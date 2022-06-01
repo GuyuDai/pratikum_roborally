@@ -8,6 +8,7 @@ public class PushPanelTwo extends BoardElem implements Move {
     public void action() {
     }
 
+
     @Override
     public void move(Robot robot) {
         robot.move(2);
