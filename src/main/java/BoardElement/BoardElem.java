@@ -18,4 +18,13 @@ public abstract class BoardElem {
   public String getName() {
     return name;
   }
+
+  public Position getPosition() {
+    return position;
+  }
+
+  public void setPosition(Position position) {
+    this.position = position;
+  }
 }
+

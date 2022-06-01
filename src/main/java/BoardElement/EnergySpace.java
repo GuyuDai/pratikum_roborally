@@ -6,4 +6,5 @@ public class EnergySpace extends BoardElem{
   public void action() {
 
   }
+
 }

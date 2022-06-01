@@ -10,9 +10,7 @@ public class RotatingBelt extends BoardElem implements Move {
 
   }
 
-
   @Override
   public void move(Robot robot) {
-
   }
 }

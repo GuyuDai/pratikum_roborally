@@ -11,14 +11,14 @@ public class Robot extends BoardElem implements RobotAction{
   public String name;
 
   public Position position;
-  public RR currectGame;
+  public RR currentGame;
   public MovementController MC;
 
   public Player owner;
 
-  public Robot(RR currectGame){
-    this.currectGame = currectGame;
-    this.MC = currectGame.getMC();
+  public Robot(RR currentGame){
+    this.currentGame = this.currentGame;
+    this.MC = currentGame.getMC();
   }
 
   /**

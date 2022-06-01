@@ -2,7 +2,7 @@ package Game;
 
 import Controller.MovementController;
 
-public class RR implements GameLogik{
+public class RR implements GameLogic {
   public MovementController MC;
 
   public RR(){

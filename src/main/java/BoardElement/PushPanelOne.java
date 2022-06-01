@@ -7,7 +7,6 @@ public class PushPanelOne extends BoardElem implements Move {
 
   @Override
   public void action() {
-
   }
 
   @Override
