@@ -1,6 +1,6 @@
 package CardTypes;
 
-import Client.Robot;
+import Player.Robot;
 import Controller.Position;
 
 public class BackUp extends Card implements Move{
@@ -10,7 +10,7 @@ public class BackUp extends Card implements Move{
    * move a robot one step back. The robot does not change the direction it is facing.
    */
   @Override
-  public void effect() {
+  public void action() {
     move(this.getOwner().getOwnRobot());
   }
 

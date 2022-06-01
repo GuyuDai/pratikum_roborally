@@ -1,6 +1,6 @@
 package CardTypes;
 
-import Client.Robot;
+import Player.Robot;
 
 /**
  * @author dai
@@ -9,7 +9,7 @@ import Client.Robot;
 public class MoveOne extends Card implements Move{
 
   @Override
-  public void effect() {
+  public void action() {
     move(this.getOwner().getOwnRobot());
   }
 

@@ -1,6 +1,6 @@
 package BoardElement;
 
-public class CheckPoint extends BoardElem{
+public class GearRed extends BoardElem{
 
   @Override
   public void action() {

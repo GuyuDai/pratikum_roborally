@@ -3,7 +3,7 @@ package BoardElement;
 public class EnergySpace extends BoardElem{
 
   @Override
-  public void effect() {
+  public void action() {
 
   }
 }

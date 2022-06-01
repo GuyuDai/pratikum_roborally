@@ -1,6 +1,6 @@
 package CardTypes;
 
-import Client.Robot;
+import Player.Robot;
 import Controller.Position;
 
 public class UTurn extends Card implements Move{
@@ -10,7 +10,7 @@ public class UTurn extends Card implements Move{
    * turn round
    */
   @Override
-  public void effect() {
+  public void action() {
     move(this.getOwner().getOwnRobot());
   }
 

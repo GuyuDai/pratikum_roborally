@@ -1,17 +1,19 @@
 package BoardElement;
 
 import CardTypes.Move;
-import Controller.Position;
+import Player.Robot;
 
 public class Wall extends BoardElem implements Move {
 
   @Override
-  public void effect() {
+  public void action() {
 
   }
 
+
+
   @Override
-  public Position move() {
-    return null;
+  public void move(Robot robot) {
+
   }
 }

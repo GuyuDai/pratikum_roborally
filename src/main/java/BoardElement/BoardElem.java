@@ -10,7 +10,7 @@ public abstract class BoardElem {
 
   }
 
-  public abstract void effect();
+  public abstract void action();
 
   //public abstract void show();  //do we need a method to show how a BoardElement looks like
 

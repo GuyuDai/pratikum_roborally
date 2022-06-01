@@ -1,4 +1,4 @@
-package Client;
+package Player;
 
 import BoardElement.BoardElem;
 import BoardElement.Nothing;
@@ -26,7 +26,7 @@ public class Robot extends BoardElem implements RobotAction{
    * please don't use this function!!
    */
   @Override
-  public void effect() {
+  public void action() {
     return;
   }
 
@@ -85,7 +85,7 @@ public class Robot extends BoardElem implements RobotAction{
   @Override
   public void act() {
     for(Card card : owner.getRegister()){
-      card.effect();
+      card.action();
     }
   }
 

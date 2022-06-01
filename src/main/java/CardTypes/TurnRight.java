@@ -1,6 +1,6 @@
 package CardTypes;
 
-import Client.Robot;
+import Player.Robot;
 import Controller.Position;
 
 public class TurnRight extends Card implements Move{
@@ -10,7 +10,7 @@ public class TurnRight extends Card implements Move{
    * reset the orientation of a robot's position
    */
   @Override
-  public void effect() {
+  public void action() {
     move(this.getOwner().getOwnRobot());
   }
 

@@ -1,9 +1,9 @@
 package CardTypes;
 
-public class Pferd extends Card implements Damage{
+public class Pferd extends Card implements DamageCards {
 
   @Override
-  public void effect() {
+  public void action() {
 
   }
 }

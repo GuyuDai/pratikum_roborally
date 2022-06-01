@@ -8,7 +8,7 @@ package BoardElement;
 public class Nothing extends BoardElem{
 
   @Override
-  public void effect() {
+  public void action() {
 
   }
 }

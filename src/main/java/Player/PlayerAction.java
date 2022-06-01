@@ -1,4 +1,4 @@
-package Client;
+package Player;
 
 public interface PlayerAction {
   void draw();
