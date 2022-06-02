@@ -9,7 +9,7 @@ public class MoveTwo extends Card implements Move{
    * to move forwards two steps
    */
   @Override
-  public void effect() {
+  public void action() {
     move(this.getOwner().getOwnRobot());
   }
 

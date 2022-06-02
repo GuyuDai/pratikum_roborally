@@ -11,14 +11,14 @@ public class Robot extends BoardElem implements RobotAction{
   public String name;
 
   public Position position;
-  public RR currectGame;
+  public RR currentGame;
   public MovementController MC;
 
   public Player owner;
 
-  public Robot(RR currectGame){
-    this.currectGame = currectGame;
-    this.MC = currectGame.getMC();
+  public Robot(RR currentGame){
+    this.currentGame = this.currentGame;
+    this.MC = currentGame.getMC();
   }
 
   /**
@@ -26,7 +26,7 @@ public class Robot extends BoardElem implements RobotAction{
    * please don't use this function!!
    */
   @Override
-  public void effect() {
+  public void action() {
     return;
   }
 
@@ -85,7 +85,7 @@ public class Robot extends BoardElem implements RobotAction{
   @Override
   public void act() {
     for(Card card : owner.getRegister()){
-      card.effect();
+      card.action();
     }
   }
 

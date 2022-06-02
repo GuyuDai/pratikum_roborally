@@ -1,6 +1,6 @@
 package CardTypes;
 
-public class Virus extends Card implements DamageCards {
+public class Trojan extends Card implements DamageCards {
 
   @Override
   public void action() {

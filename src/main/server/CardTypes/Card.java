@@ -12,7 +12,7 @@ public abstract class Card {
 
   }
 
-  public abstract void effect();
+  public abstract void action();
 
   public Player getOwner() {
     return owner;

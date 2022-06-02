@@ -10,7 +10,7 @@ public class UTurn extends Card implements Move{
    * turn round
    */
   @Override
-  public void effect() {
+  public void action() {
     move(this.getOwner().getOwnRobot());
   }
 

@@ -1,11 +1,11 @@
 package BoardElement;
 
-import CardTypes.Damage;
+import CardTypes.DamageCards;
 
-public class Laser extends BoardElem implements Damage {
+public class Laser extends BoardElem implements DamageCards {
 
   @Override
-  public void effect() {
+  public void action() {
 
   }
 }

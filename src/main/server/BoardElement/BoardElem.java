@@ -10,7 +10,7 @@ public abstract class BoardElem {
 
   }
 
-  public abstract void effect();
+  public abstract void action();
 
   //public abstract void show();  //do we need a method to show how a BoardElement looks like
 
@@ -18,4 +18,13 @@ public abstract class BoardElem {
   public String getName() {
     return name;
   }
+
+  public Position getPosition() {
+    return position;
+  }
+
+  public void setPosition(Position position) {
+    this.position = position;
+  }
 }
+

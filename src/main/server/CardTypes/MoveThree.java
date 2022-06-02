@@ -9,7 +9,7 @@ public class MoveThree extends Card implements Move{
    * to move forwards three steps
    */
   @Override
-  public void effect() {
+  public void action() {
     move(this.getOwner().getOwnRobot());
   }
 

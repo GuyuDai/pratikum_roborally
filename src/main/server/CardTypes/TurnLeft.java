@@ -10,7 +10,7 @@ public class TurnLeft extends Card implements Move{
    * reset the orientation of a robot's position
    */
   @Override
-  public void effect() {
+  public void action() {
     move(this.getOwner().getOwnRobot());
   }
 

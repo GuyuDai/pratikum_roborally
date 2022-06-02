@@ -1,17 +1,25 @@
 package BoardElement;
 
 import CardTypes.Move;
-import Controller.Position;
+import Player.Robot;
+
+/**
+ * @author Nargess Ahmadi, Nassrin Djafari
+ * Conveyor belts move your robot in the direction of the arrows.
+ * Double-arrowed conveyor belts move robots two spaces and activate before single-arrowed conveyor belts,
+ * which move robots one space. Once a robot has moved off a belt, the belt no longer affects that robot.
+ * See the examples below.
+ */
 
 public class ConveyBelt extends BoardElem implements Move {
 
   @Override
-  public void effect() {
-
+  public void action() {
   }
 
+
   @Override
-  public Position move() {
-    return null;
+  public void move(Robot robot) {
+
   }
 }

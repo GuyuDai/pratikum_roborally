@@ -10,7 +10,7 @@ public class
 MoveOne extends Card implements Move{
 
   @Override
-  public void effect() {
+  public void action() {
     move(this.getOwner().getOwnRobot());
   }
 
