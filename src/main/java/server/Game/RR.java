@@ -1,10 +1,10 @@
 package server.Game;
 
-import server.Controller.MovementController;
+import server.Control.Controller;
 import server.Player.Player;
 
 public class RR implements GameLogic {
-  public MovementController MC;
+  public Controller controller;
   public Player player;
 
 
@@ -18,10 +18,10 @@ public class RR implements GameLogic {
   }
 
   public RR(){
-    this.MC = new MovementController();
+    this.controller = new Controller();
   }
 
-  public MovementController getMC() {
-    return MC;
+  public Controller getController() {
+    return controller;
   }
 }

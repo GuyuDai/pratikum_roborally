@@ -1,6 +1,6 @@
 package server.BoardElement;
 
-import server.Controller.Position;
+import server.Control.Position;
 import server.Game.RR;
 
 public abstract class BoardElem {
@@ -12,8 +12,6 @@ public abstract class BoardElem {
   public BoardElem(String name,RR currentGame){
      this.name=name;
      this.currentGame=currentGame;
-
-
   }
 
   public abstract void action();
