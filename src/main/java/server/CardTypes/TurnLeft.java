@@ -16,7 +16,7 @@ public class TurnLeft extends Card implements Move{
 
   @Override
   public void move(Robot robot) {
-    int orientation = robot.getPosition().getOrientation();
+    int orientation = robot.getPosition().getFaceDirection();
     switch (orientation){
       case 0:
         orientation = 1;

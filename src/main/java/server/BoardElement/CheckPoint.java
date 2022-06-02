@@ -1,6 +1,6 @@
 package server.BoardElement;
 
-import Game.RR;
+import server.Game.RR;
 
 /**
  * @author Nargess Ahmadi, Nassrin Djafari

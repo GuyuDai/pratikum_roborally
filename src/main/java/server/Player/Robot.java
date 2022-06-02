@@ -42,7 +42,7 @@ public class Robot extends BoardElem implements RobotAction{
 
   private void goForwards(){
     Position togo = new Position
-        (this.position.getX(), this.position.getY()+1, this.position.getOrientation());
+        (this.position.getX(), this.position.getY()+1, this.position.getFaceDirection());
     boolean flag = this.MC.check(togo);
     if(flag){
       this.getPosition().setTile(new Empty(currentGame));
@@ -53,7 +53,7 @@ public class Robot extends BoardElem implements RobotAction{
 
   private void goBackwards(){
     Position togo = new Position
-        (this.position.getX(), this.position.getY()-1, this.position.getOrientation());
+        (this.position.getX(), this.position.getY()-1, this.position.getFaceDirection());
     boolean flag = this.MC.check(togo);
     if(flag){
       this.getPosition().setTile(new Empty(currentGame));
@@ -64,7 +64,7 @@ public class Robot extends BoardElem implements RobotAction{
 
   private void goLeft(){
     Position togo = new Position
-        (this.position.getX()-1, this.position.getY(), this.position.getOrientation());
+        (this.position.getX()-1, this.position.getY(), this.position.getFaceDirection());
     boolean flag = this.MC.check(togo);
     if(flag){
       this.getPosition().setTile(new Empty(currentGame));
@@ -75,7 +75,7 @@ public class Robot extends BoardElem implements RobotAction{
 
   private void goRight(){
     Position togo = new Position
-        (this.position.getX()+1, this.position.getY(), this.position.getOrientation());
+        (this.position.getX()+1, this.position.getY(), this.position.getFaceDirection());
     boolean flag = this.MC.check(togo);
     if(flag){
       this.getPosition().setTile(new Empty(currentGame));
@@ -95,7 +95,7 @@ public class Robot extends BoardElem implements RobotAction{
   public void move(int step) {
     for(int i = 0; i < step; step++){
       Position now = this.getPosition();
-      switch (now.getOrientation()){
+      switch (now.getFaceDirection()){
         case 0:
           goForwards();
           break;

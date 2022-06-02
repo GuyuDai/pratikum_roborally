@@ -1,8 +1,8 @@
 package server.BoardElement;
 
-import CardTypes.Move;
-import Game.RR;
-import Player.Robot;
+import server.CardTypes.Move;
+import server.Game.RR;
+import server.Player.Robot;
 
 /**
  * @author Nargess Ahmadi, Nassrin Djafari

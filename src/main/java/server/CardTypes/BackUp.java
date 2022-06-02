@@ -21,7 +21,7 @@ public class BackUp extends Card implements Move{
    */
   @Override
   public void move(Robot robot) {
-    int orientation1 = robot.getPosition().getOrientation();
+    int orientation1 = robot.getPosition().getFaceDirection();
     switch (orientation1){
       case 0:
         orientation1 = 3;
@@ -44,7 +44,7 @@ public class BackUp extends Card implements Move{
 
     robot.move(1);
 
-    int orientation2 = robot.getPosition().getOrientation();
+    int orientation2 = robot.getPosition().getFaceDirection();
     switch (orientation2){
       case 0:
         orientation2 = 3;
