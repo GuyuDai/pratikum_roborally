@@ -15,6 +15,16 @@ public class Player implements PlayerAction{
     return ownRobot;
   }
 
+   public String name;
+
+  public String getName() {
+    return name;
+  }
+
+  public CopyOnWriteArrayList<Card> getHands() {
+    return hands;
+  }
+
   public void setOwnRobot(Robot ownRobot) {
     this.ownRobot = ownRobot;
   }

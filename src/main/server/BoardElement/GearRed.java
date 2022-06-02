@@ -1,6 +1,7 @@
 package BoardElement;
 
 import CardTypes.TurnLeft;
+import Game.RR;
 import Player.Robot;
 
 
@@ -11,9 +12,13 @@ import Player.Robot;
  */
 
 public class GearRed extends BoardElem{
+  public GearRed(RR currentGame) {
+    super("GearRed", currentGame);
+  }
 
   @Override
   public void action() {
+    move(currentGame.getPlayerInCurrentTurn().getOwnRobot());
   }
 
   public void move(Robot robot){

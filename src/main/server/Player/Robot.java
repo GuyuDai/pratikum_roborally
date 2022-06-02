@@ -16,19 +16,21 @@ public class Robot extends BoardElem implements RobotAction{
 
   public Player owner;
 
+
   public Robot(RR currentGame){
-    this.currentGame = this.currentGame;
+    super("Robot",currentGame);
     this.MC = currentGame.getMC();
+
+
   }
+  @Override
+  public void action() {}
 
   /**
    * @author dai
    * please don't use this function!!
    */
-  @Override
-  public void action() {
-    return;
-  }
+
 
   public Position getPosition() {
     return position;
@@ -43,7 +45,7 @@ public class Robot extends BoardElem implements RobotAction{
         (this.position.getX(), this.position.getY()+1, this.position.getOrientation());
     boolean flag = this.MC.check(togo);
     if(flag){
-      this.getPosition().setTile(new Nothing());
+      this.getPosition().setTile(new Nothing(currentGame));
       this.setPosition(togo);
       togo.setTile(this);
     }
@@ -54,7 +56,7 @@ public class Robot extends BoardElem implements RobotAction{
         (this.position.getX(), this.position.getY()-1, this.position.getOrientation());
     boolean flag = this.MC.check(togo);
     if(flag){
-      this.getPosition().setTile(new Nothing());
+      this.getPosition().setTile(new Nothing(currentGame));
       this.setPosition(togo);
       togo.setTile(this);
     }
@@ -65,7 +67,7 @@ public class Robot extends BoardElem implements RobotAction{
         (this.position.getX()-1, this.position.getY(), this.position.getOrientation());
     boolean flag = this.MC.check(togo);
     if(flag){
-      this.getPosition().setTile(new Nothing());
+      this.getPosition().setTile(new Nothing(currentGame));
       this.setPosition(togo);
       togo.setTile(this);
     }
@@ -76,7 +78,7 @@ public class Robot extends BoardElem implements RobotAction{
         (this.position.getX()+1, this.position.getY(), this.position.getOrientation());
     boolean flag = this.MC.check(togo);
     if(flag){
-      this.getPosition().setTile(new Nothing());
+      this.getPosition().setTile(new Nothing(currentGame));
       this.setPosition(togo);
       togo.setTile(this);
     }

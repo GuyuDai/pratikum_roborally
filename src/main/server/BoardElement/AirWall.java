@@ -1,6 +1,7 @@
 package BoardElement;
-
+import Game.RR;
 import Player.Robot;
+import CardTypes.Move;
 
 /**
  * @author dai, Nargess Ahmadi
@@ -8,9 +9,14 @@ import Player.Robot;
  * but the robot cannot reach or go through or distroy it or...
  */
 
-public class AirWall extends Wall{
+public class AirWall extends BoardElem implements Move{
+
+    public AirWall(RR currentGame) {
+        super("AirWall",currentGame);
+    }
     @Override
     public void action() {
+        move(currentGame.getPlayerInCurrentTurn().getOwnRobot());
     }
 
     @Override

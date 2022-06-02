@@ -1,6 +1,7 @@
 package BoardElement;
 
 import CardTypes.Move;
+import Game.RR;
 import Player.Robot;
 
 /**
@@ -12,6 +13,9 @@ import Player.Robot;
  */
 
 public class ConveyBelt extends BoardElem implements Move {
+  public ConveyBelt (RR currentGame) {
+    super("ConveyBelt",currentGame);
+  }
 
   @Override
   public void action() {

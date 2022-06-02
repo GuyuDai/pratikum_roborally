@@ -1,12 +1,22 @@
 package BoardElement;
 
+import CardTypes.Card;
 import Controller.Position;
+import Game.RR;
+import Player.Robot;
+
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class BoardElem {
   public String name;
   public Position position;
+  protected RR currentGame;
 
-  public BoardElem(){
+
+  public BoardElem(String name,RR currentGame){
+     this.name=name;
+     this.currentGame=currentGame;
+
 
   }
 
@@ -26,5 +36,7 @@ public abstract class BoardElem {
   public void setPosition(Position position) {
     this.position = position;
   }
+
+
 }
 

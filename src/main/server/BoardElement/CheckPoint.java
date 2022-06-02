@@ -1,5 +1,8 @@
 package BoardElement;
 
+import Game.RR;
+import Player.Robot;
+
 /**
  * @author Nargess Ahmadi, Nassrin Djafari
  * Goal is to land on each of the checkpoints in your chosen course in numerical order.
@@ -10,9 +13,14 @@ package BoardElement;
  */
 
 public class CheckPoint extends BoardElem {
+  public CheckPoint (RR currentGame) {
+    super("CheckPoint",currentGame);
+  }
 
   @Override
   public void action() {
   }
+
+
 
 }
