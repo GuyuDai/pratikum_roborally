@@ -1,6 +1,6 @@
 package CardTypes;
 
-import Client.Robot;
+import Player.Robot;
 
 public class MoveThree extends Card implements Move{
 

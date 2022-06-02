@@ -1,12 +1,13 @@
 package CardTypes;
 
-import Client.Robot;
+import Player.Robot;
 
 /**
  * @author dai
  * to move forwards one step
  */
-public class MoveOne extends Card implements Move{
+public class
+MoveOne extends Card implements Move{
 
   @Override
   public void effect() {

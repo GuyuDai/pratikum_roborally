@@ -1,4 +1,4 @@
-package Client;
+package Player;
 
 import CardTypes.Card;
 import Deck.ProgrammingDeck;

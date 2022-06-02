@@ -1,13 +1,13 @@
 package CardTypes;
 
-import Client.Robot;
+import Player.Robot;
 import Controller.Position;
 
-public class TurnLeft extends Card implements Move{
+public class UTurn extends Card implements Move{
 
   /**
    * @author dai
-   * reset the orientation of a robot's position
+   * turn round
    */
   @Override
   public void effect() {
@@ -19,19 +19,19 @@ public class TurnLeft extends Card implements Move{
     int orientation = robot.getPosition().getOrientation();
     switch (orientation){
       case 0:
-        orientation = 1;
-        break;
-
-      case 1:
         orientation = 3;
         break;
 
+      case 1:
+        orientation = 2;
+        break;
+
       case 2:
-        orientation = 0;
+        orientation = 1;
         break;
 
       case 3:
-        orientation = 2;
+        orientation = 0;
         break;
     }
     robot.setPosition(new Position

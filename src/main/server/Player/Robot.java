@@ -1,4 +1,4 @@
-package Client;
+package Player;
 
 import BoardElement.BoardElem;
 import BoardElement.Nothing;

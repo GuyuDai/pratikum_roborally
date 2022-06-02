@@ -1,9 +1,9 @@
 package CardTypes;
 
-import Client.Robot;
+import Player.Robot;
 import Controller.Position;
 
-public class TurnRight extends Card implements Move{
+public class TurnLeft extends Card implements Move{
 
   /**
    * @author dai
@@ -19,19 +19,19 @@ public class TurnRight extends Card implements Move{
     int orientation = robot.getPosition().getOrientation();
     switch (orientation){
       case 0:
-        orientation = 2;
+        orientation = 1;
         break;
 
       case 1:
-        orientation = 0;
-        break;
-
-      case 2:
         orientation = 3;
         break;
 
+      case 2:
+        orientation = 0;
+        break;
+
       case 3:
-        orientation = 1;
+        orientation = 2;
         break;
     }
     robot.setPosition(new Position

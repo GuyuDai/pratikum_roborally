@@ -1,7 +1,7 @@
 package CardTypes;
 
 
-import Client.Robot;
+import Player.Robot;
 
 public interface Move {
    void move(Robot robot);

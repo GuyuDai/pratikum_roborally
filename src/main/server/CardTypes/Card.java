@@ -1,7 +1,7 @@
 package CardTypes;
 
 import Game.RR;
-import Client.Player;
+import Player.Player;
 
 public abstract class Card {
   public String name;
