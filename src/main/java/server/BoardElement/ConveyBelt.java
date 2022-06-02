@@ -19,6 +19,7 @@ public class ConveyBelt extends BoardElem implements Move {
 
   @Override
   public void action() {
+
   }
 
 

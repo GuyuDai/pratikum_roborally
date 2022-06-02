@@ -3,7 +3,7 @@ package server.BoardElement;
 
 
 public enum Direction {
-    NORTH(0),EAST(90),SOUTH(180),WEST(270);
+    UP(0), RIGHT(90), DOWN(180), LEFT(270);
 
     private final int angel;
     private Direction(final int angel){
@@ -23,7 +23,11 @@ public enum Direction {
         return Direction.getDirection((angel+90)%360);
     }
     public Direction turnLeft() {
-        return Direction.getDirection((angel-90)%360);
+        return Direction.getDirection((angel+270)%360);
+    }
+
+    public Direction turn180(){
+        return Direction.getDirection((angel+180)%360);
     }
 
 
