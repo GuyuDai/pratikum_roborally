@@ -1,36 +1,30 @@
 package server.Player;
 
 import server.BoardElement.BoardElem;
-import server.BoardElement.Empty;
-import server.Game.RR;
 import server.CardTypes.Card;
-import server.Controller.MovementController;
-import server.Controller.Position;
+import server.Control.Position;
+import server.Game.RR;
 
-public class Robot extends BoardElem implements RobotAction{
+public class Robot extends BoardElem implements RobotAction {
+
   public String name;
 
   public Position position;
   public RR currentGame;
-  public MovementController MC;
 
   public Player owner;
 
-
-  public Robot(RR currentGame){
-    super("Robot",currentGame);
-    this.MC = currentGame.getMC();
-
-
+  public Robot(String name, RR currentGame) {
+    super(name, currentGame);
   }
-  @Override
-  public void action() {}
 
   /**
-   * @author dai
-   * please don't use this function!!
+   * @author dai please don't use this function!!
    */
-
+  @Override
+  public void action() {
+    return;
+  }
 
   public Position getPosition() {
     return position;
@@ -40,78 +34,28 @@ public class Robot extends BoardElem implements RobotAction{
     this.position = position;
   }
 
-  private void goForwards(){
-    Position togo = new Position
-        (this.position.getX(), this.position.getY()+1, this.position.getFaceDirection());
-    boolean flag = this.MC.check(togo);
-    if(flag){
-      this.getPosition().setTile(new Empty(currentGame));
+  private void moveOneStep() {
+    Position togo = this.getPosition().getNextPosition();
+    boolean flag = this.currentGame.getController().movementCheck(this);
+    if (flag) {
+      this.getPosition().setOccupiedRobot(null);
+      togo.setOccupiedRobot(this);
       this.setPosition(togo);
-      togo.setTile(this);
-    }
-  }
-
-  private void goBackwards(){
-    Position togo = new Position
-        (this.position.getX(), this.position.getY()-1, this.position.getFaceDirection());
-    boolean flag = this.MC.check(togo);
-    if(flag){
-      this.getPosition().setTile(new Empty(currentGame));
-      this.setPosition(togo);
-      togo.setTile(this);
-    }
-  }
-
-  private void goLeft(){
-    Position togo = new Position
-        (this.position.getX()-1, this.position.getY(), this.position.getFaceDirection());
-    boolean flag = this.MC.check(togo);
-    if(flag){
-      this.getPosition().setTile(new Empty(currentGame));
-      this.setPosition(togo);
-      togo.setTile(this);
-    }
-  }
-
-  private void goRight(){
-    Position togo = new Position
-        (this.position.getX()+1, this.position.getY(), this.position.getFaceDirection());
-    boolean flag = this.MC.check(togo);
-    if(flag){
-      this.getPosition().setTile(new Empty(currentGame));
-      this.setPosition(togo);
-      togo.setTile(this);
     }
   }
 
   @Override
   public void act() {
-    for(Card card : owner.getRegister()){
+    for (Card card : owner.getRegister()) {
       card.action();
     }
   }
 
   @Override
   public void move(int step) {
-    for(int i = 0; i < step; step++){
-      Position now = this.getPosition();
-      switch (now.getFaceDirection()){
-        case 0:
-          goForwards();
-          break;
-
-        case 1:
-          goLeft();
-          break;
-
-        case 2:
-          goRight();
-          break;
-
-        case 3:
-          goBackwards();
-          break;
-      }
+    for (int i = 0; i < step; step++) {
+      moveOneStep();
     }
   }
 }
+

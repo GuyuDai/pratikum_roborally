@@ -1,7 +1,7 @@
 package server.CardTypes;
 
 import server.Player.Robot;
-import server.Controller.Position;
+import server.Control.Position;
 
 public class UTurn extends Card implements Move{
 
