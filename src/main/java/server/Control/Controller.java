@@ -17,7 +17,7 @@ public class Controller {
     Boolean canMoveOut = false;
 
     switch (robot.getPosition().getFaceDirection()){
-      case UP:
+      case DOWN:
         canMoveIn = !nextPosition.getBackWall();
         canMoveOut = !currentPosition.getFrontWall();
         break;
@@ -32,7 +32,7 @@ public class Controller {
         canMoveOut = !currentPosition.getRightWall();
         break;
 
-      case DOWN:
+      case UP:
         canMoveIn = !nextPosition.getFrontWall();
         canMoveOut = !currentPosition.getBackWall();
         break;

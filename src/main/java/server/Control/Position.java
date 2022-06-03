@@ -79,7 +79,7 @@ public class Position {
 
   public Position getNextPosition(){
     switch (this.faceDirection){
-      case UP:
+      case DOWN:
         return new Position(this.getX(), this.getY()+1, this.getFaceDirection());
 
       case LEFT:
@@ -88,7 +88,7 @@ public class Position {
       case RIGHT:
         return new Position(this.getX()+1, this.getY(), this.getFaceDirection());
 
-      case DOWN:
+      case UP:
         return new Position(this.getX(), this.getY()-1, this.getFaceDirection());
     }
     return null;
