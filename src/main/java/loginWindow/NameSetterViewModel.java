@@ -45,9 +45,11 @@ public class NameSetterViewModel {
         this.text = text;
         this.sendNameButton = sendNameButton;
     }
+
     public static NameSetterViewModel getInstance() {
         return instance;
     }
+
     @FXML
     /*
      * Function of the "set name" button in the NameSetter Window
@@ -60,4 +62,5 @@ public class NameSetterViewModel {
         Client.getClientReceive().getWriteOutput().flush();
         model.getTextFieldContent().set("");
     }
+}
 

@@ -43,12 +43,13 @@ public class App extends Application {
 
     // setting stage title and icon
     primaryStage.setTitle("Love Letter Game");
-    primaryStage.getIcons().add(loadTitle());
+    //primaryStage.getIcons().add(loadTitle());
 
     // loading scene into primaryStage
-    Scene scene = loadScene();
-    primaryStage.setScene(scene);
+    //Scene scene = loadScene();
+    //primaryStage.setScene(scene);
 
     // showing the stage on screen
     primaryStage.show();
   }
+}
