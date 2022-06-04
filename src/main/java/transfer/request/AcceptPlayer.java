@@ -1,14 +1,12 @@
 package transfer.request;
 
-import com.google.gson.annotations.SerializedName;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
-import mainWindow.MainApplication;
-import mainWindow.MainViewModel;
+import client.mainWindow.MainApplication;
+import client.mainWindow.MainViewModel;
 import transfer.Player;
 
 import java.net.Socket;
-import java.util.Map;
 
 /**
  *

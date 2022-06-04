@@ -1,4 +1,4 @@
-package mainWindow;
+package client.mainWindow;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +25,7 @@ public class MainApplication extends Application {
     public void start(Stage primaryStage) throws IOException {
         new Client().init();
         window = primaryStage;
-        window.setTitle("Robot");
+        window.setTitle("RoboRally");
         gameScene = loadScene(0);
         nameScene = loadScene(1);
         window.setScene(nameScene);
@@ -50,7 +50,7 @@ public class MainApplication extends Application {
                     root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/LoveLetterView.fxml")));
                     break;
                 case 1:
-                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/LoveLetterNameSetterView.fxml")));
+                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Login.fxml")));
                     break;
             }
         } else {

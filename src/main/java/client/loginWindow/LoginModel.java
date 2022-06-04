@@ -1,20 +1,20 @@
-package loginWindow;
+package client.loginWindow;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class NameSetterModel {
+public class LoginModel {
 
-    private static volatile NameSetterModel instance;
+    private static volatile LoginModel instance;
 
-    private NameSetterModel(){
+    private LoginModel(){
     }
 
-    public static NameSetterModel getInstance() {
+    public static LoginModel getInstance() {
         if (instance == null) {
-            synchronized (NameSetterModel.class) {
+            synchronized (LoginModel.class) {
                 if (instance == null) {
-                    instance = new NameSetterModel();
+                    instance = new LoginModel();
                 }
             }
         }

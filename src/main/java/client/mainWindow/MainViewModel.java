@@ -1,7 +1,7 @@
-package mainWindow;
+package client.mainWindow;
 
 import java.io.IOException;
-import java.util.Arrays;
+
 import client.Client;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;

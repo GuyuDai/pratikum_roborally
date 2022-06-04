@@ -27,7 +27,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>mainWindow.MainApplication</mainClass>
+                  <mainClass>client.mainWindow.MainApplication</mainClass>
                 </transformer>
               </transformers>
             </configuration>

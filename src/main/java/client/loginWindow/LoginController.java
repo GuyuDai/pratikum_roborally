@@ -1,4 +1,4 @@
-package loginWindow;
+package client.loginWindow;
 
 import client.Client;
 import com.google.gson.Gson;
@@ -12,9 +12,9 @@ import transfer.request.PlayerInitialisation;
 import transfer.request.RequestType;
 import transfer.request.RequestWrapper;
 
-public class NameSetterViewModel {
+public class LoginController {
 
-    private static NameSetterViewModel instance;
+    private static LoginController instance;
     @FXML
     public AnchorPane container;
     @FXML
@@ -24,14 +24,14 @@ public class NameSetterViewModel {
     @FXML
     private Button sendNameButton;
 
-    private NameSetterModel model;
+    private LoginModel model;
 
-    public NameSetterModel getModel() {
+    public LoginModel getModel() {
         return model;
     }
 
-    public NameSetterViewModel() {
-        model = NameSetterModel.getInstance();
+    public LoginController() {
+        model = LoginModel.getInstance();
     }
 
     public void initialize() {
@@ -46,7 +46,7 @@ public class NameSetterViewModel {
         this.sendNameButton = sendNameButton;
     }
 
-    public static NameSetterViewModel getInstance() {
+    public static LoginController getInstance() {
         return instance;
     }
 

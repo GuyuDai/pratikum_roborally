@@ -1,4 +1,4 @@
-package mainWindow;
+package client.mainWindow;
 
 import java.io.IOException;
 
@@ -32,7 +32,5 @@ public class MainView extends VBox{
                 e1.printStackTrace();
             }
         });
-
-
     }
 }

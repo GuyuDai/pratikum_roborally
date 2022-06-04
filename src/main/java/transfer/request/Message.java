@@ -2,7 +2,7 @@ package transfer.request;
 
 import com.google.gson.Gson;
 import javafx.application.Platform;
-import mainWindow.MainViewModel;
+import client.mainWindow.MainViewModel;
 import server.ServerThread;
 import transfer.PlayerOnline;
 

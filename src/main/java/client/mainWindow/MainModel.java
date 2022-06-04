@@ -1,4 +1,4 @@
-package mainWindow;
+package client.mainWindow;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

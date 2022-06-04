@@ -1,4 +1,4 @@
-package loginWindow;
+package client.loginWindow;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -6,9 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
-public class NameSetterView extends AnchorPane{
+public class LoginView extends AnchorPane{
 
-    public NameSetterView() {
+    public LoginView() {
         Label label = new Label("label");
 
         TextField nameInput = new TextField();
@@ -20,7 +20,7 @@ public class NameSetterView extends AnchorPane{
 
         getChildren().addAll(label,nameInput, text, button);
 
-        NameSetterViewModel viewModel = new NameSetterViewModel();
+        LoginController viewModel = new LoginController();
         viewModel.setNodeElements(this, nameInput, text, button);
         viewModel.initialize();
 
