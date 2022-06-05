@@ -15,4 +15,5 @@ public abstract class Board {
   public int getHeight() {
     return height;
   }
+
 }
