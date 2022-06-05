@@ -1,7 +1,6 @@
 package server.Control;
 
 import server.BoardElement.BoardElem;
-import server.BoardElement.Direction;
 import server.Player.Robot;
 
 public class Position {
@@ -58,7 +57,7 @@ public class Position {
   public Direction getFaceDirection() {
     return faceDirection;
   }
-  public void setOrientation(Direction faceDirection) {
+  public void setFaceDirection(Direction faceDirection) {
     this.faceDirection = faceDirection;
   }
 
@@ -77,6 +76,12 @@ public class Position {
     this.tile = tile;
   }
 
+  /**
+   * @author dai
+   * get the next position the robot is going to go to
+   * not move the robot yet when calling this method
+   * @return
+   */
   public Position getNextPosition(){
     switch (this.faceDirection){
       case DOWN:
