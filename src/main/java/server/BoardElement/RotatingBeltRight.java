@@ -22,11 +22,11 @@ public class RotatingBeltRight extends BoardElem implements Move {
     Direction arrowDirection = this.getPosition().getFaceDirection();
     if (robot.getLastPosition().getTile().getName()== "ConveyBeltBeltDoubleArrow"
             || robot.getLastPosition().getTile().getName() == "ConveyBeltBeltDoubleArrow") {
-      if (arrowDirection.equals(robot.getPosition().getFaceDirection().turnRight())) {
-        Direction faceDirection = robot.getPosition().getFaceDirection().turnRight();
-        robot.setPosition(new Position(robot.getPosition().getX(), robot.getPosition().getY(), faceDirection));
+      if (arrowDirection.equals(robot.getCurrentPosition().getFaceDirection().turnRight())) {
+        Direction faceDirection = robot.getCurrentPosition().getFaceDirection().turnRight();
+        robot.setCurrentPosition(new Position(robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY(), faceDirection));
       }
-      robot.getPosition().stay();
+      robot.getCurrentPosition().stay();
     }
   }
 }

@@ -32,12 +32,12 @@ public class ConveyBeltDoubleArrow extends BoardElem implements Move {
     public void move(Robot robot) {
         Position elemPosition =this.getPosition();
         Direction arrowDirection=elemPosition.getFaceDirection();
-        Direction robotFaceDirection=robot.getPosition().getFaceDirection();
+        Direction robotFaceDirection=robot.getCurrentPosition().getFaceDirection();
         if (arrowDirection.equals(robotFaceDirection)){
             robot.move(2);
         }
-        robot.getPosition().setFaceDirection(arrowDirection);
+        robot.getCurrentPosition().setFaceDirection(arrowDirection);
         robot.move(2);
-        robot.getPosition().setFaceDirection(robotFaceDirection);
+        robot.getCurrentPosition().setFaceDirection(robotFaceDirection);
     }
 }
