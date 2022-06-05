@@ -17,8 +17,8 @@ public class TurnRight extends Card implements Move{
 
   @Override
   public void move(Robot robot) {
-    Direction faceDirection = robot.getPosition().getFaceDirection().turnRight();
-    robot.setPosition(new Position
-        (robot.getPosition().getX(), robot.getPosition().getY(),faceDirection));
+    Direction faceDirection = robot.getCurrentPosition().getFaceDirection().turnRight();
+    robot.setCurrentPosition(new Position
+        (robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY(),faceDirection));
   }
 }

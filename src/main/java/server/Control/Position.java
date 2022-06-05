@@ -76,6 +76,12 @@ public class Position {
     this.tile = tile;
   }
 
+  /**
+   * @author dai
+   * get the next position the robot is going to go to
+   * not move the robot yet when calling this method
+   * @return
+   */
   public Position getNextPosition(){
     switch (this.faceDirection){
       case DOWN:

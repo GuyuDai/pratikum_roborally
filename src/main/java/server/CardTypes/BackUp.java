@@ -22,11 +22,11 @@ public class BackUp extends Card implements Move{
    */
   @Override
   public void move(Robot robot) {
-    Direction moveDirection = robot.getPosition().getFaceDirection().turn180();
+    Direction moveDirection = robot.getCurrentPosition().getFaceDirection().turn180();
     robot.move(1);
-    Direction faceDirection = robot.getPosition().getFaceDirection().turn180();
-    robot.setPosition(new Position
-            (robot.getPosition().getX(), robot.getPosition().getY(), faceDirection));
+    Direction faceDirection = robot.getCurrentPosition().getFaceDirection().turn180();
+    robot.setCurrentPosition(new Position
+            (robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY(), faceDirection));
 
   }
 }
