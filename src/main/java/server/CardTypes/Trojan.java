@@ -6,6 +6,7 @@ public class Trojan extends Card implements DamageCards {
 
   @Override
   public void action() {
-
+    this.getOwner().getHands().add(new Spam());
+    this.getOwner().getHands().add(new Spam());
   }
 }

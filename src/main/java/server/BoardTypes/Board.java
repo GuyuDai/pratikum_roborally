@@ -15,4 +15,9 @@ public abstract class Board {
   public int getHeight() {
     return height;
   }
+
+  public BoardElem[][] getMap() {
+    return map;
+  }
 }
+
