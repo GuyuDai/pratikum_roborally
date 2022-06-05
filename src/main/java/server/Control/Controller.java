@@ -10,19 +10,35 @@ public class Controller {
 
   /**
    * @author dai
-   * @param robot which robot wants to move
+   * @param position
+   * @return true if the checked position is out of the bound of the game board
+   */
+  public Boolean positionOutOfBound(Position position){
+    int tempX = position.getX();
+    int tempY = position.getY();
+    if(tempX >= currentGame.getGameboard().getWidth() || tempX < 0
+        || tempY >= currentGame.getGameboard().getHeight() || tempY < 0){
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * @author dai
+   * @param robot robot to move
+   * @param direction the direction the robot will move
    * @return true if the robot can move to the next position
    */
-  public boolean movementCheck(Robot robot){
+  public boolean movementCheck(Robot robot, Direction direction){
     Position currentPosition = robot.getCurrentPosition();
-    Position nextPosition = currentPosition.getNextPosition();
+    Position nextPosition = currentPosition.getNextPosition(direction);
     BoardElem currentBoardElem = currentPosition.getTile();
     BoardElem nextBoardElem = nextPosition.getTile();
 
     Boolean canMoveIn = false;
     Boolean canMoveOut = false;
 
-    switch (robot.getCurrentPosition().getFaceDirection()){
+    switch (direction){
       case UP:
         canMoveIn = !nextPosition.getBackWall();
         canMoveOut = !currentPosition.getFrontWall();
@@ -52,6 +68,26 @@ public class Controller {
       return false;
     }
 
+    if(isOccupied(nextPosition)){
+      return false;
+    }
+
+    if(positionOutOfBound(nextPosition)){
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * @author dai
+   * @param position usually is robot.getCurrentPosition().getNextPosition(Direction direction)
+   * @return true if this position is occupied by a robot
+   */
+  public Boolean isOccupied(Position position){
+    if(position.getOccupiedRobot() == null){
+      return false;
+    }
     return true;
   }
 

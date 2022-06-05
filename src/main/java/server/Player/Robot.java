@@ -13,11 +13,14 @@ public class Robot implements RobotAction {
   public Boolean isAlive;
   public int lives = 3;
 
-  public Position currentPosition;
-  public Position lastPosition = null;
+  private Position currentPosition;
+  private Position lastPosition = null;
+  private Direction faceDirection;  //direction the robot faces to
+
   public RR currentGame;
 
   public Player owner;
+  private Position startPosition;
 
   public Robot(String name, RR currentGame) {
     this.name = name;
@@ -25,6 +28,12 @@ public class Robot implements RobotAction {
     this.isAlive = true;
   }
 
+  public Direction getFaceDirection() {
+    return faceDirection;
+  }
+  public void setFaceDirection(Direction faceDirection) {
+    this.faceDirection = faceDirection;
+  }
   public Position getCurrentPosition() {
     return currentPosition;
   }
@@ -84,9 +93,28 @@ public class Robot implements RobotAction {
     return currentGame;
   }
 
+  public Position getStartPosition() {
+    return startPosition;
+  }
+
+  public void setStartPosition(){
+    Boolean flag = true;
+    Random random = new Random();
+    while (flag){
+      Position desiredPosition = new Position(random.nextInt(this.getCurrentGame().getGameboard().getWidth()),
+          random.nextInt(this.getCurrentGame().getGameboard().getHeight()));
+      Boolean flag2 = currentGame.getController().robotStartingPositionCheck(desiredPosition);
+      //flag2: whether the desired position is valid
+      if (flag2){
+        this.startPosition = desiredPosition;
+        flag = false;
+      }
+    }
+  }
+
   private void moveOneStep() {
-    Position togo = this.getCurrentPosition().getNextPosition();
-    boolean flag = this.currentGame.getController().movementCheck(this);
+    Position togo = this.getCurrentPosition().getNextPosition(this.getFaceDirection());
+    boolean flag = this.currentGame.getController().movementCheck(this, this.getFaceDirection());
     if (flag) {
       this.setLastPosition(this.getCurrentPosition());
       this.getCurrentPosition().setOccupiedRobot(null);
@@ -114,22 +142,44 @@ public class Robot implements RobotAction {
     }
   }
 
+  public void setRobotToStartPosition(Direction direction){
+    if(startPosition != null){
+      this.getCurrentPosition().setOccupiedRobot(null);
+      this.setCurrentPosition(this.getStartPosition());
+      startPosition.setOccupiedRobot(this);
+      this.setFaceDirection(direction);
+    }
+  }
+
+  public void reboot(){
+    //need to be implemented
+  }
+  private void bePushedOneStep(Direction direction) {
+    Position togo = this.getCurrentPosition().getNextPosition(direction);
+    boolean flag = this.currentGame.getController().movementCheck(this, direction);
+    if (flag) {
+      this.setLastPosition(this.getCurrentPosition());
+      this.getCurrentPosition().setOccupiedRobot(null);
+      togo.setOccupiedRobot(this);
+      this.setCurrentPosition(togo);
+    }
+  }
+
   /**
    * @author dai
-   * reboot a robot to a new random start position
+   * push another robot
+   * @param targetRobot the robot which will be pushed
+   * @param direction pushed direction
+   * @param step how many steps the target robot will be pushed
    */
-  public void reboot(){
-    Boolean flag = true;
-    Random random = new Random();
-    while (flag){
-      Position desiredPosition = new Position(random.nextInt(this.getCurrentGame().getGameboard().getWidth()),
-          random.nextInt(this.getCurrentGame().getGameboard().getHeight()), Direction.UP);
-      if (currentGame.getController().robotStartingPositionCheck(desiredPosition)){
-        this.getCurrentPosition().setOccupiedRobot(null);
-        this.setCurrentPosition(desiredPosition);
-        desiredPosition.setOccupiedRobot(this);
-        flag = false;
+  public void push(Robot targetRobot, Direction direction, int step){
+    for (int i = 0; i < step; step++) {
+      Position nextPosition = targetRobot.getCurrentPosition().getNextPosition(direction);
+      Boolean flag = this.getCurrentGame().getController().positionOutOfBound(nextPosition);
+      if(flag){
+        targetRobot.reboot();
       }
+      targetRobot.bePushedOneStep(direction);
     }
   }
 }
