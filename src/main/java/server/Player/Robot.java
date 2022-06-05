@@ -9,8 +9,9 @@ public class Robot extends BoardElem implements RobotAction {
 
   public String name;
 
-  public Position position;
+  public Position currentPosition;
   public RR currentGame;
+  public Position LastPosition;
 
   public Player owner;
 
@@ -27,14 +28,19 @@ public class Robot extends BoardElem implements RobotAction {
   }
 
   public Position getPosition() {
-    return position;
+    return currentPosition;
   }
 
   public void setPosition(Position position) {
     this.position = position;
   }
 
+  public Position getLastPosition(){
+    return LastPosition;
+  }
+
   private void moveOneStep() {
+    LastPosition=this.getPosition();
     Position togo = this.getPosition().getNextPosition();
     boolean flag = this.currentGame.getController().movementCheck(this);
     if (flag) {

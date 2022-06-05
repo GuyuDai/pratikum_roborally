@@ -1,6 +1,6 @@
 package server.CardTypes;
 
-import server.BoardElement.Direction;
+import server.Control.Direction;
 import server.Player.Robot;
 import server.Control.Position;
 
