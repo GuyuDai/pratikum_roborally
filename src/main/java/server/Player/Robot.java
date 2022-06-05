@@ -114,6 +114,10 @@ public class Robot implements RobotAction {
     }
   }
 
+  /**
+   * @author dai
+   * reboot a robot to a new random start position
+   */
   public void reboot(){
     Boolean flag = true;
     Random random = new Random();
