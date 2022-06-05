@@ -15,10 +15,10 @@ import server.Player.Robot;
  */
 
 public class ConveyBeltDoubleArrow extends BoardElem implements Move {
-    public ConveyBeltDoubleArrow(RR currentGame) {
+    public ConveyBeltDoubleArrow(RR currentGame,Direction direction) {
 
         super("ConveyBeltBeltDoubleArrow",currentGame);
-
+        this.direction=direction;
     }
 
     @Override
@@ -30,14 +30,13 @@ public class ConveyBeltDoubleArrow extends BoardElem implements Move {
 
     @Override
     public void move(Robot robot) {
-        Position elemPosition =this.getPosition();
-        Direction arrowDirection=elemPosition.getFaceDirection();
-        Direction robotFaceDirection=robot.getCurrentPosition().getFaceDirection();
+        Direction arrowDirection=this.getDirection();
+        Direction robotFaceDirection=robot.getFaceDirection();
         if (arrowDirection.equals(robotFaceDirection)){
             robot.move(2);
         }
-        robot.getCurrentPosition().setFaceDirection(arrowDirection);
+        robot.setFaceDirection(arrowDirection);
         robot.move(2);
-        robot.getCurrentPosition().setFaceDirection(robotFaceDirection);
+        robot.setFaceDirection(robotFaceDirection);
     }
 }

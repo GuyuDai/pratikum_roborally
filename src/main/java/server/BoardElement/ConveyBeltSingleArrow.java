@@ -30,14 +30,13 @@ public class ConveyBeltSingleArrow extends BoardElem implements Move {
 
   @Override
   public void move(Robot robot) {
-    Position elemPosition =this.getPosition();
-    Direction arrowDirection=elemPosition.getFaceDirection();
-    Direction robotFaceDirection=robot.getCurrentPosition().getFaceDirection();
+    Direction arrowDirection=this.getDirection();
+    Direction robotFaceDirection=robot.getFaceDirection();
     if (arrowDirection.equals(robotFaceDirection)){
       robot.move(1);
     }
-    robot.getCurrentPosition().setFaceDirection(arrowDirection);
+    robot.setFaceDirection(arrowDirection);
     robot.move(1);
-    robot.getCurrentPosition().setFaceDirection(robotFaceDirection);
+    robot.setFaceDirection(robotFaceDirection);
   }
 }
