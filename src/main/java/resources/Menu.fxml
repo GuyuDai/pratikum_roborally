@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="842.0" styleClass="backgroundColor" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.mainWindow.MenuController">
+   <children>
+      <SplitPane layoutX="15.0" layoutY="15.0" prefHeight="514.0" prefWidth="265.0" style="-fx-background-radius: 10;">
+         <items>
+            <VBox fx:id="container" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 10;" styleClass="backgroundColor">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="261.0" text="                                           Chat" textAlignment="CENTER" textFill="WHITE" />
+                  <ListView fx:id="list"  prefHeight="489.0" prefWidth="263.0" style="-fx-background-radius: 10;" />
+                  <Separator prefWidth="200.0" />
+                  <HBox prefHeight="77.0" prefWidth="263.0">
+                     <children>
+                        <TextField fx:id="input" onKeyPressed="#keyboardAction" prefHeight="39.0" prefWidth="212.0" promptText="Chat with the other players!" style="-fx-background-color: white;" />
+                        <Separator orientation="VERTICAL" prefHeight="200.0" />
+                        <Button fx:id="sendBtn" onAction="#sendButtonAction" mnemonicParsing="false" prefHeight="39.0" prefWidth="65.0" text="Send" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </items>
+      </SplitPane>
+      <Button layoutX="390.0" layoutY="440.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" style="-fx-background-radius: 10;" text="PLAY" />
+      <Button layoutX="595.0" layoutY="440.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" style="-fx-background-radius: 10;" text="EXIT">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Pane layoutX="365.0" layoutY="88.0" prefHeight="302.0" prefWidth="392.0">
+         <children>
+            <Label layoutX="41.0" layoutY="12.0" stylesheets="@styles.css" text="Select your ROBOT">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="36.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="0.15714285714285714">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="0.21736110746860504" blue="0.0416666679084301" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <ImageView fitHeight="80.0" fitWidth="82.0" layoutX="34.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="80.0" fitWidth="82.0" layoutX="272.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="80.0" fitWidth="82.0" layoutX="161.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="80.0" fitWidth="82.0" layoutX="42.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="80.0" fitWidth="82.0" layoutX="299.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="80.0" fitWidth="82.0" layoutX="166.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+   </children>
+</Pane>
+
+
+
+
+
+

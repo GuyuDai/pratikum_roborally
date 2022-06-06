@@ -5,18 +5,18 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class MainModel {
+public class MenuModel {
 
-    private static volatile MainModel instance;
+    private static volatile MenuModel instance;
 
-    private MainModel(){
+    private MenuModel(){
     }
 
-    public static MainModel getInstance() {
+    public static MenuModel getInstance() {
         if (instance == null) {
-            synchronized (MainModel.class) {
+            synchronized (MenuModel.class) {
                 if (instance == null) {
-                    instance = new MainModel();
+                    instance = new MenuModel();
                 }
             }
         }

@@ -1,9 +1,9 @@
 package transfer.request;
 
+import client.mainWindow.MenuController;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import client.mainWindow.MainApplication;
-import client.mainWindow.MainViewModel;
 import transfer.Player;
 
 import java.net.Socket;
@@ -41,8 +41,8 @@ public class AcceptPlayer {
     }
 
     private void handleAcceptedPlayer(){
-        MainViewModel.setCurrentPlayer(this.getAcceptedPlayer());
-        MainViewModel.show(this.getMessage());
+        MenuController.setCurrentPlayer(this.getAcceptedPlayer());
+        MenuController.show(this.getMessage());
         Platform.runLater(() -> {MainApplication.window.setScene(MainApplication.getScene(0));});
     }
 

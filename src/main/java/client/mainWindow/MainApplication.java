@@ -47,14 +47,14 @@ public class MainApplication extends Application {
         if (CREATE_VIEW_FROM_FXML) {
             switch(scene_number) {
                 case 0:
-                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/LoveLetterView.fxml")));
+                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Menu.fxml")));
                     break;
                 case 1:
                     root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Login.fxml")));
                     break;
             }
         } else {
-            root = new MainView();
+            root = new MenuView();
         }
         return new Scene(root);
     }

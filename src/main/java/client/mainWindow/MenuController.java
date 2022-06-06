@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import transfer.Player;
 import transfer.request.*;
 
-public class MainViewModel {
+public class MenuController {
 
     @FXML
     public VBox container;
@@ -26,9 +26,9 @@ public class MainViewModel {
     @FXML
     private Button sendButton;
 
-    private static MainModel model;
+    private static MenuModel model;
 
-    private static MainViewModel instance;
+    private static MenuController instance;
 
     private Gson gson = new Gson();
 
@@ -38,15 +38,15 @@ public class MainViewModel {
         currentPlayer = player;
     }
 
-    public MainViewModel() {
-        model = MainModel.getInstance();
+    public MenuController() {
+        model = MenuModel.getInstance();
     }
 
-    public static MainViewModel getInstance() {
+    public static MenuController getInstance() {
         return instance;
     }
 
-    public MainModel getModel() {
+    public MenuModel getModel() {
         return model;
     }
 
@@ -120,7 +120,7 @@ public class MainViewModel {
      message = message.replace("!", "");
      CommandType currentCommandType = identifyCommandType(message);
      if(currentCommandType.equals(CommandType.NO_SUCH_COMMAND_FOUND)){
-     MainViewModel.show(currentCommandType.getCommandIdentification());
+     MenuController.show(currentCommandType.getCommandIdentification());
      } else if (currentCommandType.equals(CommandType.SELECT_CARD)) {
      return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer, splitMessage(message)), RequestType.COMMAND_REQUEST));
      } else if (currentCommandType.equals(CommandType.SELECT_PLAYER)) {
