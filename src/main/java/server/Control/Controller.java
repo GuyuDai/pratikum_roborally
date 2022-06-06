@@ -16,8 +16,8 @@ public class Controller {
   public Boolean positionOutOfBound(Position position){
     int tempX = position.getX();
     int tempY = position.getY();
-    if(tempX >= currentGame.getGameboard().getWidth() || tempX < 0
-        || tempY >= currentGame.getGameboard().getHeight() || tempY < 0){
+    if(tempX >= currentGame.getGameBoard().getWidth() || tempX < 0
+        || tempY >= currentGame.getGameBoard().getHeight() || tempY < 0){
       return true;
     }
     return false;
@@ -149,5 +149,14 @@ public class Controller {
       return false;
     }
     return true;
+  }
+
+  /**
+   * @author dai
+   * @return true if one robot ends a register on the final checkpoint
+   */
+  public Boolean ifGameEnd(){
+    //need to be implemented
+    return false;
   }
 }
