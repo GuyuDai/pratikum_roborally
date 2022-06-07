@@ -761,7 +761,7 @@
         [
           {
             "type": "StartPoint",
-            "isOnBoard": "Start A",
+            "isOnBoard": "Start A"
           }
         ],
         [
@@ -883,7 +883,7 @@
         [
           {
             "type": "A",
-            "isOnBoard": "Start A",
+            "isOnBoard": "Start A"
           }
         ],
         [
