@@ -1,15 +1,11 @@
 package server.Control;
 
 import server.BoardElement.BoardElem;
-import server.BoardElement.Direction;
 import server.Player.Robot;
 
 public class Position {
   private int x;  //colum
   private int y;  //row
-  private Direction faceDirection;  //direction the robot faces to
-  //0:forwards; 1:left; 2:right; 3:backwards
-
   public Boolean frontWall;
   public Boolean leftWall;
   public Boolean rightWall;
@@ -20,10 +16,9 @@ public class Position {
   public BoardElem tile;  //which BoardElement is at this position
 
 
-  public Position(int x, int y, Direction faceDirection) {
+  public Position(int x, int y) {
     this.x = x;
     this.y = y;
-    this.faceDirection = faceDirection;
   }
 
   /**
@@ -31,7 +26,7 @@ public class Position {
    * robot stay where it is
    */
   public Position stay() {
-    return new Position(x,y, faceDirection);
+    return new Position(x,y);
   }
 
 
@@ -54,14 +49,6 @@ public class Position {
     this.y = y;
   }
 
-
-  public Direction getFaceDirection() {
-    return faceDirection;
-  }
-  public void setOrientation(Direction faceDirection) {
-    this.faceDirection = faceDirection;
-  }
-
   public Robot getOccupiedRobot() {
     return occupiedRobot;
   }
@@ -77,19 +64,25 @@ public class Position {
     this.tile = tile;
   }
 
-  public Position getNextPosition(){
-    switch (this.faceDirection){
+  /**
+   * @author dai
+   * get the next position the robot is going to go to
+   * not move the robot yet when calling this method
+   * @return
+   */
+  public Position getNextPosition(Direction direction){
+    switch (direction){
       case DOWN:
-        return new Position(this.getX(), this.getY()+1, this.getFaceDirection());
+        return new Position(this.getX(), this.getY()+1);
 
       case LEFT:
-        return new Position(this.getX()-1, this.getY(), this.getFaceDirection());
+        return new Position(this.getX()-1, this.getY());
 
       case RIGHT:
-        return new Position(this.getX()+1, this.getY(), this.getFaceDirection());
+        return new Position(this.getX()+1, this.getY());
 
       case UP:
-        return new Position(this.getX(), this.getY()-1, this.getFaceDirection());
+        return new Position(this.getX(), this.getY()-1);
     }
     return null;
   }
@@ -118,4 +111,6 @@ public class Position {
   public Boolean getBackWall() {
     return backWall;
   }
+
+
 }

@@ -1,6 +1,6 @@
 package server.CardTypes;
 
-import server.BoardElement.Direction;
+import server.Control.Direction;
 import server.Player.Robot;
 import server.Control.Position;
 
@@ -22,11 +22,6 @@ public class BackUp extends Card implements Move{
    */
   @Override
   public void move(Robot robot) {
-    Direction moveDirection = robot.getPosition().getFaceDirection().turn180();
-    robot.move(1);
-    Direction faceDirection = robot.getPosition().getFaceDirection().turn180();
-    robot.setPosition(new Position
-            (robot.getPosition().getX(), robot.getPosition().getY(), faceDirection));
-
+    robot.push(robot, robot.getFaceDirection().turn180(), 1);
   }
 }

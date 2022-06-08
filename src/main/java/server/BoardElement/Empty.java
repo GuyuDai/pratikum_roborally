@@ -9,7 +9,7 @@ import server.Game.RR;
  */
 public class Empty extends BoardElem{
   public Empty(RR currentGame) {
-    super("Nothing", currentGame);
+    super("Empty", currentGame);
   }
 
   @Override

@@ -1,6 +1,6 @@
 package server.CardTypes;
 
-import server.BoardElement.Direction;
+import server.Control.Direction;
 import server.Player.Robot;
 import server.Control.Position;
 
@@ -17,10 +17,6 @@ public class TurnLeft extends Card implements Move{
 
   @Override
   public void move(Robot robot) {
-    Direction faceDirection = robot.getPosition().getFaceDirection().turnLeft();
-
-
-    robot.setPosition(new Position
-        (robot.getPosition().getX(), robot.getPosition().getY(), faceDirection));
+    robot.setFaceDirection(robot.getFaceDirection().turnLeft());
   }
 }

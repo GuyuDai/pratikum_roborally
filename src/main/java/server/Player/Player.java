@@ -33,6 +33,10 @@ public class Player implements PlayerAction{
     return register;
   }
 
+  public ProgrammingDeck getOwnDeck() {
+    return ownDeck;
+  }
+
   @Override
   public void draw() {
     for(int i = 9; i > 0; i--){

@@ -1,5 +1,6 @@
 package server.BoardElement;
 
+import server.Control.Direction;
 import server.Control.Position;
 import server.Game.RR;
 
@@ -7,6 +8,7 @@ public abstract class BoardElem {
   public String name;
   public Position position;
   protected RR currentGame;
+  public Direction direction;
 
 
   public BoardElem(String name,RR currentGame){
@@ -29,6 +31,10 @@ public abstract class BoardElem {
 
   public void setPosition(Position position) {
     this.position = position;
+  }
+
+  public Direction getDirection(){
+    return direction;
   }
 
 
