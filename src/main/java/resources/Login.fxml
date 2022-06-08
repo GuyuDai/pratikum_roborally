@@ -8,7 +8,7 @@
 <AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="442.0" prefWidth="600.0" style="-fx-background-color: #43485E;"
             xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="client.loginWindow.LoginController">
+            fx:controller="client.loginWindow.LoginViewModel">
    <Button fx:id="sendNameButton" layoutX="242.0" layoutY="305.0" mnemonicParsing="false"
            onAction="#sendNameButtonAction" prefHeight="59.0" prefWidth="116.0" style="-fx-background-color: #43485E;">
       <font>
