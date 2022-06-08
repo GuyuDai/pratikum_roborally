@@ -2,22 +2,23 @@ package server.BoardElement;
 
 import server.CardTypes.Move;
 import server.Control.Direction;
-import server.Control.Position;
 import server.Game.RR;
 import server.Player.Robot;
 
 /**
- * @author Nargess Ahmadi, Nassrin Djafari
+ * @author Nargess Ahmadi, Nassrin Djafari,Minghao Li
  * Conveyor belts move your robot in the direction of the arrows.
  * Double-arrowed conveyor belts move robots two spaces and activate before single-arrowed conveyor belts,
  * which move robots one space. Once a robot has moved off a belt, the belt no longer affects that robot.
  * See the examples below.
  */
 
-public class ConveyBeltSingleArrow extends BoardElem implements Move {
-  public ConveyBeltSingleArrow(RR currentGame) {
+public class ConveyBelt extends BoardElem implements Move {
+  public ConveyBelt(RR currentGame,int speed,Direction direction) {
 
-    super("ConveyBeltSingleArrow",currentGame);
+    super("ConveyBelt",currentGame);
+    this.speed=speed;
+    this.direction=direction;
 
   }
 
@@ -31,12 +32,7 @@ public class ConveyBeltSingleArrow extends BoardElem implements Move {
   @Override
   public void move(Robot robot) {
     Direction arrowDirection=this.getDirection();
-    Direction robotFaceDirection=robot.getFaceDirection();
-    if (arrowDirection.equals(robotFaceDirection)){
-      robot.move(1);
-    }
-    robot.setFaceDirection(arrowDirection);
-    robot.move(1);
-    robot.setFaceDirection(robotFaceDirection);
+    int speed=this.getSpeed();
+    robot.push(robot,arrowDirection,speed);
   }
 }

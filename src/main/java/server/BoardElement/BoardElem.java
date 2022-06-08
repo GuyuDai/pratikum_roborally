@@ -9,6 +9,9 @@ public abstract class BoardElem {
   public Position position;
   protected RR currentGame;
   public Direction direction;
+  public int speed;
+  public int count;
+  public String turnDirection;
 
 
   public BoardElem(String name,RR currentGame){
@@ -37,6 +40,17 @@ public abstract class BoardElem {
     return direction;
   }
 
+  public int getSpeed() {
+    return speed;
+  }
+
+  public int getCount() {
+    return count;
+  }
+
+  public String getTurnDirection(){
+    return turnDirection;
+  }
 
 }
 

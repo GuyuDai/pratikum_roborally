@@ -1,14 +1,18 @@
 package server.BoardElement;
 
 import server.CardTypes.Move;
+import server.Control.Direction;
 import server.Game.RR;
 import server.Player.Robot;
 
-public class PushPanelOne extends BoardElem implements Move {
+public class PushPanel extends BoardElem implements Move {
 
-  public PushPanelOne(RR currentGame) {
+  public PushPanel(RR currentGame, int speed, Direction direction) {
+
     super("PushPanelOne", currentGame);
-    }
+    this.speed=speed;
+    this.direction=direction;
+  }
 
 
 
@@ -19,7 +23,7 @@ public class PushPanelOne extends BoardElem implements Move {
 
   @Override
   public void move(Robot robot) {
-    robot.move(1);
+    robot.move(this.getSpeed());
 
   }
 }
