@@ -12,9 +12,9 @@ import transfer.request.PlayerInitialisation;
 import transfer.request.RequestType;
 import transfer.request.RequestWrapper;
 
-public class LoginController {
+public class LoginViewModel {
 
-    private static LoginController instance;
+    private static LoginViewModel instance;
     @FXML
     public AnchorPane container;
     @FXML
@@ -30,7 +30,7 @@ public class LoginController {
         return model;
     }
 
-    public LoginController() {
+    public LoginViewModel() {
         model = LoginModel.getInstance();
     }
 
@@ -46,7 +46,7 @@ public class LoginController {
         this.sendNameButton = sendNameButton;
     }
 
-    public static LoginController getInstance() {
+    public static LoginViewModel getInstance() {
         return instance;
     }
 

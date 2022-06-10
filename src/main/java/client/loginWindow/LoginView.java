@@ -20,7 +20,7 @@ public class LoginView extends AnchorPane{
 
         getChildren().addAll(label,nameInput, text, button);
 
-        LoginController viewModel = new LoginController();
+        LoginViewModel viewModel = new LoginViewModel();
         viewModel.setNodeElements(this, nameInput, text, button);
         viewModel.initialize();
 
