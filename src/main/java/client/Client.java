@@ -1,9 +1,12 @@
 package client;
 
+import com.google.gson.JsonObject;
+
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.Socket;
 
-public class Client {
+public class Client{
     private static final int SERVER_PORT =1788;
     private static final String SERVER_IP = "localhost";
 
@@ -21,4 +24,14 @@ public class Client {
             e.printStackTrace();
         }
     }
+
+    //public void sendJsonMsg (JsonObject jsonObject) {
+      //  try {
+        //    OutputStream out = clientReceive
+        //}
+    //}
+    //@Override
+    //public void run() {
+
+    //}
 }

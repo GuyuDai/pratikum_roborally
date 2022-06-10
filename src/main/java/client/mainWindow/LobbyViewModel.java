@@ -15,7 +15,11 @@ import javafx.scene.layout.VBox;
 import transfer.Player;
 import transfer.request.*;
 
-public class MenuController {
+/**
+ * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
+ */
+
+public class LobbyViewModel {
 
     @FXML
     public VBox container;
@@ -26,9 +30,9 @@ public class MenuController {
     @FXML
     private Button sendButton;
 
-    private static MenuModel model;
+    private static LobbyModel model;
 
-    private static MenuController instance;
+    private static LobbyViewModel instance;
 
     private Gson gson = new Gson();
 
@@ -38,15 +42,15 @@ public class MenuController {
         currentPlayer = player;
     }
 
-    public MenuController() {
-        model = MenuModel.getInstance();
+    public LobbyViewModel() {
+        model = LobbyModel.getInstance();
     }
 
-    public static MenuController getInstance() {
+    public static LobbyViewModel getInstance() {
         return instance;
     }
 
-    public MenuModel getModel() {
+    public LobbyModel getModel() {
         return model;
     }
 
@@ -82,13 +86,13 @@ public class MenuController {
     private void checkInput(String message){
 
         String sendableRequest = "";
-        /**
+        /*
          if(message.startsWith("@")){
          sendableRequest = createDirectMessage(message);
          } else if (message.startsWith("!")){
          sendableRequest = createCommandRequest(message);
          } else {
-         **/
+         */
         sendableRequest = createMessage(message);
 
 
@@ -104,7 +108,7 @@ public class MenuController {
     }
 
 
-    /**
+    /*
      private String createDirectMessage(String message){
      message = message.replace("@", "");
      String [] splittingTarget = message.split(" ");
@@ -120,7 +124,7 @@ public class MenuController {
      message = message.replace("!", "");
      CommandType currentCommandType = identifyCommandType(message);
      if(currentCommandType.equals(CommandType.NO_SUCH_COMMAND_FOUND)){
-     MenuController.show(currentCommandType.getCommandIdentification());
+     LobbyViewModel.show(currentCommandType.getCommandIdentification());
      } else if (currentCommandType.equals(CommandType.SELECT_CARD)) {
      return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer, splitMessage(message)), RequestType.COMMAND_REQUEST));
      } else if (currentCommandType.equals(CommandType.SELECT_PLAYER)) {
@@ -175,7 +179,7 @@ public class MenuController {
         return createMessageWrapped;
     }
 
-    /*
+    /**
      * Function to send messages using keyboard "Enter" key.
      */
     @FXML
@@ -183,5 +187,14 @@ public class MenuController {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             sendButtonAction(null);
         }
+    }
+
+    public void chooseRobot (ActionEvent actionEvent) throws IOException {
+
+    }
+
+    @FXML
+    public void chooseMap(ActionEvent actionEvent) throws IOException {
+
     }
 }

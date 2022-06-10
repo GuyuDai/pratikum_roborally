@@ -1,6 +1,6 @@
 package transfer.request;
 
-import client.mainWindow.MenuController;
+import client.mainWindow.LobbyViewModel;
 import com.google.gson.Gson;
 import javafx.application.Platform;
 import server.ServerThread;
@@ -118,11 +118,11 @@ public class Message{
     private void receiveTheMessage() {
         if (this.getNameOfSender().equals("Server")) {
             Platform.runLater(() -> {
-                MenuController.show(this.getMessage());
+                LobbyViewModel.show(this.getMessage());
             });
         } else {
             Platform.runLater(() -> {
-                MenuController.show(this.getNameOfSender() + ": " + this.getMessage());
+                LobbyViewModel.show(this.getNameOfSender() + ": " + this.getMessage());
             });
         }
     }

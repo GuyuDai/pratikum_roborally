@@ -1,3 +1,28 @@
 .backgroundColor {
-    -fx-background-color: linear-gradient(to right, #304352, #d7d2cc);
+    -fx-background-color: linear-gradient(to right, #000000, #434343);
+}
+
+.rotate90 {
+    -fx-rotate: 90;
+}
+
+.rotate180{
+    -fx-rotate: 180;
+}
+
+.rotate270{
+    -fx-rotate: 270;
+}
+
+.backgroundDeck1 {
+    -fx-background-color: #CD5C5C;
+    -fx-background-radius: 15;
+}
+
+.fontColor {
+}
+
+.buttonColor {
+    -fx-background-radius: 15;
+    -fx-background-color: rgba(129, 3, 3, 0.19);
 }
