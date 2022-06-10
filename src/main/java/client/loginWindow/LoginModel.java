@@ -3,6 +3,10 @@ package client.loginWindow;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
+ */
+
 public class LoginModel {
 
     private static volatile LoginModel instance;

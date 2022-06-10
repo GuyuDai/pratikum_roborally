@@ -8,9 +8,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public class MenuView extends VBox{
+public class LobbyView extends VBox{
 
-    public MenuView() {
+    public LobbyView() {
 
         Label label = new Label("label");
         ListView<String> list = new ListView<>();
@@ -22,7 +22,7 @@ public class MenuView extends VBox{
 
         getChildren().addAll(label, list, input, sendMessageButton);
 
-        MenuController viewModel = new MenuController();
+        LobbyViewModel viewModel = new LobbyViewModel();
         viewModel.setNodeElements(this, list, input, sendMessageButton);
         viewModel.initialize();
         sendMessageButton.setOnAction(event -> {

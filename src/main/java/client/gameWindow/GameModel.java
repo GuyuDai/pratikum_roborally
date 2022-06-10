@@ -1,22 +1,27 @@
-package client.mainWindow;
+package client.gameWindow;
+
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class MenuModel {
+/**
+ * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
+ */
 
-    private static volatile MenuModel instance;
+public class GameModel {
 
-    private MenuModel(){
+    private static volatile GameModel instance;
+
+    private GameModel(){
     }
 
-    public static MenuModel getInstance() {
+    public static GameModel getInstance() {
         if (instance == null) {
-            synchronized (MenuModel.class) {
+            synchronized (GameModel.class) {
                 if (instance == null) {
-                    instance = new MenuModel();
+                    instance = new GameModel();
                 }
             }
         }
@@ -38,5 +43,4 @@ public class MenuModel {
     public void addNewListItem(String listItem) {
         listContent.add(listItem);
     }
-
 }

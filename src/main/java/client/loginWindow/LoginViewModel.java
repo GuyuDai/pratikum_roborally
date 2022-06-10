@@ -12,6 +12,10 @@ import transfer.request.PlayerInitialisation;
 import transfer.request.RequestType;
 import transfer.request.RequestWrapper;
 
+/**
+ * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
+ */
+
 public class LoginViewModel {
 
     private static LoginViewModel instance;
