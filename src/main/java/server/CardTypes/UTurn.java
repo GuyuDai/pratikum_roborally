@@ -17,9 +17,6 @@ public class UTurn extends Card implements Move{
 
   @Override
   public void move(Robot robot) {
-    Direction faceDirection = robot.getCurrentPosition().getFaceDirection().turn180();
-
-    robot.setCurrentPosition(new Position
-        (robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY(), faceDirection));
+    robot.setFaceDirection(robot.getFaceDirection().turn180());
   }
 }

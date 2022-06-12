@@ -28,6 +28,7 @@ public class MainApplication extends Application {
     public void stop() {
     }
 
+    //TODo Ändere Namen
     @Override
     public void start(Stage primaryStage) throws IOException {
         new Client().init();

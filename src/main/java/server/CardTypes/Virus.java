@@ -1,7 +1,6 @@
 package server.CardTypes;
 import server.Control.Position;
 import server.Player.Player;
-import server.Player.Robot;
 
 public class Virus extends Card implements DamageCards {
 
@@ -20,8 +19,8 @@ public class Virus extends Card implements DamageCards {
     for(int i=x-6;i<x+6;i++){
        for(int j=y-6;j<y+6;j++){
          for(Player player: currentGame.getActivePlayers())
-         if(this.currentGame.getGameboard().getMap()[i][j].getPosition().getX()==player.getOwnRobot().getCurrentPosition().getX()
-         && this.currentGame.getGameboard().getMap()[i][j].getPosition().getY()==player.getOwnRobot().getCurrentPosition().getY()){
+         if(this.currentGame.getGameBoard().getMap()[i][j].getPosition().getX()==player.getOwnRobot().getCurrentPosition().getX()
+         && this.currentGame.getGameBoard().getMap()[i][j].getPosition().getY()==player.getOwnRobot().getCurrentPosition().getY()){
             player.getHands().add(new Virus());
          }
        }
