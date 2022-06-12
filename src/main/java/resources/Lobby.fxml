@@ -93,11 +93,11 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton fx:id="buttonTwonky" layoutX="262.0" layoutY="190.0" mnemonicParsing="false" onAction="#RobotButton" toggleGroup="$ToggleGroupRobot">
+            <ToggleButton fx:id="buttonTwonkey" layoutX="262.0" layoutY="190.0" mnemonicParsing="false" onAction="#RobotButton" toggleGroup="$ToggleGroupRobot">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Robots/twonky.png" />
+                        <Image url="@Robots/twonkey.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -107,11 +107,11 @@
                   <Image url="@selectRobot.png" />
                </image>
             </ImageView>
-            <ToggleButton fx:id="buttonTruhole" layoutX="-11.0" layoutY="190.0" mnemonicParsing="false" onAction="#RobotButton" toggleGroup="$ToggleGroupRobot">
+            <ToggleButton fx:id="buttonTwitch" layoutX="-11.0" layoutY="190.0" mnemonicParsing="false" onAction="#RobotButton" toggleGroup="$ToggleGroupRobot">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Robots/truhole bot.png" />
+                        <Image url="@Robots/twitch.png" />
                      </image>
                   </ImageView>
                </graphic>

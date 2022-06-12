@@ -44,9 +44,9 @@ public class LobbyViewModel {
     @FXML
     private ToggleButton buttonSquash;
     @FXML
-    private ToggleButton buttonTruhole;
+    private ToggleButton buttonTwitch;
     @FXML
-    private ToggleButton buttonTwonky;
+    private ToggleButton buttonTwonkey;
     @FXML
     private ToggleGroup buttons;
     @FXML
@@ -66,6 +66,10 @@ public class LobbyViewModel {
         if(buttonHammer.isSelected()){
             showsButtonText();
             buttonText.setText("You selected Hammer bot.");
+
+
+            model.getTextFieldContent().set("");
+            input.requestFocus();
         }
         else if (buttonHulk.isSelected()){
             showsButtonText();
@@ -79,13 +83,13 @@ public class LobbyViewModel {
             showsButtonText();
             buttonText.setText("You selected Squash bot.");
         }
-        else if (buttonTwonky.isSelected()){
+        else if (buttonTwonkey.isSelected()){
             showsButtonText();
-            buttonText.setText("You selected Twonky.");
+            buttonText.setText("You selected Twonkey.");
         }
-        else if (buttonTruhole.isSelected()){
+        else if (buttonTwitch.isSelected()){
             showsButtonText();
-            buttonText.setText("You selected Truhole bot.");
+            buttonText.setText("You selected Twitch.");
         }
         else {
             showsButtonText();
@@ -144,7 +148,7 @@ public class LobbyViewModel {
         model.addNewListItem(message);
     }
 
-    //Function of the "send message" button in the game window.
+    //Function of the Send button in the Chat
 
     @FXML
     public void sendButtonAction(ActionEvent actionEvent) throws IOException {
