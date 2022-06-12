@@ -1,4 +1,4 @@
-package client.mainWindow;
+package client.lobbyWindow;
 
 import java.io.IOException;
 
@@ -6,18 +6,21 @@ import client.Client;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import transfer.Player;
 import transfer.request.*;
 
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+
+
 /**
  * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
  */
+
 
 public class LobbyViewModel {
 
@@ -29,6 +32,57 @@ public class LobbyViewModel {
     private TextField input;
     @FXML
     private Button sendButton;
+    @FXML
+    private ToggleGroup ToggleGroupRobot;
+
+    @FXML
+    private ToggleButton buttonHammer;
+
+    @FXML
+    private ToggleButton buttonHulk;
+
+    @FXML
+    private ToggleButton buttonSpin;
+
+    @FXML
+    private ToggleButton buttonSquash;
+
+    @FXML
+    private ToggleButton buttonTruhole;
+
+    @FXML
+    private ToggleButton buttonTwonky;
+
+    @FXML
+    private ToggleGroup buttons;
+
+    @FXML
+    private Text buttonText;
+
+    @FXML
+    private Pane selectRobot;
+
+    @FXML
+    private Button sendBtn;
+
+
+    //toggle button message for selection
+    @FXML
+    void RobotButton(ActionEvent event) {
+        if (event.getSource() == buttonHammer) {
+            buttonText.setText("You selected Hammer bot.");
+        } else if (event.getSource() == buttonHulk) {
+            buttonText.setText("You selected Hulk x90.");
+        } else if (event.getSource() == buttonSpin) {
+            buttonText.setText("You selected Spin bot.");
+        } else if (event.getSource() == buttonSquash) {
+            buttonText.setText("You selected Squash bot.");
+        } else if (event.getSource() == buttonTwonky) {
+            buttonText.setText("You selected Twonky.");
+        } else if (event.getSource() == buttonTruhole) {
+            buttonText.setText("You selected Truhole bot.");
+        }
+    }
 
     private static LobbyModel model;
 
@@ -179,7 +233,7 @@ public class LobbyViewModel {
         return createMessageWrapped;
     }
 
-    /**
+    /*
      * Function to send messages using keyboard "Enter" key.
      */
     @FXML
@@ -187,10 +241,6 @@ public class LobbyViewModel {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             sendButtonAction(null);
         }
-    }
-
-    public void chooseRobot (ActionEvent actionEvent) throws IOException {
-
     }
 
     @FXML

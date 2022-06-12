@@ -1,4 +1,4 @@
-package client.mainWindow;
+package client.lobbyWindow;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

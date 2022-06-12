@@ -1,9 +1,9 @@
 package transfer.request;
 
-import client.mainWindow.LobbyViewModel;
+import client.lobbyWindow.LobbyViewModel;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
-import client.mainWindow.MainApplication;
+import client.lobbyWindow.MainApplication;
 import transfer.Player;
 
 import java.net.Socket;

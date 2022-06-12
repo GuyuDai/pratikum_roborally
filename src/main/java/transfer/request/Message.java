@@ -1,6 +1,6 @@
 package transfer.request;
 
-import client.mainWindow.LobbyViewModel;
+import client.lobbyWindow.LobbyViewModel;
 import com.google.gson.Gson;
 import javafx.application.Platform;
 import server.ServerThread;

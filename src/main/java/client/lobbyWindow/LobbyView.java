@@ -1,4 +1,4 @@
-package client.mainWindow;
+package client.lobbyWindow;
 
 import java.io.IOException;
 

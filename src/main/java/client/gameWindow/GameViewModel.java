@@ -1,6 +1,6 @@
 package client.gameWindow;
 
-import client.mainWindow.LobbyViewModel;
+import client.lobbyWindow.LobbyViewModel;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

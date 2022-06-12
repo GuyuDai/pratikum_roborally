@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
 
+/**
+ * @author Felicia Saruba
+ */
+
 public class Client{
     private static final int SERVER_PORT =1788;
     private static final String SERVER_IP = "localhost";
