@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import client.Client;
 import com.google.gson.Gson;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -57,13 +58,14 @@ public class LobbyViewModel {
     private ToggleGroup buttons;
 
     @FXML
-    private Text buttonText;
-
-    @FXML
     private Pane selectRobot;
 
     @FXML
+    private Text buttonText;
+    @FXML
     private Button sendBtn;
+    @FXML
+    private Button playButton;
 
 
     //toggle button message for selection
@@ -111,6 +113,7 @@ public class LobbyViewModel {
     public void initialize() {
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
+        playButton.disableProperty().bind(Bindings.isNull(ToggleGroupRobot.selectedToggleProperty()));
     }
 
     public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendButton) {
@@ -233,7 +236,7 @@ public class LobbyViewModel {
         return createMessageWrapped;
     }
 
-    /*
+    /**
      * Function to send messages using keyboard "Enter" key.
      */
     @FXML
