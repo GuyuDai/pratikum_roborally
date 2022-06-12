@@ -7,7 +7,7 @@ import java.util.*;
 
 import com.google.gson.Gson;
 import transfer.PlayerOnline;
-import transfer.cards.Game;
+//import transfer.cards.Game;
 import transfer.request.RequestWrapper;
 
 public class ServerThread implements Runnable {
@@ -15,7 +15,7 @@ public class ServerThread implements Runnable {
     private Socket clientSocket;
     private BufferedReader readInput;
     public static boolean gameActive = false;
-    private static Game game = null;
+   // private static Game game = null;
 
     public ServerThread(Socket clientSocket) throws IOException {
         this. clientSocket = clientSocket;

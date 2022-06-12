@@ -63,25 +63,38 @@ public class LobbyViewModel {
     //toggle button message for selection
     @FXML
     void RobotButton(ActionEvent event) {
-        if (event.getSource() == buttonHammer) {
+        if(buttonHammer.isSelected()){
             showsButtonText();
             buttonText.setText("You selected Hammer bot.");
-        } else if (event.getSource() == buttonHulk) {
+        }
+        else if (buttonHulk.isSelected()){
             showsButtonText();
             buttonText.setText("You selected Hulk x90.");
-        } else if (event.getSource() == buttonSpin) {
+        }
+        else if (buttonSpin.isSelected()){
             showsButtonText();
             buttonText.setText("You selected Spin bot.");
-        } else if (event.getSource() == buttonSquash) {
+        }
+        else if (buttonSquash.isSelected()){
             showsButtonText();
             buttonText.setText("You selected Squash bot.");
-        } else if (event.getSource() == buttonTwonky) {
+        }
+        else if (buttonTwonky.isSelected()){
             showsButtonText();
             buttonText.setText("You selected Twonky.");
-        } else if (event.getSource() == buttonTruhole) {
+        }
+        else if (buttonTruhole.isSelected()){
             showsButtonText();
             buttonText.setText("You selected Truhole bot.");
         }
+        else {
+            showsButtonText();
+            buttonText.setText("");
+        }
+
+
+
+
     }
     public void showsButtonText() {
         if (buttonText.isVisible()) {
@@ -118,7 +131,6 @@ public class LobbyViewModel {
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
         playButton.disableProperty().bind(Bindings.isNull(ToggleGroupRobot.selectedToggleProperty()));
-        buttonText.disableProperty().bind(Bindings.isNull(ToggleGroupRobot.selectedToggleProperty()));
     }
 
     public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendButton) {

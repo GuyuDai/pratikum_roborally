@@ -1,4 +1,4 @@
-package transfer.cards;
+package transfer;
 
 import java.net.Socket;
 import java.util.ArrayList;

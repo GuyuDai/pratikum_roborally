@@ -55,7 +55,7 @@ public class GameViewModel extends LobbyViewModel {
     }
 
     /**
-     * opens ChatWindow by clicken the Open Chat Button
+     * opens ChatWindow by clicking the Open Chat Button
      * @param actionEvent
      */
     @FXML
