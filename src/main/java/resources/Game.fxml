@@ -1360,5 +1360,18 @@
             </Pane>
          </children>
       </Pane>
+      <TilePane fx:id="playersHand" layoutX="31.0" layoutY="847.0" prefHeight="110.0" prefWidth="765.0">
+         <children>
+            <StackPane fx:id="hand1" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
+            <StackPane fx:id="hand2" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
+            <StackPane fx:id="hand3" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
+            <StackPane fx:id="hand4" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
+            <StackPane fx:id="hand5" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
+            <StackPane fx:id="hand6" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
+            <StackPane fx:id="hand7" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
+            <StackPane fx:id="hand8" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
+            <StackPane fx:id="hand9" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
+         </children>
+      </TilePane>
    </children>
 </AnchorPane>

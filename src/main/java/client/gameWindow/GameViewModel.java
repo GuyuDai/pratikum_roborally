@@ -48,12 +48,16 @@ public class GameViewModel extends LobbyViewModel {
 
     private static Player currentPlayer;
 
+
     public void initialize() {
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
     }
 
-
+    /**
+     * opens ChatWindow by clicken the Open Chat Button
+     * @param actionEvent
+     */
     @FXML
     public void showChat(ActionEvent actionEvent) {
         if (chatWindow.isVisible()) {
@@ -64,5 +68,4 @@ public class GameViewModel extends LobbyViewModel {
             chatBtn.setText("Close Chat");
         }
     }
-
 }
