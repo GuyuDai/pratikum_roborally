@@ -64,48 +64,28 @@ public class LobbyViewModel {
     @FXML
     void RobotButton(ActionEvent event) {
         if(buttonHammer.isSelected()){
-            showsButtonText();
             buttonText.setText("You selected Hammer bot.");
-
-
-            model.getTextFieldContent().set("");
-            input.requestFocus();
         }
         else if (buttonHulk.isSelected()){
-            showsButtonText();
             buttonText.setText("You selected Hulk x90.");
         }
         else if (buttonSpin.isSelected()){
-            showsButtonText();
             buttonText.setText("You selected Spin bot.");
         }
         else if (buttonSquash.isSelected()){
-            showsButtonText();
             buttonText.setText("You selected Squash bot.");
         }
         else if (buttonTwonkey.isSelected()){
-            showsButtonText();
             buttonText.setText("You selected Twonkey.");
         }
         else if (buttonTwitch.isSelected()){
-            showsButtonText();
             buttonText.setText("You selected Twitch.");
         }
         else {
-            showsButtonText();
             buttonText.setText("");
         }
-
-
-
-
     }
-    public void showsButtonText() {
-        if (buttonText.isVisible()) {
-            buttonText.setVisible(true);
-        } else {
-            buttonText.setVisible(false);}
-    }
+
 
     private static LobbyModel model;
 
