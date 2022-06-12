@@ -35,28 +35,20 @@ public class LobbyViewModel {
     private Button sendButton;
     @FXML
     private ToggleGroup ToggleGroupRobot;
-
     @FXML
     private ToggleButton buttonHammer;
-
     @FXML
     private ToggleButton buttonHulk;
-
     @FXML
     private ToggleButton buttonSpin;
-
     @FXML
     private ToggleButton buttonSquash;
-
     @FXML
     private ToggleButton buttonTruhole;
-
     @FXML
     private ToggleButton buttonTwonky;
-
     @FXML
     private ToggleGroup buttons;
-
     @FXML
     private Pane selectRobot;
 
@@ -72,18 +64,30 @@ public class LobbyViewModel {
     @FXML
     void RobotButton(ActionEvent event) {
         if (event.getSource() == buttonHammer) {
+            showsButtonText();
             buttonText.setText("You selected Hammer bot.");
         } else if (event.getSource() == buttonHulk) {
+            showsButtonText();
             buttonText.setText("You selected Hulk x90.");
         } else if (event.getSource() == buttonSpin) {
+            showsButtonText();
             buttonText.setText("You selected Spin bot.");
         } else if (event.getSource() == buttonSquash) {
+            showsButtonText();
             buttonText.setText("You selected Squash bot.");
         } else if (event.getSource() == buttonTwonky) {
+            showsButtonText();
             buttonText.setText("You selected Twonky.");
         } else if (event.getSource() == buttonTruhole) {
+            showsButtonText();
             buttonText.setText("You selected Truhole bot.");
         }
+    }
+    public void showsButtonText() {
+        if (buttonText.isVisible()) {
+            buttonText.setVisible(true);
+        } else {
+            buttonText.setVisible(false);}
     }
 
     private static LobbyModel model;
@@ -114,6 +118,7 @@ public class LobbyViewModel {
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
         playButton.disableProperty().bind(Bindings.isNull(ToggleGroupRobot.selectedToggleProperty()));
+        buttonText.disableProperty().bind(Bindings.isNull(ToggleGroupRobot.selectedToggleProperty()));
     }
 
     public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendButton) {
