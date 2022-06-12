@@ -1,6 +1,10 @@
 package client.lobbyWindow;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
+import java.sql.SQLOutput;
 
 import client.Client;
 import com.google.gson.Gson;
@@ -11,12 +15,27 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import server.ServerThread;
 import transfer.Player;
-import transfer.request.*;
-
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import transfer.request.MessageTypes;
+import transfer.request.Message;
+import transfer.request.RequestWrapper;
+import transfer.request.RequestType;
 
+
+
+
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.io.IOException;
+import java.util.Objects;
+import client.Client;
 
 /**
  * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
@@ -65,6 +84,12 @@ public class LobbyViewModel {
     void RobotButton(ActionEvent event) {
         if(buttonHammer.isSelected()){
             buttonText.setText("You selected Hammer bot.");
+            /*
+            String message = "";
+            message = new Gson().toJson(new RequestWrapper(new Message("Server", currentPlayer + " selected Hammer bot.", MessageTypes.SERVER_MESSAGE), RequestType.MESSAGE));
+
+            sendToAll("test");
+            */
         }
         else if (buttonHulk.isSelected()){
             buttonText.setText("You selected Hulk x90.");
@@ -85,6 +110,26 @@ public class LobbyViewModel {
             buttonText.setText("");
         }
     }
+
+    /*
+    private void sendToAll(String message) {
+        Message publicGameMessage = new Message("Server", message, MessageTypes.SERVER_MESSAGE);
+        String wrappedMessage = new Gson().toJson(new RequestWrapper(publicGameMessage, RequestType.MESSAGE));
+        ServerThread.getPlayersOnline().stream()
+                .forEach(playerOnline -> write(wrappedMessage, playerOnline.getPlayerSocket()));
+        System.out.println("test nr2");
+    }
+    private void write(String message, Socket thread){
+        try{
+            BufferedWriter writeOutput = new BufferedWriter(new OutputStreamWriter(thread.getOutputStream()));
+            writeOutput.write(message);
+            writeOutput.newLine();
+            writeOutput.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    */
 
 
     private static LobbyModel model;
@@ -128,8 +173,12 @@ public class LobbyViewModel {
         model.addNewListItem(message);
     }
 
-    //Function of the Send button in the Chat
 
+    public void playButtonAction(ActionEvent actionEvent) throws IOException{
+        FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Game.fxml")));
+        System.out.println("test");
+    }
+    //Function of the Send button in the Chat
     @FXML
     public void sendButtonAction(ActionEvent actionEvent) throws IOException {
         String message = model.getTextFieldContent().get();
@@ -237,9 +286,8 @@ public class LobbyViewModel {
         return createMessageWrapped;
     }
 
-    /**
-     * Function to send messages using keyboard "Enter" key.
-     */
+
+    // Function to send messages using keyboard "Enter" key.
     @FXML
     public void keyboardAction(KeyEvent keyEvent) throws IOException{
         if (keyEvent.getCode() == KeyCode.ENTER) {

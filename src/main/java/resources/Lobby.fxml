@@ -41,7 +41,7 @@
             </VBox>
          </items>
       </SplitPane>
-      <Button fx:id="playButton" alignment="CENTER" layoutX="390.0" layoutY="469.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" style="-fx-background-radius: 10;">
+      <Button fx:id="playButton" alignment="CENTER" layoutX="390.0" layoutY="469.0" mnemonicParsing="false" onAction="#playButtonAction" prefHeight="40.0" prefWidth="140.0" style="-fx-background-radius: 10;">
          <graphic>
             <ImageView fitHeight="13.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
                <image>

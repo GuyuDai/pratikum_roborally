@@ -13,7 +13,7 @@ import server.ServerThread;
 
 
 public class Game {
-
+/**
     private List<PlayerOnline> alivePlayers = new ArrayList<>(); //for round
     private static List<PlayerOnline> playerInGame = new ArrayList<>(); //for game
     private static PlayerOnline currentPlayer; //player who is current in turn
@@ -38,7 +38,7 @@ public class Game {
         }
     }
 
-    /**
+
      public Game() {
      this.roundCounter = 1;
      this.winning = false;
