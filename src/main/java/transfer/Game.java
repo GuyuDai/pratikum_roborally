@@ -194,10 +194,7 @@ public class Game {
      }
 
 
-     public void score() {
-     for(PlayerOnline player: alivePlayers) {
-     sendToPlayer(player.getPlayer().getName() + " has " + player.getPlayer().getHearts() + " hearts", player.getPlayer());
-     }
+
      }
      public void showCards(Player player) {
      sendToPlayer("You have " + player.getHandCards()[0].getValue()

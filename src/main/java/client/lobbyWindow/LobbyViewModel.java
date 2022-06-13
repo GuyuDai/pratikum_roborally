@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.sql.SQLOutput;
-
 import client.Client;
 import com.google.gson.Gson;
 import javafx.beans.binding.Bindings;
@@ -23,12 +22,6 @@ import transfer.request.MessageTypes;
 import transfer.request.Message;
 import transfer.request.RequestWrapper;
 import transfer.request.RequestType;
-
-
-
-
-
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -84,12 +77,12 @@ public class LobbyViewModel {
     void RobotButton(ActionEvent event) {
         if(buttonHammer.isSelected()){
             buttonText.setText("You selected Hammer bot.");
-            /*
+
             String message = "";
             message = new Gson().toJson(new RequestWrapper(new Message("Server", currentPlayer + " selected Hammer bot.", MessageTypes.SERVER_MESSAGE), RequestType.MESSAGE));
+            System.out.println("test");
 
-            sendToAll("test");
-            */
+
         }
         else if (buttonHulk.isSelected()){
             buttonText.setText("You selected Hulk x90.");
@@ -177,6 +170,8 @@ public class LobbyViewModel {
     public void playButtonAction(ActionEvent actionEvent) throws IOException{
         FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Game.fxml")));
         System.out.println("test");
+
+
     }
     //Function of the Send button in the Chat
     @FXML

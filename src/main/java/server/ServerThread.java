@@ -54,6 +54,7 @@ public class ServerThread implements Runnable {
              wrappedRequest.getCommand().handleRequest(clientSocket);
              break;
              **/
+
         }
     }
 
@@ -67,10 +68,10 @@ public class ServerThread implements Runnable {
         return playersOnline;
     }
 
-    /**
+
      public static boolean createGame(){
      if(gameActive == false) {
-     game = new Game();
+     //game = new Game();
      gameActive = true;
      return true;
      }
@@ -83,7 +84,5 @@ public class ServerThread implements Runnable {
      return gameActive;
      }
 
-     public static Game getGame(){return game;}
-
-     **/
+    // public static Game getGame(){return game;}
 }

@@ -8,10 +8,8 @@ import transfer.Player;
 
 import java.net.Socket;
 
-/**
- *
- * Answer to the client request for applying to join the server
- */
+// Answer to the client request for applying to join the server
+
 public class AcceptPlayer {
     private String message;
     private boolean accepted;

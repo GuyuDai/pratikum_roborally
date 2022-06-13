@@ -15,7 +15,7 @@ public class Player implements PlayerAction{
     return ownRobot;
   }
 
-   public String name;
+  public String name;
 
   public String getName() {
     return name;
