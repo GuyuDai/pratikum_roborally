@@ -41,28 +41,9 @@
             </VBox>
          </items>
       </SplitPane>
-      <Button fx:id="playButton" alignment="CENTER" layoutX="390.0" layoutY="469.0" mnemonicParsing="false" onAction="#playButtonAction" prefHeight="40.0" prefWidth="140.0" style="-fx-background-radius: 10;">
-         <graphic>
-            <ImageView fitHeight="13.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@play Button.png" />
-               </image>
-            </ImageView>
-         </graphic></Button>
-      <Button alignment="CENTER" layoutX="584.0" layoutY="469.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" style="-fx-background-radius: 10;">
-         <font>
-            <Font name="System Bold" size="3.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="13.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@exit Button.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Pane fx:id="selectRobot" layoutX="365.0" layoutY="125.0" prefHeight="283.0" prefWidth="392.0">
+      <Pane fx:id="selectRobot" layoutX="364.0" layoutY="125.0" prefHeight="376.0" prefWidth="393.0">
          <children>
+            <Text fx:id="buttonText" fill="WHITE" layoutX="78.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="237.13671875" />
             <ToggleButton fx:id="buttonSquash" layoutX="-11.0" layoutY="76.0" mnemonicParsing="false" onAction="#RobotButton" toggleGroup="$ToggleGroupRobot">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
@@ -102,7 +83,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ImageView fitHeight="17.0" fitWidth="313.0" layoutX="40.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" >
+            <ImageView fitHeight="17.0" fitWidth="313.0" layoutX="40.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@selectRobot.png" />
                </image>
@@ -125,8 +106,28 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
+            <Button fx:id="playButton" alignment="CENTER" layoutX="26.0" layoutY="336.0" mnemonicParsing="false" onAction="#playButtonAction" prefHeight="40.0" prefWidth="140.0" style="-fx-background-radius: 10;">
+               <graphic>
+                  <ImageView fitHeight="13.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@play Button.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button alignment="CENTER" layoutX="213.0" layoutY="336.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font name="System Bold" size="3.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="13.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@exit Button.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </Pane>
-      <Text fx:id="buttonText" fill="WHITE" layoutX="484.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="154.13671875" />
    </children>
 </Pane>

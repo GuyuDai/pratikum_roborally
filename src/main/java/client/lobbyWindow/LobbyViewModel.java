@@ -18,17 +18,19 @@ import server.ServerThread;
 import transfer.Player;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import transfer.request.MessageTypes;
-import transfer.request.Message;
-import transfer.request.RequestWrapper;
-import transfer.request.RequestType;
+import transfer.PlayerOnline;
+import transfer.request.*;
+import java.util.ArrayList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import client.Client;
+import transfer.request.GameMessage;
 
 /**
  * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
@@ -63,7 +65,6 @@ public class LobbyViewModel {
     private ToggleGroup buttons;
     @FXML
     private Pane selectRobot;
-
     @FXML
     private Text buttonText;
     @FXML
@@ -72,57 +73,72 @@ public class LobbyViewModel {
     private Button playButton;
 
 
+    String[] robots = {"hammer", "hulk", "spin", "Squash bot", "Twonkey", "Twitch"};
+
+    List valid = Arrays.asList(robots);     //convert array to a list
+
+
     //toggle button message for selection
     @FXML
     void RobotButton(ActionEvent event) {
-        if(buttonHammer.isSelected()){
-            buttonText.setText("You selected Hammer bot.");
-
-            String message = "";
-            message = new Gson().toJson(new RequestWrapper(new Message("Server", currentPlayer + " selected Hammer bot.", MessageTypes.SERVER_MESSAGE), RequestType.MESSAGE));
-            System.out.println("test");
-
-
+        if(buttonHammer.isSelected()) {
+            if (valid.contains("hammer")) {
+                robots[0] = "leer";
+                buttonText.setText("You selected Hammer bot");
+            } else {
+                buttonText.setText("This robot has already been selected by another player.");
+            }
         }
+
         else if (buttonHulk.isSelected()){
-            buttonText.setText("You selected Hulk x90.");
+            buttonText.setText("You selected " + robots[1]);
         }
         else if (buttonSpin.isSelected()){
-            buttonText.setText("You selected Spin bot.");
+            buttonText.setText("You selected " + robots[2]);
         }
         else if (buttonSquash.isSelected()){
-            buttonText.setText("You selected Squash bot.");
+            buttonText.setText("You selected " + robots[3]);
         }
         else if (buttonTwonkey.isSelected()){
-            buttonText.setText("You selected Twonkey.");
+            buttonText.setText("You selected " + robots[4]);
         }
         else if (buttonTwitch.isSelected()){
-            buttonText.setText("You selected Twitch.");
+            buttonText.setText("You selected " + robots[5]);
         }
         else {
             buttonText.setText("");
         }
     }
 
-    /*
-    private void sendToAll(String message) {
-        Message publicGameMessage = new Message("Server", message, MessageTypes.SERVER_MESSAGE);
-        String wrappedMessage = new Gson().toJson(new RequestWrapper(publicGameMessage, RequestType.MESSAGE));
-        ServerThread.getPlayersOnline().stream()
-                .forEach(playerOnline -> write(wrappedMessage, playerOnline.getPlayerSocket()));
-        System.out.println("test nr2");
-    }
-    private void write(String message, Socket thread){
-        try{
-            BufferedWriter writeOutput = new BufferedWriter(new OutputStreamWriter(thread.getOutputStream()));
-            writeOutput.write(message);
-            writeOutput.newLine();
-            writeOutput.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+
+    // when play button is clicked a message about the selected robot appears in the chat and game window starts
+    public void playButtonAction(ActionEvent actionEvent) throws IOException{
+        if(buttonHammer.isSelected()){
+            String message = "I SELECTED HAMMER BOT.";
+            checkInput(message);
+        }
+        else if (buttonHulk.isSelected()){
+            String message = "I SELECTED HULK X90 BOT.";
+            checkInput(message);
+        }
+        else if (buttonSpin.isSelected()){
+            String message = "I SELECTED SPIN BOT.";
+            checkInput(message);
+        }
+        else if (buttonSquash.isSelected()){
+            String message = "I SELECTED SQUASH BOT.";
+            checkInput(message);
+        }
+        else if (buttonTwonkey.isSelected()){
+            String message = "I SELECTED TWONKEY.";
+            checkInput(message);
+        }
+        else if (buttonTwitch.isSelected()){
+            String message = "I SELECTED TWITCH.";
+            checkInput(message);
         }
     }
-    */
 
 
     private static LobbyModel model;
@@ -167,13 +183,6 @@ public class LobbyViewModel {
     }
 
 
-    public void playButtonAction(ActionEvent actionEvent) throws IOException{
-        FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Game.fxml")));
-        System.out.println("test");
-
-
-    }
-    //Function of the Send button in the Chat
     @FXML
     public void sendButtonAction(ActionEvent actionEvent) throws IOException {
         String message = model.getTextFieldContent().get();
@@ -184,17 +193,17 @@ public class LobbyViewModel {
         input.requestFocus();
 
     }
-
+    //takes message from textfield
     private void checkInput(String message){
 
         String sendableRequest = "";
-        /*
+/*
          if(message.startsWith("@")){
          sendableRequest = createDirectMessage(message);
          } else if (message.startsWith("!")){
          sendableRequest = createCommandRequest(message);
          } else {
-         */
+*/
         sendableRequest = createMessage(message);
 
 
@@ -209,8 +218,66 @@ public class LobbyViewModel {
         }
     }
 
+    //send messages in the chat
+    private String createMessage(String message){
+        String createMessageWrapped = gson.toJson(new RequestWrapper(new Message(currentPlayer.getName(), message, MessageTypes.CLIENT_MESSAGE), RequestType.MESSAGE));
+        return createMessageWrapped;
+    }
 
-    /*
+
+    //send messages using keyboard "Enter" key
+    @FXML
+    public void keyboardAction(KeyEvent keyEvent) throws IOException{
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            sendButtonAction(null);
+        }
+    }
+
+    @FXML
+    public void chooseMap(ActionEvent actionEvent) throws IOException {
+
+    }
+/*
+
+     String message;
+
+    //public gameMessage(String message){this.message = message;}
+
+
+    private void sendToAll(String message) {
+        Message publicGameMessage = new Message("Server", message, MessageTypes.SERVER_MESSAGE);
+        String wrappedMessage = new Gson().toJson(new RequestWrapper(publicGameMessage, RequestType.MESSAGE));
+        ServerThread.getPlayersOnline().stream()
+                .forEach(playerOnline -> write(wrappedMessage, playerOnline.getPlayerSocket()));
+
+
+    }
+
+    public void sendToPlayer(Player targetPlayer) {
+        Message publicGameMessage = new Message("Server", message, MessageTypes.SERVER_MESSAGE);
+        String wrappedMessage = new Gson().toJson(new RequestWrapper(publicGameMessage, RequestType.MESSAGE));
+        for(PlayerOnline playerOnline :  ServerThread.getPlayersOnline()){
+            if(playerOnline.getPlayer().getName().equals(targetPlayer.getName())) {
+                write(wrappedMessage, playerOnline.getPlayerSocket());
+            }
+        }
+    }
+
+    private void write(String message, Socket thread){
+        try{
+            BufferedWriter writeOutput = new BufferedWriter(new OutputStreamWriter(thread.getOutputStream()));
+            writeOutput.write(message);
+            writeOutput.newLine();
+            writeOutput.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
      private String createDirectMessage(String message){
      message = message.replace("@", "");
      String [] splittingTarget = message.split(" ");
@@ -276,22 +343,5 @@ public class LobbyViewModel {
      }
      */
 
-    private String createMessage(String message){
-        String createMessageWrapped = gson.toJson(new RequestWrapper(new Message(currentPlayer.getName(), message, MessageTypes.CLIENT_MESSAGE), RequestType.MESSAGE));
-        return createMessageWrapped;
-    }
 
-
-    // Function to send messages using keyboard "Enter" key.
-    @FXML
-    public void keyboardAction(KeyEvent keyEvent) throws IOException{
-        if (keyEvent.getCode() == KeyCode.ENTER) {
-            sendButtonAction(null);
-        }
-    }
-
-    @FXML
-    public void chooseMap(ActionEvent actionEvent) throws IOException {
-
-    }
 }

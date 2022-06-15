@@ -9,30 +9,34 @@ public class Player {
 
 
     private final String name;
-    /**
+
+    /*
      private Card[] handCards;
      private List<Card> discardedCards;
+     */
+
      private int hearts = 0;
      private boolean inGame;
      private boolean guarded;
      private String cardName;
-     **/
+
 
     public Player(String name) {
         this.name = name;
-        /**
+        /*
          handCards = new Card[2];
          handCards[0] = null;
          handCards[1] = null;
+         */
+
          inGame = true;
          guarded = false;
-         discardedCards = new ArrayList<>();
-         **/
+
     }
 
     public String getName() {return name;}
 
-    /**
+    /*
      public int getHearts() {return hearts;}
 
      public void setHearts() {this.hearts ++;}
@@ -82,7 +86,7 @@ public class Player {
      return false;
      }
      }
-     **/
+     */
 
 
 }

@@ -33,27 +33,27 @@ public class Command {
      this.commandType = commandType;
      this.playerStartsGame = playerRequesting;
      }
+  /*
 
-/**
      public void handleRequest(Socket playerSocket) {
         switch (commandType) {
             case CREATE_GAME:
-            createGame(playerSocket);
-            break;
-     case JOIN_GAME:
-     joinGame(playerSocket);
-     break;
-     case LEAVE_GAME:
-     leaveGame(playerSocket);
-     break;
-     case START_GAME:
-     startGame(playerSocket);
-     break;
-     case LEAVE_SERVER:
-     leaveServer(playerSocket);
-     break;
+               createGame(playerSocket);
+               break;
+            case JOIN_GAME:
+                 joinGame(playerSocket);
+                 break;
+          case LEAVE_GAME:
+               leaveGame(playerSocket);
+               break;
+          case START_GAME:
+               startGame(playerSocket);
+               break;
+          case LEAVE_SERVER:
+               leaveServer(playerSocket);
+               break;
 
-     /*
+
      case SELECT_CARD:
      playerSelection = new PlayerSelection(selection, playerSocket, playerStartsGame);
      break;
@@ -61,7 +61,9 @@ public class Command {
      playerSelection = new PlayerSelection(selection, playerSocket, playerStartsGame);
      break;
 
-     }
+
+
+          }
      }
 
 
@@ -120,8 +122,7 @@ public class Command {
      write(message, playerSocket);
      }
      }
-     /*
-     } else {
+
      message = new Gson().toJson(new RequestWrapper(new Message("Server", "There is no Game created at the moment. Please create a game with '!create game'.", MessageTypes.SERVER_MESSAGE), RequestType.MESSAGE));
      write(message, playerSocket);
      }
@@ -179,6 +180,6 @@ public class Command {
             e.printStackTrace();
         }
      }
-     **/
+*/
 }
 
