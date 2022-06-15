@@ -183,7 +183,7 @@ public class LobbyViewModel {
             newGameBtn.setVisible(false);
         } else {
             selectRobot.setVisible(true);
-            newGameBtn.setText("Select");
+            newGameBtn.setVisible(false);
         }
 
     }
