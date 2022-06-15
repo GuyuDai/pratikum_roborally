@@ -68,8 +68,6 @@ public class LobbyViewModel {
     @FXML
     private ToggleButton buttonTwonkey;
     @FXML
-    private ToggleGroup buttons;
-    @FXML
     private Pane selectRobot;
     @FXML
     private Text buttonText;
@@ -165,6 +163,31 @@ public class LobbyViewModel {
         }
     }
 
+
+    @FXML
+    public void sendButtonAction(ActionEvent actionEvent) throws IOException {
+        String message = model.getTextFieldContent().get();
+
+        checkInput(message);
+
+        model.getTextFieldContent().set("");
+        input.requestFocus();
+
+    }
+
+    @FXML
+    public void showRobotMap(ActionEvent actionEvent) {
+        if (selectRobot.isVisible()) {
+            selectRobot.setVisible(false);
+            newGameBtn.setText("Start New Game");
+            newGameBtn.setVisible(false);
+        } else {
+            selectRobot.setVisible(true);
+            newGameBtn.setText("Select");
+        }
+
+    }
+
     public static void setCurrentPlayer(Player player){
         currentPlayer = player;
     }
@@ -187,16 +210,6 @@ public class LobbyViewModel {
     }
 
 
-    @FXML
-    public void sendButtonAction(ActionEvent actionEvent) throws IOException {
-        String message = model.getTextFieldContent().get();
-
-        checkInput(message);
-
-        model.getTextFieldContent().set("");
-        input.requestFocus();
-
-    }
     //takes message from textfield
     private void checkInput(String message){
 
@@ -234,17 +247,6 @@ public class LobbyViewModel {
     public void keyboardAction(KeyEvent keyEvent) throws IOException{
         if (keyEvent.getCode() == KeyCode.ENTER) {
             sendButtonAction(null);
-        }
-    }
-
-    @FXML
-    public void showRobotMap(ActionEvent actionEvent) {
-        if (selectRobot.isVisible()) {
-            selectRobot.setVisible(false);
-            newGameBtn.setText("Start New Game");
-        } else {
-            selectRobot.setVisible(true);
-            newGameBtn.setText("Select");
         }
     }
 
