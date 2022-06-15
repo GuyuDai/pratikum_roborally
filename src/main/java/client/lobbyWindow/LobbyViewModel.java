@@ -39,6 +39,12 @@ import transfer.request.GameMessage;
 
 public class LobbyViewModel {
 
+    private static LobbyModel model;
+    private static LobbyViewModel instance;
+    private Gson gson = new Gson();
+    private static Player currentPlayer;
+    boolean isAvailable;
+
     @FXML
     public VBox container;
     @FXML
@@ -71,12 +77,31 @@ public class LobbyViewModel {
     private Button sendBtn;
     @FXML
     private Button playButton;
+    @FXML
+    private Button newGameBtn;
 
+
+    public void initialize() {
+        list.itemsProperty().set(model.getListContentProperty());
+        input.textProperty().bindBidirectional(model.getTextFieldContent());
+        playButton.disableProperty().bind(Bindings.isNull(ToggleGroupRobot.selectedToggleProperty()));
+    }
+
+    public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendButton) {
+        this.container = container;
+        this.list = list;
+        this.input = input;
+        this.sendButton = sendButton;
+    }
 
     String[] robots = {"hammer", "hulk", "spin", "Squash bot", "Twonkey", "Twitch"};
 
     List valid = Arrays.asList(robots);     //convert array to a list
 
+
+    public void isRobotAvailable () {
+
+    }
 
     //toggle button message for selection
     @FXML
@@ -140,15 +165,6 @@ public class LobbyViewModel {
         }
     }
 
-
-    private static LobbyModel model;
-
-    private static LobbyViewModel instance;
-
-    private Gson gson = new Gson();
-
-    private static Player currentPlayer;
-
     public static void setCurrentPlayer(Player player){
         currentPlayer = player;
     }
@@ -165,18 +181,6 @@ public class LobbyViewModel {
         return model;
     }
 
-    public void initialize() {
-        list.itemsProperty().set(model.getListContentProperty());
-        input.textProperty().bindBidirectional(model.getTextFieldContent());
-        playButton.disableProperty().bind(Bindings.isNull(ToggleGroupRobot.selectedToggleProperty()));
-    }
-
-    public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendButton) {
-        this.container = container;
-        this.list = list;
-        this.input = input;
-        this.sendButton = sendButton;
-    }
 
     public static void show(String message) {
         model.addNewListItem(message);
@@ -230,6 +234,17 @@ public class LobbyViewModel {
     public void keyboardAction(KeyEvent keyEvent) throws IOException{
         if (keyEvent.getCode() == KeyCode.ENTER) {
             sendButtonAction(null);
+        }
+    }
+
+    @FXML
+    public void showRobotMap(ActionEvent actionEvent) {
+        if (selectRobot.isVisible()) {
+            selectRobot.setVisible(false);
+            newGameBtn.setText("Start New Game");
+        } else {
+            selectRobot.setVisible(true);
+            newGameBtn.setText("Select");
         }
     }
 
