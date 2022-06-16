@@ -43,7 +43,7 @@
       </SplitPane>
       <Pane fx:id="selectRobot" layoutX="364.0" layoutY="125.0" prefHeight="376.0" prefWidth="393.0" visible="false">
          <children>
-            <Text fx:id="buttonText" fill="WHITE" layoutX="78.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="237.13671875" />
+            <Text fx:id="buttonText" fill="WHITE" layoutX="96.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="215.13671875" />
             <ToggleButton fx:id="buttonSquash" layoutX="-11.0" layoutY="76.0" mnemonicParsing="false" onAction="#RobotButton" toggleGroup="$ToggleGroupRobot">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
@@ -129,6 +129,13 @@
             </Button>
          </children>
       </Pane>
-      <Button fx:id="newGameBtn" onAction="#showRobotMap" layoutX="449.0" layoutY="331.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="237.0" text="Start New Game" />
+      <Button fx:id="newGameBtn" layoutX="391.0" layoutY="287.0" mnemonicParsing="false" onAction="#showRobotMap" prefHeight="39.0" prefWidth="306.0">
+         <graphic>
+            <ImageView fitHeight="14.0" fitWidth="327.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@startNewGame.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
    </children>
 </Pane>
