@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import server.ServerThread;
 import transfer.Player;
@@ -31,6 +32,7 @@ import java.util.List;
 import java.util.Objects;
 import client.Client;
 import transfer.request.GameMessage;
+import client.mapWindow.MapViewModel;
 
 /**
  * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
@@ -93,7 +95,6 @@ public class LobbyViewModel {
     }
 
     String[] robots = {"hammer", "hulk", "spin", "Squash bot", "Twonkey", "Twitch"};
-
     List valid = Arrays.asList(robots);     //convert array to a list
 
 
@@ -137,32 +138,28 @@ public class LobbyViewModel {
 
     // when play button is clicked a message about the selected robot appears in the chat and game window starts
     public void playButtonAction(ActionEvent actionEvent) throws IOException{
+        String message = "";
         if(buttonHammer.isSelected()){
-            String message = "I SELECTED HAMMER BOT.";
-            checkInput(message);
+            message = "I SELECTED HAMMER BOT.";
         }
         else if (buttonHulk.isSelected()){
-            String message = "I SELECTED HULK X90 BOT.";
-            checkInput(message);
+            message = "I SELECTED HULK X90 BOT.";
         }
         else if (buttonSpin.isSelected()){
-            String message = "I SELECTED SPIN BOT.";
-            checkInput(message);
+            message = "I SELECTED SPIN BOT.";
         }
         else if (buttonSquash.isSelected()){
-            String message = "I SELECTED SQUASH BOT.";
-            checkInput(message);
+            message = "I SELECTED SQUASH BOT.";
         }
         else if (buttonTwonkey.isSelected()){
-            String message = "I SELECTED TWONKEY.";
-            checkInput(message);
+            message = "I SELECTED TWONKEY.";
         }
         else if (buttonTwitch.isSelected()){
-            String message = "I SELECTED TWITCH.";
-            checkInput(message);
+            message = "I SELECTED TWITCH.";
         }
-    }
+        checkInput(message);
 
+    }
 
     @FXML
     public void sendButtonAction(ActionEvent actionEvent) throws IOException {
@@ -177,14 +174,11 @@ public class LobbyViewModel {
 
     @FXML
     public void showRobotMap(ActionEvent actionEvent) {
-        if (selectRobot.isVisible()) {
-            selectRobot.setVisible(false);
-            newGameBtn.setText("Start New Game");
-            newGameBtn.setVisible(false);
-        } else {
-            selectRobot.setVisible(true);
-            newGameBtn.setVisible(false);
-        }
+        selectRobot.setVisible(true);
+        newGameBtn.setVisible(false);
+
+        //only for first player who clicks on "start new game":
+        openMapWindow();
 
     }
 
@@ -209,6 +203,19 @@ public class LobbyViewModel {
         model.addNewListItem(message);
     }
 
+    //loads window fpr map selection
+    public void openMapWindow(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Map.fxml"));
+            Parent rootMap = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Map Selection");
+            stage.setScene(new Scene(rootMap));
+            stage.show();
+        } catch (Exception e){
+            System.out.println("not working");
+        }
+    }
 
     //takes message from textfield
     private void checkInput(String message){
