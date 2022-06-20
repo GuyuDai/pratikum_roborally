@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 
 /**
  * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
@@ -43,4 +44,6 @@ public class GameModel {
     public void addNewListItem(String listItem) {
         listContent.add(listItem);
     }
+
+    private ObservableList<Image> handObservableList;
 }

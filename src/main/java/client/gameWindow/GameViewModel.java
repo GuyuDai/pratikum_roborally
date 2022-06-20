@@ -23,6 +23,10 @@ import java.io.IOException;
 
 public class GameViewModel extends LobbyViewModel {
 
+    //public GameViewModel(){
+      //  new HostHand();
+    //}
+
     @FXML
     public AnchorPane container;
     @FXML
@@ -63,8 +67,9 @@ public class GameViewModel extends LobbyViewModel {
     }
 
     public void initialize() {
-                list.itemsProperty().set(model.getListContentProperty());
+        list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
+        new HostHand();
     }
 
     /**

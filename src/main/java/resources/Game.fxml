@@ -15,17 +15,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1005.0" prefWidth="1300.0" styleClass="backgroundColor" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
+<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1005.0" prefWidth="1300.0" styleClass="backgroundColor" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
    <children>
-      <TilePane fx:id="discardDeck" layoutX="202.0" layoutY="627.0" prefHeight="110.0" prefWidth="425.0">
-         <children>
-            <StackPane fx:id="card1" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
-            <StackPane fx:id="card2" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
-            <StackPane fx:id="card3" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
-            <StackPane fx:id="card4" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
-            <StackPane fx:id="card5" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
-         </children>
-      </TilePane>
       <StackPane prefHeight="600.0" prefWidth="780.0">
          <children>
             <TilePane fx:id="dizzyHighway" prefHeight="600.0" prefWidth="780.0">
@@ -1360,18 +1351,48 @@
             </Pane>
          </children>
       </Pane>
-      <TilePane fx:id="playersHand" layoutX="31.0" layoutY="847.0" prefHeight="110.0" prefWidth="765.0">
+      <HBox layoutX="32.0" layoutY="845.0" prefHeight="110.0" prefWidth="765.0">
          <children>
-            <StackPane fx:id="hand1" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
-            <StackPane fx:id="hand2" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
-            <StackPane fx:id="hand3" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
-            <StackPane fx:id="hand4" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
-            <StackPane fx:id="hand5" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
-            <StackPane fx:id="hand6" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
-            <StackPane fx:id="hand7" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
-            <StackPane fx:id="hand8" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
-            <StackPane fx:id="hand9" prefHeight="110.0" prefWidth="85.0" styleClass="backgroundDeck1" stylesheets="@styles.css" />
+            <HBox fx:id="hboxHand" prefHeight="110.0" prefWidth="255.0">
+               <children>
+                  <ImageView fx:id="hand1" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="hand2" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="hand3" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
+            <HBox prefHeight="110.0" prefWidth="255.0">
+               <children>
+                  <ImageView fx:id="hand4" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="hand5" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="hand6" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
+            <HBox prefHeight="110.0" prefWidth="255.0">
+               <children>
+                  <ImageView fx:id="hand7" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="hand8" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="hand9" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
          </children>
-      </TilePane>
+      </HBox>
+      <HBox fx:id="hboxDiscard" layoutX="169.0" layoutY="653.0" prefHeight="110.0" prefWidth="510.0">
+         <children>
+            <HBox prefHeight="110.0" prefWidth="255.0">
+               <children>
+                  <ImageView fx:id="hand81" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="hand82" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="hand83" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
+            <HBox prefHeight="110.0" prefWidth="255.0">
+               <children>
+                  <ImageView fx:id="hand84" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="hand85" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button alignment="TOP_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="111.0" prefWidth="84.0" text="PLAY" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
