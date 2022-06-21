@@ -102,6 +102,14 @@ public class LobbyViewModel {
 
     }
 
+
+    //ToDo: Robot not available after player selected
+    //ToDo: Connect Robot to Player
+    //ToDo: Upgrade Shop
+    //ToDo: create class for map elements
+    //ToDo: Game Window
+    //ToDo: Only first player should select Map
+
     //toggle button message for selection
     @FXML
     void RobotButton(ActionEvent event) {
@@ -158,6 +166,16 @@ public class LobbyViewModel {
             message = "I SELECTED TWITCH.";
         }
         checkInput(message);
+        try {
+            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Game.fxml"));
+            Parent rootMap = (Parent) fxmlLoaderGame.load();
+            Stage stage = new Stage();
+            stage.setTitle("Map Selection");
+            stage.setScene(new Scene(rootMap));
+            stage.show();
+        } catch (Exception e){
+            System.out.println("Game fxml not working");
+        }
 
     }
 
@@ -203,6 +221,7 @@ public class LobbyViewModel {
         model.addNewListItem(message);
     }
 
+
     //loads window fpr map selection
     public void openMapWindow(){
         try {
@@ -216,6 +235,7 @@ public class LobbyViewModel {
             System.out.println("not working");
         }
     }
+
 
     //takes message from textfield
     private void checkInput(String message){

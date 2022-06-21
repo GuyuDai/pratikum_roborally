@@ -56,16 +56,6 @@ public class GameViewModel extends LobbyViewModel {
 
     private static Player currentPlayer;
 
-    //ToDo: nur eins von beiden initialize methods
-    public void initializeee (){
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("Game.fxml"));
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public void initialize() {
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
