@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1005.0" prefWidth="1300.0" styleClass="backgroundColor" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
+<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1005.0" prefWidth="1300.0" styleClass="backgroundColor" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
    <children>
       <StackPane prefHeight="600.0" prefWidth="780.0">
          <children>
@@ -1318,13 +1318,13 @@
          <children>
             <HBox layoutX="-2.0" layoutY="1.0" prefHeight="82.0" prefWidth="448.0">
                <children>
-                  <Button fx:id="chatBtn" mnemonicParsing="false" prefHeight="77.0" prefWidth="167.0" styleClass="buttonColor" stylesheets="@styles.css" text="OPEN CHAT">
+                  <Button fx:id="chatBtn" mnemonicParsing="false" prefHeight="77.0" prefWidth="167.0" styleClass="buttonColor" stylesheets="@styles.css" text="OPEN CHAT" onAction="#chatBtnAction">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Button>
                   <Separator orientation="VERTICAL" prefHeight="82.0" prefWidth="118.0" />
-                  <Button mnemonicParsing="false" prefHeight="79.0" prefWidth="164.0" styleClass="buttonColor" stylesheets="@styles.css" text="EXIT">
+                  <Button fx:id="exitBtn" mnemonicParsing="false" prefHeight="79.0" prefWidth="164.0" styleClass="buttonColor" stylesheets="@styles.css" text="EXIT" onAction="#exitGame">
                      <font>
                         <Font size="24.0" />
                      </font>

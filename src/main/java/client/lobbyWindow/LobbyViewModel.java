@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.sql.SQLOutput;
 import client.Client;
 import com.google.gson.Gson;
 import javafx.beans.binding.Bindings;
@@ -15,7 +14,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import server.ServerThread;
 import transfer.Player;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -26,13 +24,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import transfer.request.Message;
 import java.util.Objects;
-import client.Client;
 import transfer.request.GameMessage;
 import client.mapWindow.MapViewModel;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+
 
 /**
  * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
@@ -97,17 +99,14 @@ public class LobbyViewModel {
     String[] robots = {"hammer", "hulk", "spin", "Squash bot", "Twonkey", "Twitch"};
     List valid = Arrays.asList(robots);     //convert array to a list
 
-
     public void isRobotAvailable () {
 
     }
-
 
     //ToDo: Robot not available after player selected
     //ToDo: Connect Robot to Player
     //ToDo: Upgrade Shop
     //ToDo: create class for map elements
-    //ToDo: Game Window
     //ToDo: Only first player should select Map
 
     //toggle button message for selection
@@ -149,9 +148,11 @@ public class LobbyViewModel {
         String message = "";
         if(buttonHammer.isSelected()){
             message = "I SELECTED HAMMER BOT.";
+            buttonHammer.setVisible(false);
         }
         else if (buttonHulk.isSelected()){
             message = "I SELECTED HULK X90 BOT.";
+            buttonHulk.setVisible(false);
         }
         else if (buttonSpin.isSelected()){
             message = "I SELECTED SPIN BOT.";
@@ -166,36 +167,49 @@ public class LobbyViewModel {
             message = "I SELECTED TWITCH.";
         }
         checkInput(message);
+        openGameWindow();
+
+        //close Lobby
+        Stage stage = (Stage) playButton.getScene().getWindow();
+        stage.close();
+
+    }
+
+    public void openGameWindow(){
         try {
             FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Game.fxml"));
-            Parent rootMap = (Parent) fxmlLoaderGame.load();
+            Parent rootGame = (Parent) fxmlLoaderGame.load();
+            Stage stageGame = new Stage();
+            stageGame.setTitle("Dizzy Highway");
+            stageGame.setScene(new Scene(rootGame));
+            stageGame.show();
+        } catch (Exception e){
+            System.out.println("fxml not working");
+        }
+    }
+
+
+    //loads window fpr map selection
+    public void openMapWindow(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Map.fxml"));
+            Parent rootMap = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("Map Selection");
             stage.setScene(new Scene(rootMap));
             stage.show();
         } catch (Exception e){
-            System.out.println("Game fxml not working");
+            System.out.println("not working");
         }
-
     }
 
-    @FXML
-    public void sendButtonAction(ActionEvent actionEvent) throws IOException {
-        String message = model.getTextFieldContent().get();
-
-        checkInput(message);
-
-        model.getTextFieldContent().set("");
-        input.requestFocus();
-
-    }
 
     @FXML
     public void showRobotMap(ActionEvent actionEvent) {
         selectRobot.setVisible(true);
         newGameBtn.setVisible(false);
 
-        //only for first player who clicks on "start new game":
+        //TODo: only for first player who clicks on "start new game":
         openMapWindow();
 
     }
@@ -222,36 +236,35 @@ public class LobbyViewModel {
     }
 
 
-    //loads window fpr map selection
-    public void openMapWindow(){
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Map.fxml"));
-            Parent rootMap = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Map Selection");
-            stage.setScene(new Scene(rootMap));
-            stage.show();
-        } catch (Exception e){
-            System.out.println("not working");
-        }
+    @FXML
+    public void sendButtonAction(ActionEvent actionEvent) throws IOException {
+        String message = model.getTextFieldContent().get();
+
+        checkInput(message);
+
+        model.getTextFieldContent().set("");
+        input.requestFocus();
+
     }
 
 
     //takes message from textfield
     private void checkInput(String message){
-
         String sendableRequest = "";
-/*
-         if(message.startsWith("@")){
-         sendableRequest = createDirectMessage(message);
+
+         if(message.startsWith("@")) {
+             sendableRequest = createDirectMessage(message);
+
+            /*
          } else if (message.startsWith("!")){
-         sendableRequest = createCommandRequest(message);
+            sendableRequest = createCommandRequest(message);
          } else {
+
 */
-        sendableRequest = createMessage(message);
-
-
-        if(!sendableRequest.isEmpty()){
+         }else {
+             sendableRequest = createMessage(message);
+         }
+         if(!sendableRequest.isEmpty()){
             try {
                 Client.getClientReceive().getWriteOutput().write(sendableRequest);
                 Client.getClientReceive().getWriteOutput().newLine();
@@ -268,6 +281,17 @@ public class LobbyViewModel {
         return createMessageWrapped;
     }
 
+    private String createDirectMessage(String message){
+        message = message.replace("@", "");
+        String [] splittingTarget = message.split(" ");
+        StringBuilder realMessage = new StringBuilder("");
+        for(int i = 1; i < splittingTarget.length; i++){
+            realMessage.append(splittingTarget[i]).append(" ");
+        }
+        String createMessageWrapped = gson.toJson(new RequestWrapper(new Message("Private Message from "+ currentPlayer.getName(), splittingTarget[0].trim(), realMessage.toString().trim(), MessageTypes.PRIVATE_MESSAGE), RequestType.MESSAGE));
+        return createMessageWrapped;
+    }
+
 
     //send messages using keyboard "Enter" key
     @FXML
@@ -277,16 +301,21 @@ public class LobbyViewModel {
         }
     }
 
+
     @FXML
     public void chooseMap(ActionEvent actionEvent) throws IOException {
 
     }
-/*
 
-     String message;
 
-    //public gameMessage(String message){this.message = message;}
 
+
+
+
+    //added this one from GameMessage:
+     /*
+    public gameMessage(String message){this.message = message;}
+    String message;
 
     private void sendToAll(String message) {
         Message publicGameMessage = new Message("Server", message, MessageTypes.SERVER_MESSAGE);
@@ -320,72 +349,68 @@ public class LobbyViewModel {
 
 
 
-
-
-     private String createDirectMessage(String message){
-     message = message.replace("@", "");
-     String [] splittingTarget = message.split(" ");
-     StringBuilder realMessage = new StringBuilder("");
-     for(int i = 1; i < splittingTarget.length; i++){
-     realMessage.append(splittingTarget[i]).append(" ");
-     }
-     String createMessageWrapped = gson.toJson(new RequestWrapper(new Message("Private Message from "+ currentPlayer.getName(), splittingTarget[0].trim(), realMessage.toString().trim(), MessageTypes.PRIVATE_MESSAGE), RequestType.MESSAGE));
-     return createMessageWrapped;
-     }
-
      private String createCommandRequest(String message){
-     message = message.replace("!", "");
-     CommandType currentCommandType = identifyCommandType(message);
-     if(currentCommandType.equals(CommandType.NO_SUCH_COMMAND_FOUND)){
-     LobbyViewModel.show(currentCommandType.getCommandIdentification());
-     } else if (currentCommandType.equals(CommandType.SELECT_CARD)) {
-     return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer, splitMessage(message)), RequestType.COMMAND_REQUEST));
-     } else if (currentCommandType.equals(CommandType.SELECT_PLAYER)) {
-     return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer, splitMessage(message)), RequestType.COMMAND_REQUEST));
-     } else if (currentCommandType.equals(CommandType.START_GAME)) {
-     return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer), RequestType.COMMAND_REQUEST));
-     } else if (currentCommandType.equals(CommandType.JOIN_GAME)) {
-     return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer), RequestType.COMMAND_REQUEST));
-     } else if (currentCommandType.equals(CommandType.LEAVE_GAME)) {
-     return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer), RequestType.COMMAND_REQUEST));
-     } else if (currentCommandType.equals(CommandType.CREATE_GAME)) {
-     return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer), RequestType.COMMAND_REQUEST));
-     }else {
-     return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer), RequestType.COMMAND_REQUEST));
+        message = message.replace("!", "");
+        CommandType currentCommandType = identifyCommandType(message);
+        if(currentCommandType.equals(CommandType.NO_SUCH_COMMAND_FOUND)){
+            LobbyViewModel.show(currentCommandType.getCommandIdentification());
+        } else if (currentCommandType.equals(CommandType.SELECT_CARD)) {
+            return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer, splitMessage(message)), RequestType.COMMAND_REQUEST));
+        } else if (currentCommandType.equals(CommandType.SELECT_PLAYER)) {
+            return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer, splitMessage(message)), RequestType.COMMAND_REQUEST));
+        } else if (currentCommandType.equals(CommandType.START_GAME)) {
+            return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer), RequestType.COMMAND_REQUEST));
+        } else if (currentCommandType.equals(CommandType.JOIN_GAME)) {
+            return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer), RequestType.COMMAND_REQUEST));
+        } else if (currentCommandType.equals(CommandType.LEAVE_GAME)) {
+            return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer), RequestType.COMMAND_REQUEST));
+        } else if (currentCommandType.equals(CommandType.CREATE_GAME)) {
+            return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer), RequestType.COMMAND_REQUEST));
+        }else {
+            return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer), RequestType.COMMAND_REQUEST));
+        }
+            return "";
      }
-     return "";
-     }
+
+      */
+
 
      private String splitMessage(String message) {
-     String[] splited = message.split("\\s");
-     if(splited.length!=1) {
-     return splited[1];
-     }else {
-     return "";
+        String[] splited = message.split("\\s");
+        if(splited.length!=1) {
+            return splited[1];
+        }else {
+            return "";
+        }
      }
-     }
+
+
+     /*
+
      private CommandType identifyCommandType(String message) {
-     if(message.equals(CommandType.CREATE_GAME.getCommandIdentification())){
-     return CommandType.CREATE_GAME;
-     }else if (message.equals(CommandType.JOIN_GAME.getCommandIdentification())){
-     return CommandType.JOIN_GAME;
-     } else if (message.equals(CommandType.LEAVE_GAME.getCommandIdentification())){
-     return CommandType.LEAVE_GAME;
-     }else if (message.equals(CommandType.START_GAME.getCommandIdentification())){
-     return CommandType.START_GAME;
-     }else if (message.equals(CommandType.LEAVE_SERVER.getCommandIdentification())){
-     return CommandType.LEAVE_SERVER;
-     }else if (message.equals(CommandType.CURRENT_SCORE.getCommandIdentification())){
-     return CommandType.CURRENT_SCORE;
-     }else if (message.startsWith("play")){
-     return CommandType.SELECT_CARD;
-     }else if (message.startsWith("select")){
-     return CommandType.SELECT_PLAYER;
-     }else {
-     return CommandType.NO_SUCH_COMMAND_FOUND;
+        if(message.equals(CommandType.CREATE_GAME.getCommandIdentification())){
+            return CommandType.CREATE_GAME;
+        }else if (message.equals(CommandType.JOIN_GAME.getCommandIdentification())){
+            return CommandType.JOIN_GAME;
+        } else if (message.equals(CommandType.LEAVE_GAME.getCommandIdentification())){
+            return CommandType.LEAVE_GAME;
+         }else if (message.equals(CommandType.START_GAME.getCommandIdentification())){
+             return CommandType.START_GAME;
+         }else if (message.equals(CommandType.LEAVE_SERVER.getCommandIdentification())){
+            return CommandType.LEAVE_SERVER;
+         }else if (message.equals(CommandType.CURRENT_SCORE.getCommandIdentification())){
+             return CommandType.CURRENT_SCORE;
+        }else if (message.startsWith("play")){
+            return CommandType.SELECT_CARD;
+        }else if (message.startsWith("select")){
+             return CommandType.SELECT_PLAYER;
+         }else {
+            return CommandType.NO_SUCH_COMMAND_FOUND;
+        }
      }
-     }
+
      */
+
 
 
 }

@@ -18,8 +18,8 @@ import java.io.File;
 public class HostHand extends GameViewModel{
 
     //public HostHand(){
-      //  new Player();
-        //setHand();
+    //  new Player();
+    //setHand();
     //}
 
 
@@ -46,31 +46,31 @@ public class HostHand extends GameViewModel{
                 break;
             case "MoveTwo":
                 handObservableList.add(getImage("move2"));
-            break;
+                break;
             case "MoveThree":
                 handObservableList.add(getImage("move3"));
-            break;
+                break;
             case "Again":
                 handObservableList.add(getImage("again"));
-            break;
+                break;
             case "BackUp":
                 handObservableList.add(getImage("backUp"));
-            break;
+                break;
             case "PowerUp":
                 handObservableList.add(getImage("powerUp"));
-            break;
+                break;
             case "TurnLeft":
                 handObservableList.add(getImage("TurnLeft"));
-            break;
+                break;
             case "TurnRight":
                 handObservableList.add(getImage("TurnRight"));
-            break;
+                break;
             case "uTurn":
                 handObservableList.add(getImage("uTurn"));
-            break;
+                break;
             default:
                 handObservableList.add(getImage("cardHidden"));
-            break;
+                break;
         }
     }
 

@@ -5,7 +5,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.Image;
+
+
 
 /**
  * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
@@ -14,6 +17,8 @@ import javafx.scene.image.Image;
 public class GameModel {
 
     private static volatile GameModel instance;
+
+    private static AnchorPane container;
 
     private GameModel(){
     }
@@ -31,19 +36,18 @@ public class GameModel {
 
     private final ObservableList<String> listContent = FXCollections.observableArrayList();
 
-    public ObservableList<String> getListContentProperty() {
-        return listContent;
-    }
+    public ObservableList<String> getListContentProperty() { return listContent; }
 
     private final StringProperty textFieldContent = new SimpleStringProperty("");
 
-    public StringProperty getTextFieldContent(){
-        return textFieldContent;
-    }
+    public StringProperty getTextFieldContent(){ return textFieldContent; }
 
     public void addNewListItem(String listItem) {
         listContent.add(listItem);
     }
 
-    private ObservableList<Image> handObservableList;
+    /*
+   private ObservableList<Image> handObservableList;
+     */
+
 }

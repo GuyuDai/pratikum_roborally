@@ -7,9 +7,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="rootPaneMap" prefHeight="367.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.mapWindow.MapViewModel">
+<AnchorPane fx:id="rootPaneMap" prefHeight="580.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.mapWindow.MapViewModel">
    <children>
-      <Button fx:id="map1Image" layoutX="482.0" layoutY="111.0" mnemonicParsing="false"  onAction="#map3ImageAction">
+      <Button fx:id="map1Image" layoutX="90.0" layoutY="121.0" mnemonicParsing="false" onAction="#map1ImageAction">
          <graphic>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -18,7 +18,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="map2Image" layoutX="249.0" layoutY="111.0" mnemonicParsing="false" onAction="#map2ImageAction">
+      <Button fx:id="map2Image" layoutX="396.0" layoutY="121.0" mnemonicParsing="false" onAction="#map2ImageAction">
          <graphic>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -27,7 +27,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="map3Image" layoutX="14.0" layoutY="111.0" mnemonicParsing="false" onAction="#map1ImageAction">
+      <Button fx:id="map3Image" layoutX="90.0" layoutY="344.0" mnemonicParsing="false" onAction="#map3ImageAction">
          <graphic>
             <ImageView fitHeight="150.0" fitWidth="204.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -36,16 +36,31 @@
             </ImageView>
          </graphic>
       </Button>
-      <ImageView fitHeight="38.0" fitWidth="420.0" layoutX="145.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="52.0" fitWidth="531.0" layoutX="93.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@selectMap.png" />
          </image>
       </ImageView>
-      <ToggleButton fx:id="DizzyHighwayBtn" layoutX="89.0" layoutY="279.0" mnemonicParsing="false" onAction="#selectDizzyHighway" text="Dizzy Highway">
+      <ToggleButton fx:id="map3Btn" layoutX="168.0" layoutY="513.0" mnemonicParsing="false" onAction="#select3" text="map #3" toggleGroup="$ToggleGroupMap">
          <toggleGroup>
             <ToggleGroup fx:id="ToggleGroupMap" />
          </toggleGroup></ToggleButton>
-      <ToggleButton fx:id="map3Btn" layoutX="559.0" layoutY="279.0" mnemonicParsing="false" onAction="#select2" text="map #3" toggleGroup="$ToggleGroupMap" />
-      <ToggleButton fx:id="map2Btn" layoutX="336.0" layoutY="279.0" mnemonicParsing="false" onAction="#select3" text="map #2" toggleGroup="$ToggleGroupMap" />
+      <ToggleButton fx:id="map2Btn" layoutX="474.0" layoutY="292.0" mnemonicParsing="false" onAction="#select2" text="map #2" toggleGroup="$ToggleGroupMap" />
+      <ToggleButton fx:id="DizzyHighwayBtn" layoutX="149.0" layoutY="292.0" mnemonicParsing="false" onAction="#selectDizzyHighway" text="Dizzy Highway" toggleGroup="$ToggleGroupMap" />
+      <ImageView fitHeight="12.0" fitWidth="465.0" layoutX="144.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@enlargePictureText.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="map4Image" layoutX="397.0" layoutY="344.0" mnemonicParsing="false" onAction="#map4ImageAction">
+         <graphic>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@dizzyHighwayMap.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ToggleButton fx:id="map4Btn" layoutX="475.0" layoutY="513.0" mnemonicParsing="false" onAction="#select4" text="map #4" toggleGroup="$ToggleGroupMap" />
    </children>
 </AnchorPane>
