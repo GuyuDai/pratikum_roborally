@@ -30,7 +30,6 @@ import transfer.request.Message;
 import java.util.Objects;
 import transfer.request.GameMessage;
 import client.mapWindow.MapViewModel;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -55,8 +54,8 @@ public class LobbyViewModel {
     private ListView<String> list;
     @FXML
     private TextField input;
-    @FXML
-    private Button sendButton;
+    //@FXML
+    //private Button sendButton;
     @FXML
     private ToggleGroup ToggleGroupRobot;
     @FXML
@@ -89,11 +88,11 @@ public class LobbyViewModel {
         playButton.disableProperty().bind(Bindings.isNull(ToggleGroupRobot.selectedToggleProperty()));
     }
 
-    public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendButton) {
+    public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendBtn) {
         this.container = container;
         this.list = list;
         this.input = input;
-        this.sendButton = sendButton;
+        this.sendBtn = sendBtn;
     }
 
     String[] robots = {"hammer", "hulk", "spin", "Squash bot", "Twonkey", "Twitch"};
@@ -172,7 +171,6 @@ public class LobbyViewModel {
         //close Lobby
         Stage stage = (Stage) playButton.getScene().getWindow();
         stage.close();
-
     }
 
     public void openGameWindow(){
@@ -189,7 +187,7 @@ public class LobbyViewModel {
     }
 
 
-    //loads window fpr map selection
+    //loads window for map selection
     public void openMapWindow(){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Map.fxml"));
@@ -300,7 +298,6 @@ public class LobbyViewModel {
             sendButtonAction(null);
         }
     }
-
 
     @FXML
     public void chooseMap(ActionEvent actionEvent) throws IOException {

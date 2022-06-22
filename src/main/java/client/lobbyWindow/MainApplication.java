@@ -21,7 +21,8 @@ public class MainApplication extends Application {
     public static Stage window;
     public static Scene lobbyScene;
     public static Scene loginScene;
-    //public static Scene gameScene;
+
+    public static Scene gameScene;
 
 
     @Override
@@ -36,7 +37,6 @@ public class MainApplication extends Application {
         window.setTitle("RoboRally");
         lobbyScene = loadScene(0);
         loginScene = loadScene(1);
-        //gameScene = loadScene(2);
         window.setScene(loginScene);
         window.show();
     }
@@ -47,8 +47,6 @@ public class MainApplication extends Application {
                 return lobbyScene;
             case 1:
                 return loginScene;
-           // case 2:
-             //   return gameScene;
         }
         return null;
     }
@@ -63,8 +61,6 @@ public class MainApplication extends Application {
                 case 1:
                     root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Login.fxml")));
                     break;
-                //case 3:
-                  //  root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Game.fxml")));
             }
         } else {
             root = new LobbyView();

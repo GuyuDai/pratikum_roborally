@@ -1,17 +1,21 @@
 package transfer.request;
 
+import client.gameWindow.GameViewModel;
 import client.lobbyWindow.LobbyViewModel;
 import com.google.gson.Gson;
 import javafx.application.Platform;
 import server.ServerThread;
+import transfer.Game;
 import transfer.PlayerOnline;
-
+import client.loginWindow.LoginViewModel;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-
+/**
+ * Organizes messages for the chat, name of Sender, Reciever
+ */
 public class Message{
     private String nameOfSender;
     private String message;
@@ -119,11 +123,14 @@ public class Message{
         if (this.getNameOfSender().equals("Server")) {
             Platform.runLater(() -> {
                 LobbyViewModel.show(this.getMessage());
+                //GameViewModel.show(this.getMessage());
             });
         } else {
-            Platform.runLater(() -> {
-                LobbyViewModel.show(this.getNameOfSender() + ": " + this.getMessage());
-            });
+                Platform.runLater(() -> {
+                    LobbyViewModel.show(this.getNameOfSender() + ": " + this.getMessage());
+                    //GameViewModel.show(this.getNameOfSender() + ": " + this.getMessage());
+
+                });
+            }
         }
-    }
 }

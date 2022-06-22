@@ -1,5 +1,6 @@
 package transfer.request;
 
+import client.gameWindow.GameViewModel;
 import client.lobbyWindow.LobbyViewModel;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
@@ -43,6 +44,15 @@ public class AcceptPlayer {
         LobbyViewModel.show(this.getMessage());
         Platform.runLater(() -> {MainApplication.window.setScene(MainApplication.getScene(0));});
     }
+
+    /*
+    private void handleAcceptedPlayerGame(){
+        GameViewModel.setCurrentPlayer(this.getAcceptedPlayer());
+        GameViewModel.show(this.getMessage());
+        Platform.runLater(() -> {MainApplication.window.setScene(MainApplication.getScene(2));});
+    }
+
+     */
 
     private void handleRejectedPlayer(){
         Platform.runLater(() -> {

@@ -1,10 +1,7 @@
 package client.gameWindow;
 
 import client.Client;
-import client.lobbyWindow.LobbyModel;
-import client.lobbyWindow.LobbyViewModel;
 import com.google.gson.Gson;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,32 +10,26 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 import transfer.Player;
 import transfer.request.Message;
 import transfer.request.MessageTypes;
 import transfer.request.RequestType;
 import transfer.request.RequestWrapper;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
-import java.sql.SQLOutput;
-import client.Client;
-import javafx.event.ActionEvent;
-import javafx.scene.control.*;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import server.ServerThread;
-import javafx.scene.layout.Pane;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.util.List;
-import java.util.Objects;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import transfer.request.AcceptPlayer;
+
+
+
+
 
 /**
  * @author Nargess Ahmadi, Felicia Saruba
@@ -54,98 +45,67 @@ public class GameViewModel  {
     private static GameViewModel instance;
     private Gson gson = new Gson();
     private static Player currentPlayer;
+    boolean isAvailable;
 
 
     @FXML
     private Button chatBtn;
-
     @FXML
     private Button exitBtn;
-
-    @FXML
-    private VBox chatWindow;
-
-    @FXML
-    private Label chatwindow;
-
-    @FXML
-    private AnchorPane gameContainer;
-
-    @FXML
-    private TilePane dizzyHighway;
-
-    @FXML
-    private ImageView hand1;
-
-    @FXML
-    private ImageView hand2;
-
-    @FXML
-    private ImageView hand3;
-
-    @FXML
-    private ImageView hand4;
-
-    @FXML
-    private ImageView hand5;
-
-    @FXML
-    private ImageView hand6;
-
-    @FXML
-    private ImageView hand7;
-
-    @FXML
-    private ImageView hand8;
-
-    @FXML
-    private ImageView hand81;
-
-    @FXML
-    private ImageView hand82;
-
-    @FXML
-    private ImageView hand83;
-
-    @FXML
-    private ImageView hand84;
-
-    @FXML
-    private ImageView hand85;
-
-    @FXML
-    private ImageView hand9;
-
-    @FXML
-    private HBox hboxDiscard;
-
-    @FXML
-    private HBox hboxHand;
-
-    @FXML
-    private TextField input;
-
-    @FXML
-    private ListView<String> list;
-
-    @FXML
-    private Button sendBtn;
-
-
-    @FXML
-    private StackPane maps;
-
-    @FXML
-    private TilePane discardDeck;
-
-    @FXML
-    private TilePane hand;
     @FXML
     public VBox container;
     @FXML
-    private Button sendButton;
+    private ListView<String> list;
+    @FXML
+    private TextField input;
+    @FXML
+    private Button sendBtn;
+    @FXML
+    private Label chatwindow;
+    @FXML
+    private AnchorPane gameContainer;
+    @FXML
+    private TilePane dizzyHighway;
+    @FXML
+    private ImageView hand1;
+    @FXML
+    private ImageView hand2;
+    @FXML
+    private ImageView hand3;
+    @FXML
+    private ImageView hand4;
+    @FXML
+    private ImageView hand5;
+    @FXML
+    private ImageView hand6;
+    @FXML
+    private ImageView hand7;
+    @FXML
+    private ImageView hand8;
+    @FXML
+    private ImageView hand81;
+    @FXML
+    private ImageView hand82;
+    @FXML
+    private ImageView hand83;
+    @FXML
+    private ImageView hand84;
+    @FXML
+    private ImageView hand85;
+    @FXML
+    private ImageView hand9;
+    @FXML
+    private HBox hboxDiscard;
+    @FXML
+    private HBox hboxHand;
+    @FXML
+    private StackPane maps;
+    @FXML
+    private TilePane discardDeck;
+    @FXML
+    private TilePane hand;
 
-
+    public String window = "Game";
 
 
     public void initialize() {
@@ -153,27 +113,16 @@ public class GameViewModel  {
         input.textProperty().bindBidirectional(model.getTextFieldContent());
     }
 
-    public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendButton) {
+    public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendBtn) {
         this.gameContainer = gameContainer;
         this.container = container;
         this.list = list;
         this.input = input;
-        this.sendButton = sendButton;
+        this.sendBtn = sendBtn;
+        this.currentPlayer = currentPlayer;
     }
 
-
-
-    @FXML
-    public void sendButtonAction(ActionEvent actionEvent) throws IOException {
-        String message = model.getTextFieldContent().get();
-
-        checkInput(message);
-
-        model.getTextFieldContent().set("");
-        input.requestFocus();
-
-    }
-
+    //toDo: Fix chat in game view -> current player not working
     public static void setCurrentPlayer(Player player){
         currentPlayer = player;
     }
@@ -194,19 +143,35 @@ public class GameViewModel  {
         model.addNewListItem(message);
     }
 
+
+    @FXML
+    public void sendButtonAction(ActionEvent actionEvent) throws IOException {
+        String message = model.getTextFieldContent().get();
+
+        checkInput(message);
+        System.out.println(message);
+
+        model.getTextFieldContent().set("");
+        input.requestFocus();
+    }
+
+    //takes message from textfield
     private void checkInput(String message){
-
         String sendableRequest = "";
-/*
-         if(message.startsWith("@")){
-         sendableRequest = createDirectMessage(message);
+
+
+        if(message.startsWith("@")) {
+            sendableRequest = createDirectMessage(message);
+
+            /*
          } else if (message.startsWith("!")){
-         sendableRequest = createCommandRequest(message);
+            sendableRequest = createCommandRequest(message);
          } else {
+
 */
-        sendableRequest = createMessage(message);
-
-
+        }else {
+            sendableRequest = createMessage(message);
+        }
         if(!sendableRequest.isEmpty()){
             try {
                 Client.getClientReceive().getWriteOutput().write(sendableRequest);
@@ -224,6 +189,17 @@ public class GameViewModel  {
         return createMessageWrapped;
     }
 
+    private String createDirectMessage(String message){
+        message = message.replace("@", "");
+        String [] splittingTarget = message.split(" ");
+        StringBuilder realMessage = new StringBuilder("");
+        for(int i = 1; i < splittingTarget.length; i++){
+            realMessage.append(splittingTarget[i]).append(" ");
+        }
+        String createMessageWrapped = gson.toJson(new RequestWrapper(new Message("Private Message from "+ currentPlayer.getName(), splittingTarget[0].trim(), realMessage.toString().trim(), MessageTypes.PRIVATE_MESSAGE), RequestType.MESSAGE));
+        return createMessageWrapped;
+    }
+
 
     //send messages using keyboard "Enter" key
     @FXML
@@ -238,11 +214,11 @@ public class GameViewModel  {
      * @param actionEvent
      */
     public void chatBtnAction(ActionEvent actionEvent){
-        if (chatWindow.isVisible()) {
-            chatWindow.setVisible(false);
+        if (container.isVisible()) {
+            container.setVisible(false);
             chatBtn.setText("Open Chat");
         } else {
-            chatWindow.setVisible(true);
+            container.setVisible(true);
             chatBtn.setText("Close Chat");
         }
     }
@@ -259,7 +235,6 @@ public class GameViewModel  {
             stageLobby.setScene(new Scene(rootMap));
             stageLobby.show();
         } catch (Exception e){
-            System.out.println("not working");
         }
     }
 }
