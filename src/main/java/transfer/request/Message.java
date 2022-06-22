@@ -121,16 +121,23 @@ public class Message{
 
     private void receiveTheMessage() {
         if (this.getNameOfSender().equals("Server")) {
-            Platform.runLater(() -> {
-                LobbyViewModel.show(this.getMessage());
-                //GameViewModel.show(this.getMessage());
-            });
-        } else {
+            if(LobbyViewModel.getWindowName() == "Lobby") {
                 Platform.runLater(() -> {
-                    LobbyViewModel.show(this.getNameOfSender() + ": " + this.getMessage());
-                    //GameViewModel.show(this.getNameOfSender() + ": " + this.getMessage());
-
+                    LobbyViewModel.show(this.getMessage());
                 });
             }
-        }
+            else{
+                GameViewModel.show(this.getMessage());
+            }
+        } else {
+            if(LobbyViewModel.getWindowName() == "Lobby") {
+                Platform.runLater(() -> {
+                    LobbyViewModel.show(this.getNameOfSender() + ": " + this.getMessage());
+                });
+            }
+            else{
+                GameViewModel.show(this.getNameOfSender() + ": " + this.getMessage());
+            }
+       }
+    }
 }

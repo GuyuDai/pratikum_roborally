@@ -1,9 +1,7 @@
 package client.lobbyWindow;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
+
 import client.Client;
 import com.google.gson.Gson;
 import javafx.beans.binding.Bindings;
@@ -12,14 +10,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import transfer.Player;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import transfer.PlayerOnline;
 import transfer.request.*;
-import java.util.ArrayList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,9 +22,6 @@ import javafx.stage.Stage;
 import java.util.Arrays;
 import java.util.List;
 import transfer.request.Message;
-import java.util.Objects;
-import transfer.request.GameMessage;
-import client.mapWindow.MapViewModel;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -42,10 +34,25 @@ import javafx.scene.control.TextField;
 
 public class LobbyViewModel {
 
+
+
+    public static String window = "Lobby";
+    public static void setWindowName (String name){
+        window = name;
+    }
+    public static String getWindowName(){
+        return window;
+    }
+
+
+
+
+
     private static LobbyModel model;
     private static LobbyViewModel instance;
     private Gson gson = new Gson();
     private static Player currentPlayer;
+
     boolean isAvailable;
 
     @FXML
@@ -108,7 +115,10 @@ public class LobbyViewModel {
     //ToDo: create class for map elements
     //ToDo: Only first player should select Map
 
-    //toggle button message for selection
+
+    /**
+     * toggle button message for robot selection
+     */
     @FXML
     void RobotButton(ActionEvent event) {
         if(buttonHammer.isSelected()) {
@@ -119,7 +129,6 @@ public class LobbyViewModel {
                 buttonText.setText("This robot has already been selected by another player.");
             }
         }
-
         else if (buttonHulk.isSelected()){
             buttonText.setText("You selected " + robots[1]);
         }
@@ -141,8 +150,9 @@ public class LobbyViewModel {
     }
 
 
-
-    // when play button is clicked a message about the selected robot appears in the chat and game window starts
+    /**
+     * when play button is clicked a message about the selected robot appears in the chat and game window starts
+     */
     public void playButtonAction(ActionEvent actionEvent) throws IOException{
         String message = "";
         if(buttonHammer.isSelected()){
@@ -171,6 +181,7 @@ public class LobbyViewModel {
         //close Lobby
         Stage stage = (Stage) playButton.getScene().getWindow();
         stage.close();
+        setWindowName("Game");
     }
 
     public void openGameWindow(){
@@ -182,12 +193,10 @@ public class LobbyViewModel {
             stageGame.setScene(new Scene(rootGame));
             stageGame.show();
         } catch (Exception e){
-            System.out.println("fxml not working");
         }
     }
 
 
-    //loads window for map selection
     public void openMapWindow(){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Map.fxml"));
@@ -197,7 +206,6 @@ public class LobbyViewModel {
             stage.setScene(new Scene(rootMap));
             stage.show();
         } catch (Exception e){
-            System.out.println("not working");
         }
     }
 
@@ -228,6 +236,9 @@ public class LobbyViewModel {
         return model;
     }
 
+    public String window() {
+        return window();
+    }
 
     public static void show(String message) {
         model.addNewListItem(message);
@@ -242,11 +253,11 @@ public class LobbyViewModel {
 
         model.getTextFieldContent().set("");
         input.requestFocus();
-
     }
 
-
-    //takes message from textfield
+    /**
+     * checks if it is a direct message or a normal one
+     */
     private void checkInput(String message){
         String sendableRequest = "";
 
@@ -273,7 +284,6 @@ public class LobbyViewModel {
         }
     }
 
-    //send messages in the chat
     private String createMessage(String message){
         String createMessageWrapped = gson.toJson(new RequestWrapper(new Message(currentPlayer.getName(), message, MessageTypes.CLIENT_MESSAGE), RequestType.MESSAGE));
         return createMessageWrapped;
@@ -290,8 +300,9 @@ public class LobbyViewModel {
         return createMessageWrapped;
     }
 
-
-    //send messages using keyboard "Enter" key
+    /**
+     * send messages using keyboard "Enter" key
+     */
     @FXML
     public void keyboardAction(KeyEvent keyEvent) throws IOException{
         if (keyEvent.getCode() == KeyCode.ENTER) {

@@ -1,11 +1,14 @@
 package client.gameWindow;
 
 import client.Client;
+import client.lobbyWindow.LobbyViewModel;
 import com.google.gson.Gson;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -16,7 +19,6 @@ import transfer.request.MessageTypes;
 import transfer.request.RequestType;
 import transfer.request.RequestWrapper;
 import java.io.IOException;
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.Parent;
@@ -26,9 +28,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import transfer.request.AcceptPlayer;
-
-
-
 
 
 /**
@@ -122,7 +121,6 @@ public class GameViewModel  {
         this.currentPlayer = currentPlayer;
     }
 
-    //toDo: Fix chat in game view -> current player not working
     public static void setCurrentPlayer(Player player){
         currentPlayer = player;
     }
@@ -155,7 +153,7 @@ public class GameViewModel  {
         input.requestFocus();
     }
 
-    //takes message from textfield
+
     private void checkInput(String message){
         String sendableRequest = "";
 
@@ -163,13 +161,12 @@ public class GameViewModel  {
         if(message.startsWith("@")) {
             sendableRequest = createDirectMessage(message);
 
-            /*
+        /*
          } else if (message.startsWith("!")){
             sendableRequest = createCommandRequest(message);
-         } else {
+        */
 
-*/
-        }else {
+        } else {
             sendableRequest = createMessage(message);
         }
         if(!sendableRequest.isEmpty()){
@@ -185,9 +182,12 @@ public class GameViewModel  {
 
     //send messages in the chat
     private String createMessage(String message){
-        String createMessageWrapped = gson.toJson(new RequestWrapper(new Message(currentPlayer.getName(), message, MessageTypes.CLIENT_MESSAGE), RequestType.MESSAGE));
+        String createMessageWrapped = gson.toJson(new RequestWrapper(new Message("TEST", message, MessageTypes.CLIENT_MESSAGE), RequestType.MESSAGE));
         return createMessageWrapped;
     }
+    /**
+     *      currentPlayer.getName() statt "TEST", aber funktioniert nicht
+     */
 
     private String createDirectMessage(String message){
         message = message.replace("@", "");
@@ -236,5 +236,6 @@ public class GameViewModel  {
             stageLobby.show();
         } catch (Exception e){
         }
+        LobbyViewModel.setWindowName("Lobby");
     }
 }

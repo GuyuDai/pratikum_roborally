@@ -10,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 
-
 /**
  * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
  */
@@ -41,7 +40,8 @@ public class GameModel {
 
     private final StringProperty textFieldContent = new SimpleStringProperty("");
 
-    public StringProperty getTextFieldContent(){ return textFieldContent; }
+    public StringProperty getTextFieldContent(){
+        return textFieldContent; }
 
     public void addNewListItem(String listItem) {
         listContent.add(listItem);

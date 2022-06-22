@@ -40,9 +40,15 @@ public class AcceptPlayer {
     }
 
     private void handleAcceptedPlayer(){
-        LobbyViewModel.setCurrentPlayer(this.getAcceptedPlayer());
-        LobbyViewModel.show(this.getMessage());
-        Platform.runLater(() -> {MainApplication.window.setScene(MainApplication.getScene(0));});
+        if(LobbyViewModel.getWindowName() == "Lobby") {
+            LobbyViewModel.setCurrentPlayer(this.getAcceptedPlayer());
+            LobbyViewModel.show(this.getMessage());
+            Platform.runLater(() -> {MainApplication.window.setScene(MainApplication.getScene(0));});
+        }
+        else {
+            GameViewModel.setCurrentPlayer(this.getAcceptedPlayer());
+            GameViewModel.show(this.getMessage());
+        }
     }
 
     /*
@@ -51,7 +57,6 @@ public class AcceptPlayer {
         GameViewModel.show(this.getMessage());
         Platform.runLater(() -> {MainApplication.window.setScene(MainApplication.getScene(2));});
     }
-
      */
 
     private void handleRejectedPlayer(){
