@@ -3,12 +3,10 @@ package client.gameWindow;
 import client.Client;
 import client.lobbyWindow.LobbyViewModel;
 import com.google.gson.Gson;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -27,7 +25,6 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import transfer.request.AcceptPlayer;
 
 
 /**
@@ -44,7 +41,6 @@ public class GameViewModel  {
     private static GameViewModel instance;
     private Gson gson = new Gson();
     private static Player currentPlayer;
-    boolean isAvailable;
 
 
     @FXML
@@ -118,7 +114,7 @@ public class GameViewModel  {
         this.list = list;
         this.input = input;
         this.sendBtn = sendBtn;
-        this.currentPlayer = currentPlayer;
+        //this.currentPlayer = currentPlayer;
     }
 
     public static void setCurrentPlayer(Player player){
@@ -147,13 +143,14 @@ public class GameViewModel  {
         String message = model.getTextFieldContent().get();
 
         checkInput(message);
-        System.out.println(message);
 
         model.getTextFieldContent().set("");
         input.requestFocus();
     }
 
-
+    /**
+     * checks if it is a direct message or a message for all
+     */
     private void checkInput(String message){
         String sendableRequest = "";
 
@@ -180,14 +177,12 @@ public class GameViewModel  {
         }
     }
 
-    //send messages in the chat
+
     private String createMessage(String message){
-        String createMessageWrapped = gson.toJson(new RequestWrapper(new Message("TEST", message, MessageTypes.CLIENT_MESSAGE), RequestType.MESSAGE));
+
+        String createMessageWrapped = gson.toJson(new RequestWrapper(new Message(currentPlayer.getName(), message, MessageTypes.CLIENT_MESSAGE), RequestType.MESSAGE));
         return createMessageWrapped;
     }
-    /**
-     *      currentPlayer.getName() statt "TEST", aber funktioniert nicht
-     */
 
     private String createDirectMessage(String message){
         message = message.replace("@", "");
@@ -209,7 +204,7 @@ public class GameViewModel  {
         }
     }
 
-    /*
+    /**
      * opens ChatWindow by clicking the Open Chat Button
      * @param actionEvent
      */
@@ -238,4 +233,5 @@ public class GameViewModel  {
         }
         LobbyViewModel.setWindowName("Lobby");
     }
+
 }

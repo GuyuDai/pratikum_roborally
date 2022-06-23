@@ -45,9 +45,6 @@ public class LobbyViewModel {
     }
 
 
-
-
-
     private static LobbyModel model;
     private static LobbyViewModel instance;
     private Gson gson = new Gson();
@@ -151,7 +148,7 @@ public class LobbyViewModel {
 
 
     /**
-     * when play button is clicked a message about the selected robot appears in the chat and game window starts
+     * when play button is clicked, a message about the selected robot appears in the chat and game window starts
      */
     public void playButtonAction(ActionEvent actionEvent) throws IOException{
         String message = "";
@@ -256,7 +253,7 @@ public class LobbyViewModel {
     }
 
     /**
-     * checks if it is a direct message or a normal one
+     * checks if it is a direct message or a message for all
      */
     private void checkInput(String message){
         String sendableRequest = "";
@@ -268,8 +265,8 @@ public class LobbyViewModel {
          } else if (message.startsWith("!")){
             sendableRequest = createCommandRequest(message);
          } else {
+             */
 
-*/
          }else {
              sendableRequest = createMessage(message);
          }
@@ -314,111 +311,4 @@ public class LobbyViewModel {
     public void chooseMap(ActionEvent actionEvent) throws IOException {
 
     }
-
-
-
-
-
-
-    //added this one from GameMessage:
-     /*
-    public gameMessage(String message){this.message = message;}
-    String message;
-
-    private void sendToAll(String message) {
-        Message publicGameMessage = new Message("Server", message, MessageTypes.SERVER_MESSAGE);
-        String wrappedMessage = new Gson().toJson(new RequestWrapper(publicGameMessage, RequestType.MESSAGE));
-        ServerThread.getPlayersOnline().stream()
-                .forEach(playerOnline -> write(wrappedMessage, playerOnline.getPlayerSocket()));
-
-
-    }
-
-    public void sendToPlayer(Player targetPlayer) {
-        Message publicGameMessage = new Message("Server", message, MessageTypes.SERVER_MESSAGE);
-        String wrappedMessage = new Gson().toJson(new RequestWrapper(publicGameMessage, RequestType.MESSAGE));
-        for(PlayerOnline playerOnline :  ServerThread.getPlayersOnline()){
-            if(playerOnline.getPlayer().getName().equals(targetPlayer.getName())) {
-                write(wrappedMessage, playerOnline.getPlayerSocket());
-            }
-        }
-    }
-
-    private void write(String message, Socket thread){
-        try{
-            BufferedWriter writeOutput = new BufferedWriter(new OutputStreamWriter(thread.getOutputStream()));
-            writeOutput.write(message);
-            writeOutput.newLine();
-            writeOutput.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-     private String createCommandRequest(String message){
-        message = message.replace("!", "");
-        CommandType currentCommandType = identifyCommandType(message);
-        if(currentCommandType.equals(CommandType.NO_SUCH_COMMAND_FOUND)){
-            LobbyViewModel.show(currentCommandType.getCommandIdentification());
-        } else if (currentCommandType.equals(CommandType.SELECT_CARD)) {
-            return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer, splitMessage(message)), RequestType.COMMAND_REQUEST));
-        } else if (currentCommandType.equals(CommandType.SELECT_PLAYER)) {
-            return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer, splitMessage(message)), RequestType.COMMAND_REQUEST));
-        } else if (currentCommandType.equals(CommandType.START_GAME)) {
-            return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer), RequestType.COMMAND_REQUEST));
-        } else if (currentCommandType.equals(CommandType.JOIN_GAME)) {
-            return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer), RequestType.COMMAND_REQUEST));
-        } else if (currentCommandType.equals(CommandType.LEAVE_GAME)) {
-            return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer), RequestType.COMMAND_REQUEST));
-        } else if (currentCommandType.equals(CommandType.CREATE_GAME)) {
-            return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer), RequestType.COMMAND_REQUEST));
-        }else {
-            return gson.toJson(new RequestWrapper(new Command(currentCommandType, currentPlayer), RequestType.COMMAND_REQUEST));
-        }
-            return "";
-     }
-
-      */
-
-
-     private String splitMessage(String message) {
-        String[] splited = message.split("\\s");
-        if(splited.length!=1) {
-            return splited[1];
-        }else {
-            return "";
-        }
-     }
-
-
-     /*
-
-     private CommandType identifyCommandType(String message) {
-        if(message.equals(CommandType.CREATE_GAME.getCommandIdentification())){
-            return CommandType.CREATE_GAME;
-        }else if (message.equals(CommandType.JOIN_GAME.getCommandIdentification())){
-            return CommandType.JOIN_GAME;
-        } else if (message.equals(CommandType.LEAVE_GAME.getCommandIdentification())){
-            return CommandType.LEAVE_GAME;
-         }else if (message.equals(CommandType.START_GAME.getCommandIdentification())){
-             return CommandType.START_GAME;
-         }else if (message.equals(CommandType.LEAVE_SERVER.getCommandIdentification())){
-            return CommandType.LEAVE_SERVER;
-         }else if (message.equals(CommandType.CURRENT_SCORE.getCommandIdentification())){
-             return CommandType.CURRENT_SCORE;
-        }else if (message.startsWith("play")){
-            return CommandType.SELECT_CARD;
-        }else if (message.startsWith("select")){
-             return CommandType.SELECT_PLAYER;
-         }else {
-            return CommandType.NO_SUCH_COMMAND_FOUND;
-        }
-     }
-
-     */
-
-
-
 }

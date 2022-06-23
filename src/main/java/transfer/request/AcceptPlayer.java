@@ -6,15 +6,19 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import client.lobbyWindow.MainApplication;
 import transfer.Player;
-
 import java.net.Socket;
 
-// Answer to the client request for applying to join the server
+/**
+ * @author Felicia Saruba
+ *
+ * Answer to the client request for applying to join the server
+  */
 
 public class AcceptPlayer {
     private String message;
     private boolean accepted;
     private Player acceptedPlayer;
+
     public AcceptPlayer(String message, boolean accepted, Player acceptedPlayer){
         this.message = message;
         this.accepted = accepted;
@@ -39,25 +43,20 @@ public class AcceptPlayer {
         }
     }
 
+    /**
+     * setting the name of the newly entered Player for Chatroom
+     */
     private void handleAcceptedPlayer(){
         if(LobbyViewModel.getWindowName() == "Lobby") {
             LobbyViewModel.setCurrentPlayer(this.getAcceptedPlayer());
+            GameViewModel.setCurrentPlayer(this.getAcceptedPlayer());
             LobbyViewModel.show(this.getMessage());
             Platform.runLater(() -> {MainApplication.window.setScene(MainApplication.getScene(0));});
         }
         else {
-            GameViewModel.setCurrentPlayer(this.getAcceptedPlayer());
             GameViewModel.show(this.getMessage());
         }
     }
-
-    /*
-    private void handleAcceptedPlayerGame(){
-        GameViewModel.setCurrentPlayer(this.getAcceptedPlayer());
-        GameViewModel.show(this.getMessage());
-        Platform.runLater(() -> {MainApplication.window.setScene(MainApplication.getScene(2));});
-    }
-     */
 
     private void handleRejectedPlayer(){
         Platform.runLater(() -> {

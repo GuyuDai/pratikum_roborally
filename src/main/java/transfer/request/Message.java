@@ -14,7 +14,9 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 /**
- * Organizes messages for the chat, name of Sender, Reciever
+ * @author Felicia Saruba
+ *
+ * Organizes messages for the chat, name of Sender, Receiver
  */
 public class Message{
     private String nameOfSender;
@@ -119,6 +121,9 @@ public class Message{
         }
     }
 
+    /**
+     *  differentiate between Chat in Lobby and Game and send the message
+     */
     private void receiveTheMessage() {
         if (this.getNameOfSender().equals("Server")) {
             if(LobbyViewModel.getWindowName() == "Lobby") {
@@ -127,7 +132,9 @@ public class Message{
                 });
             }
             else{
+                Platform.runLater(() -> {
                 GameViewModel.show(this.getMessage());
+                });
             }
         } else {
             if(LobbyViewModel.getWindowName() == "Lobby") {
@@ -136,7 +143,9 @@ public class Message{
                 });
             }
             else{
+                Platform.runLater(() -> {
                 GameViewModel.show(this.getNameOfSender() + ": " + this.getMessage());
+                });
             }
        }
     }

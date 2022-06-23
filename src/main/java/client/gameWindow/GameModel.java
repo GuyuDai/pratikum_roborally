@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import transfer.Game;
 
 
 /**
@@ -37,6 +38,7 @@ public class GameModel {
     private final ObservableList<String> listContent = FXCollections.observableArrayList();
 
     public ObservableList<String> getListContentProperty() { return listContent; }
+
 
     private final StringProperty textFieldContent = new SimpleStringProperty("");
 
