@@ -11,7 +11,9 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-
+import protocol.MapSelected;
+import protocol.SelectMap;
+import protocol.SendChat;
 
 
 /**
@@ -55,6 +57,8 @@ public class MapViewModel {
     public void selectDizzyHighway(ActionEvent actionEvent) {
         Stage stage = (Stage) DizzyHighwayBtn.getScene().getWindow();
         stage.close();
+        //neet to adapt according to 1.0
+        System.out.println(new MapSelected("DizzyHighway"));
     }
     @FXML
     public void select2(ActionEvent actionEvent) {
