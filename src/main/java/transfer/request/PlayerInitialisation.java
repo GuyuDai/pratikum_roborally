@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import server.ServerThread;
 import transfer.Player;
 import transfer.PlayerOnline;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;

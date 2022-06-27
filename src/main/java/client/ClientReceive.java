@@ -4,10 +4,13 @@ import java.io.*;
 import java.net.Socket;
 import com.google.gson.Gson;
 import javafx.application.Platform;
+import protocol.SendChat;
 import transfer.request.RequestWrapper;
 
 
 public class ClientReceive extends Thread{
+
+    private int clientID;
     private Socket socket;
     private Gson gson = new Gson();
     private BufferedReader readInput;
@@ -63,4 +66,11 @@ public class ClientReceive extends Thread{
     public BufferedWriter getWriteOutput(){return writeOutput;}
 
     public Socket getSocket(){return socket;}
+
+    public int getClientID() {
+        return this.clientID;
+    }
+    public void setClientID(int clientID) {
+        this.clientID = clientID;
+    }
 }

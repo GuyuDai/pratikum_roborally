@@ -1,4 +1,4 @@
-package transfer.cards;
+package transfer;
 
 import java.net.Socket;
 import java.util.ArrayList;
@@ -27,6 +27,18 @@ public class Game {
     public List<PlayerOnline> getActivePlayers() {return playerInGame;}
     private boolean gameRunning = false;
 
+
+
+    private void sendToAll(String message) {
+        GameMessage gameMessage = new GameMessage(message);
+        gameMessage.sendToAll();
+    }
+
+    public static void sendToPlayer(String message, Player player){
+        GameMessage gameMessage = new GameMessage(message);
+        gameMessage.sendToPlayer(player);
+    }
+
     public void addPlayers(PlayerOnline playerIn) {
         playerInGame.add(playerIn);
     }
@@ -37,8 +49,8 @@ public class Game {
             playerInGame.remove(playerOut);
         }
     }
+/*
 
-    /**
      public Game() {
      this.roundCounter = 1;
      this.winning = false;
@@ -194,10 +206,7 @@ public class Game {
      }
 
 
-     public void score() {
-     for(PlayerOnline player: alivePlayers) {
-     sendToPlayer(player.getPlayer().getName() + " has " + player.getPlayer().getHearts() + " hearts", player.getPlayer());
-     }
+
      }
      public void showCards(Player player) {
      sendToPlayer("You have " + player.getHandCards()[0].getValue()
@@ -327,17 +336,6 @@ public class Game {
      return currentWinner;
      }
 
-
-     private void sendToAll(String message) {
-     GameMessage gameMessage = new GameMessage(message);
-     gameMessage.sendToAll();
-     }
-
-     public static void sendToPlayer(String message, Player player){
-     GameMessage gameMessage = new GameMessage(message);
-     gameMessage.sendToPlayer(player);
-     }
-
      public boolean joinGame(Player player){
      for(PlayerOnline playerInList : playerInGame){
      if(playerInList.identifyPlayer(player.getName())){
@@ -375,5 +373,7 @@ public class Game {
      public List<PlayerOnline> getPlayerInGame() {
      return playerInGame;
      }
-     **/
+     */
+
+
 }

@@ -1,21 +1,24 @@
 package transfer.request;
 
+import client.gameWindow.GameViewModel;
+import client.lobbyWindow.LobbyViewModel;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
-import client.mainWindow.MainApplication;
-import client.mainWindow.MainViewModel;
+import client.lobbyWindow.MainApplication;
 import transfer.Player;
-
 import java.net.Socket;
 
 /**
+ * @author Felicia Saruba
  *
  * Answer to the client request for applying to join the server
- */
+  */
+
 public class AcceptPlayer {
     private String message;
     private boolean accepted;
     private Player acceptedPlayer;
+
     public AcceptPlayer(String message, boolean accepted, Player acceptedPlayer){
         this.message = message;
         this.accepted = accepted;
@@ -40,10 +43,19 @@ public class AcceptPlayer {
         }
     }
 
+    /**
+     * setting the name of the newly entered Player for Chatroom
+     */
     private void handleAcceptedPlayer(){
-        MainViewModel.setCurrentPlayer(this.getAcceptedPlayer());
-        MainViewModel.show(this.getMessage());
-        Platform.runLater(() -> {MainApplication.window.setScene(MainApplication.getScene(0));});
+        if(LobbyViewModel.getWindowName() == "Lobby") {
+            LobbyViewModel.setCurrentPlayer(this.getAcceptedPlayer());
+            GameViewModel.setCurrentPlayer(this.getAcceptedPlayer());
+            LobbyViewModel.show(this.getMessage());
+            Platform.runLater(() -> {MainApplication.window.setScene(MainApplication.getScene(0));});
+        }
+        else {
+            GameViewModel.show(this.getMessage());
+        }
     }
 
     private void handleRejectedPlayer(){

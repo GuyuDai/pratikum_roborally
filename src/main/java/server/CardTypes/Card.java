@@ -21,4 +21,8 @@ public abstract class Card {
   public void setOwner(Player owner) {
     this.owner = owner;
   }
+
+  public String getCardName(){
+    return name;
+  }
 }

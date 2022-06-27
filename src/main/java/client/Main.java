@@ -1,6 +1,6 @@
 package client;
 
-import client.mainWindow.MainApplication;
+import client.lobbyWindow.MainApplication;
 
 public class Main {
     public static void main(String[] args){

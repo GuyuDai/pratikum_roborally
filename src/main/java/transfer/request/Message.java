@@ -1,17 +1,25 @@
 package transfer.request;
 
+import client.gameWindow.GameViewModel;
+import client.lobbyWindow.LobbyViewModel;
 import com.google.gson.Gson;
 import javafx.application.Platform;
-import client.mainWindow.MainViewModel;
+import protocol.ReceivedChat;
+import protocol.SendChat;
 import server.ServerThread;
+import transfer.Game;
 import transfer.PlayerOnline;
-
+import client.loginWindow.LoginViewModel;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-
+/**
+ * @author Felicia Saruba
+ *
+ * Organizes messages for the chat, name of Sender, Receiver
+ */
 public class Message{
     private String nameOfSender;
     private String message;
@@ -61,12 +69,17 @@ public class Message{
         switch (typeOfMessage) {
             case CLIENT_MESSAGE:
                 sendMessageToAll();
+                System.out.println(new SendChat(message, -1));
                 break;
             case SERVER_MESSAGE:
                 receiveTheMessage();
+                //System.out.println(new ReceivedChat(message,42,true));
+                System.out.println(new SendChat(message, 42));
+
                 break;
             case PRIVATE_MESSAGE:
                 sendPrivateMessage(playerSocket);
+                System.out.println(new SendChat(message, 42));
                 break;
         }
     }
@@ -97,7 +110,7 @@ public class Message{
         String messageToAllPlayers = createMessage();
         ServerThread.getPlayersOnline().stream().forEach(playerOnline -> {
             writeMessage(playerOnline.getPlayerSocket(), messageToAllPlayers);
-        });
+        }) ;
     }
 
     private String createMessage() {
@@ -115,15 +128,32 @@ public class Message{
         }
     }
 
+    /**
+     *  differentiate between Chat in Lobby and Game and send the message
+     */
     private void receiveTheMessage() {
         if (this.getNameOfSender().equals("Server")) {
-            Platform.runLater(() -> {
-                MainViewModel.show(this.getMessage());
-            });
+            if(LobbyViewModel.getWindowName() == "Lobby") {
+                Platform.runLater(() -> {
+                    LobbyViewModel.show(this.getMessage());
+                });
+            }
+            else{
+                Platform.runLater(() -> {
+                GameViewModel.show(this.getMessage());
+                });
+            }
         } else {
-            Platform.runLater(() -> {
-                MainViewModel.show(this.getNameOfSender() + ": " + this.getMessage());
-            });
-        }
+            if(LobbyViewModel.getWindowName() == "Lobby") {
+                Platform.runLater(() -> {
+                    LobbyViewModel.show(this.getNameOfSender() + ": " + this.getMessage());
+                });
+            }
+            else{
+                Platform.runLater(() -> {
+                GameViewModel.show(this.getNameOfSender() + ": " + this.getMessage());
+                });
+            }
+       }
     }
 }
