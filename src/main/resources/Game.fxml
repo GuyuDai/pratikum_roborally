@@ -1318,13 +1318,13 @@
          <children>
             <HBox layoutX="-2.0" layoutY="1.0" prefHeight="82.0" prefWidth="448.0">
                <children>
-                  <Button fx:id="chatBtn" mnemonicParsing="false" prefHeight="77.0" prefWidth="167.0" styleClass="buttonColor" stylesheets="@styles.css" text="OPEN CHAT" onAction="#chatBtnAction">
+                  <Button fx:id="chatBtn" mnemonicParsing="false" onAction="#chatBtnAction" prefHeight="77.0" prefWidth="167.0" styleClass="buttonColor" stylesheets="@styles.css" text="OPEN CHAT">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Button>
                   <Separator orientation="VERTICAL" prefHeight="82.0" prefWidth="118.0" />
-                  <Button fx:id="exitBtn" mnemonicParsing="false" prefHeight="79.0" prefWidth="164.0" styleClass="buttonColor" stylesheets="@styles.css" text="EXIT" onAction="#exitGame">
+                  <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitGame" prefHeight="79.0" prefWidth="164.0" styleClass="buttonColor" stylesheets="@styles.css" text="EXIT">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -1389,7 +1389,7 @@
                <children>
                   <ImageView fx:id="hand84" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="hand85" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button alignment="TOP_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="111.0" prefWidth="84.0" text="PLAY" />
+                  <Button fx:id="playCardBtn" alignment="TOP_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#showCardBtnAction" prefHeight="111.0" prefWidth="84.0" text="PLAY" />
                </children>
             </HBox>
          </children>
