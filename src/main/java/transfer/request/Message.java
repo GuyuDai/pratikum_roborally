@@ -4,6 +4,7 @@ import client.gameWindow.GameViewModel;
 import client.lobbyWindow.LobbyViewModel;
 import com.google.gson.Gson;
 import javafx.application.Platform;
+import protocol.SendChat;
 import server.ServerThread;
 import transfer.Game;
 import transfer.PlayerOnline;
@@ -73,6 +74,7 @@ public class Message{
                 break;
             case PRIVATE_MESSAGE:
                 sendPrivateMessage(playerSocket);
+                //new SendChat("",)
                 break;
         }
     }

@@ -1,5 +1,6 @@
 package client.lobbyWindow;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
 import client.Client;
@@ -19,6 +20,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 import transfer.request.Message;
@@ -311,4 +314,6 @@ public class LobbyViewModel {
     public void chooseMap(ActionEvent actionEvent) throws IOException {
 
     }
+
+
 }

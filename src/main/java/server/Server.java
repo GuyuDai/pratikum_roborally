@@ -1,7 +1,10 @@
 package server;
 
 
+import client.ClientReceive;
 import protocol.HelloClient;
+import protocol.HelloServer;
+import protocol.Welcome;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -14,7 +17,7 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         ServerSocket server = new ServerSocket(SERVER_PORT);
-        System.out.println("Server starts");
+        System.out.println(new HelloServer("OO", false, PROTOCOL, 0));
         try {
             while(!server.isClosed()) {
                 Socket client = server.accept();
@@ -25,4 +28,5 @@ public class Server {
             ioException.printStackTrace();
         }
     }
+
 }
