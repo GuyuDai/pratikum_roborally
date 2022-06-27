@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.Socket;
 import com.google.gson.Gson;
 import javafx.application.Platform;
+import protocol.SendChat;
 import transfer.request.RequestWrapper;
 
 

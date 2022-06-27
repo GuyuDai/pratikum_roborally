@@ -4,6 +4,7 @@ import client.gameWindow.GameViewModel;
 import client.lobbyWindow.LobbyViewModel;
 import com.google.gson.Gson;
 import javafx.application.Platform;
+import protocol.ReceivedChat;
 import protocol.SendChat;
 import server.ServerThread;
 import transfer.Game;
@@ -68,13 +69,17 @@ public class Message{
         switch (typeOfMessage) {
             case CLIENT_MESSAGE:
                 sendMessageToAll();
+                System.out.println(new SendChat(message, -1));
                 break;
             case SERVER_MESSAGE:
                 receiveTheMessage();
+                //System.out.println(new ReceivedChat(message,42,true));
+                System.out.println(new SendChat(message, 42));
+
                 break;
             case PRIVATE_MESSAGE:
                 sendPrivateMessage(playerSocket);
-                //new SendChat("",)
+                System.out.println(new SendChat(message, 42));
                 break;
         }
     }
@@ -105,7 +110,7 @@ public class Message{
         String messageToAllPlayers = createMessage();
         ServerThread.getPlayersOnline().stream().forEach(playerOnline -> {
             writeMessage(playerOnline.getPlayerSocket(), messageToAllPlayers);
-        });
+        }) ;
     }
 
     private String createMessage() {

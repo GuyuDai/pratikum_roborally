@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 import client.Client;
+import client.ClientReceive;
 import com.google.gson.Gson;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -258,17 +259,11 @@ public class LobbyViewModel {
     /**
      * checks if it is a direct message or a message for all
      */
-    private void checkInput(String message){
+    public void checkInput(String message){
         String sendableRequest = "";
 
          if(message.startsWith("@")) {
              sendableRequest = createDirectMessage(message);
-
-            /*
-         } else if (message.startsWith("!")){
-            sendableRequest = createCommandRequest(message);
-         } else {
-             */
 
          }else {
              sendableRequest = createMessage(message);
@@ -314,6 +309,7 @@ public class LobbyViewModel {
     public void chooseMap(ActionEvent actionEvent) throws IOException {
 
     }
+
 
 
 }
