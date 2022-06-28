@@ -14,9 +14,12 @@
     -fx-rotate: 270;
 }
 
-.backgroundDeck1 {
-    -fx-background-color: rgba(255, 255, 255, .7);
+.radius {
     -fx-background-radius: 15;
+}
+
+.positionCenter {
+    -fx-alignment: CENTER;
 }
 
 .fontColor {
@@ -24,5 +27,5 @@
 
 .buttonColor {
     -fx-background-radius: 15;
-    -fx-background-color: #0892d0;
+    -fx-background-color: #98c0d4;
 }
