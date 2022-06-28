@@ -14,6 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import server.CardTypes.*;
 import server.Deck.ProgrammingDeck;
+import server.Server;
 import transfer.Player;
 import transfer.request.Message;
 import transfer.request.MessageTypes;
@@ -22,9 +23,9 @@ import transfer.request.RequestWrapper;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.concurrent.CopyOnWriteArrayList;
-
+import java.util.logging.Level;
+import protocol.YourCards;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.Parent;
@@ -40,15 +41,12 @@ import javafx.scene.control.TextField;
  */
 public class GameViewModel {
 
-
-    //public GameViewModel(){
-    //  new HostHand();
-    //}
-
     private static GameModel model;
     private static GameViewModel instance;
     private Gson gson = new Gson();
     private static Player currentPlayer;
+
+    public String[] cards = {"", "", "", "", "", "", "", "", ""};
 
 
     @FXML
@@ -67,6 +65,7 @@ public class GameViewModel {
     private Label chatwindow;
     @FXML
     private AnchorPane gameContainer;
+
     @FXML
     private TilePane dizzyHighway;
     @FXML
@@ -97,7 +96,6 @@ public class GameViewModel {
     private ImageView register4;
     @FXML
     private ImageView register5;
-
     @FXML
     private GridPane register;
     @FXML
@@ -112,24 +110,21 @@ public class GameViewModel {
     public ProgrammingDeck deck=new ProgrammingDeck();
     URL move1 = getClass().getResource("/programmingCards/move1.png");
     Image imageMove1 = new Image(move1.toString());
+
     URL urlMove2 = getClass().getResource("/programmingCards/move2.png");
     Image imageMove2 = new Image(urlMove2.toString());
-
 
 
     URL urlMove3 = getClass().getResource("/programmingCards/move3.png");
     Image imageMove3 = new Image(urlMove3.toString());
 
 
-
     URL urlAgain = getClass().getResource("/programmingCards/again.png");
     Image imageAgain = new Image(urlAgain.toString());
 
 
-
     URL urlBackUp = getClass().getResource("/programmingCards/backUp.png");
     Image imageBackUp = new Image(urlBackUp.toString());
-
 
 
     URL urlTurnLeft = getClass().getResource("/programmingCards/turnLeft.png");
@@ -144,11 +139,8 @@ public class GameViewModel {
     Image imageUTurn = new Image(urlUTurn.toString());
 
 
-
     URL urlPowerUp = getClass().getResource("/programmingCards/powerUp.png");
     Image imagePowerUp = new Image(urlPowerUp.toString());
-
-
 
 
 
@@ -190,7 +182,6 @@ public class GameViewModel {
         model.addNewListItem(message);
     }
 
-
     @FXML
     public void sendButtonAction(ActionEvent actionEvent) throws IOException {
         String message = model.getTextFieldContent().get();
@@ -210,11 +201,6 @@ public class GameViewModel {
 
         if (message.startsWith("@")) {
             sendableRequest = createDirectMessage(message);
-
-        /*
-         } else if (message.startsWith("!")){
-            sendableRequest = createCommandRequest(message);
-        */
 
         } else {
             sendableRequest = createMessage(message);
@@ -275,15 +261,15 @@ public class GameViewModel {
     public void exitGame(ActionEvent actionEvent) {
         Stage stage = (Stage) exitBtn.getScene().getWindow();
         stage.close();
-
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Lobby.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Lobby.fxml"));
             Parent rootMap = (Parent) fxmlLoader.load();
             Stage stageLobby = new Stage();
             stageLobby.setTitle("Lobby");
             stageLobby.setScene(new Scene(rootMap));
             stageLobby.show();
         } catch (Exception e) {
+            System.out.println("not working");
         }
         LobbyViewModel.setWindowName("Lobby");
     }
@@ -299,6 +285,7 @@ public class GameViewModel {
         for(int i=0; i<9 ;i ++) {
             String card=nineCardsFromServer.get(i).getCardName();
             Image cardImage=null;
+            cards[i] = card;
             switch (card) {
                 case "MoveOne":
                   cardImage=imageMove1;
@@ -328,8 +315,8 @@ public class GameViewModel {
                     cardImage=imageUTurn;
                     break;
                 default:
-
                     break;
+
             }
             switch (i){
                 case 0:
@@ -362,14 +349,11 @@ public class GameViewModel {
             }
         }
 
-
-
-
-
     }
 
     public void showCardBtnAction() {
         printCards();
+        Server.logger.log(Level.INFO, new YourCards(cards).toString());
     }
 
 
