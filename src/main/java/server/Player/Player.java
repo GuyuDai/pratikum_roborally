@@ -1,14 +1,11 @@
 package server.Player;
 
-import java.net.Socket;
-import server.CardTypes.Card;
-import server.CardTypes.Spam;
-import server.Deck.GameDeck;
-import server.Deck.ProgrammingDeck;
+import server.CardTypes.*;
+import server.Deck.*;
+import server.Game.*;
 
-import java.util.Random;
-import java.util.concurrent.CopyOnWriteArrayList;
-import server.Game.RR;
+import java.util.*;
+import java.util.concurrent.*;
 
 
 public class Player implements PlayerAction{
@@ -92,9 +89,23 @@ public class Player implements PlayerAction{
       }
     }
 
-
   }
-   public boolean identifyPlayer(String playerName){
+
+  /*select AICard for Programming phase
+randomize chosing cards and putting it into register
+*/
+  public void programmingPhaseAI(){
+    // draw from pile 9 cards automatically
+    draw();
+    //Choose the first five cards and put in your register
+    register.add(getHands().get(0));
+    register.add(getHands().get(1));
+    register.add(getHands().get(2));
+    register.add(getHands().get(3));
+    register.add(getHands().get(4));
+  }
+
+  public boolean identifyPlayer(String playerName){
     if(playerName.equals(this.getName())) {
       return true;
     }
