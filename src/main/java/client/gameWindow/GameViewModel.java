@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -85,27 +84,24 @@ public class GameViewModel {
     @FXML
     private ImageView hand8;
     @FXML
-    private ImageView hand81;
-    @FXML
-    private ImageView hand82;
-    @FXML
-    private ImageView hand83;
-    @FXML
-    private ImageView hand84;
-    @FXML
-    private ImageView hand85;
-    @FXML
     private ImageView hand9;
     @FXML
-    private HBox hboxDiscard;
+    private ImageView register1;
     @FXML
-    private HBox hboxHand;
+    private ImageView register2;
+    @FXML
+    private ImageView register3;
+    @FXML
+    private ImageView register4;
+    @FXML
+    private ImageView register5;
+
+    @FXML
+    private GridPane register;
+    @FXML
+    private GridPane hand;
     @FXML
     private StackPane maps;
-    @FXML
-    private TilePane discardDeck;
-    @FXML
-    private TilePane hand;
     @FXML
     private Button playCardBtn;
 
@@ -115,7 +111,7 @@ public class GameViewModel {
     public void initialize() {
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
-        hboxHand.getChildren().add(new ImageView());
+        hand.getChildren().add(new ImageView());
     }
 
 
@@ -125,7 +121,7 @@ public class GameViewModel {
         this.list = list;
         this.input = input;
         this.sendBtn = sendBtn;
-        this.hboxHand = hboxHand;
+        this.hand = hand;
 
         //this.currentPlayer = currentPlayer;
     }

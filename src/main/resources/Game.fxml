@@ -4,1336 +4,51 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1005.0" prefWidth="1300.0" styleClass="backgroundColor" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
+<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1250.0" styleClass="backgroundColor" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
    <children>
-      <StackPane prefHeight="600.0" prefWidth="780.0">
+      <Pane layoutX="6.0" layoutY="3.0" prefHeight="795.0" prefWidth="305.0" stylesheets="@styles.css">
          <children>
-            <TilePane fx:id="dizzyHighway" prefHeight="600.0" prefWidth="780.0">
+            <ImageView fitHeight="795.0" fitWidth="305.0" layoutX="-1.0" layoutY="-1.0" opacity="0.2" pickOnBounds="true" preserveRatio="true" styleClass="radius">
+               <image>
+                  <Image url="@bgImages/whiteBG.png" />
+               </image>
+            </ImageView>
+            <HBox layoutX="-2.0" layoutY="1.0" prefHeight="28.0" prefWidth="306.0" styleClass="radius" stylesheets="@styles.css">
                <children>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/GreenBeltRight.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltBottom.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltBottom.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/DoubleEnegery.JPG" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/StartPoint.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/RB Bottom.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/RB left2.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltLeft.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltLeft.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltLeft.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltLeft.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltLeft.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/RB left.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltLeft.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/WallTop.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltBottom.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/DoubleEnegery.JPG" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/RB top2.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltLeft.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/StartPoint.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltBottom.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/WallTop.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/LaserStrahl.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/checkpoint.jpg" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 270;">
-                           <image>
-                              <Image url="@BoardImages/WallLeft.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
-                           <image>
-                              <Image url="@BoardImages/Laser.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
-                           <image>
-                              <Image url="@BoardImages/LaserStrahl.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
-                           <image>
-                              <Image url="@BoardImages/WallLeft.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
-                           <image>
-                              <Image url="@BoardImages/LaserStrahl.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltTop.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
-                           <image>
-                              <Image url="@BoardImages/Antenna.jpg" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/StartPoint.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
-                           <image>
-                              <Image url="@BoardImages/WallLeft.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltBottom.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 180;">
-                           <image>
-                              <Image url="@BoardImages/WallLeft.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/LaserStrahl.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/Laser.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/DoubleEnegery.JPG" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltTop.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/StartPoint.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
-                           <image>
-                              <Image url="@BoardImages/WallLeft.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltBottom.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/DoubleEnegery.JPG" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 270;">
-                           <image>
-                              <Image url="@BoardImages/WallLeft.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/LaserStrahl.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 180;">
-                           <image>
-                              <Image url="@BoardImages/Laser.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltTop.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/StartPoint.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltBottom.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 270;">
-                           <image>
-                              <Image url="@BoardImages/WallTop.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
-                           <image>
-                              <Image url="@BoardImages/LaserStrahl.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
-                           <image>
-                              <Image url="@BoardImages/WallLeft.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
-                           <image>
-                              <Image url="@BoardImages/LaserStrahl.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 270;">
-                           <image>
-                              <Image url="@BoardImages/Laser.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 180;">
-                           <image>
-                              <Image url="@BoardImages/WallLeft.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/LaserStrahl.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltTop.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 180;">
-                           <image>
-                              <Image url="@BoardImages/WallLeft.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltRight.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/RB Bottom.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/DoubleEnegery.JPG" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltTop.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/StartPoint.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltRight.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/RB right.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltRight.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltRight.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltRight.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltRight.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltRight.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/RB right2.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/RB top.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/StartA.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/GreenBeltRight.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/DoubleEnegery.JPG" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/boardNull.png" />
-                     </image>
-                  </ImageView>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltTop.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="60.0" prefWidth="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/boardNull.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@BoardImages/BlueBeltTop.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@BoardImages/5B.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </TilePane>
-            <TilePane prefHeight="600.0" prefWidth="780.0" />
-            <TilePane prefHeight="600.0" prefWidth="780.0" />
-         </children>
-      </StackPane>
-      <TilePane layoutX="902.0" layoutY="31.0" prefHeight="200.0" prefWidth="200.0" />
-      <Pane layoutX="831.0" layoutY="9.0" prefHeight="974.0" prefWidth="442.0" styleClass="backgroundDeck1" stylesheets="@styles.css">
-         <children>
-            <HBox layoutX="-2.0" layoutY="1.0" prefHeight="82.0" prefWidth="448.0">
-               <children>
-                  <Button fx:id="chatBtn" mnemonicParsing="false" onAction="#chatBtnAction" prefHeight="77.0" prefWidth="167.0" styleClass="buttonColor" stylesheets="@styles.css" text="OPEN CHAT">
+                  <Button fx:id="chatBtn" mnemonicParsing="false" onAction="#chatBtnAction" prefHeight="31.0" prefWidth="114.0" stylesheets="@styles.css" text="OPEN CHAT">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="16.0" />
                      </font>
                   </Button>
-                  <Separator orientation="VERTICAL" prefHeight="82.0" prefWidth="118.0" />
-                  <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitGame" prefHeight="79.0" prefWidth="164.0" styleClass="buttonColor" stylesheets="@styles.css" text="EXIT">
+                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="110.0" text="SHOP">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitGame" prefHeight="31.0" prefWidth="101.0" stylesheets="@styles.css" text="EXIT">
+                     <font>
+                        <Font size="16.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <Pane layoutX="-1.0" layoutY="83.0" prefHeight="319.0" prefWidth="442.0">
+            <Pane layoutX="-1.0" layoutY="49.0" prefHeight="170.0" prefWidth="306.0">
                <children>
-                  <VBox fx:id="container" prefHeight="319.0" prefWidth="442.0" style="-fx-background-radius: 10;" styleClass="backgroundColor" visible="false">
+                  <VBox fx:id="container" prefHeight="171.0" prefWidth="305.0" style="-fx-background-radius: 10;" styleClass="backgroundColor" visible="false">
                      <children>
                         <Label fx:id="chatwindow" prefHeight="17.0" prefWidth="443.0" text="                                                                              Chat" textAlignment="CENTER" textFill="WHITE" />
                         <ListView fx:id="list" prefHeight="489.0" prefWidth="244.0" style="-fx-background-radius: 10;" />
@@ -1349,50 +64,194 @@
                   </VBox>
                </children>
             </Pane>
+            <AnchorPane fx:id="upgradeShop" layoutX="-5.0" layoutY="505.0" opacity="0.5" prefHeight="292.0" prefWidth="309.0" styleClass="backgroundColor" stylesheets="@styles.css" visible="false">
+               <children>
+                  <ImageView fx:id="playerBot41" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <VBox layoutX="6.0" layoutY="597.0" prefHeight="188.0" prefWidth="82.0" styleClass="backgroundColor" stylesheets="@styles.css">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="139.0" prefWidth="82.0">
+                     <graphic>
+                        <ImageView fitHeight="122.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+                  <Separator opacity="0.0" prefHeight="18.0" prefWidth="82.0" />
+                  <Label prefHeight="43.0" prefWidth="82.0" text="      Label" textFill="WHITE" />
+               </children>
+            </VBox>
+            <VBox layoutX="208.0" layoutY="597.0" prefHeight="188.0" prefWidth="82.0" styleClass="backgroundColor" stylesheets="@styles.css">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="139.0" prefWidth="82.0">
+                     <graphic>
+                        <ImageView fitHeight="122.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+                  <Separator opacity="0.0" prefHeight="18.0" prefWidth="82.0" />
+                  <Label prefHeight="43.0" prefWidth="82.0" text="      Label" textFill="WHITE" />
+               </children>
+            </VBox>
+            <VBox layoutX="106.0" layoutY="597.0" prefHeight="188.0" prefWidth="82.0" styleClass="backgroundColor" stylesheets="@styles.css">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="139.0" prefWidth="82.0">
+                     <graphic>
+                        <ImageView fitHeight="122.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+                  <Separator opacity="0.0" prefHeight="18.0" prefWidth="82.0" />
+                  <Label prefHeight="43.0" prefWidth="82.0" text="      Label" textFill="WHITE" />
+               </children>
+            </VBox>
+            <Label layoutX="25.0" layoutY="519.0" prefHeight="59.0" prefWidth="254.0" text="   USE YOUR UPGRADE CARDS" textFill="#fcfafa">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <HBox layoutX="32.0" layoutY="845.0" prefHeight="110.0" prefWidth="765.0">
+      <VBox layoutX="322.0" layoutY="1.0" prefHeight="797.0" prefWidth="557.0">
          <children>
-            <HBox fx:id="hboxHand" prefHeight="110.0" prefWidth="255.0">
+            <HBox prefHeight="108.0" prefWidth="557.0">
                <children>
-                  <ImageView fx:id="hand1" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="hand2" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="hand3" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="109.0" prefWidth="160.0" />
+                  <ImageView fitHeight="109.0" fitWidth="273.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@RoboRallyHeader.jpg" />
+                     </image>
+                  </ImageView>
                </children>
             </HBox>
-            <HBox prefHeight="110.0" prefWidth="255.0">
+            <AnchorPane prefHeight="430.0" prefWidth="558.0">
                <children>
-                  <ImageView fx:id="hand4" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="hand5" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="hand6" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="428.0" fitWidth="557.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@bgImages/MapBG.jpg" />
+                     </image>
+                  </ImageView>
+                  <GridPane fx:id="gameboard" gridLinesVisible="true" prefHeight="428.0" prefWidth="557.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
                </children>
-            </HBox>
-            <HBox prefHeight="110.0" prefWidth="255.0">
+            </AnchorPane>
+            <AnchorPane fx:id="phase" prefHeight="88.0" prefWidth="557.0">
                <children>
-                  <ImageView fx:id="hand7" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="hand8" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="hand9" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="yourBot" fitHeight="71.0" fitWidth="73.0" layoutX="8.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                  <TextArea layoutX="133.0" layoutY="8.0" prefHeight="68.0" prefWidth="294.0" />
+               </children></AnchorPane>
+            <GridPane fx:id="register">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="85.0" percentWidth="0.0" prefWidth="85.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="85.0" percentWidth="0.0" prefWidth="85.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="85.0" percentWidth="0.0" prefWidth="85.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="85.0" percentWidth="0.0" prefWidth="85.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="85.0" percentWidth="0.0" prefWidth="85.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="135.0" percentWidth="0.0" prefWidth="135.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" percentHeight="0.0" prefHeight="110.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ImageView fx:id="register1" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="register2" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                  <ImageView fx:id="register3" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+                  <ImageView fx:id="register4" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+                  <ImageView fx:id="register5" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="5">
+                     <children>
+                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="110.0" prefWidth="49.0" />
+                        <Button fx:id="playRegister" mnemonicParsing="false" prefHeight="110.0" prefWidth="131.0" text="PlayCards" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+               <effect>
+                  <Glow />
+               </effect>
+            </GridPane>
          </children>
-      </HBox>
-      <HBox fx:id="hboxDiscard" layoutX="169.0" layoutY="653.0" prefHeight="110.0" prefWidth="510.0">
+      </VBox>
+      <AnchorPane layoutX="886.0" layoutY="6.0" prefHeight="790.0" prefWidth="356.0">
          <children>
-            <HBox prefHeight="110.0" prefWidth="255.0">
+            <ImageView fitHeight="790.0" fitWidth="356.0" layoutX="1.0" layoutY="-2.0" opacity="0.16" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@bgImages/white2BG.png" />
+               </image>
+            </ImageView>
+            <AnchorPane fx:id="player1" layoutX="2.0" layoutY="9.0" opacity="0.5" prefHeight="88.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@styles.css">
                <children>
-                  <ImageView fx:id="hand81" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="hand82" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="hand83" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="playerBot1" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                </children>
-            </HBox>
-            <HBox prefHeight="110.0" prefWidth="255.0">
+            </AnchorPane>
+            <AnchorPane fx:id="player2" layoutX="2.0" layoutY="108.0" opacity="0.5" prefHeight="88.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@styles.css">
                <children>
-                  <ImageView fx:id="hand84" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="hand85" fitHeight="110.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button fx:id="playCardBtn" alignment="TOP_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#showCardBtnAction" prefHeight="111.0" prefWidth="84.0" text="PLAY" />
+                  <ImageView fx:id="playerBot2" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
                </children>
-            </HBox>
+            </AnchorPane>
+            <AnchorPane fx:id="player3" layoutX="1.0" layoutY="207.0" opacity="0.5" prefHeight="88.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@styles.css">
+               <children>
+                  <ImageView fx:id="playerBot3" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="player4" layoutX="2.0" layoutY="307.0" opacity="0.5" prefHeight="88.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@styles.css">
+               <children>
+                  <ImageView fx:id="playerBot4" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutY="405.0" opacity="0.5" prefHeight="88.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@styles.css">
+               <children>
+                  <ImageView fx:id="playerBot5" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <GridPane fx:id="hand" layoutX="23.0" layoutY="495.0" prefHeight="287.0" prefWidth="220.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" prefWidth="50.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" prefWidth="5.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" prefWidth="50.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ImageView fx:id="hand1" fitHeight="96.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="hand2" fitHeight="96.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                  <ImageView fx:id="hand3" fitHeight="96.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+                  <ImageView fx:id="hand4" fitHeight="96.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+                  <ImageView fx:id="hand5" fitHeight="96.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ImageView fx:id="hand6" fitHeight="96.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <ImageView fx:id="hand7" fitHeight="96.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
+                  <ImageView fx:id="hand8" fitHeight="96.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ImageView fx:id="hand9" fitHeight="96.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+            <Button layoutX="264.0" layoutY="620.0" mnemonicParsing="false" onAction="#showCardBtnAction" prefHeight="48.0" prefWidth="85.0" text="ShowCards" />
          </children>
-      </HBox>
+      </AnchorPane>
    </children>
 </AnchorPane>
