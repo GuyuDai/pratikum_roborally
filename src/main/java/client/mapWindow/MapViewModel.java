@@ -14,6 +14,9 @@ import javafx.stage.Stage;
 import protocol.MapSelected;
 import protocol.SelectMap;
 import protocol.SendChat;
+import server.Server;
+
+import java.util.logging.Level;
 
 
 /**
@@ -57,8 +60,8 @@ public class MapViewModel {
     public void selectDizzyHighway(ActionEvent actionEvent) {
         Stage stage = (Stage) DizzyHighwayBtn.getScene().getWindow();
         stage.close();
-        //neet to adapt according to 1.0
-        System.out.println(new MapSelected("DizzyHighway"));
+        //TODO need to adapt according to 1.0
+        Server.logger.log(Level.INFO, new MapSelected("DizzyHighway").toString());
     }
     @FXML
     public void select2(ActionEvent actionEvent) {

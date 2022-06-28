@@ -1,13 +1,16 @@
 package client;
 
 import com.google.gson.JsonObject;
+import protocol.HelloClient;
 import protocol.Welcome;
-
+import server.Server;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.logging.Level;
+
 
 /**
  * @author Felicia Saruba
@@ -29,7 +32,7 @@ public class Client {
             Socket client = new Socket(SERVER_IP, SERVER_PORT);
             //Start thread for receiving message from server.
             clientReceive = new ClientReceive(client);
-            System.out.println(new Welcome(42));
+            Server.logger.log(Level.INFO, new Welcome(42).toString());
             clientReceive.start();
         } catch (IOException e) {
             e.printStackTrace();

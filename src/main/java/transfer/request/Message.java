@@ -4,8 +4,11 @@ import client.gameWindow.GameViewModel;
 import client.lobbyWindow.LobbyViewModel;
 import com.google.gson.Gson;
 import javafx.application.Platform;
+import protocol.HelloClient;
 import protocol.ReceivedChat;
 import protocol.SendChat;
+import protocol.Welcome;
+import server.Server;
 import server.ServerThread;
 import transfer.Game;
 import transfer.PlayerOnline;
@@ -14,6 +17,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.logging.Level;
 
 /**
  * @author Felicia Saruba
@@ -69,17 +73,17 @@ public class Message{
         switch (typeOfMessage) {
             case CLIENT_MESSAGE:
                 sendMessageToAll();
-                System.out.println(new SendChat(message, -1));
+                Server.logger.log(Level.INFO, new SendChat(message, -1).toString());
                 break;
             case SERVER_MESSAGE:
                 receiveTheMessage();
-                //System.out.println(new ReceivedChat(message,42,true));
-                System.out.println(new SendChat(message, 42));
+                Server.logger.log(Level.INFO, new ReceivedChat(message, 42, true).toString());
+                Server.logger.log(Level.INFO, new SendChat(message, 42).toString());
 
                 break;
             case PRIVATE_MESSAGE:
                 sendPrivateMessage(playerSocket);
-                System.out.println(new SendChat(message, 42));
+                Server.logger.log(Level.INFO, new SendChat(message, 42).toString());
                 break;
         }
     }
