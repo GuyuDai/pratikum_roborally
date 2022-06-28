@@ -27,7 +27,7 @@ public class HostHand extends GameViewModel{
     @Override
     public void initialize() {
         super.initialize();
-        new Player();
+        new Player("AI");
         setHand();
     }
 
@@ -99,7 +99,7 @@ public class HostHand extends GameViewModel{
     public void setHand(){
         clearHand();
         for(int i = 0; i<9; i++){
-            getHandImage(Player.getHands().get(i));
+            //getHandImage(Player.getHands().get(i));
         }
         updateHand();
     }

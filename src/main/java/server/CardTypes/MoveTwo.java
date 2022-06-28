@@ -3,9 +3,11 @@ package server.CardTypes;
 import server.Player.Robot;
 
 public class MoveTwo extends Card implements Move{
-
+  public MoveTwo(){
+    super("MoveTwo");
+  }
   /**
-   * @author dai
+   * @author dai,Li
    * to move forwards two steps
    */
   @Override

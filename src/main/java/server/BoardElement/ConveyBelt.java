@@ -25,7 +25,6 @@ public class ConveyBelt extends BoardElem implements Move {
   @Override
   public void action() {
     move(currentGame.getPlayerInCurrentTurn().getOwnRobot());
-
   }
 
 
@@ -33,6 +32,25 @@ public class ConveyBelt extends BoardElem implements Move {
   public void move(Robot robot) {
     Direction arrowDirection=this.getDirection();
     int speed=this.getSpeed();
-    robot.push(robot,arrowDirection,speed);
+    if(speed==1) {
+      robot.push(robot, arrowDirection, speed);
+    }
+    if(speed==2){
+      robot.push(robot, arrowDirection, 1);
+      if(robot.getCurrentPosition().getTile().getName()=="ConveyBelt"){
+        robot.push(robot, arrowDirection, 1);
+      }
+      if(robot.getCurrentPosition().getTile().getName()=="RotatingBelt"){
+        robot.getCurrentPosition().getTile().action();
+        Direction moveDirection=robot.getCurrentPosition().getTile().getDirection();
+        robot.push(robot,moveDirection,1);
+      }
+      robot.getCurrentPosition().stay();
+    }
+    //check if robot moves out of ConveyBelt,it will move 1 steps anyway.
+    //but rotatingBelt is also a belt robot may not move in arrowDirection when it meets a rotatingBelt,it will change moveDirection;
+
   }
+
+
 }

@@ -7,7 +7,7 @@ import server.Deck.GameDeck;
 import server.Deck.ProgrammingDeck;
 import java.util.concurrent.CopyOnWriteArrayList;
 import server.Game.RR;
-import server.PlayerOnline;
+
 
 public class Player implements PlayerAction{
   public String name;
@@ -24,6 +24,7 @@ public class Player implements PlayerAction{
   public Player(String name){
     this.name = name;
     this.energyCubes=5;
+    this.ownDeck=new ProgrammingDeck();
   }
 
   public Robot getOwnRobot() {
@@ -89,6 +90,13 @@ public class Player implements PlayerAction{
 
 
   }
+   public boolean identifyPlayer(String playerName){
+    if(playerName.equals(this.getName())) {
+      return true;
+    }
+    else return false;
+   }
+
 
 
   public CopyOnWriteArrayList<Card> getRegister() {

@@ -9,11 +9,11 @@ import server.Game.RR;
 import server.Player.Robot;
 
 public class RotatingBelt extends BoardElem implements Move {
-    public RotatingBelt(RR currentGame, int speed, Direction direction,String turnDirection) {
+    public RotatingBelt(RR currentGame, int speed, Direction direction,Direction direction2) {
         super("RotatingBelt ", currentGame);
         this.direction=direction;
         this.speed=speed;
-        this.turnDirection=turnDirection;
+        this.direction2=direction2;
     }
 
     @Override
@@ -24,31 +24,14 @@ public class RotatingBelt extends BoardElem implements Move {
 
     @Override
     public void move(Robot robot) {
-
-        Direction arrowDirection = this.getDirection();
-        Direction faceDirection=robot.getFaceDirection();
-        if (this.getTurnDirection()=="turnLeft"){
-            if (robot.getLastPosition().getTile().getName() == "ConveyBelt") {
-                if (arrowDirection.equals(faceDirection.turnLeft())) {
-                    robot.setFaceDirection(faceDirection.turnLeft());
-                    robot.setCurrentPosition(new Position(robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY()));
-                }
-                robot.push(robot, arrowDirection, this.getSpeed());
-
+        Direction straightDirection=this.getDirection();//arrowDirection
+        Direction curvedDirection=this.getDirection2();//anotherDirection  for example：  ↵ ,← is straightDirection ↓is curvedDirection
+        if(robot.getLastPosition().getTile().getName()=="ConveyBelt"||
+                robot.getLastPosition().getTile().getName()=="RotatingBelt"){
+            if(robot.getLastPosition().getTile().getDirection().equals(curvedDirection)){
+                robot.setFaceDirection(straightDirection);
             }
             robot.getCurrentPosition().stay();
         }
-        if (this.getTurnDirection()=="turnRight"){
-            if (robot.getLastPosition().getTile().getName() == "ConveyBelt") {
-                if (arrowDirection.equals(faceDirection.turnRight())) {
-                    robot.setFaceDirection(faceDirection.turnRight());
-                    robot.setCurrentPosition(new Position(robot.getCurrentPosition().getX(), robot.getCurrentPosition().getY()));
-                }
-                robot.push(robot,arrowDirection,this.getSpeed());
-
-            }
-            robot.getCurrentPosition().stay();
-        }
-
     }
 }

@@ -5,7 +5,9 @@ import server.Player.Robot;
 import server.Control.Position;
 
 public class BackUp extends Card implements Move{
-
+  public BackUp(){
+    super("BackUp");
+  }
   /**
    * @author dai
    * move a robot one step back. The robot does not change the direction it is facing.
