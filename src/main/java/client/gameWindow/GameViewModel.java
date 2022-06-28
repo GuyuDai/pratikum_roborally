@@ -13,6 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import server.CardTypes.*;
+import server.Deck.ProgrammingDeck;
 import transfer.Player;
 import transfer.request.Message;
 import transfer.request.MessageTypes;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -106,6 +108,9 @@ public class GameViewModel {
     private Button playCardBtn;
 
     public String window = "Game";
+
+    public ProgrammingDeck deck=new ProgrammingDeck();
+
 
 
     public void initialize() {
@@ -244,7 +249,7 @@ public class GameViewModel {
         LobbyViewModel.setWindowName("Lobby");
     }
 
-    ArrayList<Card> nineCardsFromServer = new ArrayList<>();
+    CopyOnWriteArrayList<Card> nineCardsFromServer = deck.getRemainingCards();
     ArrayList<Card> discardPile;
 
     public void printCards() {
