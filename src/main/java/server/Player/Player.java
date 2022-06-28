@@ -5,6 +5,8 @@ import server.CardTypes.Card;
 import server.CardTypes.Spam;
 import server.Deck.GameDeck;
 import server.Deck.ProgrammingDeck;
+
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 import server.Game.RR;
 
@@ -19,6 +21,8 @@ public class Player implements PlayerAction{
   public GameDeck gameDeck;
   public int priority = 1;
   public int energyCubes;
+
+  private boolean isAI=false;
 
 
   public Player(String name){
@@ -95,6 +99,21 @@ public class Player implements PlayerAction{
       return true;
     }
     else return false;
+   }
+
+   public void setAI(){
+     this.isAI=true;
+   }
+   public boolean getAI(){
+    return isAI;
+   }
+
+   public void setAIRobot(){
+    if(this.getAI()){
+      Random rand=new Random();
+      int robotNumber= rand.nextInt(5);
+      setOwnRobot(robotNumber);
+    }
    }
 
 

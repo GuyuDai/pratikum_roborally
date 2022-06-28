@@ -110,6 +110,45 @@ public class GameViewModel {
     public String window = "Game";
 
     public ProgrammingDeck deck=new ProgrammingDeck();
+    URL move1 = getClass().getResource("/programmingCards/move1.png");
+    Image imageMove1 = new Image(move1.toString());
+    URL urlMove2 = getClass().getResource("/programmingCards/move2.png");
+    Image imageMove2 = new Image(urlMove2.toString());
+
+
+
+    URL urlMove3 = getClass().getResource("/programmingCards/move3.png");
+    Image imageMove3 = new Image(urlMove3.toString());
+
+
+
+    URL urlAgain = getClass().getResource("/programmingCards/again.png");
+    Image imageAgain = new Image(urlAgain.toString());
+
+
+
+    URL urlBackUp = getClass().getResource("/programmingCards/backUp.png");
+    Image imageBackUp = new Image(urlBackUp.toString());
+
+
+
+    URL urlTurnLeft = getClass().getResource("/programmingCards/turnLeft.png");
+    Image imageBTurnLeft = new Image(urlTurnLeft.toString());
+
+
+    URL urlTurnRight = getClass().getResource("/programmingCards/turnRight.png");
+    Image imageBTurnRight = new Image(urlTurnRight.toString());
+
+
+    URL urlUTurn = getClass().getResource("/programmingCards/uTurn.png");
+    Image imageUTurn = new Image(urlUTurn.toString());
+
+
+
+    URL urlPowerUp = getClass().getResource("/programmingCards/powerUp.png");
+    Image imagePowerUp = new Image(urlPowerUp.toString());
+
+
 
 
 
@@ -249,112 +288,83 @@ public class GameViewModel {
         LobbyViewModel.setWindowName("Lobby");
     }
 
-    CopyOnWriteArrayList<Card> nineCardsFromServer = deck.getRemainingCards();
+    CopyOnWriteArrayList<Card> nineCardsFromServer =new CopyOnWriteArrayList<>();
+    CopyOnWriteArrayList<Card> programmingDecK = deck.getRemainingCards();
     ArrayList<Card> discardPile;
 
     public void printCards() {
-        nineCardsFromServer.add(new MoveOne());
-        nineCardsFromServer.add(new MoveOne());
-        nineCardsFromServer.add(new MoveOne());
-        nineCardsFromServer.add(new MoveOne());
-        nineCardsFromServer.add(new MoveOne());     // 5 x Move One
-
-        nineCardsFromServer.add(new MoveTwo());
-        nineCardsFromServer.add(new MoveTwo());
-        nineCardsFromServer.add(new MoveTwo());     // 3 x Move Two
-
-        nineCardsFromServer.add(new MoveThree());   // 1 x Move Three
-
-        nineCardsFromServer.add(new Again());
-        nineCardsFromServer.add(new Again());       // 2 x Again
-
-        nineCardsFromServer.add(new BackUp());      // 1 x BackUp
-
-        nineCardsFromServer.add(new TurnLeft());
-        nineCardsFromServer.add(new TurnLeft());
-        nineCardsFromServer.add(new TurnLeft());    // 3 x Turn Left
-
-        nineCardsFromServer.add(new TurnRight());
-        nineCardsFromServer.add(new TurnRight());
-        nineCardsFromServer.add(new TurnRight());   // 3 x Turn Right
-
-        nineCardsFromServer.add(new UTurn());       // 1 x UTurn
-
-        nineCardsFromServer.add(new PowerUp());     // 1 x PowerUp
-
-        Collections.shuffle(nineCardsFromServer);
-
-
-        URL url1 = getClass().getResource("/programmingCards/move1.png");
-        if (url1 == null) {
-            throw new IllegalArgumentException("File not found: /programmingCards/" + nineCardsFromServer.get(0).getCardName());
+        for (int i = 0; i < 9; i++) {
+            nineCardsFromServer.add(programmingDecK.get(i));
         }
-        Image image1 = new Image(url1.toString());
-        hand1.setImage(image1);
+        for(int i=0; i<9 ;i ++) {
+            String card=nineCardsFromServer.get(i).getCardName();
+            Image cardImage=null;
+            switch (card) {
+                case "MoveOne":
+                  cardImage=imageMove1;
+                    break;
+                case "MoveTwo":
+                   cardImage=imageMove2;
+                    break;
+                case "MoveThree":
+                    cardImage=imageMove3;
+                    break;
+                case "Again":
+                    cardImage=imageAgain;
+                    break;
+                case "BackUp":
+                    cardImage=imageBackUp;
+                    break;
+                case "PowerUp":
+                    cardImage=imagePowerUp;
+                    break;
+                case "TurnLeft":
+                    cardImage=imageBTurnLeft;
+                    break;
+                case "TurnRight":
+                    cardImage=imageBTurnRight;
+                    break;
+                case "UTurn":
+                    cardImage=imageUTurn;
+                    break;
+                default:
 
-
-        URL url2 = getClass().getResource("/programmingCards/move2.png");
-        if (url2 == null) {
-            throw new IllegalArgumentException("File not found: /programmingCards/" + nineCardsFromServer.get(0).getCardName());
+                    break;
+            }
+            switch (i){
+                case 0:
+                    hand1.setImage(cardImage);
+                    break;
+                case 1:
+                    hand2.setImage(cardImage);
+                    break;
+                case 2:
+                    hand3.setImage(cardImage);
+                    break;
+                case 3:
+                    hand4.setImage(cardImage);
+                    break;
+                case 4:
+                    hand5.setImage(cardImage);
+                    break;
+                case 5:
+                    hand6.setImage(cardImage);
+                    break;
+                case 6:
+                    hand7.setImage(cardImage);
+                    break;
+                case 7:
+                    hand8.setImage(cardImage);
+                    break;
+                case 8:
+                    hand9.setImage(cardImage);
+                    break;
+            }
         }
-        Image image2 = new Image(url2.toString());
-        hand2.setImage(image2);
 
 
-        URL urlMove3 = getClass().getResource("/programmingCards/move3.png");
-        if (urlMove3 == null) {
-            throw new IllegalArgumentException("File not found: /programmingCards/" + nineCardsFromServer.get(0).getCardName());
-        }
-        Image imageMove3 = new Image(urlMove3.toString());
-        hand3.setImage(imageMove3);
 
 
-        URL urlAgain = getClass().getResource("/programmingCards/again.png");
-        if (urlAgain == null) {
-            throw new IllegalArgumentException("File not found: /programmingCards/" + nineCardsFromServer.get(0).getCardName());
-        }
-        Image imageAgain = new Image(urlAgain.toString());
-        hand4.setImage(imageAgain);
-
-
-        URL urlBackUp = getClass().getResource("/programmingCards/backUp.png");
-        if (urlBackUp == null) {
-            throw new IllegalArgumentException("File not found: /programmingCards/" + nineCardsFromServer.get(0).getCardName());
-        }
-        Image imageBackUp = new Image(urlBackUp.toString());
-        hand5.setImage(imageBackUp);
-
-
-        URL urlTurnLeft = getClass().getResource("/programmingCards/turnLeft.png");
-        if (urlTurnLeft == null) {
-            throw new IllegalArgumentException("File not found: /programmingCards/" + nineCardsFromServer.get(0).getCardName());
-        }
-        Image imageBTurnLeft = new Image(urlTurnLeft.toString());
-        hand6.setImage(imageBTurnLeft);
-
-
-        URL urlTurnRight = getClass().getResource("/programmingCards/turnRight.png");
-        if (urlTurnRight == null) {
-            throw new IllegalArgumentException("File not found: /programmingCards/" + nineCardsFromServer.get(0).getCardName());
-        }
-        Image imageBTurnRight = new Image(urlTurnRight.toString());
-        hand7.setImage(imageBTurnRight);
-
-
-        URL urlUTurn = getClass().getResource("/programmingCards/uTurn.png");
-        if (urlUTurn == null) {
-            throw new IllegalArgumentException("File not found: /programmingCards/" + nineCardsFromServer.get(0).getCardName());
-        }
-        Image imageUTurn = new Image(urlUTurn.toString());
-        hand8.setImage(imageUTurn);
-
-
-        URL urlPowerUp = getClass().getResource("/programmingCards/powerUp.png");
-        if (urlPowerUp == null) {
-            throw new IllegalArgumentException("File not found: /programmingCards/" + nineCardsFromServer.get(0).getCardName());
-        }
-        Image imagePowerUp = new Image(urlPowerUp.toString());
-        hand9.setImage(imagePowerUp);
 
     }
 
