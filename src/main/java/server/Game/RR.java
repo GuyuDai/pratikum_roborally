@@ -1,28 +1,24 @@
 package server.Game;
 
-import com.google.gson.Gson;
 import java.util.concurrent.CopyOnWriteArrayList;
 import server.BoardElement.Antenna;
 import server.BoardElement.BoardElem;
 import server.BoardElement.CheckPoint;
 import server.BoardTypes.Board;
 //import server.BoardTypes.DizzyHighway;
-import server.CardTypes.Card;
 import server.Control.Controller;
 import server.Control.Position;
 //import server.Control.WrappedMessage;
-import server.Player.Player;
+import server.Player.GamePlayer;
 //import server.PlayerOnline;
-import protocol.ProtocolFormat.Message;
-import protocol.ProtocolFormat.Message;
 //import server.Control.WrappedMessage;
 import server.Player.Robot;
 
 public class RR extends Thread implements GameLogic {
   private Boolean isGoingOn;
   public Controller controller;
-  protected CopyOnWriteArrayList<Player> activePlayers;
-  protected Player playerInCurrentTurn;
+  protected CopyOnWriteArrayList<GamePlayer> activePlayers;
+  protected GamePlayer playerInCurrentTurn;
   protected Board gameBoard;
   protected GameState currentState;
 
@@ -68,7 +64,7 @@ public class RR extends Thread implements GameLogic {
     this.start();
   }
 
-  public Player getPlayerInCurrentTurn() {
+  public GamePlayer getPlayerInCurrentTurn() {
     return playerInCurrentTurn;
   }
 
@@ -77,7 +73,7 @@ public class RR extends Thread implements GameLogic {
     this.playerInCurrentTurn=activePlayers.get(ListPosition);
   }
 
-  public CopyOnWriteArrayList<Player> getActivePlayers() {
+  public CopyOnWriteArrayList<GamePlayer> getActivePlayers() {
     return activePlayers;
   }
 
@@ -148,7 +144,7 @@ public class RR extends Thread implements GameLogic {
     return isGoingOn;
   }
 
-  public boolean joinGame(Player player) {
+  public boolean joinGame(GamePlayer player) {
      player = controller.joinGameCheck(player);
     if (player == null) {
       return false;
@@ -182,9 +178,9 @@ public class RR extends Thread implements GameLogic {
 
   }
 
-  public boolean leaveGame(Player player) {
-    Player removePlayer = null;
-    for(Player playerInList : activePlayers){
+  public boolean leaveGame(GamePlayer player) {
+    GamePlayer removePlayer = null;
+    for(GamePlayer playerInList : activePlayers){
       if(playerInList.identifyPlayer(player.getName())){
         removePlayer = playerInList;
       }
@@ -202,17 +198,17 @@ public class RR extends Thread implements GameLogic {
   }
 
   public void setPriority(){
-    for(Player player : activePlayers){
+    for(GamePlayer player : activePlayers){
       player.setPriority(Math.abs(this.getPositionAntenna().getX() - player.getOwnRobot().getCurrentPosition().getX())
               + Math.abs(this.getPositionAntenna().getY() - player.getOwnRobot().getCurrentPosition().getY()));
     }
   }
 
   public void reorderPlayer(){
-    CopyOnWriteArrayList<Player> temp = new CopyOnWriteArrayList<Player>();
+    CopyOnWriteArrayList<GamePlayer> temp = new CopyOnWriteArrayList<GamePlayer>();
     while(activePlayers.size() > 0){
       int i = 1;
-      for(Player player : activePlayers){
+      for(GamePlayer player : activePlayers){
         if(player.getPriority() == i){
           temp.add(player);
           activePlayers.remove(player);
@@ -237,7 +233,7 @@ public class RR extends Thread implements GameLogic {
   }
 
   public void DoProgrammingPhase(){
-    for(Player player:activePlayers){
+    for(GamePlayer player:activePlayers){
       player.draw();
       player.showHands();
       String Card="";
@@ -257,7 +253,7 @@ public class RR extends Thread implements GameLogic {
 
   public void DoActivationPhase(){
     for(int i=0;i < 5;i++) {
-      for (Player player:activePlayers) {
+      for (GamePlayer player:activePlayers) {
         setPlayerInCurrentTurn(PlayerInListPosition);
         player.getRegister().get(i).action();
         Robot ownRobot=player.getOwnRobot();

@@ -1,6 +1,5 @@
 package server.Player;
 
-import com.google.gson.Gson;
 import java.util.Random;
 import server.CardTypes.Card;
 import server.Control.Direction;
@@ -20,7 +19,7 @@ public class Robot implements RobotAction {
 
   public RR currentGame;
 
-  public Player owner;
+  public GamePlayer owner;
   private Position startPosition;
 
   public Robot(String name){
@@ -84,7 +83,7 @@ public class Robot implements RobotAction {
     return lives;
   }
 
-  public Player getOwner() {
+  public GamePlayer getOwner() {
     return owner;
   }
 

@@ -15,6 +15,7 @@ import javafx.scene.layout.*;
 import server.CardTypes.*;
 import server.Deck.ProgrammingDeck;
 import transfer.Player;
+import transfer.PlayerOnline;
 import transfer.request.Message;
 import transfer.request.MessageTypes;
 import transfer.request.RequestType;

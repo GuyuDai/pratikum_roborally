@@ -1,11 +1,11 @@
 package server.Game;
 
 import java.util.concurrent.CopyOnWriteArrayList;
-import server.Player.Player;
+import server.Player.GamePlayer;
 
 public interface GameLogic {
 
-    Player getPlayerInCurrentTurn();
+    GamePlayer getPlayerInCurrentTurn();
 
-    CopyOnWriteArrayList<Player> getActivePlayers();
+    CopyOnWriteArrayList<GamePlayer> getActivePlayers();
 }

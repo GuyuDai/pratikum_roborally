@@ -1,14 +1,12 @@
 package client.gameWindow;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.image.Image;
 import server.CardTypes.Card;
-import server.Player.Player;
-import server.Deck.ProgrammingDeck;
+import server.Player.GamePlayer;
 
 import java.io.File;
 
@@ -27,7 +25,7 @@ public class HostHand extends GameViewModel{
     @Override
     public void initialize() {
         super.initialize();
-        new Player("AI");
+        new GamePlayer("AI");
         setHand();
     }
 

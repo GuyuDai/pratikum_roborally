@@ -1,12 +1,12 @@
 package server.CardTypes;
 
 import server.Game.RR;
-import server.Player.Player;
+import server.Player.GamePlayer;
 
 public abstract class Card {
   public String name;
   public RR currentGame;
-  private Player owner;
+  private GamePlayer owner;
 
   public Card(String name){
     this.name=name;
@@ -14,11 +14,11 @@ public abstract class Card {
 
   public abstract void action();
 
-  public Player getOwner() {
+  public GamePlayer getOwner() {
     return owner;
   }
 
-  public void setOwner(Player owner) {
+  public void setOwner(GamePlayer owner) {
     this.owner = owner;
   }
 

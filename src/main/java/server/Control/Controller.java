@@ -1,15 +1,12 @@
 package server.Control;
 
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.TimeUnit;
 
 import server.BoardElement.*;
 import server.CardTypes.Card;
 import server.Game.RR;
-import server.Player.Player;
+import server.Player.GamePlayer;
 import server.Player.Robot;
-import transfer.PlayerOnline;
-import protocol.*;
 
 
 /**
@@ -107,7 +104,7 @@ public class Controller {
    * @return true if the name is valid
    */
   public boolean setPlayerNameCheck(String name) {
-    for (Player player : currentGame.getActivePlayers()) {
+    for (GamePlayer player : currentGame.getActivePlayers()) {
       if (player.getName().equals(name)) {
         return false;
       }
@@ -130,7 +127,7 @@ public class Controller {
   }
 
   public void robotLaserController(Robot robot){
-    for(Player player:currentGame.getActivePlayers()){
+    for(GamePlayer player:currentGame.getActivePlayers()){
       Direction laserDirection=player.getOwnRobot().getFaceDirection();
       int X=player.getOwnRobot().getCurrentPosition().getX();
       int Y=player.getOwnRobot().getCurrentPosition().getY();
@@ -177,7 +174,7 @@ public class Controller {
   }
 
   public boolean robotOnPositionCheck(Position position) {
-    for (Player player:currentGame.getActivePlayers()){
+    for (GamePlayer player:currentGame.getActivePlayers()){
       if (player.getOwnRobot().getCurrentPosition().equals(position)){
         return true;
       }
@@ -188,7 +185,7 @@ public class Controller {
   }
 
   public boolean selectRobotCheck(String name){
-    for(Player player: currentGame.getActivePlayers()){
+    for(GamePlayer player: currentGame.getActivePlayers()){
       if(player.getOwnRobot().getName().equals(name)){
         return true;
       }
@@ -217,7 +214,7 @@ public class Controller {
    */
   public boolean robotDeadCheck(Robot robot){
     if(robot.getLives() - 1 == 0){
-      for(Player player : currentGame.getActivePlayers()){
+      for(GamePlayer player : currentGame.getActivePlayers()){
         if(player == robot.getOwner()){
           currentGame.getActivePlayers().remove(player);
           return false;
@@ -248,14 +245,14 @@ public class Controller {
    * @param player
    * @return if the player is valid, return playerOnline of this player, or null
 */
-  public Player joinGameCheck(Player player){
-    for(Player playerInList : currentGame.getActivePlayers()){
+  public GamePlayer joinGameCheck(GamePlayer player){
+    for(GamePlayer playerInList : currentGame.getActivePlayers()){
       if(playerInList.identifyPlayer(player.getName())){
         //currentGame.sendToPlayer(new ErrorMessage("you are already in the game"), player);
         return null;
       }
     }
-    for(Player playerInList :currentGame.getActivePlayers()){
+    for(GamePlayer playerInList :currentGame.getActivePlayers()){
       if(playerInList.identifyPlayer(player.getName())){
         return player;
       }
@@ -276,15 +273,15 @@ public class Controller {
    * check if a player's programming deck is empty. if true, shuffle
    * @param player
    */
-  public void drawCardCheck(Player player){
+  public void drawCardCheck(GamePlayer player){
     if(isCardListEmpty(player.getOwnDeck().getRemainingCards())){
       player.getOwnDeck().shuffle();
     }
   }
 
-  public Player getPlayerByName(String target){
-    Player result = null;
-    for(Player player : currentGame.getActivePlayers()){
+  public GamePlayer getPlayerByName(String target){
+    GamePlayer result = null;
+    for(GamePlayer player : currentGame.getActivePlayers()){
       if(target.equals(player.getName())){
         result = player;
       }
@@ -294,7 +291,7 @@ public class Controller {
 
   public Robot getRobotByName(String target){
     Robot result = null;
-    for(Player player : currentGame.getActivePlayers()){
+    for(GamePlayer player : currentGame.getActivePlayers()){
       if(target.equals(player.getOwnRobot().getName())){
         result = player.getOwnRobot();
       }
