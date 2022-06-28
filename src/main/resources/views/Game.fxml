@@ -18,18 +18,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1250.0" styleClass="backgroundColor" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
+<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1250.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
    <children>
-      <Pane layoutX="6.0" layoutY="3.0" prefHeight="795.0" prefWidth="305.0" stylesheets="@styles.css">
+      <Pane layoutX="6.0" layoutY="3.0" prefHeight="795.0" prefWidth="305.0" stylesheets="@../styles.css">
          <children>
             <ImageView fitHeight="795.0" fitWidth="305.0" layoutX="-1.0" layoutY="-1.0" opacity="0.2" pickOnBounds="true" preserveRatio="true" styleClass="radius">
                <image>
-                  <Image url="@bgImages/whiteBG.png" />
+                  <Image url="@../bgImages/whiteBG.png" />
                </image>
             </ImageView>
-            <HBox layoutX="-2.0" layoutY="1.0" prefHeight="28.0" prefWidth="306.0" styleClass="radius" stylesheets="@styles.css">
+            <HBox layoutX="-2.0" layoutY="1.0" prefHeight="28.0" prefWidth="306.0" styleClass="radius" stylesheets="@../styles.css">
                <children>
-                  <Button fx:id="chatBtn" mnemonicParsing="false" onAction="#chatBtnAction" prefHeight="31.0" prefWidth="114.0" stylesheets="@styles.css" text="OPEN CHAT">
+                  <Button fx:id="chatBtn" mnemonicParsing="false" onAction="#chatBtnAction" prefHeight="31.0" prefWidth="114.0" stylesheets="@../styles.css" text="OPEN CHAT">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -39,7 +39,7 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitGame" prefHeight="31.0" prefWidth="101.0" stylesheets="@styles.css" text="EXIT">
+                  <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitGame" prefHeight="31.0" prefWidth="101.0" stylesheets="@../styles.css" text="EXIT">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -64,12 +64,12 @@
                   </VBox>
                </children>
             </Pane>
-            <AnchorPane fx:id="upgradeShop" layoutX="-5.0" layoutY="505.0" opacity="0.5" prefHeight="292.0" prefWidth="309.0" styleClass="backgroundColor" stylesheets="@styles.css" visible="false">
+            <AnchorPane fx:id="upgradeShop" layoutX="-5.0" layoutY="505.0" opacity="0.5" prefHeight="292.0" prefWidth="309.0" styleClass="backgroundColor" stylesheets="@../styles.css" visible="false">
                <children>
                   <ImageView fx:id="playerBot41" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
-            <VBox layoutX="6.0" layoutY="597.0" prefHeight="188.0" prefWidth="82.0" styleClass="backgroundColor" stylesheets="@styles.css">
+            <VBox layoutX="6.0" layoutY="597.0" prefHeight="188.0" prefWidth="82.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <Button mnemonicParsing="false" prefHeight="139.0" prefWidth="82.0">
                      <graphic>
@@ -80,7 +80,7 @@
                   <Label prefHeight="43.0" prefWidth="82.0" text="      Label" textFill="WHITE" />
                </children>
             </VBox>
-            <VBox layoutX="208.0" layoutY="597.0" prefHeight="188.0" prefWidth="82.0" styleClass="backgroundColor" stylesheets="@styles.css">
+            <VBox layoutX="208.0" layoutY="597.0" prefHeight="188.0" prefWidth="82.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <Button mnemonicParsing="false" prefHeight="139.0" prefWidth="82.0">
                      <graphic>
@@ -91,7 +91,7 @@
                   <Label prefHeight="43.0" prefWidth="82.0" text="      Label" textFill="WHITE" />
                </children>
             </VBox>
-            <VBox layoutX="106.0" layoutY="597.0" prefHeight="188.0" prefWidth="82.0" styleClass="backgroundColor" stylesheets="@styles.css">
+            <VBox layoutX="106.0" layoutY="597.0" prefHeight="188.0" prefWidth="82.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <Button mnemonicParsing="false" prefHeight="139.0" prefWidth="82.0">
                      <graphic>
@@ -116,7 +116,7 @@
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="109.0" prefWidth="160.0" />
                   <ImageView fitHeight="109.0" fitWidth="273.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@RoboRallyHeader.jpg" />
+                        <Image url="@../RoboRallyHeader.jpg" />
                      </image>
                   </ImageView>
                </children>
@@ -125,7 +125,7 @@
                <children>
                   <ImageView fitHeight="428.0" fitWidth="557.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@bgImages/MapBG.jpg" />
+                        <Image url="@../bgImages/MapBG.jpg" />
                      </image>
                   </ImageView>
                   <GridPane fx:id="gameboard" gridLinesVisible="true" prefHeight="428.0" prefWidth="557.0">
@@ -199,30 +199,30 @@
          <children>
             <ImageView fitHeight="790.0" fitWidth="356.0" layoutX="1.0" layoutY="-2.0" opacity="0.16" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@bgImages/white2BG.png" />
+                  <Image url="@../bgImages/white2BG.png" />
                </image>
             </ImageView>
-            <AnchorPane fx:id="player1" layoutX="2.0" layoutY="9.0" opacity="0.5" prefHeight="88.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@styles.css">
+            <AnchorPane fx:id="player1" layoutX="2.0" layoutY="9.0" opacity="0.5" prefHeight="88.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <ImageView fx:id="playerBot1" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="player2" layoutX="2.0" layoutY="108.0" opacity="0.5" prefHeight="88.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@styles.css">
+            <AnchorPane fx:id="player2" layoutX="2.0" layoutY="108.0" opacity="0.5" prefHeight="88.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <ImageView fx:id="playerBot2" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="player3" layoutX="1.0" layoutY="207.0" opacity="0.5" prefHeight="88.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@styles.css">
+            <AnchorPane fx:id="player3" layoutX="1.0" layoutY="207.0" opacity="0.5" prefHeight="88.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <ImageView fx:id="playerBot3" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="player4" layoutX="2.0" layoutY="307.0" opacity="0.5" prefHeight="88.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@styles.css">
+            <AnchorPane fx:id="player4" layoutX="2.0" layoutY="307.0" opacity="0.5" prefHeight="88.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <ImageView fx:id="playerBot4" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="405.0" opacity="0.5" prefHeight="88.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@styles.css">
+            <AnchorPane layoutY="405.0" opacity="0.5" prefHeight="88.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <ImageView fx:id="playerBot5" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                </children>

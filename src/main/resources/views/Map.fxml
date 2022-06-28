@@ -7,13 +7,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="rootPaneMap" prefHeight="580.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.mapWindow.MapViewModel">
+<AnchorPane fx:id="rootPaneMap" prefHeight="580.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.mapWindow.MapViewModel">
    <children>
       <Button fx:id="map1Image" layoutX="90.0" layoutY="121.0" mnemonicParsing="false" onAction="#map1ImageAction">
          <graphic>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@dizzyHighwayMap.png" />
+                  <Image url="@../maps/DizzyHighway.png" />
                </image>
             </ImageView>
          </graphic>
@@ -22,7 +22,7 @@
          <graphic>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@dizzyHighwayMap.png" />
+                  <Image url="@../maps/DeathTrap.png" />
                </image>
             </ImageView>
          </graphic>
@@ -31,36 +31,36 @@
          <graphic>
             <ImageView fitHeight="150.0" fitWidth="204.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@dizzyHighwayMap.png" />
+                  <Image url="@../maps/ExtraCrispy.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
       <ImageView fitHeight="52.0" fitWidth="531.0" layoutX="93.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@selectMap.png" />
+            <Image url="@../buttonImages/selectMap.png" />
          </image>
       </ImageView>
-      <ToggleButton fx:id="map3Btn" layoutX="168.0" layoutY="513.0" mnemonicParsing="false" onAction="#select3" text="map #3" toggleGroup="$ToggleGroupMap">
+      <ToggleButton fx:id="map3Btn" layoutX="157.0" layoutY="513.0" mnemonicParsing="false" onAction="#select3" text="Extra Crispy" toggleGroup="$ToggleGroupMap">
          <toggleGroup>
             <ToggleGroup fx:id="ToggleGroupMap" />
          </toggleGroup></ToggleButton>
-      <ToggleButton fx:id="map2Btn" layoutX="474.0" layoutY="292.0" mnemonicParsing="false" onAction="#select2" text="map #2" toggleGroup="$ToggleGroupMap" />
+      <ToggleButton fx:id="map2Btn" layoutX="468.0" layoutY="292.0" mnemonicParsing="false" onAction="#select2" text="Death Trap" toggleGroup="$ToggleGroupMap" />
       <ToggleButton fx:id="DizzyHighwayBtn" layoutX="149.0" layoutY="292.0" mnemonicParsing="false" onAction="#selectDizzyHighway" text="Dizzy Highway" toggleGroup="$ToggleGroupMap" />
       <ImageView fitHeight="12.0" fitWidth="465.0" layoutX="144.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@enlargePictureText.png" />
+            <Image url="@../enlargePictureText.png" />
          </image>
       </ImageView>
       <Button fx:id="map4Image" layoutX="397.0" layoutY="344.0" mnemonicParsing="false" onAction="#map4ImageAction">
          <graphic>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@dizzyHighwayMap.png" />
+                  <Image url="@../maps/LostBearings.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <ToggleButton fx:id="map4Btn" layoutX="475.0" layoutY="513.0" mnemonicParsing="false" onAction="#select4" text="map #4" toggleGroup="$ToggleGroupMap" />
+      <ToggleButton fx:id="map4Btn" layoutX="464.0" layoutY="513.0" mnemonicParsing="false" onAction="#select4" text="Lost Bearings" toggleGroup="$ToggleGroupMap" />
    </children>
 </AnchorPane>

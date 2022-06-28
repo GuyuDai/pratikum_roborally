@@ -1,15 +1,14 @@
 package client.lobbyWindow;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 
 import client.Client;
-import client.ClientReceive;
 import com.google.gson.Gson;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
@@ -22,7 +21,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 import transfer.request.Message;
@@ -88,6 +86,7 @@ public class LobbyViewModel {
     private Button playButton;
     @FXML
     private Button newGameBtn;
+
 
 
     public void initialize() {
@@ -189,7 +188,7 @@ public class LobbyViewModel {
 
     public void openGameWindow(){
         try {
-            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Game.fxml"));
+            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/views/Game.fxml"));
             Parent rootGame = (Parent) fxmlLoaderGame.load();
             Stage stageGame = new Stage();
             stageGame.setTitle("Dizzy Highway");
@@ -202,7 +201,7 @@ public class LobbyViewModel {
 
     public void openMapWindow(){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Map.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Map.fxml"));
             Parent rootMap = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("Map Selection");

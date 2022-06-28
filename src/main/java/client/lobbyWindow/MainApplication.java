@@ -56,10 +56,10 @@ public class MainApplication extends Application {
         if (CREATE_VIEW_FROM_FXML) {
             switch(scene_number) {
                 case 0:
-                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Lobby.fxml")));
+                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Lobby.fxml")));
                     break;
                 case 1:
-                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Login.fxml")));
+                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/views/Login.fxml")));
                     break;
             }
         } else {
