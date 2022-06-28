@@ -10,6 +10,9 @@ public class Robot implements RobotAction {
 
   public String name;
   public int hp = 10;
+
+  private boolean taken;
+  public boolean isTaken(){return taken;}
   public Boolean isAlive;
   public int lives = 3;
 
@@ -21,7 +24,7 @@ public class Robot implements RobotAction {
 
   public Player owner;
   private Position startPosition;
-
+// TODO write a function to create a robot selection and set the player and identify that this robot is now taken
   public Robot(String name, RR currentGame) {
     this.name = name;
     this.currentGame = currentGame;

@@ -120,6 +120,7 @@ public class LobbyViewModel {
     /**
      * toggle button message for robot selection
      */
+    //TODO get Updated by the server by notify all robots.isTaken() and disable the button
     @FXML
     void RobotButton(ActionEvent event) {
         if(buttonHammer.isSelected()) {
@@ -159,6 +160,7 @@ public class LobbyViewModel {
         if(buttonHammer.isSelected()){
             message = "I SELECTED HAMMER BOT.";
             buttonHammer.setVisible(false);
+
         }
         else if (buttonHulk.isSelected()){
             message = "I SELECTED HULK X90 BOT.";
