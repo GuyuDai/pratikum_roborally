@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.image.Image;
 import server.CardTypes.Card;
-import server.Player.GamePlayer;
+import server.Player.Player;
 
 import java.io.File;
 
@@ -25,7 +25,7 @@ public class HostHand extends GameViewModel{
     @Override
     public void initialize() {
         super.initialize();
-        new GamePlayer("AI");
+        new Player("AI");
         setHand();
     }
 

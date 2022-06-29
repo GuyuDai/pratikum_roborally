@@ -19,7 +19,7 @@ public class Robot implements RobotAction {
 
   public RR currentGame;
 
-  public GamePlayer owner;
+  public Player owner;
   private Position startPosition;
 
   public Robot(String name){
@@ -83,7 +83,7 @@ public class Robot implements RobotAction {
     return lives;
   }
 
-  public GamePlayer getOwner() {
+  public Player getOwner() {
     return owner;
   }
 

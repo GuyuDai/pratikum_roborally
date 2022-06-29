@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.concurrent.*;
 
 
-public class GamePlayer implements PlayerAction{
+public class Player implements PlayerAction{
   public String name;
   private RR currentGame;
   private ProgrammingDeck ownDeck;
@@ -22,7 +22,7 @@ public class GamePlayer implements PlayerAction{
   private boolean isAI=false;
 
 
-  public GamePlayer(String name){
+  public Player(String name){
     this.name = name;
     this.energyCubes=5;
     this.ownDeck=new ProgrammingDeck();

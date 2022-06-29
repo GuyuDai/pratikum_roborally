@@ -1,22 +1,22 @@
 package transfer;
 
-import server.Player.GamePlayer;
+import server.Player.Player;
 
 import java.net.Socket;
 
 public class PlayerOnline {
     private Socket playerSocket;
-    private Player player;
+    private transfer.Player player;
 
-    private GamePlayer gamePlayer;
+    private Player gamePlayer;
 
-    public PlayerOnline(Socket playerSocket, Player player){
+    public PlayerOnline(Socket playerSocket, transfer.Player player){
         this.playerSocket = playerSocket;
         this.player = player;
-        this.gamePlayer=new GamePlayer(player.getName());
+        this.gamePlayer=new Player(player.getName());
     }
 
-    public Player getPlayer(){return player;}
+    public transfer.Player getPlayer(){return player;}
 
     public Socket getPlayerSocket(){return playerSocket;}
 
