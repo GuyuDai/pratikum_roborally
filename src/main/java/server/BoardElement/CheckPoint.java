@@ -12,8 +12,10 @@ import server.Game.RR;
  */
 
 public class CheckPoint extends BoardElem {
-  public CheckPoint (RR currentGame) {
+  public CheckPoint (RR currentGame, int number) {
+
     super("CheckPoint",currentGame);
+    this.count=number;
   }
 
   @Override
