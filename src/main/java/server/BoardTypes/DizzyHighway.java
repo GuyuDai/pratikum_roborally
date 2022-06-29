@@ -25,7 +25,7 @@ public class DizzyHighway extends Board {
         map[0][12][0] = new EnergySpace(currentGame, 2);
 
         map[1][0][0] = empty;
-        map[1][1][0]= empty;//map[1][1] = black white gear;
+        map[1][1][0]= new StartingPoint(currentGame);
         map[1][2][0] = empty;
         map[1][3][0] = empty;
         map[1][4][0] = new RotatingBelt(currentGame,2, Direction.LEFT, Direction.DOWN);
@@ -52,7 +52,7 @@ public class DizzyHighway extends Board {
         map[2][11][0] = new RotatingBelt(currentGame,2, Direction.LEFT, Direction.UP);
         map[2][12][0] = new ConveyBelt(currentGame,2,Direction.LEFT);
 
-        map[3][0][0]= empty; //map [3][0]= new black white gear;
+        map[3][0][0]= new StartingPoint(currentGame);
         map[3][1][0] = empty;
         map[3][2][0] = empty;
         map[3][3][0] = empty;
@@ -71,7 +71,7 @@ public class DizzyHighway extends Board {
         map[3][12][0] = empty;
 
         map[4][0][0] = new Antenna(currentGame);
-        map[4][1][0]= empty; //map [4][1]= new black white gear;
+        map[4][1][0]= new StartingPoint(currentGame);
         map[4][2][1]= new Wall(currentGame, Direction.RIGHT);
         map[4][3][0] = empty;
         map[4][4][0] = new ConveyBelt(currentGame,2, Direction.DOWN);
@@ -85,7 +85,7 @@ public class DizzyHighway extends Board {
         map[4][12][0] = empty;
 
         map[5][0][0] = empty;
-        map[5][1][0] = empty; //map [5][1]= new black white gear;
+        map[5][1][0] = new StartingPoint(currentGame);
         map[5][2][0]= new Wall(currentGame, Direction.RIGHT);;
         map[5][3][0] = empty;
         map[5][4][0] = new ConveyBelt(currentGame,2, Direction.DOWN);
@@ -99,7 +99,7 @@ public class DizzyHighway extends Board {
         map[5][11][0] = new ConveyBelt(currentGame,2, Direction.UP);
         map[5][12][0] = empty;
 
-        map[6][0][0] = empty; //map [6][0]= new black white gear;
+        map[6][0][0] = new StartingPoint(currentGame);
         map[6][1][0] = empty;
         map[6][2][0] = empty;
         map[6][3][0] = empty;
@@ -131,7 +131,7 @@ public class DizzyHighway extends Board {
         map[7][12][0] = empty;
 
         map[8][0][0] = empty;
-        map[8][1][0]= empty; //map [8][1]= new black white gear;
+        map[8][1][0]= new StartingPoint(currentGame);
         map[8][2][0] = empty;
         map[8][3][0] = new ConveyBelt(currentGame,2, Direction.RIGHT);
         map[8][4][0] = new RotatingBelt(currentGame,2, Direction.DOWN, Direction.RIGHT);

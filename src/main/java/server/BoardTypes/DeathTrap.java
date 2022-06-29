@@ -35,7 +35,7 @@ public abstract class DeathTrap extends Board {
         map[1][8][0] = new PushPanel(currentGame, 3,Direction.RIGHT);
         map[1][9][0] = new ConveyBelt(currentGame,1, Direction.UP);
         map[1][10][0] = empty;
-        map[1][11][0] = empty;//Blackwhitegear
+        map[1][11][0] = new StartingPoint(currentGame);
         map[1][12][0] = empty;
 
         map[2][0][0] = empty;
@@ -47,14 +47,14 @@ public abstract class DeathTrap extends Board {
         map[2][6][0] = new EnergySpace(currentGame,2);
         map[2][7][0] = new PushPanel(currentGame, 2,Direction.UP);
         map[2][8][0] = new CheckPoint(currentGame);
-        map[2][9][0] =
-                map[2][10][0] = empty;
+        map[2][9][0] = new ConveyBelt(currentGame, 1,Direction.UP);
+        map[2][10][0] = empty;
         map[2][11][0] = new Wall(currentGame, Direction.UP);
         map[2][12][0] = empty;
 
 
 
-        map[3][0][0]= empty; //map [3][0]= new black white gear;
+        map[3][0][0]= empty;
         map[3][1][0] = empty;
         map[3][2][0] = new EnergySpace(currentGame,2);
         map[3][3][0] = empty;
@@ -66,7 +66,7 @@ public abstract class DeathTrap extends Board {
         map[3][9][0]= new ConveyBelt(currentGame, 1,Direction.UP);
         map[3][10][0] = empty;
         map[3][11][0] = empty;
-        map[3][12][0] = empty;//Blackwhitegear
+        map[3][12][0] = new StartingPoint(currentGame);
 
         map[4][0][0] = empty;
         map[4][1][0]= new ConveyBelt(currentGame, 1,Direction.DOWN);
@@ -80,7 +80,7 @@ public abstract class DeathTrap extends Board {
         map[4][8][0] = new RotatingBelt(currentGame, 1, Direction.UP, Direction.RIGHT);
         map[4][9][0] = new RotatingBelt(currentGame, 1, Direction.RIGHT, Direction.UP);
         map[4][10][0] = new Wall(currentGame, Direction.LEFT);
-        map[4][11][0] = empty;
+        map[4][11][0] = new StartingPoint(currentGame);
         map[4][12][0] = empty;
 
         map[5][0][0] = new RotatingBelt(currentGame, 1, Direction.LEFT, Direction.DOWN);
@@ -94,7 +94,7 @@ public abstract class DeathTrap extends Board {
         map[5][8][0] = new ConveyBelt(currentGame, 1,Direction.UP);
         map[5][9][0] = empty;
         map[5][10][0] = new Wall(currentGame,Direction.LEFT);
-        map[5][11][0] = empty;//Startpoint
+        map[5][11][0] = new StartingPoint(currentGame);
         map[5][12][0] = new Antenna(currentGame);
 
         map[6][0][0] = new ConveyBelt(currentGame, 1,Direction.DOWN);
@@ -109,7 +109,7 @@ public abstract class DeathTrap extends Board {
         map[6][9][0] = empty;
         map[6][10][0] = empty;
         map[6][11][0] = empty;
-        map[6][12][0] = empty;//Startpoint
+        map[6][12][0] = new StartingPoint(currentGame);
 
         map[7][0][0] = new ConveyBelt(currentGame, 1,Direction.DOWN);
         map[7][1][0] = new CheckPoint(currentGame);
@@ -138,7 +138,7 @@ public abstract class DeathTrap extends Board {
         map[8][8][0] = new PushPanel(currentGame, 3, Direction.DOWN);
         map[8][9][0] = empty;
         map[8][10][0] = empty;
-        map[8][11][0] = empty;//Startingpoint
+        map[8][11][0] = new StartingPoint(currentGame);
         map[8][12][0] = empty;
 
         map[9][0][0] = empty;
