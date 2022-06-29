@@ -8,25 +8,24 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import server.CardTypes.*;
 import server.Deck.ProgrammingDeck;
-import server.Server;
 import transfer.Player;
 import transfer.request.Message;
 import transfer.request.MessageTypes;
 import transfer.request.RequestType;
 import transfer.request.RequestWrapper;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.logging.Level;
-import protocol.YourCards;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.Parent;
@@ -145,6 +144,10 @@ public class GameViewModel {
 
     URL urlPowerUp = getClass().getResource("/programmingCards/powerUp.png");
     Image imagePowerUp = new Image(urlPowerUp.toString());
+
+    URL urlCardHidden = getClass().getResource("/programmingCards/cardHidden.png");
+    Image imageCardHidden = new Image(urlCardHidden.toString());
+
 
 
 
@@ -282,10 +285,11 @@ public class GameViewModel {
 
     CopyOnWriteArrayList<Card> nineCardsFromServer = new CopyOnWriteArrayList<>();
     CopyOnWriteArrayList<Card> programmingDecK = deck.getRemainingCards();
-    ArrayList<Card> discardPile;
+    CopyOnWriteArrayList<Card> registerPile =new CopyOnWriteArrayList<>();
 
 
     public void printCards() {
+
         for (int i = 0; i < 9; i++) {
             nineCardsFromServer.add(programmingDecK.get(i));
         }
@@ -322,7 +326,7 @@ public class GameViewModel {
                     cardImage = imageUTurn;
                     break;
                 default:
-                    break;
+                    cardImage = imageCardHidden;
 
             }
             switch (i) {
@@ -354,76 +358,54 @@ public class GameViewModel {
                     hand9.setImage(cardImage);
                     break;
             }
+
+
+            for(Node dragCard: hand.getChildren()) {
+                dragCard.setOnDragDetected(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        Dragboard db = dragCard.startDragAndDrop(TransferMode.ANY);
+                        ClipboardContent content = new ClipboardContent();
+                        content.putImage(((ImageView)dragCard).getImage());
+                        db.setContent(content);
+                        mouseEvent.consume();
+                    }
+                });
+
+                dragCard.setOnDragOver(new EventHandler<DragEvent>() {
+                    @Override
+                    public void handle(DragEvent dragEvent) {
+                        if (dragEvent.getGestureSource()!= dragCard && dragEvent.getDragboard().hasImage()) {
+                            dragEvent.acceptTransferModes(TransferMode.MOVE);
+                        }
+                        dragEvent.consume();
+                    }
+                });
+
+                dragCard.setOnDragDropped(new EventHandler<DragEvent>() {
+                    @Override
+                    public void handle(DragEvent dragEvent) {
+                       if(((ImageView)dragCard).getImage() == null && register1.getImage() != imageAgain){
+
+                       }
+                    }
+                });
+
+            }
         }
-
-        hand.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                hand.getChildren().add(new ImageView());
-                Dragboard db = hand1.startDragAndDrop();
-                db = hand2.startDragAndDrop(TransferMode.ANY);
-                db = hand3.startDragAndDrop(TransferMode.ANY);
-                db = hand4.startDragAndDrop(TransferMode.ANY);
-                db = hand5.startDragAndDrop(TransferMode.ANY);
-                db = hand6.startDragAndDrop(TransferMode.ANY);
-                db = hand7.startDragAndDrop(TransferMode.ANY);
-                db = hand8.startDragAndDrop(TransferMode.ANY);
-                db = hand9.startDragAndDrop(TransferMode.ANY);
-
-                ClipboardContent content = new ClipboardContent();
-                content.putImage(hand1.getImage());
-                content.putImage(hand2.getImage());
-                content.putImage(hand3.getImage());
-                content.putImage(hand4.getImage());
-                content.putImage(hand5.getImage());
-                content.putImage(hand6.getImage());
-                content.putImage(hand7.getImage());
-                content.putImage(hand8.getImage());
-                content.putImage(hand9.getImage());
-
-                db.setContent(content);
-
-            }
-        });
-        hand.setOnDragDetected(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                Dragboard db = hand1.startDragAndDrop(TransferMode.ANY);
-                ClipboardContent content = new ClipboardContent();
-                content.putImage(hand1.getImage());
-                db.setContent(content);
-            }
-        });
-
     }
 
 
-    public void handle(DragEvent event) {
-        Dragboard db = event.getDragboard();
-        boolean success = false;
-        Node node = event.getPickResult().getIntersectedNode();
-        if(node != register.getChildren() && db.hasImage()){
-            Integer cIndex = GridPane.getColumnIndex(node);
-            Integer rIndex = GridPane.getRowIndex(node);
-            int x = cIndex == null ? 0 : cIndex;
-            int y = rIndex == null ? 0 : rIndex;
-            ImageView image = new ImageView(db.getImage());
 
-            register.add(image, x, y, 0,0);
-            register.add(image, x, y, 0,1);
-            register.add(image, x, y, 0,2);
-            register.add(image, x, y, 0,3);
-            register.add(image, x, y, 0,4);
 
-            success = true;
-        }
-        event.consume();
-    }
+
 
 
     public void showCardBtnAction() {
         printCards();
     }
+
+
 
 
 }
