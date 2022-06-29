@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -164,7 +165,7 @@
                   <ImageView fx:id="yourBot" fitHeight="71.0" fitWidth="73.0" layoutX="8.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
                   <TextArea layoutX="133.0" layoutY="8.0" prefHeight="68.0" prefWidth="294.0" />
                </children></AnchorPane>
-            <GridPane fx:id="register">
+            <GridPane fx:id="register" gridLinesVisible="true" opacity="0.2" stylesheets="@../styles.css">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="85.0" percentWidth="0.0" prefWidth="85.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="85.0" percentWidth="0.0" prefWidth="85.0" />
@@ -192,6 +193,10 @@
                <effect>
                   <Glow />
                </effect>
+               <styleClass>
+                  <String fx:value="backgroundColor" />
+                  <String fx:value="buttonColor" />
+               </styleClass>
             </GridPane>
          </children>
       </VBox>

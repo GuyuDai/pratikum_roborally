@@ -4,13 +4,14 @@ import client.Client;
 import client.lobbyWindow.LobbyViewModel;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import server.CardTypes.*;
 import server.Deck.ProgrammingDeck;
@@ -42,6 +43,7 @@ import javafx.scene.control.TextField;
 public class GameViewModel {
 
     private static GameModel model;
+    private Client client;
     private static GameViewModel instance;
     private Gson gson = new Gson();
     private static Player currentPlayer;
@@ -66,8 +68,7 @@ public class GameViewModel {
     @FXML
     private AnchorPane gameContainer;
 
-    @FXML
-    private TilePane dizzyHighway;
+
     @FXML
     private ImageView hand1;
     @FXML
@@ -86,6 +87,8 @@ public class GameViewModel {
     private ImageView hand8;
     @FXML
     private ImageView hand9;
+
+
     @FXML
     private ImageView register1;
     @FXML
@@ -100,14 +103,15 @@ public class GameViewModel {
     private GridPane register;
     @FXML
     private GridPane hand;
-    @FXML
-    private StackPane maps;
+
     @FXML
     private Button playCardBtn;
 
     public String window = "Game";
 
-    public ProgrammingDeck deck=new ProgrammingDeck();
+    public ProgrammingDeck deck = new ProgrammingDeck();
+
+
     URL move1 = getClass().getResource("/programmingCards/move1.png");
     Image imageMove1 = new Image(move1.toString());
 
@@ -144,7 +148,9 @@ public class GameViewModel {
 
 
 
-    public void initialize() {
+
+    public void initialize(Client client) {
+        this.client = client;
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
         hand.getChildren().add(new ImageView());
@@ -274,51 +280,52 @@ public class GameViewModel {
         LobbyViewModel.setWindowName("Lobby");
     }
 
-    CopyOnWriteArrayList<Card> nineCardsFromServer =new CopyOnWriteArrayList<>();
+    CopyOnWriteArrayList<Card> nineCardsFromServer = new CopyOnWriteArrayList<>();
     CopyOnWriteArrayList<Card> programmingDecK = deck.getRemainingCards();
     ArrayList<Card> discardPile;
+
 
     public void printCards() {
         for (int i = 0; i < 9; i++) {
             nineCardsFromServer.add(programmingDecK.get(i));
         }
-        for(int i=0; i<9 ;i ++) {
-            String card=nineCardsFromServer.get(i).getCardName();
-            Image cardImage=null;
+        for (int i = 0; i < 9; i++) {
+            String card = nineCardsFromServer.get(i).getCardName();
+            Image cardImage = null;
             cards[i] = card;
             switch (card) {
                 case "MoveOne":
-                  cardImage=imageMove1;
+                    cardImage = imageMove1;
                     break;
                 case "MoveTwo":
-                   cardImage=imageMove2;
+                    cardImage = imageMove2;
                     break;
                 case "MoveThree":
-                    cardImage=imageMove3;
+                    cardImage = imageMove3;
                     break;
                 case "Again":
-                    cardImage=imageAgain;
+                    cardImage = imageAgain;
                     break;
                 case "BackUp":
-                    cardImage=imageBackUp;
+                    cardImage = imageBackUp;
                     break;
                 case "PowerUp":
-                    cardImage=imagePowerUp;
+                    cardImage = imagePowerUp;
                     break;
                 case "TurnLeft":
-                    cardImage=imageBTurnLeft;
+                    cardImage = imageBTurnLeft;
                     break;
                 case "TurnRight":
-                    cardImage=imageBTurnRight;
+                    cardImage = imageBTurnRight;
                     break;
                 case "UTurn":
-                    cardImage=imageUTurn;
+                    cardImage = imageUTurn;
                     break;
                 default:
                     break;
 
             }
-            switch (i){
+            switch (i) {
                 case 0:
                     hand1.setImage(cardImage);
                     break;
@@ -349,12 +356,75 @@ public class GameViewModel {
             }
         }
 
+        hand.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                hand.getChildren().add(new ImageView());
+                Dragboard db = hand1.startDragAndDrop();
+                db = hand2.startDragAndDrop(TransferMode.ANY);
+                db = hand3.startDragAndDrop(TransferMode.ANY);
+                db = hand4.startDragAndDrop(TransferMode.ANY);
+                db = hand5.startDragAndDrop(TransferMode.ANY);
+                db = hand6.startDragAndDrop(TransferMode.ANY);
+                db = hand7.startDragAndDrop(TransferMode.ANY);
+                db = hand8.startDragAndDrop(TransferMode.ANY);
+                db = hand9.startDragAndDrop(TransferMode.ANY);
+
+                ClipboardContent content = new ClipboardContent();
+                content.putImage(hand1.getImage());
+                content.putImage(hand2.getImage());
+                content.putImage(hand3.getImage());
+                content.putImage(hand4.getImage());
+                content.putImage(hand5.getImage());
+                content.putImage(hand6.getImage());
+                content.putImage(hand7.getImage());
+                content.putImage(hand8.getImage());
+                content.putImage(hand9.getImage());
+
+                db.setContent(content);
+
+            }
+        });
+        hand.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Dragboard db = hand1.startDragAndDrop(TransferMode.ANY);
+                ClipboardContent content = new ClipboardContent();
+                content.putImage(hand1.getImage());
+                db.setContent(content);
+            }
+        });
+
     }
+
+
+    public void handle(DragEvent event) {
+        Dragboard db = event.getDragboard();
+        boolean success = false;
+        Node node = event.getPickResult().getIntersectedNode();
+        if(node != register.getChildren() && db.hasImage()){
+            Integer cIndex = GridPane.getColumnIndex(node);
+            Integer rIndex = GridPane.getRowIndex(node);
+            int x = cIndex == null ? 0 : cIndex;
+            int y = rIndex == null ? 0 : rIndex;
+            ImageView image = new ImageView(db.getImage());
+
+            register.add(image, x, y, 0,0);
+            register.add(image, x, y, 0,1);
+            register.add(image, x, y, 0,2);
+            register.add(image, x, y, 0,3);
+            register.add(image, x, y, 0,4);
+
+            success = true;
+        }
+        event.consume();
+    }
+
 
     public void showCardBtnAction() {
         printCards();
-        Server.logger.log(Level.INFO, new YourCards(cards).toString());
     }
 
 
 }
+

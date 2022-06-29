@@ -129,7 +129,15 @@ public class MapBuilder {
 
 
     URL wallLaser3 = getClass().getResource("Laser/WallLaser3.png");
-    Image imagewallLaser3 = new Image(wallLaser1.toString());
+    Image imagewallLaser3 = new Image(wallLaser3.toString());
+
+    URL antenna = getClass().getResource("/antenna");
+    Image imageAntenna = new Image(antenna.toString());
+
+
+
+
+
 
 
 
