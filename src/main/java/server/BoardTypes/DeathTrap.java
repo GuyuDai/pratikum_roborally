@@ -24,7 +24,7 @@ public abstract class DeathTrap extends Board {
         map[0][11][0] = empty;
         map[0][12][0] = empty;
 
-        map[1][0][0] = new CheckPoint(currentGame);
+        map[1][0][0] = new CheckPoint(currentGame,1);
         map[1][1][0]= new PushPanel(currentGame, 3,Direction.UP);
         map[1][2][0] = empty;
         map[1][3][0] = new Wall(currentGame, Direction.DOWN);
@@ -46,7 +46,7 @@ public abstract class DeathTrap extends Board {
         map[2][5][0] = empty;
         map[2][6][0] = new EnergySpace(currentGame,2);
         map[2][7][0] = new PushPanel(currentGame, 2,Direction.UP);
-        map[2][8][0] = new CheckPoint(currentGame);
+        map[2][8][0] = new CheckPoint(currentGame,1);
         map[2][9][0] = new ConveyBelt(currentGame, 1,Direction.UP);
         map[2][10][0] = empty;
         map[2][11][0] = new Wall(currentGame, Direction.UP);
@@ -72,7 +72,7 @@ public abstract class DeathTrap extends Board {
         map[4][1][0]= new ConveyBelt(currentGame, 1,Direction.DOWN);
         map[4][2][0]= empty;
         map[4][3][0] = new Pit(currentGame);
-        map[4][3][1] = new CheckPoint(currentGame);
+        map[4][3][1] = new CheckPoint(currentGame,1);
         map[4][4][0] = empty;
         map[4][5][0] = new PushPanel(currentGame, 3,Direction.UP);
         map[4][6][0]= empty;
@@ -112,7 +112,7 @@ public abstract class DeathTrap extends Board {
         map[6][12][0] = new StartingPoint(currentGame);
 
         map[7][0][0] = new ConveyBelt(currentGame, 1,Direction.DOWN);
-        map[7][1][0] = new CheckPoint(currentGame);
+        map[7][1][0] = new CheckPoint(currentGame,1);
         map[7][2][0] = new PushPanel(currentGame, 2,Direction.DOWN);
         map[7][3][0] = new EnergySpace(currentGame, 2);
         map[7][4][0] = empty;
@@ -134,7 +134,7 @@ public abstract class DeathTrap extends Board {
         map[8][4][0] = new ConveyBelt(currentGame,1, Direction.RIGHT);
         map[8][5][0] = new RotatingBelt(currentGame, 1, Direction.RIGHT, Direction.DOWN);
         map[8][6][0] = new Wall(currentGame, Direction.UP);
-        map[8][7][0] = new CheckPoint(currentGame);
+        map[8][7][0] = new CheckPoint(currentGame,1);
         map[8][8][0] = new PushPanel(currentGame, 3, Direction.DOWN);
         map[8][9][0] = empty;
         map[8][10][0] = empty;

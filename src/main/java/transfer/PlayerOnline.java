@@ -1,10 +1,12 @@
 package transfer;
 
 import server.Player.Player;
+import server.ServerThread;
 
 import java.net.Socket;
 
 public class PlayerOnline {
+    private ServerThread serverThread;
     private Socket playerSocket;
     private transfer.Player player;
 
@@ -20,6 +22,13 @@ public class PlayerOnline {
 
     public Socket getPlayerSocket(){return playerSocket;}
 
+    public Player getGamePlayer() {
+        return gamePlayer;
+    }
+
+    public ServerThread getServerThread() {
+        return serverThread;
+    }
     /**
      public boolean identifyPlayer(String name){
      return player.getName().contentEquals(name);

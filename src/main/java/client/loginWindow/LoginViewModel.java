@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import server.ServerThread;
+import transfer.PlayerOnline;
 import transfer.request.PlayerInitialisation;
 import transfer.request.RequestType;
 import transfer.request.RequestWrapper;
@@ -29,6 +31,8 @@ public class LoginViewModel {
     private Button sendNameButton;
 
     private LoginModel model;
+
+
 
     public LoginModel getModel() {
         return model;

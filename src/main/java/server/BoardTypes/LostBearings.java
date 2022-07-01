@@ -46,7 +46,7 @@ public class LostBearings extends Board {
         map[2][5][0] = new EnergySpace(currentGame, 2);
         map[2][6][0] = new Pit(currentGame);
         map[2][7][0] = empty;
-        map[2][8][0] = new CheckPoint(currentGame);
+        map[2][8][0] = new CheckPoint(currentGame,1);
         map[2][9][0] = new Pit(currentGame);;
         map[2][10][0] = new EnergySpace(currentGame, 2);;
         map[2][11][0] = empty;
@@ -79,14 +79,14 @@ public class LostBearings extends Board {
         map[4][8][0] = new Gear(currentGame, "turnLeft");
         map[4][9][0] = empty;
         map[4][10][0] = new Gear(currentGame, "turnRight");
-        map[4][11][0] = new CheckPoint(currentGame);;
+        map[4][11][0] = new CheckPoint(currentGame,2);;
         map[4][12][0] = empty;
 
         map[5][0][0] = empty;
         map[5][1][0] = new StartingPoint(currentGame);
         map[5][2][0]= new Wall(currentGame, Direction.RIGHT);;
         map[5][3][0] = empty;
-        map[5][4][0] = new CheckPoint(currentGame);;
+        map[5][4][0] = new CheckPoint(currentGame,3);;
         map[5][5][0] = new Gear(currentGame, "turnRight");;
         map[5][6][0] = empty;
         map[5][7][0] = new Gear(currentGame, "turnRight");;
@@ -120,7 +120,7 @@ public class LostBearings extends Board {
         map[7][5][0] = new EnergySpace(currentGame, 2);
         map[7][6][0] = new Pit(currentGame);
         map[7][7][0] = empty;
-        map[7][8][0] = new CheckPoint(currentGame);
+        map[7][8][0] = new CheckPoint(currentGame,4);
         map[7][9][0] = new Pit(currentGame);
         map[7][10][0] = new EnergySpace(currentGame, 2);
         map[7][11][0] = empty;

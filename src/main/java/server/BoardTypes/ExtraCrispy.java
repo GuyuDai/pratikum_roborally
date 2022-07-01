@@ -45,14 +45,14 @@ public abstract class ExtraCrispy extends Board {
         map[2][2][0] = empty;
         map[2][3][0] = empty;
         map[2][4][0] = new ConveyBelt(currentGame,2, Direction.DOWN);
-        map[2][5][0] = new CheckPoint(currentGame);
+        map[2][5][0] = new CheckPoint(currentGame,1);
         map[2][5][1] = new Wall(currentGame, Direction.UP);
         map[2][5][2] = new Laser(currentGame, 1,Direction.DOWN);
         map[2][6][0] = new Pit(currentGame);
         map[2][7][0] = empty;
         map[2][8][0] = empty;
         map[2][9][0] = new Pit(currentGame);
-        map[2][10][0] = new CheckPoint(currentGame);
+        map[2][10][0] = new CheckPoint(currentGame,1);
         map[2][11][0] = new ConveyBelt(currentGame,2, Direction.DOWN);
         map[2][12][0] = empty;
 
@@ -126,14 +126,14 @@ public abstract class ExtraCrispy extends Board {
         map[7][2][0] = empty;
         map[7][3][0] = empty;
         map[7][4][0] = new ConveyBelt(currentGame,2, Direction.UP);
-        map[7][5][0] = new CheckPoint(currentGame);
+        map[7][5][0] = new CheckPoint(currentGame,1);
         map[7][5][1]= new Wall(currentGame,Direction.DOWN);
         map[7][5][2]= new Laser(currentGame, 1, Direction.DOWN);
         map[7][6][0] = new Pit(currentGame);
         map[7][7][0] = empty;
         map[7][8][0] = empty;
         map[7][9][0] = new Pit(currentGame);
-        map[7][10][0] = new CheckPoint(currentGame);
+        map[7][10][0] = new CheckPoint(currentGame,1);
         map[7][10][1]= new Wall(currentGame,Direction.DOWN);
         map[7][10][2]= new Laser(currentGame, 1, Direction.DOWN);
         map[7][11][0] = new ConveyBelt(currentGame,2, Direction.UP);
