@@ -12,8 +12,16 @@ import protocol.ProtocolFormat.MessageType;
 
 public class Reboot extends Message {
 
-    private class RebootBody extends MessageBody {
+    public class RebootBody extends MessageBody {
         protected int clientID;
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
     }
 
     public Reboot (int clientID){

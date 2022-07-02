@@ -10,7 +10,7 @@ import protocol.ProtocolFormat.MessageType;
 
 public class TimerStarted extends Message {
 
-    private class TimerStartedBody extends MessageBody {
+    public class TimerStartedBody extends MessageBody {
     }
     public TimerStarted () {
         this.messageType = MessageType.timerStarted;

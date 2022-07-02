@@ -130,8 +130,6 @@ public class Server implements Runnable{
                         }
                     default: // TODO: 2022/6/28 implement handling for other protocols
                         sendMessageToAll(value);
-                        // TODO: 2022/6/28 change all the inner classed in each protocol class to public
-                        // TODO: 2022/6/28 create getter for all the attributions in each inner class
                 }
             } );
         }

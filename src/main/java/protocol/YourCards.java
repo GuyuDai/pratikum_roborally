@@ -11,8 +11,16 @@ import protocol.ProtocolFormat.MessageType;
 
 public class YourCards extends Message {
 
-    private class YourCardsBody extends MessageBody {
+    public class YourCardsBody extends MessageBody {
         protected String[] cardsInHand;
+
+        public String[] getCardsInHand() {
+            return cardsInHand;
+        }
+
+        public void setCardsInHand(String[] cardsInHand) {
+            this.cardsInHand = cardsInHand;
+        }
     }
     public YourCards (String[] cardsInHand) {
         this.messageType = MessageType.yourCards;
