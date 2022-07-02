@@ -4,8 +4,10 @@ import java.io.*;
 import java.net.Socket;
 import com.google.gson.Gson;
 import javafx.application.Platform;
+import protocol.ProtocolFormat.Message;
+import protocol.ProtocolFormat.MessageType;
 import protocol.SendChat;
-import transfer.request.RequestWrapper;
+import protocol.*;
 
 
 public class ClientReceive extends Thread{
@@ -30,34 +32,21 @@ public class ClientReceive extends Thread{
     public void run() {
         try {
             while (!socket.isClosed()) {
-                String wrappedAnswer = readInput.readLine();
-                RequestWrapper wrappedRequest = new Gson().fromJson(wrappedAnswer, RequestWrapper.class);
-                identifyRequest(wrappedRequest);
+                String serverMessage = readInput.readLine();
+                Message message = new Gson().fromJson(serverMessage, Message.class);
+                identifyMessage(message);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void identifyRequest(RequestWrapper wrappedRequest) {
-        switch (wrappedRequest.getCurrentRequest()){
-            case PLAYER_INITIALISATION:
-                wrappedRequest.getPlayerInitialisation().handleRequest(socket);
-                break;
-            case MESSAGE:
-                wrappedRequest.getMessage().handleRequest(socket);
-                break;
-            case ACCEPT_PLAYER:
-                wrappedRequest.getAcceptPlayer().handleRequest(socket);
-                break;
-            case CLOSE:
-                try {
-                    socket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                Platform.exit();
-                break;
+    private void identifyMessage(Message message) {
+        String messageType=message.getMessageType();
+        switch (messageType){
+            case MessageType.helloClient:
+            case MessageType.welcome:
+            case MessageType.playerAdded:
         }
     }
 

@@ -112,8 +112,8 @@ randomize chosing cards and putting it into register
     else return false;
    }
 
-   public void setAI(){
-     this.isAI=true;
+   public void setAI(boolean AI){
+     this.isAI=AI;
    }
    public boolean getAI(){
     return isAI;

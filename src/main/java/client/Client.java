@@ -32,7 +32,6 @@ public class Client {
             Socket client = new Socket(SERVER_IP, SERVER_PORT);
             //Start thread for receiving message from server.
             clientReceive = new ClientReceive(client);
-            Server.logger.log(Level.INFO, new Welcome(42).toString());
             clientReceive.start();
         } catch (IOException e) {
             e.printStackTrace();

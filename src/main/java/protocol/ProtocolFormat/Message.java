@@ -19,4 +19,12 @@ public abstract class Message{
         }
         return result;
     }
+
+    public String getMessageType() {
+        return messageType;
+    }
+
+    public AbstractMessageBody getMessageBody() {
+        return messageBody;
+    }
 }
