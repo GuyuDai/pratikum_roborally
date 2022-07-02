@@ -1,22 +1,25 @@
 package client.loginWindow;
 
-import client.Client;
-import com.google.gson.Gson;
+
+import com.google.gson.GsonBuilder;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import transfer.request.PlayerInitialisation;
-import transfer.request.RequestType;
-import transfer.RequestWrapper;
+import javafx.stage.Stage;
 
-/**
- * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
- */
 
 public class LoginViewModel {
+
+    public static String window = "Login";
 
     private static LoginViewModel instance;
     @FXML
@@ -24,13 +27,29 @@ public class LoginViewModel {
     @FXML
     private TextField nameInput;
     @FXML
-    private Text text;
-    @FXML
     private Button sendNameButton;
 
+
+    /**
+     * Toggle Buttons Robots
+     */
+    @FXML
+    private ToggleGroup ToggleGroupRobot;
+    @FXML
+    private ToggleButton buttonHammer;
+    @FXML
+    private ToggleButton buttonHulk;
+    @FXML
+    private ToggleButton buttonSpin;
+    @FXML
+    private ToggleButton buttonSquash;
+    @FXML
+    private ToggleButton buttonTwitch;
+    @FXML
+    private ToggleButton buttonTwonkey;
+
+
     private LoginModel model;
-
-
 
     public LoginModel getModel() {
         return model;
@@ -40,33 +59,87 @@ public class LoginViewModel {
         model = LoginModel.getInstance();
     }
 
+    /**
+     * can only press OK button when both a robot is selected and a name inserted
+     */
     public void initialize() {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setPrettyPrinting();
         nameInput.textProperty().bindBidirectional(model.getTextFieldContent());
-        sendNameButton.disableProperty().bind(nameInput.textProperty().isEmpty());
+        sendNameButton.disableProperty().bind(nameInput.textProperty().isEmpty().or (Bindings.isNull(ToggleGroupRobot.selectedToggleProperty())));
+
     }
 
-    public void setNodeElements(AnchorPane container, TextField nameInput, Text text, Button sendNameButton) {
-        this.container = container;
-        this.nameInput = nameInput;
-        this.text = text;
-        this.sendNameButton = sendNameButton;
+    /**
+     * function when robot is selected
+     */
+    public void selectBot(ActionEvent actionEvent){
+        //String message = "";
+        if(buttonHammer.isSelected()){
+        }
+        else if (buttonHulk.isSelected()){
+        }
+        else if (buttonSpin.isSelected()){
+        }
+        else if (buttonSquash.isSelected()){
+        }
+        else if (buttonTwonkey.isSelected()){
+        }
+        else if (buttonTwitch.isSelected()){
+        }
     }
+
+    public void initPlayer(ActionEvent actionEvent) {
+        String name = model.getTextFieldContent().get();
+        //Client.getPlayerOnline().setPlayer(name);
+        nameInput.getText();
+
+        openLobbyWindow();
+
+        //Client.getPlayerOnline().sendToAll("SERVER: " + name + " has entered the chat!");
+
+        //TODO: only for first client
+        openMapWindow();
+
+        Stage stage = (Stage) sendNameButton.getScene().getWindow();
+        stage.close();
+        setWindowName("Lobby");
+    }
+
+    public void openLobbyWindow(){
+        try {
+            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/views/Lobby.fxml"));
+            Parent rootGame = (Parent) fxmlLoaderGame.load();
+            Stage stageGame = new Stage();
+            stageGame.setTitle("Lobby");
+            stageGame.setScene(new Scene(rootGame));
+            stageGame.show();
+        } catch (Exception e){
+        }
+    }
+
+    public void openMapWindow(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Map.fxml"));
+            Parent rootMap = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Map Selection");
+            stage.setScene(new Scene(rootMap));
+            stage.show();
+        } catch (Exception e){
+        }
+    }
+
 
     public static LoginViewModel getInstance() {
         return instance;
     }
 
-    @FXML
-    /*
-     * Function of the "set name" button in the NameSetter Window
-     */
-    public void sendNameButtonAction(ActionEvent actionEvent) throws Exception {
-        String name = model.getTextFieldContent().get();
-        String sendMessage = new Gson().toJson(new RequestWrapper(new PlayerInitialisation(name), RequestType.PLAYER_INITIALISATION));
-        Client.getClientReceive().getWriteOutput().write(sendMessage);
-        Client.getClientReceive().getWriteOutput().newLine();
-        Client.getClientReceive().getWriteOutput().flush();
-        model.getTextFieldContent().set("");
+    public static void setWindowName (String name){
+        window = name;
+    }
+
+    public static String getWindowName(){
+        return window;
     }
 }
-

@@ -16,6 +16,30 @@ import client.Client;
 
 public class MainApplication extends Application {
 
+
+    @Override
+    public void start(Stage primaryStage) throws IOException {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Lobby.fxml"));
+            Parent rootMap = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Map Selection");
+            stage.setScene(new Scene(rootMap));
+            stage.show();
+        } catch (Exception e) {
+        }
+
+    }
+
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
+
+    /*
+
     private static final boolean CREATE_VIEW_FROM_FXML = true;
 
     public static Stage window;
@@ -70,4 +94,5 @@ public class MainApplication extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-}
+    }
+     */
