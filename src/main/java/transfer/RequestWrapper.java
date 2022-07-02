@@ -1,8 +1,9 @@
-package transfer.request;
+package transfer;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import transfer.Player;
+import transfer.request.*;
 
 /**
  *

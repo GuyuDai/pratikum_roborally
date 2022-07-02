@@ -16,15 +16,13 @@ import javafx.scene.layout.*;
 import server.CardTypes.*;
 import server.Deck.ProgrammingDeck;
 import transfer.Player;
-import transfer.PlayerOnline;
 import transfer.request.Message;
 import transfer.request.MessageTypes;
 import transfer.request.RequestType;
-import transfer.request.RequestWrapper;
+import transfer.RequestWrapper;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javafx.scene.layout.AnchorPane;

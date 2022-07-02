@@ -8,11 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import server.ServerThread;
-import transfer.PlayerOnline;
 import transfer.request.PlayerInitialisation;
 import transfer.request.RequestType;
-import transfer.request.RequestWrapper;
+import transfer.RequestWrapper;
 
 /**
  * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba

@@ -4,15 +4,13 @@ import client.gameWindow.GameViewModel;
 import client.lobbyWindow.LobbyViewModel;
 import com.google.gson.Gson;
 import javafx.application.Platform;
-import protocol.HelloClient;
 import protocol.ReceivedChat;
 import protocol.SendChat;
-import protocol.Welcome;
 import server.Server;
 import server.ServerThread;
-import transfer.Game;
 import transfer.PlayerOnline;
-import client.loginWindow.LoginViewModel;
+import transfer.RequestWrapper;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
