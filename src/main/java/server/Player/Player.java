@@ -91,19 +91,6 @@ public class Player implements PlayerAction{
 
   }
 
-  /*select AICard for Programming phase
-randomize chosing cards and putting it into register
-*/
-  public void programmingPhaseAI(){
-    // draw from pile 9 cards automatically
-    draw();
-    //Choose the first five cards and put in your register
-    register.add(getHands().get(0));
-    register.add(getHands().get(1));
-    register.add(getHands().get(2));
-    register.add(getHands().get(3));
-    register.add(getHands().get(4));
-  }
 
   public boolean identifyPlayer(String playerName){
     if(playerName.equals(this.getName())) {
@@ -171,7 +158,22 @@ randomize chosing cards and putting it into register
       }
     }
   }
+  /*select AICard for Programming phase
+randomize chosing cards and putting it into register
+*/
+  public void programmingPhaseAI(){
+    // draw from pile 9 cards automatically
+    draw();
+    //Choose the first five cards and put in your register
+    register.add(getHands().get(0));
+    register.add(getHands().get(1));
+    register.add(getHands().get(2));
+    register.add(getHands().get(3));
+    register.add(getHands().get(4));
+  }
+  public void upgradePhaseAI(){
 
+  }
 
 
 }
