@@ -48,10 +48,10 @@ public class AcceptPlayer {
      */
     private void handleAcceptedPlayer(){
         if(LobbyViewModel.getWindowName() == "Lobby") {
-            LobbyViewModel.setCurrentPlayer(this.getAcceptedPlayer());
-            GameViewModel.setCurrentPlayer(this.getAcceptedPlayer());
-            LobbyViewModel.show(this.getMessage());
-            Platform.runLater(() -> {MainApplication.window.setScene(MainApplication.getScene(0));});
+            //LobbyViewModel.setCurrentPlayer(this.getAcceptedPlayer());
+            //GameViewModel.setCurrentPlayer(this.getAcceptedPlayer());
+            //LobbyViewModel.show(this.getMessage());
+           // Platform.runLater(() -> {MainApplication.window.setScene(MainApplication.getScene(0));});
         }
         else {
             GameViewModel.show(this.getMessage());
