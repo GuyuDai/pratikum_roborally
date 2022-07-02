@@ -9,12 +9,12 @@ import com.google.gson.Gson;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 import server.Player.Player;
-import transfer.PlayerOnline;
+
 import protocol.PlayerValues;
 
 
 public class ServerThread implements Runnable {
-    private static List<PlayerOnline> playersOnline = new ArrayList();
+    //private static List<PlayerOnline> playersOnline = new ArrayList();
     private static final String PROTOCOL = "Version 1.0";
     private Socket clientSocket;
     private BufferedReader readInput;
@@ -127,14 +127,14 @@ public class ServerThread implements Runnable {
                 phase=message.getMessageBody().getPhase();
                 break;
             case MessageType.animation:
-                type=message.getMessageBody().getType();
+                //type=message.getMessageBody().get();
                 break;
             case MessageType.cardPlayed:
-                clientID=message.getMessageBody().getClientID();
+                clientID=message.getMessageBody().getId();
                 card=message.getMessageBody().getCard();
                 break;
             case MessageType.cardSelected:
-                clientID=message.getMessageBody().getClientID();
+                clientID=message.getMessageBody().getId();
                 register=message.getMessageBody().getRegister();
                 break;
 
@@ -166,8 +166,8 @@ public class ServerThread implements Runnable {
             case MessageType.selectCard:
             case MessageType.selectedDamage:
             case MessageType.setStartingPoint:
-                x=message.getMessageBody().getX();
-                y=message.getMessageBody().getY();
+                //x=message.getMessageBody().getX();
+                //y=message.getMessageBody().getY();
                 break;
 
 
@@ -181,9 +181,7 @@ public class ServerThread implements Runnable {
 
     public Socket getClientSocket() {return clientSocket;}
 
-    public static List<PlayerOnline> getPlayersOnline() {
-        return playersOnline;
-    }
+
 
 
      public static boolean createGame(){

@@ -27,6 +27,7 @@ public class ClientReceive extends Thread{
             writeOutput = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             Message helloServer = new HelloServer("SEP OO",false,PROTOCOL,9);
             String helloServerString= helloServer.toString();
+            System.out.println(helloServerString);
             writeOutput.write(helloServerString);
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -12,8 +12,9 @@ public abstract class Message{
     public String toString(){
         String result="";
         GsonBuilder gsonBuilder =new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(Message.class,new MessageAdapter());
         Gson gson=gsonBuilder.create();
-            result = gson.toJson(messageBody);
+            result = gson.toJson(this);
       return result;
     }
 
