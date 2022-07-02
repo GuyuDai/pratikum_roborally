@@ -25,4 +25,15 @@ public class CurrentCards {
         this.messageBody = messageBody;
 
     }
+    public String getMessageType() {
+        return messageType;
+    }
+
+    public MessageBody getMessageBody() {
+        return messageBody;
+    }
+
+    public void setMessageBody(MessageBody messageBody) {
+        this.messageBody = messageBody;
+    }
 }
