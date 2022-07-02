@@ -10,11 +10,15 @@ public abstract class Message{
 
     @Override
     public String toString(){
-        String result="";
-        GsonBuilder gsonBuilder =new GsonBuilder();
-        Gson gson=gsonBuilder.create();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String result = "";
+        if(messageType.equals("ClientMessage")){
             result = gson.toJson(messageBody);
-      return result;
+        }else{
+            result = gson.toJson(this);
+        }
+        return result;
+
     }
 
     public String getMessageType() {

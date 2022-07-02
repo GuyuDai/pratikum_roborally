@@ -107,10 +107,10 @@ public class ServerThread implements Runnable {
         this. clientSocket = clientSocket;
         try {
             readInput = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            writeOutput =new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+            writeOutput = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
             Message helloClient = new HelloClient(PROTOCOL);
             String HelloClient = helloClient.toString();
-            writeOutput.println(HelloClient);
+            writeOutput.write(HelloClient);
         } catch (IOException e) {
             e.printStackTrace();
         }
