@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -12,7 +12,7 @@ import protocol.ProtocolFormat.MessageType;
 
 public class Reboot extends Message {
 
-    private class RebootBody extends AbstractMessageBody{
+    private class RebootBody extends MessageBody {
         protected int clientID;
     }
 

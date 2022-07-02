@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -10,7 +10,7 @@ import protocol.ProtocolFormat.MessageType;
 
 public class DrawDamage extends Message {
 
-    private class DrawDamageBody extends AbstractMessageBody{
+    private class DrawDamageBody extends MessageBody {
         protected int clientID;
         protected String[] cards;
     }

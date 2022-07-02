@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -13,7 +13,7 @@ import protocol.ProtocolFormat.MessageType;
 
 public class PickDamage extends Message {
 
-    private class PickDamageBody extends AbstractMessageBody{
+    private class PickDamageBody extends MessageBody {
         protected int count;
         protected String[] availablePiles;
     }

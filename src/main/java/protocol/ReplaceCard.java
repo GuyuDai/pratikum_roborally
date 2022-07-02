@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -10,7 +10,7 @@ import protocol.ProtocolFormat.MessageType;
 
 public class ReplaceCard extends Message {
 
-    private class ReplaceCardBody extends AbstractMessageBody{
+    private class ReplaceCardBody extends MessageBody {
         protected int register;
         protected String newCard;
         protected int clientID;

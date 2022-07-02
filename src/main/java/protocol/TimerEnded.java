@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -11,7 +11,7 @@ import protocol.ProtocolFormat.MessageType;
 
 public class TimerEnded extends Message {
 
-    private class TimerEndedBody extends AbstractMessageBody{
+    private class TimerEndedBody extends MessageBody {
         protected int[] clientIDs;
     }
     public TimerEnded (int[] clientIDs) {

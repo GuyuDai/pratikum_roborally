@@ -1,13 +1,13 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 
 public class HelloServer extends Message {
 
-    private class HelloServerBody extends AbstractMessageBody{
+    private class HelloServerBody extends MessageBody {
         protected String group;
         protected boolean isAI;
         protected String protocol;

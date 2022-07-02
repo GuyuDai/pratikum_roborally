@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -9,7 +9,7 @@ import protocol.ProtocolFormat.MessageType;
  */
 public class ClientMessage extends Message {
 
-  private class ClientMessageBody extends AbstractMessageBody{
+  private class ClientMessageBody extends MessageBody {
     protected String message;
   }
   public ClientMessage(String str){

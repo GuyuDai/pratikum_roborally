@@ -8,14 +8,11 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
-import transfer.Player;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import transfer.request.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,10 +20,10 @@ import javafx.stage.Stage;
 
 import java.util.Arrays;
 import java.util.List;
-import transfer.request.Message;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import server.Player.Player;
 
 
 /**
@@ -253,6 +250,7 @@ public class LobbyViewModel {
 
         checkInput(message);
 
+
         model.getTextFieldContent().set("");
         input.requestFocus();
     }
@@ -264,10 +262,10 @@ public class LobbyViewModel {
         String sendableRequest = "";
 
          if(message.startsWith("@")) {
-             sendableRequest = createDirectMessage(message);
+
 
          }else {
-             sendableRequest = createMessage(message);
+
          }
          if(!sendableRequest.isEmpty()){
             try {
@@ -280,21 +278,7 @@ public class LobbyViewModel {
         }
     }
 
-    private String createMessage(String message){
-        String createMessageWrapped = gson.toJson(new RequestWrapper(new Message(currentPlayer.getName(), message, MessageTypes.CLIENT_MESSAGE), RequestType.MESSAGE));
-        return createMessageWrapped;
-    }
 
-    private String createDirectMessage(String message){
-        message = message.replace("@", "");
-        String [] splittingTarget = message.split(" ");
-        StringBuilder realMessage = new StringBuilder("");
-        for(int i = 1; i < splittingTarget.length; i++){
-            realMessage.append(splittingTarget[i]).append(" ");
-        }
-        String createMessageWrapped = gson.toJson(new RequestWrapper(new Message("Private Message from "+ currentPlayer.getName(), splittingTarget[0].trim(), realMessage.toString().trim(), MessageTypes.PRIVATE_MESSAGE), RequestType.MESSAGE));
-        return createMessageWrapped;
-    }
 
     /**
      * send messages using keyboard "Enter" key

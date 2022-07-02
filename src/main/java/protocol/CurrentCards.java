@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.ActiveCard;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CurrentCards extends Message {
 
-    private class CurrentCardsBody extends AbstractMessageBody{
+    private class CurrentCardsBody extends MessageBody {
         protected List<ActiveCard> activeCards;
     }
     public CurrentCards (List<ActiveCard> activeCards) {

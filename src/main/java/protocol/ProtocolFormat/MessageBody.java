@@ -4,29 +4,24 @@ import server.Player.Player;
 
 import java.util.List;
 
-public class AbstractMessageBody {
+public class MessageBody {
 
-    Boolean isAI;
-    Boolean ready;
-    Boolean messageIsPrivate;
-    Boolean connected;
+    boolean isAI;
+    boolean ready;
+    boolean messageIsPrivate;
+    boolean connected;
 
-
-    Integer to;
-    Integer id;
-
-    Integer clientID;
-    Integer figure;
-    Integer phase;
-    Integer position;
-    Integer cardsInHand;
-    Integer register;
-    Integer count;
-    Integer number;
-    Integer cardsInPile;
-    Integer from;
-    Integer x;
-    Integer y;
+    int to;
+    int id;
+    int figure;
+    int  phase;
+    int position;
+    int cardsInHand;
+    int register;
+    int count;
+    int number;
+    int cardsInPile;
+    int from;
 
     String protocol;
     String group;
@@ -46,9 +41,8 @@ public class AbstractMessageBody {
 
     Player player;
     List<Map> map;
-    private String type;
 
-    public Boolean isAI() {
+    public boolean isAI() {
         return isAI;
     }
 
@@ -56,7 +50,7 @@ public class AbstractMessageBody {
         isAI = AI;
     }
 
-    public Boolean isReady() {
+    public boolean isReady() {
         return ready;
     }
 
@@ -64,7 +58,7 @@ public class AbstractMessageBody {
         this.ready = ready;
     }
 
-    public Boolean isMessageIsPrivate() {
+    public boolean isMessageIsPrivate() {
         return messageIsPrivate;
     }
 
@@ -72,7 +66,7 @@ public class AbstractMessageBody {
         this.messageIsPrivate = messageIsPrivate;
     }
 
-    public Boolean isConnected() {
+    public boolean isConnected() {
         return connected;
     }
 
@@ -95,19 +89,6 @@ public class AbstractMessageBody {
     public void setId(int id) {
         this.id = id;
     }
-
-    public int getX(){ return x; }
-
-    public void setX(int y) { this.x = x; }
-
-    public int getY(){ return y; }
-
-    public void setY(int y) { this.y = y; }
-
-
-    public int getClientID(){ return clientID; }
-
-    public void setClientID(int y) { this.clientID = clientID; }
 
     public String getProtocol() {
         return protocol;
@@ -133,11 +114,11 @@ public class AbstractMessageBody {
         this.message = message;
     }
 
-    public Integer getFrom() {
+    public int getFrom() {
         return from;
     }
 
-    public void setFrom(Integer from) {
+    public void setFrom( int from) {
         this.from = from;
     }
 
@@ -193,17 +174,17 @@ public class AbstractMessageBody {
         this.card = card;
     }
 
-    public String getCard() { return card; }
+    public String getCard() {
+        return card;
+    }
 
     public void setPhase(int phase) {
         this.phase = phase;
     }
 
-    public int getPhase() { return phase; }
-
-    public void setType(String type) { this.type = type; }
-
-    public String getType() { return type; }
+    public int getPhase() {
+        return phase;
+    }
 
     public int getPosition() {
         return position;
@@ -293,11 +274,11 @@ public class AbstractMessageBody {
         this.selectedMap = selectedMap;
     }
 
-    public Integer getCardsInPile() {
+    public int getCardsInPile() {
         return cardsInPile;
     }
 
-    public void setCardsInPile(Integer cardsInPile) {
+    public void setCardsInPile( int cardsInPile) {
         this.cardsInPile = cardsInPile;
     }
 }

@@ -1,12 +1,12 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class SetStartingPoint extends Message {
 
-    private class SetStartingPointBody extends AbstractMessageBody{
+    private class SetStartingPointBody extends MessageBody {
         protected int x;
         protected int y;
     }

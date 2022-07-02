@@ -1,12 +1,12 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class HelloClient extends Message {
 
-  private class HelloClientBody extends AbstractMessageBody{
+  private class HelloClientBody extends MessageBody {
     protected String protocol;
   }
   public HelloClient(String str){

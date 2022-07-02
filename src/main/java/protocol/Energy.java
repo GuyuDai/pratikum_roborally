@@ -1,12 +1,12 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class Energy extends Message {
 
-    private class EnergyBody extends AbstractMessageBody{
+    private class EnergyBody extends MessageBody {
         protected int clientID;
         protected int count;
         protected String source;

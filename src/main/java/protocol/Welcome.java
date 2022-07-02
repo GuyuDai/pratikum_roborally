@@ -1,12 +1,12 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class Welcome extends Message {
 
-    private class WelcomeBody extends AbstractMessageBody{
+    private class WelcomeBody extends MessageBody {
         protected int clientID;
     }
     public Welcome (int clientID) {

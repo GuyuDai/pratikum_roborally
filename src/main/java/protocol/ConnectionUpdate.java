@@ -1,12 +1,12 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class ConnectionUpdate extends Message {
 
-    private class ConnectionUpdateBody extends AbstractMessageBody{
+    private class ConnectionUpdateBody extends MessageBody {
         protected int clientID;
         protected boolean isConnected;
         protected String action;

@@ -1,12 +1,12 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class SelectedCard extends Message {
 
-    private class SelectedCardBody extends AbstractMessageBody{
+    private class SelectedCardBody extends MessageBody {
         protected String card;
         protected int register;
     }

@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -11,7 +11,7 @@ import protocol.ProtocolFormat.MessageType;
 
 public class CardSelected extends Message {
 
-    private class CardSelectedBody extends AbstractMessageBody{
+    private class CardSelectedBody extends MessageBody {
         protected int clientID;
         protected int register;
         protected boolean filled;

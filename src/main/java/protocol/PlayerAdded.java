@@ -1,12 +1,12 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class PlayerAdded extends Message {
 
-    private class PlayerAddedBody extends AbstractMessageBody{
+    private class PlayerAddedBody extends MessageBody {
         protected int clientID;
         protected String name;
         protected int figure;
