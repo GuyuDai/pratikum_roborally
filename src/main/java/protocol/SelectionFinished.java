@@ -11,8 +11,16 @@ import protocol.ProtocolFormat.MessageType;
 
 public class SelectionFinished extends Message {
 
-    private class SelectedFinishedBody extends MessageBody {
+    public class SelectedFinishedBody extends MessageBody {
         protected int clientID;
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
     }
 
     public SelectionFinished (int clientID) {

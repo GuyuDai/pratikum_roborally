@@ -6,8 +6,16 @@ import protocol.ProtocolFormat.MessageType;
 
 public class ErrorMessage extends Message {
 
-  private class ErrorMessageBody extends MessageBody {
+  public class ErrorMessageBody extends MessageBody {
     protected String error;
+
+    public String getError() {
+      return error;
+    }
+
+    public void setError(String error) {
+      this.error = error;
+    }
   }
   public ErrorMessage(String str) {
     this.messageType = MessageType.error;

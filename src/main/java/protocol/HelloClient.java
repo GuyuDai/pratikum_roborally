@@ -6,8 +6,16 @@ import protocol.ProtocolFormat.MessageType;
 
 public class HelloClient extends Message {
 
-  private class HelloClientBody extends MessageBody {
+  public class HelloClientBody extends MessageBody {
     protected String protocol;
+
+    public String getProtocol() {
+      return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+      this.protocol = protocol;
+    }
   }
   public HelloClient(String str){
     this.messageType = MessageType.helloClient;

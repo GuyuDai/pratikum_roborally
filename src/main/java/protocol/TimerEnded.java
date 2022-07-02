@@ -11,8 +11,16 @@ import protocol.ProtocolFormat.MessageType;
 
 public class TimerEnded extends Message {
 
-    private class TimerEndedBody extends MessageBody {
+    public class TimerEndedBody extends MessageBody {
         protected int[] clientIDs;
+
+        public int[] getClientIDs() {
+            return clientIDs;
+        }
+
+        public void setClientIDs(int[] clientIDs) {
+            this.clientIDs = clientIDs;
+        }
     }
     public TimerEnded (int[] clientIDs) {
         this.messageType = MessageType.timerEnded;

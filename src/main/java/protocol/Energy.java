@@ -6,10 +6,34 @@ import protocol.ProtocolFormat.MessageType;
 
 public class Energy extends Message {
 
-    private class EnergyBody extends MessageBody {
+    public class EnergyBody extends MessageBody {
         protected int clientID;
         protected int count;
         protected String source;
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public int getCount() {
+            return count;
+        }
+
+        public String getSource() {
+            return source;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
+
+        public void setSource(String source) {
+            this.source = source;
+        }
     }
     public Energy (int clientID, int count, String source){
         this.messageType = MessageType.energy;

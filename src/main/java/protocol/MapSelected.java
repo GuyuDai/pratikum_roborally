@@ -6,8 +6,16 @@ import protocol.ProtocolFormat.MessageType;
 
 public class MapSelected extends Message {
 
-    private class MapSelectedBody extends MessageBody {
+    public class MapSelectedBody extends MessageBody {
         protected String map;
+
+        public String getMap() {
+            return map;
+        }
+
+        public void setMap(String map) {
+            this.map = map;
+        }
     }
     public MapSelected (String map) {
         this.messageType = MessageType.mapSelected;

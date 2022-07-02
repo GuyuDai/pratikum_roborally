@@ -13,9 +13,25 @@ import protocol.ProtocolFormat.MessageType;
 
 public class PickDamage extends Message {
 
-    private class PickDamageBody extends MessageBody {
+    public class PickDamageBody extends MessageBody {
         protected int count;
         protected String[] availablePiles;
+
+        public int getCount() {
+            return count;
+        }
+
+        public String[] getAvailablePiles() {
+            return availablePiles;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
+
+        public void setAvailablePiles(String[] availablePiles) {
+            this.availablePiles = availablePiles;
+        }
     }
     public PickDamage (int count, String[] availablePiles){
         this.messageType = MessageType.pickDamage;

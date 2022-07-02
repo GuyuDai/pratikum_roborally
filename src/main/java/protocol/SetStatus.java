@@ -6,8 +6,16 @@ import protocol.ProtocolFormat.MessageType;
 
 public class SetStatus extends Message {
 
-    private class SetStatusBody extends MessageBody {
+    public class SetStatusBody extends MessageBody {
         protected boolean ready;
+
+        public boolean isReady() {
+            return ready;
+        }
+
+        public void setReady(boolean ready) {
+            this.ready = ready;
+        }
     }
     public SetStatus (boolean ready) {
         this.messageType = MessageType.setStatus;

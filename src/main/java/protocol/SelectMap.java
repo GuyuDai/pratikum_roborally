@@ -6,8 +6,16 @@ import protocol.ProtocolFormat.MessageType;
 
 public class SelectMap extends Message {
 
-    private class SelectMapBody extends MessageBody {
+    public class SelectMapBody extends MessageBody {
         protected String[] availableMaps;
+
+        public String[] getAvailableMaps() {
+            return availableMaps;
+        }
+
+        public void setAvailableMaps(String[] availableMaps) {
+            this.availableMaps = availableMaps;
+        }
     }
 
     public SelectMap(String[] availableMaps) {

@@ -6,10 +6,34 @@ import protocol.ProtocolFormat.MessageType;
 
 public class PlayerAdded extends Message {
 
-    private class PlayerAddedBody extends MessageBody {
+    public class PlayerAddedBody extends MessageBody {
         protected int clientID;
         protected String name;
         protected int figure;
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getFigure() {
+            return figure;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setFigure(int figure) {
+            this.figure = figure;
+        }
     }
     public PlayerAdded (int clientID, String name, int figure) {
         this.messageType = MessageType.playerAdded;

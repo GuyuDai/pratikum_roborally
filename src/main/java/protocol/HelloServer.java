@@ -7,12 +7,43 @@ import protocol.ProtocolFormat.MessageType;
 
 public class HelloServer extends Message {
 
-    private class HelloServerBody extends MessageBody {
+    public class HelloServerBody extends MessageBody {
         protected String group;
         protected boolean isAI;
         protected String protocol;
         protected int clientID;
 
+        public String getProtocol() {
+            return protocol;
+        }
+
+        public String getGroup() {
+            return group;
+        }
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public boolean isAI() {
+            return isAI;
+        }
+
+        public void setProtocol(String protocol) {
+            this.protocol = protocol;
+        }
+
+        public void setGroup(String group) {
+            this.group = group;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
+
+        public void setAI(boolean AI) {
+            isAI = AI;
+        }
     }
 
     public HelloServer(String group, boolean isAi, String protocol, int clientID) {

@@ -39,7 +39,7 @@ public class ClientReceive extends Thread{
         try {
             while (!socket.isClosed()) {
                 String serverMessage = readInput.readLine();
-                Message message = new Gson().fromJson(serverMessage, Message.class);
+                Message message = wrapMessage(serverMessage);
                 identifyMessage(message);
             }
         } catch (IOException e) {
@@ -47,6 +47,12 @@ public class ClientReceive extends Thread{
         }
     }
 
+    private Message wrapMessage(String input){
+        if(input.contains("HelloClient")){
+            return new Gson().fromJson(input, HelloClient.class);
+        }
+        return new ErrorMessage("Error when parsing String to Message");
+    }
     private void identifyMessage(Message message) {
         String messageType=message.getMessageType();
         switch (messageType){

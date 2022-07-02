@@ -15,6 +15,30 @@ public class Movement extends Message {
         protected int clientID;
         protected int x;
         protected int y;
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public int getX() {
+            return x;
+        }
+
+        public int getY() {
+            return y;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
+
+        public void setX(int x) {
+            this.x = x;
+        }
+
+        public void setY(int y) {
+            this.y = y;
+        }
     }
     public Movement (int clientID, int x, int y) {
         this.messageType = MessageType.movement;

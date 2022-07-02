@@ -7,9 +7,25 @@ import protocol.ProtocolFormat.MessageType;
 
 public class NotYourCards extends Message {
 
-    private class NotYourCardsBody extends MessageBody {
+    public class NotYourCardsBody extends MessageBody {
         protected int clientID;
         protected int cardsInHand;
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public int getCardsInHand() {
+            return cardsInHand;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
+
+        public void setCardsInHand(int cardsInHand) {
+            this.cardsInHand = cardsInHand;
+        }
     }
     public NotYourCards (int clientID, int cardsInHand) {
         this.messageType = MessageType.notYourCards;
