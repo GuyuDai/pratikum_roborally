@@ -41,7 +41,7 @@ public class Server implements Runnable{
                 System.out.println("listening for new clients");
                 Socket clientSocket = serverSocket.accept();
                 clientConnectedIn(clientSocket);
-
+                System.out.println(new Welcome(42));
                 System.out.println("new client connected");
             }
         } catch (IOException e) {
