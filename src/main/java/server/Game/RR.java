@@ -234,6 +234,9 @@ public class RR extends Thread implements GameLogic {
 
   public void DoProgrammingPhase(){
     for(Player player:activePlayers){
+      if(player.getAI()){
+        player.programmingPhaseAI();
+      }
       player.draw();
       player.showHands();
       String Card="";
