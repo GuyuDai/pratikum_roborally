@@ -6,9 +6,25 @@ import protocol.ProtocolFormat.MessageType;
 
 public class CardPlayed extends Message {
 
-    private class CardPlayedBody extends MessageBody {
+    public class CardPlayedBody extends MessageBody {
         protected int clientID;
         protected String card;
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public String getCard() {
+            return card;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
+
+        public void setCard(String card) {
+            this.card = card;
+        }
     }
     public CardPlayed (int clientID, String card) {
         this.messageType = MessageType.cardPlayed;

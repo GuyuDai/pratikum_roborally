@@ -9,8 +9,16 @@ import protocol.ProtocolFormat.MessageType;
  */
 public class ClientMessage extends Message {
 
-  private class ClientMessageBody extends MessageBody {
+  public class ClientMessageBody extends MessageBody {
     protected String message;
+
+    public String getMessage() {
+      return message;
+    }
+
+    public void setMessage(String message) {
+      this.message = message;
+    }
   }
   public ClientMessage(String str){
     this.messageType = MessageType.clientMessage;

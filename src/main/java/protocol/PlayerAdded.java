@@ -6,7 +6,7 @@ import protocol.ProtocolFormat.MessageType;
 
 public class PlayerAdded extends Message {
 
-    private class PlayerAddedBody extends MessageBody {
+    public class PlayerAddedBody extends MessageBody {
         protected int clientID;
         protected String name;
         protected int figure;

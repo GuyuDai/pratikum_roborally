@@ -9,8 +9,16 @@ import java.util.List;
 
 public class GameStarted extends Message {
 
-  private class GameStartedBody extends MessageBody {
+  public class GameStartedBody extends MessageBody {
     protected List<Map> gameMap;
+
+    public List<Map> getGameMap() {
+      return gameMap;
+    }
+
+    public void setGameMap(List<Map> gameMap) {
+      this.gameMap = gameMap;
+    }
   }
 
     public GameStarted (List<Map> gameMap) {

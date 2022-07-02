@@ -6,8 +6,16 @@ import protocol.ProtocolFormat.MessageType;
 
 public class ActivePhase extends Message {
 
-    private class ActivePhaseBody extends MessageBody {
+    public class ActivePhaseBody extends MessageBody {
         protected int phase;
+
+        public int getPhase() {
+            return phase;
+        }
+
+        public void setPhase(int phase) {
+            this.phase = phase;
+        }
     }
     public ActivePhase (int phase) {
         this.messageType = MessageType.activePhase;

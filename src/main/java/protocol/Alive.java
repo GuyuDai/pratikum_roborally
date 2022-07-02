@@ -7,7 +7,7 @@ import protocol.ProtocolFormat.MessageType;
 
 public class Alive extends Message {
 
-    private class AliveBody extends MessageBody {
+    public class AliveBody extends MessageBody {
 
     }
     public Alive (){

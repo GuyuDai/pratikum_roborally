@@ -3,23 +3,21 @@ package server;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.*;
 import protocol.*;
 import com.google.gson.Gson;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 import server.Player.Player;
-import transfer.PlayerOnline;
-import protocol.PlayerValues;
 
 
 public class ServerThread implements Runnable {
-    private static List<PlayerOnline> playersOnline = new ArrayList();
     private static final String PROTOCOL = "Version 1.0";
     private Socket clientSocket;
     private BufferedReader readInput;
     private  PrintWriter writeOutput;
     public static boolean gameActive = false;
+
+    private boolean alive;
 
     /**
      * ActivePhase
@@ -181,25 +179,23 @@ public class ServerThread implements Runnable {
 
     public Socket getClientSocket() {return clientSocket;}
 
-    public static List<PlayerOnline> getPlayersOnline() {
-        return playersOnline;
-    }
-
-
-     public static boolean createGame(){
-     if(gameActive == false) {
-     //game = new Game();
-     gameActive = true;
-     return true;
-     }
-     else{
-     return false;
-     }
-     }
-
-     public static boolean isGameActive() {
+    public static boolean isGameActive() {
      return gameActive;
      }
 
+    public int getID() {
+        return clientID;
+    }
 
+    public void setID(int clientID) {
+        this.clientID = clientID;
+    }
+
+    public void setAI(boolean AI) {
+        isAI = AI;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
 }

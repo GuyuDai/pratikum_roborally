@@ -5,7 +5,7 @@ import server.Player.Player;
 import java.util.List;
 
 public class MessageBody {
-
+/*
     boolean isAI;
     boolean ready;
     boolean messageIsPrivate;
@@ -281,6 +281,8 @@ public class MessageBody {
     public void setCardsInPile( int cardsInPile) {
         this.cardsInPile = cardsInPile;
     }
+
+ */
 }
 
 

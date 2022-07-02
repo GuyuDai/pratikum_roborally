@@ -11,8 +11,16 @@ import protocol.ProtocolFormat.MessageType;
 
 public class Animation extends Message {
 
-    private class AnimationBody extends MessageBody {
+    public class AnimationBody extends MessageBody {
         protected String type;
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
     }
     public Animation (String type){
         this.messageType = MessageType.animation;

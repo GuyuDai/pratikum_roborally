@@ -17,8 +17,16 @@ import java.util.List;
 
 public class CurrentCards extends Message {
 
-    private class CurrentCardsBody extends MessageBody {
+    public class CurrentCardsBody extends MessageBody {
         protected List<ActiveCard> activeCards;
+
+        public List<ActiveCard> getActiveCards() {
+            return activeCards;
+        }
+
+        public void setActiveCards(List<ActiveCard> activeCards) {
+            this.activeCards = activeCards;
+        }
     }
     public CurrentCards (List<ActiveCard> activeCards) {
         this.messageType = MessageType.currentCards;
