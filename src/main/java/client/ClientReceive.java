@@ -40,7 +40,10 @@ public class ClientReceive extends Thread{
         try {
             while (!socket.isClosed()) {
                 String serverMessage = readInput.readLine();
+                System.out.println(serverMessage);  //test
                 Message message = wrapMessage(serverMessage);
+                System.out.println("--------------------------------------------------------------");  //test
+                System.out.println(message);  //test
                 //Message message = new Gson().fromJson(serverMessage, Message.class);
                 identifyMessage(message);
             }
