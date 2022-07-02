@@ -1,12 +1,12 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class SelectMap extends Message {
 
-    private class SelectMapBody extends AbstractMessageBody{
+    private class SelectMapBody extends MessageBody {
         protected String[] availableMaps;
     }
 

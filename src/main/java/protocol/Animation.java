@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -11,7 +11,7 @@ import protocol.ProtocolFormat.MessageType;
 
 public class Animation extends Message {
 
-    private class AnimationBody extends AbstractMessageBody{
+    private class AnimationBody extends MessageBody {
         protected String type;
     }
     public Animation (String type){

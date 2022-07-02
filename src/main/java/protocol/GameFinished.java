@@ -1,12 +1,12 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class GameFinished extends Message {
 
-    private class GameFinishedBody extends AbstractMessageBody{
+    private class GameFinishedBody extends MessageBody {
         protected int clientID;
     }
     public GameFinished (int clientID){

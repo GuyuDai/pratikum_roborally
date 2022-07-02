@@ -1,12 +1,12 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class ErrorMessage extends Message {
 
-  private class ErrorMessageBody extends AbstractMessageBody{
+  private class ErrorMessageBody extends MessageBody {
     protected String error;
   }
   public ErrorMessage(String str) {

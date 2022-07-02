@@ -15,12 +15,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import server.CardTypes.*;
 import server.Deck.ProgrammingDeck;
-import transfer.Player;
-import transfer.PlayerOnline;
-import transfer.request.Message;
-import transfer.request.MessageTypes;
-import transfer.request.RequestType;
-import transfer.request.RequestWrapper;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,6 +30,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import server.Player.Player;
 
 
 /**
@@ -210,10 +206,10 @@ public class GameViewModel {
 
 
         if (message.startsWith("@")) {
-            sendableRequest = createDirectMessage(message);
+            //sendableRequest = createDirectMessage(message);
 
         } else {
-            sendableRequest = createMessage(message);
+           // sendableRequest = createMessage(message);
         }
         if (!sendableRequest.isEmpty()) {
             try {
@@ -227,22 +223,8 @@ public class GameViewModel {
     }
 
 
-    private String createMessage(String message) {
 
-        String createMessageWrapped = gson.toJson(new RequestWrapper(new Message(currentPlayer.getName(), message, MessageTypes.CLIENT_MESSAGE), RequestType.MESSAGE));
-        return createMessageWrapped;
-    }
 
-    private String createDirectMessage(String message) {
-        message = message.replace("@", "");
-        String[] splittingTarget = message.split(" ");
-        StringBuilder realMessage = new StringBuilder("");
-        for (int i = 1; i < splittingTarget.length; i++) {
-            realMessage.append(splittingTarget[i]).append(" ");
-        }
-        String createMessageWrapped = gson.toJson(new RequestWrapper(new Message("Private Message from " + currentPlayer.getName(), splittingTarget[0].trim(), realMessage.toString().trim(), MessageTypes.PRIVATE_MESSAGE), RequestType.MESSAGE));
-        return createMessageWrapped;
-    }
 
 
     //send messages using keyboard "Enter" key

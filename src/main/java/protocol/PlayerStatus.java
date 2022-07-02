@@ -1,12 +1,12 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class PlayerStatus extends Message {
 
-    private class PlayerStatusBody extends AbstractMessageBody{
+    private class PlayerStatusBody extends MessageBody {
         protected int clientID;
         protected boolean ready;
     }

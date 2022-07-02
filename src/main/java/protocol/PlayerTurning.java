@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -10,7 +10,7 @@ import protocol.ProtocolFormat.MessageType;
 
 public class PlayerTurning extends Message {
 
-    private class PlayerTurningBody extends AbstractMessageBody{
+    private class PlayerTurningBody extends MessageBody {
         protected int clientID;
         protected String rotation;
     }

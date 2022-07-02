@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -11,7 +11,7 @@ import protocol.ProtocolFormat.MessageType;
 
 public class Movement extends Message {
 
-    private class MovementBody extends AbstractMessageBody{
+    private class MovementBody extends MessageBody {
         protected int clientID;
         protected int x;
         protected int y;

@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -11,7 +11,7 @@ import protocol.ProtocolFormat.MessageType;
 
 public class SelectionFinished extends Message {
 
-    private class SelectedFinishedBody extends AbstractMessageBody{
+    private class SelectedFinishedBody extends MessageBody {
         protected int clientID;
     }
 

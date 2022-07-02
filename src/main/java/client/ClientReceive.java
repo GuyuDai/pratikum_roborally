@@ -18,11 +18,16 @@ public class ClientReceive extends Thread{
     private BufferedReader readInput;
     private BufferedWriter writeOutput;
 
+    private static final String PROTOCOL = "Version 1.0";
+
     public ClientReceive(Socket socket) {
         this.socket = socket;
         try {
             readInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writeOutput = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            Message helloServer = new HelloServer("SEP OO",false,PROTOCOL,9);
+            String helloServerString= helloServer.toString();
+            writeOutput.write(helloServerString);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

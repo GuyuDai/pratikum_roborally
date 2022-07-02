@@ -1,12 +1,12 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class ReceivedChat extends Message {
 
-    private class ReceivedChatBody extends AbstractMessageBody{
+    private class ReceivedChatBody extends MessageBody {
         protected String message;
         protected int from;
         private boolean isPrivate;

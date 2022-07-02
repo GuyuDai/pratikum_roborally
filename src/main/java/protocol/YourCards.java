@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -11,7 +11,7 @@ import protocol.ProtocolFormat.MessageType;
 
 public class YourCards extends Message {
 
-    private class YourCardsBody extends AbstractMessageBody{
+    private class YourCardsBody extends MessageBody {
         protected String[] cardsInHand;
     }
     public YourCards (String[] cardsInHand) {

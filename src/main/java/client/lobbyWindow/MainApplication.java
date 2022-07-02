@@ -24,7 +24,7 @@ public class MainApplication extends Application {
 
     public static Scene gameScene;
 
-
+    private static Client client;
     @Override
     public void stop() {
     }
@@ -32,7 +32,8 @@ public class MainApplication extends Application {
     //TODo Ändere Namen
     @Override
     public void start(Stage primaryStage) throws IOException {
-        new Client().init();
+        client=new Client();
+        client.init();
         window = primaryStage;
         window.setTitle("RoboRally");
         lobbyScene = loadScene(0);

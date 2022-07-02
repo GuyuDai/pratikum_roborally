@@ -9,12 +9,11 @@ import com.google.gson.Gson;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 import server.Player.Player;
-import transfer.PlayerOnline;
 //import transfer.cards.Game;
 
 
 public class ServerThread implements Runnable {
-    private static List<PlayerOnline> playersOnline = new ArrayList();
+    //private static List<PlayerOnline> playersOnline = new ArrayList();
     private static final String PROTOCOL = "Version 1.0";
     private Socket clientSocket;
     private BufferedReader readInput;
@@ -35,8 +34,8 @@ public class ServerThread implements Runnable {
             readInput = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             writeOutput =new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
             Message helloClient = new HelloClient(PROTOCOL);
-            String HelloClient = helloClient.toString();
-            writeOutput.println(HelloClient);
+            String helloClientString=helloClient.toString();
+            writeOutput.write(helloClientString);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -87,9 +86,6 @@ public class ServerThread implements Runnable {
 
     public Socket getClientSocket() {return clientSocket;}
 
-    public static List<PlayerOnline> getPlayersOnline() {
-        return playersOnline;
-    }
 
 
      public static boolean createGame(){

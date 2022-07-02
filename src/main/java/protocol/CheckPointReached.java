@@ -1,12 +1,12 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class CheckPointReached extends Message {
 
-    private class CheckPointReachedBody extends AbstractMessageBody{
+    private class CheckPointReachedBody extends MessageBody {
         protected int clientID;
         protected int number;
     }

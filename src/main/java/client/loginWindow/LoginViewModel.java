@@ -9,10 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import server.ServerThread;
-import transfer.PlayerOnline;
-import transfer.request.PlayerInitialisation;
-import transfer.request.RequestType;
-import transfer.request.RequestWrapper;
+
 
 /**
  * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
@@ -64,8 +61,8 @@ public class LoginViewModel {
      */
     public void sendNameButtonAction(ActionEvent actionEvent) throws Exception {
         String name = model.getTextFieldContent().get();
-        String sendMessage = new Gson().toJson(new RequestWrapper(new PlayerInitialisation(name), RequestType.PLAYER_INITIALISATION));
-        Client.getClientReceive().getWriteOutput().write(sendMessage);
+        //String sendMessage = new Gson().toJson(new RequestWrapper(new PlayerInitialisation(name), RequestType.PLAYER_INITIALISATION));
+        //Client.getClientReceive().getWriteOutput().write(sendMessage);
         Client.getClientReceive().getWriteOutput().newLine();
         Client.getClientReceive().getWriteOutput().flush();
         model.getTextFieldContent().set("");

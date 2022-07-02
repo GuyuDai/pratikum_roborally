@@ -1,12 +1,12 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class SendChat extends Message {
 
-    private class SendChatBody extends AbstractMessageBody{
+    private class SendChatBody extends MessageBody {
         protected String message;
         protected int to;
     }

@@ -1,12 +1,12 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class PlayCard extends Message {
 
-    private class PlayCardBody extends AbstractMessageBody{
+    private class PlayCardBody extends MessageBody {
         protected String card;
     }
     public PlayCard (String card) {
