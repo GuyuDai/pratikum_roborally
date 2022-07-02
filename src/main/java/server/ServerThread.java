@@ -5,8 +5,18 @@ import java.io.*;
 import java.net.Socket;
 import protocol.*;
 import com.google.gson.Gson;
+import protocol.ActivePhase.ActivePhaseBody;
+import protocol.Animation.AnimationBody;
+import protocol.CardPlayed.CardPlayedBody;
+import protocol.CardSelected.CardSelectedBody;
+import protocol.HelloServer.HelloServerBody;
+import protocol.PlayCard.PlayCardBody;
+import protocol.PlayerValues.PlayerValuesBody;
 import protocol.ProtocolFormat.Message;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.MessageType;
+import protocol.SetStartingPoint.SetStartingPointBody;
+import protocol.SetStatus.SetStatusBody;
 import server.Player.Player;
 
 
@@ -119,53 +129,69 @@ public class ServerThread implements Runnable {
     }
 
     private void identifyMessage(Message message) {
-        String messageType=message.getMessageType();
+        String messageType = message.getMessageType();
+        MessageBody messageBody = message.getMessageBody();
         switch (messageType){
             case MessageType.activePhase:
-                phase=message.getMessageBody().getPhase();
+                ActivePhaseBody activePhaseBodybody = (ActivePhaseBody) messageBody;
+                this.phase = activePhaseBodybody.getPhase();
                 break;
+
             case MessageType.animation:
-                type=message.getMessageBody().getType();
+                AnimationBody animationBody = (AnimationBody) messageBody;
+                type = animationBody.getType();
                 break;
+
             case MessageType.cardPlayed:
-                clientID=message.getMessageBody().getClientID();
-                card=message.getMessageBody().getCard();
+                CardPlayedBody cardPlayedBody = (CardPlayedBody) messageBody;
+                clientID = cardPlayedBody.getClientID();
+                card = cardPlayedBody.getCard();
                 break;
+
             case MessageType.cardSelected:
-                clientID=message.getMessageBody().getClientID();
-                register=message.getMessageBody().getRegister();
+                CardSelectedBody cardSelectedBody = (CardSelectedBody) messageBody;
+                clientID = cardSelectedBody.getClientID();
+                register = cardSelectedBody.getRegister();
                 break;
-
-
-
-
-
 
             case MessageType.helloServer:
-                Id=message.getMessageBody().getId();
-                group=message.getMessageBody().getGroup();
-                isAI=message.getMessageBody().isAI();
+                HelloServerBody helloServerBody = (HelloServerBody) messageBody;
+                Id = helloServerBody.getClientID();
+                group = helloServerBody.getGroup();
+                isAI = helloServerBody.isAI();
                 player.setAI(isAI);
                 break;
+
             case MessageType.playerValues:
-                name=message.getMessageBody().getGroup();
-                figure=message.getMessageBody().getFigure();
+                PlayerValuesBody playerValuesBody = (PlayerValuesBody) messageBody;
+                name = playerValuesBody.getName();
+                figure = playerValuesBody.getFigure();
                 break;
+
             case MessageType.setStatus:
-                ready=message.getMessageBody().isReady();
+                SetStatusBody setStatusBody = (SetStatusBody) messageBody;
+                ready = setStatusBody.isReady();
                 break;
+
             case MessageType.sendChat:
                 break;
+
             case MessageType.mapSelected:
                 break;
+
             case MessageType.playCard:
-                card=message.getMessageBody().getCard();
+                PlayCardBody playCardBody = (PlayCardBody) messageBody;
+                card = playCardBody.getCard();
                 break;
+
             case MessageType.selectCard:
+
             case MessageType.selectedDamage:
+
             case MessageType.setStartingPoint:
-                x=message.getMessageBody().getX();
-                y=message.getMessageBody().getY();
+                SetStartingPointBody setStartingPointBody = (SetStartingPointBody) messageBody;
+                x = setStartingPointBody.getX();
+                y = setStartingPointBody.getY();
                 break;
 
 
