@@ -38,7 +38,7 @@ public class PickDamage extends Message {
         PickDamageBody body = new PickDamageBody();
         body.count = count;
         body.availablePiles = availablePiles;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

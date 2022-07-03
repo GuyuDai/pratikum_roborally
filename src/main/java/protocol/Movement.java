@@ -46,7 +46,7 @@ public class Movement extends Message {
         body.clientID = clientID;
         body.x = x;
         body.y = y;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

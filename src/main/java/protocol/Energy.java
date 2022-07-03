@@ -41,7 +41,7 @@ public class Energy extends Message {
         body.clientID = clientID;
         body.count = count;
         body.source = source;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

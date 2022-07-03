@@ -21,7 +21,7 @@ public class CurrentPlayer extends Message {
         this.messageType = MessageType.currentPlayer;
         CurrentPlayerBody body = new CurrentPlayerBody();
         body.clientID = clientID;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

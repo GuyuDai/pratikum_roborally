@@ -41,7 +41,7 @@ public class ConnectionUpdate extends Message {
         body.clientID = clientID;
         body.isConnected = isConnected;
         body.action = action;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

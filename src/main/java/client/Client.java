@@ -38,16 +38,4 @@ public class Client {
         }
     }
 
-
-
-
-        //public void sendJsonMsg (JsonObject jsonObject) {
-        //  try {
-        //    OutputStream out = clientReceive
-        //}
-        //}
-        //@Override
-        //public void run() {
-
-        //}
-    }
+}

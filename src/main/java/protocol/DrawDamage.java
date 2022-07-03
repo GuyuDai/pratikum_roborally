@@ -35,7 +35,7 @@ public class DrawDamage extends Message {
         DrawDamageBody body = new DrawDamageBody();
         body.clientID = clientID;
         body.cards = cards;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

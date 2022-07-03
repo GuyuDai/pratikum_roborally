@@ -28,7 +28,7 @@ public class Reboot extends Message {
         this.messageType = MessageType.reboot;
         RebootBody body = new RebootBody();
         body.clientID = clientID;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

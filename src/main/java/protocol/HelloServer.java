@@ -54,8 +54,8 @@ public class HelloServer extends Message {
         body.protocol = protocol;
         body.clientID = clientID;
 
-        this.messageBody = body;
-        //this.messageBody = body.toString();
+        //this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 

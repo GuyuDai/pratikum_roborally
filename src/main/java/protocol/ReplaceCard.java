@@ -45,7 +45,7 @@ public class ReplaceCard extends Message {
         body.register =register;
         body.newCard = newCard;
         body.clientID = clientID;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

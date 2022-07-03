@@ -26,7 +26,7 @@ public class TimerEnded extends Message {
         this.messageType = MessageType.timerEnded;
         TimerEndedBody body = new TimerEndedBody();
         body.clientIDs = clientIDs;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 

@@ -21,7 +21,7 @@ public class SetStatus extends Message {
         this.messageType = MessageType.setStatus;
         SetStatusBody body = new SetStatusBody();
         body.ready = ready;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

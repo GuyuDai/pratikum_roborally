@@ -22,7 +22,7 @@ public class RebootDirection extends Message {
         this.messageType = MessageType.rebootDirection;
         RebootDirectionBody body = new RebootDirectionBody();
         body.direction = direction;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

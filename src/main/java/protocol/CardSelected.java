@@ -47,7 +47,7 @@ public class CardSelected extends Message {
         body.clientID = clientID;
         body.register = register;
         body.filled = filled;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

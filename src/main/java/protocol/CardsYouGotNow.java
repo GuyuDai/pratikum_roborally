@@ -26,7 +26,7 @@ public class CardsYouGotNow extends Message {
         this.messageType = MessageType.cardsYouGotNow;
         CardYouGotNowBody body = new CardYouGotNowBody();
         body.cards = cards;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

@@ -41,7 +41,7 @@ public class PlayerAdded extends Message {
         body.clientID = clientID ;
         body.name = name;
         body.figure = figure;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

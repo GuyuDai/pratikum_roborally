@@ -22,8 +22,8 @@ public class HelloClient extends Message {
     HelloClientBody body = new HelloClientBody();
     body.protocol = str;
 
-    this.messageBody = body;
-    //this.messageBody = body.toString();
+    //this.messageBody = body;
+    this.messageBody = body.toString();
   }
 
   /*

@@ -21,7 +21,7 @@ public class ShuffleCoding extends Message {
         this.messageType = MessageType.shuffleCoding;
         ShuffleCodingBody body = new ShuffleCodingBody();
         body.clientID = clientID;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

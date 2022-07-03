@@ -31,7 +31,7 @@ public class PlayerStatus extends Message {
         PlayerStatusBody body = new PlayerStatusBody();
         body.clientID = clientID;
         body.ready = ready;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }
