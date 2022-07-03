@@ -66,6 +66,9 @@ public class GameViewModel {
     @FXML
     private Button startGameButton;
 
+    @FXML
+    private Button selectMapButton;
+
 
     /**
      * Buttons for hand
@@ -809,7 +812,7 @@ public class GameViewModel {
         } catch (Exception e) {
         }
         startGameButton.setVisible(true);
-        selectMap.setVisible(false);
+        selectMapButton.setVisible(false);
     }
 
     /**
@@ -1037,12 +1040,36 @@ public class GameViewModel {
                // Image imageRBRightDown = new Image(rbRight.toString());
                 URL RBGreenUpRight = getClass().getResource("/ConveyorBelts/RBGreenUpRight.png");
                 Image imageRBGreenUpRight = new Image(RBGreenUpRight.toString());
+
                 URL RBGreenDownLeft = getClass().getResource("/ConveyorBelts/RBGreenDownLeft.png");
                 Image imageRBGreenDownLeft = new Image(RBGreenDownLeft.toString());
+
                 URL RBGreenDownRight = getClass().getResource("/ConveyorBelts/RBGreenDownRight.png");
                 Image imageRBGreenDownRight = new Image(RBGreenDownRight.toString());
+
                 URL RBGreenUpLeft = getClass().getResource("/ConveyorBelts/RBGreenUpLeft.png");
                 Image imageRBGreenUpLeft = new Image(RBGreenUpLeft.toString());
+
+
+
+
+
+                /**
+                 * URLs for Death Trap
+                 */
+
+                URL blueRotatingDownLeft = getClass().getResource("/bluePanelExtraCrispy/blueRotatingDownLeft.png");
+                Image imageBlueRotatingDownLeft = new Image(blueRotatingDownLeft.toString());
+
+                URL blueRotatingDownRight = getClass().getResource("/bluePanelExtraCrispy/blueRotatingDownRight.png");
+                Image imageBlueRotatingDownRight = new Image(blueRotatingDownRight.toString());
+
+                URL blueRotatingUpLeft = getClass().getResource("/bluePanelExtraCrispy/blueRotatingUpLeft.png");
+                Image imageBlueRotatingUpLeft = new Image(blueRotatingUpLeft.toString());
+
+                URL blueRotatingUpRight = getClass().getResource("/bluePanelExtraCrispy/blueRotatingUpRight.png");
+                Image imageBlueRotatingUpRight = new Image(blueRotatingUpRight.toString());
+
 
 
 
