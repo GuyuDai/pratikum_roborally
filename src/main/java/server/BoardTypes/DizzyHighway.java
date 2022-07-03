@@ -64,10 +64,10 @@ public class DizzyHighway extends Board {
         map[1][3][0] = empty;
         map[1][3][1] = empty;
 
-        map[1][4][0] = new RotatingBelt(currentGame,2, Direction.LEFT, Direction.DOWN);
+        map[1][4][0] = new RotatingBelt(currentGame,2, Direction.DOWN, Direction.LEFT);
         map[1][4][1] = empty;
 
-        map[1][5][0] = new RotatingBelt(currentGame,2, Direction.DOWN, Direction.LEFT);
+        map[1][5][0] = new RotatingBelt(currentGame,2, Direction.LEFT, Direction.DOWN);
         map[1][5][1] = empty;
 
         map[1][6][0] = new ConveyBelt(currentGame,2, Direction.LEFT);
@@ -85,7 +85,7 @@ public class DizzyHighway extends Board {
         map[1][10][0] = new ConveyBelt(currentGame,2, Direction.LEFT);
         map[1][10][1] = empty;
 
-        map[1][11][0] = new RotatingBelt(currentGame,2, Direction.UP, Direction.LEFT);
+        map[1][11][0] = new RotatingBelt(currentGame,2, Direction.LEFT, Direction.UP);
         map[1][11][1] = empty;
 
         map[1][12][0] = new ConveyBelt(currentGame,2, Direction.LEFT);
@@ -97,11 +97,8 @@ public class DizzyHighway extends Board {
         map[2][0][0] = empty;
         map[2][0][1] = empty;
 
-        map[2][1][0] = empty;
-        map[2][1][1] = empty;
-
         map[2][1][1]= new Wall(currentGame, Direction.UP);
-        map[2][1][1] = empty;
+        map[2][1][0] = empty;
 
         map[2][2][0] = empty;
         map[2][2][1] = empty;
@@ -130,7 +127,7 @@ public class DizzyHighway extends Board {
         map[2][10][0] = empty;
         map[2][10][1] = empty;
 
-        map[2][11][0] = new RotatingBelt(currentGame,2, Direction.LEFT, Direction.UP);
+        map[2][11][0] = new RotatingBelt(currentGame,2, Direction.UP, Direction.LEFT);
         map[2][11][1] = empty;
 
         map[2][12][0] = new ConveyBelt(currentGame,2,Direction.LEFT);
@@ -158,7 +155,7 @@ public class DizzyHighway extends Board {
         map[3][5][1] = empty;
 
         map[3][6][1]= new Wall(currentGame, Direction.UP);
-        map[3][6][0] = new Laser(currentGame, 1,Direction.DOWN);
+        map[3][6][0] = new Laser(currentGame, 1,Direction.UP);
 
         map[3][7][0]=  new Reboot(currentGame);
         map[3][7][1] = empty;
@@ -175,7 +172,7 @@ public class DizzyHighway extends Board {
         map[3][11][0] = new ConveyBelt(currentGame,2, Direction.UP);
         map[3][11][1] = empty;
 
-        map[3][12][0] = empty;
+        map[3][12][0] = new CheckPoint(currentGame,1);
         map[3][12][1] = empty;
 
 
@@ -187,8 +184,8 @@ public class DizzyHighway extends Board {
         map[4][1][0]= new StartingPoint(currentGame);
         map[4][1][1] = empty;
 
-        map[4][2][0]= new Wall(currentGame, Direction.RIGHT);
-        map[4][2][1] = empty;
+        map[4][2][1]= new Wall(currentGame, Direction.RIGHT);
+        map[4][2][0] = empty;
 
         map[4][3][0] = empty;
         map[4][3][1] = empty;
@@ -199,8 +196,8 @@ public class DizzyHighway extends Board {
         map[4][5][0] = empty;
         map[4][5][1] = empty;
 
-        map[4][6][0]= new Wall(currentGame, Direction.DOWN);
-        map[4][6][1] = empty;
+        map[4][6][1]= new Wall(currentGame, Direction.DOWN);
+        map[4][6][0] = new Laser(currentGame,1,Direction.UP);
 
         map[4][7][0] = empty;
         map[4][7][1] = empty;
@@ -229,8 +226,8 @@ public class DizzyHighway extends Board {
         map[5][1][0] = new StartingPoint(currentGame);
         map[5][1][1] = empty;
 
-        map[5][2][0]= new Wall(currentGame, Direction.RIGHT);
-        map[5][2][1] = empty;
+        map[5][2][1]= new Wall(currentGame, Direction.RIGHT);
+        map[5][2][0] = empty;
 
         map[5][3][0] = empty;
         map[5][3][1] = empty;
@@ -250,7 +247,7 @@ public class DizzyHighway extends Board {
         map[5][8][0] = empty;
         map[5][8][1] = empty;
 
-        map[5][9][1] = new Wall(currentGame, Direction.LEFT);
+        map[5][9][1] = new Wall(currentGame, Direction.UP);
         map[5][9][0] = new Laser(currentGame, 1,Direction.DOWN);
 
         map[5][10][0] = empty;
@@ -282,16 +279,16 @@ public class DizzyHighway extends Board {
         map[6][5][1] = empty;
 
         map[6][6][1] = new Wall(currentGame, Direction.LEFT);
-        map[6][6][0] = new Laser(currentGame, 1,Direction.RIGHT);
+        map[6][6][0] = new Laser(currentGame, 1,Direction.LEFT);
 
         map[6][7][1] = new Wall(currentGame, Direction.RIGHT);
-        map[6][7][0] = new Laser(currentGame, 1,Direction.RIGHT);
+        map[6][7][0] = new Laser(currentGame, 1,Direction.LEFT);
 
         map[6][8][0] = empty;
         map[6][8][1] = empty;
 
         map[6][9][1] = new Wall(currentGame, Direction.DOWN);
-        map[6][9][0] = new Laser(currentGame, 1,Direction.UP);
+        map[6][9][0] = new Laser(currentGame, 1,Direction.DOWN);
 
         map[6][10][0] = empty;
         map[6][10][1] = empty;
@@ -308,8 +305,8 @@ public class DizzyHighway extends Board {
         map[7][0][0] = empty;
         map[7][0][1] = empty;
 
-        map[7][1][0] = new Wall(currentGame, Direction.DOWN);
-        map[7][1][1] = empty;
+        map[7][1][1] = new Wall(currentGame, Direction.DOWN);
+        map[7][1][0] = empty;
 
         map[7][2][0] = empty;
         map[7][2][1] = empty;
@@ -317,7 +314,7 @@ public class DizzyHighway extends Board {
         map[7][3][0] = new ConveyBelt(currentGame,2, Direction.RIGHT);
         map[7][3][1] = empty;
 
-        map[7][4][0] = new RotatingBelt(currentGame,2, Direction.RIGHT, Direction.DOWN);
+        map[7][4][0] = new RotatingBelt(currentGame,2, Direction.DOWN, Direction.RIGHT);
         map[7][4][1] = empty;
 
         map[7][5][0] = empty;
@@ -359,7 +356,7 @@ public class DizzyHighway extends Board {
         map[8][3][0] = new ConveyBelt(currentGame,2, Direction.RIGHT);
         map[8][3][1] = empty;
 
-        map[8][4][0] = new RotatingBelt(currentGame,2, Direction.DOWN, Direction.RIGHT);
+        map[8][4][0] = new RotatingBelt(currentGame,2, Direction.RIGHT, Direction.DOWN);
         map[8][4][1] = empty;
 
         map[8][5][0] = new ConveyBelt(currentGame,2, Direction.RIGHT);
@@ -377,10 +374,10 @@ public class DizzyHighway extends Board {
         map[8][9][0] = new ConveyBelt(currentGame,2, Direction.RIGHT);
         map[8][9][1] = empty;
 
-        map[8][10][0] = new ConveyBelt(currentGame,2, Direction.RIGHT);
+        map[8][10][0] = new RotatingBelt(currentGame,2, Direction.RIGHT,Direction.UP);
         map[8][10][1] = empty;
 
-        map[8][11][0] = new ConveyBelt(currentGame,2, Direction.UP);
+        map[8][11][0] = new RotatingBelt(currentGame,2, Direction.UP,Direction.RIGHT);
         map[8][11][1] = empty;
 
         map[8][12][0] = empty;

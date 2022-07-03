@@ -10,7 +10,7 @@ import server.Player.Robot;
 
 public class RotatingBelt extends BoardElem implements Move {
     public RotatingBelt(RR currentGame, int speed, Direction direction,Direction direction2) {
-        super("RotatingBelt ", currentGame);
+        super("RotatingBelt", currentGame);
         this.direction=direction;
         this.speed=speed;
         this.direction2=direction2;

@@ -884,10 +884,10 @@ public class GameViewModel {
                 Image imageRBRightUp = new Image(rbRight2.toString());
 
                 URL rbTop = getClass().getResource("/ConveyorBelts/RB top.png");
-                Image imageRBUpLeft = new Image(rbTop.toString());
+                Image imageRBUpRight = new Image(rbTop.toString());
 
                 URL rbTop2 = getClass().getResource("/ConveyorBelts/RB top2.png");
-                Image imageRBUpRight = new Image(rbTop2.toString());
+                Image imageRBUpLeft = new Image(rbTop2.toString());
 
                 /**
                  * Board Images
@@ -978,6 +978,10 @@ public class GameViewModel {
                 URL wallLaser1Right = getClass().getResource("/Laser/WallLaser1Right.png");
                 Image imagewallLaser1Right = new Image(wallLaser1Right.toString());
 
+                URL rbRight = getClass().getResource("/img.png");
+                Image imageRBRightDown = new Image(rbRight.toString());
+
+
 
                 /**
                  * others
@@ -1000,6 +1004,11 @@ public class GameViewModel {
                 URL empty = getClass().getResource("/Empty.png");
                 Image imageEmpty = new Image(empty.toString());
 
+                //URL rbRight = getClass().getResource("ConveyorBelts/RB right.png");
+               // Image imageRBRightDown = new Image(rbRight.toString());
+
+
+
 
 
 
@@ -1009,6 +1018,7 @@ public class GameViewModel {
 
                 //public void printMap() {
                 Image elmImage = null;
+                Image elmImage2=null;
                 for (int x = 0; x < 10; x++) {
                     for (int y = 0; y < 13; y++) {
 
@@ -1088,40 +1098,21 @@ public class GameViewModel {
                                 int count=boardElem1.getCount();
                                 Direction LaserDirection=boardElem1.getDirection();
                                 String name=boardElem2.getName();
-                                if(!name.equals("Wall")) {
+                                Direction WallDirection=boardElem2.getDirection();
+                                if(name.equals("Wall")&&LaserDirection.equals(WallDirection.turn180())) {
                                     switch (count) {
                                         case 1:
-                                            if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT))
-                                            { elmImage = imagehorilaser1;}
-                                            if(LaserDirection.equals(Direction.UP) || LaserDirection.equals(Direction.DOWN)){
-                                                elmImage = imagelaser1Vertical;
-                                            }
-                                            break;
-                                        case 2:
-                                            if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT))
-                                            {  elmImage = imagehorilaser2; }
-                                            if(LaserDirection.equals(Direction.UP) || LaserDirection.equals(Direction.DOWN)){
-                                                elmImage = imagelaser2Vertical;
-                                            }
-                                            break;
-                                        case 3:
-                                            if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT)) {
-                                                elmImage = imagehorilaser3;
-                                            }
-                                            if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT)){
-                                                elmImage = imagelaser3Vertical;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else {
-                                    switch (count) {
-                                        case 1:
-                                            if (LaserDirection.equals(Direction.UP) || LaserDirection.equals(Direction.DOWN)) {
+                                            if ( LaserDirection.equals(Direction.DOWN)) {
                                                 elmImage = imageWallLaser1Vertical;
                                             }
-                                            if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT)){
+                                            if (LaserDirection.equals(Direction.RIGHT) ){
                                                 elmImage = imagewallRightLaser1;
+                                            }
+                                            if(LaserDirection.equals(Direction.UP)){
+                                                elmImage=imageWallLaser1Vertical2;
+                                            }
+                                            if (LaserDirection.equals(Direction.LEFT)){
+                                                elmImage=imagewallLaser1Right;
                                             }
                                             break;
                                         case 2:
@@ -1142,6 +1133,32 @@ public class GameViewModel {
                                             break;
                                     }
                                 }
+                            else {
+                                switch (count) {
+                                    case 1:
+                                        if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT))
+                                        { elmImage = imagehorilaser1;}
+                                        if(LaserDirection.equals(Direction.UP) || LaserDirection.equals(Direction.DOWN)){
+                                            elmImage = imagelaser1Vertical;
+                                        }
+                                        break;
+                                    case 2:
+                                        if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT))
+                                        {  elmImage = imagehorilaser2; }
+                                        if(LaserDirection.equals(Direction.UP) || LaserDirection.equals(Direction.DOWN)){
+                                            elmImage = imagelaser2Vertical;
+                                        }
+                                        break;
+                                    case 3:
+                                        if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT)) {
+                                            elmImage = imagehorilaser3;
+                                        }
+                                        if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT)){
+                                            elmImage = imagelaser3Vertical;
+                                        }
+                                        break;
+                                }
+                            }
                                 break;
                             case"RotatingBelt":
                                 Direction direction1=boardElem1.getDirection();
@@ -1152,6 +1169,10 @@ public class GameViewModel {
                                             case UP:
                                                 elmImage=imageRBRightUp;
                                                 break;
+                                            case DOWN:
+                                                elmImage=imageRBRightDown;
+                                                break;
+
                                         }
                                         break;
                                     case LEFT:
@@ -1210,7 +1231,7 @@ public class GameViewModel {
                                         break;
                                 }
                                 break;
-                            case"reboot":
+                            case"Reboot":
                                 elmImage=imageReboot;
                                 break;
                             case"Pit":
@@ -1228,51 +1249,57 @@ public class GameViewModel {
                                 switch (laserCount){
                                     case 1:
                                         if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT))
-                                        { elmImage = imagehorilaser1;}
+                                        { elmImage2 = imagehorilaser1;}
                                         if(LaserDirection.equals(Direction.UP) || LaserDirection.equals(Direction.DOWN)){
-                                            elmImage = imagelaser1Vertical;
+                                            elmImage2 = imagelaser1Vertical;
                                         }
                                         break;
                                     case 2:
                                         if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT))
-                                        {  elmImage = imagehorilaser2; }
+                                        {  elmImage2 = imagehorilaser2; }
                                         if(LaserDirection.equals(Direction.UP) || LaserDirection.equals(Direction.DOWN)){
-                                            elmImage = imagelaser2Vertical;
+                                            elmImage2 = imagelaser2Vertical;
                                         }
                                         break;
                                     case 3:
                                         if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT)) {
-                                            elmImage = imagehorilaser3;
+                                            elmImage2 = imagehorilaser3;
                                         }
                                         if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT)){
-                                            elmImage = imagelaser3Vertical;
+                                            elmImage2 = imagelaser3Vertical;
                                         }
                                         break;
                                 }
                                 break;
                             case"Wall":
-                                Direction wallDirection=boardElem2.getDirection2();
+                                Direction wallDirection=boardElem2.getDirection();
                                 switch (wallDirection){
                                     case UP:
-                                        elmImage=imageWallUp;
+                                        elmImage2=imageWallUp;
                                         break;
                                     case LEFT:
-                                        elmImage=imageWallLeft;
+                                        elmImage2=imageWallLeft;
                                         break;
                                     case  DOWN:
-                                        elmImage=imageWallDown;
+                                        elmImage2=imageWallDown;
                                         break;
                                     case  RIGHT:
-                                        elmImage=imageWallRight;
+                                        elmImage2=imageWallRight;
                                         break;
                                 }
+                                break;
                             case"Empty":
+                                elmImage2=imageEmpty;
                                 break;
                         }
                         ImageView boardElem=new ImageView(elmImage);
+                        ImageView boardElemSecond=new ImageView(elmImage2);
                         boardElem.setFitHeight(43);
                         boardElem.setFitWidth(43);
+                        boardElemSecond.setFitWidth(43);
+                        boardElemSecond.setFitHeight(43);
                         gameboard.add(boardElem,y,x);
+                        gameboard.add(boardElemSecond,y,x);
                     }
 
                 }
