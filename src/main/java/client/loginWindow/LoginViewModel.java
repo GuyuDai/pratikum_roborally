@@ -93,14 +93,13 @@ public class LoginViewModel {
         String name = model.getTextFieldContent().get();
         //Client.getPlayerOnline().setPlayer(name);
         nameInput.getText();
-
-        openLobbyWindow();
-
         //Client.getPlayerOnline().sendToAll("SERVER: " + name + " has entered the chat!");
 
         Stage stage = (Stage) sendNameButton.getScene().getWindow();
         stage.close();
         setWindowName("Lobby");
+
+        openLobbyWindow();
     }
 
     public void openLobbyWindow(){
@@ -112,6 +111,7 @@ public class LoginViewModel {
             stageGame.setScene(new Scene(rootGame));
             stageGame.show();
         } catch (Exception e){
+            System.out.println("test ");
         }
     }
 

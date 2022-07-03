@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import server.BoardTypes.Board;
 import server.BoardTypes.DizzyHighway;
 import server.Control.Direction;
-
 import java.net.URL;
 
 public class MapBuilder {
