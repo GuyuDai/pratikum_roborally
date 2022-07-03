@@ -17,6 +17,8 @@ import javafx.scene.layout.*;
 import server.BoardElement.BoardElem;
 import server.BoardTypes.Board;
 import server.BoardTypes.DizzyHighway;
+import server.BoardTypes.ExtraCrispy;
+import server.BoardTypes.LostBearings;
 import server.CardTypes.*;
 import server.Control.Direction;
 import server.Deck.ProgrammingDeck;
@@ -63,6 +65,9 @@ public class GameViewModel {
 
     @FXML
     private Button selectMap;
+
+    @FXML
+    private Button startGameButton;
 
 
     /**
@@ -429,6 +434,9 @@ public class GameViewModel {
         }
     }
 
+    /**
+     * exit game and return to Lobby
+     */
     public void exitGame(ActionEvent actionEvent) {
         Stage stage = (Stage) exitBtn.getScene().getWindow();
         stage.close();
@@ -449,6 +457,7 @@ public class GameViewModel {
     CopyOnWriteArrayList<Card> programmingDecK = deck.getRemainingCards();
 
     CopyOnWriteArrayList<Card> registerPile = new CopyOnWriteArrayList<>();
+
 
     /**
      * print 9 random cards from a deck of 20
@@ -527,6 +536,9 @@ public class GameViewModel {
     }
 
 
+    /**
+     * registerCount for 5 picks
+     */
     int registerCount = 0;
 
     public void setRegisterCount(int count) {
@@ -785,12 +797,10 @@ public class GameViewModel {
         }
     }
 
-    public void showCardBtnAction() {
-        printCards();
-        Text.setText("Select 5 of these cards for your register.");
-        printMapGUI("Dizzy Highway");
-    }
 
+    /**
+     * selecting a map and enabling start game button
+     */
     public void selectMapAction(ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Map.fxml"));
@@ -801,6 +811,28 @@ public class GameViewModel {
             stageGame.show();
         } catch (Exception e) {
         }
+        startGameButton.setVisible(true);
+        selectMap.setVisible(false);
+    }
+
+    /**
+     * start game button -> map gets printed and register appears.
+     */
+    public void startGameButtonAction(ActionEvent actionEvent) {
+        hand1Button.setVisible(true);
+        hand2Button.setVisible(true);
+        hand3Button.setVisible(true);
+        hand4Button.setVisible(true);
+        hand5Button.setVisible(true);
+        hand6Button.setVisible(true);
+        hand7Button.setVisible(true);
+        hand8Button.setVisible(true);
+        hand9Button.setVisible(true);
+
+        printCards();
+        Text.setText("Select 5 of these cards for your register.");
+        playCardBtn.setVisible(true);
+        printMapGUI("Dizzy Highway");
     }
 
 
@@ -884,10 +916,10 @@ public class GameViewModel {
                 Image imageRBRightUp = new Image(rbRight2.toString());
 
                 URL rbTop = getClass().getResource("/ConveyorBelts/RB top.png");
-                Image imageRBUpLeft = new Image(rbTop.toString());
+                Image imageRBUpRight = new Image(rbTop.toString());
 
                 URL rbTop2 = getClass().getResource("/ConveyorBelts/RB top2.png");
-                Image imageRBUpRight = new Image(rbTop2.toString());
+                Image imageRBUpLeft = new Image(rbTop2.toString());
 
                 /**
                  * Board Images
@@ -978,6 +1010,10 @@ public class GameViewModel {
                 URL wallLaser1Right = getClass().getResource("/Laser/WallLaser1Right.png");
                 Image imagewallLaser1Right = new Image(wallLaser1Right.toString());
 
+                URL rbRight = getClass().getResource("/img.png");
+                Image imageRBRightDown = new Image(rbRight.toString());
+
+
 
                 /**
                  * others
@@ -1000,19 +1036,31 @@ public class GameViewModel {
                 URL empty = getClass().getResource("/Empty.png");
                 Image imageEmpty = new Image(empty.toString());
 
+                //URL rbRight = getClass().getResource("ConveyorBelts/RB right.png");
+               // Image imageRBRightDown = new Image(rbRight.toString());
+                URL RBGreenUpRight = getClass().getResource("/ConveyorBelts/RBGreenUpRight.png");
+                Image imageRBGreenUpRight = new Image(RBGreenUpRight.toString());
+                URL RBGreenDownLeft = getClass().getResource("/ConveyorBelts/RBGreenDownLeft.png");
+                Image imageRBGreenDownLeft = new Image(RBGreenDownLeft.toString());
+                URL RBGreenDownRight = getClass().getResource("/ConveyorBelts/RBGreenDownRight.png");
+                Image imageRBGreenDownRight = new Image(RBGreenDownRight.toString());
+                URL RBGreenUpLeft = getClass().getResource("/ConveyorBelts/RBGreenUpLeft.png");
+                Image imageRBGreenUpLeft = new Image(RBGreenUpLeft.toString());
 
 
 
 
-                Board board=new DizzyHighway();
+
+
+
+                Board board=new ExtraCrispy();
                 System.out.println(board.getWidth());
 
                 //public void printMap() {
                 Image elmImage = null;
+                Image elmImage2=null;
                 for (int x = 0; x < 10; x++) {
                     for (int y = 0; y < 13; y++) {
-
-
                         BoardElem boardElem1 = board.getBoardElem(x, y, 0);
                         BoardElem boardElem2 = board.getBoardElem(x, y, 1);
                         String firstBoardElmName = boardElem1.getName();
@@ -1088,40 +1136,21 @@ public class GameViewModel {
                                 int count=boardElem1.getCount();
                                 Direction LaserDirection=boardElem1.getDirection();
                                 String name=boardElem2.getName();
-                                if(!name.equals("Wall")) {
+                                Direction WallDirection=boardElem2.getDirection();
+                                if(name.equals("Wall")&&LaserDirection.equals(WallDirection.turn180())) {
                                     switch (count) {
                                         case 1:
-                                            if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT))
-                                            { elmImage = imagehorilaser1;}
-                                            if(LaserDirection.equals(Direction.UP) || LaserDirection.equals(Direction.DOWN)){
-                                                elmImage = imagelaser1Vertical;
-                                            }
-                                            break;
-                                        case 2:
-                                            if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT))
-                                            {  elmImage = imagehorilaser2; }
-                                            if(LaserDirection.equals(Direction.UP) || LaserDirection.equals(Direction.DOWN)){
-                                                elmImage = imagelaser2Vertical;
-                                            }
-                                            break;
-                                        case 3:
-                                            if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT)) {
-                                                elmImage = imagehorilaser3;
-                                            }
-                                            if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT)){
-                                                elmImage = imagelaser3Vertical;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else {
-                                    switch (count) {
-                                        case 1:
-                                            if (LaserDirection.equals(Direction.UP) || LaserDirection.equals(Direction.DOWN)) {
+                                            if ( LaserDirection.equals(Direction.DOWN)) {
                                                 elmImage = imageWallLaser1Vertical;
                                             }
-                                            if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT)){
+                                            if (LaserDirection.equals(Direction.RIGHT) ){
                                                 elmImage = imagewallRightLaser1;
+                                            }
+                                            if(LaserDirection.equals(Direction.UP)){
+                                                elmImage=imageWallLaser1Vertical2;
+                                            }
+                                            if (LaserDirection.equals(Direction.LEFT)){
+                                                elmImage=imagewallLaser1Right;
                                             }
                                             break;
                                         case 2:
@@ -1142,90 +1171,8 @@ public class GameViewModel {
                                             break;
                                     }
                                 }
-                                break;
-                            case"RotatingBelt":
-                                Direction direction1=boardElem1.getDirection();
-                                Direction direction2=boardElem1.getDirection2();
-                                switch (direction1){
-                                    case RIGHT:
-                                        switch (direction2){
-                                            case UP:
-                                                elmImage=imageRBRightUp;
-                                                break;
-                                        }
-                                        break;
-                                    case LEFT:
-                                        switch (direction2){
-                                            case UP:
-                                                elmImage=imageRBLeftUp;
-                                                break;
-                                            case DOWN:
-                                                elmImage=imageRBLeftDown;
-                                                break;
-                                        }
-                                        break;
-                                    case UP:
-                                        switch (direction2){
-                                            case RIGHT:
-                                                elmImage=imageRBUpRight;
-                                                break;
-                                            case LEFT:
-                                                elmImage=imageRBUpLeft;
-                                                break;
-                                        }
-                                        break;
-                                    case DOWN:
-                                        switch (direction2){
-                                            case RIGHT:
-                                                elmImage=imageRBDownRight;
-                                                break;
-                                            case LEFT:
-                                                elmImage=imageRBDownLeft;
-                                        }
-                                        break;
-                                }
-                                break;
-                            case"Antenna":
-                                elmImage=imageAntenna;
-                                break;
-                            case"PushPanel":
-                                int speedPushPanel=boardElem1.getSpeed();
-                                switch (speedPushPanel){
-                                    case 135:
-                                        elmImage=imagePP135;
-                                        break;
-                                    case 24:
-                                        elmImage=imagePP24;
-                                        break;
-                                }
-                                break;
-                            case"Gear":
-                                String turnDirection=boardElem1.getTurnDirection();
-                                switch (turnDirection){
-                                    case "TurnLeft":
-                                        elmImage=imageGearLeft;
-                                        break;
-                                    case"TurnRight":
-                                        elmImage=imageGearRight;
-                                        break;
-                                }
-                                break;
-                            case"reboot":
-                                elmImage=imageReboot;
-                                break;
-                            case"Pit":
-                                elmImage=imagePit;
-                                break;
-                            case "Empty":
-                                elmImage=imageEmpty;
-                            default:
-                                break;
-                        }
-                        switch(secondBoardElmName){
-                            case"Laser":
-                                int laserCount=boardElem2.getCount();
-                                Direction LaserDirection=boardElem2.getDirection();
-                                switch (laserCount){
+                            else {
+                                switch (count) {
                                     case 1:
                                         if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT))
                                         { elmImage = imagehorilaser1;}
@@ -1249,30 +1196,198 @@ public class GameViewModel {
                                         }
                                         break;
                                 }
+                            }
                                 break;
-                            case"Wall":
-                                Direction wallDirection=boardElem2.getDirection2();
-                                switch (wallDirection){
-                                    case UP:
-                                        elmImage=imageWallUp;
+                            case"RotatingBelt":
+                                Direction direction1=boardElem1.getDirection();
+                                Direction direction2=boardElem1.getDirection2();
+                                int beltSpeed=boardElem1.getSpeed();
+                                switch (beltSpeed) {
+                                    case 2:
+                                    switch (direction1) {
+                                        case RIGHT:
+                                            switch (direction2) {
+                                                case UP:
+                                                    elmImage = imageRBRightUp;
+                                                    break;
+                                                case DOWN:
+                                                    elmImage = imageRBRightDown;
+                                                    break;
+
+                                            }
+                                            break;
+                                        case LEFT:
+                                            switch (direction2) {
+                                                case UP:
+                                                    elmImage = imageRBLeftUp;
+                                                    break;
+                                                case DOWN:
+                                                    elmImage = imageRBLeftDown;
+                                                    break;
+                                            }
+                                            break;
+                                        case UP:
+                                            switch (direction2) {
+                                                case RIGHT:
+                                                    elmImage = imageRBUpRight;
+                                                    break;
+                                                case LEFT:
+                                                    elmImage = imageRBUpLeft;
+                                                    break;
+                                            }
+                                            break;
+                                        case DOWN:
+                                            switch (direction2) {
+                                                case RIGHT:
+                                                    elmImage = imageRBDownRight;
+                                                    break;
+                                                case LEFT:
+                                                    elmImage = imageRBDownLeft;
+                                                    break;
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                    case 1:
+                                        switch(direction1){
+                                            case UP:
+                                                switch (direction2) {
+                                                    case RIGHT:
+                                                        elmImage=imageRBGreenUpRight;
+                                                        break;
+                                                    case LEFT:
+                                                        elmImage = imageRBGreenUpLeft;
+                                                        break;
+                                                }
+                                                break;
+
+
+                                            case DOWN:
+                                                switch (direction2) {
+                                                    case RIGHT:
+                                                        elmImage = imageRBGreenDownRight;
+                                                        break;
+                                                    case LEFT:
+                                                        elmImage = imageRBGreenDownLeft;
+                                                        break;
+                                                }
+                                                break;
+                                        }
+
+                                }
+                                break;
+                            case"Antenna":
+                                elmImage=imageAntenna;
+                                break;
+                            case"PushPanel":
+                                int speedPushPanel=boardElem1.getSpeed();
+                                switch (speedPushPanel){
+                                    case 135:
+                                        elmImage=imagePP135;
                                         break;
-                                    case LEFT:
-                                        elmImage=imageWallLeft;
-                                        break;
-                                    case  DOWN:
-                                        elmImage=imageWallDown;
-                                        break;
-                                    case  RIGHT:
-                                        elmImage=imageWallRight;
+                                    case 24:
+                                        elmImage=imagePP24;
                                         break;
                                 }
+                                break;
+                            case"Gear":
+                                String turnDirection=boardElem1.getTurnDirection();
+                                switch (turnDirection){
+                                    case "turnLeft":
+                                        elmImage=imageGearLeft;
+                                        break;
+                                    case"turnRight":
+                                        elmImage=imageGearRight;
+                                        break;
+                                }
+                                break;
+                            case"Reboot":
+                                elmImage=imageReboot;
+                                break;
+                            case"Pit":
+                                elmImage=imagePit;
+                                break;
+                            case "Empty":
+                                elmImage=imageEmpty;
+                            default:
+                                break;
+                        }
+                        switch(secondBoardElmName){
+                            case"Laser":
+                                int laserCount=boardElem2.getCount();
+                                Direction LaserDirection=boardElem2.getDirection();
+                                switch (laserCount){
+                                    case 1:
+                                        if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT))
+                                        { elmImage2 = imagehorilaser1;}
+                                        if(LaserDirection.equals(Direction.UP) || LaserDirection.equals(Direction.DOWN)){
+                                            elmImage2 = imagelaser1Vertical;
+                                        }
+                                        break;
+                                    case 2:
+                                        if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT))
+                                        {  elmImage2 = imagehorilaser2; }
+                                        if(LaserDirection.equals(Direction.UP) || LaserDirection.equals(Direction.DOWN)){
+                                            elmImage2 = imagelaser2Vertical;
+                                        }
+                                        break;
+                                    case 3:
+                                        if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT)) {
+                                            elmImage2 = imagehorilaser3;
+                                        }
+                                        if (LaserDirection.equals(Direction.RIGHT) || LaserDirection.equals(Direction.LEFT)){
+                                            elmImage2 = imagelaser3Vertical;
+                                        }
+                                        break;
+                                }
+                                break;
+                            case"Wall":
+                                Direction wallDirection=boardElem2.getDirection();
+                                switch (wallDirection){
+                                    case UP:
+                                        elmImage2=imageWallUp;
+                                        break;
+                                    case LEFT:
+                                        elmImage2=imageWallLeft;
+                                        break;
+                                    case  DOWN:
+                                        elmImage2=imageWallDown;
+                                        break;
+                                    case  RIGHT:
+                                        elmImage2=imageWallRight;
+                                        break;
+                                }
+                                break;
                             case"Empty":
+                                elmImage2=imageEmpty;
                                 break;
                         }
                         ImageView boardElem=new ImageView(elmImage);
+                        ImageView boardElemSecond=new ImageView(elmImage2);
                         boardElem.setFitHeight(43);
                         boardElem.setFitWidth(43);
+                        boardElemSecond.setFitWidth(43);
+                        boardElemSecond.setFitHeight(43);
                         gameboard.add(boardElem,y,x);
+                        gameboard.add(boardElemSecond,y,x);
+                        if(board.getName().equals("ExtraCrispy")){
+                            ImageView checkPointOne=new ImageView(imageCheckPoint1);
+                            ImageView checkPointTwo=new ImageView(imageCheckPoint2);
+                            ImageView checkPointThree=new ImageView(imageCheckPoint3);
+                            ImageView checkPointFour=new ImageView(imageCheckPoint4);
+                            checkPointThree.setFitHeight(43);
+                            checkPointOne.setFitHeight(43);
+                            checkPointTwo.setFitHeight(43);
+                            checkPointFour.setFitHeight(43);
+                            checkPointOne.setFitWidth(43);
+                            checkPointThree.setFitWidth(43);
+                            checkPointTwo.setFitWidth(43);
+                            checkPointFour.setFitWidth(43);
+                             gameboard.add(checkPointFour,5,2);
+                             gameboard.add(checkPointOne,10,2);
+                             gameboard.add(checkPointTwo,5,7);
+                             gameboard.add(checkPointThree,10,7);
+                        }
                     }
 
                 }
@@ -1280,6 +1395,9 @@ public class GameViewModel {
             }
 
     }
+
+
+
 }
 
 
