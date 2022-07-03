@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -14,8 +14,16 @@ import protocol.ProtocolFormat.MessageType;
 
 public class SelectedDamage extends Message {
 
-    private class SelectedDamageBody extends AbstractMessageBody{
+    public class SelectedDamageBody extends MessageBody {
         protected String[] cards;
+
+        public String[] getCards() {
+            return cards;
+        }
+
+        public void setCards(String[] cards) {
+            this.cards = cards;
+        }
     }
     public SelectedDamage (String[] cards){
         this.messageType = MessageType.selectedDamage;

@@ -1,13 +1,21 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class Welcome extends Message {
 
-    private class WelcomeBody extends AbstractMessageBody{
+    public class WelcomeBody extends MessageBody {
         protected int clientID;
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
     }
     public Welcome (int clientID) {
         this.messageType = MessageType.welcome;

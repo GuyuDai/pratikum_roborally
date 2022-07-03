@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -10,10 +10,34 @@ import protocol.ProtocolFormat.MessageType;
 
 public class ReplaceCard extends Message {
 
-    private class ReplaceCardBody extends AbstractMessageBody{
+    public class ReplaceCardBody extends MessageBody {
         protected int register;
         protected String newCard;
         protected int clientID;
+
+        public int getRegister() {
+            return register;
+        }
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public String getNewCard() {
+            return newCard;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
+
+        public void setRegister(int register) {
+            this.register = register;
+        }
+
+        public void setNewCard(String newCard) {
+            this.newCard = newCard;
+        }
     }
     public ReplaceCard (int register, String newCard, int clientID) {
         this.messageType = MessageType.replaceCard;

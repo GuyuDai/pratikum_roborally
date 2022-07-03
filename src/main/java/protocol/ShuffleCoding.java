@@ -1,13 +1,21 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class ShuffleCoding extends Message {
 
-    private class ShuffleCodingBody extends AbstractMessageBody{
+    public class ShuffleCodingBody extends MessageBody {
         protected int clientID;
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
     }
     public ShuffleCoding (int clientID) {
         this.messageType = MessageType.shuffleCoding;

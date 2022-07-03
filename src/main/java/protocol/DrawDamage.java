@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -10,9 +10,25 @@ import protocol.ProtocolFormat.MessageType;
 
 public class DrawDamage extends Message {
 
-    private class DrawDamageBody extends AbstractMessageBody{
+    public class DrawDamageBody extends MessageBody {
         protected int clientID;
         protected String[] cards;
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public String[] getCards() {
+            return cards;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
+
+        public void setCards(String[] cards) {
+            this.cards = cards;
+        }
     }
     public DrawDamage (int clientID, String[] cards) {
         this.messageType = MessageType.drawDamage;

@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Map;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
@@ -9,8 +9,16 @@ import java.util.List;
 
 public class GameStarted extends Message {
 
-  private class GameStartedBody extends AbstractMessageBody{
+  public class GameStartedBody extends MessageBody {
     protected List<Map> gameMap;
+
+    public List<Map> getGameMap() {
+      return gameMap;
+    }
+
+    public void setGameMap(List<Map> gameMap) {
+      this.gameMap = gameMap;
+    }
   }
 
     public GameStarted (List<Map> gameMap) {

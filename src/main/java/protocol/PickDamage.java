@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -13,9 +13,25 @@ import protocol.ProtocolFormat.MessageType;
 
 public class PickDamage extends Message {
 
-    private class PickDamageBody extends AbstractMessageBody{
+    public class PickDamageBody extends MessageBody {
         protected int count;
         protected String[] availablePiles;
+
+        public int getCount() {
+            return count;
+        }
+
+        public String[] getAvailablePiles() {
+            return availablePiles;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
+
+        public void setAvailablePiles(String[] availablePiles) {
+            this.availablePiles = availablePiles;
+        }
     }
     public PickDamage (int count, String[] availablePiles){
         this.messageType = MessageType.pickDamage;

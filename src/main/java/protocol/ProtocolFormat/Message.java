@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder;
 
 public abstract class Message{
     public String messageType;
-    public AbstractMessageBody messageBody;
+    public MessageBody messageBody;
 
     @Override
     public String toString(){
@@ -18,13 +18,14 @@ public abstract class Message{
             result = gson.toJson(this);
         }
         return result;
+
     }
 
     public String getMessageType() {
         return messageType;
     }
 
-    public AbstractMessageBody getMessageBody() {
+    public MessageBody getMessageBody() {
         return messageBody;
     }
 }

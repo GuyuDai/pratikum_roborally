@@ -1,13 +1,21 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class CurrentPlayer extends Message {
 
-    private class CurrentPlayerBody extends AbstractMessageBody{
+    public class CurrentPlayerBody extends MessageBody {
         protected int clientID;
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
     }
     public CurrentPlayer (int clientID) {
         this.messageType = MessageType.currentPlayer;

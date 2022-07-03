@@ -1,14 +1,22 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 
 public class RebootDirection extends Message {
 
-    private class RebootDirectionBody extends AbstractMessageBody{
+    public class RebootDirectionBody extends MessageBody {
         protected String direction;
+
+        public String getDirection() {
+            return direction;
+        }
+
+        public void setDirection(String direction) {
+            this.direction = direction;
+        }
     }
     public RebootDirection (String direction){
         this.messageType = MessageType.rebootDirection;

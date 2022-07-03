@@ -1,14 +1,30 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class SendChat extends Message {
 
-    private class SendChatBody extends AbstractMessageBody{
+    public class SendChatBody extends MessageBody {
         protected String message;
         protected int to;
+
+        public String getMessage() {
+            return message;
+        }
+
+        public int getTo() {
+            return to;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public void setTo(int to) {
+            this.to = to;
+        }
     }
     public SendChat (String message, int to) {
         this.messageType = MessageType.sendChat;

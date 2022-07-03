@@ -1,13 +1,21 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class SetStatus extends Message {
 
-    private class SetStatusBody extends AbstractMessageBody{
+    public class SetStatusBody extends MessageBody {
         protected boolean ready;
+
+        public boolean isReady() {
+            return ready;
+        }
+
+        public void setReady(boolean ready) {
+            this.ready = ready;
+        }
     }
     public SetStatus (boolean ready) {
         this.messageType = MessageType.setStatus;

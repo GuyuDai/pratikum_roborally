@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -10,9 +10,25 @@ import protocol.ProtocolFormat.MessageType;
 
 public class PlayerTurning extends Message {
 
-    private class PlayerTurningBody extends AbstractMessageBody{
+    public class PlayerTurningBody extends MessageBody {
         protected int clientID;
         protected String rotation;
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public String getRotation() {
+            return rotation;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
+
+        public void setRotation(String rotation) {
+            this.rotation = rotation;
+        }
     }
     public PlayerTurning (int clientID, String rotation){
         this.messageType = MessageType.playerTurning;
