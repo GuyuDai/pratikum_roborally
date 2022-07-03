@@ -35,7 +35,6 @@ public class ExtraCrispy extends Board {
         map[0][4][1] = empty;
         map[0][4][2] = empty;
 
-
         map[0][5][0] = empty;
         map[0][5][1] = empty;
         map[0][5][2] = empty;
@@ -67,6 +66,9 @@ public class ExtraCrispy extends Board {
         map[0][12][0] = empty;
         map[0][12][1] = empty;
         map[0][12][2] = empty;
+
+
+
 
         map[1][0][0] = empty;
         map[1][0][1] = empty;
@@ -120,6 +122,9 @@ public class ExtraCrispy extends Board {
         map[1][12][1] = empty;
         map[1][12][2] = empty;
 
+
+
+
         map[2][0][0] = empty;
         map[2][0][1] = empty;
         map[2][0][2] = empty;
@@ -127,7 +132,6 @@ public class ExtraCrispy extends Board {
         map[2][1][0]= new Wall(currentGame, Direction.UP);
         map[2][1][1] = empty;
         map[2][1][2] = empty;
-
 
         map[2][2][0] = empty;
         map[2][2][1] = empty;
@@ -141,7 +145,7 @@ public class ExtraCrispy extends Board {
         map[2][4][1] = empty;
         map[2][4][2] = empty;
 
-        map[2][5][0] = new CheckPoint(currentGame,1);
+        map[2][5][0] = new CheckPoint(currentGame,4);
         map[2][5][1] = new Wall(currentGame, Direction.UP);
         map[2][5][2] = new Laser(currentGame, 1,Direction.DOWN);
 
@@ -173,6 +177,9 @@ public class ExtraCrispy extends Board {
         map[2][12][1] = empty;
         map[2][12][2] = empty;
 
+
+
+
         map[3][0][0]= new StartingPoint(currentGame);
         map[3][0][1] = empty;
         map[3][0][2] = empty;
@@ -201,7 +208,6 @@ public class ExtraCrispy extends Board {
         map[3][6][1] = empty;
         map[3][6][2] = empty;
 
-
         map[3][7][0] = new Laser(currentGame, 1,Direction.LEFT);
         map[3][7][1] = new Wall(currentGame, Direction.LEFT);
         map[3][7][2] = empty;
@@ -226,6 +232,9 @@ public class ExtraCrispy extends Board {
         map[3][12][1] = empty;
         map[3][12][2] = empty;
 
+
+
+
         map[4][0][0] = new Antenna(currentGame);
         map[4][0][1] = empty;
         map[4][0][2] = empty;
@@ -233,7 +242,6 @@ public class ExtraCrispy extends Board {
         map[4][1][0]= new StartingPoint(currentGame);
         map[4][1][1] = empty;
         map[4][1][2] = empty;
-
 
         map[4][2][0]= new Wall(currentGame, Direction.RIGHT);
         map[4][2][1] = empty;
@@ -331,6 +339,9 @@ public class ExtraCrispy extends Board {
         map[5][12][1] = empty;
         map[5][12][2] = empty;
 
+
+
+
         map[6][0][0] = new StartingPoint(currentGame);
         map[6][0][1] = empty;
         map[6][0][2] = empty;
@@ -375,7 +386,6 @@ public class ExtraCrispy extends Board {
         map[6][10][1] = new Laser(currentGame, 1,Direction.DOWN);
         map[6][10][2] = empty;
 
-
         map[6][11][0] = new RotatingBelt(currentGame, 2, Direction.UP, Direction.LEFT);
         map[6][11][1] = empty;
         map[6][11][2] = empty;
@@ -383,6 +393,9 @@ public class ExtraCrispy extends Board {
         map[6][12][0] = empty;
         map[6][12][1] = empty;
         map[6][12][2] = empty;
+
+
+
 
         map[7][0][0] = empty;
         map[7][0][1] = empty;
@@ -404,14 +417,13 @@ public class ExtraCrispy extends Board {
         map[7][4][1] = empty;
         map[7][4][2] = empty;
 
-        map[7][5][0] = new CheckPoint(currentGame,1);
+        map[7][5][0] = new CheckPoint(currentGame,2);
         map[7][5][1]= new Wall(currentGame,Direction.DOWN);
         map[7][5][2]= new Laser(currentGame, 1, Direction.DOWN);
 
         map[7][6][0] = new Pit(currentGame);
         map[7][6][1] = empty;
         map[7][6][2] = empty;
-
 
         map[7][7][0] = empty;
         map[7][7][1] = empty;
@@ -425,7 +437,7 @@ public class ExtraCrispy extends Board {
         map[7][9][1] = empty;
         map[7][9][2] = empty;
 
-        map[7][10][0] = new CheckPoint(currentGame,1);
+        map[7][10][0] = new CheckPoint(currentGame,3);
         map[7][10][1]= new Wall(currentGame,Direction.DOWN);
         map[7][10][2]= new Laser(currentGame, 1, Direction.DOWN);
 
@@ -436,6 +448,9 @@ public class ExtraCrispy extends Board {
         map[7][12][0] = empty;
         map[7][12][1] = empty;
         map[7][12][2] = empty;
+
+
+
 
         map[8][0][0] = empty;
         map[8][0][1] = empty;
@@ -465,7 +480,6 @@ public class ExtraCrispy extends Board {
         map[8][6][1] = empty;
         map[8][6][2] = empty;
 
-
         map[8][7][0] = empty;
         map[8][7][1] = empty;
         map[8][7][2] = empty;
@@ -489,6 +503,7 @@ public class ExtraCrispy extends Board {
         map[8][12][0] = empty;
         map[8][12][1] = empty;
         map[8][12][2] = empty;
+
 
 
 
