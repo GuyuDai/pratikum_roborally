@@ -4,8 +4,9 @@ import client.Client;
 import client.MapBuilder;
 import client.lobbyWindow.LobbyViewModel;
 import com.google.gson.Gson;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import client.mapWindow.MapViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -36,8 +37,10 @@ public class GameViewModel {
     private static GameModel model;
     private Client client;
     private static GameViewModel instance;
+
     private Gson gson = new Gson();
 
+    public String mapSelected;
 
     public String[] cards = {"", "", "", "", "", "", "", "", ""};
 
@@ -53,6 +56,9 @@ public class GameViewModel {
     private Button sendBtn;
     @FXML
     private Button playCardBtn;
+
+    @FXML
+    private Button selectMap;
 
 
     /**
@@ -310,9 +316,6 @@ public class GameViewModel {
 
 
 
-
-
-
     /**
      * URL adress to .png file
      */
@@ -356,19 +359,16 @@ public class GameViewModel {
     Image imageCardHidden = new Image(urlCardHidden.toString());
 
 
-    /**
-     * TEST
-     * @param client
-     */
-
-
-
 
     public void initialize(Client client) {
         this.client = client;
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
         hand.getChildren().add(new ImageView());
+
+       // hand1Button.disabledProperty().bind(playCardBtn.set));
+
+
     }
 
 
@@ -790,9 +790,131 @@ public class GameViewModel {
     public void showCardBtnAction() {
         printCards();
         Text.setText("Select 5 of these cards for your register.");
+        printMapGUI("Dizzy Highway");
+    }
 
-        ;
+    public void selectMapAction(ActionEvent actionEvent) {
+        try {
+            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Map.fxml"));
+            Parent rootGame = (Parent) fxmlLoaderGame.load();
+            Stage stageGame = new Stage();
+            stageGame.setTitle("Map Selection");
+            stageGame.setScene(new Scene(rootGame));
+            stageGame.show();
+        } catch (Exception e){
+        }
+    }
 
+
+    public void printMapGUI(String setMapSelection){
+        System.out.println(MapViewModel.getMapSelection());
+        switch(setMapSelection){
+            case "Dizzy Highway":
+
+                URL wallup = getClass().getResource("/BoardImages/Wall.png");
+                Image imageWallUp = new Image(wallup.toString());
+
+
+
+                URL blueBeltTop = getClass().getResource("/ConveyorBelts/BlueBeltTop.png");
+                Image imageBlueBeltTop = new Image(blueBeltTop.toString());
+
+                URL blueBeltBottom = getClass().getResource("/ConveyorBelts/BlueBeltBottom.png");
+                Image imageBlueBeltBottom = new Image(blueBeltBottom.toString());
+
+                URL blueBeltLeft = getClass().getResource("/ConveyorBelts/BlueBeltLeft.png");
+                Image imageBlueBeltLeft = new Image(blueBeltLeft.toString());
+
+                URL greenBeltRight = getClass().getResource("/ConveyorBelts/GreenBeltRight.png");
+                Image imageGreenBeltRight = new Image(greenBeltRight.toString());
+
+                URL rbBottom = getClass().getResource("/ConveyorBelts/RB Bottom.png");
+                Image imageRBDownLeft = new Image(rbBottom.toString());
+
+                URL rbLeft = getClass().getResource("/ConveyorBelts/RB left.png");
+                Image imageRBLeftUp = new Image(rbLeft.toString());
+
+                URL rbLeft2 = getClass().getResource("/ConveyorBelts/RB left2.png");
+                Image imageRBLeftDown = new Image(rbLeft2.toString());
+
+                URL rbTop2 = getClass().getResource("/ConveyorBelts/RB top2.png");
+                Image imageRBUpRight = new Image(rbTop2.toString());
+
+
+
+
+                URL energyOff = getClass().getResource("/EnergyImg/energyOff.png");
+                Image imageenergyOff = new Image(energyOff.toString());
+
+                URL startPoint = getClass().getResource("/BoardImages/StartPoint.png");
+                Image imageStartPoint = new Image(startPoint.toString());
+
+
+
+                URL wallLaser1Vertical = getClass().getResource("/Laser/WallLaser1Vertical.png");
+                Image imageWallLaser1Vertical = new Image(wallLaser1Vertical.toString());
+
+                URL wallLaser1 = getClass().getResource("/Laser/WallLaser1.png");
+                Image imagewallRightLaser1 = new Image(wallLaser1.toString());
+
+                URL wallLaser1Right = getClass().getResource("/Laser/WallLaser1Right.png");
+                Image imagewallLaser1Right = new Image(wallLaser1Right.toString());
+
+
+
+
+                URL reboot = getClass().getResource("/others/reboot.png");
+                Image imageReboot = new Image(reboot.toString());
+
+
+
+                URL checkPoint1 = getClass().getResource("/Checkpoints/Checkpoint1.png");
+                Image imageCheckPoint1 = new Image(checkPoint1.toString());
+
+
+
+                // Zeile 1
+                mapImage20.setImage(imageGreenBeltRight);
+                mapImage40.setImage(imageBlueBeltBottom);
+                mapImage50.setImage(imageBlueBeltBottom);
+                mapImage120.setImage(imageenergyOff);
+                // Zeile 2
+                mapImage11.setImage(imageStartPoint);
+                mapImage41.setImage(imageRBDownLeft);
+                mapImage51.setImage(imageRBLeftDown);
+                mapImage61.setImage(imageBlueBeltLeft);
+                mapImage71.setImage(imageBlueBeltLeft);
+                mapImage81.setImage(imageBlueBeltLeft);
+                mapImage91.setImage(imageBlueBeltLeft);
+                mapImage101.setImage(imageBlueBeltLeft);
+                mapImage111.setImage(imageRBLeftUp);
+                mapImage121.setImage(imageBlueBeltLeft);
+                //Zeile 3
+                mapImage12.setImage(imageWallUp);
+                mapImage42.setImage(imageBlueBeltBottom);
+                mapImage52.setImage(imageenergyOff);
+                mapImage112.setImage(imageRBUpRight);
+                mapImage122.setImage(imageGreenBeltRight);
+                //Zeile 4
+                mapImage03.setImage(imageStartPoint);
+                mapImage43.setImage(imageBlueBeltBottom);
+                mapImage63.setImage(imageWallLaser1Vertical);
+                mapImage73.setImage(imageReboot);
+                mapImage83.setImage(imagewallRightLaser1);
+                mapImage93.setImage(imagewallLaser1Right);
+                mapImage113.setImage(imageBlueBeltTop);
+                mapImage123.setImage(imageCheckPoint1);
+
+
+
+                break;
+            case "Death Trap":
+                break;
+            case "Extra Cripsy":
+                break;
+            case "Lost Bearings":
+                break;
+        }
     }
 }
 

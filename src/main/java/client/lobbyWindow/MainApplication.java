@@ -20,7 +20,7 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Lobby.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Login.fxml"));
             Parent rootMap = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("Map Selection");
