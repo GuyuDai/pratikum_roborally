@@ -66,7 +66,7 @@ public class DeathTrap extends Board {
         map[1][3][1] = new Wall(currentGame, Direction.DOWN);
         map[1][3][0] = empty;
 
-        map[1][4][0] = new RotatingBelt(currentGame,1, Direction.UP, Direction.RIGHT);
+        map[1][4][0] = new RotatingBelt(currentGame,1, Direction.UP, Direction.LEFT);
         map[1][4][1] = empty;
 
         map[1][5][0] = new ConveyBelt(currentGame,1, Direction.LEFT);
@@ -119,7 +119,7 @@ public class DeathTrap extends Board {
         map[2][7][1] = empty;
 
         map[2][8][0] = new CheckPoint(currentGame,4);
-        map[2][0][1] = empty;
+        map[2][8][1] = empty;
 
         map[2][9][0] = new ConveyBelt(currentGame, 1,Direction.UP);
         map[2][9][1] = empty;
@@ -188,7 +188,7 @@ public class DeathTrap extends Board {
         map[4][3][0] = new Pit(currentGame);
         map[4][3][1] = empty;
 
-        map[4][4][1] = new CheckPoint(currentGame,2);
+        map[4][4][0] = new CheckPoint(currentGame,2);
         map[4][4][1] = empty;
 
         map[4][5][0] = empty;
@@ -200,10 +200,10 @@ public class DeathTrap extends Board {
         map[4][7][0] = empty;
         map[4][7][1] = empty;
 
-        map[4][8][0] = new RotatingBelt(currentGame, 1, Direction.UP, Direction.RIGHT);
+        map[4][8][0] = new RotatingBelt(currentGame, 1, Direction.RIGHT, Direction.UP);
         map[4][8][1] = empty;
 
-        map[4][9][0] = new RotatingBelt(currentGame, 1, Direction.RIGHT, Direction.UP);
+        map[4][9][0] = new RotatingBelt(currentGame, 1, Direction.UP, Direction.RIGHT);
         map[4][9][1] = empty;
 
         map[4][10][1] = new Wall(currentGame, Direction.LEFT);
@@ -217,10 +217,10 @@ public class DeathTrap extends Board {
 
 
 
-        map[5][0][0] = new RotatingBelt(currentGame, 1, Direction.LEFT, Direction.DOWN);
+        map[5][0][0] = new RotatingBelt(currentGame, 1, Direction.DOWN, Direction.LEFT);
         map[5][0][1] = empty;
 
-        map[5][1][0] = new RotatingBelt(currentGame, 1, Direction.DOWN, Direction.LEFT);
+        map[5][1][0] = new RotatingBelt(currentGame, 1, Direction.LEFT, Direction.DOWN);
         map[5][1][1] = empty;
 
         map[5][2][0]= empty;
@@ -233,7 +233,7 @@ public class DeathTrap extends Board {
         map[5][4][1] = empty;
 
         map[5][5][1] = new Wall(currentGame, Direction.DOWN);
-        map[5][0][0] = empty;
+        map[5][5][0] = empty;
 
         map[5][6][0] = new Pit(currentGame);
         map[5][6][1] = empty;
@@ -355,7 +355,7 @@ public class DeathTrap extends Board {
         map[8][4][0] = new ConveyBelt(currentGame,1, Direction.RIGHT);
         map[8][4][1] = empty;
 
-        map[8][5][0] = new RotatingBelt(currentGame, 1, Direction.RIGHT, Direction.DOWN);
+        map[8][5][0] = new RotatingBelt(currentGame, 1, Direction.DOWN, Direction.RIGHT);
         map[8][5][1] = empty;
 
         map[8][6][1] = new Wall(currentGame, Direction.UP);
@@ -396,7 +396,7 @@ public class DeathTrap extends Board {
         map[9][4][0] = empty;
         map[9][4][1] = empty;
 
-        map[9][5][0] = new RotatingBelt(currentGame, 1, Direction.DOWN, Direction.RIGHT);
+        map[9][5][0] = new RotatingBelt(currentGame, 1, Direction.RIGHT, Direction.DOWN);
         map[9][5][1] = empty;
 
         map[9][6][0] = new ConveyBelt(currentGame,1, Direction.RIGHT);

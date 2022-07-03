@@ -1077,7 +1077,7 @@ public class GameViewModel {
 
 
 
-                Board board=new DizzyHighway();
+                Board board=new DeathTrap();
                 System.out.println(board.getWidth());
 
                 //public void printMap() {
@@ -1228,7 +1228,31 @@ public class GameViewModel {
                                 int beltSpeed=boardElem1.getSpeed();
                                 switch (beltSpeed) {
                                     case 2:
-                                    switch (direction1) {
+                                        if(board.getName().equals("ExtraCrispy")) {
+                                            switch (direction1) {
+                                                case RIGHT:
+                                                    switch (direction2) {
+                                                        case UP:
+                                                            elmImage = imageBlueRotatingUpRight;
+                                                            break;
+                                                        case DOWN:
+                                                            elmImage = imageBlueRotatingDownRight;
+                                                            break;
+                                                    }
+                                                    break;
+                                                case LEFT:
+                                                    switch (direction2) {
+                                                        case UP:
+                                                            elmImage = imageBlueRotatingUpLeft;
+                                                            break;
+                                                        case DOWN:
+                                                            elmImage = imageBlueRotatingDownLeft;
+                                                            break;
+                                                    }
+                                                    break;
+                                            }
+                                        }
+                                   else switch (direction1) {
                                         case RIGHT:
                                             switch (direction2) {
                                                 case UP:
@@ -1306,7 +1330,7 @@ public class GameViewModel {
                             case"PushPanel":
                                 String PushPanelReg=boardElem1.getPush();
                                 switch (PushPanelReg){
-                                    case "1,3,5":
+                                    case"1,3,5":
                                         elmImage=imagePP135;
                                         break;
                                     case "2,4":

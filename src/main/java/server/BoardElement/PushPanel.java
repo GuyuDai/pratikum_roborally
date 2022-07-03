@@ -9,7 +9,7 @@ public class PushPanel extends BoardElem implements Move {
 
   public PushPanel(RR currentGame, String push, Direction direction) {
 
-    super("PushPanelOne", currentGame);
+    super("PushPanel", currentGame);
     this.direction=direction;
     this.push=push;
   }

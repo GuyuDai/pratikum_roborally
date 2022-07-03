@@ -196,7 +196,7 @@ public class ExtraCrispy extends Board {
         map[3][3][1] = empty;
         map[3][3][2] = empty;
 
-        map[3][4][0] = new RotatingBelt(currentGame,2, Direction.UP, Direction.LEFT);
+        map[3][4][0] = new RotatingBelt(currentGame,2, Direction.RIGHT, Direction.DOWN);
         map[3][4][1] = empty;
         map[3][4][2] = empty;
 
