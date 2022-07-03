@@ -17,6 +17,7 @@ import javafx.scene.layout.*;
 import server.BoardElement.BoardElem;
 import server.BoardTypes.Board;
 import server.BoardTypes.DizzyHighway;
+import server.BoardTypes.LostBearings;
 import server.CardTypes.*;
 import server.Control.Direction;
 import server.Deck.ProgrammingDeck;
@@ -1013,7 +1014,7 @@ public class GameViewModel {
 
 
 
-                Board board=new DizzyHighway();
+                Board board=new LostBearings();
                 System.out.println(board.getWidth());
 
                 //public void printMap() {
@@ -1021,8 +1022,6 @@ public class GameViewModel {
                 Image elmImage2=null;
                 for (int x = 0; x < 10; x++) {
                     for (int y = 0; y < 13; y++) {
-
-
                         BoardElem boardElem1 = board.getBoardElem(x, y, 0);
                         BoardElem boardElem2 = board.getBoardElem(x, y, 1);
                         String firstBoardElmName = boardElem1.getName();
@@ -1163,47 +1162,95 @@ public class GameViewModel {
                             case"RotatingBelt":
                                 Direction direction1=boardElem1.getDirection();
                                 Direction direction2=boardElem1.getDirection2();
-                                switch (direction1){
-                                    case RIGHT:
-                                        switch (direction2){
-                                            case UP:
-                                                elmImage=imageRBRightUp;
-                                                break;
-                                            case DOWN:
-                                                elmImage=imageRBRightDown;
-                                                break;
+                                int beltSpeed=boardElem1.getSpeed();
+                                switch (beltSpeed) {
+                                    case 2:
+                                    switch (direction1) {
+                                        case RIGHT:
+                                            switch (direction2) {
+                                                case UP:
+                                                    elmImage = imageRBRightUp;
+                                                    break;
+                                                case DOWN:
+                                                    elmImage = imageRBRightDown;
+                                                    break;
 
-                                        }
-                                        break;
-                                    case LEFT:
-                                        switch (direction2){
+                                            }
+                                            break;
+                                        case LEFT:
+                                            switch (direction2) {
+                                                case UP:
+                                                    elmImage = imageRBLeftUp;
+                                                    break;
+                                                case DOWN:
+                                                    elmImage = imageRBLeftDown;
+                                                    break;
+                                            }
+                                            break;
+                                        case UP:
+                                            switch (direction2) {
+                                                case RIGHT:
+                                                    elmImage = imageRBUpRight;
+                                                    break;
+                                                case LEFT:
+                                                    elmImage = imageRBUpLeft;
+                                                    break;
+                                            }
+                                            break;
+                                        case DOWN:
+                                            switch (direction2) {
+                                                case RIGHT:
+                                                    elmImage = imageRBDownRight;
+                                                    break;
+                                                case LEFT:
+                                                    elmImage = imageRBDownLeft;
+                                                    break;
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                    case 1:
+                                        switch(direction1){
+
                                             case UP:
-                                                elmImage=imageRBLeftUp;
-                                                break;
+                                                switch (direction2) {
+                                                    case RIGHT:
+                                                        elmImage = imageGreenRotating;
+                                                        break;
+                                                    case LEFT:
+                                                        elmImage = imageRBDownLeft;
+                                                        break;
+                                                }
+                                            case RIGHT:
+                                                switch (direction2) {
+                                                    case RIGHT:
+                                                        elmImage = imageRBDownRight;
+                                                        break;
+                                                    case LEFT:
+                                                        elmImage = imageRBDownLeft;
+                                                        break;
+                                                }
                                             case DOWN:
-                                                elmImage=imageRBLeftDown;
-                                                break;
-                                        }
-                                        break;
-                                    case UP:
-                                        switch (direction2){
-                                            case RIGHT:
-                                                elmImage=imageRBUpRight;
-                                                break;
+                                                switch (direction2) {
+                                                    case RIGHT:
+                                                        elmImage = imageRBDownRight;
+                                                        break;
+                                                    case LEFT:
+                                                        elmImage = imageRBDownLeft;
+                                                        break;
+                                                }
+
                                             case LEFT:
-                                                elmImage=imageRBUpLeft;
-                                                break;
+                                                switch (direction2) {
+                                                    case RIGHT:
+                                                        elmImage = imageRBDownRight;
+                                                        break;
+                                                    case LEFT:
+                                                        elmImage = imageRBDownLeft;
+                                                        break;
+                                                }
                                         }
-                                        break;
-                                    case DOWN:
-                                        switch (direction2){
-                                            case RIGHT:
-                                                elmImage=imageRBDownRight;
-                                                break;
-                                            case LEFT:
-                                                elmImage=imageRBDownLeft;
-                                        }
-                                        break;
+
                                 }
                                 break;
                             case"Antenna":
@@ -1223,10 +1270,10 @@ public class GameViewModel {
                             case"Gear":
                                 String turnDirection=boardElem1.getTurnDirection();
                                 switch (turnDirection){
-                                    case "TurnLeft":
+                                    case "turnLeft":
                                         elmImage=imageGearLeft;
                                         break;
-                                    case"TurnRight":
+                                    case"turnRight":
                                         elmImage=imageGearRight;
                                         break;
                                 }

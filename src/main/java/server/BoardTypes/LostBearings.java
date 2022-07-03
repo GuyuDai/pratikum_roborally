@@ -49,7 +49,9 @@ public class LostBearings extends Board {
         map[0][10][1] = empty;
 
         map[0][11][0] = new ConveyBelt(currentGame,1,Direction.UP);;
-        map[0][12][0] = empty;
+        map[0][11][1]=empty;
+        map[0][12][0]=empty;
+        map[0][12][1] = empty;
 
 
 
@@ -185,8 +187,8 @@ public class LostBearings extends Board {
         map[4][1][0]= new StartingPoint(currentGame);
         map[4][1][1] = empty;
 
-        map[4][2][0]= new Wall(currentGame, Direction.RIGHT);
-        map[4][2][1] = empty;
+        map[4][2][1]= new Wall(currentGame, Direction.RIGHT);
+        map[4][2][0] = empty;
 
         map[4][3][0] = empty;
         map[4][3][1] = empty;
@@ -227,8 +229,8 @@ public class LostBearings extends Board {
         map[5][1][0] = new StartingPoint(currentGame);
         map[5][1][1] = empty;
 
-        map[5][2][0]= new Wall(currentGame, Direction.RIGHT);
-        map[5][2][1] = empty;
+        map[5][2][1]= new Wall(currentGame, Direction.RIGHT);
+        map[5][2][0] = empty;
 
         map[5][3][0] = empty;
         map[5][3][1] = empty;
