@@ -35,8 +35,10 @@ public abstract class Board {
   }
 
   public BoardElem getBoardElem(int x,int y, int z){
-    return this.getMap()[x][y][z];
+    return map[x][y][z];
   }
+
+
 
 
 }
