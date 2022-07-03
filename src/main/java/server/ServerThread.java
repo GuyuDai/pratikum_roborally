@@ -66,8 +66,6 @@ public class ServerThread implements Runnable {
     /**
      * PlayerValues
      */
-    String name;
-    int figure;
 
 
     /**
@@ -133,8 +131,8 @@ public class ServerThread implements Runnable {
         MessageBody messageBody = message.getMessageBody();
         switch (messageType){
             case MessageType.activePhase:
-                ActivePhaseBody activePhaseBodybody = (ActivePhaseBody) messageBody;
-                this.phase = activePhaseBodybody.getPhase();
+                ActivePhaseBody activePhaseBody = (ActivePhaseBody) messageBody;
+                this.phase = activePhaseBody.getPhase();
                 break;
 
             case MessageType.animation:
@@ -164,8 +162,8 @@ public class ServerThread implements Runnable {
 
             case MessageType.playerValues:
                 PlayerValuesBody playerValuesBody = (PlayerValuesBody) messageBody;
-                name = playerValuesBody.getName();
-                figure = playerValuesBody.getFigure();
+                String name = playerValuesBody.getName();
+                int figure = playerValuesBody.getFigure();
                 player=new Player(name);
                 player.setOwnRobot(figure);
                 break;

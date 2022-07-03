@@ -997,6 +997,11 @@ public class GameViewModel {
                 URL reboot = getClass().getResource("/others/reboot.png");
                 Image imageReboot = new Image(reboot.toString());
 
+                URL empty = getClass().getResource("/Empty.png");
+                Image imageEmpty = new Image(empty.toString());
+
+
+
 
 
                 Board board=new DizzyHighway();
@@ -1005,7 +1010,7 @@ public class GameViewModel {
                 //public void printMap() {
                 Image elmImage = null;
                 for (int x = 0; x < 1; x++) {
-                    for (int y = 0; y <= 12; y++) {
+                    for (int y = 0; y < 13; y++) {
 
 
                         BoardElem boardElem1 = board.getBoardElem(x, y, 0);
@@ -1058,19 +1063,20 @@ public class GameViewModel {
                                             break;
                                     }
                                 }
+
                                 if(speed==2){
                                     switch (direction){
                                         case UP:
                                             elmImage=imageBlueBeltTop;
                                             break;
                                         case DOWN:
-                                            elmImage=imageGreenBeltBottom;
+                                            elmImage=imageBlueBeltBottom;
                                             break;
                                         case LEFT:
-                                            elmImage=imageGreenBeltLeft;
+                                            elmImage=imageBlueBeltLeft;
                                             break;
                                         case RIGHT:
-                                            elmImage=imageGreenBeltRight;
+                                            elmImage=imageBlueBeltRight;
                                             break;
                                     }
                                 }
@@ -1210,6 +1216,8 @@ public class GameViewModel {
                             case"Pit":
                                 elmImage=imagePit;
                                 break;
+                            case "Empty":
+                                elmImage=imageEmpty;
                             default:
                                 break;
                         }
@@ -1258,10 +1266,15 @@ public class GameViewModel {
                                         elmImage=imageWallRight;
                                         break;
                                 }
+                            case"Empty":
+                                break;
                         }
                         ImageView boardElem=new ImageView(elmImage);
-                        gameboard.add(boardElem,x,y);
+                        boardElem.setFitHeight(43);
+                        boardElem.setFitWidth(43);
+                        gameboard.add(boardElem,y,x);
                     }
+
                 }
 
             }
