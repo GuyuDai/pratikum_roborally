@@ -38,9 +38,9 @@ public abstract class Board {
     return map[x][y][z];
   }
 
-
-
-
+  public String getName() {
+    return name;
+  }
 }
 
 

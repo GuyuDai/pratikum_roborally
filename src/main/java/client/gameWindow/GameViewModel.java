@@ -17,6 +17,7 @@ import javafx.scene.layout.*;
 import server.BoardElement.BoardElem;
 import server.BoardTypes.Board;
 import server.BoardTypes.DizzyHighway;
+import server.BoardTypes.ExtraCrispy;
 import server.BoardTypes.LostBearings;
 import server.CardTypes.*;
 import server.Control.Direction;
@@ -1007,6 +1008,14 @@ public class GameViewModel {
 
                 //URL rbRight = getClass().getResource("ConveyorBelts/RB right.png");
                // Image imageRBRightDown = new Image(rbRight.toString());
+                URL RBGreenUpRight = getClass().getResource("/ConveyorBelts/RBGreenUpRight.png");
+                Image imageRBGreenUpRight = new Image(RBGreenUpRight.toString());
+                URL RBGreenDownLeft = getClass().getResource("/ConveyorBelts/RBGreenDownLeft.png");
+                Image imageRBGreenDownLeft = new Image(RBGreenDownLeft.toString());
+                URL RBGreenDownRight = getClass().getResource("/ConveyorBelts/RBGreenDownRight.png");
+                Image imageRBGreenDownRight = new Image(RBGreenDownRight.toString());
+                URL RBGreenUpLeft = getClass().getResource("/ConveyorBelts/RBGreenUpLeft.png");
+                Image imageRBGreenUpLeft = new Image(RBGreenUpLeft.toString());
 
 
 
@@ -1014,7 +1023,7 @@ public class GameViewModel {
 
 
 
-                Board board=new LostBearings();
+                Board board=new ExtraCrispy();
                 System.out.println(board.getWidth());
 
                 //public void printMap() {
@@ -1211,44 +1220,28 @@ public class GameViewModel {
                                     break;
                                     case 1:
                                         switch(direction1){
-
                                             case UP:
                                                 switch (direction2) {
                                                     case RIGHT:
-                                                        elmImage = imageGreenRotating;
+                                                        elmImage=imageRBGreenUpRight;
                                                         break;
                                                     case LEFT:
-                                                        elmImage = imageRBDownLeft;
+                                                        elmImage = imageRBGreenUpLeft;
                                                         break;
                                                 }
-                                            case RIGHT:
-                                                switch (direction2) {
-                                                    case RIGHT:
-                                                        elmImage = imageRBDownRight;
-                                                        break;
-                                                    case LEFT:
-                                                        elmImage = imageRBDownLeft;
-                                                        break;
-                                                }
+                                                break;
+
+
                                             case DOWN:
                                                 switch (direction2) {
                                                     case RIGHT:
-                                                        elmImage = imageRBDownRight;
+                                                        elmImage = imageRBGreenDownRight;
                                                         break;
                                                     case LEFT:
-                                                        elmImage = imageRBDownLeft;
+                                                        elmImage = imageRBGreenDownLeft;
                                                         break;
                                                 }
-
-                                            case LEFT:
-                                                switch (direction2) {
-                                                    case RIGHT:
-                                                        elmImage = imageRBDownRight;
-                                                        break;
-                                                    case LEFT:
-                                                        elmImage = imageRBDownLeft;
-                                                        break;
-                                                }
+                                                break;
                                         }
 
                                 }
@@ -1347,6 +1340,24 @@ public class GameViewModel {
                         boardElemSecond.setFitHeight(43);
                         gameboard.add(boardElem,y,x);
                         gameboard.add(boardElemSecond,y,x);
+                        if(board.getName().equals("ExtraCrispy")){
+                            ImageView checkPointOne=new ImageView(imageCheckPoint1);
+                            ImageView checkPointTwo=new ImageView(imageCheckPoint2);
+                            ImageView checkPointThree=new ImageView(imageCheckPoint3);
+                            ImageView checkPointFour=new ImageView(imageCheckPoint4);
+                            checkPointThree.setFitHeight(43);
+                            checkPointOne.setFitHeight(43);
+                            checkPointTwo.setFitHeight(43);
+                            checkPointFour.setFitHeight(43);
+                            checkPointOne.setFitWidth(43);
+                            checkPointThree.setFitWidth(43);
+                            checkPointTwo.setFitWidth(43);
+                            checkPointFour.setFitWidth(43);
+                             gameboard.add(checkPointFour,5,2);
+                             gameboard.add(checkPointOne,10,2);
+                             gameboard.add(checkPointTwo,5,7);
+                             gameboard.add(checkPointThree,10,7);
+                        }
                     }
 
                 }
