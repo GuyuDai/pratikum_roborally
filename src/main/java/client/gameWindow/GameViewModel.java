@@ -15,10 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import server.BoardElement.BoardElem;
-import server.BoardTypes.Board;
-import server.BoardTypes.DizzyHighway;
-import server.BoardTypes.ExtraCrispy;
-import server.BoardTypes.LostBearings;
+import server.BoardTypes.*;
 import server.CardTypes.*;
 import server.Control.Direction;
 import server.Deck.ProgrammingDeck;
@@ -1053,7 +1050,7 @@ public class GameViewModel {
 
 
 
-                Board board=new ExtraCrispy();
+                Board board=new DizzyHighway();
                 System.out.println(board.getWidth());
 
                 //public void printMap() {
@@ -1280,12 +1277,12 @@ public class GameViewModel {
                                 elmImage=imageAntenna;
                                 break;
                             case"PushPanel":
-                                int speedPushPanel=boardElem1.getSpeed();
-                                switch (speedPushPanel){
-                                    case 135:
+                                String PushPanelReg=boardElem1.getPush();
+                                switch (PushPanelReg){
+                                    case "1,3,5":
                                         elmImage=imagePP135;
                                         break;
-                                    case 24:
+                                    case "2,4":
                                         elmImage=imagePP24;
                                         break;
                                 }

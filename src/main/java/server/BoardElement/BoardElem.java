@@ -15,6 +15,9 @@ public abstract class BoardElem {
 
   public Direction direction2;
 
+  public  String push;
+
+
 
   public BoardElem(String name,RR currentGame){
     this.name=name;
@@ -58,6 +61,9 @@ public abstract class BoardElem {
     return turnDirection;
   }
 
+  public String getPush() {
+    return push;
+  }
 }
 
 

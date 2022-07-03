@@ -57,7 +57,7 @@ public class DeathTrap extends Board {
         map[1][0][0] = new CheckPoint(currentGame,5);
         map[1][0][1] = empty;
 
-        map[1][1][0]= new PushPanel(currentGame, 3,Direction.UP);
+        map[1][1][0]= new PushPanel(currentGame,"1,3,5",Direction.UP);
         map[1][1][1] = empty;
 
         map[1][2][0] = empty;
@@ -78,7 +78,7 @@ public class DeathTrap extends Board {
         map[1][7][0] = new Pit(currentGame);
         map[1][7][1] = empty;
 
-        map[1][8][0] = new PushPanel(currentGame, 3,Direction.RIGHT);
+        map[1][8][0] = new PushPanel(currentGame,"1,3,5",Direction.RIGHT);
         map[1][8][1] = empty;
 
         map[1][9][0] = new ConveyBelt(currentGame,1, Direction.UP);
@@ -100,7 +100,7 @@ public class DeathTrap extends Board {
         map[2][1][0]= new Pit(currentGame);
         map[2][1][1] = empty;
 
-        map[2][2][0] = new PushPanel(currentGame, 2,Direction.LEFT);
+        map[2][2][0] = new PushPanel(currentGame, "2,4",Direction.LEFT);
         map[2][2][1] = empty;
 
         map[2][3][0] = new Pit(currentGame);
@@ -115,7 +115,7 @@ public class DeathTrap extends Board {
         map[2][6][0] = new EnergySpace(currentGame,2);
         map[2][6][1] = empty;
 
-        map[2][7][0] = new PushPanel(currentGame, 2,Direction.UP);
+        map[2][7][0] = new PushPanel(currentGame, "2,4",Direction.UP);
         map[2][7][1] = empty;
 
         map[2][8][0] = new CheckPoint(currentGame,4);
@@ -147,7 +147,7 @@ public class DeathTrap extends Board {
         map[3][3][0] = empty;
         map[3][3][1] = empty;
 
-        map[3][4][0] = new PushPanel(currentGame, 2,Direction.DOWN);
+        map[3][4][0] = new PushPanel(currentGame, "2,4",Direction.DOWN);
         map[3][4][1] = empty;
 
         map[3][5][0] = empty;
@@ -194,7 +194,7 @@ public class DeathTrap extends Board {
         map[4][5][0] = empty;
         map[4][5][1] = empty;
 
-        map[4][6][0] = new PushPanel(currentGame, 3,Direction.UP);
+        map[4][6][0] = new PushPanel(currentGame, "1,3,5",Direction.UP);
         map[4][6][1] = empty;
 
         map[4][7][0] = empty;
@@ -226,10 +226,10 @@ public class DeathTrap extends Board {
         map[5][2][0]= empty;
         map[5][2][1] = empty;
 
-        map[5][3][0] = new PushPanel(currentGame, 3,Direction.DOWN);
+        map[5][3][0] = new PushPanel(currentGame, "1,3,5",Direction.DOWN);
         map[5][3][1] = empty;
 
-        map[5][4][0] = new PushPanel(currentGame, 2,Direction.UP);
+        map[5][4][0] = new PushPanel(currentGame, "2,4",Direction.UP);
         map[5][4][1] = empty;
 
         map[5][5][1] = new Wall(currentGame, Direction.DOWN);
@@ -305,7 +305,7 @@ public class DeathTrap extends Board {
         map[7][1][0] = new CheckPoint(currentGame,1);
         map[7][1][1] = empty;
 
-        map[7][2][0] = new PushPanel(currentGame, 2,Direction.DOWN);
+        map[7][2][0] = new PushPanel(currentGame, "2,4",Direction.DOWN);
         map[7][2][1] = empty;
 
         map[7][3][0] = new EnergySpace(currentGame, 2);
@@ -320,7 +320,7 @@ public class DeathTrap extends Board {
         map[7][6][0]= new Pit(currentGame);
         map[7][6][1] = empty;
 
-        map[7][7][0]= new PushPanel(currentGame, 1, Direction.LEFT);
+        map[7][7][0]= new PushPanel(currentGame, "1,3,5", Direction.LEFT);
         map[7][7][1] = empty;
 
         map[7][8][0] = new Pit(currentGame);
@@ -343,7 +343,7 @@ public class DeathTrap extends Board {
         map[8][0][0] = new ConveyBelt(currentGame, 1,Direction.DOWN);
         map[8][0][1] = empty;
 
-        map[8][1][0] = new PushPanel(currentGame, 3,Direction.LEFT);
+        map[8][1][0] = new PushPanel(currentGame, "1,3,5",Direction.LEFT);
         map[8][1][1] = empty;
 
         map[8][2][0] = new Pit(currentGame);
@@ -364,7 +364,7 @@ public class DeathTrap extends Board {
         map[8][7][0] = new CheckPoint(currentGame,3);
         map[8][7][1] = empty;
 
-        map[8][8][0] = new PushPanel(currentGame, 3, Direction.DOWN);
+        map[8][8][0] = new PushPanel(currentGame, "1,3,5", Direction.DOWN);
         map[8][8][1] = empty;
 
         map[8][9][0] = empty;
