@@ -4,6 +4,10 @@ import server.BoardElement.*;
 import server.Control.*;
 
 
+/**
+ * @author Minghao Li, Felicia Saruba, Nargess Ahmadi, Niklas Nißl
+ */
+
 public class DizzyHighway extends Board {
     public DizzyHighway() {
         super("DizzyHighway");
