@@ -121,12 +121,12 @@
          </Label>
       </children>
    </AnchorPane>
-   <Label layoutX="76.0" layoutY="451.0" prefHeight="48.0" prefWidth="99.0" text="PLAYER ID:" textFill="WHITE">
+   <Label layoutX="76.0" layoutY="451.0" prefHeight="48.0" prefWidth="107.0" text="PLAYER ID:" textFill="WHITE">
       <font>
          <Font size="18.0" />
       </font>
    </Label>
-   <Label fx:id="setPlayerID" layoutX="175.0" layoutY="451.0" prefHeight="48.0" prefWidth="41.0" textFill="WHITE">
+   <Label fx:id="playerID" layoutX="175.0" layoutY="451.0" onDragDetected="#setPlayerID" prefHeight="48.0" prefWidth="65.0" textFill="WHITE">
       <font>
          <Font size="24.0" />
       </font>

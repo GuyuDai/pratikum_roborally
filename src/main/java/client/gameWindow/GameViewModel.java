@@ -843,6 +843,7 @@ public class GameViewModel {
         switch (setMapSelection) {
             case "Dizzy Highway":
 
+
                 /**
                  * checkpoints
                  */
@@ -1082,6 +1083,34 @@ public class GameViewModel {
 
                 URL RBGreenDownLeft3 = getClass().getResource("/greenPanelDeathTrap/RBGreenDownLeft3.png");
                 Image imageRBGreenDownLeft3 = new Image(RBGreenDownLeft3.toString());
+
+                /**
+                 * URLs for Push Panels
+                 */
+
+                URL PP24Bottom = getClass().getResource("PushPanels/PP24Bottom.png");
+                Image imagePP24Bottom = new Image(PP24Bottom.toString());
+
+                URL PP24Left = getClass().getResource("PushPanels/PP24Left.png");
+                Image imagePP24Left = new Image(PP24Left.toString());
+
+                URL PP24Right = getClass().getResource("PushPanels/PP24Right.png");
+                Image imagePP24Right = new Image(PP24Right.toString());
+
+                URL PP24Top = getClass().getResource("PushPanels/PP24Top.png");
+                Image imagePP24Top = new Image(PP24Top.toString());
+
+                URL PP135Bottom = getClass().getResource("PushPanels/PP135Bottom.png");
+                Image imagePP135Bottom = new Image(PP135Bottom.toString());
+
+                URL PP135Top = getClass().getResource("PushPanels/PP135Top.png");
+                Image imagePP135Top = new Image(PP135Top.toString());
+
+                URL PP135Right = getClass().getResource("PushPanels/PP135Right.png");
+                Image imagePP135Right = new Image(PP135Right.toString());
+
+                URL PP135Left = getClass().getResource("PushPanels/PP135Left.png");
+                Image imagePP135Left = new Image(PP135Left.toString());
 
 
 
