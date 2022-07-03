@@ -22,7 +22,7 @@ public class SelectMap extends Message {
         this.messageType = MessageType.selectMap;
         SelectMapBody body = new SelectMapBody();
         body.availableMaps = availableMaps ;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

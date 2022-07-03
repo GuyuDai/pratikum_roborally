@@ -21,7 +21,7 @@ public class PlayCard extends Message {
         this.messageType = MessageType.playCard;
         PlayCardBody body = new PlayCardBody();
         body.card = card;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

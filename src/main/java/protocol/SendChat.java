@@ -31,7 +31,7 @@ public class SendChat extends Message {
         SendChatBody body = new SendChatBody();
         body.message = message;
         body.to = to;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

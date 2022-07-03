@@ -13,7 +13,7 @@ public class Alive extends Message {
     public Alive (){
         this.messageType = MessageType.alive;
         AliveBody body = new AliveBody();
-        this.messageBody = body;
+        this.messageBody = body.toString();
     }
 
 

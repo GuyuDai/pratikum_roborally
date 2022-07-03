@@ -21,7 +21,7 @@ public class ErrorMessage extends Message {
     this.messageType = MessageType.error;
     ErrorMessageBody body = new ErrorMessageBody();
     body.error = str;
-    this.messageBody = body;
+    this.messageBody = body.toString();
   }
 
 }

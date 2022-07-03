@@ -31,7 +31,7 @@ public class SetStartingPoint extends Message {
         SetStartingPointBody body = new SetStartingPointBody();
         body.x=x;
         body.y=y;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

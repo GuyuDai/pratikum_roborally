@@ -21,7 +21,7 @@ public class Welcome extends Message {
         this.messageType = MessageType.welcome;
         WelcomeBody body = new WelcomeBody();
         body.clientID = clientID;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

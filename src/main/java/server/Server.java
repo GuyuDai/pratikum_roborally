@@ -1,6 +1,7 @@
 package server;
 
 
+import com.google.gson.Gson;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -64,7 +65,7 @@ public class Server implements Runnable{
         count ++;
         connectedClient.setAI(false);
         connectedClient.setAlive(true);
-        this.connectedClients.add(connectedClient);
+        connectedClients.add(connectedClient);
         Thread clientThread = new Thread(connectedClient);
         clientThread.start();
         sendMessageToClient(new Welcome(connectedClient.getID()),connectedClient);
@@ -74,6 +75,7 @@ public class Server implements Runnable{
         try {
             BufferedWriter write = new BufferedWriter(new OutputStreamWriter(client.getClientSocket().getOutputStream()));
             String messageToSend = msg.toString();
+            //String messageToSend = new Gson().toJson(msg);
             write.write(messageToSend);
             write.newLine();
             write.flush();

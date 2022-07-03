@@ -15,7 +15,7 @@ public class TimerStarted extends Message {
     public TimerStarted () {
         this.messageType = MessageType.timerStarted;
         TimerStartedBody body = new TimerStartedBody();
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

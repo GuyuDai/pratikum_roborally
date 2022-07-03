@@ -31,6 +31,6 @@ public class SelectedCard extends Message {
         SelectedCardBody body = new SelectedCardBody();
         body.card = cardName;
         body.register = register;
-        this.messageBody = body;
+        this.messageBody = body.toString();
     }
 }

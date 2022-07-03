@@ -25,6 +25,6 @@ public class GameStarted extends Message {
       this.messageType = MessageType.gameStarted;
       GameStartedBody body = new GameStartedBody();
       body.gameMap = gameMap;
-      this.messageBody = body;
+      this.messageBody = body.toString();
     }
 }

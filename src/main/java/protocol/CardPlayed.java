@@ -31,6 +31,6 @@ public class CardPlayed extends Message {
         CardPlayedBody body = new CardPlayedBody();
         body.clientID = clientID;
         body.card = card;
-        this.messageBody = body;
+        this.messageBody = body.toString();
     }
 }

@@ -21,7 +21,7 @@ public class MapSelected extends Message {
         this.messageType = MessageType.mapSelected;
         MapSelectedBody body = new MapSelectedBody();
         body.map = map;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

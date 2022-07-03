@@ -21,7 +21,7 @@ public class ActivePhase extends Message {
         this.messageType = MessageType.activePhase;
         ActivePhaseBody body = new ActivePhaseBody();
         body.phase = phase;
-        this.messageBody = body;
+        this.messageBody = body.toString();
     }
 }
 

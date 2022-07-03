@@ -35,7 +35,7 @@ public class PlayerTurning extends Message {
         PlayerTurningBody body = new PlayerTurningBody();
         body.clientID  = clientID;
         body.rotation = rotation;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

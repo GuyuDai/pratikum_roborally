@@ -1,6 +1,7 @@
 package server;
 
 
+import com.google.gson.GsonBuilder;
 import java.io.*;
 import java.net.Socket;
 import protocol.*;
@@ -13,6 +14,7 @@ import protocol.HelloServer.HelloServerBody;
 import protocol.PlayCard.PlayCardBody;
 import protocol.PlayerValues.PlayerValuesBody;
 import protocol.ProtocolFormat.Message;
+import protocol.ProtocolFormat.MessageAdapter;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.MessageType;
 import protocol.SetStartingPoint.SetStartingPointBody;
@@ -127,8 +129,13 @@ public class ServerThread implements Runnable {
     }
 
     private void identifyMessage(Message message) {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(Message.class, new MessageAdapter());
+        Gson gson = gsonBuilder.create();
+
         String messageType = message.getMessageType();
-        MessageBody messageBody = message.getMessageBody();
+        String body = message.getMessageBody();
+        MessageBody messageBody = gson.fromJson(body,MessageBody.class);
         switch (messageType){
             case MessageType.activePhase:
                 ActivePhaseBody activePhaseBody = (ActivePhaseBody) messageBody;

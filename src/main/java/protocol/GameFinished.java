@@ -21,7 +21,7 @@ public class GameFinished extends Message {
         this.messageType = MessageType.gameFinished;
         GameFinishedBody body = new GameFinishedBody();
         body.clientID = clientID;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

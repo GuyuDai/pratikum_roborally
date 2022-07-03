@@ -29,7 +29,7 @@ public class SelectedDamage extends Message {
         this.messageType = MessageType.selectedDamage;
         SelectedDamageBody body = new SelectedDamageBody();
         body.cards = cards;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

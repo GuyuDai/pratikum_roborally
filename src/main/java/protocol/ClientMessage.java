@@ -24,6 +24,6 @@ public class ClientMessage extends Message {
     this.messageType = MessageType.clientMessage;
     ClientMessageBody body = new ClientMessageBody();
     body.message = str;
-    this.messageBody = body;
+    this.messageBody = body.toString();
   }
 }

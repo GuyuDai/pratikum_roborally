@@ -41,7 +41,7 @@ public class ReceivedChat extends Message {
         body.message = message;
         body.from = from;
         body.isPrivate = isPrivate;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

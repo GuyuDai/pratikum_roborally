@@ -1,11 +1,13 @@
 package protocol.ProtocolFormat;
 
+import com.google.gson.Gson;
 import server.Player.Player;
 
 import java.util.List;
 
 public class MessageBody {
-/*
+
+    /*
     boolean isAI;
 
     public boolean getReady() {
@@ -48,7 +50,7 @@ public class MessageBody {
     int figure;
     int  phase;
     int position;
-    int cardsInHand;
+    String[] cardsInHand;
     int register;
     int count;
     int number;
@@ -132,7 +134,7 @@ public class MessageBody {
     List<ActiveCard> activeCards;
 
     Player player;
-    List<Map> map;
+    String map;
 
     boolean isConnected;
 
@@ -243,11 +245,11 @@ public class MessageBody {
         this.player = player;
     }
 
-    public List<Map> getMap() {
+    public String getMap() {
         return map;
     }
 
-    public void setMap(List<Map> map) {
+    public void setMap(String map) {
         this.map = map;
     }
 
@@ -291,11 +293,11 @@ public class MessageBody {
         this.position = position;
     }
 
-    public int getCardsInHand() {
+    public String[] getCardsInHand() {
         return cardsInHand;
     }
 
-    public void setCardsInHand(int cards) {
+    public void setCardsInHand(String[] cards) {
         this.cardsInHand = cards;
     }
 
@@ -379,9 +381,13 @@ public class MessageBody {
         this.cardsInPile = cardsInPile;
     }
 
+     */
 
- */
 
+    @Override
+    public String toString(){
+        return new Gson().toJson(this);
+    }
 }
 
 

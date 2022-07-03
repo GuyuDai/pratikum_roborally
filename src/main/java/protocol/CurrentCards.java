@@ -32,7 +32,7 @@ public class CurrentCards extends Message {
         this.messageType = MessageType.currentCards;
         CurrentCardsBody body = new CurrentCardsBody();
         body.activeCards = activeCards;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

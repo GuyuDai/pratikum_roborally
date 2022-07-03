@@ -31,7 +31,7 @@ public class CheckPointReached extends Message {
         CheckPointReachedBody body = new CheckPointReachedBody();
         body.clientID = clientID;
         body.number = number;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

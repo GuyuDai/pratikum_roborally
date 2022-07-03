@@ -41,7 +41,7 @@ public class StartingPointTaken extends Message {
         body.x = x;
         body.y = y;
         body.clientID = clientID;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

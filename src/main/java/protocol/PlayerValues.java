@@ -31,7 +31,7 @@ public class PlayerValues extends Message {
         PlayerValuesBody body = new PlayerValuesBody();
         body.name = name;
         body.figure = figure;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

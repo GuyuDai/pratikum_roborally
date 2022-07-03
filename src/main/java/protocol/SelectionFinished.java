@@ -27,7 +27,7 @@ public class SelectionFinished extends Message {
         this.messageType = MessageType.selectionFinished;
         SelectedFinishedBody body = new SelectedFinishedBody();
         body.clientID = clientID;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

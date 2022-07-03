@@ -26,7 +26,7 @@ public class Animation extends Message {
         this.messageType = MessageType.animation;
         AnimationBody body = new AnimationBody();
         body.type = type;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }
