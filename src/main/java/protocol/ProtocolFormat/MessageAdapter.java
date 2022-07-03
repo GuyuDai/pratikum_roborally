@@ -4,7 +4,7 @@ import com.google.gson.*;
 
 import java.lang.reflect.Type;
 
-public class MessageAdapter implements JsonDeserializer<Message>, JsonSerializer<Message>{
+public class MessageAdapter implements JsonDeserializer<Message>{
     @Override
     public Message deserialize(JsonElement json, Type t, JsonDeserializationContext context) throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
@@ -16,9 +16,4 @@ public class MessageAdapter implements JsonDeserializer<Message>, JsonSerializer
         }
     }
 
-    @Override
-    public JsonElement serialize(Message message, Type type,
-        JsonSerializationContext jsonSerializationContext) {
-        return null;
-    }
 }
