@@ -13,7 +13,7 @@ public class LostBearings extends Board {
         super("LostBearings");
         Empty empty = new Empty(currentGame);
 
-        this.map = new BoardElem[10][13][2];//{{{},{}},{{},{}}};
+        this.map = new BoardElem[10][13][2];
 
         map[0][0][0] = new Reboot(currentGame);
         map[0][0][1] = empty;

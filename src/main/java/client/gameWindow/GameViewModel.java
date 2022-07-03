@@ -66,6 +66,9 @@ public class GameViewModel {
     @FXML
     private Button selectMap;
 
+    @FXML
+    private Button startGameButton;
+
 
     /**
      * Buttons for hand
@@ -431,6 +434,9 @@ public class GameViewModel {
         }
     }
 
+    /**
+     * exit game and return to Lobby
+     */
     public void exitGame(ActionEvent actionEvent) {
         Stage stage = (Stage) exitBtn.getScene().getWindow();
         stage.close();
@@ -451,6 +457,7 @@ public class GameViewModel {
     CopyOnWriteArrayList<Card> programmingDecK = deck.getRemainingCards();
 
     CopyOnWriteArrayList<Card> registerPile = new CopyOnWriteArrayList<>();
+
 
     /**
      * print 9 random cards from a deck of 20
@@ -529,6 +536,9 @@ public class GameViewModel {
     }
 
 
+    /**
+     * registerCount for 5 picks
+     */
     int registerCount = 0;
 
     public void setRegisterCount(int count) {
@@ -787,12 +797,10 @@ public class GameViewModel {
         }
     }
 
-    public void showCardBtnAction() {
-        printCards();
-        Text.setText("Select 5 of these cards for your register.");
-        printMapGUI("Dizzy Highway");
-    }
 
+    /**
+     * selecting a map and enabling start game button
+     */
     public void selectMapAction(ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Map.fxml"));
@@ -803,6 +811,28 @@ public class GameViewModel {
             stageGame.show();
         } catch (Exception e) {
         }
+        startGameButton.setVisible(true);
+        selectMap.setVisible(false);
+    }
+
+    /**
+     * start game button -> map gets printed and register appears.
+     */
+    public void startGameButtonAction(ActionEvent actionEvent) {
+        hand1Button.setVisible(true);
+        hand2Button.setVisible(true);
+        hand3Button.setVisible(true);
+        hand4Button.setVisible(true);
+        hand5Button.setVisible(true);
+        hand6Button.setVisible(true);
+        hand7Button.setVisible(true);
+        hand8Button.setVisible(true);
+        hand9Button.setVisible(true);
+
+        printCards();
+        Text.setText("Select 5 of these cards for your register.");
+        playCardBtn.setVisible(true);
+        printMapGUI("Dizzy Highway");
     }
 
 
@@ -1365,6 +1395,9 @@ public class GameViewModel {
             }
 
     }
+
+
+
 }
 
 

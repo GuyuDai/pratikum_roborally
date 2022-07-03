@@ -13,7 +13,7 @@ public class DizzyHighway extends Board {
         super("DizzyHighway");
         Empty empty = new Empty(currentGame);
 
-        this.map = new BoardElem[10][13][2];//{{{},{}},{{},{}}};
+        this.map = new BoardElem[10][13][2];
         map[0][0][0] = empty;
         map[0][0][1] = empty;
 
