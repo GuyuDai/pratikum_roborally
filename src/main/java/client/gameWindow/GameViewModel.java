@@ -870,7 +870,6 @@ public class GameViewModel {
                 URL blueBeltBottom = getClass().getResource("/ConveyorBelts/BlueBeltBottom.png");
                 Image imageBlueBeltBottom = new Image(blueBeltBottom.toString());
 
-
                 URL blueBeltLeft = getClass().getResource("/ConveyorBelts/BlueBeltLeft.png");
                 Image imageBlueBeltLeft = new Image(blueBeltLeft.toString());
 
@@ -910,8 +909,6 @@ public class GameViewModel {
                 URL rbLeft2 = getClass().getResource("/ConveyorBelts/RB left2.png");
                 Image imageRBLeftDown = new Image(rbLeft2.toString());
 
-
-
                 URL rbRight2 = getClass().getResource("/ConveyorBelts/RB right2.png");
                 Image imageRBRightUp = new Image(rbRight2.toString());
 
@@ -920,6 +917,23 @@ public class GameViewModel {
 
                 URL rbTop2 = getClass().getResource("/ConveyorBelts/RB top2.png");
                 Image imageRBUpLeft = new Image(rbTop2.toString());
+
+                URL RBGreenUpRight = getClass().getResource("/ConveyorBelts/RBGreenUpRight.png");
+                Image imageRBGreenUpRight = new Image(RBGreenUpRight.toString());
+
+                URL RBGreenDownLeft = getClass().getResource("/ConveyorBelts/RBGreenDownLeft.png");
+                Image imageRBGreenDownLeft = new Image(RBGreenDownLeft.toString());
+
+                URL RBGreenDownRight = getClass().getResource("/ConveyorBelts/RBGreenDownRight.png");
+                Image imageRBGreenDownRight = new Image(RBGreenDownRight.toString());
+
+                URL RBGreenUpLeft = getClass().getResource("/ConveyorBelts/RBGreenUpLeft.png");
+                Image imageRBGreenUpLeft = new Image(RBGreenUpLeft.toString());
+
+                URL rbRight = getClass().getResource("/img.png");
+                Image imageRBRightDown = new Image(rbRight.toString());
+
+
 
                 /**
                  * Board Images
@@ -1010,9 +1024,6 @@ public class GameViewModel {
                 URL wallLaser1Right = getClass().getResource("/Laser/WallLaser1Right.png");
                 Image imagewallLaser1Right = new Image(wallLaser1Right.toString());
 
-                URL rbRight = getClass().getResource("/img.png");
-                Image imageRBRightDown = new Image(rbRight.toString());
-
 
 
                 /**
@@ -1036,26 +1047,10 @@ public class GameViewModel {
                 URL empty = getClass().getResource("/Empty.png");
                 Image imageEmpty = new Image(empty.toString());
 
-                //URL rbRight = getClass().getResource("ConveyorBelts/RB right.png");
-               // Image imageRBRightDown = new Image(rbRight.toString());
-                URL RBGreenUpRight = getClass().getResource("/ConveyorBelts/RBGreenUpRight.png");
-                Image imageRBGreenUpRight = new Image(RBGreenUpRight.toString());
-
-                URL RBGreenDownLeft = getClass().getResource("/ConveyorBelts/RBGreenDownLeft.png");
-                Image imageRBGreenDownLeft = new Image(RBGreenDownLeft.toString());
-
-                URL RBGreenDownRight = getClass().getResource("/ConveyorBelts/RBGreenDownRight.png");
-                Image imageRBGreenDownRight = new Image(RBGreenDownRight.toString());
-
-                URL RBGreenUpLeft = getClass().getResource("/ConveyorBelts/RBGreenUpLeft.png");
-                Image imageRBGreenUpLeft = new Image(RBGreenUpLeft.toString());
-
-
-
 
 
                 /**
-                 * URLs for Death Trap
+                 * URLs for Extra Crispy
                  */
 
                 URL blueRotatingDownLeft = getClass().getResource("/bluePanelExtraCrispy/blueRotatingDownLeft.png");
@@ -1072,7 +1067,21 @@ public class GameViewModel {
 
 
 
+                /**
+                 * green Conveyor belt for Death trap
+                 */
 
+                URL RBGreenUpLeft2 = getClass().getResource("/greenPanelDeathTrap/RBGreenUpLeft2.png");
+                Image imageRBGreenUpLeft2 = new Image(RBGreenUpLeft2.toString());
+
+                URL RBGreenDownLeft2 = getClass().getResource("/greenPanelDeathTrap/RBGreenDownLeft2.png");
+                Image imageRBGreenDownLeft2 = new Image(RBGreenDownLeft2.toString());
+
+                URL RBGreenUpRight2 = getClass().getResource("/greenPanelDeathTrap/RBGreenUpRight2.png");
+                Image imageRBGreenUpRight2 = new Image(RBGreenUpRight2.toString());
+
+                URL RBGreenDownLeft3 = getClass().getResource("/greenPanelDeathTrap/RBGreenDownLeft3.png");
+                Image imageRBGreenDownLeft3 = new Image(RBGreenDownLeft3.toString());
 
 
 
