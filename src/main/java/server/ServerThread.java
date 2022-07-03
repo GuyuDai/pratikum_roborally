@@ -166,6 +166,8 @@ public class ServerThread implements Runnable {
                 PlayerValuesBody playerValuesBody = (PlayerValuesBody) messageBody;
                 name = playerValuesBody.getName();
                 figure = playerValuesBody.getFigure();
+                player=new Player(name);
+                player.setOwnRobot(figure);
                 break;
 
             case MessageType.setStatus:

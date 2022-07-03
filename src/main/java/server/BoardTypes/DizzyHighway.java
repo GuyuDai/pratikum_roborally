@@ -9,7 +9,7 @@ public class DizzyHighway extends Board {
         super("DizzyHighway");
         Empty empty = new Empty(currentGame);
 
-        BoardElem[][][] map = new BoardElem[9][12][1];//{{{},{}},{{},{}}};
+        this.map = new BoardElem[10][13][2];//{{{},{}},{{},{}}};
         map[0][0][0] = empty;
         map[0][1][0] = empty;
         map[0][2][0] = new ConveyBelt(currentGame,1, server.Control.Direction.RIGHT);

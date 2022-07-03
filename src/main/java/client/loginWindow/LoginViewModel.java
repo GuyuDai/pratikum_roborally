@@ -1,6 +1,7 @@
 package client.loginWindow;
 
 
+import client.Client;
 import com.google.gson.GsonBuilder;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -15,12 +16,18 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import protocol.PlayerValues;
+import protocol.ProtocolFormat.Message;
+
+import java.io.IOException;
 
 
 public class LoginViewModel {
 
     public static String window = "Login";
+    public int figure;
 
+    public boolean robotSelected=false;
     private static LoginViewModel instance;
     @FXML
     public AnchorPane container;
@@ -76,30 +83,46 @@ public class LoginViewModel {
     public void selectBot(ActionEvent actionEvent){
         //String message = "";
         if(buttonHammer.isSelected()){
+            figure=0;
+            robotSelected=true;
         }
         else if (buttonHulk.isSelected()){
+            figure=1;
+            robotSelected=true;
         }
         else if (buttonSpin.isSelected()){
+            figure=2;
+            robotSelected=true;
         }
         else if (buttonSquash.isSelected()){
+            figure=3;
+            robotSelected=true;
         }
         else if (buttonTwonkey.isSelected()){
+            figure=5;
+            robotSelected=true;
         }
         else if (buttonTwitch.isSelected()){
+            figure=6;
+            robotSelected=true;
         }
     }
 
-    public void initPlayer(ActionEvent actionEvent) {
-        String name = model.getTextFieldContent().get();
+    public void initPlayer(ActionEvent actionEvent) throws IOException {
+
         //Client.getPlayerOnline().setPlayer(name);
-        nameInput.getText();
+        String name =nameInput.getText();
         //Client.getPlayerOnline().sendToAll("SERVER: " + name + " has entered the chat!");
+            Message message = new PlayerValues(name, figure);
+            String clientMessage = message.toString();
+            Client.getClientReceive().getWriteOutput().write(clientMessage);
+            Client.getClientReceive().getWriteOutput().newLine();
+            Client.getClientReceive().getWriteOutput().flush();
+            Stage stage = (Stage) sendNameButton.getScene().getWindow();
+            stage.close();
+            setWindowName("Lobby");
+            openLobbyWindow();
 
-        Stage stage = (Stage) sendNameButton.getScene().getWindow();
-        stage.close();
-        setWindowName("Lobby");
-
-        openLobbyWindow();
     }
 
     public void openLobbyWindow(){

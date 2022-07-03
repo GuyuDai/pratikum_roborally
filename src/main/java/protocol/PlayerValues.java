@@ -26,7 +26,7 @@ public class PlayerValues extends Message {
             this.name = name;
         }
     }
-    public void PlayerValue (String name, int figure) {
+    public  PlayerValues (String name, int figure) {
         this.messageType = MessageType.playerValues;
         PlayerValuesBody body = new PlayerValuesBody();
         body.name = name;
