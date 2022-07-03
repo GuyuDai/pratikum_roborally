@@ -17,6 +17,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageAdapter;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.MessageType;
+import protocol.SendChat.SendChatBody;
 import protocol.SetStartingPoint.SetStartingPointBody;
 import protocol.SetStatus.SetStatusBody;
 import server.Player.Player;
@@ -181,6 +182,8 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.sendChat:
+                SendChatBody sendChatBody = (SendChatBody) messageBody;
+                //some behaviour
                 break;
 
             case MessageType.mapSelected:
@@ -192,16 +195,16 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.selectCard:
+                break;
 
             case MessageType.selectedDamage:
+                break;
 
             case MessageType.setStartingPoint:
                 SetStartingPointBody setStartingPointBody = (SetStartingPointBody) messageBody;
                 x = setStartingPointBody.getX();
                 y = setStartingPointBody.getY();
                 break;
-
-
 
         }
     }
