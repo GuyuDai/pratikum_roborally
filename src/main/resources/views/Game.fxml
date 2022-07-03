@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1250.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
+<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1250.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
    <children>
       <Pane layoutX="6.0" layoutY="3.0" prefHeight="795.0" prefWidth="305.0" stylesheets="@../styles.css">
          <children>
@@ -335,7 +335,8 @@
                   </Button>
                </children>
             </GridPane>
-            <Button layoutX="269.0" layoutY="620.0" mnemonicParsing="false" onAction="#showCardBtnAction" prefHeight="48.0" prefWidth="80.0" text="show cards" />
+            <Button layoutX="269.0" layoutY="620.0" mnemonicParsing="false" onAction="#showCardBtnAction" prefHeight="48.0" prefWidth="80.0" text="start game" />
+            <Button fx:id="selectMapButton" layoutX="269.0" layoutY="557.0" mnemonicParsing="false" onAction="#selectMapAction" prefHeight="48.0" prefWidth="80.0" text="select map" />
          </children>
       </AnchorPane>
    </children>

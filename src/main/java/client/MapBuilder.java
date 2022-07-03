@@ -181,6 +181,9 @@ public class MapBuilder {
     URL wallLaser3Vertical2 = getClass().getResource("/Laser/WallLaser3Vertical2.png");
     Image imageWallLaser3Vertical2 = new Image(wallLaser3Vertical2.toString());
 
+    URL wallLaser1Right = getClass().getResource("/Laser/WallLaser1Right.png");
+    Image imagewallLaser1Right = new Image(wallLaser1Right.toString());
+
 
     /**
      * others

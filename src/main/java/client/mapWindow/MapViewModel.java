@@ -1,6 +1,7 @@
 package client.mapWindow;
 
 
+import client.gameWindow.GameViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,13 +54,15 @@ public class MapViewModel {
     @FXML
     private ToggleButton map3Btn;
 
+
+    public static String mapSelection;
+
     //when clicked on Map Selection, the window closes
     @FXML
     public void selectDizzyHighway(ActionEvent actionEvent) {
         Stage stage = (Stage) DizzyHighwayBtn.getScene().getWindow();
         stage.close();
-        //TODO need to adapt according to 1.0
-        //Server.logger.log(Level.INFO, new MapSelected("DizzyHighway").toString());
+        setMapSelection("Dizzy Highway");
     }
     @FXML
     public void select2(ActionEvent actionEvent) {
@@ -122,5 +125,14 @@ public class MapViewModel {
             stage.show();
         } catch (Exception e){
         }
+    }
+
+
+    public static void setMapSelection(String name){
+        mapSelection = name;
+    }
+
+    public static String getMapSelection(){
+        return mapSelection;
     }
 }

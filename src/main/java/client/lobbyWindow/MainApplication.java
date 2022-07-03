@@ -20,8 +20,8 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         try {
-            new Client().init();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Lobby.fxml"));
+            //new Client().init();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Login.fxml"));
             Parent rootMap = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("Map Selection");
@@ -49,7 +49,7 @@ public class MainApplication extends Application {
 
     public static Scene gameScene;
 
-    private static Client client;
+
     @Override
     public void stop() {
     }
@@ -57,8 +57,7 @@ public class MainApplication extends Application {
     //TODo Ändere Namen
     @Override
     public void start(Stage primaryStage) throws IOException {
-        client=new Client();
-        client.init();
+        new Client().init();
         window = primaryStage;
         window.setTitle("RoboRally");
         lobbyScene = loadScene(0);
