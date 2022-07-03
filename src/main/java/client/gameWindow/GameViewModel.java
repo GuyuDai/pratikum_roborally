@@ -365,7 +365,7 @@ public class GameViewModel {
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
         hand.getChildren().add(new ImageView());
-            }
+    }
 
 
     public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendBtn) {
