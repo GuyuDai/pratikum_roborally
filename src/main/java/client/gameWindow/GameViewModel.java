@@ -1009,7 +1009,7 @@ public class GameViewModel {
 
                 //public void printMap() {
                 Image elmImage = null;
-                for (int x = 0; x < 1; x++) {
+                for (int x = 0; x < 10; x++) {
                     for (int y = 0; y < 13; y++) {
 
 
