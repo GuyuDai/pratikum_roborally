@@ -22,6 +22,12 @@ public class CheckPoint extends BoardElem {
   public void action() {
   }
 
+  @Override
+  public String toString(){
+    String result = "";
+    result += "CheckPoint";
+    return result;
+  }
 
 
 }

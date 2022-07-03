@@ -34,5 +34,11 @@ public class Gear extends BoardElem implements Move {
     }
 
   }
+  @Override
+  public String toString(){
+    String result = "";
+    result += "Gear, turnDirection:" + this.turnDirection;
+    return result;
+  }
 }
 

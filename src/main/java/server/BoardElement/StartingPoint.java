@@ -15,4 +15,10 @@ public class StartingPoint extends BoardElem {
 
     }
 
+    @Override
+    public String toString(){
+        String result = "";
+        result += "StartingPoint, direction:" + this.direction;
+        return result;
+    }
 }

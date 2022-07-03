@@ -16,4 +16,11 @@ public class Empty extends BoardElem{
   public void action() {
 
   }
+
+  @Override
+  public String toString(){
+    String result = "";
+    result += "Empty";
+    return result;
+  }
 }

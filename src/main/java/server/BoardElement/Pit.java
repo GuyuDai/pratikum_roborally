@@ -18,4 +18,11 @@ public class Pit extends BoardElem{
   public void move(Robot robot){
     robot.reboot();
   }
+
+  @Override
+  public String toString(){
+    String result = "";
+    result += "Pit";
+    return result;
+  }
 }
