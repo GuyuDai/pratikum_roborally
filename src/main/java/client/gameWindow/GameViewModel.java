@@ -365,11 +365,7 @@ public class GameViewModel {
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
         hand.getChildren().add(new ImageView());
-
-       // hand1Button.disabledProperty().bind(playCardBtn.set));
-
-
-    }
+            }
 
 
     public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendBtn) {
