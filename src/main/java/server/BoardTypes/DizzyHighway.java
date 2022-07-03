@@ -9,20 +9,50 @@ public class DizzyHighway extends Board {
         super("DizzyHighway");
         Empty empty = new Empty(currentGame);
 
-        BoardElem[][][] map = new BoardElem[9][12][1];//{{{},{}},{{},{}}};
+        this.map = new BoardElem[10][13][2];//{{{},{}},{{},{}}};
         map[0][0][0] = empty;
+        map[0][0][1] = empty;
+
         map[0][1][0] = empty;
+        map[0][1][1] = empty;
+
         map[0][2][0] = new ConveyBelt(currentGame,1, server.Control.Direction.RIGHT);
+        map[0][2][1] = empty;
+
         map[0][3][0] = empty;
+        map[0][3][1] = empty;
+
         map[0][4][0] = new ConveyBelt(currentGame,2, server.Control.Direction.DOWN);
+        map[0][4][1] = empty;
+
         map[0][5][0] = new ConveyBelt(currentGame,2, server.Control.Direction.DOWN);
+        map[0][5][1] = empty;
+
         map[0][6][0] = empty;
+        map[0][6][1] = empty;
+
         map[0][7][0] = empty;
+        map[0][7][1] = empty;
+
         map[0][8][0] = empty;
+        map[0][8][1] = empty;
+
         map[0][9][0] = empty;
+        map[0][9][1] = empty;
+
         map[0][10][0] = empty;
+        map[0][10][1] = empty;
+
         map[0][11][0] = empty;
+        map[0][11][1] = empty;
+
         map[0][12][0] = new EnergySpace(currentGame, 2);
+        map[0][12][1] = empty;
+
+
+
+
+
 
         map[1][0][0] = empty;
         map[1][1][0]= empty;//map[1][1] = black white gear;

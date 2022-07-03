@@ -210,8 +210,8 @@ public class MapBuilder {
 
     public void printMap() {
         Image elmImage = null;
-        for (int x = 0; x < 9; x++) {
-            for (int y = 0; y < 12; y++) {
+        for (int x = 0; x <= 9; x++) {
+            for (int y = 0; y <= 12; y++) {
                 BoardElem boardElem1 = board.getBoardElem(x, y, 0);
                 BoardElem boardElem2 = board.getBoardElem(x, y, 1);
                 String firstBoardElmName = board.getBoardElem(x, y, 0).getName();
