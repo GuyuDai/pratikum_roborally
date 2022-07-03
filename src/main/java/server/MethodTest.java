@@ -1,13 +1,15 @@
 package server;
 
 import com.google.gson.Gson;
-import protocol.Welcome;
-import server.BoardTypes.DizzyHighway;
+import server.BoardElement.ConveyBelt;
+import server.BoardTypes.ExtraCrispy;
+import server.Control.Direction;
 
 public class MethodTest {
 
   public static void main(String[] args) {
-    DizzyHighway map = new DizzyHighway();
-    System.out.println(new Gson().toJson(map));
+    ExtraCrispy map = new ExtraCrispy();
+    ConveyBelt element = new ConveyBelt(null,2, Direction.UP);
+    System.out.println(new Gson().toJson(element));
   }
 }

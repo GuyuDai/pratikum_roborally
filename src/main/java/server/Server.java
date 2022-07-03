@@ -1,7 +1,6 @@
 package server;
 
 
-import com.google.gson.Gson;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -9,12 +8,20 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import protocol.*;
 import protocol.ProtocolFormat.Message;
 
 public class Server implements Runnable{
 
+    public static final Logger logger = Logger.getLogger(Server.class.getName());
     private final ServerSocket serverSocket;
+
+    public ServerSocket getServerSocket() {
+        return serverSocket;
+    }
+
     private static final List<ServerThread> connectedClients = new ArrayList<ServerThread>();
 
     public static List<ServerThread> getConnectedClients() {
@@ -39,10 +46,12 @@ public class Server implements Runnable{
     public void run() {
         try {
             while (!serverSocket.isClosed()) {
-                System.out.println("listening for new clients");
+                logger.log(Level.INFO, "listening for new clients");
+                //System.out.println("listening for new clients");
                 Socket clientSocket = serverSocket.accept();
                 clientConnectedIn(clientSocket);
-                System.out.println("new client connected");
+                logger.log(Level.INFO, "new client connected");
+                //System.out.println("new client connected");
             }
         } catch (IOException e) {
             closeServerSocket();
