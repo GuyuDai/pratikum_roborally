@@ -16,4 +16,10 @@ public class Wall extends BoardElem {
 
     }
 
+    @Override
+    public String toString(){
+        String result = "";
+        result += "Wall, direction:" + this.direction;
+        return result;
+    }
 }

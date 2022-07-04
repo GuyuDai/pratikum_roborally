@@ -34,4 +34,11 @@ public class RotatingBelt extends BoardElem implements Move {
             robot.getCurrentPosition().stay();
         }
     }
+
+    @Override
+    public String toString(){
+        String result = "";
+        result += "RotatingBelt, speed:" + this.speed + ", in:" + this.direction2 + ", out:" + this.direction;
+        return result;
+    }
 }

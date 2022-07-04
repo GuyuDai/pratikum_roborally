@@ -17,5 +17,11 @@ public class EnergySpace extends BoardElem{
     this.count--;
   }
 
+  @Override
+  public String toString(){
+    String result = "";
+    result += "EnergySpace, count:" + this.count;
+    return result;
+  }
 }
 

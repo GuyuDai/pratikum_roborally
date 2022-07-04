@@ -52,5 +52,11 @@ public class ConveyBelt extends BoardElem implements Move {
 
   }
 
+  @Override
+  public String toString(){
+    String result = "";
+    result += "Conveybelt, speed:" + this.speed + ", orientations: " + this.direction;
+    return result;
+  }
 
 }

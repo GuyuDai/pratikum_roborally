@@ -41,6 +41,24 @@ public abstract class Board {
   public String getName() {
     return name;
   }
+
+  @Override
+  public String toString(){
+    String result = "";
+    result += "[" + "\n";
+    for(BoardElem[][] elem2d : map){
+      result += "  [" + "\n";
+      for(BoardElem[] elem1d : elem2d){
+        result += "    [";
+        result += elem1d[0].toString() + "; ";
+        result += elem1d[1].toString();
+        result += "]" + "\n";
+      }
+      result += "  ]" + "\n";
+    }
+    result += "]";
+    return result;
+  }
 }
 
 

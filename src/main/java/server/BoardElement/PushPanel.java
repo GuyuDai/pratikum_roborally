@@ -26,4 +26,11 @@ public class PushPanel extends BoardElem implements Move {
     robot.move(this.getSpeed());
 
   }
+
+  @Override
+  public String toString(){
+    String result = "";
+    result += "PushPanel, speed:" + this.speed + ", direction:" + this.direction;
+    return result;
+  }
 }

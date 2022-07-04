@@ -13,7 +13,12 @@ public class Reboot extends BoardElem {
         public void action() {
         }
 
-
+  @Override
+  public String toString(){
+    String result = "";
+    result += "Reboot";
+    return result;
+  }
 
     }
 
