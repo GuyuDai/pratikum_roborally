@@ -36,6 +36,10 @@ public class Player implements PlayerAction{
     return name;
   }
 
+  public void setName(String name) {
+    this.name = name;
+  }
+
   public RR getCurrentGame() {
     return currentGame;
   }
@@ -96,12 +100,20 @@ public class Player implements PlayerAction{
     if(playerName.equals(this.getName())) {
       return true;
     }
+
     else return false;
    }
 
    public void setAI(boolean AI){
      this.isAI=AI;
-   }
+     String[] AINameArray=new String[] {"AIBob","AIAlice","AIJay","AImax","AICarl","AITom"};
+     //TODO need a controller to make sure AI doesnt have same name
+     Random rand= new Random();
+     int number=rand.nextInt(5);
+     String AIName=AINameArray[number];
+     setName(AIName);
+     setAIRobot();
+  }
    public boolean getAI(){
     return isAI;
    }

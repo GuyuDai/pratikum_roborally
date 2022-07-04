@@ -312,6 +312,10 @@ public class ServerThread implements Runnable {
                 group = helloServerBody.getGroup();
                 isAI = helloServerBody.isAI();
                 setAI(isAI);
+                if(isAI){
+                    player=new Player("AI");
+                    player.setAI(isAI);
+                }
                 Timer.countDown(5);
                 sendMessage(new Alive().toString());
                 break;
