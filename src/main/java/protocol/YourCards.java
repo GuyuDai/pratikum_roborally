@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -11,14 +11,22 @@ import protocol.ProtocolFormat.MessageType;
 
 public class YourCards extends Message {
 
-    private class YourCardsBody extends AbstractMessageBody{
+    public class YourCardsBody extends MessageBody {
         protected String[] cardsInHand;
+
+        public String[] getCardsInHand() {
+            return cardsInHand;
+        }
+
+        public void setCardsInHand(String[] cardsInHand) {
+            this.cardsInHand = cardsInHand;
+        }
     }
     public YourCards (String[] cardsInHand) {
         this.messageType = MessageType.yourCards;
         YourCardsBody body = new YourCardsBody();
         body.cardsInHand = cardsInHand;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 

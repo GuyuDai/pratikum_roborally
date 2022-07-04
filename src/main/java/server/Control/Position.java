@@ -1,17 +1,15 @@
 package server.Control;
-
+import server.BoardTypes.Board;
 import server.BoardElement.BoardElem;
 import server.Player.Robot;
 
 public class Position {
   private int x;  //colum
   private int y;  //row
-  public Boolean frontWall;
-  public Boolean leftWall;
-  public Boolean rightWall;
-  public Boolean backWall;
 
   public Robot occupiedRobot = null;
+
+  public Board board;
 
   public BoardElem tile;  //which BoardElement is at this position
 
@@ -56,8 +54,13 @@ public class Position {
   public void setOccupiedRobot(Robot robot) {
     this.occupiedRobot = robot;
   }
+
+  public BoardElem getSecondTile(){
+    return board.getBoardElem(this.getX(),this.getY(),1);
+  }
+  //a Position could have 2 Tiles
   public BoardElem getTile() {
-    return tile;
+    return board.getBoardElem(this.getX(),this.getY(),0);
   }
 
   public void setTile(BoardElem tile) {
@@ -94,22 +97,6 @@ public class Position {
    */
   public boolean equals(Position p) {
     return p.getX() == this.getX() && p.getY() == this.getY();
-  }
-
-  public Boolean getFrontWall() {
-    return frontWall;
-  }
-
-  public Boolean getLeftWall() {
-    return leftWall;
-  }
-
-  public Boolean getRightWall() {
-    return rightWall;
-  }
-
-  public Boolean getBackWall() {
-    return backWall;
   }
 
 

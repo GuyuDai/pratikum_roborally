@@ -18,6 +18,11 @@ public class Antenna extends BoardElem{
 
     }
 
-
+    @Override
+    public String toString(){
+        String result = "";
+        result += "Annetta";
+        return result;
+    }
 
 }

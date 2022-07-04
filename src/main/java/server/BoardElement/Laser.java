@@ -27,4 +27,11 @@ public class Laser extends BoardElem implements DamageCards {
         }
 
   }
+
+  @Override
+  public String toString(){
+    String result = "";
+    result += "Laser, count:" + this.count + ", direction:" + this.direction;
+    return result;
+  }
 }

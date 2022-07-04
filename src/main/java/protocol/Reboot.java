@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -12,15 +12,23 @@ import protocol.ProtocolFormat.MessageType;
 
 public class Reboot extends Message {
 
-    private class RebootBody extends AbstractMessageBody{
+    public class RebootBody extends MessageBody {
         protected int clientID;
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
     }
 
     public Reboot (int clientID){
         this.messageType = MessageType.reboot;
         RebootBody body = new RebootBody();
         body.clientID = clientID;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

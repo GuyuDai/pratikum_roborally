@@ -1,0 +1,31 @@
+.backgroundColor {
+    -fx-background-color: linear-gradient(to right, #000000, #434343);
+}
+
+.rotate90 {
+    -fx-rotate: 90;
+}
+
+.rotate180{
+    -fx-rotate: 180;
+}
+
+.rotate270{
+    -fx-rotate: 270;
+}
+
+.radius {
+    -fx-background-radius: 15;
+}
+
+.positionCenter {
+    -fx-alignment: CENTER;
+}
+
+.fontColor {
+}
+
+.buttonColor {
+    -fx-background-radius: 15;
+    -fx-background-color: #98c0d4;
+}

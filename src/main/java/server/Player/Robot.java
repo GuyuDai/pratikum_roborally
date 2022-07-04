@@ -22,10 +22,8 @@ public class Robot implements RobotAction {
   public Player owner;
   private Position startPosition;
 
-  public Robot(String name, RR currentGame) {
-    this.name = name;
-    this.currentGame = currentGame;
-    this.isAlive = true;
+  public Robot(String name){
+    this.name=name;
   }
 
   public Direction getFaceDirection() {
@@ -102,7 +100,7 @@ public class Robot implements RobotAction {
     Random random = new Random();
     while (flag){
       Position desiredPosition = new Position(random.nextInt(this.getCurrentGame().getGameBoard().getWidth()),
-          random.nextInt(this.getCurrentGame().getGameBoard().getHeight()));
+              random.nextInt(this.getCurrentGame().getGameBoard().getHeight()));
       Boolean flag2 = currentGame.getController().robotStartingPositionCheck(desiredPosition);
       //flag2: whether the desired position is valid
       if (flag2){
@@ -183,4 +181,6 @@ public class Robot implements RobotAction {
     }
   }
 }
+
+
 

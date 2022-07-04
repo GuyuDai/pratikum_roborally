@@ -4,8 +4,11 @@ import server.Player.Robot;
 
 public class MoveThree extends Card implements Move{
 
+  public MoveThree(){
+    super("MoveThree");
+  }
   /**
-   * @author dai
+   * @author dai,Li
    * to move forwards three steps
    */
   @Override

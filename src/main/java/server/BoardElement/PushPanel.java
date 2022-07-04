@@ -7,11 +7,11 @@ import server.Player.Robot;
 
 public class PushPanel extends BoardElem implements Move {
 
-  public PushPanel(RR currentGame, int speed, Direction direction) {
+  public PushPanel(RR currentGame, String push, Direction direction) {
 
-    super("PushPanelOne", currentGame);
-    this.speed=speed;
+    super("PushPanel", currentGame);
     this.direction=direction;
+    this.push=push;
   }
 
 
@@ -25,5 +25,12 @@ public class PushPanel extends BoardElem implements Move {
   public void move(Robot robot) {
     robot.move(this.getSpeed());
 
+  }
+
+  @Override
+  public String toString(){
+    String result = "";
+    result += "PushPanel, speed:" + this.push + ", direction:" + this.direction;
+    return result;
   }
 }

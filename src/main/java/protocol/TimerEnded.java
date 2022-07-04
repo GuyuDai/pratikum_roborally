@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -11,14 +11,22 @@ import protocol.ProtocolFormat.MessageType;
 
 public class TimerEnded extends Message {
 
-    private class TimerEndedBody extends AbstractMessageBody{
+    public class TimerEndedBody extends MessageBody {
         protected int[] clientIDs;
+
+        public int[] getClientIDs() {
+            return clientIDs;
+        }
+
+        public void setClientIDs(int[] clientIDs) {
+            this.clientIDs = clientIDs;
+        }
     }
     public TimerEnded (int[] clientIDs) {
         this.messageType = MessageType.timerEnded;
         TimerEndedBody body = new TimerEndedBody();
         body.clientIDs = clientIDs;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 

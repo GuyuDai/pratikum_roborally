@@ -8,8 +8,8 @@ public abstract class Card {
   public RR currentGame;
   private Player owner;
 
-  public Card(){
-
+  public Card(String name){
+    this.name=name;
   }
 
   public abstract void action();
@@ -26,3 +26,4 @@ public abstract class Card {
     return name;
   }
 }
+

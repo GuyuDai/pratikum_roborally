@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -11,10 +11,34 @@ import protocol.ProtocolFormat.MessageType;
 
 public class Movement extends Message {
 
-    private class MovementBody extends AbstractMessageBody{
+    private class MovementBody extends MessageBody {
         protected int clientID;
         protected int x;
         protected int y;
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public int getX() {
+            return x;
+        }
+
+        public int getY() {
+            return y;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
+
+        public void setX(int x) {
+            this.x = x;
+        }
+
+        public void setY(int y) {
+            this.y = y;
+        }
     }
     public Movement (int clientID, int x, int y) {
         this.messageType = MessageType.movement;
@@ -22,7 +46,7 @@ public class Movement extends Message {
         body.clientID = clientID;
         body.x = x;
         body.y = y;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

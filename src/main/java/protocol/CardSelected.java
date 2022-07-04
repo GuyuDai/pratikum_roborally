@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -11,10 +11,34 @@ import protocol.ProtocolFormat.MessageType;
 
 public class CardSelected extends Message {
 
-    private class CardSelectedBody extends AbstractMessageBody{
+    public class CardSelectedBody extends MessageBody {
         protected int clientID;
         protected int register;
         protected boolean filled;
+
+        public int getClientID() {
+            return clientID;
+        }
+
+        public int getRegister() {
+            return register;
+        }
+
+        public boolean isFilled() {
+            return filled;
+        }
+
+        public void setClientID(int clientID) {
+            this.clientID = clientID;
+        }
+
+        public void setRegister(int register) {
+            this.register = register;
+        }
+
+        public void setFilled(boolean filled) {
+            this.filled = filled;
+        }
     }
 
     public CardSelected (int clientID, int register, boolean filled) {
@@ -23,7 +47,7 @@ public class CardSelected extends Message {
         body.clientID = clientID;
         body.register = register;
         body.filled = filled;
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

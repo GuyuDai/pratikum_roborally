@@ -5,7 +5,9 @@ import server.Player.Robot;
 import server.Control.Position;
 
 public class UTurn extends Card implements Move{
-
+  public UTurn(){
+    super("UTurn");
+  }
   /**
    * @author dai
    * turn round

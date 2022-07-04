@@ -7,16 +7,21 @@ import server.Game.RR;
 public abstract class BoardElem {
   public String name;
   public Position position;
-  protected RR currentGame;
+  public RR currentGame;
   public Direction direction;
   public int speed;
   public int count;
   public String turnDirection;
 
+  public Direction direction2;
+
+  public  String push;
+
+
 
   public BoardElem(String name,RR currentGame){
-     this.name=name;
-     this.currentGame=currentGame;
+    this.name=name;
+    this.currentGame=currentGame;
   }
 
   public abstract void action();
@@ -40,6 +45,10 @@ public abstract class BoardElem {
     return direction;
   }
 
+  public Direction getDirection2(){
+    return  direction2;
+  }
+
   public int getSpeed() {
     return speed;
   }
@@ -52,5 +61,10 @@ public abstract class BoardElem {
     return turnDirection;
   }
 
+  public String getPush() {
+    return push;
+  }
 }
+
+
 

@@ -3,12 +3,14 @@ package server.CardTypes;
 import server.Player.Robot;
 
 /**
- * @author dai
+ * @author dai,Li
  * to move forwards one step
  */
 public class
 MoveOne extends Card implements Move{
-
+  public MoveOne(){
+    super("MoveOne");
+  }
   @Override
   public void action() {
     move(this.getOwner().getOwnRobot());
@@ -19,3 +21,4 @@ MoveOne extends Card implements Move{
     robot.move(1);
   }
 }
+

@@ -1,6 +1,7 @@
 package client.mapWindow;
 
 
+import client.gameWindow.GameViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +13,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import protocol.MapSelected;
-import protocol.SelectMap;
-import protocol.SendChat;
+import server.Server;
+
+import java.util.logging.Level;
 
 
 /**
@@ -52,13 +54,15 @@ public class MapViewModel {
     @FXML
     private ToggleButton map3Btn;
 
+
+    public static String mapSelection;
+
     //when clicked on Map Selection, the window closes
     @FXML
     public void selectDizzyHighway(ActionEvent actionEvent) {
         Stage stage = (Stage) DizzyHighwayBtn.getScene().getWindow();
         stage.close();
-        //neet to adapt according to 1.0
-        System.out.println(new MapSelected("DizzyHighway"));
+        setMapSelection("Dizzy Highway");
     }
     @FXML
     public void select2(ActionEvent actionEvent) {
@@ -77,7 +81,7 @@ public class MapViewModel {
 
     public void map1ImageAction (ActionEvent actionEvent) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Image1.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/DizzyHigway.fxml"));
             Parent rootMap1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("Dizzy Highway");
@@ -89,10 +93,10 @@ public class MapViewModel {
 
     public void map2ImageAction(ActionEvent actionEvent) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Image1.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/DeathTrap.fxml"));
             Parent rootMap1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            stage.setTitle("Map 2");
+            stage.setTitle("Death Trap");
             stage.setScene(new Scene(rootMap1));
             stage.show();
         } catch (Exception e){
@@ -101,10 +105,10 @@ public class MapViewModel {
 
     public void map3ImageAction(ActionEvent actionEvent) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Image1.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ExtraCrispy.fxml"));
             Parent rootMap1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            stage.setTitle("Map 3");
+            stage.setTitle("Extra Crispy");
             stage.setScene(new Scene(rootMap1));
             stage.show();
         } catch (Exception e){
@@ -113,13 +117,22 @@ public class MapViewModel {
 
     public void map4ImageAction(ActionEvent actionEvent) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Image1.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/LostBearings.fxml"));
             Parent rootMap1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            stage.setTitle("Map 4");
+            stage.setTitle("Lost Bearings");
             stage.setScene(new Scene(rootMap1));
             stage.show();
         } catch (Exception e){
         }
+    }
+
+
+    public static void setMapSelection(String name){
+        mapSelection = name;
+    }
+
+    public static String getMapSelection(){
+        return mapSelection;
     }
 }

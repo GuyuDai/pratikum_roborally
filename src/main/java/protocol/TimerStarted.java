@@ -1,6 +1,6 @@
 package protocol;
 
-import protocol.ProtocolFormat.AbstractMessageBody;
+import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
@@ -10,12 +10,12 @@ import protocol.ProtocolFormat.MessageType;
 
 public class TimerStarted extends Message {
 
-    private class TimerStartedBody extends AbstractMessageBody{
+    public class TimerStartedBody extends MessageBody {
     }
     public TimerStarted () {
         this.messageType = MessageType.timerStarted;
         TimerStartedBody body = new TimerStartedBody();
-        this.messageBody = body;
+        this.messageBody = body.toString();
 
     }
 }

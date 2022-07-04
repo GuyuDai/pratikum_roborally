@@ -5,9 +5,12 @@ import server.Player.Robot;
 import server.Control.Position;
 
 public class TurnLeft extends Card implements Move{
+  public TurnLeft(){
+    super("TurnLeft");
+  }
 
   /**
-   * @author dai
+   * @author dai,Li
    * reset the orientation of a robot's position
    */
   @Override
