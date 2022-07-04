@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -113,15 +114,15 @@ public class LoginViewModel {
         //Client.getPlayerOnline().setPlayer(name);
         String name =nameInput.getText();
         //Client.getPlayerOnline().sendToAll("SERVER: " + name + " has entered the chat!");
-            Message message = new PlayerValues(name, figure);
-            String clientMessage = message.toString();
-            Client.getClientReceive().getWriteOutput().write(clientMessage);
-            Client.getClientReceive().getWriteOutput().newLine();
-            Client.getClientReceive().getWriteOutput().flush();
-            Stage stage = (Stage) sendNameButton.getScene().getWindow();
-            stage.close();
-            setWindowName("Lobby");
-            openLobbyWindow();
+        Message message = new PlayerValues(name, figure);
+        String clientMessage = message.toString();
+        Client.getClientReceive().getWriteOutput().write(clientMessage);
+        Client.getClientReceive().getWriteOutput().newLine();
+        Client.getClientReceive().getWriteOutput().flush();
+        Stage stage = (Stage) sendNameButton.getScene().getWindow();
+        stage.close();
+        setWindowName("Lobby");
+        openLobbyWindow();
 
     }
 
@@ -149,5 +150,8 @@ public class LoginViewModel {
 
     public static String getWindowName(){
         return window;
+    }
+
+    public void setPlayerID(MouseEvent mouseEvent) {
     }
 }

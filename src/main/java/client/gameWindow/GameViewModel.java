@@ -1088,6 +1088,7 @@ public class GameViewModel {
                  * URLs for Push Panels
                  */
 
+                /*
                 URL PP24Bottom = getClass().getResource("PushPanels/PP24Bottom.png");
                 Image imagePP24Bottom = new Image(PP24Bottom.toString());
 
@@ -1112,10 +1113,12 @@ public class GameViewModel {
                 URL PP135Left = getClass().getResource("PushPanels/PP135Left.png");
                 Image imagePP135Left = new Image(PP135Left.toString());
 
+                 */
 
 
 
-                Board board=new DeathTrap();
+
+                Board board=new DizzyHighway();
                 System.out.println(board.getWidth());
 
                 //public void printMap() {
