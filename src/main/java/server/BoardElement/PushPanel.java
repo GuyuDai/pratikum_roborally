@@ -30,7 +30,7 @@ public class PushPanel extends BoardElem implements Move {
   @Override
   public String toString(){
     String result = "";
-    result += "PushPanel, speed:" + this.speed + ", direction:" + this.direction;
+    result += "PushPanel, speed:" + this.push + ", direction:" + this.direction;
     return result;
   }
 }
