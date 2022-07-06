@@ -3,6 +3,7 @@ package protocol;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
+import server.CardTypes.*;
 
 /**
  * Some cards have to be replaced by e.g. spam cards during the activation of the register.
@@ -12,7 +13,7 @@ public class ReplaceCard extends Message {
 
     public class ReplaceCardBody extends MessageBody {
         protected int register;
-        protected String newCard;
+        protected Card newCard;
         protected int clientID;
 
         public int getRegister() {
@@ -23,7 +24,7 @@ public class ReplaceCard extends Message {
             return clientID;
         }
 
-        public String getNewCard() {
+        public Card getNewCard() {
             return newCard;
         }
 
@@ -35,11 +36,11 @@ public class ReplaceCard extends Message {
             this.register = register;
         }
 
-        public void setNewCard(String newCard) {
+        public void setNewCard(Card newCard) {
             this.newCard = newCard;
         }
     }
-    public ReplaceCard (int register, String newCard, int clientID) {
+    public ReplaceCard (int register, Card newCard, int clientID) {
         this.messageType = MessageType.replaceCard;
         ReplaceCardBody body = new ReplaceCardBody();
         body.register =register;

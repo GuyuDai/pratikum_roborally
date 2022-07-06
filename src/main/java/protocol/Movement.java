@@ -11,7 +11,7 @@ import protocol.ProtocolFormat.MessageType;
 
 public class Movement extends Message {
 
-    private class MovementBody extends MessageBody {
+    public class MovementBody extends MessageBody {
         protected int clientID;
         protected int x;
         protected int y;
