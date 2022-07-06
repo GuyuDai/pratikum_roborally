@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import protocol.SendChat;
 import server.BoardElement.BoardElem;
 import server.BoardTypes.*;
 import server.CardTypes.*;
@@ -405,9 +406,48 @@ public class GameViewModel {
     @FXML
     public void sendButtonAction(ActionEvent actionEvent) throws IOException {
         String message = model.getTextFieldContent().get();
-
+        checkInput(message);
         model.getTextFieldContent().set("");
         input.requestFocus();
+    }
+
+    public void checkInput(String message){
+        String chatToSend = "";
+
+        if(message.startsWith("@")) {
+            chatToSend = createDirectMessage(message);
+
+        }else {
+            chatToSend = createMessage(message);
+        }
+        if(!chatToSend.isEmpty()){
+            try {
+                Client.getClientReceive().getWriteOutput().write(chatToSend);
+                Client.getClientReceive().getWriteOutput().newLine();
+                Client.getClientReceive().getWriteOutput().flush();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    private String createMessage(String message){
+        String sendChat=new SendChat(message,-1).toString();
+        return sendChat;
+    }
+
+    private String createDirectMessage(String message){
+        message = message.replace("@", "");
+        String [] splittingTarget = message.split(" ");
+        StringBuilder realMessage = new StringBuilder("");
+        for(int i = 1; i < splittingTarget.length; i++){
+            realMessage.append(splittingTarget[i]).append(" ");
+        }
+        String target=splittingTarget[0].trim();
+        int to=Client.getClientReceive().getIdByName(target);
+        String messageToSend=realMessage.toString().trim();
+        String sendChat=new SendChat(messageToSend,to).toString();
+
+        return sendChat;
     }
 
 

@@ -369,7 +369,7 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.mapSelected:
-                MapSelectedBody mapSelectedBody=new Gson().fromJson(body, MapSelected.MapSelectedBody.class);
+                MapSelectedBody mapSelectedBody=new Gson().fromJson(body, MapSelectedBody.class);
                 map=mapSelectedBody.getMap();
                 switch (map){
                     case "DizzyHighway":

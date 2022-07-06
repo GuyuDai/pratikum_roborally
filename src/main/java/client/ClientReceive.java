@@ -1,10 +1,15 @@
 package client;
 
+import client.gameWindow.GameViewModel;
+import client.lobbyWindow.LobbyViewModel;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import java.io.*;
 import java.net.Socket;
 import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import javafx.application.Platform;
 import protocol.ProtocolFormat.Message;
@@ -12,6 +17,8 @@ import protocol.ProtocolFormat.MessageAdapter;
 import protocol.ProtocolFormat.MessageType;
 import protocol.SendChat;
 import protocol.*;
+import protocol.PlayerAdded.PlayerAddedBody;
+import protocol.ReceivedChat.ReceivedChatBody;
 import server.Server;
 
 
@@ -24,6 +31,18 @@ public class ClientReceive extends Thread{
 
     private static final String PROTOCOL = "Version 1.0";
     private static final String GROUP = "Origionelle Oktopusse";
+
+    int playerId;
+    String playerName;
+    int figure;
+
+    String chatMsg;
+
+    int fromId;
+
+    boolean isPrivate;
+
+    Map<String,Integer> IdName=new HashMap<>();
 
     public ClientReceive(Socket socket) {
         this.socket = socket;
@@ -208,6 +227,7 @@ public class ClientReceive extends Thread{
 
     private void identifyMessage(Message message) {
         String type = message.getMessageType();
+        String body = message.getMessageBody();
         switch (type){
             case MessageType.helloClient:
                 sendMessage(new HelloServer(GROUP,false,PROTOCOL,clientID).toString());
@@ -219,10 +239,50 @@ public class ClientReceive extends Thread{
 
             case MessageType.welcome:
             case MessageType.playerAdded:
-
+                PlayerAddedBody playerAddedBody=new Gson().fromJson(body,PlayerAddedBody.class);
+                playerId=playerAddedBody.getClientID();
+                playerName=playerAddedBody.getName();
+                figure=playerAddedBody.getFigure();
+                IdName.put(playerName,playerId);
+            case MessageType.receivedChat:
+                ReceivedChatBody receivedChatBody=new Gson().fromJson(body,ReceivedChatBody.class);
+                 chatMsg=receivedChatBody.getMessage();
+                 fromId=receivedChatBody.getFrom();
+                 isPrivate=receivedChatBody.isPrivate();
+                 receiveChat(chatMsg);
         }
     }
 
+    public void receiveChat(String msg){
+        String fromName = this.getNameById(fromId);
+        if(LobbyViewModel.getWindowName() == "Lobby") {
+            Platform.runLater(() -> {
+                LobbyViewModel.show(fromName + ": " + msg);
+            });
+        }
+        else{
+            Platform.runLater(() -> {
+                GameViewModel.show(fromName + ": " + msg);
+            });
+        }
+    }
+    public int getIdByName(String name){
+        return IdName.get(playerName);
+    }
+
+    public String getNameById(int id){
+        String name="";
+        for(String key: IdName.keySet()){
+            if(IdName.get(key).equals(id)){
+                name=key;
+            }
+        }
+        return name;
+    }
+
+    public int getFromId(){
+        return fromId;
+    }
     public void sendMessage(String msg){
         try {
             writeOutput.write(msg);

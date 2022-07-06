@@ -1,6 +1,8 @@
 package client.lobbyWindow;
 
 import java.io.IOException;
+
+import client.Client;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import protocol.SendChat;
 
 
 /**
@@ -84,8 +87,6 @@ public class LobbyViewModel {
         }
     }
 
-
-
     public LobbyViewModel() {
         model = LobbyModel.getInstance();
     }
@@ -106,13 +107,15 @@ public class LobbyViewModel {
         model.addNewListItem(message);
     }
 
-    @FXML
+   /* @FXML
     public void sendButtonAction(ActionEvent actionEvent) throws IOException {
         String message = model.getTextFieldContent().get();
         model.getTextFieldContent().set("");
         input.requestFocus();
         openGameWindow();
     }
+
+    */
 
     /**
      * send messages using keyboard "Enter" key
@@ -124,7 +127,7 @@ public class LobbyViewModel {
         }
     }
 
-    /*
+
     @FXML
     public void sendButtonAction(ActionEvent actionEvent) throws IOException {
         String message = model.getTextFieldContent().get();
@@ -139,17 +142,17 @@ public class LobbyViewModel {
     //checks if it is a direct message or a message for all
 
     public void checkInput(String message){
-        String sendableRequest = "";
+        String chatToSend = "";
 
         if(message.startsWith("@")) {
-            sendableRequest = createDirectMessage(message);
+            chatToSend = createDirectMessage(message);
 
         }else {
-            sendableRequest = createMessage(message);
+            chatToSend = createMessage(message);
         }
-        if(!sendableRequest.isEmpty()){
+        if(!chatToSend.isEmpty()){
             try {
-                Client.getClientReceive().getWriteOutput().write(sendableRequest);
+                Client.getClientReceive().getWriteOutput().write(chatToSend);
                 Client.getClientReceive().getWriteOutput().newLine();
                 Client.getClientReceive().getWriteOutput().flush();
             } catch (IOException e) {
@@ -159,8 +162,8 @@ public class LobbyViewModel {
     }
 
     private String createMessage(String message){
-        String createMessageWrapped = gson.toJson(new RequestWrapper(new Message(currentPlayer.getName(), message, MessageTypes.CLIENT_MESSAGE), RequestType.MESSAGE));
-        return createMessageWrapped;
+        String sendChat=new SendChat(message,-1).toString();
+        return sendChat;
     }
 
     private String createDirectMessage(String message){
@@ -170,10 +173,14 @@ public class LobbyViewModel {
         for(int i = 1; i < splittingTarget.length; i++){
             realMessage.append(splittingTarget[i]).append(" ");
         }
-        String createMessageWrapped = gson.toJson(new RequestWrapper(new Message("Private Message from "+ currentPlayer.getName(), splittingTarget[0].trim(), realMessage.toString().trim(), MessageTypes.PRIVATE_MESSAGE), RequestType.MESSAGE));
-        return createMessageWrapped;
+        String target=splittingTarget[0].trim();
+        int to=Client.getClientReceive().getIdByName(target);
+        String messageToSend=realMessage.toString().trim();
+        String sendChat=new SendChat(messageToSend,to).toString();
+
+        return sendChat;
     }
-     */
+
 
 
     @FXML
