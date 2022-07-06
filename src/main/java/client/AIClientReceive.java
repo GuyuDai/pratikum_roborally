@@ -2,6 +2,7 @@ package client;
 
 import com.google.gson.*;
 import protocol.*;
+import protocol.PickDamage.*;
 import protocol.ProtocolFormat.*;
 import server.CardTypes.*;
 import server.Player.*;
@@ -40,7 +41,7 @@ public class AIClientReceive extends Thread{
 
     String card;
     String [] cards;
-
+    String[] availablePiles;
     public Card getRegisterNumb(int i) {
         return register.get(i);
     }
@@ -71,7 +72,7 @@ public class AIClientReceive extends Thread{
     ArrayList<Card> nineCardsPile;
 
 
-    int count;
+    int countofDamage;
     String[] availableMaps;
     boolean isPrivate;
     int cardsInHand;
@@ -325,6 +326,24 @@ public class AIClientReceive extends Thread{
     public void getMessageFromServer(Message message){
         String type = message.getMessageType();
         switch(type){
+
+            case MessageType.welcome:
+                //gets the ClientID from Server
+                Welcome.WelcomeBody welcomeBody= new Gson().fromJson(messageBody, Welcome.WelcomeBody.class);
+                clientID= welcomeBody.getClientID();
+                break;
+
+            case MessageType.playerStatus:
+                //Sobald ein Spieler seine Auswahl erfolgreich getroffen hat,
+                // kann er dem Server signalisieren bereit zu sein.
+                // Diese Meinung kann er via Boolean aber auch zurückziehen!
+                break;
+            case MessageType.selectMap:
+                break;
+            case MessageType.mapSelected:
+                MapSelected.MapSelectedBody mapSelectedBody = new Gson().fromJson(messageBody,MapSelected.MapSelectedBody.class);;
+                map = mapSelectedBody.getMap();
+                break;
             case MessageType.currentPlayer:
                 if (activePhase.equals("GameInitializing")) {
                     if (map.equals("Death Trap")) {
@@ -341,16 +360,14 @@ public class AIClientReceive extends Thread{
                     }
 
                 } else if (activePhase.equals("ActivationPhase")) {
+                    //If its your turn it will always play the first register and deletes the card from the register after action.
                     Card reg1= getRegisterNumb(0);
                     reg1.action();
-                    Card reg2= getRegisterNumb(1);
-                    reg2.action();
-                    Card reg3= getRegisterNumb(2);
-                    reg3.action();
-                    Card reg4= getRegisterNumb(3);
-                    reg4.action();
-                    Card reg5= getRegisterNumb(4);
-                    reg5.action();
+                    //benachrichtigt den Server welche Karte gespielt wird
+                    sendMessage(new PlayCard(reg1.name).toString());
+                    //Nachdem Karte gespielt, wird diese aus dem Register entfernt
+                    register.remove(0);
+
                 }
                 else if (activePhase.equals("UpgradePhase")) {
                     upgradePhaseAI();
@@ -358,9 +375,25 @@ public class AIClientReceive extends Thread{
                 } else if(activePhase.equals("ProgrammingPhase")){
                     programmingPhaseAI();
                 }
+                break;
+            case MessageType.drawDamage:
+                //All damage cards will be transmitted at once
+                DrawDamage.DrawDamageBody drawDamageBody = new Gson().fromJson(messageBody, DrawDamage.DrawDamageBody.class);
+                //Damage cards put on the cards[]
+                cards = drawDamageBody.getCards();
+                break;
+            case MessageType.pickDamage:
+
+                PickDamageBody pickDamageBody= new Gson().fromJson(messageBody,PickDamageBody.class);
+                countofDamage = pickDamageBody.getCount();
+                //Saves the damagecards on the available piles.
+                availablePiles= pickDamageBody.getAvailablePiles();
+
+                break;
+
         }
     }
-
+    //ToDo
     public void upgradePhaseAI(){
 
     }
