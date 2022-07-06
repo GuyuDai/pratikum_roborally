@@ -79,6 +79,9 @@ public class MapViewModel {
         stage.close();
     }
 
+    /**
+     * by clicking on the map images, it will appear as an enlarged image
+     */
     public void map1ImageAction (ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/DizzyHigway.fxml"));

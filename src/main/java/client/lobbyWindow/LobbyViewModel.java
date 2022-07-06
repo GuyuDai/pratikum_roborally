@@ -29,13 +29,6 @@ import protocol.SetStatus;
 public class LobbyViewModel {
 
     public static String window = "Lobby";
-    public static void setWindowName (String name){
-        window = name;
-    }
-    public static String getWindowName(){
-        return window;
-    }
-
     private static LobbyModel model;
     private static LobbyViewModel instance;
 
@@ -59,12 +52,15 @@ public class LobbyViewModel {
     private TextField input;
     @FXML
     private Button sendBtn;
+    @FXML
+    private Button selectMap;
 
 
 
     public void initialize() {
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
+        selectMap.setVisible(false);
     }
 
     public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendBtn) {
@@ -75,7 +71,7 @@ public class LobbyViewModel {
     }
 
 
-    //ToDo: Robot not available after player selected
+
     //ToDo: Connect Robot to Player
     //ToDo: Only first player should select Map
 
@@ -112,15 +108,6 @@ public class LobbyViewModel {
         model.addNewListItem(message);
     }
 
-   /* @FXML
-    public void sendButtonAction(ActionEvent actionEvent) throws IOException {
-        String message = model.getTextFieldContent().get();
-        model.getTextFieldContent().set("");
-        input.requestFocus();
-        openGameWindow();
-    }
-
-    */
 
     /**
      * send messages using keyboard "Enter" key
@@ -147,7 +134,6 @@ public class LobbyViewModel {
     /**
      * checks if it is a direct message or a message for all
      */
-
     public void checkInput(String message){
         String chatToSend = "";
 
@@ -168,11 +154,17 @@ public class LobbyViewModel {
         }
     }
 
+    /**
+     * message for all
+     */
     private String createMessage(String message){
         String sendChat=new SendChat(message,-1).toString();
         return sendChat;
     }
 
+    /**
+     * direct message
+     */
     private String createDirectMessage(String message){
         message = message.replace("@", "");
         String [] splittingTarget = message.split(" ");
@@ -194,10 +186,11 @@ public class LobbyViewModel {
     public void readyButtonAction(ActionEvent actionEvent) {
         String readyMessage=new SetStatus(true).toString();
         Client.getClientReceive().sendMessage(readyMessage);
+        selectMap.setVisible(true);
     }
 
     /**
-     * selecting a map and enabling start game button
+     * selecting a map by opening map selection window
      */
     public void selectMapAction(ActionEvent actionEvent) {
         try {
@@ -211,4 +204,10 @@ public class LobbyViewModel {
         }
     }
 
+    public static void setWindowName (String name){
+        window = name;
+    }
+    public static String getWindowName(){
+        return window;
+    }
 }

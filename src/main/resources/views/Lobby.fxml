@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="842.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.lobbyWindow.LobbyViewModel">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="842.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.lobbyWindow.LobbyViewModel">
    <children>
       <ImageView fitHeight="176.0" fitWidth="418.0" layoutX="348.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -44,5 +44,10 @@
             <Font size="24.0" />
          </font>
       </CheckBox>
+      <Button fx:id="selectMap" layoutX="687.0" layoutY="480.0" mnemonicParsing="false" onAction="#selectMapAction" prefHeight="40.0" prefWidth="120.0" text="select map">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </Pane>
