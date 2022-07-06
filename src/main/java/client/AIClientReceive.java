@@ -350,13 +350,13 @@ public class AIClientReceive extends Thread{
                         //Position.setX(11);
                         x=11;
                         //Position.setY(8);
-                        y=8;
-                        sendMessage(new HelloServer(GROUP,false,PROTOCOL,clientID).toString());
+                        y=1;
+                        sendMessage(new SetStartingPoint(x,y).toString());
                     } else {
-                        //Position.setX(1);
+                        //There is the same startpoint on every MAP exept DeathTrap
                         x=1;
-                        //Position.setX(8);
-                        x=8;
+                        y=1;
+                        sendMessage(new SetStartingPoint(x,y).toString());
                     }
 
                 } else if (activePhase.equals("ActivationPhase")) {
