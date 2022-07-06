@@ -33,6 +33,7 @@ public class AIClientReceive extends Thread{
     private int aiEnergyCubes=5;
 
     int phase;
+    private List<String> myNineCardsOnPile = new ArrayList<>();
     private HashSet<Position> availableStartingPositions = new HashSet<>();
     private HashSet<Position> availableDeathTrapStartingPositions = new HashSet<>();
     private String activePhase = null;
@@ -415,7 +416,20 @@ public class AIClientReceive extends Thread{
                 availablePiles= pickDamageBody.getAvailablePiles();
 
                 break;
+            case MessageType.yourCards:
+                //Draws nine cards from the pile on server side and sends them to client
+                YourCards.YourCardsBody yourCardsBody= new Gson().fromJson(messageBody,YourCards.YourCardsBody.class);
+                List<String> cardsInHand = List.of(yourCardsBody.getCardsInHand());
+                // Save all the Cards on your own CardsPile
+                for (String card : cardsInHand) {
+                    myNineCardsOnPile.add(card);
+                }
+            case MessageType.notYourCards:
 
+                NotYourCards.NotYourCardsBody notYourCardsBody = new Gson().fromJson(messageBody,NotYourCards.NotYourCardsBody.class);
+                int client = notYourCardsBody.getClientID();
+                int cardCount = notYourCardsBody.getCardsInHand();
+                System.out.println("Client"+client+ "got new Cards: Number" + cardCount);
         }
     }
     //ToDo
