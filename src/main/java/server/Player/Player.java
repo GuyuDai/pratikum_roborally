@@ -21,6 +21,8 @@ public class Player implements PlayerAction{
 
   private boolean isAI=false;
 
+  private boolean isReady=false;
+
 
   public Player(String name){
     this.name = name;
@@ -38,6 +40,14 @@ public class Player implements PlayerAction{
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public boolean getReady() {
+    return isReady;
+  }
+
+  public void setReady(boolean ready) {
+    isReady = ready;
   }
 
   public RR getCurrentGame() {
@@ -173,6 +183,37 @@ public class Player implements PlayerAction{
   /*select AICard for Programming phase
 randomize chosing cards and putting it into register
 */
+  public void drawWormCard(int count){
+    for(int i=0;i<count;i++){
+      // @dai: i think there needs to check whether the spam pile is empty
+      // the method in Controller isCardListEmpty(..) can be used
+      if(!currentGame.getController().isCardListEmpty(gameDeck.getWormPile())) {
+        hands.add(gameDeck.getWormPile().get(0));
+        gameDeck.getWormPile().remove(0);
+      }
+    }
+  }
+
+  public void drawVirusCard(int count){
+    for(int i=0;i<count;i++){
+      // @dai: i think there needs to check whether the spam pile is empty
+      // the method in Controller isCardListEmpty(..) can be used
+      if(!currentGame.getController().isCardListEmpty(gameDeck.getVirusPile())) {
+        hands.add(gameDeck.getVirusPile().get(0));
+        gameDeck.getVirusPile().remove(0);
+      }
+    }
+  }
+  public void drawTrojanCard(int count){
+    for(int i=0;i<count;i++){
+      // @dai: i think there needs to check whether the spam pile is empty
+      // the method in Controller isCardListEmpty(..) can be used
+      if(!currentGame.getController().isCardListEmpty(gameDeck.getTrojanPile())) {
+        hands.add(gameDeck.getSpamPile().get(0));
+        gameDeck.getVirusPile().remove(0);
+      }
+    }
+  }
   public void programmingPhaseAI(){
     // draw from pile 9 cards automatically
     draw();

@@ -4,6 +4,9 @@ package server;
 import com.google.gson.GsonBuilder;
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+
 import protocol.*;
 import com.google.gson.Gson;
 import protocol.ActivePhase.ActivePhaseBody;
@@ -16,11 +19,18 @@ import protocol.PlayerValues.PlayerValuesBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageAdapter;
 import protocol.ProtocolFormat.MessageBody;
+import protocol.SelectedDamage.SelectedDamageBody;
 import protocol.ProtocolFormat.MessageType;
 import protocol.SendChat.SendChatBody;
 import protocol.SetStartingPoint.SetStartingPointBody;
 import protocol.SetStatus.SetStatusBody;
+import protocol.MapSelected.MapSelectedBody;
+import protocol.SelectedCard.SelectedCardBody;
+import server.BoardTypes.*;
+import server.CardTypes.Card;
 import server.Control.Timer;
+import server.Game.GameState;
+import server.Game.RR;
 import server.Player.Player;
 
 
@@ -33,6 +43,8 @@ public class ServerThread implements Runnable {
     public static boolean gameActive = false;
 
     private boolean alive;
+
+    private static  List<ServerThread> connectedClients = new ArrayList<ServerThread>();
 
     /**
      * ActivePhase
@@ -77,6 +89,7 @@ public class ServerThread implements Runnable {
      * SetStatus
      */
     boolean ready;
+    RR currentGame;
 
 
     /**
@@ -84,16 +97,11 @@ public class ServerThread implements Runnable {
      */
     String message;
     int to;
-
-
     /**
      * MapSelection
      */
+    Board board;
     String map;
-
-
-
-
 
     /**
      * SetStartingPoint
@@ -108,6 +116,7 @@ public class ServerThread implements Runnable {
 
     public ServerThread(Socket clientSocket) throws IOException {
         this. clientSocket = clientSocket;
+        connectedClients=Server.getConnectedClients();
         try {
             readInput = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             writeOutput = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
@@ -286,7 +295,7 @@ public class ServerThread implements Runnable {
         switch (messageType){
             case MessageType.activePhase:
                 ActivePhaseBody activePhaseBody = new Gson().fromJson(body,ActivePhaseBody.class);
-                this.phase = activePhaseBody.getPhase();
+                phase = activePhaseBody.getPhase();
                 break;
 
             case MessageType.animation:
@@ -326,30 +335,115 @@ public class ServerThread implements Runnable {
                 int figure = playerValuesBody.getFigure();
                 player = new Player(name);
                 player.setOwnRobot(figure);
+                sendMessage(new PlayerAdded(Id,name,figure).toString());
                 break;
 
             case MessageType.setStatus:
                 SetStatusBody setStatusBody = new Gson().fromJson(body,SetStatusBody.class);
                 ready = setStatusBody.isReady();
+                player.setReady(ready);
+                if(firstPlayerReady()!=null){
+                    if (firstPlayerReady().equals(player)) {
+                        sendMessage(new SelectMap(
+                                new String[]{"DizzyHighway","ExtraCrispy","DeathTrap","LostBearings"}).toString());
+                    }
+                }
+                if (allPlayerReady()&&connectedClients.size()>=2){
+                    currentGame=new RR(board);
+                    currentGame.start();
+                }
                 break;
 
             case MessageType.sendChat:
                 SendChatBody sendChatBody = new Gson().fromJson(body,SendChatBody.class);
+                String msg=sendChatBody.getMessage();
+                int targetId=sendChatBody.getTo();
+                if(targetId==-1){
+                    sendToAll(msg);
+                }
+                else {
+                    sendPrivate(msg,targetId);
+                }
+
                 //some behaviour
                 break;
 
             case MessageType.mapSelected:
+                MapSelectedBody mapSelectedBody=new Gson().fromJson(body, MapSelected.MapSelectedBody.class);
+                map=mapSelectedBody.getMap();
+                switch (map){
+                    case "DizzyHighway":
+                        board=new DizzyHighway();
+                        break;
+                    case "ExtraCrispy":
+                        board=new ExtraCrispy();
+                        break;
+                    case "LostBearings":
+                        board=new LostBearings();
+                        break;
+                    case "DeathTrap":
+                        board=new DeathTrap();
+                        break;
+                }
                 break;
 
             case MessageType.playCard:
                 PlayCardBody playCardBody = new Gson().fromJson(body,PlayCardBody.class);
                 card = playCardBody.getCard();
+                String cardPlayedMessage=new CardPlayed(clientID,card).toString();
+                sendToAll(cardPlayedMessage);
                 break;
 
             case MessageType.selectCard:
+                SelectedCardBody selectedCardBody=new Gson().fromJson(body,SelectedCardBody.class);
+                if(currentGame!=null&&currentGame.getCurrentState().equals(GameState.ProgrammingPhase)){
+                    register=selectedCardBody.getRegister();
+                    card=selectedCardBody.toString();
+                    int i = 0;
+                    while (i < player.getHands().size()) {
+                        Card currentCard = player.getHands().get(i);
+                        if (currentCard != null && currentCard.getCardName().equals(card)) {
+                            player.getRegister().add(currentCard);
+                            player.getHands().remove(currentCard);
+                        }   //if remove one Card in handsList,don't do i++
+                        else {
+                            i++;
+                        }
+                        //TODO change DoProgrammingPhase later,player can do card selection here;
+                    }
+                    int filledCardNumber=player.getRegister().size();
+                    String cardSelected="";
+                    if (filledCardNumber<5){
+                        cardSelected = new CardSelected(clientID, register, false).toString();
+                    }
+                    else {
+                        cardSelected = new CardSelected(clientID, register, true).toString();
+                    }
+                    sendToAll(cardSelected);
+                }
                 break;
 
             case MessageType.selectedDamage:
+                SelectedDamageBody selectedDamageBody=new Gson().fromJson(body,SelectedDamageBody.class);
+                if(currentGame!=null){
+                 String[] damageCards=selectedDamageBody.getCards();
+                 for(String damageCard : damageCards){
+                     switch (damageCard) {
+                         case "Spam":
+                             player.drawSpamCard(1);
+                             break;
+                         case"Worm":
+                             player.drawWormCard(1);
+                             break;
+                         case "Virus":
+                             player.drawVirusCard(1);
+                             break;
+                         case "Trojan":
+                             player.drawTrojanCard(1);
+                             break;
+                     }
+                 }
+                }
                 break;
 
             case MessageType.setStartingPoint:
@@ -369,6 +463,61 @@ public class ServerThread implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public void sendToAll(String msg){
+        String chatMessage=new ReceivedChat(msg,clientID,false).toString();
+        try {
+            for (ServerThread serverThread : connectedClients) {
+                serverThread.getWriteOutput().write(chatMessage);
+                serverThread.getWriteOutput().newLine();
+                serverThread.getWriteOutput().flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendPrivate(String msg,int id){
+        String chatMessage=new ReceivedChat(msg,clientID,true).toString();
+        try {
+            for (ServerThread serverThread : connectedClients) {
+                int targetId=serverThread.getID();
+                if(targetId==id) {
+                    serverThread.getWriteOutput().write(chatMessage);
+                    serverThread.getWriteOutput().newLine();
+                    serverThread.getWriteOutput().flush();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public Player firstPlayerReady(){
+        int readyPlayer=0;
+        Player firstReadyPlayer=null;
+        for(ServerThread target: connectedClients) {
+            if (target.isReady()) {
+                readyPlayer++;
+                firstReadyPlayer = target.getPlayer();
+            }
+        }
+        if (readyPlayer==1){
+            return firstReadyPlayer;
+        }
+        return null;
+    }
+
+    public boolean allPlayerReady(){
+      for(ServerThread target: connectedClients){
+          if(!target.isReady()){
+              return false;
+          }
+      }
+      return true;
+
     }
     public BufferedReader getReadInput(){
         return readInput;
@@ -398,5 +547,13 @@ public class ServerThread implements Runnable {
 
     public void setAlive(boolean alive) {
         this.alive = alive;
+    }
+
+    public boolean isReady() {
+        return ready;
+    }
+
+    public Player getPlayer(){
+        return player;
     }
 }

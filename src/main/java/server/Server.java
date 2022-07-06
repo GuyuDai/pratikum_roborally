@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import protocol.*;
 import protocol.ProtocolFormat.Message;
+import server.Player.Player;
 
 public class Server implements Runnable{
 
@@ -114,6 +115,24 @@ public class Server implements Runnable{
     public static Server getServer() {
         return server;
     }
+
+
+    public Player firstPlayerReady(){
+        int readyPlayer=0;
+        Player firstReadyPlayer=null;
+        for(ServerThread target: getConnectedClients()) {
+            if (target.isReady()) {
+                readyPlayer++;
+                firstReadyPlayer = target.getPlayer();
+            }
+        }
+           if (readyPlayer==1){
+               return firstReadyPlayer;
+           }
+           return null;
+    }
+
+
 
     private ServerThread getPlayerOnlineById(int id){
         for(ServerThread target : getConnectedClients()){
