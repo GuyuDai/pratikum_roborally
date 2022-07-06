@@ -150,4 +150,9 @@ public class LoginViewModel {
     public static String getWindowName(){
         return window;
     }
+
+    public void initAI(ActionEvent actionEvent) {
+
+
+    }
 }
