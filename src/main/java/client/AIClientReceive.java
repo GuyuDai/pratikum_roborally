@@ -47,7 +47,7 @@ public class AIClientReceive extends Thread {
     String[] availablePiles;
     int checkPointNumber;
 
-    private Card[] register = new Card[5];
+    private String[] register = new String[5];
 
     String group;
     int Id;
@@ -55,7 +55,7 @@ public class AIClientReceive extends Thread {
 
     String name;
     int figure;
-
+    private HashMap<Integer, Integer> robotsOfPlayers = new HashMap<>();
     private HashMap<Integer, Direction> currentDirectionsofAllPlayers = new HashMap<>();
 
     boolean ready;
@@ -76,7 +76,7 @@ public class AIClientReceive extends Thread {
     boolean isPrivate;
     int cardsInHand;
     int energyStorage;
-
+    private LinkedHashMap<Integer, Boolean> readyStatusOfClients = new LinkedHashMap<>();
     String source;
     String protocol;
     boolean isConnected;
@@ -89,7 +89,7 @@ public class AIClientReceive extends Thread {
     String messageBody;
     private static ClientReceive clientAIReceive;
     private final HashMap<Integer, int[]> activePositionsOfAllPlayers = new HashMap<>();
-
+    private HashMap<Integer, String> playerNames = new HashMap<>();
 
     //Starting the ActiviationPhase
     public void setActivationPhase() {
@@ -323,11 +323,17 @@ public class AIClientReceive extends Thread {
         // draw from pile 9 cards automatically
 
         //Choose the first five cards and put in your register
-        register[0] = nineCardsPile.get(0);
-        register[0] = nineCardsPile.get(1);
-        register[0] = nineCardsPile.get(2);
-        register[0] = nineCardsPile.get(3);
-        register[0] = nineCardsPile.get(4);
+        register[0] = String.valueOf(nineCardsPile.get(0));
+        register[1] = String.valueOf(nineCardsPile.get(1));
+        register[2] = String.valueOf(nineCardsPile.get(2));
+        register[3] = String.valueOf(nineCardsPile.get(3));
+        register[4] = String.valueOf(nineCardsPile.get(4));
+
+        sendMessage(new SelectedCard(register[0],0).toString());
+        sendMessage(new SelectedCard(register[1],1).toString());
+        sendMessage(new SelectedCard(register[2],2).toString());
+        sendMessage(new SelectedCard(register[3],3).toString());
+        sendMessage(new SelectedCard(register[4],4).toString());
     }
 
     /**
@@ -344,16 +350,30 @@ public class AIClientReceive extends Thread {
                 clientID = welcomeBody.getClientID();
                 break;
 
+            //case MessageType.playerValues:
+                //no here the client sends a message to the server about the playerValues
             case MessageType.playerStatus:
                 //Sobald ein Spieler seine Auswahl erfolgreich getroffen hat,
                 // kann er dem Server signalisieren bereit zu sein.
                 // Diese Meinung kann er via Boolean aber auch zurückziehen!
+                PlayerStatus.PlayerStatusBody playerStatusBody = new Gson().fromJson(messageBody, PlayerStatus.PlayerStatusBody.class);
+                int clientWhoIsReady = playerStatusBody.getClientID();
+                boolean ready = playerStatusBody.isReady();
+                readyStatusOfClients.put(clientWhoIsReady, ready);
                 break;
             case MessageType.selectMap:
-                break;
-            case MessageType.mapSelected:
+                //Saves Map
                 MapSelected.MapSelectedBody mapSelectedBody = new Gson().fromJson(messageBody, MapSelected.MapSelectedBody.class);
-                map = mapSelectedBody.getMap();
+                String mapName = mapSelectedBody.getMap();
+                map = mapName;
+                //or always choose DizzyHighway
+                //map = "DizzyHighway";
+                sendMessage(new MapSelected(map).toString());
+                break;
+
+            case MessageType.mapSelected:
+                MapSelected.MapSelectedBody mapSelectedBody1 = new Gson().fromJson(messageBody, MapSelected.MapSelectedBody.class);
+                map = mapSelectedBody1.getMap();
                 break;
             case MessageType.currentPlayer:
                 if (activePhase.equals("GameInitializing")) {
@@ -362,21 +382,24 @@ public class AIClientReceive extends Thread {
                         x = 11;
                         //Position.setY(8);
                         y = 1;
+                        //benachrichtigt den Server
                         sendMessage(new SetStartingPoint(x, y).toString());
                     } else {
                         //There is the same Startpoint on every MAP exept DeathTrap
                         x = 1;
                         y = 1;
+                        //benachrichtigt den Server
                         sendMessage(new SetStartingPoint(x, y).toString());
                     }
 
                 } else if (activePhase.equals("ActivationPhase")) {
                     //If its your turn it will always play the first register and deletes the card from the register after action.
-                    Card reg1 = register[pointerForRegister];
-                    reg1.action();
+                    String reg1 = register[pointerForRegister];
+                    //reg1.action();
                     pointerForRegister++;
                     //benachrichtigt den Server welche Karte gespielt wird
-                    sendMessage(new PlayCard(reg1.name).toString());
+                    //auf dem Server wird die KartenAction aufgerufen
+                    sendMessage(new PlayCard(reg1).toString());
                     //Nachdem Karte gespielt, wird diese aus dem Register entfernt
                     //Or we use a rigister pointer that increses for each register
 
@@ -443,6 +466,8 @@ public class AIClientReceive extends Thread {
                 System.out.println("Client" + shuffler + "is shuffling");
                 break;
             case MessageType.cardSelected:
+                //Der Server gibt das belegte Register, natürlich ohne Karteninformation, an alle weiter.
+                // "Filled" steht hierbei für die Information, ob eine Karte in ein Register gelegt oder entfernt wurde.
                 CardSelected.CardSelectedBody cardSelectedBody = new Gson().fromJson(messageBody, CardSelected.CardSelectedBody.class);
                 int registerSelectedCardsbyClient = cardSelectedBody.getClientID();
                 int numberOfFilledRegisters = cardSelectedBody.getRegister();
@@ -462,7 +487,7 @@ public class AIClientReceive extends Thread {
                 CardsYouGotNow.CardYouGotNowBody cardsYouGotNowBody = new Gson().fromJson(messageBody, CardsYouGotNow.CardYouGotNowBody.class);
                 String[] cards = cardsYouGotNowBody.getCards();
                 for (int i = 0; i <= 4; i++) {
-                    register[i] = cards.get(i);
+                    register[i] = cards[i];
                 }
                 break;
 
@@ -504,7 +529,7 @@ public class AIClientReceive extends Thread {
                 ReplaceCard.ReplaceCardBody replaceCardBody = new Gson().fromJson(messageBody, ReplaceCard.ReplaceCardBody.class);
                 int clientForReplace = replaceCardBody.getClientID();
                 int registerForReplace = replaceCardBody.getRegister();
-                Card replacedCard = replaceCardBody.getNewCard();
+                String replacedCard = replaceCardBody.getNewCard().getCardName();
                 if (clientForReplace == clientID) {
                     register[registerForReplace] = replacedCard;
                     /*if (registerForReplace == 0) {
@@ -556,6 +581,30 @@ public class AIClientReceive extends Thread {
                 if(clientIDCheckReached==clientID){
                     checkPointNumber=numberOfCheckpointsReached;
                 }
+                break;
+            case MessageType.playerAdded:
+
+                PlayerAdded.PlayerAddedBody playerAddedBody = new Gson().fromJson(messageBody, PlayerAdded.PlayerAddedBody.class);
+                int playerAdded = playerAddedBody.getClientID();
+                int robotAdded = playerAddedBody.getFigure();
+                String nameAdded = playerAddedBody.getName();
+
+                // not add infos twice
+                if (!playerNames.containsKey(playerAdded)) {
+
+                    System.out.println(playerNames.get(playerAdded) + ": " + robotsOfPlayers.get(playerAdded));
+                    playerNames.put(playerAdded, nameAdded);
+                    robotsOfPlayers.put(playerAdded, robotAdded);
+
+                    // if the added player is self, then launch the chatAndGame window
+                    if (playerAdded == clientID) {
+                        name = nameAdded;
+                        //Todo: Start game
+                    }
+                }
+                break;
+            case MessageType.selectedDamage:
+
         }
     }
 
