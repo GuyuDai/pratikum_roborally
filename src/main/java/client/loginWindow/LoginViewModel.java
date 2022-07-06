@@ -18,7 +18,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import protocol.PlayerValues;
 import protocol.ProtocolFormat.Message;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
