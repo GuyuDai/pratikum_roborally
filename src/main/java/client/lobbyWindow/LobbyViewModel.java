@@ -6,6 +6,7 @@ import client.Client;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
@@ -17,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import protocol.SendChat;
+import protocol.SetStatus;
 
 
 /**
@@ -42,6 +44,9 @@ public class LobbyViewModel {
     //private static Player currentPlayer;
 
     boolean isAvailable;
+
+    @FXML
+    private CheckBox readyButton;
 
     /**
      * chat properties
@@ -186,5 +191,10 @@ public class LobbyViewModel {
     @FXML
     public void chooseMap(ActionEvent actionEvent) throws IOException {
 
+    }
+
+    public void readyButtonAction(ActionEvent actionEvent) {
+        String readyMessage=new SetStatus(true).toString();
+        Client.getClientReceive().sendMessage(readyMessage);
     }
 }
