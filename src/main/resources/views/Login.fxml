@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.loginWindow.LoginViewModel">
+<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="934.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.loginWindow.LoginViewModel">
    <Button fx:id="sendNameButton" layoutX="618.0" layoutY="435.0" mnemonicParsing="false" onAction="#initPlayer" prefHeight="83.0" prefWidth="90.0" styleClass="backgroundColor" stylesheets="@../styles.css">
       <font>
          <Font size="22.0" />
@@ -31,7 +31,7 @@
          <Image url="@../RoboRallyHeader.jpg" />
       </image>
    </ImageView>
-   <AnchorPane layoutX="22.0" layoutY="140.0" prefHeight="285.0" prefWidth="807.0">
+   <AnchorPane layoutX="64.0" layoutY="140.0" prefHeight="285.0" prefWidth="807.0">
       <children>
          <ImageView fitHeight="17.0" fitWidth="313.0" layoutX="268.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -126,9 +126,14 @@
          <Font size="18.0" />
       </font>
    </Label>
-   <Label fx:id="playerID" layoutX="175.0" layoutY="451.0" onDragDetected="#setPlayerID" prefHeight="48.0" prefWidth="65.0" textFill="WHITE">
+   <Label fx:id="playerID" layoutX="175.0" layoutY="451.0" prefHeight="48.0" prefWidth="65.0" textFill="WHITE">
       <font>
          <Font size="24.0" />
       </font>
    </Label>
+   <Button fx:id="AIbutton" layoutX="780.0" layoutY="433.0" mnemonicParsing="false" onAction="#initAI" prefHeight="83.0" prefWidth="107.0" stylesheets="@../styles.css" text="AI ">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Button>
 </AnchorPane>

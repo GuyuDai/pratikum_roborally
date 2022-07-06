@@ -28,6 +28,7 @@ public class MainApplication extends Application {
             stage.setScene(new Scene(rootMap));
             stage.show();
         } catch (Exception e) {
+            System.out.println("not working");
         }
 
     }

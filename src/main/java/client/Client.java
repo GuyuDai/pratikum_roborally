@@ -12,9 +12,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 
 
-/**
- * @author Felicia Saruba
- */
+
 
 public class Client {
     private static final int SERVER_PORT = 1788;

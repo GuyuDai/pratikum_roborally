@@ -219,6 +219,7 @@ public class ClientReceive extends Thread{
 
             case MessageType.welcome:
             case MessageType.playerAdded:
+
         }
     }
 
