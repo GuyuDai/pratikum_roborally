@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Felicia Saruba, Nargess Ahmadi, Minghao Li
+ */
 
 public class LoginViewModel {
 
@@ -112,6 +115,9 @@ public class LoginViewModel {
     }
 
 
+    /**
+     * disable button when it is selected by a player
+     */
       public void checkRobot() {
           takenRobotNumbers = Client.getClientReceive().getRobotNumbers();
           for (int number : takenRobotNumbers) {
@@ -138,10 +144,7 @@ public class LoginViewModel {
           }
       }
     public void initPlayer(ActionEvent actionEvent) throws IOException {
-
-        //Client.getPlayerOnline().setPlayer(name);
         String name =nameInput.getText();
-        //Client.getPlayerOnline().sendToAll("SERVER: " + name + " has entered the chat!");
         Message message = new PlayerValues(name, figure);
         String clientMessage = message.toString();
         Client.getClientReceive().getWriteOutput().write(clientMessage);
@@ -151,7 +154,6 @@ public class LoginViewModel {
         stage.close();
         setWindowName("Lobby");
         openLobbyWindow();
-
     }
 
     public void openLobbyWindow(){
