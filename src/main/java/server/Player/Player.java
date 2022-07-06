@@ -71,36 +71,23 @@ public class Player implements PlayerAction{
   }
 
   public void setOwnRobot(int robotNumber) {
-
-    if(!currentGame.getController().selectRobotCheck("hammer")){
-      if(robotNumber==0) {
+      if(robotNumber==4) {
         this.ownRobot = new Robot("hammer");
       }
-    }
-    if(!currentGame.getController().selectRobotCheck("hulk")){
       if(robotNumber==1) {
         this.ownRobot = new Robot("hulk");
       }
-    }
-    if(!currentGame.getController().selectRobotCheck("spin")){
       if(robotNumber==2) {
         this.ownRobot = new Robot("spin");
-      }
     }
-    if(!currentGame.getController().selectRobotCheck("squash robot")){
       if(robotNumber==3) {
         this.ownRobot = new Robot("squash robot");
-      }
     }
-    if(!currentGame.getController().selectRobotCheck("Twonkey")){
-      if(robotNumber==4) {
-        this.ownRobot = new Robot("Twonkey");
-      }
-    }
-    if(!currentGame.getController().selectRobotCheck("Twitch")){
       if(robotNumber==5) {
+        this.ownRobot = new Robot("Twonkey");
+    }
+      if(robotNumber==6) {
         this.ownRobot = new Robot("Twitch");
-      }
     }
 
   }

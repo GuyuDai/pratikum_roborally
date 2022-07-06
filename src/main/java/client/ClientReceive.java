@@ -8,9 +8,8 @@ import java.io.*;
 import java.net.Socket;
 import com.google.gson.Gson;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
 import javafx.application.Platform;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageAdapter;
@@ -43,6 +42,8 @@ public class ClientReceive extends Thread{
     int fromId;
 
     boolean isPrivate;
+
+    List<Integer> robotNumbers=new ArrayList<>();
 
     Map<String,Integer> IdName=new HashMap<>();
 
@@ -243,6 +244,7 @@ public class ClientReceive extends Thread{
                 playerId=playerAddedBody.getClientID();
                 playerName=playerAddedBody.getName();
                 figure=playerAddedBody.getFigure();
+                robotNumbers.add(figure);
                 IdName.put(playerName,playerId);
             case MessageType.receivedChat:
                 ReceivedChatBody receivedChatBody=new Gson().fromJson(body,ReceivedChatBody.class);
@@ -302,6 +304,10 @@ public class ClientReceive extends Thread{
     }
     public void setClientID(int clientID) {
         this.clientID = clientID;
+    }
+
+    public List<Integer> getRobotNumbers() {
+        return robotNumbers;
     }
 
     public Map<String, Integer> getIdName() {

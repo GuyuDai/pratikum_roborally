@@ -325,6 +325,15 @@ public class ServerThread implements Runnable {
                     player=new Player("AI");
                     player.setAI(isAI);
                 }
+                for (ServerThread serverThread: connectedClients){
+                    int othersID=serverThread.getID();
+                    String othersName=serverThread.getName();
+                    int othersFigure=serverThread.getFigure();
+                    if(othersID!=clientID){
+                        sendMessage( new PlayerAdded(othersID,othersName,othersFigure).toString());
+                    }
+                }
+
                 Timer.countDown(5);
                 sendMessage(new Alive().toString());
                 break;
@@ -334,18 +343,10 @@ public class ServerThread implements Runnable {
                  name = playerValuesBody.getName();
                  figure = playerValuesBody.getFigure();
                 player = new Player(name);
-                //player.setOwnRobot(figure);
+                player.setOwnRobot(figure);
                 sendToAll(
                         new PlayerAdded(clientID,name,figure).toString()
                 );
-                for (ServerThread serverThread: connectedClients){
-                      int othersID=serverThread.getID();
-                      String othersName=serverThread.getName();
-                      int othersFigure=serverThread.getFigure();
-                      if(othersID!=clientID){
-                          sendMessage( new PlayerAdded(othersID,othersName,othersFigure).toString());
-                      }
-                }
 
                 break;
 

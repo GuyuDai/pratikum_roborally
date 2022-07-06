@@ -20,6 +20,8 @@ import protocol.PlayerValues;
 import protocol.ProtocolFormat.Message;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class LoginViewModel {
@@ -35,6 +37,8 @@ public class LoginViewModel {
     private TextField nameInput;
     @FXML
     private Button sendNameButton;
+
+    List<Integer> takenRobotNumbers=new ArrayList<>();
 
 
     /**
@@ -74,7 +78,7 @@ public class LoginViewModel {
         gsonBuilder.setPrettyPrinting();
         nameInput.textProperty().bindBidirectional(model.getTextFieldContent());
         sendNameButton.disableProperty().bind(nameInput.textProperty().isEmpty().or (Bindings.isNull(ToggleGroupRobot.selectedToggleProperty())));
-
+        checkRobot();
     }
 
     /**
@@ -83,7 +87,7 @@ public class LoginViewModel {
     public void selectBot(ActionEvent actionEvent){
         //String message = "";
         if(buttonHammer.isSelected()){
-            figure=0;
+            figure=4;
             robotSelected=true;
         }
         else if (buttonHulk.isSelected()){
@@ -108,6 +112,32 @@ public class LoginViewModel {
         }
     }
 
+
+      public void checkRobot() {
+          takenRobotNumbers = Client.getClientReceive().getRobotNumbers();
+          for (int number : takenRobotNumbers) {
+              switch(number) {
+                  case 1: // Hulk
+                      buttonHulk.setDisable(true);
+                      break;
+                  case 2: //Spin
+                      buttonSpin.setDisable(true);
+                      break;
+                  case 3: //Squash
+                      buttonSquash.setDisable(true);
+                      break;
+                  case 4: //Hammer
+                      buttonHammer.setDisable(true);
+                      break;
+                  case 5: //Twonkey
+                      buttonTwonkey.setDisable(true);
+                      break;
+                  case 6: //Twitch
+                      buttonTwitch.setDisable(true);
+                      break;
+              }
+          }
+      }
     public void initPlayer(ActionEvent actionEvent) throws IOException {
 
         //Client.getPlayerOnline().setPlayer(name);
