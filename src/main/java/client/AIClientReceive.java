@@ -5,6 +5,7 @@ import protocol.*;
 import protocol.PickDamage.*;
 import protocol.ProtocolFormat.*;
 import server.CardTypes.*;
+import server.Control.*;
 import server.Player.*;
 
 import java.io.*;
@@ -32,13 +33,15 @@ public class AIClientReceive extends Thread{
     private int aiEnergyCubes=5;
 
     int phase;
-
+    private HashSet<Position> availableStartingPositions = new HashSet<>();
+    private HashSet<Position> availableDeathTrapStartingPositions = new HashSet<>();
     private String activePhase = null;
     String type;
     //Position in Client
     private int x;  //colum
     private int y;  //row
 
+    private final HashMap<Integer, int[]> startingPointsOfPlayers = new HashMap<>();
     String card;
     String [] cards;
     String[] availablePiles;
@@ -71,7 +74,7 @@ public class AIClientReceive extends Thread{
 
     ArrayList<Card> nineCardsPile;
 
-
+    int pointerForRegister = 0;
     int countofDamage;
     String[] availableMaps;
     boolean isPrivate;
@@ -88,6 +91,7 @@ public class AIClientReceive extends Thread{
     int[] clientIDs;
     String messageBody;
     private static ClientReceive clientAIReceive;
+    private final HashMap<Integer, int[]> activePositionsOfAllPlayers = new HashMap<>();
 
 
     //Starting the ActiviationPhase
@@ -341,7 +345,7 @@ public class AIClientReceive extends Thread{
             case MessageType.selectMap:
                 break;
             case MessageType.mapSelected:
-                MapSelected.MapSelectedBody mapSelectedBody = new Gson().fromJson(messageBody,MapSelected.MapSelectedBody.class);;
+                MapSelected.MapSelectedBody mapSelectedBody = new Gson().fromJson(messageBody,MapSelected.MapSelectedBody.class);
                 map = mapSelectedBody.getMap();
                 break;
             case MessageType.currentPlayer:
@@ -353,7 +357,7 @@ public class AIClientReceive extends Thread{
                         y=1;
                         sendMessage(new SetStartingPoint(x,y).toString());
                     } else {
-                        //There is the same startpoint on every MAP exept DeathTrap
+                        //There is the same Startpoint on every MAP exept DeathTrap
                         x=1;
                         y=1;
                         sendMessage(new SetStartingPoint(x,y).toString());
@@ -361,12 +365,15 @@ public class AIClientReceive extends Thread{
 
                 } else if (activePhase.equals("ActivationPhase")) {
                     //If its your turn it will always play the first register and deletes the card from the register after action.
-                    Card reg1= getRegisterNumb(0);
+                    Card reg1= getRegisterNumb(pointerForRegister);
                     reg1.action();
+                    pointerForRegister++;
                     //benachrichtigt den Server welche Karte gespielt wird
                     sendMessage(new PlayCard(reg1.name).toString());
                     //Nachdem Karte gespielt, wird diese aus dem Register entfernt
-                    register.remove(0);
+                    //Or we use a rigister pointer that increses for each register
+
+                    //register.remove(0);
 
                 }
                 else if (activePhase.equals("UpgradePhase")) {
@@ -375,6 +382,24 @@ public class AIClientReceive extends Thread{
                 } else if(activePhase.equals("ProgrammingPhase")){
                     programmingPhaseAI();
                 }
+                break;
+
+            case MessageType.startingPointTaken:
+                //or is this too complicated???
+                StartingPointTaken.StartingPointTakenBody startingPointTakenBody = new Gson().fromJson(messageBody,StartingPointTaken.StartingPointTakenBody.class);
+                int startingPositionSetbyOtherPlayer = startingPointTakenBody.getClientID();
+                int otherPlayerX = startingPointTakenBody.getX();
+                int otherPlayerY = startingPointTakenBody.getY();
+
+                removeStartPointsInHashSet(otherPlayerX, otherPlayerY);
+
+                // store the start position
+                startingPointsOfPlayers.get(startingPositionSetbyOtherPlayer)[0] = otherPlayerX;
+                startingPointsOfPlayers.get(startingPositionSetbyOtherPlayer)[1] = otherPlayerX;
+                // set current position
+                activePositionsOfAllPlayers.get(startingPositionSetbyOtherPlayer)[0] = otherPlayerX;
+                activePositionsOfAllPlayers.get(startingPositionSetbyOtherPlayer)[1] = otherPlayerY;
+
                 break;
             case MessageType.drawDamage:
                 //All damage cards will be transmitted at once
@@ -396,5 +421,29 @@ public class AIClientReceive extends Thread{
     //ToDo
     public void upgradePhaseAI(){
 
+    }
+    /**
+     * if the start position is taken, remove it from hashset
+     *
+     * @param x the x
+     * @param y the y
+     */
+    public void removeStartPointsInHashSet(int x, int y) {
+        HashSet<Position> delete = new HashSet<>();
+        if (map.equals("Death Trap")) {
+            for (Position position : availableDeathTrapStartingPositions) {
+                if (position.getX() == x && position.getY() == y) {
+                    delete.add(position);
+                }
+            }
+            availableDeathTrapStartingPositions.removeAll(delete);
+        } else {
+            for (Position position : availableStartingPositions) {
+                if (position.getX() == x && position.getY() == y) {
+                    delete.add(position);
+                }
+            }
+            availableStartingPositions.removeAll(delete);
+        }
     }
 }
