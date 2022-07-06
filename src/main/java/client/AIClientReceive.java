@@ -45,7 +45,7 @@ public class AIClientReceive extends Thread {
     String card;
     String[] cards;
     String[] availablePiles;
-
+    int checkPointNumber;
 
     private Card[] register = new Card[5];
 
@@ -75,7 +75,8 @@ public class AIClientReceive extends Thread {
     String[] availableMaps;
     boolean isPrivate;
     int cardsInHand;
-    int number;
+    int energyStorage;
+
     String source;
     String protocol;
     boolean isConnected;
@@ -517,7 +518,7 @@ public class AIClientReceive extends Thread {
                 Reboot.RebootBody rebootBody = new Gson().fromJson(messageBody, Reboot.RebootBody.class);
                 int clientReboot = rebootBody.getClientID();
 
-                // clear all my registers if I reboot
+                // delete cardpile and register
                 if (clientReboot == clientID) {
                     myNineCardsOnPile.clear();
                     for (int i = 0; i < register.length; i++) {
@@ -525,7 +526,35 @@ public class AIClientReceive extends Thread {
                     }
                     pointerForRegister = 0;
                     System.out.println("client reboot to start point");
-                    break;
+
+                }
+                //Depending on which map the Robot will accordingly set the facing direction
+                if (map.equals("DizzyHighway")|map.equals("ExtraCrispy")|map.equals("LostBearings")){
+                    direction = "right";
+                    //gibt dem Server Bescheid über neue direction
+                    sendMessage(new RebootDirection(direction).toString());
+                } else{
+                    direction = "left";
+                    //gibt dem Server Bescheid über neue direction
+                    sendMessage(new RebootDirection(direction).toString());
+                }
+                break;
+            case MessageType.energy:
+                Energy.EnergyBody energyBody = new Gson().fromJson(messageBody, Energy.EnergyBody.class);
+                int supposedClient = energyBody.getClientID();
+                int amount = energyBody.getCount();
+                //If its you the energy will be added to your storage
+                if (supposedClient == clientID) {
+                    energyStorage = energyStorage + amount;
+                }
+                break;
+            case MessageType.checkpointReached:
+                CheckPointReached.CheckPointReachedBody checkPointReachedBody = new Gson().fromJson(messageBody, CheckPointReached.CheckPointReachedBody.class);
+                int clientIDCheckReached= checkPointReachedBody.getClientID();
+                int numberOfCheckpointsReached= checkPointReachedBody.getNumber();
+                //Sets the number of checkpoints reached
+                if(clientIDCheckReached==clientID){
+                    checkPointNumber=numberOfCheckpointsReached;
                 }
         }
     }
