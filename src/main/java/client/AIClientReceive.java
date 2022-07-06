@@ -41,6 +41,14 @@ public class AIClientReceive extends Thread{
     String card;
     String [] cards;
 
+    public Card getRegisterNumb(int i) {
+        return register.get(i);
+    }
+
+    public void setRegister(CopyOnWriteArrayList<Card> register) {
+        this.register = register;
+    }
+
     private CopyOnWriteArrayList<Card> register;
 
     String group;
@@ -60,7 +68,7 @@ public class AIClientReceive extends Thread{
 
     String action;
 
-    ArrayList<ActiveCard> activeCards;
+    ArrayList<Card> nineCardsPile;
 
 
     int count;
@@ -301,13 +309,13 @@ public class AIClientReceive extends Thread{
 
     public void programmingPhaseAI(){
         // draw from pile 9 cards automatically
-        draw();
+
         //Choose the first five cards and put in your register
-        register.add(getHands().get(0));
-        register.add(getHands().get(1));
-        register.add(getHands().get(2));
-        register.add(getHands().get(3));
-        register.add(getHands().get(4));
+        register.add(nineCardsPile.get(0));
+        register.add(nineCardsPile.get(1));
+        register.add(nineCardsPile.get(2));
+        register.add(nineCardsPile.get(3));
+        register.add(nineCardsPile.get(4));
     }
 
     /** Check incoming messages and call corresponding method
@@ -333,15 +341,15 @@ public class AIClientReceive extends Thread{
                     }
 
                 } else if (activePhase.equals("ActivationPhase")) {
-                    Card reg1= Player.getRegister(0);
+                    Card reg1= getRegisterNumb(0);
                     reg1.action();
-                    Card reg2= Player.getRegister(1);
+                    Card reg2= getRegisterNumb(1);
                     reg2.action();
-                    Card reg3= Player.getRegister(2);
+                    Card reg3= getRegisterNumb(2);
                     reg3.action();
-                    Card reg4= Player.getRegister(3);
+                    Card reg4= getRegisterNumb(3);
                     reg4.action();
-                    Card reg5= Player.getRegister(4);
+                    Card reg5= getRegisterNumb(4);
                     reg5.action();
                 }
                 else if (activePhase.equals("UpgradePhase")) {
@@ -352,15 +360,7 @@ public class AIClientReceive extends Thread{
                 }
         }
     }
-    public void programmingPhaseAI(){
 
-        //Choose the first five cards and put in your register
-        register.add(getHands().get(0));
-        register.add(getHands().get(1));
-        register.add(getHands().get(2));
-        register.add(getHands().get(3));
-        register.add(getHands().get(4));
-    }
     public void upgradePhaseAI(){
 
     }
