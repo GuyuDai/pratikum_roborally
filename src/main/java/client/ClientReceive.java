@@ -19,12 +19,14 @@ import protocol.SendChat;
 import protocol.*;
 import protocol.PlayerAdded.PlayerAddedBody;
 import protocol.ReceivedChat.ReceivedChatBody;
+import protocol.Welcome.WelcomeBody;
+import protocol.HelloClient.HelloClientBody;
 import server.Server;
 
 
 public class ClientReceive extends Thread{
 
-    private int clientID;
+     int clientID;
     private Socket socket;
     private BufferedReader readInput;
     private BufferedWriter writeOutput;
@@ -50,11 +52,7 @@ public class ClientReceive extends Thread{
         try {
             readInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writeOutput = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            Message helloServer = new HelloServer(GROUP,false,PROTOCOL,clientID);
-            String helloServerString= helloServer.toString();  //this message is missing
-            //System.out.println(helloServerString);
-            //writeOutput.write(helloServerString);
-            sendMessage(helloServerString);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -230,7 +228,6 @@ public class ClientReceive extends Thread{
         String body = message.getMessageBody();
         switch (type){
             case MessageType.helloClient:
-                sendMessage(new HelloServer(GROUP,false,PROTOCOL,clientID).toString());
                 break;
 
             case MessageType.alive:
@@ -238,6 +235,9 @@ public class ClientReceive extends Thread{
                 break;
 
             case MessageType.welcome:
+                WelcomeBody welcomeBody=new Gson().fromJson(body,WelcomeBody.class);
+                clientID=welcomeBody.getClientID();
+                sendMessage(new HelloServer(GROUP,false,PROTOCOL,clientID).toString());
             case MessageType.playerAdded:
                 PlayerAddedBody playerAddedBody=new Gson().fromJson(body,PlayerAddedBody.class);
                 playerId=playerAddedBody.getClientID();
@@ -254,7 +254,7 @@ public class ClientReceive extends Thread{
     }
 
     public void receiveChat(String msg){
-        String fromName = this.getNameById(fromId);
+        String fromName = this.getNameById(getFromId());
         if(LobbyViewModel.getWindowName() == "Lobby") {
             Platform.runLater(() -> {
                 LobbyViewModel.show(fromName + ": " + msg);
@@ -267,13 +267,12 @@ public class ClientReceive extends Thread{
         }
     }
     public int getIdByName(String name){
-        return IdName.get(playerName);
+        return getIdName().get(name);
     }
-
     public String getNameById(int id){
         String name="";
-        for(String key: IdName.keySet()){
-            if(IdName.get(key).equals(id)){
+        for(String key: getIdName().keySet()){
+            if(getIdName().get(key).equals(id)){
                 name=key;
             }
         }
@@ -303,5 +302,9 @@ public class ClientReceive extends Thread{
     }
     public void setClientID(int clientID) {
         this.clientID = clientID;
+    }
+
+    public Map<String, Integer> getIdName() {
+        return IdName;
     }
 }

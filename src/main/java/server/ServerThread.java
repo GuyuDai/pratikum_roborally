@@ -64,8 +64,8 @@ public class ServerThread implements Runnable {
      */
     int clientID;
     String card;
-
-
+    int figure;
+    String name;
     /**
      * CardSelected
      */
@@ -317,7 +317,7 @@ public class ServerThread implements Runnable {
 
             case MessageType.helloServer:
                 HelloServerBody helloServerBody = new Gson().fromJson(body,HelloServerBody.class);
-                Id = helloServerBody.getClientID();
+                clientID = helloServerBody.getClientID();
                 group = helloServerBody.getGroup();
                 isAI = helloServerBody.isAI();
                 setAI(isAI);
@@ -331,11 +331,22 @@ public class ServerThread implements Runnable {
 
             case MessageType.playerValues:
                 PlayerValuesBody playerValuesBody = new Gson().fromJson(body,PlayerValuesBody.class);
-                String name = playerValuesBody.getName();
-                int figure = playerValuesBody.getFigure();
+                 name = playerValuesBody.getName();
+                 figure = playerValuesBody.getFigure();
                 player = new Player(name);
-                player.setOwnRobot(figure);
-                sendMessage(new PlayerAdded(Id,name,figure).toString());
+                //player.setOwnRobot(figure);
+                sendToAll(
+                        new PlayerAdded(clientID,name,figure).toString()
+                );
+                for (ServerThread serverThread: connectedClients){
+                      int othersID=serverThread.getID();
+                      String othersName=serverThread.getName();
+                      int othersFigure=serverThread.getFigure();
+                      if(othersID!=clientID){
+                          sendMessage( new PlayerAdded(othersID,othersName,othersFigure).toString());
+                      }
+                }
+
                 break;
 
             case MessageType.setStatus:
@@ -359,10 +370,10 @@ public class ServerThread implements Runnable {
                 String msg=sendChatBody.getMessage();
                 int targetId=sendChatBody.getTo();
                 if(targetId==-1){
-                    sendToAll(msg);
+                    sendToAll(new ReceivedChat(msg,clientID,false).toString());
                 }
                 else {
-                    sendPrivate(msg,targetId);
+                    sendPrivate(new ReceivedChat(msg,clientID,true).toString(),targetId);
                 }
 
                 //some behaviour
@@ -465,10 +476,9 @@ public class ServerThread implements Runnable {
         }
     }
     public void sendToAll(String msg){
-        String chatMessage=new ReceivedChat(msg,clientID,false).toString();
         try {
             for (ServerThread serverThread : connectedClients) {
-                serverThread.getWriteOutput().write(chatMessage);
+                serverThread.getWriteOutput().write(msg);
                 serverThread.getWriteOutput().newLine();
                 serverThread.getWriteOutput().flush();
             }
@@ -478,12 +488,11 @@ public class ServerThread implements Runnable {
     }
 
     public void sendPrivate(String msg,int id){
-        String chatMessage=new ReceivedChat(msg,clientID,true).toString();
         try {
             for (ServerThread serverThread : connectedClients) {
                 int targetId=serverThread.getID();
                 if(targetId==id) {
-                    serverThread.getWriteOutput().write(chatMessage);
+                    serverThread.getWriteOutput().write(msg);
                     serverThread.getWriteOutput().newLine();
                     serverThread.getWriteOutput().flush();
                 }
@@ -551,6 +560,14 @@ public class ServerThread implements Runnable {
 
     public boolean isReady() {
         return ready;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getFigure() {
+        return figure;
     }
 
     public Player getPlayer(){
