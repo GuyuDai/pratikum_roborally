@@ -20,6 +20,7 @@ import protocol.PlayerAdded.PlayerAddedBody;
 import protocol.ReceivedChat.ReceivedChatBody;
 import protocol.Welcome.WelcomeBody;
 import protocol.HelloClient.HelloClientBody;
+import server.Player.Player;
 import server.Server;
 
 
@@ -46,6 +47,10 @@ public class ClientReceive extends Thread{
     List<Integer> robotNumbers=new ArrayList<>();
 
     Map<String,Integer> IdName=new HashMap<>();
+
+    Player player;
+
+    String[] maps;
 
     public ClientReceive(Socket socket) {
         this.socket = socket;
@@ -252,6 +257,9 @@ public class ClientReceive extends Thread{
                  fromId=receivedChatBody.getFrom();
                  isPrivate=receivedChatBody.isPrivate();
                  receiveChat(chatMsg);
+            case MessageType.selectMap:
+                SelectMap.SelectMapBody selectMapBody=new Gson().fromJson(body,SelectMap.SelectMapBody.class);
+                maps=selectMapBody.getAvailableMaps();
         }
     }
 
