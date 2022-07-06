@@ -144,7 +144,9 @@ public class LobbyViewModel {
     }
 
 
-    //checks if it is a direct message or a message for all
+    /**
+     * checks if it is a direct message or a message for all
+     */
 
     public void checkInput(String message){
         String chatToSend = "";
@@ -186,15 +188,27 @@ public class LobbyViewModel {
         return sendChat;
     }
 
-
-
-    @FXML
-    public void chooseMap(ActionEvent actionEvent) throws IOException {
-
-    }
-
+    /**
+     * click on ready Button -> first player to click will select map
+     */
     public void readyButtonAction(ActionEvent actionEvent) {
         String readyMessage=new SetStatus(true).toString();
         Client.getClientReceive().sendMessage(readyMessage);
     }
+
+    /**
+     * selecting a map and enabling start game button
+     */
+    public void selectMapAction(ActionEvent actionEvent) {
+        try {
+            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Map.fxml"));
+            Parent rootGame = (Parent) fxmlLoaderGame.load();
+            Stage stageGame = new Stage();
+            stageGame.setTitle("Map Selection");
+            stageGame.setScene(new Scene(rootGame));
+            stageGame.show();
+        } catch (Exception e) {
+        }
+    }
+
 }
