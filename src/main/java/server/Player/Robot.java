@@ -95,19 +95,8 @@ public class Robot implements RobotAction {
     return startPosition;
   }
 
-  public void setStartPosition(){
-    Boolean flag = true;
-    Random random = new Random();
-    while (flag){
-      Position desiredPosition = new Position(random.nextInt(this.getCurrentGame().getGameBoard().getWidth()),
-              random.nextInt(this.getCurrentGame().getGameBoard().getHeight()));
-      Boolean flag2 = currentGame.getController().robotStartingPositionCheck(desiredPosition);
-      //flag2: whether the desired position is valid
-      if (flag2){
-        this.startPosition = desiredPosition;
-        flag = false;
-      }
-    }
+  public void setStartPosition(Position startPosition) {
+    this.startPosition = startPosition;
   }
 
   private void moveOneStep() {

@@ -27,12 +27,13 @@ public class RR extends Thread implements GameLogic {
     this.isGoingOn = false;
 
     for (int i = 0; i <= this.getGameBoard().getHeight(); i++) {
-      for (int j = 0; j <= this.getGameBoard().getWidth(); j++)
+      for (int j = 0; j <= this.getGameBoard().getWidth(); j++) {
         for (BoardElem boardElem : this.getGameBoard().getMap()[j][i]) {
           if (boardElem instanceof Antenna) {
             this.positionAntenna = boardElem.getPosition();
           }
         }
+      }
     }
 
     for (int i = 0; i <= this.getGameBoard().getHeight(); i++) {
@@ -149,6 +150,7 @@ public class RR extends Thread implements GameLogic {
   }
 
   public void gameProgress() {
+    /*
     if (currentState == GameState.GameInitializing) {
 
     }
@@ -170,6 +172,31 @@ public class RR extends Thread implements GameLogic {
       }
     }
 
+     */
+
+    buildingPhase();
+    counter = 0;
+    boolean everyoneFinished;
+    while (!gameIsOver) {
+      initializePosition();
+      programmingPhase();
+      everyoneFinished = false;
+      timesOver = false;
+      synchronized (this) {
+
+        while (!timesOver && !everyoneFinished) {// ^ = XOR
+          try {
+            this.wait();
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+          everyoneFinished = everyoneFinished();
+        }
+      }
+
+      activationPhase();
+      everyoneNotFinished();
+    }
   }
 
   public boolean leaveGame(Player player) {
