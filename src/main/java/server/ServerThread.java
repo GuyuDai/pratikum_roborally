@@ -300,7 +300,7 @@ public class ServerThread implements Runnable {
                     }
                 }
 
-                    );
+                    ;
                 }else {
                     sendMessage(new ErrorMessage("this robot has been taken").toString());
                 }
@@ -455,16 +455,9 @@ public class ServerThread implements Runnable {
                          case "Trojan":
                              player.drawTrojanCard(1);
                              break;
-                     }
-                 }
+                        }
+                    }
                 }
-                break;
-
-            case MessageType.setStartingPoint:
-                SetStartingPointBody setStartingPointBody = new Gson().fromJson(body,SetStartingPointBody.class);
-                x = setStartingPointBody.getX();
-                y = setStartingPointBody.getY();
-
                 break;
 
         }
