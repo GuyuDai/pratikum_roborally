@@ -186,7 +186,13 @@ public class LobbyViewModel {
     public void readyButtonAction(ActionEvent actionEvent) {
         String readyMessage=new SetStatus(true).toString();
         Client.getClientReceive().sendMessage(readyMessage);
-        selectMap.setVisible(true);
+        if(Client.getClientReceive().getReadyList().size()==1) {
+            selectMap.setVisible(true);
+        }
+        else{
+            selectMap.setText("open game");
+            selectMap.setVisible(true);
+        }
     }
 
     /**
@@ -202,10 +208,12 @@ public class LobbyViewModel {
               stageGame.setScene(new Scene(rootGame));
               stageGame.show();
           } catch (Exception e) {
+
           }
+
       }
       else{
-          selectMap.setVisible(false);
+          openGameWindow();
       }
     }
 

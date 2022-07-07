@@ -1,6 +1,7 @@
 package client.mapWindow;
 
 
+import client.Client;
 import client.gameWindow.GameViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -63,20 +64,31 @@ public class MapViewModel {
         Stage stage = (Stage) DizzyHighwayBtn.getScene().getWindow();
         stage.close();
         setMapSelection("Dizzy Highway");
+        Client.getClientReceive().sendMessage(new MapSelected("DizzyHighway").toString());
+        openGameWindow();
     }
     @FXML
     public void select2(ActionEvent actionEvent) {
         Stage stage = (Stage) map2Btn.getScene().getWindow();
         stage.close();
+        setMapSelection("Death Trap");
+        Client.getClientReceive().sendMessage(new MapSelected("DeathTrap").toString());
+        openGameWindow();
     }
     @FXML
     public void select3(ActionEvent actionEvent) {
         Stage stage = (Stage) map3Btn.getScene().getWindow();
         stage.close();
+        setMapSelection("Extra Crispy");
+        Client.getClientReceive().sendMessage(new MapSelected("ExtraCrispy").toString());
+        openGameWindow();
     }
     public void select4(ActionEvent actionEvent) {
         Stage stage = (Stage) map4Btn.getScene().getWindow();
         stage.close();
+        setMapSelection("Lost Bearings");
+        Client.getClientReceive().sendMessage(new MapSelected("LostBearings").toString());
+        openGameWindow();
     }
 
     /**
@@ -129,7 +141,17 @@ public class MapViewModel {
         } catch (Exception e){
         }
     }
-
+    public void openGameWindow(){
+        try {
+            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Game.fxml"));
+            Parent rootGame = (Parent) fxmlLoaderGame.load();
+            Stage stageGame = new Stage();
+            stageGame.setTitle("Dizzy Highway");
+            stageGame.setScene(new Scene(rootGame));
+            stageGame.show();
+        } catch (Exception e){
+        }
+    }
 
     public static void setMapSelection(String name){
         mapSelection = name;

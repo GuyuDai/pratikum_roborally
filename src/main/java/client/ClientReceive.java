@@ -42,9 +42,13 @@ public class ClientReceive extends Thread{
 
     int fromId;
 
+    int register;
+
     boolean isPrivate;
 
     boolean isReady;
+
+    boolean isFilled;
 
     Map<Integer,Boolean> IdReady=new HashMap<>();
 
@@ -52,9 +56,14 @@ public class ClientReceive extends Thread{
 
     Map<String,Integer> IdName=new HashMap<>();
 
+    List<Boolean> readyList=new ArrayList<>();
+
+
     Player player;
 
     String[] maps;
+
+    String board;
 
     public ClientReceive(Socket socket) {
         this.socket = socket;
@@ -241,7 +250,7 @@ public class ClientReceive extends Thread{
                 break;
 
             case MessageType.alive:
-                sendMessage(new HelloServer(GROUP,false,PROTOCOL,clientID).toString());
+                sendMessage(new Alive().toString());
                 break;
 
             case MessageType.welcome:
@@ -268,8 +277,19 @@ public class ClientReceive extends Thread{
                 PlayerStatus.PlayerStatusBody playerStatusBody=new Gson().fromJson(body, PlayerStatus.PlayerStatusBody.class);
                 isReady=playerStatusBody.isReady();
                 playerId=playerStatusBody.getClientID();
+                readyList.add(isReady);
                 IdReady.put(playerId,isReady);
+            case MessageType.mapSelected:
+                MapSelected.MapSelectedBody mapSelectedBody=new Gson().fromJson(body,MapSelected.MapSelectedBody.class);
+                board=mapSelectedBody.getMap();
+
             case MessageType.cardSelected:
+                CardSelected.CardSelectedBody cardSelectedBody=new Gson().fromJson(body, CardSelected.CardSelectedBody.class);
+                playerId=cardSelectedBody.getClientID();
+                register=cardSelectedBody.getRegister();
+                isFilled=cardSelectedBody.isFilled();
+            case MessageType.pickDamage:
+
 
         }
     }
@@ -335,5 +355,17 @@ public class ClientReceive extends Thread{
 
     public Map<String, Integer> getIdName() {
         return IdName;
+    }
+
+    public List<Boolean> getReadyList() {
+        return readyList;
+    }
+
+    public String getBoard() {
+        return board;
+    }
+
+    public Map<Integer, Boolean> getIdReady() {
+        return IdReady;
     }
 }

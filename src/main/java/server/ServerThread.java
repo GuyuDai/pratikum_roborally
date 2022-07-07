@@ -88,7 +88,7 @@ public class ServerThread implements Runnable {
     /**
      * SetStatus
      */
-    boolean ready;
+    boolean ready=false;
     RR currentGame;
 
 
@@ -341,6 +341,7 @@ public class ServerThread implements Runnable {
             case MessageType.alive:
                 Timer.countDown(5);
                 sendMessage(new Alive().toString());
+                break;
 
             case MessageType.playerValues:
                 PlayerValuesBody playerValuesBody = new Gson().fromJson(body,PlayerValuesBody.class);
@@ -351,6 +352,13 @@ public class ServerThread implements Runnable {
                 sendToAll(
                         new PlayerAdded(clientID,name,figure).toString()
                 );
+                for (ServerThread serverThread: connectedClients) {
+                    int othersID = serverThread.getID();
+                    boolean othersReady = serverThread.isReady();
+                    if (othersID != clientID && othersReady) {
+                        sendMessage(new PlayerStatus(othersID,othersReady).toString());
+                    }
+                }
 
                 break;
 
@@ -391,15 +399,19 @@ public class ServerThread implements Runnable {
                 switch (map){
                     case "DizzyHighway":
                         board = new DizzyHighway();
+                        sendToAll(new MapSelected("DizzyHighway").toString());
                         break;
                     case "ExtraCrispy":
                         board = new ExtraCrispy();
+                        sendToAll(new MapSelected("ExtraCrispy").toString());
                         break;
                     case "LostBearings":
                         board = new LostBearings();
+                        sendToAll(new MapSelected("LostBearings").toString());
                         break;
                     case "DeathTrap":
                         board = new DeathTrap();
+                        sendToAll(new MapSelected("DeathTrap").toString());
                         break;
                 }
                 if (allPlayerReady() && connectedClients.size()>=2 && board != null){

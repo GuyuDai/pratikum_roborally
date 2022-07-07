@@ -872,17 +872,27 @@ public class GameViewModel {
         printCards();
         Text.setText("Select 5 of these cards for your register.");
         playCardBtn.setVisible(true);
-        printMapGUI("Dizzy Highway");
+        String map=Client.getClientReceive().getBoard();
+        printMapGUI(map);
     }
 
 
     public void printMapGUI(String setMapSelection) {
-
-
-        System.out.println(MapViewModel.getMapSelection());
+        Board board=null;
         switch (setMapSelection) {
-            case "Dizzy Highway":
-
+            case "DizzyHighway":
+                board = new DizzyHighway();
+                break;
+            case "ExtraCrispy":
+                board = new ExtraCrispy();
+                break;
+            case "DeathTrap":
+                board = new DeathTrap();
+                break;
+            case "LostBearings":
+                board = new LostBearings();
+                break;
+        }
 
                 /**
                  * checkpoints
@@ -1128,7 +1138,7 @@ public class GameViewModel {
                  * URLs for Push Panels
                  */
 
-                URL PP24Bottom = getClass().getResource("PushPanels/PP24Bottom.png");
+                /*URL PP24Bottom = getClass().getResource("PushPanels/PP24Bottom.png");
                 Image imagePP24Bottom = new Image(PP24Bottom.toString());
 
                 URL PP24Left = getClass().getResource("PushPanels/PP24Left.png");
@@ -1152,11 +1162,11 @@ public class GameViewModel {
                 URL PP135Left = getClass().getResource("PushPanels/PP135Left.png");
                 Image imagePP135Left = new Image(PP135Left.toString());
 
+                 */
 
 
 
-                Board board=new DeathTrap();
-                System.out.println(board.getWidth());
+
 
                 //public void printMap() {
                 Image elmImage = null;
@@ -1524,7 +1534,7 @@ public class GameViewModel {
 
 
 
-}
+
 
 
 
