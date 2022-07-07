@@ -1,17 +1,17 @@
 package client;
-;
 
 import protocol.ProtocolFormat.*;
 import server.CardTypes.*;
-import server.Control.*;
-import server.Game.*;
 import server.Player.*;
 
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.concurrent.*;
 
-public class AIClient extends Player {
+;
+
+public class AIClient extends Client {
 
     private volatile Socket sockAI;
     //sending messages
@@ -29,12 +29,14 @@ public class AIClient extends Player {
 
     private String activePhase = null;
     String type;
-
+    //Position in Client
+    private int x;  //colum
+    private int y;  //row
 
     String card;
     String [] cards;
 
-    int register;
+    private CopyOnWriteArrayList<Card> register;
 
     String group;
     int Id;
@@ -55,9 +57,7 @@ public class AIClient extends Player {
 
     ArrayList<ActiveCard> activeCards;
 
-    //ArrayList<> gameMap;
-    int x;
-    int y;
+
     int count;
     String[] availableMaps;
     boolean isPrivate;
@@ -73,7 +73,7 @@ public class AIClient extends Player {
     int from;
     int[] clientIDs;
     String messageBody;
-
+    private static ClientReceive clientAIReceive;
 
 
     //Starting the ActiviationPhase
@@ -81,13 +81,14 @@ public class AIClient extends Player {
 
     //constructor for AI
     public AIClient() throws IOException{
-        super("AIRobot");
+
         sockAI= new Socket("AIHost", 1788);
         sender= new PrintWriter(sockAI.getOutputStream(),true);
         reader= new BufferedReader(new InputStreamReader(sockAI.getInputStream()));
-
-
+        clientAIReceive = new ClientReceive(sockAI);
     }
+
+
    /* public void run() {
         try {
             String message;
