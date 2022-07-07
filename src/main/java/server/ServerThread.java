@@ -28,6 +28,7 @@ import protocol.MapSelected.MapSelectedBody;
 import protocol.SelectedCard.SelectedCardBody;
 import server.BoardTypes.*;
 import server.CardTypes.Card;
+import server.Control.Position;
 import server.Control.Timer;
 import server.Game.GameState;
 import server.Game.RR;
@@ -35,92 +36,38 @@ import server.Player.Player;
 
 
 public class ServerThread implements Runnable {
+
     private static final String PROTOCOL = "Version 1.0";
-    private static final String GROUP = "Origionelle Oktopusse";
     private Socket clientSocket;
     private BufferedReader readInput;
     private  BufferedWriter writeOutput;
     public static boolean gameActive = false;
-
     private boolean alive;
-
     private static  List<ServerThread> connectedClients = new ArrayList<ServerThread>();
-
-    /**
-     * ActivePhase
-     */
-    int phase;
-
-    //TODO Alive?
-
-    /**
-     * Animation
-     */
-    String type;
-
-
-    /**
-     * CardPlayed
-     */
-    int clientID;
-    String card;
-    int figure;
-    String name;
-    /**
-     * CardSelected
-     */
-    int register;
-
-
-    /**
-     * HelloServer
-     */
-    String group;
-    int Id;
-    boolean isAI;
-
-
-    /**
-     * PlayerValues
-     */
-
-
-    /**
-     * SetStatus
-     */
-    boolean ready=false;
-    RR currentGame;
-
-
-    /**
-     * SendChat
-     */
-    String message;
-    int to;
-    /**
-     * MapSelection
-     */
-    Board board;
-    String map;
-
-    /**
-     * SetStartingPoint
-     */
-    int x;
-    int y;
-
-
-
+    private int phase;
+    private String type;
+    private int clientID;
+    private String card;
+    private int figure;
+    private String name;
+    private int register;
+    private String group;
+    private boolean isAI;
+    private boolean ready;
+    public static RR currentGame;
+    private Board board;
+    private String map;
     private Player player;
-    // private static Game game = null;
+    private Position startingPosition;
+
 
     public ServerThread(Socket clientSocket) throws IOException {
         this. clientSocket = clientSocket;
-        connectedClients=Server.getConnectedClients();
+        connectedClients = Server.getConnectedClients();
         try {
             readInput = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             writeOutput = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-            Message helloClient = new HelloClient(PROTOCOL);  //this message is missing
+            Message helloClient = new HelloClient(PROTOCOL);
             String HelloClient = helloClient.toString();
             sendMessage(HelloClient);
         } catch (IOException e) {
@@ -132,10 +79,10 @@ public class ServerThread implements Runnable {
         try {
             while (!clientSocket.isClosed()) {
                 String clientMessage = readInput.readLine();
-                System.out.println(clientMessage + "----------original message");  //test
+                //System.out.println(clientMessage + "----------original message");  //test
                 Message message = wrapMessage(clientMessage);
-                System.out.println("-----------------------------------------------------");  //test
-                System.out.println(message.toString());  //test
+                //System.out.println("-----------------------------------------------------");  //test
+                System.out.println(message.toString() + "wrapped message");  //test
                 identifyMessage(message);
             }
         } catch (IOException e) {
@@ -293,49 +240,33 @@ public class ServerThread implements Runnable {
         //MessageBody messageBody = gson.fromJson(body,MessageBody.class);
 
         switch (messageType){
-            case MessageType.activePhase:
-                ActivePhaseBody activePhaseBody = new Gson().fromJson(body,ActivePhaseBody.class);
-                phase = activePhaseBody.getPhase();
-                break;
-
-            case MessageType.animation:
-                AnimationBody animationBody = new Gson().fromJson(body,AnimationBody.class);
-                type = animationBody.getType();
-                break;
-
-            case MessageType.cardPlayed:
-                CardPlayedBody cardPlayedBody = new Gson().fromJson(body,CardPlayedBody.class);
-                clientID = cardPlayedBody.getClientID();
-                card = cardPlayedBody.getCard();
-                break;
-
-            case MessageType.cardSelected:
-                CardSelectedBody cardSelectedBody = new Gson().fromJson(body,CardSelectedBody.class);
-                clientID = cardSelectedBody.getClientID();
-                register = cardSelectedBody.getRegister();
-                break;
-
             case MessageType.helloServer:
                 HelloServerBody helloServerBody = new Gson().fromJson(body,HelloServerBody.class);
-                clientID = helloServerBody.getClientID();
-                group = helloServerBody.getGroup();
-                isAI = helloServerBody.isAI();
-                setAI(isAI);
-                if(isAI){
-                    player=new Player("AI");
-                    player.setAI(isAI);
-                }
-                for (ServerThread serverThread: connectedClients){
-                    int othersID=serverThread.getID();
-                    String othersName=serverThread.getName();
-                    int othersFigure=serverThread.getFigure();
-                    if(othersID != clientID){
-                        sendMessage( new PlayerAdded(othersID,othersName,othersFigure).toString());
-                    }
-                }
+                String clientProtocol = helloServerBody.getProtocol();
 
-                Timer.countDown(5);
-                sendMessage(new Alive().toString());
+                if(PROTOCOL.equals(clientProtocol)){
+                    clientID = helloServerBody.getClientID();
+                    group = helloServerBody.getGroup();
+                    isAI = helloServerBody.isAI();
+                    setAI(isAI);
+                    if(isAI){
+                        player=new Player("AI");
+                        player.setAI(isAI);
+                    }
+                    for (ServerThread serverThread: connectedClients){
+                        int othersID=serverThread.getID();
+                        String othersName=serverThread.getName();
+                        int othersFigure=serverThread.getFigure();
+                        if(othersID != clientID){
+                            sendMessage( new PlayerAdded(othersID,othersName,othersFigure).toString());
+                        }
+                    }
+
+                    Timer.countDown(5);
+                    sendMessage(new Alive().toString());
+                }else {
+                    sendMessage(new ErrorMessage("your protocol version is unsupported").toString());
+                }
                 break;
 
             case MessageType.alive:
@@ -345,11 +276,20 @@ public class ServerThread implements Runnable {
 
             case MessageType.playerValues:
                 PlayerValuesBody playerValuesBody = new Gson().fromJson(body,PlayerValuesBody.class);
-                 name = playerValuesBody.getName();
-                 figure = playerValuesBody.getFigure();
-                player = new Player(name);
-                player.setOwnRobot(figure);
-                sendToAll(
+                boolean flagInPlayerValues = true;
+                String tempName = playerValuesBody.getName();
+                int tempFigure = playerValuesBody.getFigure();
+                for(ServerThread serverThread: connectedClients){
+                    if(serverThread.getFigure() == tempFigure){
+                        flagInPlayerValues = false;
+                    }
+                }
+                if(flagInPlayerValues){
+                    this.name = tempName;
+                    this.figure = tempFigure;
+                    player = new Player(name);
+                    player.setOwnRobot(figure);
+                    sendToAll(
                         new PlayerAdded(clientID,name,figure).toString()
                 );
                 for (ServerThread serverThread: connectedClients) {
@@ -360,6 +300,10 @@ public class ServerThread implements Runnable {
                     }
                 }
 
+                    );
+                }else {
+                    sendMessage(new ErrorMessage("this robot has been taken").toString());
+                }
                 break;
 
             case MessageType.setStatus:
@@ -367,30 +311,15 @@ public class ServerThread implements Runnable {
                 ready = setStatusBody.isReady();
                 player.setReady(ready);
                 sendToAll(new PlayerStatus(clientID,true).toString());
-                if(firstPlayerReady()!=null){
+                if(firstPlayerReady() != null){
                     if (firstPlayerReady().equals(player)) {
                         sendMessage(new SelectMap(
-                                new String[]{"DizzyHighway","ExtraCrispy","DeathTrap","LostBearings"}).toString());
+                            new String[]{"DizzyHighway","ExtraCrispy","DeathTrap","LostBearings"}).toString());
                     }
                 }
                 if (allPlayerReady() && connectedClients.size()>=2 && board != null){
-                    currentGame = new RR(board);
-                    currentGame.start();
+                    startGame(this.board);
                 }
-                break;
-
-            case MessageType.sendChat:
-                SendChatBody sendChatBody = new Gson().fromJson(body,SendChatBody.class);
-                String msg=sendChatBody.getMessage();
-                int targetId=sendChatBody.getTo();
-                if(targetId==-1){
-                    sendToAll(new ReceivedChat(msg,clientID,false).toString());
-                }
-                else {
-                    sendPrivate(new ReceivedChat(msg,clientID,true).toString(),targetId);
-                }
-
-                //some behaviour
                 break;
 
             case MessageType.mapSelected:
@@ -414,17 +343,69 @@ public class ServerThread implements Runnable {
                         sendToAll(new MapSelected("DeathTrap").toString());
                         break;
                 }
-                if (allPlayerReady() && connectedClients.size()>=2 && board != null){
-                    currentGame = new RR(board);
-                    currentGame.start();
+                if (allPlayerReady() && connectedClients.size() >= 2 && board != null){
+                    startGame(this.board);
+                }
+                break;
+
+            case MessageType.sendChat:
+                SendChatBody sendChatBody = new Gson().fromJson(body,SendChatBody.class);
+                String msg = sendChatBody.getMessage();
+                int targetId = sendChatBody.getTo();
+                if(targetId == -1){
+                    sendToAll(new ReceivedChat(msg,clientID,false).toString());
+                }
+                else {
+                    sendPrivate(new ReceivedChat(msg,clientID,true).toString(),targetId);
                 }
                 break;
 
             case MessageType.playCard:
                 PlayCardBody playCardBody = new Gson().fromJson(body,PlayCardBody.class);
                 card = playCardBody.getCard();
-                String cardPlayedMessage = new CardPlayed(clientID,card).toString();
-                sendToAll(cardPlayedMessage);
+                sendToAll(new CardPlayed(clientID,card).toString());
+                break;
+
+            case MessageType.setStartingPoint:
+                SetStartingPointBody setStartingPointBody = new Gson().fromJson(body,SetStartingPointBody.class);
+                int x = setStartingPointBody.getX();
+                int y = setStartingPointBody.getY();
+                Position tempPosition = new Position(x,y);
+                boolean flagInSetStartingPoint = true;
+                for(ServerThread serverThread : connectedClients){
+                    if(serverThread.getStartingPosition().equals(tempPosition)){
+                        flagInSetStartingPoint = false;
+                    }
+                }
+                if(flagInSetStartingPoint){
+                    this.startingPosition = tempPosition;
+                    sendToAll(new StartingPointTaken(x,y,clientID).toString());
+                    this.player.getOwnRobot().setStartPosition(this.startingPosition);
+                }else {
+                    sendMessage(new ErrorMessage("this position has been taken").toString());
+                }
+                break;
+
+            case MessageType.activePhase:
+                ActivePhaseBody activePhaseBody = new Gson().fromJson(body,ActivePhaseBody.class);
+                phase = activePhaseBody.getPhase();
+                break;
+
+            case MessageType.animation:
+                AnimationBody animationBody = new Gson().fromJson(body,AnimationBody.class);
+                type = animationBody.getType();
+                break;
+
+            case MessageType.cardPlayed:
+                CardPlayedBody cardPlayedBody = new Gson().fromJson(body,CardPlayedBody.class);
+                clientID = cardPlayedBody.getClientID();
+                card = cardPlayedBody.getCard();
+                break;
+
+            case MessageType.cardSelected:
+                CardSelectedBody cardSelectedBody = new Gson().fromJson(body,CardSelectedBody.class);
+                clientID = cardSelectedBody.getClientID();
+                register = cardSelectedBody.getRegister();
                 break;
 
             case MessageType.selectCard:
@@ -525,11 +506,21 @@ public class ServerThread implements Runnable {
         }
     }
 
-
+    private void startGame(Board board){
+        if(currentGame == null){
+            RR game = new RR(board);
+            for(ServerThread serverThread : connectedClients){
+                serverThread.setCurrentGame(game);
+            }
+            game.start();
+        }else {
+            sendMessage(new ErrorMessage("game already started").toString());
+        }
+    }
 
     public Player firstPlayerReady(){
-        int readyPlayer=0;
-        Player firstReadyPlayer=null;
+        int readyPlayer = 0;
+        Player firstReadyPlayer = null;
         for(ServerThread target: connectedClients) {
             if (target.isReady()) {
                 readyPlayer++;
@@ -581,6 +572,10 @@ public class ServerThread implements Runnable {
         this.alive = alive;
     }
 
+    public void setCurrentGame(RR currentGame) {
+        this.currentGame = currentGame;
+    }
+
     public boolean isReady() {
         return ready;
     }
@@ -595,5 +590,9 @@ public class ServerThread implements Runnable {
 
     public Player getPlayer(){
         return player;
+    }
+
+    public Position getStartingPosition() {
+        return startingPosition;
     }
 }

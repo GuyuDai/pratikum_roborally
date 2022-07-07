@@ -14,7 +14,7 @@ import protocol.*;
 import protocol.ProtocolFormat.Message;
 import server.Player.Player;
 
-public class Server implements Runnable{
+public class Server{
 
     public static final Logger logger = Logger.getLogger(Server.class.getName());
     private final ServerSocket serverSocket;

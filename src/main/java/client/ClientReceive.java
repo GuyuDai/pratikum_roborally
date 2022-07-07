@@ -54,7 +54,7 @@ public class ClientReceive extends Thread{
 
     List<Integer> robotNumbers=new ArrayList<>();
 
-    Map<String,Integer> IdName=new HashMap<>();
+    Map<String,Integer> IdName = new HashMap<>();
 
     List<Boolean> readyList=new ArrayList<>();
 
@@ -81,13 +81,14 @@ public class ClientReceive extends Thread{
 
     @Override
     public void run() {
+        IdName.put("Server",-1);
         try {
             while (!socket.isClosed()) {
                 String serverMessage = readInput.readLine();
-                System.out.println(serverMessage + "-----------original message");  //test
+                //System.out.println(serverMessage + "-----------original message");  //test
                 Message message = wrapMessage(serverMessage);
-                System.out.println("--------------------------------------------------------------");  //test
-                System.out.println(message);  //test
+                //System.out.println("--------------------------------------------------------------");  //test
+                System.out.println(message + "wrapped message");  //test
                 identifyMessage(message);
             }
         } catch (IOException e) {

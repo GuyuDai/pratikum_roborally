@@ -18,9 +18,7 @@ public class Player implements PlayerAction{
   public GameDeck gameDeck;
   public int priority = 1;
   public int energyCubes;
-
   private boolean isAI=false;
-
   private boolean isReady=false;
 
 
