@@ -44,6 +44,10 @@ public class ClientReceive extends Thread{
 
     boolean isPrivate;
 
+    boolean isReady;
+
+    Map<Integer,Boolean> IdReady=new HashMap<>();
+
     List<Integer> robotNumbers=new ArrayList<>();
 
     Map<String,Integer> IdName=new HashMap<>();
@@ -260,6 +264,13 @@ public class ClientReceive extends Thread{
             case MessageType.selectMap:
                 SelectMap.SelectMapBody selectMapBody=new Gson().fromJson(body,SelectMap.SelectMapBody.class);
                 maps=selectMapBody.getAvailableMaps();
+            case MessageType.playerStatus:
+                PlayerStatus.PlayerStatusBody playerStatusBody=new Gson().fromJson(body, PlayerStatus.PlayerStatusBody.class);
+                isReady=playerStatusBody.isReady();
+                playerId=playerStatusBody.getClientID();
+                IdReady.put(playerId,isReady);
+            case MessageType.cardSelected:
+
         }
     }
 
@@ -304,6 +315,10 @@ public class ClientReceive extends Thread{
     public BufferedReader getReadInput(){return readInput;}
 
     public BufferedWriter getWriteOutput(){return writeOutput;}
+
+    public String[] getMaps() {
+        return maps;
+    }
 
     public Socket getSocket(){return socket;}
 

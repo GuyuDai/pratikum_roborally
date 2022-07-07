@@ -15,9 +15,9 @@ public class LobbyView extends VBox{
         Label label = new Label("label");
         ListView<String> list = new ListView<>();
         TextField input = new TextField();
-//        input.setPromptText("input");
+    //    input.setPromptText("input");
         Button sendMessageButton = new Button();
-//        sendMessageButton.setText("buttonInput");
+ //      sendMessageButton.setText("buttonInput");
 
 
         getChildren().addAll(label, list, input, sendMessageButton);

@@ -193,15 +193,20 @@ public class LobbyViewModel {
      * selecting a map by opening map selection window
      */
     public void selectMapAction(ActionEvent actionEvent) {
-        try {
-            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Map.fxml"));
-            Parent rootGame = (Parent) fxmlLoaderGame.load();
-            Stage stageGame = new Stage();
-            stageGame.setTitle("Map Selection");
-            stageGame.setScene(new Scene(rootGame));
-            stageGame.show();
-        } catch (Exception e) {
-        }
+      if(Client.getClientReceive().getMaps()!=null) {
+          try {
+              FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Map.fxml"));
+              Parent rootGame = (Parent) fxmlLoaderGame.load();
+              Stage stageGame = new Stage();
+              stageGame.setTitle("Map Selection");
+              stageGame.setScene(new Scene(rootGame));
+              stageGame.show();
+          } catch (Exception e) {
+          }
+      }
+      else{
+          selectMap.setVisible(false);
+      }
     }
 
     public static void setWindowName (String name){
