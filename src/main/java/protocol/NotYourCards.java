@@ -9,7 +9,7 @@ public class NotYourCards extends Message {
 
     public class NotYourCardsBody extends MessageBody {
         protected int clientID;
-        protected String[] cardsInHand;
+        protected int cardsInHand;
 
         public int getClientID() {
             return clientID;
@@ -23,11 +23,11 @@ public class NotYourCards extends Message {
             this.clientID = clientID;
         }
 
-        public void setCardsInHand(String[] cardsInHand) {
+        public void setCardsInHand(int cardsInHand) {
             this.cardsInHand = cardsInHand;
         }
     }
-    public NotYourCards (int clientID, String[] cardsInHand) {
+    public NotYourCards (int clientID, int cardsInHand) {
         this.messageType = MessageType.notYourCards;
         NotYourCardsBody body = new NotYourCardsBody();
         body.clientID = clientID;

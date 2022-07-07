@@ -1,6 +1,7 @@
 package client.gameWindow;
 
 import client.Client;
+import client.ClientReceive;
 import client.MapBuilder;
 import client.lobbyWindow.LobbyViewModel;
 import com.google.gson.Gson;
@@ -14,7 +15,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import protocol.SelectedCard;
 import protocol.SendChat;
+import protocol.YourCards;
 import server.BoardElement.BoardElem;
 import server.BoardTypes.*;
 import server.CardTypes.*;
@@ -573,6 +576,7 @@ public class GameViewModel {
                     break;
             }
         }
+        Client.getClientReceive().sendMessage(new YourCards(cards).toString());
     }
 
 
@@ -599,6 +603,8 @@ public class GameViewModel {
         switch (getRegisterCount()) {
             case 1:
                 register1.setImage(hand1.getImage());
+
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[0],1).toString());
                 hand1Button.setVisible(false);
                 break;
             case 2:
