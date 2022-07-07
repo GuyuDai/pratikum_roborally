@@ -65,7 +65,7 @@ public class AIClientReceive extends Thread {
 
     String message;
     int to;
-
+    boolean isRobotValuesSet= false;
     String map;
 
     String action;
@@ -88,6 +88,7 @@ public class AIClientReceive extends Thread {
     String direction;
     int from;
     int[] clientIDs;
+    int aIRobot;
     String messageBody;
     private static ClientReceive clientAIReceive;
     private final HashMap<Integer, int[]> activePositionsOfAllPlayers = new HashMap<>();
@@ -105,14 +106,18 @@ public class AIClientReceive extends Thread {
     private static final String PROTOCOL = "Version 1.0";
     private static final String GROUP = "Origionelle Oktopusse";
 
+    //identifyMessage(wrapMessage(String.valueOf(readInput)));
+    //            setAIRobot();
     public AIClientReceive(Socket socket) {
         this.sockAI = socket;
+        setStartingPositions();
         //sendMessageToServer("test");
         try {
             readInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writeOutput = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            Message helloServer = new HelloServer(GROUP, false, PROTOCOL, clientID);
+            Message helloServer = new HelloServer(GROUP, true, PROTOCOL, clientID);
             String helloServerString = helloServer.toString();  //this message is missing
+
             //System.out.println(helloServerString);
             //writeOutput.write(helloServerString);
             sendMessage(helloServerString);
@@ -130,7 +135,7 @@ public class AIClientReceive extends Thread {
                 Message message = wrapMessage(serverMessage);
                 System.out.println("--------------------------------------------------------------");  //test
                 System.out.println(message);  //test
-                identifyMessage(message);
+                getMessageFromServer(message);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -294,21 +299,7 @@ public class AIClientReceive extends Thread {
 
     //Todo: Start the AI with methods IdentifyMessage and setStartingPositions
 
-    private void identifyMessage(Message message) {
-        String type = message.getMessageType();
-        switch (type) {
-            case MessageType.helloClient:
-                sendMessage(new HelloServer(GROUP, false, PROTOCOL, clientID).toString());
-                break;
 
-            case MessageType.alive:
-                sendMessage(new HelloServer(GROUP, false, PROTOCOL, clientID).toString());
-                break;
-
-            case MessageType.welcome:
-            case MessageType.playerAdded:
-        }
-    }
 
     public void sendMessage(String msg) {
         try {
@@ -358,8 +349,32 @@ public class AIClientReceive extends Thread {
     }
 
     /**
-     * Check incoming messages and call corresponding method
+     * Check incoming messages and call corresponding method and setstatus to true
+     * get free robot by setnew robot
+     * sendMessage(new PlayerValues("AiRobo", 5);
+     * sendMessage(new SetStatus(true));
      */
+    public void setAIRobot(){
+        if(!robotsOfPlayers.containsValue(1)){
+            aIRobot=1;
+            sendMessage(new PlayerValues(name,1).toString());
+        } else if (!robotsOfPlayers.containsValue(2)){
+            aIRobot=2;
+            sendMessage(new PlayerValues(name,2).toString());
+        } else if (!robotsOfPlayers.containsValue(3)){
+            aIRobot=3;
+            sendMessage(new PlayerValues(name,3).toString());
+        } else if (!robotsOfPlayers.containsValue(4)){
+            aIRobot=4;
+            sendMessage(new PlayerValues(name,4).toString());
+        } else if (!robotsOfPlayers.containsValue(5)){
+            aIRobot=5;
+            sendMessage(new PlayerValues(name,5).toString());
+        } else if (!robotsOfPlayers.containsValue(6)){
+            aIRobot=6;
+            sendMessage(new PlayerValues(name,6).toString());
+        }
+    }
 
     public void getMessageFromServer(Message message) {
         String type = message.getMessageType();
@@ -372,11 +387,9 @@ public class AIClientReceive extends Thread {
                 break;
 
             //case MessageType.playerValues:
-                //no here the client sends a message to the server about the playerValues
+
             case MessageType.playerStatus:
-                //Sobald ein Spieler seine Auswahl erfolgreich getroffen hat,
-                // kann er dem Server signalisieren bereit zu sein.
-                // Diese Meinung kann er via Boolean aber auch zurückziehen!
+                //Von Seiten des Servers wird der Spielerstatus an alle verbundenen Clients verteilt.
                 PlayerStatus.PlayerStatusBody playerStatusBody = new Gson().fromJson(messageBody, PlayerStatus.PlayerStatusBody.class);
                 int clientWhoIsReady = playerStatusBody.getClientID();
                 boolean ready = playerStatusBody.isReady();
@@ -681,6 +694,11 @@ public class AIClientReceive extends Thread {
                     if (playerAdded == clientID) {
                         name = nameAdded;
                         //Todo: Start game
+                    }
+
+                    if (isRobotValuesSet==false){
+                        setAIRobot();
+                        isRobotValuesSet=true;
                     }
                 }
                 break;
