@@ -131,9 +131,9 @@
          <Font size="24.0" />
       </font>
    </Label>
-   <Button fx:id="AIbutton" layoutX="780.0" layoutY="433.0" mnemonicParsing="false" onAction="#initAI" prefHeight="83.0" prefWidth="107.0" stylesheets="@../styles.css" text="AI ">
+   <Button fx:id="AIbutton" layoutX="780.0" layoutY="433.0" mnemonicParsing="false" onAction="#initAI" prefHeight="83.0" prefWidth="90.0" stylesheets="@../styles.css" text="AI ">
       <font>
-         <Font size="24.0" />
+         <Font size="36.0" />
       </font>
    </Button>
 </AnchorPane>

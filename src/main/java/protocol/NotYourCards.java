@@ -15,7 +15,7 @@ public class NotYourCards extends Message {
             return clientID;
         }
 
-        public String[] getCardsInHand() {
+        public int getCardsInHand() {
             return cardsInHand;
         }
 
