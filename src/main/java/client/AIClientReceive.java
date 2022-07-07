@@ -35,6 +35,8 @@ public class AIClientReceive extends Thread {
     private List<String> myNineCardsOnPile = new ArrayList<>();
     private HashSet<Position> availableStartingPositions = new HashSet<>();
     private HashSet<Position> availableDeathTrapStartingPositions = new HashSet<>();
+
+
     private String activePhase = null;
     String type;
     //Position in Client
@@ -135,6 +137,23 @@ public class AIClientReceive extends Thread {
         }
     }
 
+    /**Sets the available StartingPositions
+     * Only DeathTrap map has different Starting Positions
+     */
+    public void setStartingPositions() {
+        availableDeathTrapStartingPositions.add(new Position(11, 1));
+        availableDeathTrapStartingPositions.add(new Position(12, 3));
+        availableDeathTrapStartingPositions.add(new Position(11, 4));
+        availableDeathTrapStartingPositions.add(new Position(11, 5));
+        availableDeathTrapStartingPositions.add(new Position(12, 6));
+        availableDeathTrapStartingPositions.add(new Position(11, 8));
+        availableStartingPositions.add(new Position(1, 1));
+        availableStartingPositions.add(new Position(0, 3));
+        availableStartingPositions.add(new Position(1, 4));
+        availableStartingPositions.add(new Position(1, 5));
+        availableStartingPositions.add(new Position(0, 6));
+        availableStartingPositions.add(new Position(1, 8));
+    }
 
     private Message wrapMessage(String input) {
         if (input.contains("\"messageType\":\"ActivePhase\",\"messageBody\"")) {
@@ -272,6 +291,8 @@ public class AIClientReceive extends Thread {
 
         return new ErrorMessage("Error when parsing String to Message");
     }
+
+    //Todo: Start the AI with methods IdentifyMessage and setStartingPositions
 
     private void identifyMessage(Message message) {
         String type = message.getMessageType();
@@ -414,20 +435,21 @@ public class AIClientReceive extends Thread {
                 break;
 
             case MessageType.startingPointTaken:
+                //Wenn die gewünschte Position valide ist, werden alle Spieler darüber benachrichtigt.
                 //or is this too complicated???
                 StartingPointTaken.StartingPointTakenBody startingPointTakenBody = new Gson().fromJson(messageBody, StartingPointTaken.StartingPointTakenBody.class);
                 int startingPositionSetbyOtherPlayer = startingPointTakenBody.getClientID();
-                int otherPlayerX = startingPointTakenBody.getX();
-                int otherPlayerY = startingPointTakenBody.getY();
+                int otherPlayerXPosition = startingPointTakenBody.getX();
+                int otherPlayerYPosition = startingPointTakenBody.getY();
 
-                removeStartPointsInHashSet(otherPlayerX, otherPlayerY);
+                removeStartPointsInHashSet(otherPlayerXPosition, otherPlayerYPosition);
 
                 // store the start position
-                startingPointsOfPlayers.get(startingPositionSetbyOtherPlayer)[0] = otherPlayerX;
-                startingPointsOfPlayers.get(startingPositionSetbyOtherPlayer)[1] = otherPlayerX;
+                startingPointsOfPlayers.get(startingPositionSetbyOtherPlayer)[0] = otherPlayerXPosition;
+                startingPointsOfPlayers.get(startingPositionSetbyOtherPlayer)[1] = otherPlayerXPosition;
                 // set current position
-                activePositionsOfAllPlayers.get(startingPositionSetbyOtherPlayer)[0] = otherPlayerX;
-                activePositionsOfAllPlayers.get(startingPositionSetbyOtherPlayer)[1] = otherPlayerY;
+                activePositionsOfAllPlayers.get(startingPositionSetbyOtherPlayer)[0] = otherPlayerXPosition;
+                activePositionsOfAllPlayers.get(startingPositionSetbyOtherPlayer)[1] = otherPlayerYPosition;
                 //Todo sendmessage
                 break;
             case MessageType.drawDamage:
@@ -614,10 +636,9 @@ public class AIClientReceive extends Thread {
     }
 
     /**
-     * if the start position is taken, remove it from hashset
+     * Save all taken starting positions
      *
-     * @param x the x
-     * @param y the y
+     *
      */
     public void removeStartPointsInHashSet(int x, int y) {
         HashSet<Position> delete = new HashSet<>();
@@ -627,14 +648,14 @@ public class AIClientReceive extends Thread {
                     delete.add(position);
                 }
             }
-            availableDeathTrapStartingPositions.removeAll(delete);
+
         } else {
             for (Position position : availableStartingPositions) {
                 if (position.getX() == x && position.getY() == y) {
                     delete.add(position);
                 }
             }
-            availableStartingPositions.removeAll(delete);
+
         }
     }
 }
