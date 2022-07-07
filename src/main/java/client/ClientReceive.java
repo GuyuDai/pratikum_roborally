@@ -293,7 +293,11 @@ public class ClientReceive extends Thread{
                 playerId=cardSelectedBody.getClientID();
                 register=cardSelectedBody.getRegister();
                 isFilled=cardSelectedBody.isFilled();
+                if(isFilled){
+                    sendMessage(new SelectionFinished(playerId).toString());
+                }
             case MessageType.pickDamage:
+
 
 
         }

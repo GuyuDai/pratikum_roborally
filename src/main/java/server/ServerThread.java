@@ -436,6 +436,8 @@ public class ServerThread implements Runnable {
                     sendToAll(cardSelected);
                 }
                 break;
+            case MessageType.selectionFinished:
+                  sendToAll(new TimerStarted().toString());
 
             case MessageType.selectedDamage:
                 SelectedDamageBody selectedDamageBody=new Gson().fromJson(body,SelectedDamageBody.class);
