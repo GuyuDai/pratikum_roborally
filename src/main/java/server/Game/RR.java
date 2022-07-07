@@ -1,29 +1,38 @@
 package server.Game;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import protocol.ActivePhase;
+import protocol.NotYourCards;
+import protocol.ProtocolFormat.Message;
+import protocol.ReceivedChat;
+import protocol.YourCards;
 import server.BoardElement.*;
 import server.BoardTypes.*;
+import server.CardTypes.Card;
 import server.Control.*;
 import server.Player.*;
 
 import java.util.concurrent.*;
+import server.ServerThread;
 
 public class RR extends Thread implements GameLogic {
   private Boolean isGoingOn;
   public Controller controller;
   protected CopyOnWriteArrayList<Player> activePlayers;
+  protected CopyOnWriteArrayList<ServerThread> activeClients;
   protected Player playerInCurrentTurn;
   protected Board gameBoard;
   protected GameState currentState;
-
   protected Position positionCheckPoint;
   protected Position positionAntenna;
-
-  protected int PlayerInListPosition = 0;
+  protected int PlayerInListPosition = -1;
+  protected int activePhase;  //0 => Aufbauphase, 1 => Upgradephase, 2 => Programmierphase, 3 => Aktivierungsphase
 
 
   public RR(Board gameBoard) {
     this.gameBoard = gameBoard;
-    this.controller = new Controller();
     this.isGoingOn = false;
 
     for (int i = 0; i <= this.getGameBoard().getHeight(); i++) {
@@ -50,6 +59,7 @@ public class RR extends Thread implements GameLogic {
   @Override
   public void run() {
     this.setName("GameThread");
+    this.controller = new Controller(this);
     gameProgress();
   }
 
@@ -93,6 +103,10 @@ public class RR extends Thread implements GameLogic {
 
   public void setCurrentState(GameState currentState) {
     this.currentState = currentState;
+  }
+
+  public CopyOnWriteArrayList<ServerThread> getActiveClients() {
+    return activeClients;
   }
 
   public void nextGameState() {
@@ -150,16 +164,15 @@ public class RR extends Thread implements GameLogic {
   }
 
   public void gameProgress() {
-    /*
     if (currentState == GameState.GameInitializing) {
-
+      doGameInitializing();
     }
     while (isGoingOn) {
       if (currentState == GameState.GameStarting) {
-        DoGameStarting();
+        doBulidingPhase();
       }
       if (currentState == GameState.UpgradePhase) {
-        DoUpgradePhase();
+        doUpgradePhase();
       }
       if (currentState == GameState.ProgrammingPhase) {
         DoProgrammingPhase();
@@ -172,31 +185,6 @@ public class RR extends Thread implements GameLogic {
       }
     }
 
-     */
-
-    buildingPhase();
-    counter = 0;
-    boolean everyoneFinished;
-    while (!gameIsOver) {
-      initializePosition();
-      programmingPhase();
-      everyoneFinished = false;
-      timesOver = false;
-      synchronized (this) {
-
-        while (!timesOver && !everyoneFinished) {// ^ = XOR
-          try {
-            this.wait();
-          } catch (InterruptedException e) {
-            e.printStackTrace();
-          }
-          everyoneFinished = everyoneFinished();
-        }
-      }
-
-      activationPhase();
-      everyoneNotFinished();
-    }
   }
 
   public boolean leaveGame(Player player) {
@@ -240,66 +228,135 @@ public class RR extends Thread implements GameLogic {
     activePlayers = temp;
   }
 
+  public void doGameInitializing(){
+    for(ServerThread serverThread : getActiveClients()){
+      activePlayers.add(serverThread.getPlayer());
+    }
+    for(Player player : getActivePlayers()){
+      player.setCurrentGame(this);
+    }
+    nextGameState();
+  }
 
-  public void DoGameStarting() {
+  public void doBulidingPhase() {
+    this.activePhase = 0;
+    sendMessageToAll(new ActivePhase(activePhase));
+    sendMessageToAll(new ReceivedChat("choose your starting position",-1,false));
+
+    boolean allFinished = false;  //this part is to check if all player decided their starting position
+    while (!allFinished){
+      for(ServerThread serverThread : getActiveClients()){
+        // TODO: 2022/7/7 there is some problems
+        allFinished = (serverThread.getStartingPosition() != null);  //only each player has a valid starting position, this flag will be true
+      }
+    }
+
+    for(Player player : getActivePlayers()){
+      player.getOwnRobot().setCurrentPosition(player.getOwnRobot().getStartPosition());
+    }
     setPriority();
     reorderPlayer();
+    nextGameState();
   }
 
 
-  public void DoUpgradePhase() {
-    for (Player playerUpgrade : activePlayers) {
-      if (playerUpgrade.getAI()) {
-        playerUpgrade.upgradePhaseAI();
-      } else {//add when we have UpgradeCards
+  public void doUpgradePhase() {
+    this.activePhase = 1;
+    sendMessageToAll(new ActivePhase(activePhase));
+    sendMessageToAll(new ReceivedChat("Upgrade Phase starts",-1,false));
 
-      }}}
+    //add when we have upgrade cards and upgrade deck
 
-      public void DoProgrammingPhase () {
-        for (Player player : activePlayers) {
-          if (player.getAI()) {
-            player.programmingPhaseAI();
-          } else {
-            player.draw();
-            player.showHands();
-            String Card = "";
-            int i = 0;
-            while (i < player.getHands().size()) {
-              server.CardTypes.Card currentCard = player.getHands().get(i);
-              if (currentCard != null && currentCard.getCardName().equals(Card)) {
-                player.getRegister().add(currentCard);
-                player.getHands().remove(currentCard);
-              }   //if remove one Card in handsList,don't do i++
-              else {
-                i++;
-              }
-            }
-          }
-        }
+    nextGameState();
+  }
+
+  public void DoProgrammingPhase () {
+    this.activePhase = 1;
+    sendMessageToAll(new ActivePhase(activePhase));
+    sendMessageToAll(new ReceivedChat("Programming Phase starts",-1,false));
+
+    for(Player player : getActivePlayers()){  //each player draws 9 cards
+      player.draw();
+      String[] cards = new String[9];
+      int i = 0;
+      for(Card card : player.getHands()){
+        cards[i] = card.getCardName();
+        i ++;
       }
-      public void DoActivationPhase () {
-        for (int i = 0; i < 5; i++) {
-          for (Player player : activePlayers) {
-            setPlayerInCurrentTurn(PlayerInListPosition);
-            player.getRegister().get(i).action();
-            Robot ownRobot = player.getOwnRobot();
-            int X = ownRobot.getCurrentPosition().getX();
-            int Y = ownRobot.getCurrentPosition().getY();
-            gameBoard.getBoardElem(X, Y, 0).action();
-            if (gameBoard.getBoardElem(X, Y, 1) != null) {
-              gameBoard.getBoardElem(X, Y, 1).action();
-            }
-            player.getCurrentGame().getController().robotLaserController(ownRobot);
-            PlayerInListPosition++;
-            if (PlayerInListPosition >= activePlayers.size()) {
-              PlayerInListPosition = 0;
-            }
-          }
+      sendMessageToClient(new YourCards(cards),getServerThreadById(player.clientID));
+      sendMessageWithout(new NotYourCards(player.clientID, player.getHands().size()),getServerThreadById(player.clientID));
+    }
+
+    sendMessageToAll(new ReceivedChat("fill your register",-1,false));
+    boolean timerStart = false;
+    boolean allFinished = false;
+    // TODO: 2022/7/7 not complete yet
+    while(!allFinished){
+      for(Player player : getActivePlayers()){
+        if(player.getRegister().size() == 5){
+          timerStart = true;
         }
-      }
-
-      public void DoGameEnding () {
-
       }
     }
+  }
+  public void DoActivationPhase () {
+    for (int i = 0; i < 5; i++) {
+      for (Player player : activePlayers) {
+        setPlayerInCurrentTurn(PlayerInListPosition);
+        player.getRegister().get(i).action();
+        Robot ownRobot = player.getOwnRobot();
+        int X = ownRobot.getCurrentPosition().getX();
+        int Y = ownRobot.getCurrentPosition().getY();
+        gameBoard.getBoardElem(X, Y, 0).action();
+        if (gameBoard.getBoardElem(X, Y, 1) != null) {
+          gameBoard.getBoardElem(X, Y, 1).action();
+        }
+        player.getCurrentGame().getController().robotLaserController(ownRobot);
+        PlayerInListPosition++;
+        if (PlayerInListPosition >= activePlayers.size()) {
+          PlayerInListPosition = 0;
+        }
+      }
+    }
+  }
+
+  public void DoGameEnding () {
+
+  }
+
+  public void sendMessageToClient(Message msg, ServerThread client) {
+    try {
+      BufferedWriter write = new BufferedWriter(new OutputStreamWriter(client.getClientSocket().getOutputStream()));
+      String messageToSend = msg.toString();
+      write.write(messageToSend);
+      write.newLine();
+      write.flush();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void sendMessageToAll(Message msg){
+    for(ServerThread client : this.activeClients){
+      sendMessageToClient(msg, client);
+    }
+  }
+
+  public void sendMessageWithout(Message msg, ServerThread without){
+    for(ServerThread client : this.activeClients){
+      if(client.getID() != without.getID()){
+        sendMessageToClient(msg, client);
+      }
+    }
+  }
+
+  public ServerThread getServerThreadById(int id){
+    for(ServerThread target : getActiveClients()){
+      if(target.getID() == id){
+        return target;
+      }
+    }
+    return null;
+  }
+}
 
