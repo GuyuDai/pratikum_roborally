@@ -280,7 +280,7 @@ public class ServerThread implements Runnable {
         return new ErrorMessage("Error when parsing String to Message");
     }
 
-    private void identifyMessage(Message message) {
+    private synchronized void identifyMessage(Message message) {
         /*
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Message.class, new MessageAdapter());
@@ -329,7 +329,7 @@ public class ServerThread implements Runnable {
                     int othersID=serverThread.getID();
                     String othersName=serverThread.getName();
                     int othersFigure=serverThread.getFigure();
-                    if(othersID!=clientID){
+                    if(othersID != clientID){
                         sendMessage( new PlayerAdded(othersID,othersName,othersFigure).toString());
                     }
                 }
@@ -337,6 +337,10 @@ public class ServerThread implements Runnable {
                 Timer.countDown(5);
                 sendMessage(new Alive().toString());
                 break;
+
+            case MessageType.alive:
+                Timer.countDown(5);
+                sendMessage(new Alive().toString());
 
             case MessageType.playerValues:
                 PlayerValuesBody playerValuesBody = new Gson().fromJson(body,PlayerValuesBody.class);
@@ -354,14 +358,15 @@ public class ServerThread implements Runnable {
                 SetStatusBody setStatusBody = new Gson().fromJson(body,SetStatusBody.class);
                 ready = setStatusBody.isReady();
                 player.setReady(ready);
+                sendToAll(new PlayerStatus(clientID,true).toString());
                 if(firstPlayerReady()!=null){
                     if (firstPlayerReady().equals(player)) {
                         sendMessage(new SelectMap(
                                 new String[]{"DizzyHighway","ExtraCrispy","DeathTrap","LostBearings"}).toString());
                     }
                 }
-                if (allPlayerReady()&&connectedClients.size()>=2){
-                    currentGame=new RR(board);
+                if (allPlayerReady() && connectedClients.size()>=2 && board != null){
+                    currentGame = new RR(board);
                     currentGame.start();
                 }
                 break;
@@ -381,36 +386,40 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.mapSelected:
-                MapSelectedBody mapSelectedBody=new Gson().fromJson(body, MapSelectedBody.class);
-                map=mapSelectedBody.getMap();
+                MapSelectedBody mapSelectedBody = new Gson().fromJson(body, MapSelectedBody.class);
+                map = mapSelectedBody.getMap();
                 switch (map){
                     case "DizzyHighway":
-                        board=new DizzyHighway();
+                        board = new DizzyHighway();
                         break;
                     case "ExtraCrispy":
-                        board=new ExtraCrispy();
+                        board = new ExtraCrispy();
                         break;
                     case "LostBearings":
-                        board=new LostBearings();
+                        board = new LostBearings();
                         break;
                     case "DeathTrap":
-                        board=new DeathTrap();
+                        board = new DeathTrap();
                         break;
+                }
+                if (allPlayerReady() && connectedClients.size()>=2 && board != null){
+                    currentGame = new RR(board);
+                    currentGame.start();
                 }
                 break;
 
             case MessageType.playCard:
                 PlayCardBody playCardBody = new Gson().fromJson(body,PlayCardBody.class);
                 card = playCardBody.getCard();
-                String cardPlayedMessage=new CardPlayed(clientID,card).toString();
+                String cardPlayedMessage = new CardPlayed(clientID,card).toString();
                 sendToAll(cardPlayedMessage);
                 break;
 
             case MessageType.selectCard:
-                SelectedCardBody selectedCardBody=new Gson().fromJson(body,SelectedCardBody.class);
-                if(currentGame!=null&&currentGame.getCurrentState().equals(GameState.ProgrammingPhase)){
-                    register=selectedCardBody.getRegister();
-                    card=selectedCardBody.toString();
+                SelectedCardBody selectedCardBody = new Gson().fromJson(body,SelectedCardBody.class);
+                if(currentGame != null && currentGame.getCurrentState().equals(GameState.ProgrammingPhase)){
+                    register = selectedCardBody.getRegister();
+                    card = selectedCardBody.getCard();
                     int i = 0;
                     while (i < player.getHands().size()) {
                         Card currentCard = player.getHands().get(i);
@@ -423,7 +432,7 @@ public class ServerThread implements Runnable {
                         }
                         //TODO change DoProgrammingPhase later,player can do card selection here;
                     }
-                    int filledCardNumber=player.getRegister().size();
+                    int filledCardNumber = player.getRegister().size();
                     String cardSelected="";
                     if (filledCardNumber<5){
                         cardSelected = new CardSelected(clientID, register, false).toString();
@@ -527,8 +536,8 @@ public class ServerThread implements Runnable {
           }
       }
       return true;
-
     }
+
     public BufferedReader getReadInput(){
         return readInput;
     }
