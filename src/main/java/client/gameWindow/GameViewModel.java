@@ -844,27 +844,16 @@ public class GameViewModel {
     }
 
 
-    /**
-     * selecting a map and enabling start game button
-     */
-    public void selectMapAction(ActionEvent actionEvent) {
-        try {
-            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Map.fxml"));
-            Parent rootGame = (Parent) fxmlLoaderGame.load();
-            Stage stageGame = new Stage();
-            stageGame.setTitle("Map Selection");
-            stageGame.setScene(new Scene(rootGame));
-            stageGame.show();
-        } catch (Exception e) {
-        }
-        startGameButton.setVisible(true);
-        selectMapButton.setVisible(false);
-    }
 
     /**
      * start game button -> map gets printed and register appears.
      */
+
     public void startGameButtonAction(ActionEvent actionEvent) {
+
+        String map=Client.getClientReceive().getBoard();
+        printMapGUI(map);
+
         hand1Button.setVisible(true);
         hand2Button.setVisible(true);
         hand3Button.setVisible(true);
@@ -878,8 +867,6 @@ public class GameViewModel {
         printCards();
         Text.setText("Select 5 of these cards for your register.");
         playCardBtn.setVisible(true);
-        String map=Client.getClientReceive().getBoard();
-        printMapGUI(map);
     }
 
 

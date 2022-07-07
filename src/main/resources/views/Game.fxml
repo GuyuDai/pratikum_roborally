@@ -154,60 +154,93 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
-                     <children>
-                        <ImageView fx:id="mapImage20" fitHeight="44.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-                        <ImageView fx:id="mapImage30" fitHeight="44.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
-                        <ImageView fx:id="mapImage10" fitHeight="44.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-                        <ImageView fx:id="mapImage00" fitHeight="44.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="mapImage40" fitHeight="44.0" fitWidth="43.0" layoutX="94.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" />
-                        <ImageView fx:id="mapImage50" fitHeight="44.0" fitWidth="43.0" layoutX="137.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" />
-                        <ImageView fx:id="mapImage60" fitHeight="44.0" fitWidth="43.0" layoutX="52.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" />
-                        <ImageView fx:id="mapImage70" fitHeight="44.0" fitWidth="43.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" />
-                        <ImageView fx:id="mapImage90" fitHeight="44.0" fitWidth="43.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" />
-                        <ImageView fx:id="mapImage100" fitHeight="44.0" fitWidth="43.0" layoutX="180.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="10" />
-                        <ImageView fx:id="mapImage80" fitHeight="44.0" fitWidth="43.0" layoutX="223.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" />
-                        <ImageView fx:id="mapImage110" fitHeight="44.0" fitWidth="43.0" layoutX="266.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="11" />
-                        <ImageView fx:id="mapImage120" fitHeight="44.0" fitWidth="43.0" layoutX="309.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="12" />
-                        <ImageView fx:id="mapImage01" fitHeight="44.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
-                        <ImageView fx:id="mapImage11" fitHeight="44.0" fitWidth="43.0" layoutX="10.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <ImageView fx:id="mapImage21" fitHeight="44.0" fitWidth="43.0" layoutX="52.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <ImageView fx:id="mapImage31" fitHeight="44.0" fitWidth="43.0" layoutX="52.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <ImageView fx:id="mapImage41" fitHeight="44.0" fitWidth="43.0" layoutX="94.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                        <ImageView fx:id="mapImage51" fitHeight="44.0" fitWidth="43.0" layoutX="52.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                        <ImageView fx:id="mapImage61" fitHeight="44.0" fitWidth="43.0" layoutX="94.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                        <ImageView fx:id="mapImage71" fitHeight="44.0" fitWidth="43.0" layoutX="137.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-                        <ImageView fx:id="mapImage81" fitHeight="44.0" fitWidth="43.0" layoutX="180.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="1" />
-                        <ImageView fx:id="mapImage91" fitHeight="44.0" fitWidth="43.0" layoutX="223.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="1" />
-                        <ImageView fx:id="mapImage101" fitHeight="44.0" fitWidth="43.0" layoutX="266.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="10" GridPane.rowIndex="1" />
-                        <ImageView fx:id="mapImage111" fitHeight="44.0" fitWidth="43.0" layoutX="309.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="11" GridPane.rowIndex="1" />
-                        <ImageView fx:id="mapImage121" fitHeight="44.0" fitWidth="43.0" layoutX="352.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="12" GridPane.rowIndex="1" />
-                        <ImageView fx:id="mapImage02" fitHeight="44.0" fitWidth="43.0" layoutX="10.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
-                        <ImageView fx:id="mapImage12" fitHeight="44.0" fitWidth="43.0" layoutX="52.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <ImageView fx:id="mapImage22" fitHeight="44.0" fitWidth="43.0" layoutX="94.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                        <ImageView fx:id="mapImage32" fitHeight="44.0" fitWidth="43.0" layoutX="137.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                        <ImageView fx:id="mapImage42" fitHeight="44.0" fitWidth="43.0" layoutX="180.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                        <ImageView fx:id="mapImage52" fitHeight="44.0" fitWidth="43.0" layoutX="223.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                        <ImageView fx:id="mapImage62" fitHeight="44.0" fitWidth="43.0" layoutX="266.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                        <ImageView fx:id="mapImage72" fitHeight="44.0" fitWidth="43.0" layoutX="309.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-                        <ImageView fx:id="mapImage82" fitHeight="44.0" fitWidth="43.0" layoutX="352.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="2" />
-                        <ImageView fx:id="mapImage92" fitHeight="44.0" fitWidth="43.0" layoutX="395.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="2" />
-                        <ImageView fx:id="mapImage102" fitHeight="44.0" fitWidth="43.0" layoutX="438.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="10" GridPane.rowIndex="2" />
-                        <ImageView fx:id="mapImage112" fitHeight="44.0" fitWidth="43.0" layoutX="481.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="11" GridPane.rowIndex="2" />
-                        <ImageView fx:id="mapImage122" fitHeight="44.0" fitWidth="43.0" layoutX="524.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="12" GridPane.rowIndex="2" />
-                        <ImageView fx:id="mapImage03" fitHeight="44.0" fitWidth="43.0" layoutX="10.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
-                        <ImageView fx:id="mapImage13" fitHeight="44.0" fitWidth="43.0" layoutX="52.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <ImageView fx:id="mapImage23" fitHeight="44.0" fitWidth="43.0" layoutX="94.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                        <ImageView fx:id="mapImage33" fitHeight="44.0" fitWidth="43.0" layoutX="137.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                        <ImageView fx:id="mapImage43" fitHeight="44.0" fitWidth="43.0" layoutX="180.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                        <ImageView fx:id="mapImage53" fitHeight="44.0" fitWidth="43.0" layoutX="223.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                        <ImageView fx:id="mapImage63" fitHeight="44.0" fitWidth="43.0" layoutX="266.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                        <ImageView fx:id="mapImage73" fitHeight="44.0" fitWidth="43.0" layoutX="309.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="3" />
-                        <ImageView fx:id="mapImage83" fitHeight="44.0" fitWidth="43.0" layoutX="352.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="3" />
-                        <ImageView fx:id="mapImage93" fitHeight="44.0" fitWidth="43.0" layoutX="395.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="3" />
-                        <ImageView fx:id="mapImage103" fitHeight="44.0" fitWidth="43.0" layoutX="438.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="10" GridPane.rowIndex="3" />
-                        <ImageView fx:id="mapImage113" fitHeight="44.0" fitWidth="43.0" layoutX="481.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="11" GridPane.rowIndex="3" />
-                        <ImageView fx:id="mapImage123" fitHeight="44.0" fitWidth="43.0" layoutX="524.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="12" GridPane.rowIndex="3" />
-                     </children>
+                  </GridPane>
+                  <GridPane fx:id="startBoard" gridLinesVisible="true" prefHeight="428.0" prefWidth="557.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <GridPane fx:id="robotBoard" gridLinesVisible="true" prefHeight="428.0" prefWidth="557.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <GridPane fx:id="checkBoard" gridLinesVisible="true" prefHeight="428.0" prefWidth="557.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
                   </GridPane>
                </children>
             </AnchorPane>
@@ -335,8 +368,7 @@
                   </Button>
                </children>
             </GridPane>
-            <Button fx:id="startGameButton" layoutX="269.0" layoutY="620.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="48.0" prefWidth="80.0" text="start game" visible="false" />
-            <Button fx:id="selectMapButton" layoutX="269.0" layoutY="557.0" mnemonicParsing="false" onAction="#selectMapAction" prefHeight="48.0" prefWidth="80.0" text="select map" />
+            <Button fx:id="startGameButton" layoutX="269.0" layoutY="620.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="48.0" prefWidth="80.0" text="start game" />
          </children>
       </AnchorPane>
    </children>
