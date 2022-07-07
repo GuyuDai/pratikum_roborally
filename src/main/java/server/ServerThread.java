@@ -483,6 +483,7 @@ public class ServerThread implements Runnable {
                 SetStartingPointBody setStartingPointBody = new Gson().fromJson(body,SetStartingPointBody.class);
                 x = setStartingPointBody.getX();
                 y = setStartingPointBody.getY();
+
                 break;
 
         }

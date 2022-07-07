@@ -63,6 +63,8 @@ public class ClientReceive extends Thread{
 
     String[] maps;
 
+    String[] cards;
+
     String board;
 
     public ClientReceive(Socket socket) {
@@ -282,7 +284,9 @@ public class ClientReceive extends Thread{
             case MessageType.mapSelected:
                 MapSelected.MapSelectedBody mapSelectedBody=new Gson().fromJson(body,MapSelected.MapSelectedBody.class);
                 board=mapSelectedBody.getMap();
-
+            case MessageType.yourCards:
+                YourCards.YourCardsBody yourCardsBody=new Gson().fromJson(body, YourCards.YourCardsBody.class);
+                cards=yourCardsBody.getCardsInHand();
             case MessageType.cardSelected:
                 CardSelected.CardSelectedBody cardSelectedBody=new Gson().fromJson(body, CardSelected.CardSelectedBody.class);
                 playerId=cardSelectedBody.getClientID();
@@ -367,5 +371,9 @@ public class ClientReceive extends Thread{
 
     public Map<Integer, Boolean> getIdReady() {
         return IdReady;
+    }
+
+    public String[] getCards() {
+        return cards;
     }
 }
