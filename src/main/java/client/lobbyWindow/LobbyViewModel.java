@@ -215,6 +215,9 @@ public class LobbyViewModel {
       else{
           openGameWindow();
       }
+        //close Lobby
+        Stage stage = (Stage) selectMap.getScene().getWindow();
+        stage.close();
     }
 
     public static void setWindowName (String name){
