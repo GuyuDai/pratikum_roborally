@@ -349,10 +349,8 @@ public class AIClientReceive extends Thread {
     }
 
     /**
-     * Check incoming messages and call corresponding method and setstatus to true
-     * get free robot by setnew robot
-     * sendMessage(new PlayerValues("AiRobo", 5);
-     * sendMessage(new SetStatus(true));
+     * choses a free robot for the AIClient and notifies the server about
+     * the his PlayerValues
      */
     public void setAIRobot(){
         if(!robotsOfPlayers.containsValue(1)){

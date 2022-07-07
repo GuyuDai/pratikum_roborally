@@ -1,26 +1,19 @@
 package client;
 
-import client.gameWindow.GameViewModel;
-import client.lobbyWindow.LobbyViewModel;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import java.io.*;
-import java.net.Socket;
-import com.google.gson.Gson;
-
-import java.util.*;
-
-import javafx.application.Platform;
-import protocol.ProtocolFormat.Message;
-import protocol.ProtocolFormat.MessageAdapter;
-import protocol.ProtocolFormat.MessageType;
-import protocol.SendChat;
+import client.gameWindow.*;
+import client.lobbyWindow.*;
+import com.google.gson.*;
+import javafx.application.*;
 import protocol.*;
-import protocol.PlayerAdded.PlayerAddedBody;
-import protocol.ReceivedChat.ReceivedChatBody;
-import protocol.Welcome.WelcomeBody;
-import protocol.HelloClient.HelloClientBody;
-import server.Server;
+import protocol.PlayerAdded.*;
+import protocol.ProtocolFormat.*;
+import protocol.ReceivedChat.*;
+import protocol.Welcome.*;
+
+import java.io.*;
+import java.net.*;
+import java.util.Map;
+import java.util.*;
 
 
 public class ClientReceive extends Thread{
@@ -75,16 +68,6 @@ public class ClientReceive extends Thread{
         }
     }
 
-    /*
-    public Message wrapMessage(String input){  //doesn't work
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(Message.class, new MessageAdapter());
-        Gson gson = gsonBuilder.create();
-
-        return gson.fromJson(input, Message.class);
-    }
-
-     */
 
 
     private Message wrapMessage(String input){
