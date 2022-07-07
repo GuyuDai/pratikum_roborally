@@ -121,19 +121,9 @@
          </Label>
       </children>
    </AnchorPane>
-   <Label layoutX="76.0" layoutY="451.0" prefHeight="48.0" prefWidth="107.0" text="PLAYER ID:" textFill="WHITE">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
-   <Label fx:id="playerID" layoutX="175.0" layoutY="451.0" prefHeight="48.0" prefWidth="65.0" textFill="WHITE">
-      <font>
-         <Font size="24.0" />
-      </font>
-   </Label>
    <Button fx:id="AIbutton" layoutX="780.0" layoutY="433.0" mnemonicParsing="false" onAction="#initAI" prefHeight="83.0" prefWidth="90.0" stylesheets="@../styles.css" text="AI ">
       <font>
-         <Font size="36.0" />
+         <Font size="18.0" />
       </font>
    </Button>
 </AnchorPane>

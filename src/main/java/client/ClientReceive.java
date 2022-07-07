@@ -54,6 +54,8 @@ public class ClientReceive extends Thread{
 
     List<Integer> robotNumbers=new ArrayList<>();
 
+    List<Integer> startNumbers=new ArrayList<>();
+
     Map<String,Integer> IdName = new HashMap<>();
 
     List<Boolean> readyList=new ArrayList<>();
@@ -356,6 +358,10 @@ public class ClientReceive extends Thread{
 
     public List<Integer> getRobotNumbers() {
         return robotNumbers;
+    }
+
+    public List<Integer> getStartNumbers(){
+        return startNumbers;
     }
 
     public Map<String, Integer> getIdName() {

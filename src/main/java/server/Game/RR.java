@@ -174,30 +174,7 @@ public class RR extends Thread implements GameLogic {
 
      */
 
-    buildingPhase();
-    counter = 0;
-    boolean everyoneFinished;
-    while (!gameIsOver) {
-      initializePosition();
-      programmingPhase();
-      everyoneFinished = false;
-      timesOver = false;
-      synchronized (this) {
-
-        while (!timesOver && !everyoneFinished) {// ^ = XOR
-          try {
-            this.wait();
-          } catch (InterruptedException e) {
-            e.printStackTrace();
-          }
-          everyoneFinished = everyoneFinished();
-        }
-      }
-
-      activationPhase();
-      everyoneNotFinished();
     }
-  }
 
   public boolean leaveGame(Player player) {
     Player removePlayer = null;
