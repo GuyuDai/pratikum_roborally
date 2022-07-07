@@ -428,7 +428,7 @@ public class AIClientReceive extends Thread {
                 // set current position
                 activePositionsOfAllPlayers.get(startingPositionSetbyOtherPlayer)[0] = otherPlayerX;
                 activePositionsOfAllPlayers.get(startingPositionSetbyOtherPlayer)[1] = otherPlayerY;
-
+                //Todo sendmessage
                 break;
             case MessageType.drawDamage:
                 //All damage cards will be transmitted at once
