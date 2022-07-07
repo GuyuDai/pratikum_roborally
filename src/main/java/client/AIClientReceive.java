@@ -400,17 +400,76 @@ public class AIClientReceive extends Thread {
                 if (activePhase.equals("GameInitializing")) {
                     if (map.equals("Death Trap")) {
                         //Position.setX(11);
+                        if (availableDeathTrapStartingPositions.contains(new Position(11,1))){
                         x = 11;
-                        //Position.setY(8);
                         y = 1;
                         //benachrichtigt den Server
                         sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if (availableDeathTrapStartingPositions.contains(new Position(12,3))){
+                            x = 12;
+                            y = 3;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if (availableDeathTrapStartingPositions.contains(new Position(11,4))) {
+                            x = 11;
+                            y = 4;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if (availableDeathTrapStartingPositions.contains(new Position(11,5))) {
+                            x = 11;
+                            y = 5;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if (availableDeathTrapStartingPositions.contains(new Position(12,6))) {
+                            x = 12;
+                            y = 6;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if (availableDeathTrapStartingPositions.contains(new Position(11,8))) {
+                            x = 11;
+                            y = 8;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        }
+
                     } else {
+                        if(availableStartingPositions.contains(new Position(1,1))){
                         //There is the same Startpoint on every MAP exept DeathTrap
                         x = 1;
                         y = 1;
                         //benachrichtigt den Server
                         sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if(availableStartingPositions.contains(new Position(0,3))){
+                            //There is the same Startpoint on every MAP exept DeathTrap
+                            x = 0;
+                            y = 3;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if(availableStartingPositions.contains(new Position(1,4))){
+                            //There is the same Startpoint on every MAP exept DeathTrap
+                            x = 1;
+                            y = 4;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if(availableStartingPositions.contains(new Position(1,5))){
+                            //There is the same Startpoint on every MAP exept DeathTrap
+                            x = 1;
+                            y = 5;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if(availableStartingPositions.contains(new Position(0,6))){
+                            //There is the same Startpoint on every MAP exept DeathTrap
+                            x = 0;
+                            y = 6;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if(availableStartingPositions.contains(new Position(1,8))){
+                            //There is the same Startpoint on every MAP exept DeathTrap
+                            x = 1;
+                            y = 8;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        }
                     }
 
                 } else if (activePhase.equals("ActivationPhase")) {
