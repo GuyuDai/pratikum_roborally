@@ -75,10 +75,20 @@ public class ClientReceive extends Thread{
 
     String board;
 
+    String[] filledRegister;
+
     Integer[] positions;
+
+    String turnDirection;
+
+    String animationType;
 
     int x;
     int y;
+
+    int activePhaseNumber;
+
+    int rebootClientId;
 
     Map<Integer,Integer[]> IdPosition=new HashMap<>();
 
@@ -356,6 +366,10 @@ public class ClientReceive extends Thread{
                 playerId=cardPlayedBody.getClientID();
                 IdCardPlayed.put(playerId,cardPlayed);
                 break;
+            case MessageType.cardsYouGotNow:
+                CardsYouGotNow.CardYouGotNowBody cardYouGotNowBody=new Gson().fromJson(body, CardsYouGotNow.CardYouGotNowBody.class);
+                filledRegister=cardYouGotNowBody.getCards();
+
             case MessageType.movement:
                 Movement.MovementBody movementBody=new Gson().fromJson(body,Movement.MovementBody.class);
                 playerId=movementBody.getClientID();
@@ -363,6 +377,22 @@ public class ClientReceive extends Thread{
                 x=movementBody.getY();
                 positions=new Integer[]{x,y};
                 IdPosition.put(playerId,positions);
+                break;
+            case MessageType.playerTurning:
+                PlayerTurning.PlayerTurningBody playerTurningBody=new Gson().fromJson(body, PlayerTurning.PlayerTurningBody.class);
+                turnDirection=playerTurningBody.getRotation();
+                break;
+            case MessageType.animation:
+                Animation.AnimationBody animationBody=new Gson().fromJson(body,Animation.AnimationBody.class);
+                animationType=animationBody.getType();
+                break;
+            case MessageType.activePhase:
+                ActivePhase.ActivePhaseBody activePhaseBody=new Gson().fromJson(body,ActivePhase.ActivePhaseBody.class);
+                activePhaseNumber=activePhaseBody.getPhase();
+                break;
+            case MessageType.reboot:
+                Reboot.RebootBody rebootBody=new Gson().fromJson(body, Reboot.RebootBody.class);
+                rebootClientId=rebootBody.getClientID();
                 break;
 
         }
@@ -456,6 +486,10 @@ public class ClientReceive extends Thread{
 
     public boolean isTimerStarted() {
         return timerStarted;
+    }
+
+    public String[] getFilledRegister() {
+        return filledRegister;
     }
 
     public String[] getCards() {

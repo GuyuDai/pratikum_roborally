@@ -8,6 +8,6 @@ public class Trojan extends Card implements DamageCards {
 
   @Override
   public void action() {
-    this.getOwner().drawSpamCard(2);
+    this.getOwner().drawDamage("Spam",2);
   }
 }

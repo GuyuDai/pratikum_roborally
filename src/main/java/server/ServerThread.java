@@ -371,6 +371,7 @@ public class ServerThread implements Runnable {
                 int x = setStartingPointBody.getX();
                 int y = setStartingPointBody.getY();
                 Position tempPosition = new Position(x,y);
+                System.out.println(tempPosition.getX());
                 boolean flagInSetStartingPoint = true;
                 for(ServerThread serverThread : connectedClients){
                     if(serverThread.getStartingPosition()!=null) {
@@ -380,9 +381,11 @@ public class ServerThread implements Runnable {
                     }
                 }
                 if(flagInSetStartingPoint){
-                    this.startingPosition = tempPosition;
+                    startingPosition = tempPosition;
+                    System.out.println(startingPosition.getX());
                     sendToAll(new StartingPointTaken(x,y,clientID).toString());
                     this.player.getOwnRobot().setStartPosition(this.startingPosition);
+                    System.out.println(player.getOwnRobot().getStartPosition().getX());
                 }else {
                     sendMessage(new ErrorMessage("this position has been taken").toString());
                 }
