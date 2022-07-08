@@ -1665,7 +1665,6 @@ public class GameViewModel {
 
     public void startPointOKAction(ActionEvent actionEvent) {
         //checkStart();
-        image1.setImage(test);
 
         switch (getStartingPointCount()) {
             case 1:
@@ -1687,7 +1686,7 @@ public class GameViewModel {
             Client.getClientReceive().sendMessage(new SetStartingPoint(8, 1).toString());
             break;
         }
-/*
+
         //Todo put timer to right place in code (card selection), here is just for testing
 
 
@@ -1768,12 +1767,6 @@ public class GameViewModel {
 
 
 
-    }
-                timer.setText("" + timeInSeconds);
-                TimeUnit.SECONDS.sleep(1);
-                timeInSeconds--;
-            }
-            timerStarted = false;
 
     public void timerStart(){
         timerText.setVisible(true);
@@ -1782,14 +1775,7 @@ public class GameViewModel {
         timer30Sec();
     }
 
-
-        } catch (InterruptedException e) {
-            timerStarted = false;
-            e.printStackTrace();
-        }
-         */
-
-
+    
 
 
     public void checkStart() {
