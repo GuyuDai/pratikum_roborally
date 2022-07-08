@@ -6,8 +6,8 @@ import server.Control.Position;
 
 public abstract class Board {
   public String name;
-  public int width;  //x
-  public int height;  //y
+  public int width = 9;  //x
+  public int height = 12;  //y
   public BoardElem[][][] map;
 
   public Direction direction;

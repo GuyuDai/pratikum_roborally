@@ -1846,37 +1846,6 @@ public class GameViewModel {
     }
 
 
-    @FXML
-    private Button virus;
-
-    @FXML
-    private Label virusNumber;
-
-    @FXML
-    private Button worm;
-
-    @FXML
-    private Label wormNumber;
-
-    @FXML
-    private Button trojan;
-
-    @FXML
-    private Label trojanNumber;
-    @FXML
-    private Button spam;
-
-    @FXML
-    private Label spamNumber;
-
-
-    //ToDo method for playing damaging Cards
-    @FXML
-    void playDamageCards(ActionEvent event) {
-
-    }
-
-
 }
 
 

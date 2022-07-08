@@ -186,7 +186,7 @@ public class LobbyViewModel {
     public void readyButtonAction(ActionEvent actionEvent) {
         String readyMessage=new SetStatus(true).toString();
         Client.getClientReceive().sendMessage(readyMessage);
-        if(Client.getClientReceive().getReadyList().size()==1) {
+        if(Client.getClientReceive().getReadyList().size()<1) {
             selectMap.setVisible(true);
         }
         else{

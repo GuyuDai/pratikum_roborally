@@ -23,8 +23,8 @@ import server.ServerThread;
 public class RR extends Thread implements GameLogic {
   private Boolean isGoingOn;
   public Controller controller;
-  protected CopyOnWriteArrayList<Player> activePlayers;
-  protected CopyOnWriteArrayList<ServerThread> activeClients;
+  protected CopyOnWriteArrayList<Player> activePlayers = new CopyOnWriteArrayList<Player>();
+  protected CopyOnWriteArrayList<ServerThread> activeClients = new CopyOnWriteArrayList<ServerThread>();
   protected Player playerInCurrentTurn;
   protected Board gameBoard;
   public GameDeck gameDeck;
@@ -44,8 +44,8 @@ public class RR extends Thread implements GameLogic {
     for (int i = 0; i <= this.getGameBoard().getHeight(); i++) {
       for (int j = 0; j <= this.getGameBoard().getWidth(); j++) {
         for (BoardElem boardElem : this.getGameBoard().getMap()[j][i]) {
-          if (boardElem instanceof Antenna) {
-            this.positionAntenna = boardElem.getPosition();
+          if (boardElem.getName().equals("Antenna")){
+            this.positionAntenna = new Position(i,j);
           }
         }
       }
@@ -54,8 +54,8 @@ public class RR extends Thread implements GameLogic {
     for (int i = 0; i <= this.getGameBoard().getHeight(); i++) {
       for (int j = 0; j <= this.getGameBoard().getWidth(); j++) {
         for (BoardElem boardElem : this.getGameBoard().getMap()[j][i]) {
-          if (boardElem instanceof CheckPoint) {
-            this.positionCheckPoint = boardElem.getPosition();
+          if (boardElem.getName().equals("CheckPoint")) {
+            this.positionCheckPoint = new Position(i,j);
           }
         }
       }
@@ -220,8 +220,8 @@ public class RR extends Thread implements GameLogic {
 
   public void setPriority() {
     for (Player player : activePlayers) {
-      player.setPriority(Math.abs(this.getPositionAntenna().getX() - player.getOwnRobot().getCurrentPosition().getX())
-              + Math.abs(this.getPositionAntenna().getY() - player.getOwnRobot().getCurrentPosition().getY()));
+      player.setPriority(Math.abs(this.getPositionAntenna().getX() - player.getOwnRobot().getStartPosition().getX())
+              + Math.abs(this.getPositionAntenna().getY() - player.getOwnRobot().getStartPosition().getY()));
     }
   }
 
@@ -263,7 +263,6 @@ public class RR extends Thread implements GameLogic {
         }
       }
     }
-
     for(Player player : getActivePlayers()){
       player.getOwnRobot().setCurrentPosition(player.getOwnRobot().getStartPosition());
     }
@@ -368,6 +367,7 @@ public class RR extends Thread implements GameLogic {
   }
 
   public void sendMessageToClient(Message msg, ServerThread client) {
+    /*
     try {
       BufferedWriter write = new BufferedWriter(new OutputStreamWriter(client.getClientSocket().getOutputStream()));
       String messageToSend = msg.toString();
@@ -377,6 +377,10 @@ public class RR extends Thread implements GameLogic {
     } catch (IOException e) {
       e.printStackTrace();
     }
+
+     */
+    client.sendMessage(msg.toString());
+
   }
 
   public void sendMessageToAll(Message msg){
