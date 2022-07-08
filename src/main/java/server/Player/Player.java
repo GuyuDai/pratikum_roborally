@@ -1,6 +1,6 @@
 package server.Player;
 
-import protocol.YourCards;
+import protocol.ErrorMessage;
 import server.CardTypes.*;
 import server.Deck.*;
 import server.Game.*;
@@ -17,7 +17,6 @@ public class Player implements PlayerAction{
   public Robot ownRobot;
   private CopyOnWriteArrayList<Card> hands;
   private CopyOnWriteArrayList<Card> register;
-  public GameDeck gameDeck;
   public int priority = 1;
   public int energyCubes;
   private boolean isAI = false;
@@ -158,49 +157,64 @@ public class Player implements PlayerAction{
     }
   }
 
-  public void drawSpamCard(int count){
-    for(int i=0;i<count;i++){
-      // @dai: i think there needs to check whether the spam pile is empty
-      // the method in Controller isCardListEmpty(..) can be used
-      if(!currentGame.getController().isCardListEmpty(gameDeck.getSpamPile())) {
-        hands.add(gameDeck.getSpamPile().get(0));
-        gameDeck.getSpamPile().remove(0);
-      }
-    }
-  }
-  /*select AICard for Programming phase
-randomize chosing cards and putting it into register
-*/
-  public void drawWormCard(int count){
-    for(int i=0;i<count;i++){
-      // @dai: i think there needs to check whether the spam pile is empty
-      // the method in Controller isCardListEmpty(..) can be used
-      if(!currentGame.getController().isCardListEmpty(gameDeck.getWormPile())) {
-        hands.add(gameDeck.getWormPile().get(0));
-        gameDeck.getWormPile().remove(0);
-      }
+  public void drawDamage(String type, int count){
+    switch (type.trim().toLowerCase()){
+      case "spam":
+        for(int i=0; i<count; i++){
+          if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getSpamPile())){
+            ownDeck.getDiscardPile().add(currentGame.gameDeck.getSpamPile().get(0));
+          }else {
+            //behaviours needed
+          }
+        }
+        break;
+
+      case "worm":
+        for(int i=0; i<count; i++){
+          if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getWormPile())){
+            ownDeck.getDiscardPile().add(currentGame.gameDeck.getWormPile().get(0));
+          }else {
+            //behaviours needed
+          }
+        }
+        break;
+
+      case "virus":
+        for(int i=0; i<count; i++){
+          if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getVirusPile())){
+            ownDeck.getDiscardPile().add(currentGame.gameDeck.getVirusPile().get(0));
+          }else {
+            //behaviours needed
+          }
+        }
+        break;
+
+      case "trojan":
+        for(int i=0; i<count; i++){
+          if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getTrojanPile())){
+            ownDeck.getDiscardPile().add(currentGame.gameDeck.getTrojanPile().get(0));
+          }else {
+            //behaviours needed
+          }
+        }
+        break;
+
+      default:
+        currentGame.sendMessageToAll(new ErrorMessage("unknown damage type"));
     }
   }
 
-  public void drawVirusCard(int count){
-    for(int i=0;i<count;i++){
-      // @dai: i think there needs to check whether the spam pile is empty
-      // the method in Controller isCardListEmpty(..) can be used
-      if(!currentGame.getController().isCardListEmpty(gameDeck.getVirusPile())) {
-        hands.add(gameDeck.getVirusPile().get(0));
-        gameDeck.getVirusPile().remove(0);
-      }
-    }
-  }
-  public void drawTrojanCard(int count){
-    for(int i=0;i<count;i++){
-      // @dai: i think there needs to check whether the spam pile is empty
-      // the method in Controller isCardListEmpty(..) can be used
-      if(!currentGame.getController().isCardListEmpty(gameDeck.getTrojanPile())) {
-        hands.add(gameDeck.getSpamPile().get(0));
-        gameDeck.getVirusPile().remove(0);
-      }
+  public void discardHands(){
+    for(Card card : getHands()){
+      getOwnDeck().getDiscardPile().add(card);
+      this.hands.remove(card);
     }
   }
 
+  public void discardRegister(){
+    for(Card card : getRegister()){
+      getOwnDeck().getDiscardPile().add(card);
+      this.register.remove(card);
+    }
+  }
 }

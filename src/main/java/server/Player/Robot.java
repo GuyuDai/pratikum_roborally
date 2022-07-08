@@ -1,6 +1,7 @@
 package server.Player;
 
 import java.util.Random;
+import protocol.Movement;
 import server.CardTypes.Card;
 import server.Control.Direction;
 import server.Control.Position;
@@ -91,6 +92,10 @@ public class Robot implements RobotAction {
     return currentGame;
   }
 
+  public void setCurrentGame(RR currentGame) {
+    this.currentGame = currentGame;
+  }
+
   public Position getStartPosition() {
     return startPosition;
   }
@@ -107,6 +112,7 @@ public class Robot implements RobotAction {
       this.getCurrentPosition().setOccupiedRobot(null);
       togo.setOccupiedRobot(this);
       this.setCurrentPosition(togo);
+      currentGame.sendMessageToAll(new Movement(owner.clientID, togo.getX(), togo.getY()));
     }
   }
 
@@ -139,7 +145,8 @@ public class Robot implements RobotAction {
   }
 
   public void reboot(){
-    //need to be implemented
+    owner.drawDamage("Spam",2);
+    owner.discardRegister();
   }
   private void bePushedOneStep(Direction direction) {
     Position togo = this.getCurrentPosition().getNextPosition(direction);

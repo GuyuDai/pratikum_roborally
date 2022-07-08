@@ -442,20 +442,7 @@ public class ServerThread implements Runnable {
                 if(currentGame!=null){
                  String[] damageCards=selectedDamageBody.getCards();
                  for(String damageCard : damageCards){
-                     switch (damageCard) {
-                         case "Spam":
-                             player.drawSpamCard(1);
-                             break;
-                         case"Worm":
-                             player.drawWormCard(1);
-                             break;
-                         case "Virus":
-                             player.drawVirusCard(1);
-                             break;
-                         case "Trojan":
-                             player.drawTrojanCard(1);
-                             break;
-                        }
+                     player.drawDamage(damageCard,1);
                     }
                 }
                 break;
@@ -504,6 +491,8 @@ public class ServerThread implements Runnable {
             RR game = new RR(board);
             for(ServerThread serverThread : connectedClients){
                 serverThread.setCurrentGame(game);
+                serverThread.getPlayer().setCurrentGame(game);
+                serverThread.getPlayer().getOwnRobot().setCurrentGame(game);
                 game.getActiveClients().add(serverThread);
             }
             game.startGame();
