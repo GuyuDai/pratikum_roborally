@@ -393,15 +393,7 @@ public class RR extends Thread implements GameLogic {
   }
 
   public void sendMessageToClient(Message msg, ServerThread client) {
-    try {
-      BufferedWriter write = new BufferedWriter(new OutputStreamWriter(client.getClientSocket().getOutputStream()));
-      String messageToSend = msg.toString();
-      write.write(messageToSend);
-      write.newLine();
-      write.flush();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    client.sendMessage(msg.toString());
   }
 
   public void sendMessageToAll(Message msg){

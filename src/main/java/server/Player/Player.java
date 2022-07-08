@@ -1,6 +1,8 @@
 package server.Player;
 
+import protocol.DrawDamage;
 import protocol.ErrorMessage;
+import protocol.PickDamage;
 import server.CardTypes.*;
 import server.Deck.*;
 import server.Game.*;
@@ -158,13 +160,17 @@ public class Player implements PlayerAction{
   }
 
   public void drawDamage(String type, int count){
+    ArrayList<String> tempCards = new ArrayList<String>();
     switch (type.trim().toLowerCase()){
       case "spam":
         for(int i=0; i<count; i++){
           if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getSpamPile())){
-            ownDeck.getDiscardPile().add(currentGame.gameDeck.getSpamPile().get(0));
+            Card addedCard = currentGame.gameDeck.getSpamPile().get(0);
+            ownDeck.getDiscardPile().add(addedCard);
+            tempCards.add(addedCard.getCardName());
           }else {
-            //behaviours needed
+            chooseDamage(count - i);
+            break;
           }
         }
         break;
@@ -172,9 +178,12 @@ public class Player implements PlayerAction{
       case "worm":
         for(int i=0; i<count; i++){
           if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getWormPile())){
-            ownDeck.getDiscardPile().add(currentGame.gameDeck.getWormPile().get(0));
+            Card addedCard = currentGame.gameDeck.getWormPile().get(0);
+            ownDeck.getDiscardPile().add(addedCard);
+            tempCards.add(addedCard.getCardName());
           }else {
-            //behaviours needed
+            chooseDamage(count - i);
+            break;
           }
         }
         break;
@@ -182,9 +191,12 @@ public class Player implements PlayerAction{
       case "virus":
         for(int i=0; i<count; i++){
           if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getVirusPile())){
-            ownDeck.getDiscardPile().add(currentGame.gameDeck.getVirusPile().get(0));
+            Card addedCard = currentGame.gameDeck.getVirusPile().get(0);
+            ownDeck.getDiscardPile().add(addedCard);
+            tempCards.add(addedCard.getCardName());
           }else {
-            //behaviours needed
+            chooseDamage(count - i);
+            break;
           }
         }
         break;
@@ -192,9 +204,12 @@ public class Player implements PlayerAction{
       case "trojan":
         for(int i=0; i<count; i++){
           if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getTrojanPile())){
-            ownDeck.getDiscardPile().add(currentGame.gameDeck.getTrojanPile().get(0));
+            Card addedCard = currentGame.gameDeck.getTrojanPile().get(0);
+            ownDeck.getDiscardPile().add(addedCard);
+            tempCards.add(addedCard.getCardName());
           }else {
-            //behaviours needed
+            chooseDamage(count - i);
+            break;
           }
         }
         break;
@@ -202,6 +217,25 @@ public class Player implements PlayerAction{
       default:
         currentGame.sendMessageToAll(new ErrorMessage("unknown damage type"));
     }
+    currentGame.sendMessageToAll(new DrawDamage(clientID, tempCards.toArray(new String[0])));
+  }
+
+  public void chooseDamage(int count){
+    ArrayList<String> tempAvailablePiles = new ArrayList<String>();
+    if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getSpamPile())){
+      tempAvailablePiles.add("Spam");
+    }
+    if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getWormPile())){
+      tempAvailablePiles.add("Worm");
+    }
+    if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getVirusPile())){
+      tempAvailablePiles.add("Virus");
+    }
+    if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getTrojanPile())){
+      tempAvailablePiles.add("Trojan");
+    }
+    String[] availablePiles = tempAvailablePiles.toArray(new String[0]);
+    currentGame.sendMessageToClient(new PickDamage(count,availablePiles),currentGame.getServerThreadById(clientID));
   }
 
   public void discardHands(){

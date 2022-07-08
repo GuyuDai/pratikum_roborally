@@ -1,8 +1,11 @@
 package server.Player;
 
 import java.util.Random;
+import protocol.Animation;
+import protocol.Energy;
 import protocol.Movement;
 import protocol.PlayerTurning;
+import protocol.Reboot;
 import server.CardTypes.Card;
 import server.Control.Direction;
 import server.Control.Position;
@@ -129,6 +132,27 @@ public class Robot implements RobotAction {
     Position togo = this.getCurrentPosition().getNextPosition(this.getFaceDirection());
     boolean flag = this.currentGame.getController().movementCheck(this, this.getFaceDirection());
     if (flag) {
+      //send protocol message
+      String type1 = togo.getTile().getName();
+      String type2 = togo.getSecondTile().getName();
+      switch (type1){
+        case "ConveyBelt":
+        case "Gear":
+        case "Laser":
+        case "PushPanel":
+        case "EnergySpace":
+          currentGame.sendMessageToClient(new Energy
+              (owner.clientID,togo.getTile().count,"EnergySpace"),currentGame.getServerThreadById(owner.clientID));
+        case "CheckPoint":
+          currentGame.sendMessageToClient(new Animation(type1),currentGame.getServerThreadById(owner.clientID));
+          break;
+      }
+      switch (type2){
+        case "Laser":
+          currentGame.sendMessageToClient(new Animation(type2),currentGame.getServerThreadById(owner.clientID));
+          break;
+      }
+      //do movement
       this.setLastPosition(this.getCurrentPosition());
       this.getCurrentPosition().setOccupiedRobot(null);
       togo.setOccupiedRobot(this);
@@ -166,6 +190,7 @@ public class Robot implements RobotAction {
   }
 
   public void reboot(){
+    currentGame.sendMessageToAll(new Reboot(owner.clientID));
     owner.drawDamage("Spam",2);
     owner.discardRegister();
     // TODO: 2022/7/8

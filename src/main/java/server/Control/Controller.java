@@ -2,7 +2,10 @@ package server.Control;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import protocol.Animation;
+import protocol.CheckPointReached;
 import protocol.ErrorMessage;
+import protocol.GameFinished;
 import protocol.ReceivedChat;
 import protocol.ShuffleCoding;
 import server.BoardElement.*;
@@ -147,6 +150,7 @@ public class Controller {
                   || currentGame.getGameBoard().getBoardElem(X,i,1) instanceof Wall)
                   || robotOnPositionCheck(new Position(X,i))) {
             robot.getOwner().drawDamage("Spam",1);
+            currentGame.sendMessageToClient(new Animation("RobotLaser"),currentGame.getServerThreadById(robot.owner.clientID));
           }
         }
       }
@@ -156,6 +160,7 @@ public class Controller {
                   || currentGame.getGameBoard().getBoardElem(X,i,1) instanceof Wall
                   || robotOnPositionCheck(new Position(X,i)))) {
             robot.getOwner().drawDamage("Spam",1);
+            currentGame.sendMessageToClient(new Animation("RobotLaser"),currentGame.getServerThreadById(robot.owner.clientID));
           }
         }
       }
@@ -165,6 +170,7 @@ public class Controller {
                   || currentGame.getGameBoard().getBoardElem(i,Y,1) instanceof Wall
                   || robotOnPositionCheck(new Position(i,Y)))) {
             robot.getOwner().drawDamage("Spam",1);
+            currentGame.sendMessageToClient(new Animation("RobotLaser"),currentGame.getServerThreadById(robot.owner.clientID));
           }
         }
       }
@@ -174,6 +180,7 @@ public class Controller {
                   || currentGame.getGameBoard().getBoardElem(i,Y,1) instanceof Wall
                   ||robotOnPositionCheck(new Position(i,Y)))){
             robot.getOwner().drawDamage("Spam",1);
+            currentGame.sendMessageToClient(new Animation("RobotLaser"),currentGame.getServerThreadById(robot.owner.clientID));
           }
         }
       }
@@ -236,17 +243,26 @@ public class Controller {
    * @return true if one robot ends a register on the final checkpoint
    */
   public boolean ifGameEnd(){
+    boolean flag = false;
     if(currentGame.getActivePlayers().size() == 0){
       currentGame.sendMessageToAll(new ReceivedChat("Game end. No winner",-1,false));
-      return true;
+      flag = true;
     }
-    Robot r = currentGame.getPositionCheckPoint().getOccupiedRobot();
-    if(r != null){
-      currentGame.sendMessageToAll(new ReceivedChat
-          ("The winner is " + r.getOwner().getName() + ". Congratulation!",-1,false));
-      return true;
+    for(Player player : currentGame.getActivePlayers()){
+      BoardElem elem1 = player.getOwnRobot().getCurrentPosition().getTile();
+      BoardElem elem2 = player.getOwnRobot().getCurrentPosition().getSecondTile();
+      if(elem1.getName().equals("CheckPoint")){
+        flag = true;
+        currentGame.sendMessageToAll(new CheckPointReached(player.clientID, elem1.count));
+        currentGame.sendMessageToAll(new GameFinished(player.clientID));
+      }
+      if(elem2.getName().equals("CheckPoint")){
+        flag = true;
+        currentGame.sendMessageToAll(new CheckPointReached(player.clientID, elem2.count));
+        currentGame.sendMessageToAll(new GameFinished(player.clientID));
+      }
     }
-    return false;
+    return flag;
   }
 
   /**

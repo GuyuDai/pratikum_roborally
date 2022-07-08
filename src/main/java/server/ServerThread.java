@@ -438,9 +438,9 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.selectedDamage:
-                SelectedDamageBody selectedDamageBody=new Gson().fromJson(body,SelectedDamageBody.class);
-                if(currentGame!=null){
-                 String[] damageCards=selectedDamageBody.getCards();
+                SelectedDamageBody selectedDamageBody = new Gson().fromJson(body,SelectedDamageBody.class);
+                if(currentGame != null){
+                 String[] damageCards = selectedDamageBody.getCards();
                  for(String damageCard : damageCards){
                      player.drawDamage(damageCard,1);
                     }
