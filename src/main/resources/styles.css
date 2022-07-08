@@ -29,3 +29,43 @@
     -fx-background-radius: 15;
     -fx-background-color: #98c0d4;
 }
+
+.worm {
+    -fx-background-radius: 10;
+    -fx-min-height: 100px;
+    -fx-min-width: 75px;
+    -fx-background-image: url("/damagingCards/worm.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center 8px;
+}
+
+.spam {
+    -fx-min-height: 100px;
+    -fx-min-width: 75px;
+    -fx-background-image: url("/damagingCards/spam.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center 8px;
+    -fx-background-radius: 10;
+}
+
+.trojan {
+    -fx-min-height: 100px;
+    -fx-min-width: 75px;
+    -fx-background-image: url("/damagingCards/trojan.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center 8px;
+    -fx-background-radius: 10;
+}
+
+.virus {
+    -fx-min-height: 100px;
+    -fx-min-width: 75px;
+    -fx-background-image: url("/damagingCards/virus.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center 8px;
+    -fx-background-radius: 10;
+}
