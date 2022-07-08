@@ -4,9 +4,12 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import protocol.ActivePhase;
+import protocol.CurrentCards;
 import protocol.NotYourCards;
+import protocol.ProtocolFormat.ActiveCard;
 import protocol.ProtocolFormat.Message;
 import protocol.ReceivedChat;
+import protocol.ReplaceCard;
 import protocol.TimerEnded;
 import protocol.TimerStarted;
 import protocol.YourCards;
@@ -343,7 +346,17 @@ public class RR extends Thread implements GameLogic {
     sendMessageToAll(new ActivePhase(activePhase));
     sendMessageToAll(new ReceivedChat("Programming Phase starts",-1,false));
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 5; i++) {  //round i
+      //send protocol message
+      ActiveCard[] activeCards = new ActiveCard[activePlayers.size()];
+      int index = 0;
+      for(Player player : activePlayers){
+        ActiveCard activeCard = new ActiveCard(player.clientID,player.getRegister().get(0));
+        activeCards[index] = activeCard;
+        index++;
+      }
+      sendMessageToAll(new CurrentCards(activeCards));
+      //active
       for (Player player : activePlayers) {
         setPlayerInCurrentTurn(PlayerInListPosition);
         player.getRegister().get(i).action();
@@ -359,10 +372,20 @@ public class RR extends Thread implements GameLogic {
         if (PlayerInListPosition >= activePlayers.size()) {
           PlayerInListPosition = 0;
         }
-        reorderPlayer();
       }
-      nextGameState();
+      //send protocol message
+      for(Player player : activePlayers){
+        int newIndex = 0;
+        for(Card card : player.getRegister()){
+          sendMessageToClient(new ReplaceCard(newIndex,card,player.clientID),getServerThreadById(player.clientID));
+          newIndex++;
+        }
+      }
+      //reorder players
+      setPriority();
+      reorderPlayer();
     }
+    nextGameState();
   }
 
   public void DoGameEnding () {
