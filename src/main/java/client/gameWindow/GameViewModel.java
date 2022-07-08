@@ -5,16 +5,19 @@ import client.ClientReceive;
 import client.MapBuilder;
 import client.lobbyWindow.LobbyViewModel;
 import com.google.gson.Gson;
+import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import client.mapWindow.MapViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import javafx.util.Duration;
 import protocol.SelectedCard;
 import protocol.SendChat;
 import protocol.YourCards;
@@ -22,18 +25,20 @@ import server.BoardElement.BoardElem;
 import server.BoardTypes.*;
 import server.CardTypes.*;
 import server.Control.Direction;
+import server.Control.Timer;
 import server.Deck.ProgrammingDeck;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.TimeUnit;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 
 
 /**
@@ -50,6 +55,54 @@ public class GameViewModel {
     public String mapSelected;
 
     public String[] cards = {"", "", "", "", "", "", "", "", ""};
+
+
+    /**
+     * timer
+     */
+
+    @FXML
+    private Label timerText;
+
+    @FXML
+    private TextField timer30;
+
+
+    /**
+     * starting point selection
+     */
+    @FXML
+    private Pane selectStartingPoint;
+    @FXML
+    private ToggleGroup StartingPoint;
+    @FXML
+    private ToggleButton startingPoint1;
+    @FXML
+    private ToggleButton startingPoint2;
+    @FXML
+    private ToggleButton startingPoint3;
+    @FXML
+    private ToggleButton startingPoint4;
+    @FXML
+    private ToggleButton startingPoint5;
+    @FXML
+    private ToggleButton startingPoint6;
+    @FXML
+    private Label textStartingPoint;
+
+    @FXML
+    private Button startingPointOK;
+
+    List<Integer> takenStartNumbers=new ArrayList<>();
+
+
+
+
+    @FXML
+    private Label timer;
+
+    @FXML
+    private ImageView image1;
 
 
     /**
@@ -72,6 +125,28 @@ public class GameViewModel {
 
     @FXML
     private Button selectMapButton;
+
+
+    /**
+     * starting points
+     */
+    @FXML
+    private Button start1;
+
+    @FXML
+    private Button start2;
+
+    @FXML
+    private Button start3;
+
+    @FXML
+    private Button start4;
+
+    @FXML
+    private Button start5;
+
+    @FXML
+    private Button start6;
 
 
     /**
@@ -161,171 +236,11 @@ public class GameViewModel {
     private Label Text;
 
     @FXML
-    GridPane gameboard;
+    GridPane gameboard, startBoard, robotBoard, checkBoard;
 
     public String window = "Game";
     public ProgrammingDeck deck = new ProgrammingDeck();
 
-
-    /**
-     * Map Image Views
-     */
-
-    @FXML
-    private ImageView mapImage00;
-
-    @FXML
-    private ImageView mapImage01;
-
-    @FXML
-    private ImageView mapImage02;
-
-    @FXML
-    private ImageView mapImage03;
-
-    @FXML
-    private ImageView mapImage10;
-
-    @FXML
-    private ImageView mapImage100;
-
-    @FXML
-    private ImageView mapImage101;
-
-    @FXML
-    private ImageView mapImage102;
-
-    @FXML
-    private ImageView mapImage103;
-
-    @FXML
-    private ImageView mapImage11;
-
-    @FXML
-    private ImageView mapImage110;
-
-    @FXML
-    private ImageView mapImage111;
-
-    @FXML
-    private ImageView mapImage112;
-
-    @FXML
-    private ImageView mapImage113;
-
-    @FXML
-    private ImageView mapImage12;
-
-    @FXML
-    private ImageView mapImage120;
-
-    @FXML
-    private ImageView mapImage121;
-
-    @FXML
-    private ImageView mapImage122;
-
-    @FXML
-    private ImageView mapImage123;
-
-    @FXML
-    private ImageView mapImage13;
-
-    @FXML
-    private ImageView mapImage20;
-
-    @FXML
-    private ImageView mapImage21;
-
-    @FXML
-    private ImageView mapImage22;
-
-    @FXML
-    private ImageView mapImage23;
-
-    @FXML
-    private ImageView mapImage30;
-
-    @FXML
-    private ImageView mapImage31;
-
-    @FXML
-    private ImageView mapImage32;
-
-    @FXML
-    private ImageView mapImage33;
-
-    @FXML
-    private ImageView mapImage40;
-
-    @FXML
-    private ImageView mapImage41;
-
-    @FXML
-    private ImageView mapImage42;
-
-    @FXML
-    private ImageView mapImage43;
-
-    @FXML
-    private ImageView mapImage50;
-
-    @FXML
-    private ImageView mapImage51;
-
-    @FXML
-    private ImageView mapImage52;
-
-    @FXML
-    private ImageView mapImage53;
-
-    @FXML
-    private ImageView mapImage60;
-
-    @FXML
-    private ImageView mapImage61;
-
-    @FXML
-    private ImageView mapImage62;
-
-    @FXML
-    private ImageView mapImage63;
-
-    @FXML
-    private ImageView mapImage70;
-
-    @FXML
-    private ImageView mapImage71;
-
-    @FXML
-    private ImageView mapImage72;
-
-    @FXML
-    private ImageView mapImage73;
-
-    @FXML
-    private ImageView mapImage80;
-
-    @FXML
-    private ImageView mapImage81;
-
-    @FXML
-    private ImageView mapImage82;
-
-    @FXML
-    private ImageView mapImage83;
-
-    @FXML
-    private ImageView mapImage90;
-
-    @FXML
-    private ImageView mapImage91;
-
-    @FXML
-    private ImageView mapImage92;
-
-    @FXML
-    private ImageView mapImage93;
 
 
     /**
@@ -931,9 +846,10 @@ public class GameViewModel {
         hand8Button.setVisible(true);
         hand9Button.setVisible(true);
 
-        printCards();
+        //printCards();
         Text.setText("Select 5 of these cards for your register.");
         playCardBtn.setVisible(true);
+        selectStartingPoint.setVisible(true);
     }
 
 
@@ -1590,41 +1506,255 @@ public class GameViewModel {
 
             }
 
+
+//just for testing:
+    URL image = getClass().getResource("/Robots/twitch.png");
+    Image test = new Image(image.toString());
+
+
+
+    int startingPointCount;
+    int x;
+    int y;
+
+    public void setStartingPointCount(int count){
+        this.startingPointCount = count;
+    }
+
+    public int getStartingPointCount(){
+        return startingPointCount;
+    }
+
+    public void startingPoint1Action(ActionEvent actionEvent) {
+        setStartingPointCount(1);
+        x = 1;
+        y = 1;
+    }
+
+    public void startingPoint2Action(ActionEvent actionEvent) {
+        setStartingPointCount(2);
+        x = 3;
+        y = 0;
+    }
+
+    public void startingPoint3Action(ActionEvent actionEvent) {
+        setStartingPointCount(3);
+        x = 4;
+        y = 1;
+    }
+
+    public void startingPoint4Action(ActionEvent actionEvent) {
+        setStartingPointCount(4);
+        x = 5;
+        y = 1;
+    }
+
+    public void startingPoint5Action(ActionEvent actionEvent) {
+        setStartingPointCount(5);
+        x = 6;
+        y = 0;
+    }
+
+    public void startingPoint6Action(ActionEvent actionEvent) {
+        setStartingPointCount(6);
+        x = 8;
+        y = 1;
     }
 
 
+    public void startPointOKAction(ActionEvent actionEvent) {
+        //checkStart();
+        image1.setImage(test);
+
+
+        //Todo put timer to right place in code (card selection), here is just for testing
+        timerText.setVisible(true);
+        Text.setText("You have 30 seconds left to finish selecting your register. Hurry!!");
+        timer.setText("30");
+        timer30Sec();
 
 
 
 
 
 
+        /*
+        Timer timer30 = new Timer();
+        try {
+            timerStarted = true;
+            int timeInSeconds = 30;
+            while (timerStarted && timeInSeconds > 0) {
 
 
 
 
+                //System.out.println(timeInSeconds);  //for testing
+                //timer.setText("" + timeInSeconds);
+                TimeUnit.SECONDS.sleep(1);
+                timeInSeconds--;
+            }
+            timerStarted = false;
 
-
-
-
-
-
-/*
-
-
-                break;
-            case "Death Trap":
-                break;
-            case "Extra Cripsy":
-                break;
-            case "Lost Bearings":
-                break;
-
-
+        } catch (InterruptedException e) {
+            timerStarted = false;
+            e.printStackTrace();
         }
-
+         */
     }
+
+
+
+    public void checkStart() {
+        takenStartNumbers = Client.getClientReceive().getStartNumbers();
+        for (int number : takenStartNumbers) {
+            switch(number) {
+                case 1:
+                    startingPoint1.setDisable(true);
+                    break;
+                case 2:
+                    startingPoint2.setDisable(true);
+                    break;
+                case 3:
+                    startingPoint3.setDisable(true);
+                    break;
+                case 4:
+                    startingPoint4.setDisable(true);
+                    break;
+                case 5:
+                    startingPoint5.setDisable(true);
+                    break;
+                case 6:
+                    startingPoint6.setDisable(true);
+                    break;
+            }
+        }
+    }
+
+
+    public void timer30Sec (){
+        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
+        pauseTransition.setOnFinished(e -> timer.setText("29"));
+        pauseTransition.play();
+
+        PauseTransition pauseTransition28 = new PauseTransition(Duration.seconds(2));
+        pauseTransition28.setOnFinished(e -> timer.setText("28"));
+        pauseTransition28.play();
+
+        PauseTransition pauseTransition27 = new PauseTransition(Duration.seconds(3));
+        pauseTransition27.setOnFinished(e -> timer.setText("27"));
+        pauseTransition27.play();
+
+        PauseTransition pauseTransition26 = new PauseTransition(Duration.seconds(4));
+        pauseTransition26.setOnFinished(e -> timer.setText("26"));
+        pauseTransition26.play();
+
+        PauseTransition pauseTransition25 = new PauseTransition(Duration.seconds(5));
+        pauseTransition25.setOnFinished(e -> timer.setText("25"));
+        pauseTransition25.play();
+
+        PauseTransition pauseTransition24 = new PauseTransition(Duration.seconds(6));
+        pauseTransition24.setOnFinished(e -> timer.setText("24"));
+        pauseTransition24.play();
+
+        PauseTransition pauseTransition23 = new PauseTransition(Duration.seconds(7));
+        pauseTransition23.setOnFinished(e -> timer.setText("23"));
+        pauseTransition23.play();
+
+        PauseTransition pauseTransition22 = new PauseTransition(Duration.seconds(8));
+        pauseTransition22.setOnFinished(e -> timer.setText("22"));
+        pauseTransition22.play();
+
+        PauseTransition pauseTransition21 = new PauseTransition(Duration.seconds(9));
+        pauseTransition21.setOnFinished(e -> timer.setText("21"));
+        pauseTransition21.play();
+
+        PauseTransition pauseTransition20 = new PauseTransition(Duration.seconds(10));
+        pauseTransition20.setOnFinished(e -> timer.setText("20"));
+        pauseTransition20.play();
+
+        PauseTransition pauseTransition19 = new PauseTransition(Duration.seconds(11));
+        pauseTransition19.setOnFinished(e -> timer.setText("19"));
+        pauseTransition19.play();
+
+        PauseTransition pauseTransition18 = new PauseTransition(Duration.seconds(12));
+        pauseTransition18.setOnFinished(e -> timer.setText("18"));
+        pauseTransition18.play();
+
+        PauseTransition pauseTransition17 = new PauseTransition(Duration.seconds(13));
+        pauseTransition17.setOnFinished(e -> timer.setText("17"));
+        pauseTransition17.play();
+
+        PauseTransition pauseTransition16 = new PauseTransition(Duration.seconds(14));
+        pauseTransition16.setOnFinished(e -> timer.setText("16"));
+        pauseTransition16.play();
+
+        PauseTransition pauseTransition15 = new PauseTransition(Duration.seconds(15));
+        pauseTransition15.setOnFinished(e -> timer.setText("15"));
+        pauseTransition15.play();
+
+        PauseTransition pauseTransition14 = new PauseTransition(Duration.seconds(16));
+        pauseTransition14.setOnFinished(e -> timer.setText("14"));
+        pauseTransition14.play();
+
+        PauseTransition pauseTransition13 = new PauseTransition(Duration.seconds(17));
+        pauseTransition13.setOnFinished(e -> timer.setText("13"));
+        pauseTransition13.play();
+
+        PauseTransition pauseTransition12 = new PauseTransition(Duration.seconds(18));
+        pauseTransition12.setOnFinished(e -> timer.setText("12"));
+        pauseTransition12.play();
+
+        PauseTransition pauseTransition11 = new PauseTransition(Duration.seconds(19));
+        pauseTransition11.setOnFinished(e -> timer.setText("11"));
+        pauseTransition11.play();
+
+        PauseTransition pauseTransition10 = new PauseTransition(Duration.seconds(20));
+        pauseTransition10.setOnFinished(e -> timer.setText("10"));
+        pauseTransition10.play();
+
+        PauseTransition pauseTransition9 = new PauseTransition(Duration.seconds(21));
+        pauseTransition9.setOnFinished(e -> timer.setText("9"));
+        pauseTransition9.play();
+
+        PauseTransition pauseTransition8 = new PauseTransition(Duration.seconds(22));
+        pauseTransition8.setOnFinished(e -> timer.setText("8"));
+        pauseTransition8.play();
+
+        PauseTransition pauseTransition7 = new PauseTransition(Duration.seconds(23));
+        pauseTransition7.setOnFinished(e -> timer.setText("7"));
+        pauseTransition7.play();
+
+        PauseTransition pauseTransition6 = new PauseTransition(Duration.seconds(24));
+        pauseTransition6.setOnFinished(e -> timer.setText("6"));
+        pauseTransition6.play();
+
+        PauseTransition pauseTransition5 = new PauseTransition(Duration.seconds(25));
+        pauseTransition5.setOnFinished(e -> timer.setText("5"));
+        pauseTransition5.play();
+
+        PauseTransition pauseTransition4 = new PauseTransition(Duration.seconds(26));
+        pauseTransition4.setOnFinished(e -> timer.setText("4"));
+        pauseTransition4.play();
+
+        PauseTransition pauseTransition3 = new PauseTransition(Duration.seconds(27));
+        pauseTransition3.setOnFinished(e -> timer.setText("3"));
+        pauseTransition3.play();
+
+        PauseTransition pauseTransition2 = new PauseTransition(Duration.seconds(28));
+        pauseTransition2.setOnFinished(e -> timer.setText("2"));
+        pauseTransition2.play();
+
+        PauseTransition pauseTransition1 = new PauseTransition(Duration.seconds(29));
+        pauseTransition1.setOnFinished(e -> timer.setText("1"));
+        pauseTransition1.play();
+
+        PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
+        pauseTransition0.setOnFinished(e -> timer.setText("0"));
+        pauseTransition0.play();
+    }
+
+
 }
-*/
+
 
 

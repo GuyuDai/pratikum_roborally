@@ -5,6 +5,8 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -60,6 +62,15 @@
                         </HBox>
                      </children>
                   </VBox>
+                  <Label fx:id="timer" layoutX="166.0" layoutY="44.0" prefHeight="71.0" prefWidth="116.0" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font></Label>
+                  <Label fx:id="timerText" layoutX="69.0" layoutY="50.0" prefHeight="59.0" prefWidth="116.0" text="time left:" textFill="WHITE" visible="false">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <AnchorPane fx:id="upgradeShop" layoutX="-5.0" layoutY="505.0" opacity="0.5" prefHeight="292.0" prefWidth="309.0" styleClass="backgroundColor" stylesheets="@../styles.css" visible="false">
@@ -105,6 +116,31 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
+            <Pane fx:id="selectStartingPoint" layoutX="27.0" layoutY="298.0" prefHeight="217.0" prefWidth="253.0">
+               <children>
+                  <Label fx:id="textStartingPoint" layoutX="20.0" layoutY="1.0" prefHeight="27.0" prefWidth="358.0" text="Select your Starting Point" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ToggleButton fx:id="startingPoint2" layoutX="14.0" layoutY="75.0" mnemonicParsing="false" onAction="#startingPoint2Action" text="Starting Point 2">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="StartingPoint" />
+                     </toggleGroup>
+                  </ToggleButton>
+                  <ToggleButton fx:id="startingPoint1" layoutX="14.0" layoutY="41.0" mnemonicParsing="false" onAction="#startingPoint1Action" text="Starting Point 1" toggleGroup="$StartingPoint" />
+                  <ToggleButton fx:id="startingPoint4" layoutX="139.0" layoutY="41.0" mnemonicParsing="false" onAction="#startingPoint4Action" text="Starting Point 4" toggleGroup="$StartingPoint" />
+                  <ToggleButton fx:id="startingPoint3" layoutX="14.0" layoutY="108.0" mnemonicParsing="false" onAction="#startingPoint3Action" text="Starting Point 3" toggleGroup="$StartingPoint" />
+                  <ToggleButton fx:id="startingPoint5" layoutX="139.0" layoutY="75.0" mnemonicParsing="false" onAction="#startingPoint5Action" text="Starting Point 5" toggleGroup="$StartingPoint" />
+                  <ToggleButton fx:id="startingPoint6" layoutX="139.0" layoutY="108.0" mnemonicParsing="false" onAction="#startingPoint6Action" text="Starting Point 6" toggleGroup="$StartingPoint" />
+                  <Button fx:id="startPointOK" layoutX="110.0" layoutY="149.0" mnemonicParsing="false" onAction="#startPointOKAction" text="OK" />
+                  <Label layoutX="20.0" layoutY="174.0" prefHeight="48.0" prefWidth="415.0" text="This starting point is already taken" textFill="WHITE" visible="false">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
       </Pane>
       <VBox layoutX="322.0" layoutY="1.0" prefHeight="797.0" prefWidth="557.0">
@@ -212,6 +248,9 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
+                     <children>
+                        <ImageView fx:id="image1" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
                   </GridPane>
                   <GridPane fx:id="checkBoard" gridLinesVisible="true" prefHeight="428.0" prefWidth="557.0">
                      <columnConstraints>
