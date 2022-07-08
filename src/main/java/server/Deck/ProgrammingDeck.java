@@ -53,4 +53,12 @@ public class ProgrammingDeck {
   public void setRemainingCards(CopyOnWriteArrayList<Card> remainingCards) {
     this.remainingCards = remainingCards;
   }
+
+  public CopyOnWriteArrayList<Card> getDiscardPile() {
+    return discardPile;
+  }
+
+  public void setDiscardPile(CopyOnWriteArrayList<Card> discardPile) {
+    this.discardPile = discardPile;
+  }
 }

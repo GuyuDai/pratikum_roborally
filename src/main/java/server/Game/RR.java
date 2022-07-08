@@ -7,11 +7,14 @@ import protocol.ActivePhase;
 import protocol.NotYourCards;
 import protocol.ProtocolFormat.Message;
 import protocol.ReceivedChat;
+import protocol.TimerEnded;
+import protocol.TimerStarted;
 import protocol.YourCards;
 import server.BoardElement.*;
 import server.BoardTypes.*;
 import server.CardTypes.Card;
 import server.Control.*;
+import server.Deck.GameDeck;
 import server.Player.*;
 
 import java.util.concurrent.*;
@@ -24,11 +27,14 @@ public class RR extends Thread implements GameLogic {
   protected CopyOnWriteArrayList<ServerThread> activeClients;
   protected Player playerInCurrentTurn;
   protected Board gameBoard;
+  public GameDeck gameDeck;
   protected GameState currentState;
   protected Position positionCheckPoint;
   protected Position positionAntenna;
   protected int PlayerInListPosition = -1;
   protected int activePhase;  //0 => Aufbauphase, 1 => Upgradephase, 2 => Programmierphase, 3 => Aktivierungsphase
+  private int finishedPlayers = 0;  //this attribution is used to check whether all player have down a certain behavior
+
 
 
   public RR(Board gameBoard) {
@@ -110,6 +116,7 @@ public class RR extends Thread implements GameLogic {
   }
 
   public void nextGameState() {
+    finishedPlayers = 0;
     switch (currentState) {
       case GameInitializing:
         this.isGoingOn = true;
@@ -135,7 +142,12 @@ public class RR extends Thread implements GameLogic {
 
       case ActivationPhase:
         //sendToAll(new Gson().toJson(new ActiveGameState(GameState.ActivationPhase)));
-        setCurrentState(GameState.GameEnding);
+        boolean isGameEnd = controller.ifGameEnd();
+        if(isGameEnd){
+          setCurrentState(GameState.GameEnding);
+        }else {
+          setCurrentState(GameState.UpgradePhase);
+        }
         break;
 
       case GameEnding:
@@ -243,11 +255,12 @@ public class RR extends Thread implements GameLogic {
     sendMessageToAll(new ActivePhase(activePhase));
     sendMessageToAll(new ReceivedChat("choose your starting position",-1,false));
 
-    boolean allFinished = false;  //this part is to check if all player decided their starting position
-    while (!allFinished){
+    while (finishedPlayers < activeClients.size()){
+      finishedPlayers = 0;
       for(ServerThread serverThread : getActiveClients()){
-        // TODO: 2022/7/7 there is some problems
-        allFinished = (serverThread.getStartingPosition() != null);  //only each player has a valid starting position, this flag will be true
+        if(serverThread.getStartingPosition() != null){
+          finishedPlayers ++;
+        }
       }
     }
 
@@ -271,35 +284,63 @@ public class RR extends Thread implements GameLogic {
   }
 
   public void DoProgrammingPhase () {
-    this.activePhase = 1;
+    this.activePhase = 2;
     sendMessageToAll(new ActivePhase(activePhase));
     sendMessageToAll(new ReceivedChat("Programming Phase starts",-1,false));
-
-    for(Player player : getActivePlayers()){  //each player draws 9 cards
+    //each player draws 9 cards
+    for(Player player : getActivePlayers()){
       player.draw();
       String[] cards = new String[9];
       int i = 0;
       for(Card card : player.getHands()){
         cards[i] = card.getCardName();
-        i ++;
+        i++;
       }
       sendMessageToClient(new YourCards(cards),getServerThreadById(player.clientID));
       sendMessageWithout(new NotYourCards(player.clientID, player.getHands().size()),getServerThreadById(player.clientID));
     }
-
+    //start programming
     sendMessageToAll(new ReceivedChat("fill your register",-1,false));
-    boolean timerStart = false;
-    boolean allFinished = false;
-    // TODO: 2022/7/7 not complete yet
-    while(!allFinished){
-      for(Player player : getActivePlayers()){
+    //if there is a player already finished programming
+    while(finishedPlayers == 0){
+      for(Player player : activePlayers){
         if(player.getRegister().size() == 5){
-          timerStart = true;
+          finishedPlayers++;
         }
       }
     }
+    //timer starts
+    sendMessageToAll(new TimerStarted());
+    Timer.countDown(30);
+    int[] clients = new int[activeClients.size()];
+    int i = 0;
+    for(ServerThread serverThread : activeClients){
+      clients[i] = serverThread.getID();
+      i++;
+    }
+    sendMessageToAll(new TimerEnded(clients));
+    //timer ends and automatically fill registers which are not filled
+    int count = 0;
+    for(Player player : activePlayers){
+      count = player.getRegister().size();
+      while(count < 5){
+        player.getRegister().add(count,player.getHands().get(0));
+        player.getHands().remove(0);
+        count++;
+      }
+    }
+    //discard the remaining cards for each player
+    for(Player player : activePlayers){
+      player.discardHands();
+    }
+    //next phase
+    nextGameState();
   }
   public void DoActivationPhase () {
+    this.activePhase = 3;
+    sendMessageToAll(new ActivePhase(activePhase));
+    sendMessageToAll(new ReceivedChat("Programming Phase starts",-1,false));
+
     for (int i = 0; i < 5; i++) {
       for (Player player : activePlayers) {
         setPlayerInCurrentTurn(PlayerInListPosition);
@@ -311,12 +352,14 @@ public class RR extends Thread implements GameLogic {
         if (gameBoard.getBoardElem(X, Y, 1) != null) {
           gameBoard.getBoardElem(X, Y, 1).action();
         }
-        player.getCurrentGame().getController().robotLaserController(ownRobot);
+        controller.robotLaserController(ownRobot);
         PlayerInListPosition++;
         if (PlayerInListPosition >= activePlayers.size()) {
           PlayerInListPosition = 0;
         }
+        reorderPlayer();
       }
+      nextGameState();
     }
   }
 
