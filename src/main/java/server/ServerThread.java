@@ -250,7 +250,7 @@ public class ServerThread implements Runnable {
                     isAI = helloServerBody.isAI();
                     setAI(isAI);
                     if(isAI){
-                        player=new Player("AI");
+                        player = new Player("AI", clientID);
                         player.setAI(isAI);
                     }
                     for (ServerThread serverThread: connectedClients){
@@ -287,7 +287,7 @@ public class ServerThread implements Runnable {
                 if(flagInPlayerValues){
                     this.name = tempName;
                     this.figure = tempFigure;
-                    player = new Player(name);
+                    player = new Player(name, clientID);
                     player.setOwnRobot(figure);
                     sendToAll(
                         new PlayerAdded(clientID,name,figure).toString()
@@ -506,8 +506,9 @@ public class ServerThread implements Runnable {
             RR game = new RR(board);
             for(ServerThread serverThread : connectedClients){
                 serverThread.setCurrentGame(game);
+                game.getActiveClients().add(serverThread);
             }
-            game.start();
+            game.startGame();
         }else {
             sendMessage(new ErrorMessage("game already started").toString());
         }

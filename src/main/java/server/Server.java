@@ -134,7 +134,7 @@ public class Server{
 
 
 
-    private ServerThread getPlayerOnlineById(int id){
+    public static ServerThread getServerThreadById(int id){
         for(ServerThread target : getConnectedClients()){
             if(target.getID() == id){
                 return target;
