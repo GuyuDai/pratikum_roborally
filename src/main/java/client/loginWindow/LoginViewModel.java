@@ -87,7 +87,6 @@ public class LoginViewModel {
      * function when robot is selected
      */
     public void selectBot(ActionEvent actionEvent){
-        //String message = "";
         if(buttonHammer.isSelected()){
             figure=4;
             robotSelected=true;
