@@ -58,6 +58,17 @@ public class GameViewModel {
 
 
     /**
+     * timer
+     */
+
+    @FXML
+    private Label timerText;
+
+    @FXML
+    private TextField timer30;
+
+
+    /**
      * starting point selection
      */
     @FXML
@@ -1496,24 +1507,15 @@ public class GameViewModel {
             }
 
 
-
+//just for testing:
     URL image = getClass().getResource("/Robots/twitch.png");
     Image test = new Image(image.toString());
 
 
 
-
-    @FXML
-    private void mouseEntered(MouseEvent e) {
-        Node source = (Node)e.getSource() ;
-        Integer colIndex = startBoard.getColumnIndex(source);
-        Integer rowIndex = startBoard.getRowIndex(source);
-        System.out.printf("Mouse entered cell [%d, %d]%n", colIndex.intValue(), rowIndex.intValue());
-    }
-
-
-
     int startingPointCount;
+    int x;
+    int y;
 
     public void setStartingPointCount(int count){
         this.startingPointCount = count;
@@ -1525,39 +1527,49 @@ public class GameViewModel {
 
     public void startingPoint1Action(ActionEvent actionEvent) {
         setStartingPointCount(1);
+        x = 1;
+        y = 1;
     }
 
-    public void startingPoint2(ActionEvent actionEvent) {
+    public void startingPoint2Action(ActionEvent actionEvent) {
         setStartingPointCount(2);
+        x = 3;
+        y = 0;
     }
 
     public void startingPoint3Action(ActionEvent actionEvent) {
         setStartingPointCount(3);
+        x = 4;
+        y = 1;
     }
 
     public void startingPoint4Action(ActionEvent actionEvent) {
         setStartingPointCount(4);
+        x = 5;
+        y = 1;
     }
 
     public void startingPoint5Action(ActionEvent actionEvent) {
         setStartingPointCount(5);
+        x = 6;
+        y = 0;
     }
 
     public void startingPoint6Action(ActionEvent actionEvent) {
         setStartingPointCount(6);
+        x = 8;
+        y = 1;
     }
 
-    boolean timerStarted = false;
-
-
-
-    @FXML
-    private TextField timer30;
 
     public void startPointOKAction(ActionEvent actionEvent) {
         //checkStart();
-        startingPoint1.setDisable(true);
+        image1.setImage(test);
 
+
+        //Todo put timer to right place in code (card selection), here is just for testing
+        timerText.setVisible(true);
+        Text.setText("You have 30 seconds left to finish selecting your register. Hurry!!");
         timer.setText("30");
         timer30Sec();
 
@@ -1565,11 +1577,9 @@ public class GameViewModel {
 
 
 
-        //Timer timer30 = new Timer();
-
-        //getStartingPointCount();
 
         /*
+        Timer timer30 = new Timer();
         try {
             timerStarted = true;
             int timeInSeconds = 30;
@@ -1589,11 +1599,7 @@ public class GameViewModel {
             timerStarted = false;
             e.printStackTrace();
         }
-
          */
-
-
-
     }
 
 
@@ -1702,7 +1708,7 @@ public class GameViewModel {
         pauseTransition11.setOnFinished(e -> timer.setText("11"));
         pauseTransition11.play();
 
-        PauseTransition pauseTransition10 = new PauseTransition(Duration.seconds(29));
+        PauseTransition pauseTransition10 = new PauseTransition(Duration.seconds(20));
         pauseTransition10.setOnFinished(e -> timer.setText("10"));
         pauseTransition10.play();
 
@@ -1745,7 +1751,6 @@ public class GameViewModel {
         PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
         pauseTransition0.setOnFinished(e -> timer.setText("0"));
         pauseTransition0.play();
-
     }
 
 

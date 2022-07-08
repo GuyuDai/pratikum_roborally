@@ -66,6 +66,11 @@
                      <font>
                         <Font size="24.0" />
                      </font></Label>
+                  <Label fx:id="timerText" layoutX="69.0" layoutY="50.0" prefHeight="59.0" prefWidth="116.0" text="time left:" textFill="WHITE" visible="false">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <AnchorPane fx:id="upgradeShop" layoutX="-5.0" layoutY="505.0" opacity="0.5" prefHeight="292.0" prefWidth="309.0" styleClass="backgroundColor" stylesheets="@../styles.css" visible="false">
@@ -118,7 +123,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ToggleButton fx:id="startingPoint2" layoutX="14.0" layoutY="75.0" mnemonicParsing="false" onAction="#startingPoint2" text="Starting Point 2">
+                  <ToggleButton fx:id="startingPoint2" layoutX="14.0" layoutY="75.0" mnemonicParsing="false" onAction="#startingPoint2Action" text="Starting Point 2">
                      <toggleGroup>
                         <ToggleGroup fx:id="StartingPoint" />
                      </toggleGroup>
