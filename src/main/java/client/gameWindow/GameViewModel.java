@@ -9,6 +9,7 @@ import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import client.mapWindow.MapViewModel;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -125,28 +126,6 @@ public class GameViewModel {
 
     @FXML
     private Button selectMapButton;
-
-
-    /**
-     * starting points
-     */
-    @FXML
-    private Button start1;
-
-    @FXML
-    private Button start2;
-
-    @FXML
-    private Button start3;
-
-    @FXML
-    private Button start4;
-
-    @FXML
-    private Button start5;
-
-    @FXML
-    private Button start6;
 
 
     /**
@@ -1507,10 +1486,6 @@ public class GameViewModel {
             }
 
 
-//just for testing:
-    URL image = getClass().getResource("/Robots/twitch.png");
-    Image test = new Image(image.toString());
-
 
 
     int startingPointCount;
@@ -1525,6 +1500,7 @@ public class GameViewModel {
         return startingPointCount;
     }
 
+    //ToDO swap x and y
     public void startingPoint1Action(ActionEvent actionEvent) {
         setStartingPointCount(1);
         x = 1;
@@ -1564,15 +1540,70 @@ public class GameViewModel {
 
     public void startPointOKAction(ActionEvent actionEvent) {
         //checkStart();
-        image1.setImage(test);
 
 
-        //Todo put timer to right place in code (card selection), here is just for testing
+
+        //Todo put TIMER to right place in code (card selection), here is just for testing
         timerText.setVisible(true);
         Text.setText("You have 30 seconds left to finish selecting your register. Hurry!!");
         timer.setText("30");
         timer30Sec();
 
+
+
+        moveRobot();
+    }
+
+
+
+
+    public void moveRobot() {
+
+        URL image = getClass().getResource("/Robots/twitch.png");
+        Image test = new Image(image.toString());
+
+        ImageView testViewRotate = new ImageView(test);
+        testViewRotate.setRotate(90);
+
+        ImageView testView = new ImageView(test);
+
+        testView.setFitWidth(43);
+        testView.setFitHeight(43);
+        testViewRotate.setFitWidth(43);
+        testViewRotate.setFitHeight(43);
+
+
+        int x = 5;
+        int y = 3;
+
+
+        robotBoard.add(testView, x, y);
+
+        PauseTransition move1d = new PauseTransition(Duration.seconds(2));
+        move1d.setOnFinished(e -> robotBoard.add(testView, x, y +1));
+        move1d.play();
+
+        PauseTransition move2 = new PauseTransition(Duration.seconds(3));
+        move2.setOnFinished(e -> robotBoard.add(testView, x, y+2));
+        move2.play();
+
+        PauseTransition move3 = new PauseTransition(Duration.seconds(4));
+        move3.setOnFinished(e -> robotBoard.add(testView, x +1 , y+2));
+        move3.play();
+
+        PauseTransition move4 = new PauseTransition(Duration.seconds(5));
+        move4.setOnFinished(e -> robotBoard.add(testView, x +1 , y+2));
+        move4.play();
+    }
+
+    public void MouseAction(MouseEvent mouseEvent) {
+        System.out.println("hello this is a test");
+        //TODO connect to refresher here!
+    }
+
+    public void playCardBtnAction(ActionEvent actionEvent) {
+
+    }
 
 
 
@@ -1585,11 +1616,7 @@ public class GameViewModel {
             int timeInSeconds = 30;
             while (timerStarted && timeInSeconds > 0) {
 
-
-
-
-                //System.out.println(timeInSeconds);  //for testing
-                //timer.setText("" + timeInSeconds);
+                timer.setText("" + timeInSeconds);
                 TimeUnit.SECONDS.sleep(1);
                 timeInSeconds--;
             }
@@ -1600,7 +1627,7 @@ public class GameViewModel {
             e.printStackTrace();
         }
          */
-    }
+
 
 
 
@@ -1752,8 +1779,6 @@ public class GameViewModel {
         pauseTransition0.setOnFinished(e -> timer.setText("0"));
         pauseTransition0.play();
     }
-
-
 }
 
 
