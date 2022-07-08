@@ -23,8 +23,8 @@ import server.ServerThread;
 public class RR extends Thread implements GameLogic {
   private Boolean isGoingOn;
   public Controller controller;
-  protected CopyOnWriteArrayList<Player> activePlayers;
-  protected CopyOnWriteArrayList<ServerThread> activeClients;
+  protected CopyOnWriteArrayList<Player> activePlayers = new CopyOnWriteArrayList<Player>();
+  protected CopyOnWriteArrayList<ServerThread> activeClients = new CopyOnWriteArrayList<ServerThread>();
   protected Player playerInCurrentTurn;
   protected Board gameBoard;
   public GameDeck gameDeck;
@@ -44,8 +44,9 @@ public class RR extends Thread implements GameLogic {
     for (int i = 0; i <= this.getGameBoard().getHeight(); i++) {
       for (int j = 0; j <= this.getGameBoard().getWidth(); j++) {
         for (BoardElem boardElem : this.getGameBoard().getMap()[j][i]) {
-          if (boardElem instanceof Antenna) {
-            this.positionAntenna = boardElem.getPosition();
+          if (boardElem.getName().equals("Antenna")) {
+            //this.positionAntenna = boardElem.getPosition();
+            this.positionAntenna = new Position(j,i);
           }
         }
       }
@@ -54,8 +55,9 @@ public class RR extends Thread implements GameLogic {
     for (int i = 0; i <= this.getGameBoard().getHeight(); i++) {
       for (int j = 0; j <= this.getGameBoard().getWidth(); j++) {
         for (BoardElem boardElem : this.getGameBoard().getMap()[j][i]) {
-          if (boardElem instanceof CheckPoint) {
-            this.positionCheckPoint = boardElem.getPosition();
+          if (boardElem.getName().equals("CheckPoint")) {
+            //this.positionCheckPoint = boardElem.getPosition();
+            this.positionCheckPoint = new Position(j,i);
           }
         }
       }

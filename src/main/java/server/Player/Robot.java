@@ -2,6 +2,7 @@ package server.Player;
 
 import java.util.Random;
 import protocol.Movement;
+import protocol.PlayerTurning;
 import server.CardTypes.Card;
 import server.Control.Direction;
 import server.Control.Position;
@@ -31,6 +32,26 @@ public class Robot implements RobotAction {
     return faceDirection;
   }
   public void setFaceDirection(Direction faceDirection) {
+    Direction currentDirection = this.faceDirection;
+    int difference = currentDirection.getAngel() - faceDirection.getAngel();
+    String rotation = "";
+    switch (difference){
+      case -90:
+      case 270:
+        rotation += "counterclockwise";
+        break;
+
+      case 90:
+      case -270:
+        rotation += "clockwise";
+        break;
+
+      case 180:
+      case -180:
+        rotation += "turn 180";
+        break;
+    }
+    currentGame.sendMessageToAll(new PlayerTurning(owner.clientID, rotation));
     this.faceDirection = faceDirection;
   }
   public Position getCurrentPosition() {
@@ -147,6 +168,7 @@ public class Robot implements RobotAction {
   public void reboot(){
     owner.drawDamage("Spam",2);
     owner.discardRegister();
+    // TODO: 2022/7/8
   }
   private void bePushedOneStep(Direction direction) {
     Position togo = this.getCurrentPosition().getNextPosition(direction);
