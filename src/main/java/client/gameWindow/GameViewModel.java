@@ -18,9 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
-import protocol.SelectedCard;
-import protocol.SendChat;
-import protocol.YourCards;
+import protocol.*;
 import server.BoardElement.BoardElem;
 import server.BoardTypes.*;
 import server.CardTypes.*;
@@ -286,8 +284,7 @@ public class GameViewModel {
     Image imageCardHidden = new Image(urlCardHidden.toString());
 
 
-    public void initialize(Client client) {
-        this.client = client;
+    public void initialize() {
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
         hand.getChildren().add(new ImageView());
@@ -310,8 +307,16 @@ public class GameViewModel {
     }
 
     public static GameViewModel getInstance() {
+        if (instance == null) {
+            synchronized (GameViewModel.class) {
+                if (instance == null) {
+                    instance = new GameViewModel();
+                }
+            }
+        }
         return instance;
     }
+
 
     public GameModel getModel() {
         return model;
@@ -1526,36 +1531,42 @@ public class GameViewModel {
     }
 
     public void startingPoint1Action(ActionEvent actionEvent) {
+        checkStart();
         setStartingPointCount(1);
         x = 1;
         y = 1;
     }
 
     public void startingPoint2Action(ActionEvent actionEvent) {
+        checkStart();
         setStartingPointCount(2);
         x = 3;
         y = 0;
     }
 
     public void startingPoint3Action(ActionEvent actionEvent) {
+        checkStart();
         setStartingPointCount(3);
         x = 4;
         y = 1;
     }
 
     public void startingPoint4Action(ActionEvent actionEvent) {
+        checkStart();
         setStartingPointCount(4);
         x = 5;
         y = 1;
     }
 
     public void startingPoint5Action(ActionEvent actionEvent) {
+        checkStart();
         setStartingPointCount(5);
         x = 6;
         y = 0;
     }
 
     public void startingPoint6Action(ActionEvent actionEvent) {
+        checkStart();
         setStartingPointCount(6);
         x = 8;
         y = 1;
@@ -1563,44 +1574,49 @@ public class GameViewModel {
 
 
     public void startPointOKAction(ActionEvent actionEvent) {
-        //checkStart();
-        image1.setImage(test);
 
-
+        switch (getStartingPointCount()) {
+            case 1:
+            Client.getClientReceive().sendMessage(new SetStartingPoint(1, 1).toString());
+            break;
+            case 2:
+            Client.getClientReceive().sendMessage(new SetStartingPoint(3, 0).toString());
+            break;
+            case 3:
+            Client.getClientReceive().sendMessage(new SetStartingPoint(4, 1).toString());
+            break;
+            case 4:
+            Client.getClientReceive().sendMessage(new SetStartingPoint(5, 1).toString());
+            break;
+            case 5:
+            Client.getClientReceive().sendMessage(new SetStartingPoint(6, 0).toString());
+            break;
+            case 6:
+            Client.getClientReceive().sendMessage(new SetStartingPoint(8, 1).toString());
+            break;
+        }
+/*
         //Todo put timer to right place in code (card selection), here is just for testing
         timerText.setVisible(true);
         Text.setText("You have 30 seconds left to finish selecting your register. Hurry!!");
         timer.setText("30");
         timer30Sec();
 
+ */
 
 
 
 
-
-        /*
-        Timer timer30 = new Timer();
-        try {
-            timerStarted = true;
-            int timeInSeconds = 30;
-            while (timerStarted && timeInSeconds > 0) {
-
-
-
-
-                //System.out.println(timeInSeconds);  //for testing
-                //timer.setText("" + timeInSeconds);
-                TimeUnit.SECONDS.sleep(1);
-                timeInSeconds--;
-            }
-            timerStarted = false;
-
-        } catch (InterruptedException e) {
-            timerStarted = false;
-            e.printStackTrace();
-        }
-         */
     }
+
+    public void timerStart(){
+        timerText.setVisible(true);
+        Text.setText("You have 30 seconds left to finish selecting your register. Hurry!!");
+        timer.setText("30");
+        timer30Sec();
+    }
+
+
 
 
 

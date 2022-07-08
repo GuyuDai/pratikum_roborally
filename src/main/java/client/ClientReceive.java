@@ -44,11 +44,18 @@ public class ClientReceive extends Thread{
 
     int register;
 
+    int damageCount;
     boolean isPrivate;
 
     boolean isReady;
 
     boolean isFilled;
+
+    boolean timerStarted=false;
+
+    String cardPlayed;
+
+    Map<Integer,String> IdCardPlayed=new HashMap<>();
 
     Map<Integer,Boolean> IdReady=new HashMap<>();
 
@@ -60,14 +67,20 @@ public class ClientReceive extends Thread{
 
     List<Boolean> readyList=new ArrayList<>();
 
-
-    Player player;
-
     String[] maps;
 
     String[] cards;
 
+    String[]damageDecks;
+
     String board;
+
+    Integer[] positions;
+
+    int x;
+    int y;
+
+    Map<Integer,Integer[]> IdPosition=new HashMap<>();
 
     public ClientReceive(Socket socket) {
         this.socket = socket;
@@ -262,6 +275,7 @@ public class ClientReceive extends Thread{
                 WelcomeBody welcomeBody=new Gson().fromJson(body,WelcomeBody.class);
                 clientID=welcomeBody.getClientID();
                 sendMessage(new HelloServer(GROUP,false,PROTOCOL,clientID).toString());
+                break;
             case MessageType.playerAdded:
                 PlayerAddedBody playerAddedBody=new Gson().fromJson(body,PlayerAddedBody.class);
                 playerId=playerAddedBody.getClientID();
@@ -269,27 +283,32 @@ public class ClientReceive extends Thread{
                 figure=playerAddedBody.getFigure();
                 robotNumbers.add(figure);
                 IdName.put(playerName,playerId);
+                break;
             case MessageType.receivedChat:
                 ReceivedChatBody receivedChatBody=new Gson().fromJson(body,ReceivedChatBody.class);
                  chatMsg=receivedChatBody.getMessage();
                  fromId=receivedChatBody.getFrom();
                  isPrivate=receivedChatBody.isPrivate();
                  receiveChat(chatMsg);
+                 break;
             case MessageType.selectMap:
                 SelectMap.SelectMapBody selectMapBody=new Gson().fromJson(body,SelectMap.SelectMapBody.class);
                 maps=selectMapBody.getAvailableMaps();
+                break;
             case MessageType.playerStatus:
                 PlayerStatus.PlayerStatusBody playerStatusBody=new Gson().fromJson(body, PlayerStatus.PlayerStatusBody.class);
                 isReady=playerStatusBody.isReady();
                 playerId=playerStatusBody.getClientID();
                 readyList.add(isReady);
                 IdReady.put(playerId,isReady);
+                break;
             case MessageType.mapSelected:
                 MapSelected.MapSelectedBody mapSelectedBody=new Gson().fromJson(body,MapSelected.MapSelectedBody.class);
                 board=mapSelectedBody.getMap();
             case MessageType.yourCards:
                 YourCards.YourCardsBody yourCardsBody=new Gson().fromJson(body, YourCards.YourCardsBody.class);
                 cards=yourCardsBody.getCardsInHand();
+                break;
             case MessageType.cardSelected:
                 CardSelected.CardSelectedBody cardSelectedBody=new Gson().fromJson(body, CardSelected.CardSelectedBody.class);
                 playerId=cardSelectedBody.getClientID();
@@ -298,9 +317,53 @@ public class ClientReceive extends Thread{
                 if(isFilled){
                     sendMessage(new SelectionFinished(playerId).toString());
                 }
+                break;
             case MessageType.pickDamage:
-
-
+                PickDamage.PickDamageBody pickDamageBody=new Gson().fromJson(body, PickDamage.PickDamageBody.class);
+                damageDecks=pickDamageBody.getAvailablePiles();
+                damageCount=pickDamageBody.getCount();
+                break;
+            case MessageType.startingPointTaken:
+                StartingPointTaken.StartingPointTakenBody startingPointTakenBody=new Gson().fromJson(body,
+                        StartingPointTaken.StartingPointTakenBody.class);
+                int takenX=startingPointTakenBody.getX();
+                int takenY=startingPointTakenBody.getY();
+                if(takenX==1 && takenY==1){
+                    startNumbers.add(1);
+                }
+                if(takenX==3 && takenY==0){
+                    startNumbers.add(2);
+                }
+                if(takenX==4 && takenY==1){
+                    startNumbers.add(3);
+                }
+                if (takenX==5 && takenY==1){
+                    startNumbers.add(4);
+                }
+                if(takenX==6 && takenY==0 ){
+                    startNumbers.add(5);
+                }
+                if (takenX==8 && takenY==1){
+                    startNumbers.add(6);
+                }
+                break;
+            case MessageType.timerStarted:
+                timerStarted=true;
+                break;
+            case MessageType.cardPlayed:
+                CardPlayed.CardPlayedBody cardPlayedBody=new Gson().fromJson(body, CardPlayed.CardPlayedBody.class);
+                cardPlayed=cardPlayedBody.getCard();
+                playerId=cardPlayedBody.getClientID();
+                IdCardPlayed.put(playerId,cardPlayed);
+                break;
+            case MessageType.movement:
+                Movement.MovementBody movementBody=new Gson().fromJson(body,Movement.MovementBody.class);
+                playerId=movementBody.getClientID();
+                y=movementBody.getX();
+                x=movementBody.getY();
+                positions=new Integer[]{x,y};
+                IdPosition.put(playerId,positions);
+                break;
 
         }
     }
@@ -368,6 +431,9 @@ public class ClientReceive extends Thread{
         return startNumbers;
     }
 
+     public Map<Integer,Integer[]> getIdPosition(){
+        return IdPosition;
+     }
     public Map<String, Integer> getIdName() {
         return IdName;
     }
@@ -382,6 +448,14 @@ public class ClientReceive extends Thread{
 
     public Map<Integer, Boolean> getIdReady() {
         return IdReady;
+    }
+
+    public Integer[] getPositionById(int ID) {
+        return getIdPosition().get(ID);
+    }
+
+    public boolean isTimerStarted() {
+        return timerStarted;
     }
 
     public String[] getCards() {

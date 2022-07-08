@@ -373,8 +373,10 @@ public class ServerThread implements Runnable {
                 Position tempPosition = new Position(x,y);
                 boolean flagInSetStartingPoint = true;
                 for(ServerThread serverThread : connectedClients){
-                    if(serverThread.getStartingPosition().equals(tempPosition)){
-                        flagInSetStartingPoint = false;
+                    if(serverThread.getStartingPosition()!=null) {
+                        if (serverThread.getStartingPosition().equals(tempPosition)) {
+                            flagInSetStartingPoint = false;
+                        }
                     }
                 }
                 if(flagInSetStartingPoint){
