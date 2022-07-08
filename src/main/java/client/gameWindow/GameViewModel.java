@@ -43,7 +43,7 @@ import javafx.stage.Stage;
 
 
 /**
- * @author Nargess Ahmadi, Felicia Saruba
+ * @author Nargess Ahmadi, Felicia Saruba, Li MingHao
  */
 public class GameViewModel {
 
@@ -1093,38 +1093,34 @@ public class GameViewModel {
                  * URLs for Push Panels
                  */
 
-                /*URL PP24Bottom = getClass().getResource("PushPanels/PP24Bottom.png");
-                Image imagePP24Bottom = new Image(PP24Bottom.toString());
+        URL pp135Down = getClass().getResource("/pushpanel/pp135Down.png");
+        Image imagePP135Down = new Image(pp135Down.toString());
 
-                URL PP24Left = getClass().getResource("PushPanels/PP24Left.png");
-                Image imagePP24Left = new Image(PP24Left.toString());
+        URL pp135Up = getClass().getResource("/pushpanel/pp135Up.png");
+        Image imagePP135Up = new Image(pp135Up.toString());
 
-                URL PP24Right = getClass().getResource("PushPanels/PP24Right.png");
-                Image imagePP24Right = new Image(PP24Right.toString());
+        URL pp135Right = getClass().getResource("/pushpanel/pp135Right.png");
+        Image imagePP135Right = new Image(pp135Right.toString());
 
-                URL PP24Top = getClass().getResource("PushPanels/PP24Top.png");
-                Image imagePP24Top = new Image(PP24Top.toString());
+        URL pp135Left = getClass().getResource("/pushpanel/pp135Left.png");
+        Image imagePP135Left = new Image(pp135Left.toString());
 
-                URL PP135Bottom = getClass().getResource("PushPanels/PP135Bottom.png");
-                Image imagePP135Bottom = new Image(PP135Bottom.toString());
+        URL pp24Down = getClass().getResource("/pushpanel/pp24Down.png");
+        Image imagePP24Down = new Image(pp24Down.toString());
 
-                URL PP135Top = getClass().getResource("PushPanels/PP135Top.png");
-                Image imagePP135Top = new Image(PP135Top.toString());
+        URL pp24Up = getClass().getResource("/pushpanel/pp24Up.png");
+        Image imagePP24Up = new Image(pp24Up.toString());
 
-                URL PP135Right = getClass().getResource("PushPanels/PP135Right.png");
-                Image imagePP135Right = new Image(PP135Right.toString());
+        URL pp24Right = getClass().getResource("/pushpanel/pp24Right.png");
+        Image imagePP24Right = new Image(pp24Right.toString());
 
-                URL PP135Left = getClass().getResource("PushPanels/PP135Left.png");
-                Image imagePP135Left = new Image(PP135Left.toString());
-
-                 */
+        URL pp24Left = getClass().getResource("/pushpanel/pp24Left.png");
+        Image imagePP24Left = new Image(pp24Left.toString());
 
 
 
 
-
-                //public void printMap() {
-                Image elmImage = null;
+        Image elmImage = null;
                 Image elmImage2=null;
                 for (int x = 0; x < 10; x++) {
                     for (int y = 0; y < 13; y++) {
@@ -1293,9 +1289,7 @@ public class GameViewModel {
                                                             break;
                                                     }
                                                     break;
-                                            }
-                                        }
-                                   else switch (direction1) {
+                                            }} else switch (direction1) {
                                         case RIGHT:
                                             switch (direction2) {
                                                 case UP:
@@ -1304,7 +1298,6 @@ public class GameViewModel {
                                                 case DOWN:
                                                     elmImage = imageRBRightDown;
                                                     break;
-
                                             }
                                             break;
                                         case LEFT:
@@ -1364,6 +1357,81 @@ public class GameViewModel {
                                                 }
                                                 break;
                                         }
+                                    case 3:
+                                        if(board.getName().equals("LostBearings")) {
+                                            switch(direction1){
+                                                case UP:
+                                                    switch (direction2) {
+                                                        case RIGHT:
+                                                            elmImage = imageRBGreenUpRight2;
+                                                            break;
+                                                        case LEFT:
+                                                            elmImage = imageRBGreenUpLeft2;
+                                                            break;
+                                                    }
+                                                    break;
+
+
+                                                case DOWN:
+                                                    switch (direction2) {
+                                                        case RIGHT:
+                                                            elmImage = imageRBGreenDownLeft3; //change
+                                                            break;
+                                                        case LEFT:
+                                                            elmImage = imageRBGreenDownLeft2;
+                                                            break;
+                                                    }
+                                                    break;
+                                            }
+                                        }
+                                    case 4:
+                                        if(board.getName().equals("DeathTrap")) {
+                                            switch(direction1) {
+                                                case RIGHT:
+                                                    switch (direction2) {
+                                                        case UP:
+                                                            elmImage = imageRBGreenUpRight2;
+                                                            break;
+                                                        case DOWN:
+                                                            elmImage = imageRBGreenDownRight;
+                                                            break;
+                                                    }
+                                                    break;
+
+                                                case LEFT:
+                                                    switch (direction2) {
+                                                        case UP:
+                                                            elmImage = imageRBGreenUpLeft;
+                                                            break;
+                                                        case DOWN:
+                                                            elmImage = imageRBGreenDownLeft2;
+                                                            break;
+                                                    }
+                                                    break;
+                                                case UP:
+                                                    switch (direction2) {
+                                                        case RIGHT:
+                                                            elmImage = imageRBGreenUpRight;
+                                                            break;
+                                                        case LEFT:
+                                                            elmImage = imageRBGreenUpLeft2; //
+                                                            break;
+                                                    }
+                                                    break;
+
+
+                                                case DOWN:
+                                                    switch (direction2) {
+                                                        case RIGHT:
+                                                            elmImage = imageRBGreenDownLeft3;
+                                                            break;
+                                                        case LEFT:
+                                                            elmImage = imageRBGreenDownLeft;
+                                                            break;
+                                                    }
+                                                    break;
+                                            }
+                                        }
 
                                 }
                                 break;
@@ -1371,14 +1439,38 @@ public class GameViewModel {
                                 elmImage=imageAntenna;
                                 break;
                             case"PushPanel":
-                                String PushPanelReg=boardElem1.getPush();
-                                switch (PushPanelReg){
-                                    case"1,3,5":
-                                        elmImage=imagePP135;
-                                        break;
-                                    case "2,4":
-                                        elmImage=imagePP24;
-                                        break;
+                                String pushPanelReg=boardElem1.getPush();
+                                Direction pushDirection = boardElem1.getDirection();
+                                if (pushPanelReg.equals("1,3,5")){
+                                    switch (pushDirection) {
+                                        case UP:
+                                            elmImage = imagePP135Up;
+                                            break;
+                                        case DOWN:
+                                            elmImage = imagePP135Down;
+                                            break;
+                                        case RIGHT:
+                                            elmImage = imagePP135Right;
+                                            break;
+                                        case LEFT:
+                                            elmImage = imagePP135Left;
+                                    }
+                                }
+
+                                if(pushPanelReg.equals("2,4")){
+                                    switch (pushDirection){
+                                        case UP:
+                                            elmImage = imagePP24Up;
+                                            break;
+                                        case DOWN:
+                                            elmImage = imagePP24Down;
+                                            break;
+                                        case RIGHT:
+                                            elmImage = imagePP24Right;
+                                            break;
+                                        case LEFT:
+                                            elmImage = imagePP24Left;
+                                    }
                                 }
                                 break;
                             case"Gear":

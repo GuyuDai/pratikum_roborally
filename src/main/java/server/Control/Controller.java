@@ -2,6 +2,8 @@ package server.Control;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import protocol.ErrorMessage;
+import protocol.ReceivedChat;
 import protocol.ShuffleCoding;
 import server.BoardElement.*;
 import server.CardTypes.Card;
@@ -144,7 +146,7 @@ public class Controller {
           if(!(currentGame.getGameBoard().getBoardElem(X,i,0) instanceof Antenna
                   || currentGame.getGameBoard().getBoardElem(X,i,1) instanceof Wall)
                   || robotOnPositionCheck(new Position(X,i))) {
-            robot.getOwner().drawSpamCard(1);
+            robot.getOwner().drawDamage("Spam",1);
           }
         }
       }
@@ -153,7 +155,7 @@ public class Controller {
           if(!(currentGame.getGameBoard().getBoardElem(X,i,0) instanceof Antenna
                   || currentGame.getGameBoard().getBoardElem(X,i,1) instanceof Wall
                   || robotOnPositionCheck(new Position(X,i)))) {
-            robot.getOwner().drawSpamCard(1);
+            robot.getOwner().drawDamage("Spam",1);
           }
         }
       }
@@ -162,7 +164,7 @@ public class Controller {
           if(!(currentGame.getGameBoard().getBoardElem(i,Y,0) instanceof Antenna
                   || currentGame.getGameBoard().getBoardElem(i,Y,1) instanceof Wall
                   || robotOnPositionCheck(new Position(i,Y)))) {
-            robot.getOwner().drawSpamCard(1);
+            robot.getOwner().drawDamage("Spam",1);
           }
         }
       }
@@ -171,7 +173,7 @@ public class Controller {
           if(!(currentGame.getGameBoard().getBoardElem(i,Y,0) instanceof Antenna
                   || currentGame.getGameBoard().getBoardElem(i,Y,1) instanceof Wall
                   ||robotOnPositionCheck(new Position(i,Y)))){
-            robot.getOwner().drawSpamCard(1);
+            robot.getOwner().drawDamage("Spam",1);
           }
         }
       }
@@ -233,14 +235,15 @@ public class Controller {
   /**
    * @return true if one robot ends a register on the final checkpoint
    */
-  /*public boolean ifGameEnd(){
+  public boolean ifGameEnd(){
     if(currentGame.getActivePlayers().size() == 0){
-      currentGame.sendToAll(new ErrorMessage("Game end. No winner"));
+      currentGame.sendMessageToAll(new ReceivedChat("Game end. No winner",-1,false));
       return true;
     }
     Robot r = currentGame.getPositionCheckPoint().getOccupiedRobot();
     if(r != null){
-      currentGame.sendToAll(new ErrorMessage("The winner is " + r.getOwner().getName() + ". Congratulation!"));
+      currentGame.sendMessageToAll(new ReceivedChat
+          ("The winner is " + r.getOwner().getName() + ". Congratulation!",-1,false));
       return true;
     }
     return false;

@@ -26,7 +26,7 @@ public class DeathTrap extends Board {
         map[0][3][0] = new ConveyBelt(currentGame,1, Direction.LEFT);
         map[0][3][1] = empty;
 
-        map[0][4][0] = new RotatingBelt(currentGame,1, Direction.UP, Direction.LEFT);
+        map[0][4][0] = new RotatingBelt(currentGame,1, Direction.LEFT, Direction.UP);
         map[0][4][1] = empty;
 
         map[0][5][0] = empty;
