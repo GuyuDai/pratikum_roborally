@@ -9,7 +9,6 @@ import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import client.mapWindow.MapViewModel;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -19,7 +18,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
-import protocol.*;
+import protocol.SelectedCard;
+import protocol.SendChat;
+import protocol.YourCards;
 import server.BoardElement.BoardElem;
 import server.BoardTypes.*;
 import server.CardTypes.*;
@@ -285,7 +286,8 @@ public class GameViewModel {
     Image imageCardHidden = new Image(urlCardHidden.toString());
 
 
-    public void initialize() {
+    public void initialize(Client client) {
+        this.client = client;
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
         hand.getChildren().add(new ImageView());
@@ -308,16 +310,8 @@ public class GameViewModel {
     }
 
     public static GameViewModel getInstance() {
-        if (instance == null) {
-            synchronized (GameViewModel.class) {
-                if (instance == null) {
-                    instance = new GameViewModel();
-                }
-            }
-        }
         return instance;
     }
-
 
     public GameModel getModel() {
         return model;
@@ -1325,7 +1319,6 @@ public class GameViewModel {
                                                 case DOWN:
                                                     elmImage = imageRBRightDown;
                                                     break;
-
                                             }
                                             break;
                                         case LEFT:
@@ -1606,6 +1599,10 @@ public class GameViewModel {
             }
 
 
+//just for testing:
+    URL image = getClass().getResource("/Robots/twitch.png");
+    Image test = new Image(image.toString());
+
 
 
     int startingPointCount;
@@ -1621,42 +1618,36 @@ public class GameViewModel {
     }
 
     public void startingPoint1Action(ActionEvent actionEvent) {
-        checkStart();
         setStartingPointCount(1);
         x = 1;
         y = 1;
     }
 
     public void startingPoint2Action(ActionEvent actionEvent) {
-        checkStart();
         setStartingPointCount(2);
         x = 3;
         y = 0;
     }
 
     public void startingPoint3Action(ActionEvent actionEvent) {
-        checkStart();
         setStartingPointCount(3);
         x = 4;
         y = 1;
     }
 
     public void startingPoint4Action(ActionEvent actionEvent) {
-        checkStart();
         setStartingPointCount(4);
         x = 5;
         y = 1;
     }
 
     public void startingPoint5Action(ActionEvent actionEvent) {
-        checkStart();
         setStartingPointCount(5);
         x = 6;
         y = 0;
     }
 
     public void startingPoint6Action(ActionEvent actionEvent) {
-        checkStart();
         setStartingPointCount(6);
         x = 8;
         y = 1;
@@ -1665,92 +1656,15 @@ public class GameViewModel {
 
     public void startPointOKAction(ActionEvent actionEvent) {
         //checkStart();
+        image1.setImage(test);
 
-        switch (getStartingPointCount()) {
-            case 1:
-            Client.getClientReceive().sendMessage(new SetStartingPoint(1, 1).toString());
-            break;
-            case 2:
-            Client.getClientReceive().sendMessage(new SetStartingPoint(3, 0).toString());
-            break;
-            case 3:
-            Client.getClientReceive().sendMessage(new SetStartingPoint(4, 1).toString());
-            break;
-            case 4:
-            Client.getClientReceive().sendMessage(new SetStartingPoint(5, 1).toString());
-            break;
-            case 5:
-            Client.getClientReceive().sendMessage(new SetStartingPoint(6, 0).toString());
-            break;
-            case 6:
-            Client.getClientReceive().sendMessage(new SetStartingPoint(8, 1).toString());
-            break;
-        }
 
         //Todo put timer to right place in code (card selection), here is just for testing
-
-
-        //Todo put TIMER to right place in code (card selection), here is just for testing
         timerText.setVisible(true);
         Text.setText("You have 30 seconds left to finish selecting your register. Hurry!!");
         timer.setText("30");
         timer30Sec();
 
-
-
-        moveRobot();
-    }
-
-
-
-
-    public void moveRobot() {
-
-        URL image = getClass().getResource("/Robots/twitch.png");
-        Image test = new Image(image.toString());
-
-        ImageView testViewRotate = new ImageView(test);
-        testViewRotate.setRotate(90);
-
-        ImageView testView = new ImageView(test);
-
-        testView.setFitWidth(43);
-        testView.setFitHeight(43);
-        testViewRotate.setFitWidth(43);
-        testViewRotate.setFitHeight(43);
-
-
-        int x = 5;
-        int y = 3;
-
-
-        robotBoard.add(testView, x, y);
-
-        PauseTransition move1d = new PauseTransition(Duration.seconds(2));
-        move1d.setOnFinished(e -> robotBoard.add(testView, x, y +1));
-        move1d.play();
-
-        PauseTransition move2 = new PauseTransition(Duration.seconds(3));
-        move2.setOnFinished(e -> robotBoard.add(testView, x, y+2));
-        move2.play();
-
-        PauseTransition move3 = new PauseTransition(Duration.seconds(4));
-        move3.setOnFinished(e -> robotBoard.add(testView, x +1 , y+2));
-        move3.play();
-
-        PauseTransition move4 = new PauseTransition(Duration.seconds(5));
-        move4.setOnFinished(e -> robotBoard.add(testView, x +1 , y+2));
-        move4.play();
-    }
-
-    public void MouseAction(MouseEvent mouseEvent) {
-        System.out.println("hello this is a test");
-        //TODO connect to refresher here!
-    }
-
-    public void playCardBtnAction(ActionEvent actionEvent) {
-
-    }
 
 
 
@@ -1762,20 +1676,24 @@ public class GameViewModel {
             timerStarted = true;
             int timeInSeconds = 30;
             while (timerStarted && timeInSeconds > 0) {
- */
 
 
 
 
+                //System.out.println(timeInSeconds);  //for testing
+                //timer.setText("" + timeInSeconds);
+                TimeUnit.SECONDS.sleep(1);
+                timeInSeconds--;
+            }
+            timerStarted = false;
 
-    public void timerStart(){
-        timerText.setVisible(true);
-        Text.setText("You have 30 seconds left to finish selecting your register. Hurry!!");
-        timer.setText("30");
-        timer30Sec();
+        } catch (InterruptedException e) {
+            timerStarted = false;
+            e.printStackTrace();
+        }
+         */
     }
 
-    
 
 
     public void checkStart() {
@@ -1926,6 +1844,8 @@ public class GameViewModel {
         pauseTransition0.setOnFinished(e -> timer.setText("0"));
         pauseTransition0.play();
     }
+
+
 }
 
 
