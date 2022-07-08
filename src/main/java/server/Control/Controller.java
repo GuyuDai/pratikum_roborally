@@ -2,6 +2,7 @@ package server.Control;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import protocol.ShuffleCoding;
 import server.BoardElement.*;
 import server.CardTypes.Card;
 import server.Game.RR;
@@ -15,6 +16,11 @@ import server.Player.Robot;
  */
 public class Controller {
   public RR currentGame;
+
+  public Controller(RR game){
+    this.currentGame = game;
+  }
+
   /**
    * @param position
    * @return true if the checked position is out of the bound of the game board
@@ -276,6 +282,7 @@ public class Controller {
   public void drawCardCheck(Player player){
     if(isCardListEmpty(player.getOwnDeck().getRemainingCards())){
       player.getOwnDeck().shuffle();
+      currentGame.sendMessageToClient(new ShuffleCoding(player.clientID), currentGame.getServerThreadById(player.clientID));
     }
   }
 

@@ -1,5 +1,6 @@
 package server.Player;
 
+import protocol.YourCards;
 import server.CardTypes.*;
 import server.Deck.*;
 import server.Game.*;
@@ -10,6 +11,7 @@ import java.util.concurrent.*;
 
 public class Player implements PlayerAction{
   public String name;
+  public int clientID;
   private RR currentGame;
   private ProgrammingDeck ownDeck;
   public Robot ownRobot;
@@ -18,14 +20,15 @@ public class Player implements PlayerAction{
   public GameDeck gameDeck;
   public int priority = 1;
   public int energyCubes;
-  private boolean isAI=false;
-  private boolean isReady=false;
+  private boolean isAI = false;
+  private boolean isReady = false;
 
 
-  public Player(String name){
+  public Player(String name, int ID){
     this.name = name;
-    this.energyCubes=5;
-    this.ownDeck=new ProgrammingDeck();
+    this.clientID = ID;
+    this.energyCubes = 5;
+    this.ownDeck = new ProgrammingDeck();
   }
 
   public Robot getOwnRobot() {
@@ -101,7 +104,7 @@ public class Player implements PlayerAction{
 
    public void setAI(boolean AI){
      this.isAI=AI;
-     String[] AINameArray=new String[] {"AIBob","AIAlice","AIJay","AImax","AICarl","AITom"};
+     String[] AINameArray=new String[] {"AIBob","AIAlice","AIJay","AIMax","AICarl","AITom"};
      //TODO need a controller to make sure AI doesnt have same name
      Random rand= new Random();
      int number=rand.nextInt(5);
@@ -109,12 +112,12 @@ public class Player implements PlayerAction{
      setName(AIName);
      setAIRobot();
   }
-   public boolean getAI(){
+   public boolean isAI(){
     return isAI;
    }
 
    public void setAIRobot(){
-    if(this.getAI()){
+    if(this.isAI()){
       Random rand=new Random();
       int robotNumber= rand.nextInt(5);
       setOwnRobot(robotNumber);
@@ -199,19 +202,5 @@ randomize chosing cards and putting it into register
       }
     }
   }
-  public void programmingPhaseAI(){
-    // draw from pile 9 cards automatically
-    draw();
-    //Choose the first five cards and put in your register
-    register.add(getHands().get(0));
-    register.add(getHands().get(1));
-    register.add(getHands().get(2));
-    register.add(getHands().get(3));
-    register.add(getHands().get(4));
-  }
-  public void upgradePhaseAI(){
-
-  }
-
 
 }
