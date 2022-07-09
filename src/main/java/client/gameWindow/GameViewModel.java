@@ -859,7 +859,6 @@ public class GameViewModel {
 
         Text.setText("Select a starting point.");
         selectStartingPoint.setVisible(true);
-
         printMapButton.setVisible(false);
     }
 
@@ -868,11 +867,10 @@ public class GameViewModel {
      */
 
     public void startGameButtonAction(ActionEvent actionEvent) {
-        allStartNumbers=Client.getClientReceive().getStartNumbers();
-        for(int number: allStartNumbers){
-           if(number!=this.getStartingPointCount()){
-               setOtherRobotOnBoard(number);
-           }
+        for(int id:Client.getClientReceive().getIdList()){
+               int robotNumber=Client.getClientReceive().getRobotById(id);
+               int startingPointNumber=Client.getClientReceive().getStartPointById(id);
+                setOtherRobotOnBoard(robotNumber,startingPointNumber);
         }
         getCardsButton.setVisible(true);
         startGameButton.setVisible(false);
@@ -1715,6 +1713,7 @@ public class GameViewModel {
            }
         //checkStart();
         startGameButton.setVisible(true);
+        selectStartingPoint.setVisible(false);
 
 
         //Todo put TIMER to right place in code (card selection), here is just for testing
@@ -1863,12 +1862,8 @@ public class GameViewModel {
     }
 
 
-    public void setOtherRobotOnBoard(int startingPointNumber){
-        int otherRobotNumber;
-        Image otherRobotImage = null;
-        for(int id :Client.getClientReceive().getIdRobot().keySet()){
-            if(id!=Client.getClientReceive().getClientID()){
-                 otherRobotNumber = Client.getClientReceive().getIdRobot().get(id);
+    public void setOtherRobotOnBoard(int otherRobotNumber,int startingPointNumber){
+                Image otherRobotImage = null;
                 switch (otherRobotNumber) {
                     case 1:
                         otherRobotImage = imageHulk;//hulk
@@ -1911,10 +1906,9 @@ public class GameViewModel {
                     case 6:
                         robotBoard.add(robotPic, 1, 8);
                         break;
-
                 }
-            }
-        }
+
+
     }
 
 

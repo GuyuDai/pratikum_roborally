@@ -55,6 +55,9 @@ public class ClientReceive extends Thread{
 
     String cardPlayed;
 
+    List<Integer> IdList=new ArrayList<>();
+    Map<Integer,Integer>IdStartPoint= new HashMap<>();
+
     Map<Integer,String> IdCardPlayed=new HashMap<>();
 
     Map<Integer,Boolean> IdReady=new HashMap<>();
@@ -293,6 +296,7 @@ public class ClientReceive extends Thread{
                 playerId=playerAddedBody.getClientID();
                 playerName=playerAddedBody.getName();
                 figure=playerAddedBody.getFigure();
+                IdList.add(playerId);
                 robotNumbers.add(figure);
                 IdRobot.put(playerId,figure);
                 IdName.put(playerName,playerId);
@@ -318,6 +322,7 @@ public class ClientReceive extends Thread{
             case MessageType.mapSelected:
                 MapSelected.MapSelectedBody mapSelectedBody=new Gson().fromJson(body,MapSelected.MapSelectedBody.class);
                 board=mapSelectedBody.getMap();
+                break;
             case MessageType.yourCards:
                 YourCards.YourCardsBody yourCardsBody=new Gson().fromJson(body, YourCards.YourCardsBody.class);
                 cards=yourCardsBody.getCardsInHand();
@@ -341,23 +346,30 @@ public class ClientReceive extends Thread{
                         StartingPointTaken.StartingPointTakenBody.class);
                 int takenX=startingPointTakenBody.getX();
                 int takenY=startingPointTakenBody.getY();
+                playerId=startingPointTakenBody.getClientID();
                 if(takenX==1 && takenY==1){
                     startNumbers.add(1);
+                    IdStartPoint.put(playerId,1);
                 }
                 if(takenX==3 && takenY==0){
                     startNumbers.add(2);
+                    IdStartPoint.put(playerId,2);
                 }
                 if(takenX==4 && takenY==1){
                     startNumbers.add(3);
+                    IdStartPoint.put(playerId,3);
                 }
                 if (takenX==5 && takenY==1){
                     startNumbers.add(4);
+                    IdStartPoint.put(playerId,4);
                 }
                 if(takenX==6 && takenY==0 ){
                     startNumbers.add(5);
+                    IdStartPoint.put(playerId,5);
                 }
                 if (takenX==8 && takenY==1){
                     startNumbers.add(6);
+                    IdStartPoint.put(playerId,6);
                 }
                 break;
             case MessageType.timerStarted:
@@ -372,6 +384,7 @@ public class ClientReceive extends Thread{
             case MessageType.cardsYouGotNow:
                 CardsYouGotNow.CardYouGotNowBody cardYouGotNowBody=new Gson().fromJson(body, CardsYouGotNow.CardYouGotNowBody.class);
                 filledRegister=cardYouGotNowBody.getCards();
+                break;
 
             case MessageType.movement:
                 Movement.MovementBody movementBody=new Gson().fromJson(body,Movement.MovementBody.class);
@@ -426,6 +439,12 @@ public class ClientReceive extends Thread{
     public int getRobotById(int id){
         return getIdRobot().get(id);
     }
+
+    public Map<Integer, Integer> getIdStartPoint() {
+        return IdStartPoint;
+    }
+
+    public int getStartPointById(int id){ return  getIdStartPoint().get(id);}
 
     public int getIdByName(String name){
         return getIdName().get(name);
@@ -506,6 +525,10 @@ public class ClientReceive extends Thread{
 
     public String[] getFilledRegister() {
         return filledRegister;
+    }
+
+    public List<Integer> getIdList() {
+        return IdList;
     }
 
     public String[] getCards() {
