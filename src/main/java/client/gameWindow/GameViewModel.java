@@ -20,6 +20,7 @@ import javafx.scene.layout.*;
 import javafx.util.Duration;
 import protocol.SelectedCard;
 import protocol.SendChat;
+import protocol.SetStartingPoint;
 import protocol.YourCards;
 import server.BoardElement.BoardElem;
 import server.BoardTypes.*;
@@ -1606,36 +1607,42 @@ public class GameViewModel {
     }
 
     public void startingPoint1Action(ActionEvent actionEvent) {
+        checkStart();
         setStartingPointCount(1);
         x = 1;
         y = 1;
     }
 
     public void startingPoint2Action(ActionEvent actionEvent) {
+        checkStart();
         setStartingPointCount(2);
         x = 3;
         y = 0;
     }
 
     public void startingPoint3Action(ActionEvent actionEvent) {
+        checkStart();
         setStartingPointCount(3);
         x = 4;
         y = 1;
     }
 
     public void startingPoint4Action(ActionEvent actionEvent) {
+        checkStart();
         setStartingPointCount(4);
         x = 5;
         y = 1;
     }
 
     public void startingPoint5Action(ActionEvent actionEvent) {
+        checkStart();
         setStartingPointCount(5);
         x = 6;
         y = 0;
     }
 
     public void startingPoint6Action(ActionEvent actionEvent) {
+        checkStart();
         setStartingPointCount(6);
         x = 8;
         y = 1;
@@ -1643,6 +1650,26 @@ public class GameViewModel {
 
 
     public void startPointOKAction(ActionEvent actionEvent) {
+           switch (getStartingPointCount()){
+               case 1:
+                   Client.getClientReceive().sendMessage(new SetStartingPoint(1,1).toString());
+                   break;
+               case 2:
+                   Client.getClientReceive().sendMessage(new SetStartingPoint(3,0).toString());
+                    break;
+               case 3:
+                   Client.getClientReceive().sendMessage(new SetStartingPoint(4,1).toString());
+                   break;
+               case 4:
+                   Client.getClientReceive().sendMessage(new SetStartingPoint(5,1).toString());
+                   break;
+               case 5:
+                   Client.getClientReceive().sendMessage(new SetStartingPoint(6,0).toString());
+                   break;
+               case 6:
+                   Client.getClientReceive().sendMessage(new SetStartingPoint(8,1).toString());
+                   break;
+           }
         //checkStart();
 
 
@@ -1932,12 +1959,6 @@ public class GameViewModel {
             }
             timerStarted = false;
 
-        } catch (InterruptedException e) {
-            timerStarted = false;
-            e.printStackTrace();
-        }
-         */
-    }
 
 }
 
