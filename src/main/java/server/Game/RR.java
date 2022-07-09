@@ -34,7 +34,7 @@ public class RR extends Thread implements GameLogic {
   protected GameState currentState;
   protected Position positionCheckPoint;
   protected Position positionAntenna;
-  protected int PlayerInListPosition = -1;
+  protected int PlayerInListPosition = 0;
   protected int activePhase;  //0 => Aufbauphase, 1 => Upgradephase, 2 => Programmierphase, 3 => Aktivierungsphase
   private int finishedPlayers = 0;  //this attribution is used to check whether all player have down a certain behavior
 

@@ -31,7 +31,9 @@ import server.Deck.ProgrammingDeck;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -97,8 +99,9 @@ public class GameViewModel {
 
     List<Integer> takenStartNumbers=new ArrayList<>();
 
-    List<Integer> allStartNumbers=new ArrayList<>();
+    public Map<Integer,Integer[]> robotOldPosition=new HashMap<>();
 
+    public Map<Integer,ImageView> robotOgPicture=new HashMap<>();
 
 
 
@@ -982,7 +985,9 @@ public class GameViewModel {
         for(int id:Client.getClientReceive().getIdList()){
                int robotNumber=Client.getClientReceive().getRobotById(id);
                int startingPointNumber=Client.getClientReceive().getStartPointById(id);
-                setOtherRobotOnBoard(robotNumber,startingPointNumber);
+               Integer[] position=Client.getClientReceive().getPositionById(id);
+               robotOldPosition.put(robotNumber,position);
+               setOtherRobotOnBoard(robotNumber,startingPointNumber);
         }
         getCardsButton.setVisible(true);
         startGameButton.setVisible(false);
@@ -1870,61 +1875,36 @@ public class GameViewModel {
 
     }
 
+    ImageView hammerView = new ImageView(imageHammer);
+    ImageView hulkView = new ImageView(imageHulk);
+    ImageView spinView = new ImageView(imageSpin);
+    ImageView squashView = new ImageView(imageSquash);
+    ImageView twitchView = new ImageView(imageTwitch);
+    ImageView twonkeyView = new ImageView(imageTwonkey);
+
 
     public void moveRobot() {
+        for (int clientId : Client.getClientReceive().getIdPosition().keySet()) {
+            int moveX = Client.getClientReceive().getPositionById(clientId)[0];
+            int moveY = Client.getClientReceive().getPositionById(clientId)[1];
+            int robotNumber=Client.getClientReceive().getRobotById(clientId);
+            int oldX=robotOldPosition.get(robotNumber)[0];
+            int oldY=robotOldPosition.get(robotNumber)[1];
+            ImageView botView=robotOgPicture.get(robotNumber);
+            URL empty = getClass().getResource("/Empty.png");
+            Image imageEmpty = new Image(empty.toString());
+            ImageView emptyView=new ImageView(imageEmpty);
 
-
-        ImageView hammerView = new ImageView(imageHammer);
-        ImageView hulkView = new ImageView(imageHulk);
-        ImageView spinView = new ImageView(imageSpin);
-        ImageView squashView = new ImageView(imageSquash);
-        ImageView twitchView = new ImageView(imageTwitch);
-        ImageView twonkeyView = new ImageView(imageTwonkey);
-
-        hammerView.setFitWidth(43);
-        hammerView.setFitHeight(43);
-        hulkView.setFitWidth(43);
-        hulkView.setFitHeight(43);
-        spinView.setFitWidth(43);
-        spinView.setFitHeight(43);
-        squashView.setFitWidth(43);
-        squashView.setFitHeight(43);
-        twitchView.setFitWidth(43);
-        twitchView.setFitHeight(43);
-        twonkeyView.setFitWidth(43);
-        twonkeyView.setFitHeight(43);
-
-
-
-        //rotating image view
-        //ImageView testViewRotate = new ImageView(test);
-        //testViewRotate.setRotate(90);
-
-
-        int x = 5;
-        int y = 3;
-
-
-        robotBoard.add(hammerView, x, y);
-
-        PauseTransition move1d = new PauseTransition(Duration.seconds(2));
-        move1d.setOnFinished(e -> robotBoard.add(hammerView, x, y +1));
-        move1d.play();
-
-        /*
-        PauseTransition move2 = new PauseTransition(Duration.seconds(3));
-        move2.setOnFinished(e -> robotBoard.add(testView, x, y+2));
-        move2.play();
-
-        PauseTransition move3 = new PauseTransition(Duration.seconds(4));
-        move3.setOnFinished(e -> robotBoard.add(testView, x +1 , y+2));
-        move3.play();
-
-        PauseTransition move4 = new PauseTransition(Duration.seconds(5));
-        move4.setOnFinished(e -> robotBoard.add(testView, x +1 , y+2));
-        move4.play();
-
-         */
+            PauseTransition remove = new PauseTransition(Duration.seconds(1));
+            remove.setOnFinished(e -> robotBoard.add(emptyView,oldX,oldY));
+            remove.play();
+            PauseTransition move1d = new PauseTransition(Duration.seconds(2));
+            move1d.setOnFinished(e -> robotBoard.add(botView, moveX, moveY));
+            move1d.play();
+           // PauseTransition remove2 = new PauseTransition(Duration.seconds(2));
+           // remove2.setOnFinished(e -> robotBoard.getChildren().remove(1));
+          //  remove2.play();
+        }
     }
 
 
@@ -2032,6 +2012,7 @@ public class GameViewModel {
                 robotPic.setFitWidth(43);
                 robotPic.setFitHeight(43);
                 robotPic.setRotate(90);
+                robotOgPicture.put(otherRobotNumber,robotPic);
                 switch (startingPointNumber) {
                     case 1:
                         robotBoard.add(robotPic, 1, 1);
@@ -2064,7 +2045,7 @@ public class GameViewModel {
 
 
     public void playCardBtnAction(ActionEvent actionEvent) {
-
+         moveRobot();
     }
 
     public void getCardsButtonAction(ActionEvent actionEvent) {

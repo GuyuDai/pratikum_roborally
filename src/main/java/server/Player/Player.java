@@ -30,6 +30,7 @@ public class Player implements PlayerAction{
     this.clientID = ID;
     this.energyCubes = 5;
     this.ownDeck = new ProgrammingDeck();
+
   }
 
   public Robot getOwnRobot() {
