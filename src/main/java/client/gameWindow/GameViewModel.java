@@ -242,6 +242,12 @@ public class GameViewModel {
     private Label Text;
 
     @FXML
+    private Label yourBotText;
+
+    @FXML
+    private ImageView yourBot;
+
+    @FXML
     GridPane gameboard, startBoard, robotBoard, checkBoard;
 
     public String window = "Game";
@@ -437,6 +443,36 @@ public class GameViewModel {
     }
 
 
+    /**
+     * sets your own robot icon
+     */
+    public void setYourBotIcon(){
+        yourBotText.setVisible(true);
+        int yourId=Client.getClientReceive().getClientID();
+        int yourRobotNumber=Client.getClientReceive().getRobotById(yourId);
+        Image robotIcon=null;
+        switch (yourRobotNumber) {
+            case 1:
+                robotIcon = imageHulk;//hulk
+                break;
+            case 2:
+                robotIcon = imageSpin;//spin
+                break;
+            case 3:
+                robotIcon = imageSquash;//squash
+                break;
+            case 4:
+                robotIcon = imageHammer;//hammer
+                break;
+            case 5:
+                robotIcon = imageTwonkey;//twonkey
+                break;
+            case 6:
+                robotIcon = imageTwitch;//twitch
+                break;
+        }
+        yourBot.setImage(robotIcon);
+    }
 
 
     /**
@@ -861,6 +897,7 @@ public class GameViewModel {
         selectStartingPoint.setVisible(true);
 
         printMapButton.setVisible(false);
+        setYourBotIcon();
     }
 
     /**
