@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1251.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
+<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1251.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
    <children>
       <Pane layoutX="6.0" layoutY="3.0" prefHeight="795.0" prefWidth="305.0" stylesheets="@../styles.css">
          <children>
@@ -136,7 +136,7 @@
                   <Label prefHeight="43.0" prefWidth="82.0" text="      Label" textFill="WHITE" />
                </children>
             </VBox>
-            <Label layoutX="53.0" layoutY="522.0" prefHeight="59.0" prefWidth="200.0" text="       USE YOUR UPGRADE CARDS" textFill="#fcfafa">
+            <Label layoutX="32.0" layoutY="529.0" prefHeight="59.0" prefWidth="235.0" text="       USE YOUR UPGRADE CARDS" textFill="#fcfafa">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -153,17 +153,17 @@
                   <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label fx:id="wormNumber" prefHeight="17.0" prefWidth="74.0" text="WORM    0x" textFill="#fffefe" GridPane.rowIndex="1" />
-                  <Label fx:id="virusNumber" prefHeight="17.0" prefWidth="74.0" text="VIRUS      0x" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="spamNumber" prefHeight="17.0" prefWidth="74.0" text="SPAM      0x" textFill="#ffeeee" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Label fx:id="trojanNumber" prefHeight="17.0" prefWidth="74.0" text="  TROJAN  0x" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Label fx:id="wormNumber" prefHeight="17.0" prefWidth="74.0" text="Worm  0x" textFill="#fffefe" GridPane.rowIndex="1" />
+                  <Label fx:id="virusNumber" prefHeight="17.0" prefWidth="74.0" text="Virus   0x" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="spamNumber" prefHeight="17.0" prefWidth="74.0" text="Spam  0x" textFill="#ffeeee" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label fx:id="trojanNumber" prefHeight="17.0" prefWidth="74.0" text="Trojan  0x" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                   <Button fx:id="worm" graphicTextGap="0.0" minWidth="77.0" mnemonicParsing="false" onAction="#playDamageCards" prefHeight="100.0" prefWidth="77.0" styleClass="worm" stylesheets="@../styles.css" />
                   <Button fx:id="virus" mnemonicParsing="false" onAction="#playDamageCards" styleClass="virus" stylesheets="@../styles.css" GridPane.columnIndex="1" />
                   <Button fx:id="spam" mnemonicParsing="false" onAction="#playDamageCards" styleClass="spam" stylesheets="@../styles.css" GridPane.columnIndex="2" />
                   <Button fx:id="trojan" mnemonicParsing="false" onAction="#playDamageCards" styleClass="trojan" stylesheets="@../styles.css" GridPane.columnIndex="3" />
                </children>
             </GridPane>
-            <Label layoutX="106.0" layoutY="323.0" prefHeight="59.0" prefWidth="104.0" text="DAMAGE CARDS" textFill="#fcfafa">
+            <Label layoutX="90.0" layoutY="323.0" prefHeight="59.0" prefWidth="130.0" text="DAMAGE CARDS" textFill="#fcfafa">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -370,7 +370,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="hand1Button" mnemonicParsing="false" onAction="#hand1ButtonAction" prefHeight="89.0" prefWidth="74.0" styleClass="backgroundColor" stylesheets="@../styles.css" visible="false">
+                  <Button fx:id="hand1Button" mnemonicParsing="false" onAction="#hand1ButtonAction" prefHeight="89.0" prefWidth="74.0" stylesheets="@../styles.css" visible="false">
                      <graphic>
                         <ImageView fx:id="hand1" fitHeight="85.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
@@ -380,7 +380,7 @@
                         <ImageView fx:id="hand2" fitHeight="85.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
-                  <Button fx:id="hand3Button" mnemonicParsing="false" onAction="#hand3ButtonAction" prefHeight="89.0" prefWidth="74.0" styleClass="backgroundColor" stylesheets="@../styles.css" visible="false" GridPane.columnIndex="2">
+                  <Button fx:id="hand3Button" mnemonicParsing="false" onAction="#hand3ButtonAction" prefHeight="89.0" prefWidth="74.0" visible="false" GridPane.columnIndex="2">
                      <graphic>
                         <ImageView fx:id="hand3" fitHeight="85.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
