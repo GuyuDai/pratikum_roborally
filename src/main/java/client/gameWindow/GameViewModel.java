@@ -437,7 +437,6 @@ public class GameViewModel {
             stageLobby.setScene(new Scene(rootMap));
             stageLobby.show();
         } catch (Exception e) {
-            System.out.println("not working");
         }
         LobbyViewModel.setWindowName("Lobby");
     }
@@ -872,7 +871,7 @@ public class GameViewModel {
                 hand7Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[6],4).toString());
                 playCardBtn.setVisible(true);
-                Text.setText("Click on 'play cards'! ");
+                Text.setText("Click on 'play cards'!");
                 timer30Sec();
                 break;
         }
@@ -951,6 +950,79 @@ public class GameViewModel {
         }
     }
 
+
+    /**
+     * pick 5 cards from hands automatically -> when timer is 0 and for AI
+     */
+    public void autoFillRegister(){
+        for(int i = 1; i < 10 ; i ++) {
+            if (getRegisterCount() != 5) {
+                switch (i) {
+                    case 1:
+                        try {
+                            hand1Button.fire();
+                        } catch (Exception e) {
+                        }
+                        break;
+                    case 2:
+                        try {
+                            hand2Button.fire();
+
+                        } catch (Exception e) {
+                        }
+                        break;
+                    case 3:
+                        try {
+                            hand3Button.fire();
+                        } catch (Exception e) {
+                        }
+                        break;
+                    case 4:
+                        try {
+                            hand4Button.fire();
+                        } catch (Exception e) {
+                        }
+                        break;
+                    case 5:
+                        try {
+                            hand5Button.fire();
+                        } catch (Exception e) {
+                        }
+                        break;
+
+                    case 6:
+                        try {
+                            hand6Button.fire();
+                        } catch (Exception e) {
+                        }
+                        break;
+                    case 7:
+                        try {
+                            hand7Button.fire();
+                        } catch (Exception e) {
+                        }
+                        break;
+                    case 8:
+                        try {
+                            hand8Button.fire();
+                        } catch (Exception e) {
+                        }
+                        break;
+                    case 9:
+                        try {
+                            hand9Button.fire();
+                        } catch (Exception e) {
+                        }
+                        break;
+                }
+            }
+            else{
+            }
+        }
+    }
+
+
+
     /**
      * print map button -> map gets printed and starting point selection appears
      */
@@ -972,6 +1044,10 @@ public class GameViewModel {
         emptyView.setFitHeight(43);
 
         robotBoard.add(emptyView, 0, 0);
+
+
+        //TODO just testing
+        moveRobot();
     }
 
     /**
@@ -986,7 +1062,7 @@ public class GameViewModel {
         }
         getCardsButton.setVisible(true);
         startGameButton.setVisible(false);
-
+        Text.setText("Click on 'get cards'!");
     }
 
 
@@ -1784,6 +1860,7 @@ public class GameViewModel {
         return robotSelectStartPointView;
     }
 
+    //ToDo starting point for Death Trap
 
     public void startingPoint1Action(ActionEvent actionEvent) {
         robotBoard.getChildren().remove(1);
@@ -1872,59 +1949,29 @@ public class GameViewModel {
 
 
     public void moveRobot() {
-
-
-        ImageView hammerView = new ImageView(imageHammer);
-        ImageView hulkView = new ImageView(imageHulk);
-        ImageView spinView = new ImageView(imageSpin);
-        ImageView squashView = new ImageView(imageSquash);
-        ImageView twitchView = new ImageView(imageTwitch);
-        ImageView twonkeyView = new ImageView(imageTwonkey);
-
-        hammerView.setFitWidth(43);
-        hammerView.setFitHeight(43);
-        hulkView.setFitWidth(43);
-        hulkView.setFitHeight(43);
-        spinView.setFitWidth(43);
-        spinView.setFitHeight(43);
-        squashView.setFitWidth(43);
-        squashView.setFitHeight(43);
-        twitchView.setFitWidth(43);
-        twitchView.setFitHeight(43);
-        twonkeyView.setFitWidth(43);
-        twonkeyView.setFitHeight(43);
-
-
-
-        //rotating image view
-        //ImageView testViewRotate = new ImageView(test);
-        //testViewRotate.setRotate(90);
+        checkYourbotImageView();
 
 
         int x = 5;
         int y = 3;
 
 
-        robotBoard.add(hammerView, x, y);
+        robotBoard.add(checkYourbotImageView(), x, y);
 
-        PauseTransition move1d = new PauseTransition(Duration.seconds(2));
-        move1d.setOnFinished(e -> robotBoard.add(hammerView, x, y +1));
-        move1d.play();
+        PauseTransition remove = new PauseTransition(Duration.seconds(1));
+        remove.setOnFinished(e -> robotBoard.getChildren().remove(1));
+        remove.play();
 
-        /*
-        PauseTransition move2 = new PauseTransition(Duration.seconds(3));
-        move2.setOnFinished(e -> robotBoard.add(testView, x, y+2));
-        move2.play();
+        PauseTransition move1 = new PauseTransition(Duration.seconds(2));
+        move1.setOnFinished(e -> robotBoard.add(checkYourbotImageView(), x, y +1));
+        move1.play();
 
-        PauseTransition move3 = new PauseTransition(Duration.seconds(4));
-        move3.setOnFinished(e -> robotBoard.add(testView, x +1 , y+2));
-        move3.play();
+        PauseTransition remove2 = new PauseTransition(Duration.seconds(2));
+        remove2.setOnFinished(e -> robotBoard.getChildren().remove(1));
+        remove2.play();
 
-        PauseTransition move4 = new PauseTransition(Duration.seconds(5));
-        move4.setOnFinished(e -> robotBoard.add(testView, x +1 , y+2));
-        move4.play();
 
-         */
+
     }
 
 
@@ -2085,8 +2132,9 @@ public class GameViewModel {
         printCards();
     }
 
-    public void MouseAction(MouseEvent mouseEvent) {
 
+
+    public void MouseAction(MouseEvent mouseEvent) {
         //TODO connect to refresher here!
     }
 
@@ -2220,24 +2268,6 @@ public class GameViewModel {
         pauseTransition0.setOnFinished(e -> timer.setText("0"));
         pauseTransition0.play();
     }
-
-
-
-        /*
-        Timer timer30 = new Timer();
-        try {
-            timerStarted = true;
-            int timeInSeconds = 30;
-            while (timerStarted && timeInSeconds > 0) {
-
-                timer.setText("" + timeInSeconds);
-                TimeUnit.SECONDS.sleep(1);
-                timeInSeconds--;
-            }
-            timerStarted = false;
-
-         */
-
 }
 
 
