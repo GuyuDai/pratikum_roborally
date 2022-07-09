@@ -69,3 +69,13 @@
     -fx-background-position: center 8px;
     -fx-background-radius: 10;
 }
+
+.setCheckPointImage {
+    -fx-background-image: url("/checkpoint.png");
+}
+
+.label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16;
+}
