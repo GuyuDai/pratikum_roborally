@@ -224,16 +224,19 @@ public class RR extends Thread implements GameLogic {
   }
 
   public void setPriority() {
+    System.out.println("enter setPriority");  //test
     for (Player player : activePlayers) {
       player.setPriority(Math.abs(this.getPositionAntenna().getX() - player.getOwnRobot().getCurrentPosition().getX())
               + Math.abs(this.getPositionAntenna().getY() - player.getOwnRobot().getCurrentPosition().getY()));
     }
+    System.out.println("leave SP");  //test
   }
 
   public void reorderPlayer() {
+    System.out.println("entry RP");  //test
     CopyOnWriteArrayList<Player> temp = new CopyOnWriteArrayList<Player>();
+    int i = 1;
     while (activePlayers.size() > 0) {
-      int i = 1;
       for (Player player : activePlayers) {
         if (player.getPriority() == i) {
           temp.add(player);
@@ -241,8 +244,11 @@ public class RR extends Thread implements GameLogic {
         }
       }
       i++;
+      System.out.println(i);//test
     }
     activePlayers = temp;
+    System.out.println("leave RP");  //test
+
   }
 
   public void doGameInitializing(){
@@ -256,6 +262,7 @@ public class RR extends Thread implements GameLogic {
   }
 
   public void doBulidingPhase() {
+    System.out.println("enter building phase");  //test
     this.activePhase = 0;
     sendMessageToAll(new ActivePhase(activePhase));
     sendMessageToAll(new ReceivedChat("choose your starting position",-1,false));
@@ -263,18 +270,21 @@ public class RR extends Thread implements GameLogic {
     while (finishedPlayers < activeClients.size()){
       finishedPlayers = 0;
       for(ServerThread serverThread : getActiveClients()){
-        if(serverThread.getStartingPosition() != null){
+        if(serverThread.getPlayer().getOwnRobot().getStartPosition() != null){
           finishedPlayers ++;
         }
       }
     }
+    System.out.println("leave while");//test
 
     for(Player player : getActivePlayers()){
       player.getOwnRobot().setCurrentPosition(player.getOwnRobot().getStartPosition());
     }
+    System.out.println("leave for");//test
     setPriority();
     reorderPlayer();
     nextGameState();
+    System.out.println("leave building phase");  //test
   }
 
 

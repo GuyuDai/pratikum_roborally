@@ -1,7 +1,6 @@
 package server;
 
 
-import com.google.gson.GsonBuilder;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -17,8 +16,6 @@ import protocol.HelloServer.HelloServerBody;
 import protocol.PlayCard.PlayCardBody;
 import protocol.PlayerValues.PlayerValuesBody;
 import protocol.ProtocolFormat.Message;
-import protocol.ProtocolFormat.MessageAdapter;
-import protocol.ProtocolFormat.MessageBody;
 import protocol.SelectedDamage.SelectedDamageBody;
 import protocol.ProtocolFormat.MessageType;
 import protocol.SendChat.SendChatBody;
@@ -270,8 +267,8 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.alive:
-                Timer.countDown(5);
-                sendMessage(new Alive().toString());
+                //Timer.countDown(5);
+                //sendMessage(new Alive().toString());
                 break;
 
             case MessageType.playerValues:
@@ -413,7 +410,7 @@ public class ServerThread implements Runnable {
                 register = cardSelectedBody.getRegister();
                 break;
 
-            case MessageType.selectCard:
+            case MessageType.selectedCard:
                 SelectedCardBody selectedCardBody = new Gson().fromJson(body,SelectedCardBody.class);
                 if(currentGame != null && currentGame.getCurrentState().equals(GameState.ProgrammingPhase)){
                     register = selectedCardBody.getRegister();
