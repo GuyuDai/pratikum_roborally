@@ -449,6 +449,7 @@ public class GameViewModel {
     public void setYourBotIcon(){
         yourBotText.setVisible(true);
         int yourId=Client.getClientReceive().getClientID();
+        String yourName=Client.getClientReceive().getNameById(yourId);
         int yourRobotNumber=Client.getClientReceive().getRobotById(yourId);
         Image robotIcon=null;
         switch (yourRobotNumber) {
@@ -472,8 +473,73 @@ public class GameViewModel {
                 break;
         }
         yourBot.setImage(robotIcon);
+        yourBotText.setText(yourName);
     }
 
+
+    @FXML
+    ImageView playerBot1, playerBot2, playerBot3,playerBot4, playerBot5, playerBot6;
+    @FXML
+    Label playerName1, playerName2, playerName3, playerName4, playerName5, playerName6 ;
+
+    /**
+     * Set other player´s icon and name on board.
+     */
+    public void setOthersBotIcon() {
+        for (int id : Client.getClientReceive().getIdRobot().keySet()) {
+            if (id != Client.getClientReceive().getClientID()) {
+                int otherRobotNumber = Client.getClientReceive().getIdRobot().get(id);
+                String playerName = Client.getClientReceive().getNameById(id);
+                Image otherRobotIcon = null;
+                switch (otherRobotNumber) {
+                    case 1:
+                        otherRobotIcon = imageHulk;
+                        break;
+                    case 2:
+                        otherRobotIcon = imageSpin;
+                        break;
+                    case 3:
+                        otherRobotIcon = imageSquash;
+                        break;
+                    case 4:
+                        otherRobotIcon = imageHammer;
+                        break;
+                    case 5:
+                        otherRobotIcon = imageTwonkey;
+                        break;
+                    case 6:
+                        otherRobotIcon = imageTwitch;
+                        break;
+                }
+
+                switch (otherRobotNumber) {
+                    case 1:
+                        playerBot1.setImage(otherRobotIcon);
+                        playerName1.setText(playerName);
+                        break;
+                    case 2:
+                        playerBot2.setImage(otherRobotIcon);
+                        playerName2.setText(playerName);
+                        break;
+                    case 3:
+                        playerBot3.setImage(otherRobotIcon);
+                        playerName3.setText(playerName);
+                        break;
+                    case 4:
+                        playerBot4.setImage(otherRobotIcon);
+                        playerName4.setText(playerName);
+                        break;
+                    case 5:
+                        playerBot5.setImage(otherRobotIcon);
+                        playerName5.setText(playerName);
+                        break;
+                    case 6:
+                        playerBot6.setImage(otherRobotIcon);
+                        playerName6.setText(playerName);
+                }
+            }
+        }
+    }
 
     /**
      * print 9 random cards from a deck of 20
@@ -897,6 +963,7 @@ public class GameViewModel {
         selectStartingPoint.setVisible(true);
         printMapButton.setVisible(false);
         setYourBotIcon();
+        setOthersBotIcon();
     }
 
     /**
@@ -1875,6 +1942,7 @@ public class GameViewModel {
         ImageView robotPic=new ImageView(robotImage);
         robotPic.setFitWidth(43);
         robotPic.setFitHeight(43);
+        robotPic.setRotate(90);
         switch (startingPointNumber){
             case 1:
                 robotBoard.add(robotPic,1,1);
@@ -1924,6 +1992,7 @@ public class GameViewModel {
                 ImageView robotPic = new ImageView(otherRobotImage);
                 robotPic.setFitWidth(43);
                 robotPic.setFitHeight(43);
+                robotPic.setRotate(90);
                 switch (startingPointNumber) {
                     case 1:
                         robotBoard.add(robotPic, 1, 1);
