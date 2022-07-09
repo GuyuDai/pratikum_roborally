@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import protocol.*;
 import protocol.ProtocolFormat.Message;
+import server.Control.DisconnectionController;
 import server.Player.Player;
 
 public class Server{
@@ -170,5 +171,6 @@ public class Server{
     public static void main(String[] args) {
         System.out.println("server starts");
         server.run();
+        new DisconnectionController().start();
     }
 }

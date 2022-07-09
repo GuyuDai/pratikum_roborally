@@ -23,6 +23,8 @@ public class Player implements PlayerAction{
   public int energyCubes;
   private boolean isAI = false;
   private boolean isReady = false;
+  private static final String[] AINameArray = new String[] {"AIBob","AIAlice","AIJay","AIMax","AICarl","AITom"};
+
 
 
   public Player(String name, int ID){
@@ -106,28 +108,14 @@ public class Player implements PlayerAction{
     else return false;
    }
 
-   public void setAI(boolean AI){
-     this.isAI=AI;
-     String[] AINameArray=new String[] {"AIBob","AIAlice","AIJay","AIMax","AICarl","AITom"};
-     //TODO need a controller to make sure AI doesnt have same name
-     Random rand= new Random();
-     int number=rand.nextInt(5);
-     String AIName=AINameArray[number];
-     setName(AIName);
-     setAIRobot();
-  }
+   public void setAI(int figure){
+     this.isAI = true;
+     setName(AINameArray[clientID]);
+     setOwnRobot(figure);
+   }
    public boolean isAI(){
     return isAI;
    }
-
-   public void setAIRobot(){
-    if(this.isAI()){
-      Random rand=new Random();
-      int robotNumber= rand.nextInt(5);
-      setOwnRobot(robotNumber);
-    }
-   }
-
 
 
   public CopyOnWriteArrayList<Card> getRegister() {

@@ -25,6 +25,7 @@ import protocol.MapSelected.MapSelectedBody;
 import protocol.SelectedCard.SelectedCardBody;
 import server.BoardTypes.*;
 import server.CardTypes.Card;
+import server.Control.DisconnectionController;
 import server.Control.Position;
 import server.Control.Timer;
 import server.Game.GameState;
@@ -40,7 +41,7 @@ public class ServerThread implements Runnable {
     private  BufferedWriter writeOutput;
     public static boolean gameActive = false;
     private boolean alive;
-    private static  List<ServerThread> connectedClients = new ArrayList<ServerThread>();
+    private static List<ServerThread> connectedClients = new ArrayList<ServerThread>();
     private int phase;
     private String type;
     private int clientID;
@@ -56,12 +57,11 @@ public class ServerThread implements Runnable {
     private String map;
     private Player player;
     private Position startingPosition;
-
     private String[] damageCards;
 
 
     public ServerThread(Socket clientSocket) throws IOException {
-        this. clientSocket = clientSocket;
+        this.clientSocket = clientSocket;
         connectedClients = Server.getConnectedClients();
         try {
             readInput = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -250,27 +250,39 @@ public class ServerThread implements Runnable {
                     setAI(isAI);
                     if(isAI){
                         player = new Player("AI", clientID);
-                        player.setAI(isAI);
-                    }
-                    for (ServerThread serverThread: connectedClients){
-                        int othersID=serverThread.getID();
-                        String othersName=serverThread.getName();
-                        int othersFigure=serverThread.getFigure();
-                        if(othersID != clientID){
-                            sendMessage( new PlayerAdded(othersID,othersName,othersFigure).toString());
+                        int availableFigure = 0;
+                        outer: while(true){
+                            inner: for(ServerThread serverThread : connectedClients){
+                                if(availableFigure == serverThread.getFigure()){
+                                    availableFigure++;
+                                    break inner;
+                                }
+                                break outer;
+                            }
                         }
-                    }
+                        player.setAI(availableFigure);
+                    }else {
+                        for (ServerThread serverThread: connectedClients){
+                            int othersID = serverThread.getID();
+                            String othersName = serverThread.getName();
+                            int othersFigure = serverThread.getFigure();
+                            if(othersID != clientID){
+                                sendMessage( new PlayerAdded(othersID,othersName,othersFigure).toString());
+                            }
+                        }
 
-                    Timer.countDown(5);
-                    sendMessage(new Alive().toString());
+                        Timer.countDown(5);
+                        sendMessage(new Alive().toString());
+                    }
                 }else {
                     sendMessage(new ErrorMessage("your protocol version is unsupported").toString());
                 }
                 break;
 
             case MessageType.alive:
-                //Timer.countDown(5);
-                //sendMessage(new Alive().toString());
+                DisconnectionController.updateAlive(this);
+                Timer.countDown(5);
+                sendMessage(new Alive().toString());
                 break;
 
             case MessageType.playerValues:
@@ -288,9 +300,7 @@ public class ServerThread implements Runnable {
                     this.figure = tempFigure;
                     player = new Player(name, clientID);
                     player.setOwnRobot(figure);
-                    sendToAll(
-                        new PlayerAdded(clientID,name,figure).toString()
-                );
+                    sendToAll(new PlayerAdded(clientID,name,figure).toString());
                 for (ServerThread serverThread: connectedClients) {
                     int othersID = serverThread.getID();
                     boolean othersReady = serverThread.isReady();

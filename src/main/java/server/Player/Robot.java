@@ -193,7 +193,6 @@ public class Robot implements RobotAction {
     currentGame.sendMessageToAll(new Reboot(owner.clientID));
     owner.drawDamage("Spam",2);
     owner.discardRegister();
-    // TODO: 2022/7/8
   }
   private void bePushedOneStep(Direction direction) {
     Position togo = this.getCurrentPosition().getNextPosition(direction);
