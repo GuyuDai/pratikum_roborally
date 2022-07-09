@@ -964,6 +964,15 @@ public class GameViewModel {
         printMapButton.setVisible(false);
         setYourBotIcon();
         setOthersBotIcon();
+
+        URL empty = getClass().getResource("/Empty.png");
+        Image imageEmpty = new Image(empty.toString());
+
+        ImageView emptyView = new ImageView(imageEmpty);
+        emptyView.setFitWidth(43);
+        emptyView.setFitHeight(43);
+
+        robotBoard.add(emptyView, 0, 0);
     }
 
     /**
@@ -1745,50 +1754,84 @@ public class GameViewModel {
         return startingPointCount;
     }
 
+
+    public ImageView checkYourbotImageView(){
+        int yourId=Client.getClientReceive().getClientID();
+        int yourRobotNumber=Client.getClientReceive().getRobotById(yourId);
+        Image robotSelectStartPoint = null;
+        switch (yourRobotNumber){
+            case 1:
+                robotSelectStartPoint=imageHulk;//hulk
+                break;
+            case 2:
+                robotSelectStartPoint=imageSpin;//spin
+                break;
+            case 3:
+                robotSelectStartPoint=imageSquash;//squash
+                break;
+            case 4:
+                robotSelectStartPoint=imageHammer;//hammer
+                break;
+            case 5:
+                robotSelectStartPoint=imageTwonkey;//twonkey
+                break;
+            case 6:
+                robotSelectStartPoint=imageTwitch;//twitch
+                break;
+        }
+        ImageView robotSelectStartPointView = new ImageView(robotSelectStartPoint);
+        robotSelectStartPointView.setFitWidth(43);
+        robotSelectStartPointView.setFitHeight(43);
+        return robotSelectStartPointView;
+    }
+
+
     public void startingPoint1Action(ActionEvent actionEvent) {
+        robotBoard.getChildren().remove(1);
+        robotBoard.add(checkYourbotImageView(), 1,1);
         checkStart();
         setStartingPointCount(1);
-        x = 1;
-        y = 1;
     }
 
     public void startingPoint2Action(ActionEvent actionEvent) {
+        robotBoard.getChildren().remove(1);
+        robotBoard.add(checkYourbotImageView(), 0,3);
         checkStart();
         setStartingPointCount(2);
-        x = 3;
-        y = 0;
     }
 
     public void startingPoint3Action(ActionEvent actionEvent) {
+        robotBoard.getChildren().remove(1);
+        robotBoard.add(checkYourbotImageView(), 1,4);
         checkStart();
         setStartingPointCount(3);
-        x = 4;
-        y = 1;
     }
 
     public void startingPoint4Action(ActionEvent actionEvent) {
+        robotBoard.getChildren().remove(1);
+        robotBoard.add(checkYourbotImageView(), 1,5);
         checkStart();
         setStartingPointCount(4);
-        x = 5;
-        y = 1;
     }
 
     public void startingPoint5Action(ActionEvent actionEvent) {
+        robotBoard.getChildren().remove(1);
+        robotBoard.add(checkYourbotImageView(), 0,6);
         checkStart();
         setStartingPointCount(5);
-        x = 6;
-        y = 0;
     }
 
     public void startingPoint6Action(ActionEvent actionEvent) {
+        robotBoard.getChildren().remove(1);
+        robotBoard.add(checkYourbotImageView(), 1,8);
         checkStart();
         setStartingPointCount(6);
-        x = 8;
-        y = 1;
     }
 
 
+
     public void startPointOKAction(ActionEvent actionEvent) {
+        robotBoard.getChildren().remove(1);
            switch (getStartingPointCount()){
                case 1:
                    Client.getClientReceive().sendMessage(new SetStartingPoint(1,1).toString());
