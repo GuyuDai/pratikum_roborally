@@ -875,7 +875,7 @@ public class GameViewModel {
                 hand7Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[6],4).toString());
                 playCardBtn.setVisible(true);
-                Text.setText("Click on 'play cards'! ");
+                Text.setText("Click on 'play cards'!");
                 timer30Sec();
                 break;
         }
@@ -954,6 +954,79 @@ public class GameViewModel {
         }
     }
 
+
+    /**
+     * pick 5 cards from hands automatically -> when timer is 0 and for AI
+     */
+    public void autoFillRegister(){
+        for(int i = 1; i < 10 ; i ++) {
+            if (getRegisterCount() != 5) {
+                switch (i) {
+                    case 1:
+                        try {
+                            hand1Button.fire();
+                        } catch (Exception e) {
+                        }
+                        break;
+                    case 2:
+                        try {
+                            hand2Button.fire();
+
+                        } catch (Exception e) {
+                        }
+                        break;
+                    case 3:
+                        try {
+                            hand3Button.fire();
+                        } catch (Exception e) {
+                        }
+                        break;
+                    case 4:
+                        try {
+                            hand4Button.fire();
+                        } catch (Exception e) {
+                        }
+                        break;
+                    case 5:
+                        try {
+                            hand5Button.fire();
+                        } catch (Exception e) {
+                        }
+                        break;
+
+                    case 6:
+                        try {
+                            hand6Button.fire();
+                        } catch (Exception e) {
+                        }
+                        break;
+                    case 7:
+                        try {
+                            hand7Button.fire();
+                        } catch (Exception e) {
+                        }
+                        break;
+                    case 8:
+                        try {
+                            hand8Button.fire();
+                        } catch (Exception e) {
+                        }
+                        break;
+                    case 9:
+                        try {
+                            hand9Button.fire();
+                        } catch (Exception e) {
+                        }
+                        break;
+                }
+            }
+            else{
+            }
+        }
+    }
+
+
+
     /**
      * print map button -> map gets printed and starting point selection appears
      */
@@ -991,7 +1064,7 @@ public class GameViewModel {
         }
         getCardsButton.setVisible(true);
         startGameButton.setVisible(false);
-
+        Text.setText("Click on 'get cards'!");
     }
 
 
@@ -1789,6 +1862,7 @@ public class GameViewModel {
         return robotSelectStartPointView;
     }
 
+    //ToDo starting point for Death Trap
 
     public void startingPoint1Action(ActionEvent actionEvent) {
         robotBoard.getChildren().remove(1);
