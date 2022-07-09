@@ -119,13 +119,13 @@ public class GameViewModel {
     private Button playCardBtn;
 
     @FXML
-    private Button selectMap;
-
-    @FXML
     private Button startGameButton;
 
     @FXML
     private Button selectMapButton;
+
+    @FXML
+    private Button getCardsButton;
 
 
     /**
@@ -829,7 +829,7 @@ public class GameViewModel {
 
 
     /**
-     * start game button -> map gets printed and register appears.
+     * start game button -> map gets printed and starting point selection appears.
      */
 
     public void startGameButtonAction(ActionEvent actionEvent) {
@@ -837,19 +837,7 @@ public class GameViewModel {
         String map=Client.getClientReceive().getBoard();
         printMapGUI(map);
 
-        hand1Button.setVisible(true);
-        hand2Button.setVisible(true);
-        hand3Button.setVisible(true);
-        hand4Button.setVisible(true);
-        hand5Button.setVisible(true);
-        hand6Button.setVisible(true);
-        hand7Button.setVisible(true);
-        hand8Button.setVisible(true);
-        hand9Button.setVisible(true);
-
-        //printCards();
-        Text.setText("Select 5 of these cards for your register.");
-        playCardBtn.setVisible(true);
+        Text.setText("Select a starting point.");
         selectStartingPoint.setVisible(true);
     }
 
@@ -1115,29 +1103,29 @@ public class GameViewModel {
                  * URLs for Push Panels
                  */
 
-        URL pp135Down = getClass().getResource("/pushpanel/pp135Down.png");
-        Image imagePP135Down = new Image(pp135Down.toString());
+                URL pp135Down = getClass().getResource("/pushpanel/pp135Down.png");
+                Image imagePP135Down = new Image(pp135Down.toString());
 
-        URL pp135Up = getClass().getResource("/pushpanel/pp135Up.png");
-        Image imagePP135Up = new Image(pp135Up.toString());
+                URL pp135Up = getClass().getResource("/pushpanel/pp135Up.png");
+                Image imagePP135Up = new Image(pp135Up.toString());
 
-        URL pp135Right = getClass().getResource("/pushpanel/pp135Right.png");
-        Image imagePP135Right = new Image(pp135Right.toString());
+                URL pp135Right = getClass().getResource("/pushpanel/pp135Right.png");
+                Image imagePP135Right = new Image(pp135Right.toString());
 
-        URL pp135Left = getClass().getResource("/pushpanel/pp135Left.png");
-        Image imagePP135Left = new Image(pp135Left.toString());
+                URL pp135Left = getClass().getResource("/pushpanel/pp135Left.png");
+                Image imagePP135Left = new Image(pp135Left.toString());
 
-        URL pp24Down = getClass().getResource("/pushpanel/pp24Down.png");
-        Image imagePP24Down = new Image(pp24Down.toString());
+                URL pp24Down = getClass().getResource("/pushpanel/pp24Down.png");
+                Image imagePP24Down = new Image(pp24Down.toString());
 
-        URL pp24Up = getClass().getResource("/pushpanel/pp24Up.png");
-        Image imagePP24Up = new Image(pp24Up.toString());
+                URL pp24Up = getClass().getResource("/pushpanel/pp24Up.png");
+                Image imagePP24Up = new Image(pp24Up.toString());
 
-        URL pp24Right = getClass().getResource("/pushpanel/pp24Right.png");
-        Image imagePP24Right = new Image(pp24Right.toString());
+                URL pp24Right = getClass().getResource("/pushpanel/pp24Right.png");
+                Image imagePP24Right = new Image(pp24Right.toString());
 
-        URL pp24Left = getClass().getResource("/pushpanel/pp24Left.png");
-        Image imagePP24Left = new Image(pp24Left.toString());
+                URL pp24Left = getClass().getResource("/pushpanel/pp24Left.png");
+                Image imagePP24Left = new Image(pp24Left.toString());
 
 
 
@@ -1682,36 +1670,96 @@ public class GameViewModel {
                    Client.getClientReceive().sendMessage(new SetStartingPoint(8,1).toString());
                    break;
            }
+        //checkStart();
 
 
+        //Todo put TIMER to right place in code (card selection), here is just for testing
+        timerText.setVisible(true);
+        Text.setText("You have 30 seconds left to finish selecting your register. Hurry!!");
+        timer.setText("30");
+        timer30Sec();
 
 
+        moveRobot(); //movement just for testing
 
+        getCardsButton.setVisible(true);
 
-        /*
-        Timer timer30 = new Timer();
-        try {
-            timerStarted = true;
-            int timeInSeconds = 30;
-            while (timerStarted && timeInSeconds > 0) {
-
-
-
-
-                //System.out.println(timeInSeconds);  //for testing
-                //timer.setText("" + timeInSeconds);
-                TimeUnit.SECONDS.sleep(1);
-                timeInSeconds--;
-            }
-            timerStarted = false;
-
-        } catch (InterruptedException e) {
-            timerStarted = false;
-            e.printStackTrace();
-        }
-         */
     }
 
+
+    public void moveRobot() {
+
+        URL hammer = getClass().getResource("/Robots/hammer bot.png");
+        Image imageHammer = new Image(hammer.toString());
+
+        URL hulk = getClass().getResource("/Robots/hulk x90.png");
+        Image imageHulk = new Image(hulk.toString());
+
+        URL spin = getClass().getResource("/Robots/spin bot.png");
+        Image imageSpin = new Image(spin.toString());
+
+        URL squash = getClass().getResource("/Robots/squash bot.png");
+        Image imageSquash = new Image(squash.toString());
+
+        URL twitch = getClass().getResource("/Robots/twitch.png");
+        Image imageTwitch = new Image(twitch.toString());
+
+        URL twonkey = getClass().getResource("/Robots/twonkey.png");
+        Image imageTwonkey = new Image(twonkey.toString());
+
+
+        ImageView hammerView = new ImageView(imageHammer);
+        ImageView hulkView = new ImageView(imageHulk);
+        ImageView spinView = new ImageView(imageSpin);
+        ImageView squashView = new ImageView(imageSquash);
+        ImageView twitchView = new ImageView(imageTwitch);
+        ImageView twonkeyView = new ImageView(imageTwonkey);
+
+        hammerView.setFitWidth(43);
+        hammerView.setFitHeight(43);
+        hulkView.setFitWidth(43);
+        hulkView.setFitHeight(43);
+        spinView.setFitWidth(43);
+        spinView.setFitHeight(43);
+        squashView.setFitWidth(43);
+        squashView.setFitHeight(43);
+        twitchView.setFitWidth(43);
+        twitchView.setFitHeight(43);
+        twonkeyView.setFitWidth(43);
+        twonkeyView.setFitHeight(43);
+
+
+
+        //rotating image view
+        //ImageView testViewRotate = new ImageView(test);
+        //testViewRotate.setRotate(90);
+
+
+        int x = 5;
+        int y = 3;
+
+
+        robotBoard.add(hammerView, x, y);
+
+        PauseTransition move1d = new PauseTransition(Duration.seconds(2));
+        move1d.setOnFinished(e -> robotBoard.add(hammerView, x, y +1));
+        move1d.play();
+
+        /*
+        PauseTransition move2 = new PauseTransition(Duration.seconds(3));
+        move2.setOnFinished(e -> robotBoard.add(testView, x, y+2));
+        move2.play();
+
+        PauseTransition move3 = new PauseTransition(Duration.seconds(4));
+        move3.setOnFinished(e -> robotBoard.add(testView, x +1 , y+2));
+        move3.play();
+
+        PauseTransition move4 = new PauseTransition(Duration.seconds(5));
+        move4.setOnFinished(e -> robotBoard.add(testView, x +1 , y+2));
+        move4.play();
+
+         */
+    }
 
 
     public void checkStart() {
@@ -1790,7 +1838,42 @@ public class GameViewModel {
         }
     }
 
-    public void timer30Sec (){
+
+    public void playDamageCards(ActionEvent actionEvent) {
+    }
+
+
+
+    public void playCardBtnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void getCardsButtonAction(ActionEvent actionEvent) {
+        //make hand buttons visible
+        hand1Button.setVisible(true);
+        hand2Button.setVisible(true);
+        hand3Button.setVisible(true);
+        hand4Button.setVisible(true);
+        hand5Button.setVisible(true);
+        hand6Button.setVisible(true);
+        hand7Button.setVisible(true);
+        hand8Button.setVisible(true);
+        hand9Button.setVisible(true);
+
+        Text.setText("Select 5 of these cards for your register.");
+    }
+
+    public void MouseAction(MouseEvent mouseEvent) {
+        System.out.println("hello this is a test");
+        //TODO connect to refresher here!
+    }
+
+
+
+    /**
+     * timer 30 seconds when first player finished selecting register
+     */
+    public void timer30Sec () {
         PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
         pauseTransition.setOnFinished(e -> timer.setText("29"));
         pauseTransition.play();
@@ -1912,6 +1995,21 @@ public class GameViewModel {
         pauseTransition0.play();
     }
 
+
+        /*
+        Timer timer30 = new Timer();
+        try {
+            timerStarted = true;
+            int timeInSeconds = 30;
+            while (timerStarted && timeInSeconds > 0) {
+
+                timer.setText("" + timeInSeconds);
+                TimeUnit.SECONDS.sleep(1);
+                timeInSeconds--;
+            }
+            timerStarted = false;
+
+         */
 
 }
 
