@@ -13,6 +13,7 @@ import protocol.ProtocolFormat.MessageType;
 
 public class PickDamage extends Message {
 
+    // TODO: 2022/7/9 when a robot get hurt, we need to send this message to its owner
     public class PickDamageBody extends MessageBody {
         protected int count;
         protected String[] availablePiles;

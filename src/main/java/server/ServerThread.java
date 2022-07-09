@@ -57,6 +57,8 @@ public class ServerThread implements Runnable {
     private Player player;
     private Position startingPosition;
 
+    private String[] damageCards;
+
 
     public ServerThread(Socket clientSocket) throws IOException {
         this. clientSocket = clientSocket;
@@ -421,11 +423,12 @@ public class ServerThread implements Runnable {
                         if (currentCard != null && currentCard.getCardName().equals(card)) {
                             player.getRegister().add(currentCard);
                             player.getHands().remove(currentCard);
+                            i = 0;
                         }   //if remove one Card in handsList,don't do i++
                         else {
                             i++;
                         }
-                        //TODO change DoProgrammingPhase later,player can do card selection here;
+                        //change DoProgrammingPhase later maybe,player can do card selection here;
                     }
                     int filledCardNumber = player.getRegister().size();
                     String cardSelected="";
@@ -444,7 +447,8 @@ public class ServerThread implements Runnable {
             case MessageType.selectedDamage:
                 SelectedDamageBody selectedDamageBody = new Gson().fromJson(body,SelectedDamageBody.class);
                 if(currentGame != null){
-                 String[] damageCards = selectedDamageBody.getCards();
+                 damageCards = selectedDamageBody.getCards();
+                    // TODO: 2022/7/10 in the  
                  for(String damageCard : damageCards){
                      player.drawDamage(damageCard,1);
                     }

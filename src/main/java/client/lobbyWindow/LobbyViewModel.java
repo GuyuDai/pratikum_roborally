@@ -158,7 +158,7 @@ public class LobbyViewModel {
      * message for all
      */
     private String createMessage(String message){
-        String sendChat=new SendChat(message,-1).toString();
+        String sendChat = new SendChat(message,-1).toString();
         return sendChat;
     }
 
@@ -174,8 +174,8 @@ public class LobbyViewModel {
         }
         String target=splittingTarget[0].trim();
         int to=Client.getClientReceive().getIdByName(target);
-        String messageToSend=realMessage.toString().trim();
-        String sendChat=new SendChat(messageToSend,to).toString();
+        String messageToSend = realMessage.toString().trim();
+        String sendChat = new SendChat(messageToSend,to).toString();
 
         return sendChat;
     }
