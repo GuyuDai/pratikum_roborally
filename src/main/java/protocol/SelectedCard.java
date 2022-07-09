@@ -27,7 +27,7 @@ public class SelectedCard extends Message {
         }
     }
     public SelectedCard(String cardName, int register){
-        this.messageType = MessageType.selectCard;
+        this.messageType = MessageType.selectedCard;
         SelectedCardBody body = new SelectedCardBody();
         body.card = cardName;
         body.register = register;

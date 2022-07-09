@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="934.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.loginWindow.LoginViewModel">
+<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="934.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.loginWindow.LoginViewModel">
    <Button fx:id="sendNameButton" layoutX="618.0" layoutY="435.0" mnemonicParsing="false" onAction="#initPlayer" prefHeight="83.0" prefWidth="90.0" styleClass="backgroundColor" stylesheets="@../styles.css">
       <font>
          <Font size="22.0" />
@@ -89,12 +89,12 @@
                   </image></ImageView>
             </graphic>
          </ToggleButton>
-         <Label layoutX="34.0" layoutY="220.0" prefHeight="18.0" prefWidth="90.0" text="SQUASH BOT" textFill="WHITE">
+         <Label layoutX="26.0" layoutY="220.0" prefHeight="25.0" prefWidth="116.0" text="SQUASH BOT" textFill="WHITE">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>
          </Label>
-         <Label layoutX="554.0" layoutY="220.0" prefHeight="18.0" prefWidth="90.0" text="HAMMER BOT" textFill="WHITE">
+         <Label layoutX="546.0" layoutY="220.0" prefHeight="25.0" prefWidth="116.0" text="HAMMER BOT" textFill="WHITE">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>
@@ -104,7 +104,7 @@
                <Font name="System Bold" size="14.0" />
             </font>
          </Label>
-         <Label layoutX="441.0" layoutY="220.0" prefHeight="18.0" prefWidth="56.0" text="TWITCH" textFill="WHITE">
+         <Label layoutX="436.0" layoutY="220.0" prefHeight="25.0" prefWidth="90.0" text="TWITCH" textFill="WHITE">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>
@@ -114,7 +114,7 @@
                <Font name="System Bold" size="14.0" />
             </font>
          </Label>
-         <Label layoutX="176.0" layoutY="220.0" prefHeight="18.0" prefWidth="65.0" text="SPIN BOT" textFill="WHITE">
+         <Label layoutX="170.0" layoutY="220.0" prefHeight="25.0" prefWidth="81.0" text="SPIN BOT" textFill="WHITE">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>

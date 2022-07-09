@@ -63,6 +63,11 @@ public class ClientReceive extends Thread{
     protected int activePhaseNumber;
     protected int rebootClientId;
     protected Map<Integer,Integer[]> IdPosition = new HashMap<>();
+    protected List<Integer> IdList=new ArrayList<>();
+    protected Map<Integer,Integer> IdRobot=new HashMap<>();
+    protected Map<Integer,Integer>IdStartPoint= new HashMap<>();
+
+
 
     public ClientReceive(Socket socket) {
         this.socket = socket;
@@ -263,7 +268,9 @@ public class ClientReceive extends Thread{
                 playerId=playerAddedBody.getClientID();
                 playerName=playerAddedBody.getName();
                 figure=playerAddedBody.getFigure();
+                IdList.add(playerId);
                 robotNumbers.add(figure);
+                IdRobot.put(playerId,figure);
                 IdName.put(playerName,playerId);
                 break;
             case MessageType.receivedChat:
@@ -309,6 +316,33 @@ public class ClientReceive extends Thread{
             case MessageType.startingPointTaken:
                 StartingPointTaken.StartingPointTakenBody startingPointTakenBody = new Gson().fromJson(body,
                         StartingPointTaken.StartingPointTakenBody.class);
+                int takenX=startingPointTakenBody.getX();
+                int takenY=startingPointTakenBody.getY();
+                playerId=startingPointTakenBody.getClientID();
+                if(takenX==1 && takenY==1){
+                    startNumbers.add(1);
+                    IdStartPoint.put(playerId,1);
+                }
+                if(takenX==3 && takenY==0){
+                    startNumbers.add(2);
+                    IdStartPoint.put(playerId,2);
+                }
+                if(takenX==4 && takenY==1){
+                    startNumbers.add(3);
+                    IdStartPoint.put(playerId,3);
+                }
+                if (takenX==5 && takenY==1){
+                    startNumbers.add(4);
+                    IdStartPoint.put(playerId,4);
+                }
+                if(takenX==6 && takenY==0 ){
+                    startNumbers.add(5);
+                    IdStartPoint.put(playerId,5);
+                }
+                if (takenX==8 && takenY==1){
+                    startNumbers.add(6);
+                    IdStartPoint.put(playerId,6);
+                }
                 int takenX = startingPointTakenBody.getX();
                 int takenY = startingPointTakenBody.getY();
                 startingPositionAdd(takenX,takenY);
@@ -342,18 +376,22 @@ public class ClientReceive extends Thread{
                 positions=new Integer[]{x,y};
                 IdPosition.put(playerId,positions);
                 break;
+
             case MessageType.playerTurning:
                 PlayerTurning.PlayerTurningBody playerTurningBody=new Gson().fromJson(body, PlayerTurning.PlayerTurningBody.class);
                 turnDirection=playerTurningBody.getRotation();
                 break;
+
             case MessageType.animation:
                 Animation.AnimationBody animationBody=new Gson().fromJson(body,Animation.AnimationBody.class);
                 animationType=animationBody.getType();
                 break;
+
             case MessageType.activePhase:
                 ActivePhase.ActivePhaseBody activePhaseBody=new Gson().fromJson(body,ActivePhase.ActivePhaseBody.class);
                 activePhaseNumber=activePhaseBody.getPhase();
                 break;
+
             case MessageType.reboot:
                 Reboot.RebootBody rebootBody=new Gson().fromJson(body, Reboot.RebootBody.class);
                 rebootClientId=rebootBody.getClientID();
@@ -375,6 +413,25 @@ public class ClientReceive extends Thread{
             });
         }
     }
+
+    public int getFigure() {
+        return figure;
+    }
+
+    public Map<Integer, Integer> getIdRobot() {
+        return IdRobot;
+    }
+
+    public int getRobotById(int id){
+        return getIdRobot().get(id);
+    }
+
+    public Map<Integer, Integer> getIdStartPoint() {
+        return IdStartPoint;
+    }
+
+    public int getStartPointById(int id){ return  getIdStartPoint().get(id);}
+
     public int getIdByName(String name){
         return getIdName().get(name);
     }
@@ -496,6 +553,10 @@ public class ClientReceive extends Thread{
 
     public String[] getFilledRegister() {
         return filledRegister;
+    }
+
+    public List<Integer> getIdList() {
+        return IdList;
     }
 
     public String[] getCards() {

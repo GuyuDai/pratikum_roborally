@@ -25,7 +25,7 @@ public class MessageType {
     public static final String yourCards = "YourCards";
     public static final String notYourCards = "NotYourCards";
     public static final String shuffleCoding = "ShuffleCoding";
-    public static final String selectCard = "SelectCard";
+    public static final String selectedCard = "SelectedCard";
     public static final String cardSelected = "CardSelected";
     public static final String selectionFinished = "SelectionFinished";
     public static final String timerStarted = "TimerStarted";

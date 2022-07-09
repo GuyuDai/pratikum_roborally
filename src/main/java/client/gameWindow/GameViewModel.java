@@ -69,6 +69,7 @@ public class GameViewModel {
     private TextField timer30;
 
 
+
     /**
      * starting point selection
      */
@@ -95,6 +96,8 @@ public class GameViewModel {
     private Button startingPointOK;
 
     List<Integer> takenStartNumbers=new ArrayList<>();
+
+    List<Integer> allStartNumbers=new ArrayList<>();
 
 
 
@@ -123,9 +126,11 @@ public class GameViewModel {
 
     @FXML
     private Button selectMapButton;
-
     @FXML
     private Button getCardsButton;
+
+    @FXML
+    private Button printMapButton;
 
 
     /**
@@ -237,11 +242,18 @@ public class GameViewModel {
     private Label Text;
 
     @FXML
+    private Label yourBotText;
+
+    @FXML
+    private ImageView yourBot;
+
+    @FXML
     GridPane gameboard, startBoard, robotBoard, checkBoard;
 
     public String window = "Game";
     public ProgrammingDeck deck = new ProgrammingDeck();
 
+    String[] allTakenStaringPoint;
 
 
     /**
@@ -285,6 +297,24 @@ public class GameViewModel {
 
     URL urlCardHidden = getClass().getResource("/programmingCards/cardHidden.png");
     Image imageCardHidden = new Image(urlCardHidden.toString());
+
+    URL hammer = getClass().getResource("/Robots/hammer bot.png");
+    Image imageHammer = new Image(hammer.toString());
+
+    URL hulk = getClass().getResource("/Robots/hulk x90.png");
+    Image imageHulk = new Image(hulk.toString());
+
+    URL spin = getClass().getResource("/Robots/spin bot.png");
+    Image imageSpin = new Image(spin.toString());
+
+    URL squash = getClass().getResource("/Robots/squash bot.png");
+    Image imageSquash = new Image(squash.toString());
+
+    URL twitch = getClass().getResource("/Robots/twitch.png");
+    Image imageTwitch = new Image(twitch.toString());
+
+    URL twonkey = getClass().getResource("/Robots/twonkey.png");
+    Image imageTwonkey = new Image(twonkey.toString());
 
 
     public void initialize(Client client) {
@@ -413,7 +443,103 @@ public class GameViewModel {
     }
 
 
+    /**
+     * sets your own robot icon
+     */
+    public void setYourBotIcon(){
+        yourBotText.setVisible(true);
+        int yourId=Client.getClientReceive().getClientID();
+        String yourName=Client.getClientReceive().getNameById(yourId);
+        int yourRobotNumber=Client.getClientReceive().getRobotById(yourId);
+        Image robotIcon=null;
+        switch (yourRobotNumber) {
+            case 1:
+                robotIcon = imageHulk;//hulk
+                break;
+            case 2:
+                robotIcon = imageSpin;//spin
+                break;
+            case 3:
+                robotIcon = imageSquash;//squash
+                break;
+            case 4:
+                robotIcon = imageHammer;//hammer
+                break;
+            case 5:
+                robotIcon = imageTwonkey;//twonkey
+                break;
+            case 6:
+                robotIcon = imageTwitch;//twitch
+                break;
+        }
+        yourBot.setImage(robotIcon);
+        yourBotText.setText(yourName);
+    }
 
+
+    @FXML
+    ImageView playerBot1, playerBot2, playerBot3,playerBot4, playerBot5, playerBot6;
+    @FXML
+    Label playerName1, playerName2, playerName3, playerName4, playerName5, playerName6 ;
+
+    /**
+     * Set other player´s icon and name on board.
+     */
+    public void setOthersBotIcon() {
+        for (int id : Client.getClientReceive().getIdRobot().keySet()) {
+            if (id != Client.getClientReceive().getClientID()) {
+                int otherRobotNumber = Client.getClientReceive().getIdRobot().get(id);
+                String playerName = Client.getClientReceive().getNameById(id);
+                Image otherRobotIcon = null;
+                switch (otherRobotNumber) {
+                    case 1:
+                        otherRobotIcon = imageHulk;
+                        break;
+                    case 2:
+                        otherRobotIcon = imageSpin;
+                        break;
+                    case 3:
+                        otherRobotIcon = imageSquash;
+                        break;
+                    case 4:
+                        otherRobotIcon = imageHammer;
+                        break;
+                    case 5:
+                        otherRobotIcon = imageTwonkey;
+                        break;
+                    case 6:
+                        otherRobotIcon = imageTwitch;
+                        break;
+                }
+
+                switch (otherRobotNumber) {
+                    case 1:
+                        playerBot1.setImage(otherRobotIcon);
+                        playerName1.setText(playerName);
+                        break;
+                    case 2:
+                        playerBot2.setImage(otherRobotIcon);
+                        playerName2.setText(playerName);
+                        break;
+                    case 3:
+                        playerBot3.setImage(otherRobotIcon);
+                        playerName3.setText(playerName);
+                        break;
+                    case 4:
+                        playerBot4.setImage(otherRobotIcon);
+                        playerName4.setText(playerName);
+                        break;
+                    case 5:
+                        playerBot5.setImage(otherRobotIcon);
+                        playerName5.setText(playerName);
+                        break;
+                    case 6:
+                        playerBot6.setImage(otherRobotIcon);
+                        playerName6.setText(playerName);
+                }
+            }
+        }
+    }
 
     /**
      * print 9 random cards from a deck of 20
@@ -826,20 +952,44 @@ public class GameViewModel {
         }
     }
 
-
-
     /**
-     * start game button -> map gets printed and starting point selection appears.
+     * print map button -> map gets printed and starting point selection appears
      */
-
-    public void startGameButtonAction(ActionEvent actionEvent) {
-
+    public void printMapButtonAction(ActionEvent actionEvent) {
         String map=Client.getClientReceive().getBoard();
         printMapGUI(map);
 
         Text.setText("Select a starting point.");
         selectStartingPoint.setVisible(true);
+        printMapButton.setVisible(false);
+        setYourBotIcon();
+        setOthersBotIcon();
+
+        URL empty = getClass().getResource("/Empty.png");
+        Image imageEmpty = new Image(empty.toString());
+
+        ImageView emptyView = new ImageView(imageEmpty);
+        emptyView.setFitWidth(43);
+        emptyView.setFitHeight(43);
+
+        robotBoard.add(emptyView, 0, 0);
     }
+
+    /**
+     * start game button -> show button get Cards
+     */
+
+    public void startGameButtonAction(ActionEvent actionEvent) {
+        for(int id:Client.getClientReceive().getIdList()){
+               int robotNumber=Client.getClientReceive().getRobotById(id);
+               int startingPointNumber=Client.getClientReceive().getStartPointById(id);
+                setOtherRobotOnBoard(robotNumber,startingPointNumber);
+        }
+        getCardsButton.setVisible(true);
+        startGameButton.setVisible(false);
+
+    }
+
 
 
     public void printMapGUI(String setMapSelection) {
@@ -1589,8 +1739,6 @@ public class GameViewModel {
 
 
 //just for testing:
-    URL image = getClass().getResource("/Robots/twitch.png");
-    Image test = new Image(image.toString());
 
 
 
@@ -1606,106 +1754,128 @@ public class GameViewModel {
         return startingPointCount;
     }
 
+
+    public ImageView checkYourbotImageView(){
+        int yourId=Client.getClientReceive().getClientID();
+        int yourRobotNumber=Client.getClientReceive().getRobotById(yourId);
+        Image robotSelectStartPoint = null;
+        switch (yourRobotNumber){
+            case 1:
+                robotSelectStartPoint=imageHulk;//hulk
+                break;
+            case 2:
+                robotSelectStartPoint=imageSpin;//spin
+                break;
+            case 3:
+                robotSelectStartPoint=imageSquash;//squash
+                break;
+            case 4:
+                robotSelectStartPoint=imageHammer;//hammer
+                break;
+            case 5:
+                robotSelectStartPoint=imageTwonkey;//twonkey
+                break;
+            case 6:
+                robotSelectStartPoint=imageTwitch;//twitch
+                break;
+        }
+        ImageView robotSelectStartPointView = new ImageView(robotSelectStartPoint);
+        robotSelectStartPointView.setFitWidth(43);
+        robotSelectStartPointView.setFitHeight(43);
+        return robotSelectStartPointView;
+    }
+
+
     public void startingPoint1Action(ActionEvent actionEvent) {
+        robotBoard.getChildren().remove(1);
+        robotBoard.add(checkYourbotImageView(), 1,1);
         checkStart();
         setStartingPointCount(1);
-        x = 1;
-        y = 1;
     }
 
     public void startingPoint2Action(ActionEvent actionEvent) {
+        robotBoard.getChildren().remove(1);
+        robotBoard.add(checkYourbotImageView(), 0,3);
         checkStart();
         setStartingPointCount(2);
-        x = 3;
-        y = 0;
     }
 
     public void startingPoint3Action(ActionEvent actionEvent) {
+        robotBoard.getChildren().remove(1);
+        robotBoard.add(checkYourbotImageView(), 1,4);
         checkStart();
         setStartingPointCount(3);
-        x = 4;
-        y = 1;
     }
 
     public void startingPoint4Action(ActionEvent actionEvent) {
+        robotBoard.getChildren().remove(1);
+        robotBoard.add(checkYourbotImageView(), 1,5);
         checkStart();
         setStartingPointCount(4);
-        x = 5;
-        y = 1;
     }
 
     public void startingPoint5Action(ActionEvent actionEvent) {
+        robotBoard.getChildren().remove(1);
+        robotBoard.add(checkYourbotImageView(), 0,6);
         checkStart();
         setStartingPointCount(5);
-        x = 6;
-        y = 0;
     }
 
     public void startingPoint6Action(ActionEvent actionEvent) {
+        robotBoard.getChildren().remove(1);
+        robotBoard.add(checkYourbotImageView(), 1,8);
         checkStart();
         setStartingPointCount(6);
-        x = 8;
-        y = 1;
     }
 
 
+
     public void startPointOKAction(ActionEvent actionEvent) {
+        robotBoard.getChildren().remove(1);
            switch (getStartingPointCount()){
                case 1:
                    Client.getClientReceive().sendMessage(new SetStartingPoint(1,1).toString());
+                   setRobotOnBoard(1);
                    break;
                case 2:
                    Client.getClientReceive().sendMessage(new SetStartingPoint(3,0).toString());
+                   setRobotOnBoard(2);
                     break;
                case 3:
                    Client.getClientReceive().sendMessage(new SetStartingPoint(4,1).toString());
+                   setRobotOnBoard(3);
                    break;
                case 4:
                    Client.getClientReceive().sendMessage(new SetStartingPoint(5,1).toString());
+                   setRobotOnBoard(4);
                    break;
                case 5:
                    Client.getClientReceive().sendMessage(new SetStartingPoint(6,0).toString());
+                   setRobotOnBoard(5);
                    break;
                case 6:
                    Client.getClientReceive().sendMessage(new SetStartingPoint(8,1).toString());
+                   setRobotOnBoard(6);
                    break;
            }
         //checkStart();
+        startGameButton.setVisible(true);
+        selectStartingPoint.setVisible(false);
 
 
         //Todo put TIMER to right place in code (card selection), here is just for testing
-        timerText.setVisible(true);
-        Text.setText("You have 30 seconds left to finish selecting your register. Hurry!!");
-        timer.setText("30");
-        timer30Sec();
+        //timerText.setVisible(true);
+       // Text.setText("You have 30 seconds left to finish selecting your register. Hurry!!");
+       // timer.setText("30");
+       // timer30Sec();
 
 
-        moveRobot(); //movement just for testing
-
-        getCardsButton.setVisible(true);
+       // moveRobot(); //movement just for testing
 
     }
 
 
     public void moveRobot() {
-
-        URL hammer = getClass().getResource("/Robots/hammer bot.png");
-        Image imageHammer = new Image(hammer.toString());
-
-        URL hulk = getClass().getResource("/Robots/hulk x90.png");
-        Image imageHulk = new Image(hulk.toString());
-
-        URL spin = getClass().getResource("/Robots/spin bot.png");
-        Image imageSpin = new Image(spin.toString());
-
-        URL squash = getClass().getResource("/Robots/squash bot.png");
-        Image imageSquash = new Image(squash.toString());
-
-        URL twitch = getClass().getResource("/Robots/twitch.png");
-        Image imageTwitch = new Image(twitch.toString());
-
-        URL twonkey = getClass().getResource("/Robots/twonkey.png");
-        Image imageTwonkey = new Image(twonkey.toString());
 
 
         ImageView hammerView = new ImageView(imageHammer);
@@ -1788,6 +1958,108 @@ public class GameViewModel {
         }
     }
 
+    public void setRobotOnBoard(int startingPointNumber){
+        int yourId=Client.getClientReceive().getClientID();
+        int yourRobotNumber=Client.getClientReceive().getRobotById(yourId);
+        Image robotImage=null;
+        switch (yourRobotNumber){
+            case 1:
+                robotImage=imageHulk;//hulk
+                break;
+            case 2:
+                robotImage=imageSpin;//spin
+                break;
+            case 3:
+                robotImage=imageSquash;//squash
+                break;
+            case 4:
+                robotImage=imageHammer;//hammer
+                break;
+            case 5:
+                robotImage=imageTwonkey;//twonkey
+                break;
+            case 6:
+                robotImage=imageTwitch;//twitch
+                break;
+        }
+        ImageView robotPic=new ImageView(robotImage);
+        robotPic.setFitWidth(43);
+        robotPic.setFitHeight(43);
+        robotPic.setRotate(90);
+        switch (startingPointNumber){
+            case 1:
+                robotBoard.add(robotPic,1,1);
+                break;
+            case 2:
+                robotBoard.add(robotPic,0,3);
+                break;
+            case 3:
+                robotBoard.add(robotPic,1,4);
+                break;
+            case 4:
+                robotBoard.add(robotPic,1,5);
+                break;
+            case 5:
+                robotBoard.add(robotPic,0,6);
+                break;
+            case 6:
+                robotBoard.add(robotPic,1,8);
+                break;
+
+        }
+    }
+
+
+    public void setOtherRobotOnBoard(int otherRobotNumber,int startingPointNumber){
+                Image otherRobotImage = null;
+                switch (otherRobotNumber) {
+                    case 1:
+                        otherRobotImage = imageHulk;//hulk
+                        break;
+                    case 2:
+                        otherRobotImage = imageSpin;//spin
+                        break;
+                    case 3:
+                        otherRobotImage = imageSquash;//squash
+                        break;
+                    case 4:
+                        otherRobotImage = imageHammer;//hammer
+                        break;
+                    case 5:
+                        otherRobotImage = imageTwonkey;//twonkey
+                        break;
+                    case 6:
+                        otherRobotImage = imageTwitch;//twitch
+                        break;
+                }
+                ImageView robotPic = new ImageView(otherRobotImage);
+                robotPic.setFitWidth(43);
+                robotPic.setFitHeight(43);
+                robotPic.setRotate(90);
+                switch (startingPointNumber) {
+                    case 1:
+                        robotBoard.add(robotPic, 1, 1);
+                        break;
+                    case 2:
+                        robotBoard.add(robotPic, 0, 3);
+                        break;
+                    case 3:
+                        robotBoard.add(robotPic, 1, 4);
+                        break;
+                    case 4:
+                        robotBoard.add(robotPic, 1, 5);
+                        break;
+                    case 5:
+                        robotBoard.add(robotPic, 0, 6);
+                        break;
+                    case 6:
+                        robotBoard.add(robotPic, 1, 8);
+                        break;
+                }
+
+
+    }
+
 
 
     public void playDamageCards(ActionEvent actionEvent) {
@@ -1800,6 +2072,8 @@ public class GameViewModel {
     }
 
     public void getCardsButtonAction(ActionEvent actionEvent) {
+        getCardsButton.setVisible(false);
+
         //make hand buttons visible
         hand1Button.setVisible(true);
         hand2Button.setVisible(true);
@@ -1812,6 +2086,7 @@ public class GameViewModel {
         hand9Button.setVisible(true);
 
         Text.setText("Select 5 of these cards for your register.");
+        printCards();
     }
 
     public void MouseAction(MouseEvent mouseEvent) {
@@ -1945,6 +2220,7 @@ public class GameViewModel {
         pauseTransition0.setOnFinished(e -> timer.setText("0"));
         pauseTransition0.play();
     }
+
 
 
         /*

@@ -1,7 +1,6 @@
 package server;
 
 
-import com.google.gson.GsonBuilder;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -17,8 +16,6 @@ import protocol.HelloServer.HelloServerBody;
 import protocol.PlayCard.PlayCardBody;
 import protocol.PlayerValues.PlayerValuesBody;
 import protocol.ProtocolFormat.Message;
-import protocol.ProtocolFormat.MessageAdapter;
-import protocol.ProtocolFormat.MessageBody;
 import protocol.SelectedDamage.SelectedDamageBody;
 import protocol.ProtocolFormat.MessageType;
 import protocol.SendChat.SendChatBody;
@@ -59,6 +56,8 @@ public class ServerThread implements Runnable {
     private String map;
     private Player player;
     private Position startingPosition;
+
+    private String[] damageCards;
 
 
     public ServerThread(Socket clientSocket) throws IOException {
@@ -270,8 +269,8 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.alive:
-                Timer.countDown(5);
-                sendMessage(new Alive().toString());
+                //Timer.countDown(5);
+                //sendMessage(new Alive().toString());
                 break;
 
             case MessageType.playerValues:
@@ -413,7 +412,7 @@ public class ServerThread implements Runnable {
                 register = cardSelectedBody.getRegister();
                 break;
 
-            case MessageType.selectCard:
+            case MessageType.selectedCard:
                 SelectedCardBody selectedCardBody = new Gson().fromJson(body,SelectedCardBody.class);
                 if(currentGame != null && currentGame.getCurrentState().equals(GameState.ProgrammingPhase)){
                     register = selectedCardBody.getRegister();
@@ -424,6 +423,7 @@ public class ServerThread implements Runnable {
                         if (currentCard != null && currentCard.getCardName().equals(card)) {
                             player.getRegister().add(currentCard);
                             player.getHands().remove(currentCard);
+                            i = 0;
                         }   //if remove one Card in handsList,don't do i++
                         else {
                             i++;
@@ -447,7 +447,8 @@ public class ServerThread implements Runnable {
             case MessageType.selectedDamage:
                 SelectedDamageBody selectedDamageBody = new Gson().fromJson(body,SelectedDamageBody.class);
                 if(currentGame != null){
-                 String[] damageCards = selectedDamageBody.getCards();
+                 damageCards = selectedDamageBody.getCards();
+                    // TODO: 2022/7/10 in the  
                  for(String damageCard : damageCards){
                      player.drawDamage(damageCard,1);
                     }
