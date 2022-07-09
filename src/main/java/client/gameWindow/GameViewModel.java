@@ -69,6 +69,7 @@ public class GameViewModel {
     private TextField timer30;
 
 
+
     /**
      * starting point selection
      */
@@ -95,6 +96,8 @@ public class GameViewModel {
     private Button startingPointOK;
 
     List<Integer> takenStartNumbers=new ArrayList<>();
+
+    List<Integer> allStartNumbers=new ArrayList<>();
 
 
 
@@ -244,6 +247,7 @@ public class GameViewModel {
     public String window = "Game";
     public ProgrammingDeck deck = new ProgrammingDeck();
 
+    String[] allTakenStaringPoint;
 
 
     /**
@@ -864,6 +868,12 @@ public class GameViewModel {
      */
 
     public void startGameButtonAction(ActionEvent actionEvent) {
+        allStartNumbers=Client.getClientReceive().getStartNumbers();
+        for(int number: allStartNumbers){
+           if(number!=this.getStartingPointCount()){
+               setOtherRobotOnBoard(number);
+           }
+        }
         getCardsButton.setVisible(true);
         startGameButton.setVisible(false);
 
@@ -1708,13 +1718,13 @@ public class GameViewModel {
 
 
         //Todo put TIMER to right place in code (card selection), here is just for testing
-        timerText.setVisible(true);
-        Text.setText("You have 30 seconds left to finish selecting your register. Hurry!!");
-        timer.setText("30");
-        timer30Sec();
+        //timerText.setVisible(true);
+       // Text.setText("You have 30 seconds left to finish selecting your register. Hurry!!");
+       // timer.setText("30");
+       // timer30Sec();
 
 
-        moveRobot(); //movement just for testing
+       // moveRobot(); //movement just for testing
 
     }
 
@@ -1854,10 +1864,11 @@ public class GameViewModel {
 
 
     public void setOtherRobotOnBoard(int startingPointNumber){
+        int otherRobotNumber;
+        Image otherRobotImage = null;
         for(int id :Client.getClientReceive().getIdRobot().keySet()){
             if(id!=Client.getClientReceive().getClientID()){
-                int otherRobotNumber = Client.getClientReceive().getIdRobot().get(id);
-                Image otherRobotImage = null;
+                 otherRobotNumber = Client.getClientReceive().getIdRobot().get(id);
                 switch (otherRobotNumber) {
                     case 1:
                         otherRobotImage = imageHulk;//hulk
