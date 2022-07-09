@@ -430,8 +430,9 @@
                   </Button>
                </children>
             </GridPane>
-            <Button fx:id="startGameButton" layoutX="269.0" layoutY="620.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="48.0" prefWidth="80.0" text="start game" />
+            <Button fx:id="startGameButton" layoutX="269.0" layoutY="620.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="48.0" prefWidth="80.0" text="start game" visible="false" />
             <Button fx:id="getCardsButton" layoutX="269.0" layoutY="678.0" mnemonicParsing="false" onAction="#getCardsButtonAction" prefHeight="48.0" prefWidth="80.0" text="get cards" visible="false" />
+            <Button fx:id="printMapButton" layoutX="269.0" layoutY="565.0" mnemonicParsing="false" onAction="#printMapButtonAction" prefHeight="48.0" prefWidth="80.0" text="print Map" />
          </children>
       </AnchorPane>
    </children>

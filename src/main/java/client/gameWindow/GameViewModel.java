@@ -123,9 +123,11 @@ public class GameViewModel {
 
     @FXML
     private Button selectMapButton;
-
     @FXML
     private Button getCardsButton;
+
+    @FXML
+    private Button printMapButton;
 
 
     /**
@@ -844,20 +846,29 @@ public class GameViewModel {
         }
     }
 
-
-
     /**
-     * start game button -> map gets printed and starting point selection appears.
+     * print map button -> map gets printed and starting point selection appears
      */
-
-    public void startGameButtonAction(ActionEvent actionEvent) {
-
+    public void printMapButtonAction(ActionEvent actionEvent) {
         String map=Client.getClientReceive().getBoard();
         printMapGUI(map);
 
         Text.setText("Select a starting point.");
         selectStartingPoint.setVisible(true);
+
+        printMapButton.setVisible(false);
     }
+
+    /**
+     * start game button -> show button get Cards
+     */
+
+    public void startGameButtonAction(ActionEvent actionEvent) {
+        getCardsButton.setVisible(true);
+        startGameButton.setVisible(false);
+
+    }
+
 
 
     public void printMapGUI(String setMapSelection) {
@@ -1693,6 +1704,7 @@ public class GameViewModel {
                    break;
            }
         //checkStart();
+        startGameButton.setVisible(true);
 
 
         //Todo put TIMER to right place in code (card selection), here is just for testing
@@ -1703,8 +1715,6 @@ public class GameViewModel {
 
 
         moveRobot(); //movement just for testing
-
-        getCardsButton.setVisible(true);
 
     }
 
@@ -1908,6 +1918,8 @@ public class GameViewModel {
     }
 
     public void getCardsButtonAction(ActionEvent actionEvent) {
+        getCardsButton.setVisible(false);
+
         //make hand buttons visible
         hand1Button.setVisible(true);
         hand2Button.setVisible(true);
@@ -2054,6 +2066,7 @@ public class GameViewModel {
         pauseTransition0.setOnFinished(e -> timer.setText("0"));
         pauseTransition0.play();
     }
+
 
 
         /*
