@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1250.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
+<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1250.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
    <children>
       <Pane layoutX="6.0" layoutY="3.0" prefHeight="795.0" prefWidth="305.0" stylesheets="@../styles.css">
          <children>
@@ -62,16 +62,16 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <Label fx:id="timer" layoutX="166.0" layoutY="44.0" prefHeight="71.0" prefWidth="116.0" textFill="WHITE">
+                  <Label fx:id="timer" layoutX="169.0" layoutY="14.0" prefHeight="71.0" prefWidth="116.0" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font></Label>
-                  <Label fx:id="timerText" layoutX="69.0" layoutY="50.0" prefHeight="59.0" prefWidth="116.0" text="time left:" textFill="WHITE" visible="false">
+                  <Label fx:id="timerText" layoutX="72.0" layoutY="20.0" prefHeight="59.0" prefWidth="116.0" text="time left:" textFill="WHITE" visible="false">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Pane fx:id="selectStartingPoint" layoutX="31.0" layoutY="43.0" prefHeight="217.0" prefWidth="253.0">
+                  <Pane fx:id="selectStartingPoint" layoutX="40.0" layoutY="86.0" prefHeight="188.0" prefWidth="253.0" visible="false">
                      <children>
                         <Label fx:id="textStartingPoint" layoutX="20.0" layoutY="1.0" prefHeight="27.0" prefWidth="358.0" text="Select your Starting Point" textFill="WHITE">
                            <font>
@@ -431,6 +431,7 @@
                </children>
             </GridPane>
             <Button fx:id="startGameButton" layoutX="269.0" layoutY="620.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="48.0" prefWidth="80.0" text="start game" />
+            <Button fx:id="getCardsButton" layoutX="269.0" layoutY="678.0" mnemonicParsing="false" onAction="#getCardsButtonAction" prefHeight="48.0" prefWidth="80.0" text="get cards" visible="false" />
          </children>
       </AnchorPane>
    </children>
