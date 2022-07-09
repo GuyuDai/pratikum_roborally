@@ -316,36 +316,10 @@ public class ClientReceive extends Thread{
             case MessageType.startingPointTaken:
                 StartingPointTaken.StartingPointTakenBody startingPointTakenBody = new Gson().fromJson(body,
                         StartingPointTaken.StartingPointTakenBody.class);
-                int takenX=startingPointTakenBody.getX();
-                int takenY=startingPointTakenBody.getY();
-                playerId=startingPointTakenBody.getClientID();
-                if(takenX==1 && takenY==1){
-                    startNumbers.add(1);
-                    IdStartPoint.put(playerId,1);
-                }
-                if(takenX==3 && takenY==0){
-                    startNumbers.add(2);
-                    IdStartPoint.put(playerId,2);
-                }
-                if(takenX==4 && takenY==1){
-                    startNumbers.add(3);
-                    IdStartPoint.put(playerId,3);
-                }
-                if (takenX==5 && takenY==1){
-                    startNumbers.add(4);
-                    IdStartPoint.put(playerId,4);
-                }
-                if(takenX==6 && takenY==0 ){
-                    startNumbers.add(5);
-                    IdStartPoint.put(playerId,5);
-                }
-                if (takenX==8 && takenY==1){
-                    startNumbers.add(6);
-                    IdStartPoint.put(playerId,6);
-                }
                 int takenX = startingPointTakenBody.getX();
                 int takenY = startingPointTakenBody.getY();
-                startingPositionAdd(takenX,takenY);
+                playerId = startingPointTakenBody.getClientID();
+                startingPositionAdd(takenX,takenY, playerId);
                 break;
 
             case MessageType.timerStarted:
@@ -458,44 +432,56 @@ public class ClientReceive extends Thread{
         }
     }
 
-    public void startingPositionAdd(int takenX, int takenY){
+    public void startingPositionAdd(int takenX, int takenY, int playerId){
         if(board.equals("DeathTrap")){
             if(takenX==1 && takenY==11){
                 startNumbers.add(1);
+                IdStartPoint.put(playerId,1);
             }
             if(takenX==3 && takenY==12){
                 startNumbers.add(2);
+                IdStartPoint.put(playerId,2);
             }
             if(takenX==4 && takenY==11){
                 startNumbers.add(3);
+                IdStartPoint.put(playerId,3);
             }
             if (takenX==5 && takenY==11){
                 startNumbers.add(4);
+                IdStartPoint.put(playerId,4);
             }
             if(takenX==6 && takenY==12){
                 startNumbers.add(5);
+                IdStartPoint.put(playerId,5);
             }
             if (takenX==8 && takenY==11){
                 startNumbers.add(6);
+                IdStartPoint.put(playerId,6);
             }
         }else {
             if(takenX==1 && takenY==1){
                 startNumbers.add(1);
+                IdStartPoint.put(playerId,1);
             }
             if(takenX==3 && takenY==0){
                 startNumbers.add(2);
+                IdStartPoint.put(playerId,2);
             }
             if(takenX==4 && takenY==1){
                 startNumbers.add(3);
+                IdStartPoint.put(playerId,3);
             }
             if (takenX==5 && takenY==1){
                 startNumbers.add(4);
+                IdStartPoint.put(playerId,4);
             }
             if(takenX==6 && takenY==0 ){
                 startNumbers.add(5);
+                IdStartPoint.put(playerId,5);
             }
             if (takenX==8 && takenY==1){
                 startNumbers.add(6);
+                IdStartPoint.put(playerId,6);
             }
         }
     }

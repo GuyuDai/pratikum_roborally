@@ -122,7 +122,8 @@ public class AIReceive extends ClientReceive {
             (body, StartingPointTaken.StartingPointTakenBody.class);
         int takenX = startingPointTakenBody.getX();
         int takenY = startingPointTakenBody.getY();
-        startingPositionAdd(takenX,takenY);
+        playerId = startingPointTakenBody.getClientID();
+        startingPositionAdd(takenX,takenY,playerId);
         break;
 
       case MessageType.timerStarted:
