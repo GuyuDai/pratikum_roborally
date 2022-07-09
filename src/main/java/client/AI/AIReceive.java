@@ -3,6 +3,7 @@ package client.AI;
 import client.ClientReceive;
 import com.google.gson.Gson;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Random;
 import protocol.ActivePhase;
 import protocol.Alive;
@@ -22,11 +23,14 @@ import protocol.ProtocolFormat.MessageType;
 import protocol.Reboot;
 import protocol.ReceivedChat.ReceivedChatBody;
 import protocol.SelectMap;
+import protocol.SelectedCard;
+import protocol.SelectedDamage;
 import protocol.SelectionFinished;
 import protocol.SetStatus;
 import protocol.StartingPointTaken;
 import protocol.Welcome.WelcomeBody;
 import protocol.YourCards;
+import server.CardTypes.Card;
 
 public class AIReceive extends ClientReceive {
 
@@ -194,11 +198,34 @@ public class AIReceive extends ClientReceive {
   }
 
   private void aiProgramming(){
-
+    try {
+      sleep(6000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    for(int i = 0; i < 5; i++){
+      int cardIndex = random.nextInt(cards.length - 1);
+      sendMessage(new SelectedCard(cards[cardIndex],register).toString());
+      register++;
+    }
+    //reset attributions
+    cards = null;
+    register = 0;
   }
 
   private void aiPickDamage(){
-
+    try {
+      sleep(6000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    ArrayList<String> cardsList = new ArrayList<String>();
+    while(damageCount > 0){
+      int damageIndex = random.nextInt(damageDecks.length - 1);
+      cardsList.add(damageDecks[damageIndex]);
+      damageCount--;
+    }
+    sendMessage(new SelectedDamage(cardsList.toArray(new String[0])).toString());
   }
 
   private void aiReboot(){
