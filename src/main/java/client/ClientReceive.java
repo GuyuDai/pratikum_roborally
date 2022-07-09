@@ -26,71 +26,43 @@ import server.Server;
 
 public class ClientReceive extends Thread{
 
-     int clientID;
-    private Socket socket;
-    private BufferedReader readInput;
-    private BufferedWriter writeOutput;
-
-    private static final String PROTOCOL = "Version 1.0";
-    private static final String GROUP = "Origionelle Oktopusse";
-
-    int playerId;
-    String playerName;
-    int figure;
-
-    String chatMsg;
-
-    int fromId;
-
-    int register;
-
-    int damageCount;
-    boolean isPrivate;
-
-    boolean isReady;
-
-    boolean isFilled;
-
-    boolean timerStarted=false;
-
-    String cardPlayed;
-
-    Map<Integer,String> IdCardPlayed=new HashMap<>();
-
-    Map<Integer,Boolean> IdReady=new HashMap<>();
-
-    List<Integer> robotNumbers=new ArrayList<>();
-
-    List<Integer> startNumbers=new ArrayList<>();
-
-    Map<String,Integer> IdName = new HashMap<>();
-
-    List<Boolean> readyList=new ArrayList<>();
-
-    String[] maps;
-
-    String[] cards;
-
-    String[]damageDecks;
-
-    String board;
-
-    String[] filledRegister;
-
-    Integer[] positions;
-
-    String turnDirection;
-
-    String animationType;
-
-    int x;
-    int y;
-
-    int activePhaseNumber;
-
-    int rebootClientId;
-
-    Map<Integer,Integer[]> IdPosition=new HashMap<>();
+    protected int clientID;
+    protected Socket socket;
+    protected BufferedReader readInput;
+    protected BufferedWriter writeOutput;
+    protected static final String PROTOCOL = "Version 1.0";
+    protected static final String GROUP = "Origionelle Oktopusse";
+    protected int playerId;
+    protected String playerName;
+    protected int figure;
+    protected String chatMsg;
+    protected int fromId;
+    protected int register;
+    protected int damageCount;
+    protected boolean isPrivate;
+    protected boolean isReady;
+    protected boolean isFilled;
+    protected boolean timerStarted=false;
+    protected String cardPlayed;
+    protected Map<Integer,String> IdCardPlayed=new HashMap<>();
+    protected Map<Integer,Boolean> IdReady=new HashMap<>();
+    protected List<Integer> robotNumbers=new ArrayList<>();
+    protected List<Integer> startNumbers=new ArrayList<>();
+    protected Map<String,Integer> IdName = new HashMap<>();
+    protected List<Boolean> readyList=new ArrayList<>();
+    protected String[] maps;
+    protected String[] cards;
+    protected String[]damageDecks;
+    protected String board;
+    protected String[] filledRegister;
+    protected Integer[] positions;
+    protected String turnDirection;
+    protected String animationType;
+    protected int x;
+    protected int y;
+    protected int activePhaseNumber;
+    protected int rebootClientId;
+    protected Map<Integer,Integer[]> IdPosition = new HashMap<>();
 
     public ClientReceive(Socket socket) {
         this.socket = socket;
@@ -315,6 +287,7 @@ public class ClientReceive extends Thread{
             case MessageType.mapSelected:
                 MapSelected.MapSelectedBody mapSelectedBody=new Gson().fromJson(body,MapSelected.MapSelectedBody.class);
                 board=mapSelectedBody.getMap();
+                break;
             case MessageType.yourCards:
                 YourCards.YourCardsBody yourCardsBody=new Gson().fromJson(body, YourCards.YourCardsBody.class);
                 cards=yourCardsBody.getCardsInHand();
@@ -334,41 +307,32 @@ public class ClientReceive extends Thread{
                 damageCount=pickDamageBody.getCount();
                 break;
             case MessageType.startingPointTaken:
-                StartingPointTaken.StartingPointTakenBody startingPointTakenBody=new Gson().fromJson(body,
+                StartingPointTaken.StartingPointTakenBody startingPointTakenBody = new Gson().fromJson(body,
                         StartingPointTaken.StartingPointTakenBody.class);
-                int takenX=startingPointTakenBody.getX();
-                int takenY=startingPointTakenBody.getY();
-                if(takenX==1 && takenY==1){
-                    startNumbers.add(1);
-                }
-                if(takenX==3 && takenY==0){
-                    startNumbers.add(2);
-                }
-                if(takenX==4 && takenY==1){
-                    startNumbers.add(3);
-                }
-                if (takenX==5 && takenY==1){
-                    startNumbers.add(4);
-                }
-                if(takenX==6 && takenY==0 ){
-                    startNumbers.add(5);
-                }
-                if (takenX==8 && takenY==1){
-                    startNumbers.add(6);
-                }
+                int takenX = startingPointTakenBody.getX();
+                int takenY = startingPointTakenBody.getY();
+                startingPositionAdd(takenX,takenY);
                 break;
+
             case MessageType.timerStarted:
                 timerStarted=true;
                 break;
+
+            case MessageType.timerEnded:
+                timerStarted = false;
+                break;
+
             case MessageType.cardPlayed:
                 CardPlayed.CardPlayedBody cardPlayedBody=new Gson().fromJson(body, CardPlayed.CardPlayedBody.class);
                 cardPlayed=cardPlayedBody.getCard();
                 playerId=cardPlayedBody.getClientID();
                 IdCardPlayed.put(playerId,cardPlayed);
                 break;
+
             case MessageType.cardsYouGotNow:
                 CardsYouGotNow.CardYouGotNowBody cardYouGotNowBody=new Gson().fromJson(body, CardsYouGotNow.CardYouGotNowBody.class);
                 filledRegister=cardYouGotNowBody.getCards();
+                break;
 
             case MessageType.movement:
                 Movement.MovementBody movementBody=new Gson().fromJson(body,Movement.MovementBody.class);
@@ -434,6 +398,48 @@ public class ClientReceive extends Thread{
             writeOutput.flush();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void startingPositionAdd(int takenX, int takenY){
+        if(board.equals("DeathTrap")){
+            if(takenX==1 && takenY==11){
+                startNumbers.add(1);
+            }
+            if(takenX==3 && takenY==12){
+                startNumbers.add(2);
+            }
+            if(takenX==4 && takenY==11){
+                startNumbers.add(3);
+            }
+            if (takenX==5 && takenY==11){
+                startNumbers.add(4);
+            }
+            if(takenX==6 && takenY==12){
+                startNumbers.add(5);
+            }
+            if (takenX==8 && takenY==11){
+                startNumbers.add(6);
+            }
+        }else {
+            if(takenX==1 && takenY==1){
+                startNumbers.add(1);
+            }
+            if(takenX==3 && takenY==0){
+                startNumbers.add(2);
+            }
+            if(takenX==4 && takenY==1){
+                startNumbers.add(3);
+            }
+            if (takenX==5 && takenY==1){
+                startNumbers.add(4);
+            }
+            if(takenX==6 && takenY==0 ){
+                startNumbers.add(5);
+            }
+            if (takenX==8 && takenY==1){
+                startNumbers.add(6);
+            }
         }
     }
     public BufferedReader getReadInput(){return readInput;}
