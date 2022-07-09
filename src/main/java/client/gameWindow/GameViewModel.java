@@ -1740,6 +1740,55 @@ public class GameViewModel {
         }
     }
 
+    public void setRobotOnBoard(int startingPointNumber){
+        int yourId=Client.getClientReceive().getClientID();
+        int yourRobotNumber=Client.getClientReceive().getRobotById(yourId);
+        Image robotImage=null;
+        switch (yourRobotNumber){
+            case 1:
+                robotImage=test;//hulk
+                break;
+            case 2:
+                robotImage=test;//spin
+                break;
+            case 3:
+                robotImage=test;//squash
+                break;
+            case 4:
+                robotImage=test;//hammer
+                break;
+            case 5:
+                robotImage=test;//twonkey
+                break;
+            case 6:
+                robotImage=test;//twitch
+                break;
+        }
+        ImageView robotPic=new ImageView(robotImage);
+        robotPic.setFitWidth(43);
+        robotPic.setFitHeight(43);
+        switch (startingPointNumber){
+            case 1:
+                robotBoard.add(robotPic,1,1);
+                break;
+            case 2:
+                robotBoard.add(robotPic,0,3);
+                break;
+            case 3:
+                robotBoard.add(robotPic,1,4);
+                break;
+            case 4:
+                robotBoard.add(robotPic,1,5);
+                break;
+            case 5:
+                robotBoard.add(robotPic,0,6);
+                break;
+            case 6:
+                robotBoard.add(robotPic,1,8);
+                break;
+
+        }
+    }
 
     public void timer30Sec (){
         PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));

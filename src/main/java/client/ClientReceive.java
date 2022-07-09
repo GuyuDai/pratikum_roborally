@@ -63,6 +63,8 @@ public class ClientReceive extends Thread{
 
     List<Integer> startNumbers=new ArrayList<>();
 
+    Map<Integer,Integer> IdRobot=new HashMap<>();
+
     Map<String,Integer> IdName = new HashMap<>();
 
     List<Boolean> readyList=new ArrayList<>();
@@ -292,6 +294,7 @@ public class ClientReceive extends Thread{
                 playerName=playerAddedBody.getName();
                 figure=playerAddedBody.getFigure();
                 robotNumbers.add(figure);
+                IdRobot.put(playerId,figure);
                 IdName.put(playerName,playerId);
                 break;
             case MessageType.receivedChat:
@@ -411,6 +414,19 @@ public class ClientReceive extends Thread{
             });
         }
     }
+
+    public int getFigure() {
+        return figure;
+    }
+
+    public Map<Integer, Integer> getIdRobot() {
+        return IdRobot;
+    }
+
+    public int getRobotById(int id){
+        return getIdRobot().get(id);
+    }
+
     public int getIdByName(String name){
         return getIdName().get(name);
     }

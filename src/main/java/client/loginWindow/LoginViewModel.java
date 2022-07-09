@@ -90,26 +90,32 @@ public class LoginViewModel {
         if(buttonHammer.isSelected()){
             figure=4;
             robotSelected=true;
+            checkRobot();
         }
         else if (buttonHulk.isSelected()){
             figure=1;
             robotSelected=true;
+            checkRobot();
         }
         else if (buttonSpin.isSelected()){
             figure=2;
             robotSelected=true;
+            checkRobot();
         }
         else if (buttonSquash.isSelected()){
             figure=3;
             robotSelected=true;
+            checkRobot();
         }
         else if (buttonTwonkey.isSelected()){
             figure=5;
             robotSelected=true;
+            checkRobot();
         }
         else if (buttonTwitch.isSelected()){
             figure=6;
             robotSelected=true;
+            checkRobot();
         }
     }
 
