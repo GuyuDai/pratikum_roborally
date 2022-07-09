@@ -308,10 +308,15 @@
             </AnchorPane>
             <AnchorPane prefHeight="91.0" prefWidth="557.0">
                <children>
-                  <ImageView fx:id="yourBot" fitHeight="88.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="yourBot" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="Text" layoutX="110.0" prefHeight="88.0" prefWidth="447.0" textFill="WHITE">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="yourBotText" layoutY="64.0" text="your robot" textFill="WHITE" visible="false">
+                     <font>
+                        <Font size="16.0" />
                      </font>
                   </Label>
                </children>
