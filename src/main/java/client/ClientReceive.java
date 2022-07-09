@@ -402,12 +402,12 @@ public class ClientReceive extends Thread{
         String fromName = this.getNameById(getFromId());
         if(LobbyViewModel.getWindowName() == "Lobby") {
             Platform.runLater(() -> {
-                LobbyViewModel.show(fromName + ": " + msg);
+                LobbyViewModel.show("(private)" + fromName + ": " + msg);
             });
         }
         else{
             Platform.runLater(() -> {
-                GameViewModel.show(fromName + ": " + msg);
+                GameViewModel.show("(private)" + fromName + ": " + msg);
             });
         }
     }

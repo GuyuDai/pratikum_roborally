@@ -428,7 +428,7 @@ public class ServerThread implements Runnable {
                         else {
                             i++;
                         }
-                        //TODO change DoProgrammingPhase later,player can do card selection here;
+                        //change DoProgrammingPhase later maybe,player can do card selection here;
                     }
                     int filledCardNumber = player.getRegister().size();
                     String cardSelected="";
