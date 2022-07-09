@@ -36,12 +36,6 @@ public class ProgrammingDeck {
     Collections.shuffle(remainingCards);
   }
 
-  public void shuffle(){
-    this.remainingCards = this.discardPile;
-    Collections.shuffle(remainingCards);
-    this.discardPile = new CopyOnWriteArrayList<Card>();
-  }
-
   public void addDamageCard(){};
   public void addUpgradeCard(){};
   public void addSpecialProgrammingCard(){};

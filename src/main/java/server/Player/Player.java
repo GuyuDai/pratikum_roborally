@@ -30,6 +30,9 @@ public class Player implements PlayerAction{
     this.clientID = ID;
     this.energyCubes = 5;
     this.ownDeck = new ProgrammingDeck();
+    for(Card card : ownDeck.getRemainingCards()){
+      card.setOwner(this);
+    }
   }
 
   public Robot getOwnRobot() {
@@ -221,21 +224,8 @@ public class Player implements PlayerAction{
   }
 
   public void chooseDamage(int count){
-    ArrayList<String> tempAvailablePiles = new ArrayList<String>();
-    if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getSpamPile())){
-      tempAvailablePiles.add("Spam");
-    }
-    if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getWormPile())){
-      tempAvailablePiles.add("Worm");
-    }
-    if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getVirusPile())){
-      tempAvailablePiles.add("Virus");
-    }
-    if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getTrojanPile())){
-      tempAvailablePiles.add("Trojan");
-    }
-    String[] availablePiles = tempAvailablePiles.toArray(new String[0]);
-    currentGame.sendMessageToClient(new PickDamage(count,availablePiles),currentGame.getServerThreadById(clientID));
+    currentGame.sendMessageToClient(new PickDamage
+        (count, currentGame.getAvailablePiles()),currentGame.getServerThreadById(clientID));
   }
 
   public void discardHands(){
@@ -249,6 +239,15 @@ public class Player implements PlayerAction{
     for(Card card : getRegister()){
       getOwnDeck().getDiscardPile().add(card);
       this.register.remove(card);
+    }
+  }
+
+  public void shuffle(){
+    ownDeck.setRemainingCards(ownDeck.getDiscardPile());
+    Collections.shuffle(ownDeck.getRemainingCards());
+    ownDeck.setDiscardPile(new CopyOnWriteArrayList<Card>());
+    for(Card card : ownDeck.getRemainingCards()){
+      card.setOwner(this);
     }
   }
 }

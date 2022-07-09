@@ -6,6 +6,7 @@ import protocol.Animation;
 import protocol.CheckPointReached;
 import protocol.ErrorMessage;
 import protocol.GameFinished;
+import protocol.PickDamage;
 import protocol.ReceivedChat;
 import protocol.ShuffleCoding;
 import server.BoardElement.*;
@@ -97,6 +98,19 @@ public class Controller {
     }
 
     return true;
+  }
+
+  /**
+   * check if the robot will get hurt
+   * @param robot
+   */
+  public void positionDamageCheck(Robot robot){
+    BoardElem currentElem1 = robot.getCurrentPosition().getTile();
+    BoardElem currentElem2 = robot.getCurrentPosition().getSecondTile();
+    if(currentElem1.getName().equals("Pit")){
+      currentGame.sendMessageToClient(new PickDamage
+          (1, currentGame.getAvailablePiles()),currentGame.getServerThreadById(robot.getOwner().clientID));
+    }
   }
 
   /**
@@ -300,7 +314,7 @@ public class Controller {
    */
   public void drawCardCheck(Player player){
     if(isCardListEmpty(player.getOwnDeck().getRemainingCards())){
-      player.getOwnDeck().shuffle();
+      player.shuffle();
       currentGame.sendMessageToClient(new ShuffleCoding(player.clientID), currentGame.getServerThreadById(player.clientID));
     }
   }

@@ -10,9 +10,7 @@ public class Pit extends BoardElem{
 
   @Override
   public void action() {
-    currentGame.getPlayerInCurrentTurn().getOwnRobot();
-
-
+    currentGame.getPlayerInCurrentTurn().getOwnRobot().reboot();
   }
 
   public void move(Robot robot){

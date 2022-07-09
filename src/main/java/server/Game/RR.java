@@ -3,6 +3,7 @@ package server.Game;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import protocol.ActivePhase;
 import protocol.CurrentCards;
 import protocol.NotYourCards;
@@ -427,6 +428,24 @@ public class RR extends Thread implements GameLogic {
       }
     }
     return null;
+  }
+
+  public String[] getAvailablePiles(){
+    ArrayList<String> tempAvailablePiles = new ArrayList<String>();
+    if(controller.isCardListEmpty(gameDeck.getSpamPile())){
+      tempAvailablePiles.add("Spam");
+    }
+    if(controller.isCardListEmpty(gameDeck.getWormPile())){
+      tempAvailablePiles.add("Worm");
+    }
+    if(controller.isCardListEmpty(gameDeck.getVirusPile())){
+      tempAvailablePiles.add("Virus");
+    }
+    if(controller.isCardListEmpty(gameDeck.getTrojanPile())){
+      tempAvailablePiles.add("Trojan");
+    }
+    String[] availablePiles = tempAvailablePiles.toArray(new String[0]);
+    return availablePiles;
   }
 }
 
