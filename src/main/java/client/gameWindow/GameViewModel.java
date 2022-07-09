@@ -286,6 +286,24 @@ public class GameViewModel {
     URL urlCardHidden = getClass().getResource("/programmingCards/cardHidden.png");
     Image imageCardHidden = new Image(urlCardHidden.toString());
 
+    URL hammer = getClass().getResource("/Robots/hammer bot.png");
+    Image imageHammer = new Image(hammer.toString());
+
+    URL hulk = getClass().getResource("/Robots/hulk x90.png");
+    Image imageHulk = new Image(hulk.toString());
+
+    URL spin = getClass().getResource("/Robots/spin bot.png");
+    Image imageSpin = new Image(spin.toString());
+
+    URL squash = getClass().getResource("/Robots/squash bot.png");
+    Image imageSquash = new Image(squash.toString());
+
+    URL twitch = getClass().getResource("/Robots/twitch.png");
+    Image imageTwitch = new Image(twitch.toString());
+
+    URL twonkey = getClass().getResource("/Robots/twonkey.png");
+    Image imageTwonkey = new Image(twonkey.toString());
+
 
     public void initialize(Client client) {
         this.client = client;
@@ -1589,8 +1607,6 @@ public class GameViewModel {
 
 
 //just for testing:
-    URL image = getClass().getResource("/Robots/twitch.png");
-    Image test = new Image(image.toString());
 
 
 
@@ -1653,21 +1669,27 @@ public class GameViewModel {
            switch (getStartingPointCount()){
                case 1:
                    Client.getClientReceive().sendMessage(new SetStartingPoint(1,1).toString());
+                   setRobotOnBoard(1);
                    break;
                case 2:
                    Client.getClientReceive().sendMessage(new SetStartingPoint(3,0).toString());
+                   setRobotOnBoard(2);
                     break;
                case 3:
                    Client.getClientReceive().sendMessage(new SetStartingPoint(4,1).toString());
+                   setRobotOnBoard(3);
                    break;
                case 4:
                    Client.getClientReceive().sendMessage(new SetStartingPoint(5,1).toString());
+                   setRobotOnBoard(4);
                    break;
                case 5:
                    Client.getClientReceive().sendMessage(new SetStartingPoint(6,0).toString());
+                   setRobotOnBoard(5);
                    break;
                case 6:
                    Client.getClientReceive().sendMessage(new SetStartingPoint(8,1).toString());
+                   setRobotOnBoard(6);
                    break;
            }
         //checkStart();
@@ -1688,24 +1710,6 @@ public class GameViewModel {
 
 
     public void moveRobot() {
-
-        URL hammer = getClass().getResource("/Robots/hammer bot.png");
-        Image imageHammer = new Image(hammer.toString());
-
-        URL hulk = getClass().getResource("/Robots/hulk x90.png");
-        Image imageHulk = new Image(hulk.toString());
-
-        URL spin = getClass().getResource("/Robots/spin bot.png");
-        Image imageSpin = new Image(spin.toString());
-
-        URL squash = getClass().getResource("/Robots/squash bot.png");
-        Image imageSquash = new Image(squash.toString());
-
-        URL twitch = getClass().getResource("/Robots/twitch.png");
-        Image imageTwitch = new Image(twitch.toString());
-
-        URL twonkey = getClass().getResource("/Robots/twonkey.png");
-        Image imageTwonkey = new Image(twonkey.toString());
 
 
         ImageView hammerView = new ImageView(imageHammer);
@@ -1794,22 +1798,22 @@ public class GameViewModel {
         Image robotImage=null;
         switch (yourRobotNumber){
             case 1:
-                robotImage=test;//hulk
+                robotImage=imageHulk;//hulk
                 break;
             case 2:
-                robotImage=test;//spin
+                robotImage=imageSpin;//spin
                 break;
             case 3:
-                robotImage=test;//squash
+                robotImage=imageSquash;//squash
                 break;
             case 4:
-                robotImage=test;//hammer
+                robotImage=imageHammer;//hammer
                 break;
             case 5:
-                robotImage=test;//twonkey
+                robotImage=imageTwonkey;//twonkey
                 break;
             case 6:
-                robotImage=test;//twitch
+                robotImage=imageTwitch;//twitch
                 break;
         }
         ImageView robotPic=new ImageView(robotImage);
@@ -1839,6 +1843,61 @@ public class GameViewModel {
     }
 
 
+    public void setOtherRobotOnBoard(int startingPointNumber){
+        for(int id :Client.getClientReceive().getIdRobot().keySet()){
+            if(id!=Client.getClientReceive().getClientID()){
+                int otherRobotNumber = Client.getClientReceive().getIdRobot().get(id);
+                Image otherRobotImage = null;
+                switch (otherRobotNumber) {
+                    case 1:
+                        otherRobotImage = imageHulk;//hulk
+                        break;
+                    case 2:
+                        otherRobotImage = imageSpin;//spin
+                        break;
+                    case 3:
+                        otherRobotImage = imageSquash;//squash
+                        break;
+                    case 4:
+                        otherRobotImage = imageHammer;//hammer
+                        break;
+                    case 5:
+                        otherRobotImage = imageTwonkey;//twonkey
+                        break;
+                    case 6:
+                        otherRobotImage = imageTwitch;//twitch
+                        break;
+                }
+                ImageView robotPic = new ImageView(otherRobotImage);
+                robotPic.setFitWidth(43);
+                robotPic.setFitHeight(43);
+                switch (startingPointNumber) {
+                    case 1:
+                        robotBoard.add(robotPic, 1, 1);
+                        break;
+                    case 2:
+                        robotBoard.add(robotPic, 0, 3);
+                        break;
+                    case 3:
+                        robotBoard.add(robotPic, 1, 4);
+                        break;
+                    case 4:
+                        robotBoard.add(robotPic, 1, 5);
+                        break;
+                    case 5:
+                        robotBoard.add(robotPic, 0, 6);
+                        break;
+                    case 6:
+                        robotBoard.add(robotPic, 1, 8);
+                        break;
+
+                }
+            }
+        }
+    }
+
+
+
     public void playDamageCards(ActionEvent actionEvent) {
     }
 
@@ -1861,6 +1920,7 @@ public class GameViewModel {
         hand9Button.setVisible(true);
 
         Text.setText("Select 5 of these cards for your register.");
+        printCards();
     }
 
     public void MouseAction(MouseEvent mouseEvent) {
