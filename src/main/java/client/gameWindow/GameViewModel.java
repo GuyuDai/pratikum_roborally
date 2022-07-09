@@ -69,6 +69,7 @@ public class GameViewModel {
     private TextField timer30;
 
 
+
     /**
      * starting point selection
      */
@@ -95,6 +96,8 @@ public class GameViewModel {
     private Button startingPointOK;
 
     List<Integer> takenStartNumbers=new ArrayList<>();
+
+    List<Integer> allStartNumbers=new ArrayList<>();
 
 
 
@@ -239,17 +242,12 @@ public class GameViewModel {
     private Label Text;
 
     @FXML
-    private ImageView yourBot;
-
-    @FXML
-    private Label yourBotText;
-
-    @FXML
     GridPane gameboard, startBoard, robotBoard, checkBoard;
 
     public String window = "Game";
     public ProgrammingDeck deck = new ProgrammingDeck();
 
+    String[] allTakenStaringPoint;
 
 
     /**
@@ -439,36 +437,6 @@ public class GameViewModel {
     }
 
 
-    /**
-     * sets your own robot icon
-     */
-    public void setYourBotIcon(){
-        yourBotText.setVisible(true);
-        int yourId=Client.getClientReceive().getClientID();
-        int yourRobotNumber=Client.getClientReceive().getRobotById(yourId);
-        Image robotIcon=null;
-        switch (yourRobotNumber) {
-            case 1:
-                robotIcon = imageHulk;//hulk
-                break;
-            case 2:
-                robotIcon = imageSpin;//spin
-                break;
-            case 3:
-                robotIcon = imageSquash;//squash
-                break;
-            case 4:
-                robotIcon = imageHammer;//hammer
-                break;
-            case 5:
-                robotIcon = imageTwonkey;//twonkey
-                break;
-            case 6:
-                robotIcon = imageTwitch;//twitch
-                break;
-        }
-        yourBot.setImage(robotIcon);
-    }
 
 
     /**
@@ -893,16 +861,22 @@ public class GameViewModel {
         selectStartingPoint.setVisible(true);
 
         printMapButton.setVisible(false);
-        setYourBotIcon();
     }
-
 
     /**
      * start game button -> show button get Cards
      */
+
     public void startGameButtonAction(ActionEvent actionEvent) {
+        allStartNumbers=Client.getClientReceive().getStartNumbers();
+        for(int number: allStartNumbers){
+           if(number!=this.getStartingPointCount()){
+               setOtherRobotOnBoard(number);
+           }
+        }
         getCardsButton.setVisible(true);
         startGameButton.setVisible(false);
+
     }
 
 
@@ -1744,13 +1718,13 @@ public class GameViewModel {
 
 
         //Todo put TIMER to right place in code (card selection), here is just for testing
-        timerText.setVisible(true);
-        Text.setText("You have 30 seconds left to finish selecting your register. Hurry!!");
-        timer.setText("30");
-        timer30Sec();
+        //timerText.setVisible(true);
+       // Text.setText("You have 30 seconds left to finish selecting your register. Hurry!!");
+       // timer.setText("30");
+       // timer30Sec();
 
 
-        //moveRobot(); //movement just for testing
+       // moveRobot(); //movement just for testing
 
     }
 
@@ -1890,10 +1864,11 @@ public class GameViewModel {
 
 
     public void setOtherRobotOnBoard(int startingPointNumber){
+        int otherRobotNumber;
+        Image otherRobotImage = null;
         for(int id :Client.getClientReceive().getIdRobot().keySet()){
             if(id!=Client.getClientReceive().getClientID()){
-                int otherRobotNumber = Client.getClientReceive().getIdRobot().get(id);
-                Image otherRobotImage = null;
+                 otherRobotNumber = Client.getClientReceive().getIdRobot().get(id);
                 switch (otherRobotNumber) {
                     case 1:
                         otherRobotImage = imageHulk;//hulk
