@@ -458,7 +458,7 @@ public class ServerThread implements Runnable {
                 SelectedDamageBody selectedDamageBody = new Gson().fromJson(body,SelectedDamageBody.class);
                 if(currentGame != null){
                  damageCards = selectedDamageBody.getCards();
-                    // TODO: 2022/7/10 in the  
+                    // TODO: 2022/7/10 in the
                  for(String damageCard : damageCards){
                      player.drawDamage(damageCard,1);
                     }

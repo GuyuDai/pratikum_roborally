@@ -34,10 +34,6 @@ public class LobbyViewModel {
 
     private Gson gson = new Gson();
 
-    //private static Player currentPlayer;
-
-    boolean isAvailable;
-
     @FXML
     private CheckBox readyButton;
 
@@ -56,7 +52,6 @@ public class LobbyViewModel {
     private Button selectMap;
 
 
-
     public void initialize() {
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
@@ -69,11 +64,6 @@ public class LobbyViewModel {
         this.input = input;
         this.sendBtn = sendBtn;
     }
-
-
-
-    //ToDo: Connect Robot to Player
-    //ToDo: Only first player should select Map
 
 
     public void openGameWindow(){
@@ -214,6 +204,7 @@ public class LobbyViewModel {
       }
       else{
           openGameWindow();
+          setWindowName("Game");
       }
         //close Lobby
         Stage stage = (Stage) selectMap.getScene().getWindow();
