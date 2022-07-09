@@ -136,7 +136,7 @@
                   <Label prefHeight="43.0" prefWidth="82.0" text="      Label" textFill="WHITE" />
                </children>
             </VBox>
-            <Label layoutX="32.0" layoutY="529.0" prefHeight="59.0" prefWidth="235.0" text="       USE YOUR UPGRADE CARDS" textFill="#fcfafa">
+            <Label layoutX="3.0" layoutY="531.0" prefHeight="59.0" prefWidth="305.0" text="       USE YOUR UPGRADE CARDS" textFill="#fcfafa">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -153,10 +153,22 @@
                   <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label fx:id="wormNumber" prefHeight="17.0" prefWidth="74.0" text="Worm  0x" textFill="#fffefe" GridPane.rowIndex="1" />
-                  <Label fx:id="virusNumber" prefHeight="17.0" prefWidth="74.0" text="Virus   0x" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="spamNumber" prefHeight="17.0" prefWidth="74.0" text="Spam  0x" textFill="#ffeeee" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Label fx:id="trojanNumber" prefHeight="17.0" prefWidth="74.0" text="Trojan  0x" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Label fx:id="wormNumber" prefHeight="17.0" prefWidth="74.0" text="Worm 0x" textFill="#fffefe" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="11.0" />
+                     </font></Label>
+                  <Label fx:id="virusNumber" prefHeight="17.0" prefWidth="74.0" text="Virus  0x" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="11.0" />
+                     </font></Label>
+                  <Label fx:id="spamNumber" prefHeight="17.0" prefWidth="74.0" text="Spam 0x" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="11.0" />
+                     </font></Label>
+                  <Label fx:id="trojanNumber" prefHeight="25.0" prefWidth="97.0" text="Trojan 0x" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="11.0" />
+                     </font></Label>
                   <Button fx:id="worm" graphicTextGap="0.0" minWidth="77.0" mnemonicParsing="false" onAction="#playDamageCards" prefHeight="100.0" prefWidth="77.0" styleClass="worm" stylesheets="@../styles.css" />
                   <Button fx:id="virus" mnemonicParsing="false" onAction="#playDamageCards" styleClass="virus" stylesheets="@../styles.css" GridPane.columnIndex="1" />
                   <Button fx:id="spam" mnemonicParsing="false" onAction="#playDamageCards" styleClass="spam" stylesheets="@../styles.css" GridPane.columnIndex="2" />
@@ -309,7 +321,7 @@
             <AnchorPane prefHeight="91.0" prefWidth="557.0">
                <children>
                   <ImageView fx:id="yourBot" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="Text" layoutX="110.0" prefHeight="88.0" prefWidth="447.0" textFill="WHITE">
+                  <Label fx:id="Text" layoutX="90.0" prefHeight="77.0" prefWidth="467.0" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>

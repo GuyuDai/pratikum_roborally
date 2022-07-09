@@ -9,7 +9,6 @@ import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
 
-;
 
 public class AIClient extends Client {
 
@@ -28,51 +27,7 @@ public class AIClient extends Client {
     int phase;
 
     private String activePhase = null;
-    String type;
-    //Position in Client
-    private int x;  //colum
-    private int y;  //row
 
-    String card;
-    String [] cards;
-
-    private CopyOnWriteArrayList<Card> register;
-
-    String group;
-    int Id;
-    boolean isAI;
-
-    String name;
-    int figure;
-
-    boolean ready;
-    String newCard;
-
-    String message;
-    int to;
-
-    String map;
-
-    String action;
-
-    ArrayList<ActiveCard> activeCards;
-
-
-    int count;
-    String[] availableMaps;
-    boolean isPrivate;
-    int cardsInHand;
-    int number;
-    String source;
-    String protocol;
-    boolean isConnected;
-    private Player player;
-    String rotation;
-    String error;
-    String direction;
-    int from;
-    int[] clientIDs;
-    String messageBody;
     private static ClientReceive clientAIReceive;
 
 
