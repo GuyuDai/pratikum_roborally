@@ -1824,7 +1824,7 @@ public class GameViewModel {
     /**
      * timer 30 seconds when first player finished selecting register
      */
-    public void timer30Sec (){
+    public void timer30Sec () {
         PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
         pauseTransition.setOnFinished(e -> timer.setText("29"));
         pauseTransition.play();
@@ -1944,6 +1944,7 @@ public class GameViewModel {
         PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
         pauseTransition0.setOnFinished(e -> timer.setText("0"));
         pauseTransition0.play();
+    }
 
 
         /*
@@ -1959,6 +1960,7 @@ public class GameViewModel {
             }
             timerStarted = false;
 
+         */
 
 }
 
