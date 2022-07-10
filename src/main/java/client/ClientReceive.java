@@ -281,8 +281,8 @@ public class ClientReceive extends Thread{
                  receiveChat(chatMsg);
                  break;
             case MessageType.selectMap:
-                SelectMap.SelectMapBody selectMapBody=new Gson().fromJson(body,SelectMap.SelectMapBody.class);
-                maps=selectMapBody.getAvailableMaps();
+                SelectMap.SelectMapBody selectMapBody = new Gson().fromJson(body,SelectMap.SelectMapBody.class);
+                maps = selectMapBody.getAvailableMaps();
                 break;
             case MessageType.playerStatus:
                 PlayerStatus.PlayerStatusBody playerStatusBody=new Gson().fromJson(body, PlayerStatus.PlayerStatusBody.class);
@@ -293,7 +293,7 @@ public class ClientReceive extends Thread{
                 break;
             case MessageType.mapSelected:
                 MapSelected.MapSelectedBody mapSelectedBody=new Gson().fromJson(body,MapSelected.MapSelectedBody.class);
-                board=mapSelectedBody.getMap();
+                board = mapSelectedBody.getMap();
                 break;
             case MessageType.yourCards:
                 YourCards.YourCardsBody yourCardsBody=new Gson().fromJson(body, YourCards.YourCardsBody.class);

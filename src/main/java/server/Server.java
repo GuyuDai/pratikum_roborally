@@ -78,6 +78,7 @@ public class Server{
         connectedClient.setAlive(true);
         connectedClients.add(connectedClient);
         Thread clientThread = new Thread(connectedClient);
+        clientThread.setName("ServerThread:" + connectedClient.getID());
         clientThread.start();
         sendMessageToClient(new Welcome(connectedClient.getID()),connectedClient);
     }

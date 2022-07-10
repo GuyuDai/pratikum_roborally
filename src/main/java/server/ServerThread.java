@@ -283,8 +283,8 @@ public class ServerThread implements Runnable {
 
             case MessageType.alive:
                 DisconnectionController.updateAlive(this);
-                Timer.countDown(5);
-                sendMessage(new Alive().toString());
+                //Timer.countDown(5);
+                //sendMessage(new Alive().toString());
                 break;
 
             case MessageType.playerValues:
@@ -383,10 +383,10 @@ public class ServerThread implements Runnable {
                 int x = setStartingPointBody.getX();
                 int y = setStartingPointBody.getY();
                 Position tempPosition = new Position(x,y,board);
-                System.out.println(tempPosition.getX());
+                System.out.println(tempPosition.getX());  //test
                 boolean flagInSetStartingPoint = true;
                 for(ServerThread serverThread : connectedClients){
-                    if(serverThread.getStartingPosition()!=null) {
+                    if(serverThread.getStartingPosition() != null) {
                         if (serverThread.getStartingPosition().equals(tempPosition)) {
                             flagInSetStartingPoint = false;
                         }
@@ -394,7 +394,7 @@ public class ServerThread implements Runnable {
                 }
                 if(flagInSetStartingPoint){
                     startingPosition = tempPosition;
-                    System.out.println(startingPosition.getX());
+                    System.out.println(startingPosition.getX());  //test
                     sendToAll(new StartingPointTaken(x,y,clientID).toString());
                     this.player.getOwnRobot().setStartPosition(this.startingPosition);
                     System.out.println(player.getOwnRobot().getStartPosition().getX());
@@ -465,7 +465,6 @@ public class ServerThread implements Runnable {
                 SelectedDamageBody selectedDamageBody = new Gson().fromJson(body,SelectedDamageBody.class);
                 if(currentGame != null){
                  damageCards = selectedDamageBody.getCards();
-                    // TODO: 2022/7/10 in the
                  for(String damageCard : damageCards){
                      player.drawDamage(damageCard,1);
                     }
@@ -532,6 +531,7 @@ public class ServerThread implements Runnable {
         if(currentGame == null){
             RR game = new RR(board);
             for(ServerThread serverThread : connectedClients){
+                serverThread.setBoard(board);
                 serverThread.setCurrentGame(game);
                 serverThread.getPlayer().setCurrentGame(game);
                 serverThread.getPlayer().getOwnRobot().setCurrentGame(game);
@@ -619,6 +619,14 @@ public class ServerThread implements Runnable {
 
     public Position getStartingPosition() {
         return startingPosition;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
     }
 
     public void elegantClose(){

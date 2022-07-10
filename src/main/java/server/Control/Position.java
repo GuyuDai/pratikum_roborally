@@ -17,7 +17,7 @@ public class Position {
   public Position(int x, int y, Board board) {
     this.x = x;
     this.y = y;
-    this.board=board;
+    this.board = board;
   }
 
   /**

@@ -1072,7 +1072,7 @@ public class GameViewModel {
 
 
     public void printMapGUI(String setMapSelection) {
-        Board board=null;
+        Board board = null;
         switch (setMapSelection) {
             case "DizzyHighway":
                 board = new DizzyHighway();
