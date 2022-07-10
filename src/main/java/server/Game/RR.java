@@ -50,7 +50,7 @@ public class RR extends Thread implements GameLogic {
         for (BoardElem boardElem : this.getGameBoard().getMap()[j][i]) {
           if (boardElem.getName().equals("Antenna")) {
             //this.positionAntenna = boardElem.getPosition();
-            this.positionAntenna = new Position(j,i);
+            this.positionAntenna = new Position(j,i,gameBoard);
           }
         }
       }
@@ -61,7 +61,7 @@ public class RR extends Thread implements GameLogic {
         for (BoardElem boardElem : this.getGameBoard().getMap()[j][i]) {
           if (boardElem.getName().equals("CheckPoint")) {
             //this.positionCheckPoint = boardElem.getPosition();
-            this.positionCheckPoint = new Position(j,i);
+            this.positionCheckPoint = new Position(j,i,gameBoard);
           }
         }
       }
@@ -353,9 +353,11 @@ public class RR extends Thread implements GameLogic {
     nextGameState();
   }
   public void DoActivationPhase () {
+    System.out.println("enter AP");//TEST
     this.activePhase = 3;
     sendMessageToAll(new ActivePhase(activePhase));
     sendMessageToAll(new ReceivedChat("Programming Phase starts",-1,false));
+    System.out.println("enter FOR");//TEST
 
     for (int i = 0; i < 5; i++) {  //round i
       //send protocol message
@@ -366,6 +368,9 @@ public class RR extends Thread implements GameLogic {
         activeCards[index] = activeCard;
         index++;
       }
+
+      System.out.println("leave FOR");//TEST
+
       sendMessageToAll(new CurrentCards(activeCards));
       //active
       for (Player player : activePlayers) {
@@ -388,7 +393,7 @@ public class RR extends Thread implements GameLogic {
       for(Player player : activePlayers){
         int newIndex = 0;
         for(Card card : player.getRegister()){
-          sendMessageToClient(new ReplaceCard(newIndex,card,player.clientID),getServerThreadById(player.clientID));
+          sendMessageToClient(new ReplaceCard(newIndex,card.getCardName(),player.clientID),getServerThreadById(player.clientID));
           newIndex++;
         }
       }

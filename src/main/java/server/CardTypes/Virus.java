@@ -20,7 +20,7 @@ public class Virus extends Card implements DamageCards {
         int y= position.getY();
         for(int i=x-6;i<x+6;i++){
             for(int j=y-6;j<y+6;j++){
-                Position checkPosition=new Position(i,j);
+                Position checkPosition=new Position(i,j, position.getBoard());
                 for(Player player: currentGame.getActivePlayers())
                     if(player.getOwnRobot().getCurrentPosition().equals(checkPosition)){
                         player.getHands().add(new Virus());

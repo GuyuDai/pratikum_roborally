@@ -29,8 +29,12 @@ public class Robot implements RobotAction {
 
   public Robot(String name){
     this.name=name;
+    this.faceDirection=Direction.RIGHT;
   }
 
+  public void setOwner(Player player){
+    this.owner=player;
+  }
   public Direction getFaceDirection() {
     return faceDirection;
   }
@@ -175,7 +179,7 @@ public class Robot implements RobotAction {
    */
   @Override
   public void move(int step) {
-    for (int i = 0; i < step; step++) {
+    for (int i = 0; i < step; i++) {
       moveOneStep();
     }
   }

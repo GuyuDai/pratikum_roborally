@@ -14,9 +14,10 @@ public class Position {
   public BoardElem tile;  //which BoardElement is at this position
 
 
-  public Position(int x, int y) {
+  public Position(int x, int y, Board board) {
     this.x = x;
     this.y = y;
+    this.board=board;
   }
 
   /**
@@ -24,9 +25,17 @@ public class Position {
    * robot stay where it is
    */
   public Position stay() {
-    return new Position(x,y);
+    return new Position(x,y,board);
   }
 
+
+  public void setBoard(Board board){
+    this.board=board;
+  }
+
+  public Board getBoard(){
+    return board;
+  }
 
   public int getX() {
     return x;
@@ -56,11 +65,11 @@ public class Position {
   }
 
   public BoardElem getSecondTile(){
-    return board.getBoardElem(this.getX(),this.getY(),1);
+    return getBoard().getBoardElem(this.getX(),this.getY(),1);
   }
   //a Position could have 2 Tiles
   public BoardElem getTile() {
-    return board.getBoardElem(this.getX(),this.getY(),0);
+    return getBoard().getBoardElem(this.getX(),this.getY(),0);
   }
 
   public void setTile(BoardElem tile) {
@@ -76,16 +85,16 @@ public class Position {
   public Position getNextPosition(Direction direction){
     switch (direction){
       case DOWN:
-        return new Position(this.getX(), this.getY()+1);
+        return new Position(this.getX()+1, this.getY(),board);
 
       case LEFT:
-        return new Position(this.getX()-1, this.getY());
+        return new Position(this.getX(), this.getY()-1,board);
 
       case RIGHT:
-        return new Position(this.getX()+1, this.getY());
+        return new Position(this.getX(), this.getY()+1,board);
 
       case UP:
-        return new Position(this.getX(), this.getY()-1);
+        return new Position(this.getX()-1, this.getY(),board);
     }
     return null;
   }
