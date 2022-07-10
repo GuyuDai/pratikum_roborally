@@ -1,42 +1,27 @@
 package client.gameWindow;
 
-import client.Client;
-import client.ClientReceive;
-import client.MapBuilder;
-import client.lobbyWindow.LobbyViewModel;
-import com.google.gson.Gson;
-import javafx.animation.PauseTransition;
-import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
-import client.mapWindow.MapViewModel;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import client.*;
+import client.lobbyWindow.*;
+import com.google.gson.*;
+import javafx.animation.*;
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
-import javafx.util.Duration;
+import javafx.stage.*;
+import javafx.util.*;
 import protocol.*;
-import server.BoardElement.BoardElem;
+import server.BoardElement.*;
 import server.BoardTypes.*;
-import server.CardTypes.*;
-import server.Control.Direction;
-import server.Deck.ProgrammingDeck;
-import java.io.IOException;
-import java.net.IDN;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import server.Control.*;
+import server.Deck.*;
+
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
 
 /**
@@ -451,6 +436,7 @@ public class GameViewModel {
         String yourName=Client.getClientReceive().getNameById(yourId);
         int yourRobotNumber=Client.getClientReceive().getRobotById(yourId);
         Image robotIcon=null;
+        //int aiID=AIClient.getAiClientReceive().getClientID();
         switch (yourRobotNumber) {
             case 1:
                 robotIcon = imageHulk;//hulk
@@ -2350,10 +2336,7 @@ public class GameViewModel {
 
 
     public void playCardBtnAction(ActionEvent actionEvent) {
-
          moveRobot();
-
-         //Client.getClientReceive().sendMessage(new PlayCard("hello").toString());
     }
 
     public void getCardsButtonAction(ActionEvent actionEvent) {

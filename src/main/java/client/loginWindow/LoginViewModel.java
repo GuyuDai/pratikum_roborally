@@ -1,26 +1,20 @@
 package client.loginWindow;
 
 
-import client.Client;
-import com.google.gson.GsonBuilder;
-import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import protocol.PlayerValues;
-import protocol.ProtocolFormat.Message;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import client.*;
+import com.google.gson.*;
+import javafx.beans.binding.*;
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
+import protocol.*;
+import protocol.ProtocolFormat.*;
+
+import java.io.*;
+import java.util.*;
 
 /**
  * @author Felicia Saruba, Nargess Ahmadi, Minghao Li
@@ -80,6 +74,7 @@ public class LoginViewModel {
         gsonBuilder.setPrettyPrinting();
         nameInput.textProperty().bindBidirectional(model.getTextFieldContent());
         sendNameButton.disableProperty().bind(nameInput.textProperty().isEmpty().or (Bindings.isNull(ToggleGroupRobot.selectedToggleProperty())));
+        //AIButton.disableProperty().bind();
         checkRobot();
     }
 
@@ -187,8 +182,42 @@ public class LoginViewModel {
         return window;
     }
 
-    public void initAI(ActionEvent actionEvent) {
 
 
+    @FXML
+    public Button AIButton;
+
+    //init AI with Robot and Name
+    public void initAI(ActionEvent actionEvent) throws IOException {
+        AIClient newAIClient= new AIClient();
+        //AI newAIClient=new AI();
+        newAIClient.init();
+        nameInput.setText("AI");
+        String name = nameInput.getText();
+        checkRobot();
+        //AIClient.getAiReceive().setAIRobot();
+        //figure= AIClient.getAiReceive().getaIRobot();
+        figure= 4;
+        //Message message = new PlayerValues(name, figure);
+        newAIClient.getAiClientReceive().sendMessage(new PlayerValues(name,figure).toString());
+        //newAIClient.getAiReceive().sendMessage(new PlayerValues(name,figure).toString());
+        //AIClient.getAiClientReceive().getWriteOutput().write(aiMessage);
+        //AIClient.getAiClientReceive().getWriteOutput().newLine();
+        //AIClient.getAiClientReceive().getWriteOutput().flush();
+        //Stage stage = (Stage) AIButton.getScene().getWindow();
+        //stage.close();
+        setWindowName("Game");
+        openGameWindow();
+    }
+    public void openGameWindow(){
+        try {
+            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Game.fxml"));
+            Parent rootGame = (Parent) fxmlLoaderGame.load();
+            Stage stageGame = new Stage();
+            stageGame.setTitle("Dizzy Highway");
+            stageGame.setScene(new Scene(rootGame));
+            stageGame.show();
+        } catch (Exception e){
+        }
     }
 }
