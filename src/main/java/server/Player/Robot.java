@@ -222,6 +222,8 @@ public class Robot implements RobotAction {
     }
     this.lastPosition = currentPosition;
     this.currentPosition = rebootPosition;
+    currentGame.sendMessageToAll(new Movement
+        (owner.clientID, currentPosition.getX(), currentPosition.getY()));
   }
   private void bePushedOneStep(Direction direction) {
     Position togo = this.getCurrentPosition().getNextPosition(direction);

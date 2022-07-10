@@ -1,5 +1,6 @@
 package server.BoardElement;
 
+import server.BoardTypes.Board;
 import server.Control.Direction;
 import server.Control.Position;
 import server.Game.RR;
@@ -12,10 +13,9 @@ public abstract class BoardElem {
   public int speed;
   public int count;
   public String turnDirection;
-
   public Direction direction2;
-
   public  String push;
+  private Board gameBoard;
 
 
 
@@ -63,6 +63,22 @@ public abstract class BoardElem {
 
   public String getPush() {
     return push;
+  }
+
+  public RR getCurrentGame() {
+    return currentGame;
+  }
+
+  public void setCurrentGame(RR currentGame) {
+    this.currentGame = currentGame;
+  }
+
+  public Board getGameBoard() {
+    return gameBoard;
+  }
+
+  public void setGameBoard(Board gameBoard) {
+    this.gameBoard = gameBoard;
   }
 }
 

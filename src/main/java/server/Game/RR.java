@@ -41,6 +41,7 @@ public class RR extends Thread implements GameLogic {
   public RR(Board gameBoard) {
     this.gameBoard = gameBoard;
     this.isGoingOn = false;
+    this.gameDeck = new GameDeck();
 
     for (int i = 0; i <= this.getGameBoard().getHeight(); i++) {
       for (int j = 0; j <= this.getGameBoard().getWidth(); j++) {
@@ -317,6 +318,7 @@ public class RR extends Thread implements GameLogic {
     //if there is a player already finished programming
     while(finishedPlayers == 0){
       for(Player player : activePlayers){
+        System.out.println(player.getName() + player.getRegister().size());  //test
         if(player.getRegister().size() == 5){
           finishedPlayers++;
         }
@@ -347,6 +349,9 @@ public class RR extends Thread implements GameLogic {
       player.discardHands();
     }
     //next phase
+    for(ServerThread serverThread : activeClients){
+      serverThread.setRegisterPointer(0);
+    }
     nextGameState();
   }
   public void DoActivationPhase () {
