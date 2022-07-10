@@ -85,16 +85,16 @@ public class Position {
   public Position getNextPosition(Direction direction){
     switch (direction){
       case DOWN:
-        return new Position(this.getX()+1, this.getY(),board);
+        return new Position(this.getX()+1, this.getY(),getBoard());
 
       case LEFT:
-        return new Position(this.getX(), this.getY()-1,board);
+        return new Position(this.getX(), this.getY()-1,getBoard());
 
       case RIGHT:
-        return new Position(this.getX(), this.getY()+1,board);
+        return new Position(this.getX(), this.getY()+1,getBoard());
 
       case UP:
-        return new Position(this.getX()-1, this.getY(),board);
+        return new Position(this.getX()-1, this.getY(),getBoard());
     }
     return null;
   }
