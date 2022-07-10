@@ -344,11 +344,11 @@ public class AIClientReceive extends Thread {
         register[3] = String.valueOf(nineCardsPile.get(3));
         register[4] = String.valueOf(nineCardsPile.get(4));
 
-        sendMessage(new SelectedCard(register[0],0).toString());
-        sendMessage(new SelectedCard(register[1],1).toString());
-        sendMessage(new SelectedCard(register[2],2).toString());
-        sendMessage(new SelectedCard(register[3],3).toString());
-        sendMessage(new SelectedCard(register[4],4).toString());
+        sendMessage(new SelectedCard(register[0],0,getClientID()).toString());
+        sendMessage(new SelectedCard(register[1],1,getClientID()).toString());
+        sendMessage(new SelectedCard(register[2],2,getClientID()).toString());
+        sendMessage(new SelectedCard(register[3],3,getClientID()).toString());
+        sendMessage(new SelectedCard(register[4],4,getClientID()).toString());
     }
 
     /**

@@ -29,6 +29,7 @@ import server.Control.Direction;
 import server.Control.Timer;
 import server.Deck.ProgrammingDeck;
 import java.io.IOException;
+import java.net.IDN;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -318,6 +319,8 @@ public class GameViewModel {
 
     URL twonkey = getClass().getResource("/Robots/twonkey.png");
     Image imageTwonkey = new Image(twonkey.toString());
+
+    int ID=Client.getClientReceive().getClientID();
 
 
     public void initialize(Client client) {
@@ -641,27 +644,27 @@ public class GameViewModel {
             case 1:
                 register1.setImage(hand1.getImage());
                 hand1Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[0],0).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[0],0, ID).toString());
                 break;
             case 2:
                 register2.setImage(hand1.getImage());
                 hand1Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[0],1).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[0],1,ID).toString());
                 break;
             case 3:
                 register3.setImage(hand1.getImage());
                 hand1Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[0],2).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[0],2,ID).toString());
                 break;
             case 4:
                 register4.setImage(hand1.getImage());
                 hand1Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[0],3).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[0],3,ID).toString());
                 break;
             case 5:
                 register5.setImage(hand1.getImage());
                 hand1Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[0],4).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[0],4,ID).toString());
                 playCardBtn.setVisible(true);
                 Text.setText("Click on 'play cards'! ");
                 timer30Sec();
@@ -676,27 +679,27 @@ public class GameViewModel {
             case 1:
                 register1.setImage(hand2.getImage());
                 hand2Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[1],0).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[1],0,ID).toString());
                 break;
             case 2:
                 register2.setImage(hand2.getImage());
                 hand2Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[1],1).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[1],1,ID).toString());
                 break;
             case 3:
                 register3.setImage(hand2.getImage());
                 hand2Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[1],2).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[1],2,ID).toString());
                 break;
             case 4:
                 register4.setImage(hand2.getImage());
                 hand2Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[1],3).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[1],3,ID).toString());
                 break;
             case 5:
                 register5.setImage(hand2.getImage());
                 hand2Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[1],4).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[1],4,ID).toString());
                 playCardBtn.setVisible(true);
                 Text.setText("Click on 'play cards'! ");
                 timer30Sec();
@@ -711,27 +714,27 @@ public class GameViewModel {
             case 1:
                 register1.setImage(hand3.getImage());
                 hand3Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[2],0).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[2],0,ID).toString());
                 break;
             case 2:
                 register2.setImage(hand3.getImage());
                 hand3Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[2],1).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[2],1,ID).toString());
                 break;
             case 3:
                 register3.setImage(hand3.getImage());
                 hand3Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[2],2).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[2],2,ID).toString());
                 break;
             case 4:
                 register4.setImage(hand3.getImage());
                 hand3Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[2],3).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[2],3,ID).toString());
                 break;
             case 5:
                 register5.setImage(hand3.getImage());
                 hand3Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[2],4).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[2],4,ID).toString());
                 playCardBtn.setVisible(true);
                 Text.setText("Click on 'play cards'! ");
                 timer30Sec();
@@ -746,27 +749,27 @@ public class GameViewModel {
             case 1:
                 register1.setImage(hand4.getImage());
                 hand4Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[3],0).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[3],0,ID).toString());
                 break;
             case 2:
                 register2.setImage(hand4.getImage());
                 hand4Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[3],1).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[3],1,ID).toString());
                 break;
             case 3:
                 register3.setImage(hand4.getImage());
                 hand4Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[3],2).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[3],2,ID).toString());
                 break;
             case 4:
                 register4.setImage(hand4.getImage());
                 hand4Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[3],3).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[3],3,ID).toString());
                 break;
             case 5:
                 register5.setImage(hand4.getImage());
                 hand4Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[3],4).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[3],4,ID).toString());
                 playCardBtn.setVisible(true);
                 Text.setText("Click on 'play cards'! ");
                 timer30Sec();
@@ -781,27 +784,27 @@ public class GameViewModel {
             case 1:
                 register1.setImage(hand5.getImage());
                 hand5Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[4],0).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[4],0,ID).toString());
                 break;
             case 2:
                 register2.setImage(hand5.getImage());
                 hand5Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[4],1).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[4],1,ID).toString());
                 break;
             case 3:
                 register3.setImage(hand5.getImage());
                 hand5Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[4],2).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[4],2,ID).toString());
                 break;
             case 4:
                 register4.setImage(hand5.getImage());
                 hand5Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[4],3).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[4],3,ID).toString());
                 break;
             case 5:
                 register5.setImage(hand5.getImage());
                 hand5Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[4],4).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[4],4,ID).toString());
                 playCardBtn.setVisible(true);
                 Text.setText("Click on 'play cards'! ");
                 timer30Sec();
@@ -817,27 +820,27 @@ public class GameViewModel {
             case 1:
                 register1.setImage(hand6.getImage());
                 hand6Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[5],0).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[5],0,ID).toString());
                 break;
             case 2:
                 register2.setImage(hand6.getImage());
                 hand6Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[5],1).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[5],1,ID).toString());
                 break;
             case 3:
                 register3.setImage(hand6.getImage());
                 hand6Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[5],2).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[5],2,ID).toString());
                 break;
             case 4:
                 register4.setImage(hand6.getImage());
                 hand6Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[5],3).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[5],3,ID).toString());
                 break;
             case 5:
                 register5.setImage(hand6.getImage());
                 hand6Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[5],4).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[5],4,ID).toString());
                 playCardBtn.setVisible(true);
                 Text.setText("Click on 'play cards'! ");
                 timer30Sec();
@@ -852,28 +855,28 @@ public class GameViewModel {
             case 1:
                 register1.setImage(hand7.getImage());
                 hand7Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[6],0).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[6],0,ID).toString());
 
                 break;
             case 2:
                 register2.setImage(hand7.getImage());
                 hand7Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[6],1).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[6],1,ID).toString());
                 break;
             case 3:
                 register3.setImage(hand7.getImage());
                 hand7Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[6],2).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[6],2,ID).toString());
                 break;
             case 4:
                 register4.setImage(hand7.getImage());
                 hand7Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[6],3).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[6],3,ID).toString());
                 break;
             case 5:
                 register5.setImage(hand7.getImage());
                 hand7Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[6],4).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[6],4,ID).toString());
                 playCardBtn.setVisible(true);
                 Text.setText("Click on 'play cards'!");
                 timer30Sec();
@@ -888,30 +891,30 @@ public class GameViewModel {
             case 1:
                 register1.setImage(hand8.getImage());
                 hand8Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[7],0).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[7],0,ID).toString());
                 break;
             case 2:
                 register2.setImage(hand8.getImage());
                 hand8Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[7],1).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[7],1,ID).toString());
 
                 break;
             case 3:
                 register3.setImage(hand8.getImage());
                 hand8Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[7],2).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[7],2,ID).toString());
 
                 break;
             case 4:
                 register4.setImage(hand8.getImage());
                 hand8Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[7],3).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[7],3,ID).toString());
 
                 break;
             case 5:
                 register5.setImage(hand8.getImage());
                 hand8Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[7],4).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[7],4,ID).toString());
                 playCardBtn.setVisible(true);
                 Text.setText("Click on 'play cards'! ");
                 timer30Sec();
@@ -926,27 +929,27 @@ public class GameViewModel {
             case 1:
                 register1.setImage(hand9.getImage());
                 hand9Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[8],0).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[8],0,ID).toString());
                 break;
             case 2:
                 register2.setImage(hand9.getImage());
                 hand9Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[8],1).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[8],1,ID).toString());
                 break;
             case 3:
                 register3.setImage(hand9.getImage());
                 hand9Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[8],2).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[8],2,ID).toString());
                 break;
             case 4:
                 register4.setImage(hand9.getImage());
                 hand9Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[8],3).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[8],3,ID).toString());
                 break;
             case 5:
                 register5.setImage(hand9.getImage());
                 hand9Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[8],4).toString());
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[8],4,ID).toString());
                 playCardBtn.setVisible(true);
                 Text.setText("Click on 'play cards'! ");
                 timer30Sec();

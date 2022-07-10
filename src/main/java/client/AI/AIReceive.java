@@ -206,7 +206,7 @@ public class AIReceive extends ClientReceive {
     }
     for(int i = 0; i < 5; i++){
       int cardIndex = random.nextInt(cards.length - 1);
-      sendMessage(new SelectedCard(cards[cardIndex],register).toString());
+      sendMessage(new SelectedCard(cards[cardIndex],register,getClientID()).toString());
       register++;
     }
     //reset attributions

@@ -432,30 +432,32 @@ public class ServerThread implements Runnable {
                 if(currentGame != null && currentGame.getCurrentState().equals(GameState.ProgrammingPhase)){
                     register = selectedCardBody.getRegister();
                     card = selectedCardBody.getCard();
+                    int playerID=selectedCardBody.getClientID();
                     //TODO make sure the card come from the same player
-                    int i = 0;
+                    if(playerID==clientID) {
+                        int i = 0;
 
-                    while (i < player.getHands().size()) {
-                        Card currentCard = player.getHands().get(i);
-                        if (currentCard != null && currentCard.getCardName().equals(card)) {
-                            player.getRegister().add(currentCard);
-                            player.getHands().remove(currentCard);
-                            i = 0;
-                        }   //if remove one Card in handsList,don't do i++
-                        else {
-                            i++;
+                        while (i < player.getHands().size()) {
+                            Card currentCard = player.getHands().get(i);
+                            if (currentCard != null && currentCard.getCardName().equals(card)) {
+                                player.getRegister().add(currentCard);
+                                player.getHands().remove(currentCard);
+                                i = 0;
+                            }   //if remove one Card in handsList,don't do i++
+                            else {
+                                i++;
+                            }
+                            //change DoProgrammingPhase later maybe,player can do card selection here;
                         }
-                        //change DoProgrammingPhase later maybe,player can do card selection here;
+                        int filledCardNumber = player.getRegister().size();
+                        String cardSelected = "";
+                        if (filledCardNumber < 5) {
+                            cardSelected = new CardSelected(clientID, register, false).toString();
+                        } else {
+                            cardSelected = new CardSelected(clientID, register, true).toString();
+                        }
+                        sendToAll(cardSelected);
                     }
-                    int filledCardNumber = player.getRegister().size();
-                    String cardSelected="";
-                    if (filledCardNumber<5){
-                        cardSelected = new CardSelected(clientID, register, false).toString();
-                    }
-                    else {
-                        cardSelected = new CardSelected(clientID, register, true).toString();
-                    }
-                    sendToAll(cardSelected);
                 }
                 break;
             case MessageType.selectionFinished:
