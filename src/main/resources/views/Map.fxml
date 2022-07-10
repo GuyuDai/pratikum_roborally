@@ -41,11 +41,11 @@
             <Image url="@../buttonImages/selectMap.png" />
          </image>
       </ImageView>
-      <ToggleButton fx:id="map3Btn" layoutX="157.0" layoutY="513.0" mnemonicParsing="false" onAction="#select3" text="Extra Crispy" toggleGroup="$ToggleGroupMap">
+      <ToggleButton fx:id="map3Btn" layoutX="157.0" layoutY="513.0" mnemonicParsing="false" onAction="#selectExtraCrispy" text="Extra Crispy" toggleGroup="$ToggleGroupMap">
          <toggleGroup>
             <ToggleGroup fx:id="ToggleGroupMap" />
          </toggleGroup></ToggleButton>
-      <ToggleButton fx:id="map2Btn" layoutX="468.0" layoutY="292.0" mnemonicParsing="false" onAction="#select2" text="Death Trap" toggleGroup="$ToggleGroupMap" />
+      <ToggleButton fx:id="map2Btn" layoutX="468.0" layoutY="292.0" mnemonicParsing="false" onAction="#selectDeathTrap" text="Death Trap" toggleGroup="$ToggleGroupMap" />
       <ToggleButton fx:id="DizzyHighwayBtn" layoutX="149.0" layoutY="292.0" mnemonicParsing="false" onAction="#selectDizzyHighway" text="Dizzy Highway" toggleGroup="$ToggleGroupMap" />
       <ImageView fitHeight="12.0" fitWidth="465.0" layoutX="144.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -61,6 +61,6 @@
             </ImageView>
          </graphic>
       </Button>
-      <ToggleButton fx:id="map4Btn" layoutX="464.0" layoutY="513.0" mnemonicParsing="false" onAction="#select4" text="Lost Bearings" toggleGroup="$ToggleGroupMap" />
+      <ToggleButton fx:id="map4Btn" layoutX="464.0" layoutY="513.0" mnemonicParsing="false" onAction="#selectLostBearings" text="Lost Bearings" toggleGroup="$ToggleGroupMap" />
    </children>
 </AnchorPane>

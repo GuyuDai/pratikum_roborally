@@ -2,7 +2,6 @@ package client.mapWindow;
 
 
 import client.Client;
-import client.gameWindow.GameViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,9 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import protocol.MapSelected;
-import server.Server;
-
-import java.util.logging.Level;
 
 
 /**
@@ -27,38 +23,27 @@ public class MapViewModel {
 
     @FXML
     private AnchorPane rootPaneMap;
-
     @FXML
     private Button map1Image;
-
     @FXML
     private Button map2Image;
-
     @FXML
     private Button map3Image;
-
     @FXML
     private Button map4Image;
-
     @FXML
     private ToggleButton map4Btn;
-
     @FXML
     private ToggleGroup ToggleGroupMap;
-
     @FXML
     private ToggleButton DizzyHighwayBtn;
-
     @FXML
     private ToggleButton map2Btn;
-
     @FXML
     private ToggleButton map3Btn;
 
-
     public static String mapSelection;
 
-    //when clicked on Map Selection, the window closes
     @FXML
     public void selectDizzyHighway(ActionEvent actionEvent) {
         Stage stage = (Stage) DizzyHighwayBtn.getScene().getWindow();
@@ -68,7 +53,7 @@ public class MapViewModel {
         openGameWindow();
     }
     @FXML
-    public void select2(ActionEvent actionEvent) {
+    public void selectDeathTrap(ActionEvent actionEvent) {
         Stage stage = (Stage) map2Btn.getScene().getWindow();
         stage.close();
         setMapSelection("Death Trap");
@@ -76,14 +61,14 @@ public class MapViewModel {
         openGameWindow();
     }
     @FXML
-    public void select3(ActionEvent actionEvent) {
+    public void selectExtraCrispy(ActionEvent actionEvent) {
         Stage stage = (Stage) map3Btn.getScene().getWindow();
         stage.close();
         setMapSelection("Extra Crispy");
         Client.getClientReceive().sendMessage(new MapSelected("ExtraCrispy").toString());
         openGameWindow();
     }
-    public void select4(ActionEvent actionEvent) {
+    public void selectLostBearings(ActionEvent actionEvent) {
         Stage stage = (Stage) map4Btn.getScene().getWindow();
         stage.close();
         setMapSelection("Lost Bearings");
@@ -92,7 +77,7 @@ public class MapViewModel {
     }
 
     /**
-     * by clicking on the map images, it will appear as an enlarged image
+     * by clicking on each of the map images, it will appear as an enlarged image
      */
     public void map1ImageAction (ActionEvent actionEvent) {
         try {
@@ -146,7 +131,7 @@ public class MapViewModel {
             FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Game.fxml"));
             Parent rootGame = (Parent) fxmlLoaderGame.load();
             Stage stageGame = new Stage();
-            stageGame.setTitle("Dizzy Highway");
+            stageGame.setTitle("Robo Rally");
             stageGame.setScene(new Scene(rootGame));
             stageGame.show();
         } catch (Exception e){

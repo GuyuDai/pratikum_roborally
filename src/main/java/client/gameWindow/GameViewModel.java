@@ -1068,7 +1068,6 @@ public class GameViewModel {
     }
 
 
-
     public void printMapGUI(String setMapSelection) {
         Board board=null;
         switch (setMapSelection) {
@@ -1815,10 +1814,6 @@ public class GameViewModel {
             }
 
 
-//just for testing:
-
-
-
     int startingPointCount;
     int x;
     int y;
@@ -1832,6 +1827,10 @@ public class GameViewModel {
     }
 
 
+    /**
+     *
+     * @return imageView of your own robot
+     */
     public ImageView checkYourbotImageView(){
         int yourId=Client.getClientReceive().getClientID();
         int yourRobotNumber=Client.getClientReceive().getRobotById(yourId);
@@ -1862,77 +1861,154 @@ public class GameViewModel {
         return robotSelectStartPointView;
     }
 
-    //ToDo starting point for Death Trap
 
+    /**
+     * when clicking on each starting point button ( 1 - 6 ), user will see where the robot would be on the map
+     */
     public void startingPoint1Action(ActionEvent actionEvent) {
-        robotBoard.getChildren().remove(1);
-        robotBoard.add(checkYourbotImageView(), 1,1);
-        checkStart();
-        setStartingPointCount(1);
+        String selectedMap = Client.getClientReceive().getBoard();
+        if (selectedMap.equals("DeathTrap")){
+            robotBoard.getChildren().remove(1);
+            robotBoard.add(checkYourbotImageView(), 11,1);
+            checkStart();
+            setStartingPointCount(1);
+        } else {
+            robotBoard.getChildren().remove(1);
+            robotBoard.add(checkYourbotImageView(), 1, 1);
+            checkStart();
+            setStartingPointCount(1);
+        }
     }
 
     public void startingPoint2Action(ActionEvent actionEvent) {
-        robotBoard.getChildren().remove(1);
-        robotBoard.add(checkYourbotImageView(), 0,3);
-        checkStart();
-        setStartingPointCount(2);
+        String selectedMap = Client.getClientReceive().getBoard();
+        if (selectedMap.equals("DeathTrap")) {
+            robotBoard.getChildren().remove(1);
+            robotBoard.add(checkYourbotImageView(), 12, 3);
+            checkStart();
+            setStartingPointCount(2);
+        } else {
+            robotBoard.getChildren().remove(1);
+            robotBoard.add(checkYourbotImageView(), 0, 3);
+            checkStart();
+            setStartingPointCount(2);
+        }
     }
 
     public void startingPoint3Action(ActionEvent actionEvent) {
-        robotBoard.getChildren().remove(1);
-        robotBoard.add(checkYourbotImageView(), 1,4);
-        checkStart();
-        setStartingPointCount(3);
+        String selectedMap = Client.getClientReceive().getBoard();
+        if (selectedMap.equals("DeathTrap")) {
+            robotBoard.getChildren().remove(1);
+            robotBoard.add(checkYourbotImageView(), 11, 4);
+            checkStart();
+            setStartingPointCount(3);
+        } else {
+            robotBoard.getChildren().remove(1);
+            robotBoard.add(checkYourbotImageView(), 1, 4);
+            checkStart();
+            setStartingPointCount(3);
+        }
     }
 
     public void startingPoint4Action(ActionEvent actionEvent) {
-        robotBoard.getChildren().remove(1);
-        robotBoard.add(checkYourbotImageView(), 1,5);
-        checkStart();
-        setStartingPointCount(4);
+        String selectedMap = Client.getClientReceive().getBoard();
+        if (selectedMap.equals("DeathTrap")) {
+            robotBoard.getChildren().remove(1);
+            robotBoard.add(checkYourbotImageView(), 11, 5);
+            checkStart();
+            setStartingPointCount(4);
+        } else {
+            robotBoard.getChildren().remove(1);
+            robotBoard.add(checkYourbotImageView(), 1, 5);
+            checkStart();
+            setStartingPointCount(4);
+        }
     }
 
     public void startingPoint5Action(ActionEvent actionEvent) {
-        robotBoard.getChildren().remove(1);
-        robotBoard.add(checkYourbotImageView(), 0,6);
-        checkStart();
-        setStartingPointCount(5);
+        String selectedMap = Client.getClientReceive().getBoard();
+        if (selectedMap.equals("DeathTrap")) {
+            robotBoard.getChildren().remove(1);
+            robotBoard.add(checkYourbotImageView(), 12, 6);
+            checkStart();
+            setStartingPointCount(5);
+        } else {
+            robotBoard.getChildren().remove(1);
+            robotBoard.add(checkYourbotImageView(), 0, 6);
+            checkStart();
+            setStartingPointCount(5);
+        }
     }
 
     public void startingPoint6Action(ActionEvent actionEvent) {
-        robotBoard.getChildren().remove(1);
-        robotBoard.add(checkYourbotImageView(), 1,8);
-        checkStart();
-        setStartingPointCount(6);
+        String selectedMap = Client.getClientReceive().getBoard();
+        if (selectedMap.equals("DeathTrap")) {
+            robotBoard.getChildren().remove(1);
+            robotBoard.add(checkYourbotImageView(), 11, 8);
+            checkStart();
+            setStartingPointCount(6);
+        } else {
+            robotBoard.getChildren().remove(1);
+            robotBoard.add(checkYourbotImageView(), 1, 8);
+            checkStart();
+            setStartingPointCount(6);
+        }
     }
 
 
-
+    /**
+     *  OK Button -> starting point will be selected and robot will be set on the map
+     */
     public void startPointOKAction(ActionEvent actionEvent) {
         robotBoard.getChildren().remove(1);
+        String selectedMap = Client.getClientReceive().getBoard();
            switch (getStartingPointCount()){
                case 1:
-                   Client.getClientReceive().sendMessage(new SetStartingPoint(1,1).toString());
+                   if (selectedMap.equals("DeathTrap")) {
+                       Client.getClientReceive().sendMessage(new SetStartingPoint(1,11).toString());
+                   } else {
+                       Client.getClientReceive().sendMessage(new SetStartingPoint(1,1).toString());
+                   }
                    setRobotOnBoard(1);
                    break;
                case 2:
-                   Client.getClientReceive().sendMessage(new SetStartingPoint(3,0).toString());
+                   if (selectedMap.equals("DeathTrap")) {
+                       Client.getClientReceive().sendMessage(new SetStartingPoint(3,12).toString());
+                   } else {
+                       Client.getClientReceive().sendMessage(new SetStartingPoint(3,0).toString());
+                   }
                    setRobotOnBoard(2);
                     break;
                case 3:
-                   Client.getClientReceive().sendMessage(new SetStartingPoint(4,1).toString());
+                   if (selectedMap.equals("DeathTrap")) {
+                       Client.getClientReceive().sendMessage(new SetStartingPoint(4,11).toString());
+                   } else {
+                       Client.getClientReceive().sendMessage(new SetStartingPoint(4,1).toString());
+                   }
                    setRobotOnBoard(3);
                    break;
                case 4:
-                   Client.getClientReceive().sendMessage(new SetStartingPoint(5,1).toString());
+                   if (selectedMap.equals("DeathTrap")) {
+                       Client.getClientReceive().sendMessage(new SetStartingPoint(5,11).toString());
+                   } else {
+                       Client.getClientReceive().sendMessage(new SetStartingPoint(5,1).toString());
+                   }
                    setRobotOnBoard(4);
                    break;
                case 5:
-                   Client.getClientReceive().sendMessage(new SetStartingPoint(6,0).toString());
+                   if (selectedMap.equals("DeathTrap")) {
+                       Client.getClientReceive().sendMessage(new SetStartingPoint(6,12).toString());
+                   } else {
+                       Client.getClientReceive().sendMessage(new SetStartingPoint(6,0).toString());
+                   }
                    setRobotOnBoard(5);
                    break;
                case 6:
-                   Client.getClientReceive().sendMessage(new SetStartingPoint(8,1).toString());
+                   if (selectedMap.equals("DeathTrap")) {
+                       Client.getClientReceive().sendMessage(new SetStartingPoint(8,11).toString());
+                   } else {
+                       Client.getClientReceive().sendMessage(new SetStartingPoint(8,1).toString());
+                   }
                    setRobotOnBoard(6);
                    break;
            }
@@ -1942,19 +2018,11 @@ public class GameViewModel {
 
 
 
-
-
-
        // moveRobot(); //movement just for testing
 
     }
 
-    ImageView hammerView = new ImageView(imageHammer);
-    ImageView hulkView = new ImageView(imageHulk);
-    ImageView spinView = new ImageView(imageSpin);
-    ImageView squashView = new ImageView(imageSquash);
-    ImageView twitchView = new ImageView(imageTwitch);
-    ImageView twonkeyView = new ImageView(imageTwonkey);
+
 
 
     public void moveRobot() {
@@ -1982,6 +2050,9 @@ public class GameViewModel {
     }
 
 
+    /**
+     * disable starting point button when selected by another player
+     */
     public void checkStart() {
         takenStartNumbers = Client.getClientReceive().getStartNumbers();
         for (int number : takenStartNumbers) {
@@ -2035,31 +2106,63 @@ public class GameViewModel {
         ImageView robotPic=new ImageView(robotImage);
         robotPic.setFitWidth(43);
         robotPic.setFitHeight(43);
-        robotPic.setRotate(90);
+        String selectedMap = Client.getClientReceive().getBoard();
+        if (selectedMap.equals("DeathTrap")){
+            robotPic.setRotate(270);
+        } else {
+            robotPic.setRotate(90);
+        }
         switch (startingPointNumber){
             case 1:
-                robotBoard.add(robotPic,1,1);
+                if (selectedMap.equals("DeathTrap")) {
+                    robotBoard.add(robotPic,11,1);
+                } else {
+                    robotBoard.add(robotPic,1,1);
+                }
                 break;
             case 2:
-                robotBoard.add(robotPic,0,3);
+                if (selectedMap.equals("DeathTrap")) {
+                    robotBoard.add(robotPic,12,3);
+                } else {
+                    robotBoard.add(robotPic,0,3);
+                }
                 break;
             case 3:
-                robotBoard.add(robotPic,1,4);
+                if (selectedMap.equals("DeathTrap")) {
+                    robotBoard.add(robotPic,11,4);
+                } else {
+                    robotBoard.add(robotPic,1,4);
+                }
                 break;
             case 4:
-                robotBoard.add(robotPic,1,5);
+                if (selectedMap.equals("DeathTrap")) {
+                    robotBoard.add(robotPic,11,5);
+                } else {
+                    robotBoard.add(robotPic,1,5);
+                }
                 break;
             case 5:
-                robotBoard.add(robotPic,0,6);
+                if (selectedMap.equals("DeathTrap")) {
+                    robotBoard.add(robotPic,12,6);
+                } else {
+                    robotBoard.add(robotPic,0,6);
+                }
                 break;
             case 6:
-                robotBoard.add(robotPic,1,8);
+                if (selectedMap.equals("DeathTrap")) {
+                    robotBoard.add(robotPic,11,8);
+                } else {
+                    robotBoard.add(robotPic,1,8);
+                }
                 break;
 
         }
     }
 
 
+    /**
+     * see other robots on their starting point on your GUI
+     */
     public void setOtherRobotOnBoard(int otherRobotNumber,int startingPointNumber){
                 Image otherRobotImage = null;
                 switch (otherRobotNumber) {
@@ -2085,30 +2188,57 @@ public class GameViewModel {
                 ImageView robotPic = new ImageView(otherRobotImage);
                 robotPic.setFitWidth(43);
                 robotPic.setFitHeight(43);
-                robotPic.setRotate(90);
+                String selectedMap = Client.getClientReceive().getBoard();
+                if (selectedMap.equals("DeathTrap")){
+                    robotPic.setRotate(270);
+                } else {
+                    robotPic.setRotate(90);
+                }
                 robotOgPicture.put(otherRobotNumber,robotPic);
                 switch (startingPointNumber) {
                     case 1:
-                        robotBoard.add(robotPic, 1, 1);
+                        if (selectedMap.equals("DeathTrap")) {
+                            robotBoard.add(robotPic,11,1);
+                        } else {
+                            robotBoard.add(robotPic,1,1);
+                        }
                         break;
                     case 2:
-                        robotBoard.add(robotPic, 0, 3);
+                        if (selectedMap.equals("DeathTrap")) {
+                            robotBoard.add(robotPic,12,3);
+                        } else {
+                            robotBoard.add(robotPic,0,3);
+                        }
                         break;
                     case 3:
-                        robotBoard.add(robotPic, 1, 4);
+                        if (selectedMap.equals("DeathTrap")) {
+                            robotBoard.add(robotPic,11,4);
+                        } else {
+                            robotBoard.add(robotPic,1,4);
+                        }
                         break;
                     case 4:
-                        robotBoard.add(robotPic, 1, 5);
+                        if (selectedMap.equals("DeathTrap")) {
+                            robotBoard.add(robotPic,11,5);
+                        } else {
+                            robotBoard.add(robotPic,1,5);
+                        }
                         break;
                     case 5:
-                        robotBoard.add(robotPic, 0, 6);
+                        if (selectedMap.equals("DeathTrap")) {
+                            robotBoard.add(robotPic,12,6);
+                        } else {
+                            robotBoard.add(robotPic,0,6);
+                        }
                         break;
                     case 6:
-                        robotBoard.add(robotPic, 1, 8);
+                        if (selectedMap.equals("DeathTrap")) {
+                            robotBoard.add(robotPic,11,8);
+                        } else {
+                            robotBoard.add(robotPic,1,8);
+                        }
                         break;
                 }
-
-
     }
 
 
