@@ -1,8 +1,5 @@
 package server.Game;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import protocol.ActivePhase;
 import protocol.CurrentCards;
@@ -33,7 +30,7 @@ public class RR extends Thread implements GameLogic {
   protected Board gameBoard;
   public GameDeck gameDeck;
   protected GameState currentState;
-  protected Position positionCheckPoint;
+  protected Position positionReboot;
   protected Position positionAntenna;
   protected int PlayerInListPosition = 0;
   protected int activePhase;  //0 => Aufbauphase, 1 => Upgradephase, 2 => Programmierphase, 3 => Aktivierungsphase
@@ -59,9 +56,9 @@ public class RR extends Thread implements GameLogic {
     for (int i = 0; i <= this.getGameBoard().getHeight(); i++) {
       for (int j = 0; j <= this.getGameBoard().getWidth(); j++) {
         for (BoardElem boardElem : this.getGameBoard().getMap()[j][i]) {
-          if (boardElem.getName().equals("CheckPoint")) {
+          if (boardElem.getName().equals("Reboot")) {
             //this.positionCheckPoint = boardElem.getPosition();
-            this.positionCheckPoint = new Position(j,i,gameBoard);
+            this.positionReboot = new Position(j,i,gameBoard);
           }
         }
       }
@@ -109,8 +106,8 @@ public class RR extends Thread implements GameLogic {
     return positionAntenna;
   }
 
-  public Position getPositionCheckPoint() {
-    return positionCheckPoint;
+  public Position getPositionReboot() {
+    return positionReboot;
   }
 
   public void setCurrentState(GameState currentState) {
@@ -353,11 +350,9 @@ public class RR extends Thread implements GameLogic {
     nextGameState();
   }
   public void DoActivationPhase () {
-    System.out.println("enter AP");//TEST
     this.activePhase = 3;
     sendMessageToAll(new ActivePhase(activePhase));
     sendMessageToAll(new ReceivedChat("Programming Phase starts",-1,false));
-    System.out.println("enter FOR");//TEST
 
     for (int i = 0; i < 5; i++) {  //round i
       //send protocol message
@@ -368,9 +363,6 @@ public class RR extends Thread implements GameLogic {
         activeCards[index] = activeCard;
         index++;
       }
-
-      System.out.println("leave FOR");//TEST
-
       sendMessageToAll(new CurrentCards(activeCards));
       //active
       for (Player player : activePlayers) {

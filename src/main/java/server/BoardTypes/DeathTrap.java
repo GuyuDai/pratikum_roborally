@@ -417,7 +417,7 @@ public class DeathTrap extends Board {
         map[9][11][0] = empty;
         map[9][11][1] = empty;
 
-        map[9][12][0] = new Reboot(currentGame);
+        map[9][12][0] = new Reboot(currentGame,Direction.LEFT);
         map[9][12][1] = empty;
     }
 }

@@ -16,6 +16,7 @@ import protocol.HelloServer.HelloServerBody;
 import protocol.PlayCard.PlayCardBody;
 import protocol.PlayerValues.PlayerValuesBody;
 import protocol.ProtocolFormat.Message;
+import protocol.RebootDirection.RebootDirectionBody;
 import protocol.SelectedDamage.SelectedDamageBody;
 import protocol.ProtocolFormat.MessageType;
 import protocol.SendChat.SendChatBody;
@@ -25,6 +26,7 @@ import protocol.MapSelected.MapSelectedBody;
 import protocol.SelectedCard.SelectedCardBody;
 import server.BoardTypes.*;
 import server.CardTypes.Card;
+import server.Control.Direction;
 import server.Control.DisconnectionController;
 import server.Control.Position;
 import server.Control.Timer;
@@ -59,7 +61,6 @@ public class ServerThread implements Runnable {
     private Position startingPosition;
     private String[] damageCards;
 
-
     public ServerThread(Socket clientSocket) throws IOException {
         this.clientSocket = clientSocket;
         connectedClients = Server.getConnectedClients();
@@ -70,13 +71,13 @@ public class ServerThread implements Runnable {
             String HelloClient = helloClient.toString();
             sendMessage(HelloClient);
         } catch (IOException e) {
-            e.printStackTrace();
+            elegantClose();
         }
     }
     @Override
     public void run() {
         try {
-            while (!clientSocket.isClosed()) {
+            while (clientSocket.isConnected()) {
                 String clientMessage = readInput.readLine();
                 //System.out.println(clientMessage + "----------original message");  //test
                 Message message = wrapMessage(clientMessage);
@@ -84,12 +85,9 @@ public class ServerThread implements Runnable {
                 System.out.println(message.toString() + "wrapped message");  //test
                 identifyMessage(message);
             }
-            connectedClients.remove(this);
-            readInput.close();
-            writeOutput.close();
-            clientSocket.close();
+            elegantClose();
         } catch (IOException e) {
-            e.printStackTrace();
+            elegantClose();
         }
     }
 
@@ -474,6 +472,23 @@ public class ServerThread implements Runnable {
                 }
                 break;
 
+            case MessageType.rebootDirection:
+                RebootDirectionBody rebootDirectionBody = new Gson().fromJson(body,RebootDirectionBody.class);
+                String tempDirection = rebootDirectionBody.getDirection().toLowerCase().trim();
+                switch (tempDirection){
+                    case "up":
+                        this.player.getOwnRobot().setRebootDirection(Direction.UP);
+                        break;
+                    case "right":
+                        this.player.getOwnRobot().setRebootDirection(Direction.RIGHT);
+                        break;
+                    case "down":
+                        this.player.getOwnRobot().setRebootDirection(Direction.DOWN);
+                        break;
+                    case "left":
+                        this.player.getOwnRobot().setRebootDirection(Direction.LEFT);
+                        break;
+                }
         }
     }
 
@@ -604,5 +619,17 @@ public class ServerThread implements Runnable {
 
     public Position getStartingPosition() {
         return startingPosition;
+    }
+
+    public void elegantClose(){
+        sendToAll(new ConnectionUpdate(clientID,false,"remove").toString());
+        connectedClients.remove(this);
+        try {
+            readInput.close();
+            writeOutput.close();
+            clientSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

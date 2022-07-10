@@ -6,6 +6,7 @@ import protocol.Energy;
 import protocol.Movement;
 import protocol.PlayerTurning;
 import protocol.Reboot;
+import protocol.ReceivedChat;
 import server.CardTypes.Card;
 import server.Control.Direction;
 import server.Control.Position;
@@ -17,15 +18,15 @@ public class Robot implements RobotAction {
   public int hp = 10;
   public Boolean isAlive;
   public int lives = 3;
-
   private Position currentPosition;
   private Position lastPosition = null;
   private Direction faceDirection;  //direction the robot faces to
 
   public RR currentGame;
-
   public Player owner;
   private Position startPosition;
+  private Direction rebootDirection = Direction.UP;
+
 
   public Robot(String name){
     this.name=name;
@@ -132,6 +133,14 @@ public class Robot implements RobotAction {
     this.startPosition = startPosition;
   }
 
+  public Direction getRebootDirection() {
+    return rebootDirection;
+  }
+
+  public void setRebootDirection(Direction rebootDirection) {
+    this.rebootDirection = rebootDirection;
+  }
+
   private void moveOneStep() {
     Position togo = this.getCurrentPosition().getNextPosition(this.getFaceDirection());
     boolean flag = this.currentGame.getController().movementCheck(this, this.getFaceDirection());
@@ -197,6 +206,22 @@ public class Robot implements RobotAction {
     currentGame.sendMessageToAll(new Reboot(owner.clientID));
     owner.drawDamage("Spam",2);
     owner.discardRegister();
+    Position rebootPosition = currentGame.getPositionReboot();
+    boolean flag = currentGame.getController().isOccupied(rebootPosition);
+    currentGame.sendMessageToClient(new ReceivedChat
+        ("decide your reboot direction", -1, true), currentGame.getServerThreadById(owner.clientID));
+    try {
+      wait(5000);  //wait player to make decision
+    } catch (InterruptedException e) {
+      System.out.println("error in reboot");
+    }
+    this.faceDirection = rebootDirection;
+    if(flag){
+      Robot occupiedRobot = rebootPosition.getOccupiedRobot();
+      push(occupiedRobot, rebootPosition.getTile().getDirection(),1);
+    }
+    this.lastPosition = currentPosition;
+    this.currentPosition = rebootPosition;
   }
   private void bePushedOneStep(Direction direction) {
     Position togo = this.getCurrentPosition().getNextPosition(direction);
