@@ -165,7 +165,7 @@ public class LobbyViewModel {
         String target=splittingTarget[0].trim();
         int to=Client.getClientReceive().getIdByName(target);
         String messageToSend = realMessage.toString().trim();
-        String sendChat = new SendChat(messageToSend,to).toString();
+        String sendChat = new SendChat("(private) " + messageToSend,to).toString();
 
         return sendChat;
     }
