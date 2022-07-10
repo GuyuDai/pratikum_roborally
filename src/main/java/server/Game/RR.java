@@ -318,7 +318,7 @@ public class RR extends Thread implements GameLogic {
     //if there is a player already finished programming
     while(finishedPlayers == 0){
       for(Player player : activePlayers){
-        System.out.println(player.getName() + player.getRegister().size());  //test
+        //System.out.println(player.getName() + player.getRegister().size());  //test
         if(player.getRegister().size() == 5){
           finishedPlayers++;
         }
