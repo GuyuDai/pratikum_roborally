@@ -16,15 +16,21 @@ public class Again extends Card {
 
   @Override
   public void action() {
-    int i=this.getOwner().getRegister().indexOf(this);
-    Card lastCard=this.getOwner().getRegister().get(i-1);
-    if(lastCard instanceof Spam||lastCard instanceof Trojan||lastCard instanceof Virus||lastCard instanceof Worm){
-      this.getOwner().getOwnDeck().getRemainingCards().get(0).action();
-      this.getOwner().getOwnDeck().getRemainingCards().remove(0);
-
+    int i = this.getOwner().getRegister().indexOf(this);
+    if(i != 0){
+      Card lastCard = this.getOwner().getRegister().get(i-1);
+      if(lastCard.getCardName().equals("Spam")
+          || lastCard.getCardName().equals("Trojan")
+          || lastCard.getCardName().equals("Virus")
+          || lastCard.getCardName().equals("Worm")){
+        Card activeCard = this.getOwner().getOwnDeck().getRemainingCards().get(0);
+        activeCard.action();
+        this.getOwner().getOwnDeck().getRemainingCards().remove(activeCard);
+        this.getOwner().getOwnDeck().getDiscardPile().add(activeCard);
+      }else {
+        lastCard.action();
+      }
     }
-    lastCard.action();
-
   }
 
 }
