@@ -18,10 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
-import protocol.SelectedCard;
-import protocol.SendChat;
-import protocol.SetStartingPoint;
-import protocol.YourCards;
+import protocol.*;
 import server.BoardElement.BoardElem;
 import server.BoardTypes.*;
 import server.CardTypes.*;
@@ -2135,17 +2132,16 @@ public class GameViewModel {
             int moveX = Client.getClientReceive().getPositionById(clientId)[0];
             int moveY = Client.getClientReceive().getPositionById(clientId)[1];
             int robotNumber=Client.getClientReceive().getRobotById(clientId);
-            int oldX=robotOldPosition.get(robotNumber)[0];
-            int oldY=robotOldPosition.get(robotNumber)[1];
+           // int oldX=robotOldPosition.get(robotNumber)[0];
+           // int oldY=robotOldPosition.get(robotNumber)[1];
             ImageView botView=robotOgPicture.get(robotNumber);
             URL empty = getClass().getResource("/Empty.png");
             Image imageEmpty = new Image(empty.toString());
             ImageView emptyView=new ImageView(imageEmpty);
-
-            PauseTransition remove = new PauseTransition(Duration.seconds(1));
-            remove.setOnFinished(e -> robotBoard.add(emptyView,oldX,oldY));
-            remove.play();
-            PauseTransition move1d = new PauseTransition(Duration.seconds(2));
+            //TODO delete startPosition
+           // remove.setOnFinished(e -> robotBoard.add(emptyView,oldX,oldY));
+            robotBoard.getChildren().remove(botView);
+            PauseTransition move1d = new PauseTransition(Duration.seconds(1));
             move1d.setOnFinished(e -> robotBoard.add(botView, moveX, moveY));
             move1d.play();
            // PauseTransition remove2 = new PauseTransition(Duration.seconds(2));
@@ -2354,7 +2350,10 @@ public class GameViewModel {
 
 
     public void playCardBtnAction(ActionEvent actionEvent) {
+
          moveRobot();
+
+         //Client.getClientReceive().sendMessage(new PlayCard("hello").toString());
     }
 
     public void getCardsButtonAction(ActionEvent actionEvent) {
