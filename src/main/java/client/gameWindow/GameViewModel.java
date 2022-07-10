@@ -2376,8 +2376,10 @@ public class GameViewModel {
     }
 
     public void MouseAction(MouseEvent mouseEvent) {
-
-        //TODO connect to refresher here!
+        if(getRegisterCount() < 5){
+            timer30Sec();
+        } else {
+        }
     }
 
 
@@ -2528,7 +2530,7 @@ public class GameViewModel {
             timegone4.setOnFinished(e -> autoFillRegister());
             timegone4.play();
 
-            PauseTransition textAppear2 = new PauseTransition(Duration.seconds(34));
+            PauseTransition textAppear2 = new PauseTransition(Duration.seconds(33));
             textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
             textAppear2.play();
         }
