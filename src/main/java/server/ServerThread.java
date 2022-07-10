@@ -24,6 +24,7 @@ import protocol.SetStartingPoint.SetStartingPointBody;
 import protocol.SetStatus.SetStatusBody;
 import protocol.MapSelected.MapSelectedBody;
 import protocol.SelectedCard.SelectedCardBody;
+import server.BoardElement.BoardElem;
 import server.BoardTypes.*;
 import server.CardTypes.Card;
 import server.Control.Direction;
@@ -60,6 +61,7 @@ public class ServerThread implements Runnable {
     private Player player;
     private Position startingPosition;
     private String[] damageCards;
+    private int registerPointer = 0;
 
     public ServerThread(Socket clientSocket) throws IOException {
         this.clientSocket = clientSocket;
@@ -430,9 +432,9 @@ public class ServerThread implements Runnable {
                 if(currentGame != null && currentGame.getCurrentState().equals(GameState.ProgrammingPhase)){
                     register = selectedCardBody.getRegister();
                     card = selectedCardBody.getCard();
-                    int playerID=selectedCardBody.getClientID();
+                    int playerID = selectedCardBody.getClientID();
                     //TODO make sure the card come from the same player
-                    if(playerID==clientID) {
+                    if(playerID == clientID) {
                         int i = 0;
 
                         while (i < player.getHands().size()) {
@@ -441,23 +443,24 @@ public class ServerThread implements Runnable {
                                 player.getRegister().add(currentCard);
                                 player.getHands().remove(currentCard);
                                 i = 0;
-                            }   //if remove one Card in handsList,don't do i++
-                            else {
+                                break;
+                            } else {  //if remove one Card in handsList,don't do i++
                                 i++;
                             }
                             //change DoProgrammingPhase later maybe,player can do card selection here;
                         }
-                        int filledCardNumber = player.getRegister().size();
                         String cardSelected = "";
-                        if (filledCardNumber < 5) {
+                        if (registerPointer < 5) {
                             cardSelected = new CardSelected(clientID, register, false).toString();
                         } else {
                             cardSelected = new CardSelected(clientID, register, true).toString();
                         }
+                        registerPointer++;
                         sendToAll(cardSelected);
                     }
                 }
                 break;
+
             case MessageType.selectionFinished:
                   sendToAll(new TimerStarted().toString());
 
@@ -536,6 +539,14 @@ public class ServerThread implements Runnable {
                 serverThread.getPlayer().setCurrentGame(game);
                 serverThread.getPlayer().getOwnRobot().setCurrentGame(game);
                 game.getActiveClients().add(serverThread);
+            }
+            for(BoardElem[][] elem2d : board.map){
+                for(BoardElem[] elem1d : elem2d){
+                    for(BoardElem elem : elem1d){
+                        elem.setGameBoard(board);
+                        elem.setCurrentGame(game);
+                    }
+                }
             }
             game.startGame();
         }else {
@@ -627,6 +638,10 @@ public class ServerThread implements Runnable {
 
     public void setBoard(Board board) {
         this.board = board;
+    }
+
+    public void setRegisterPointer(int registerPointer) {
+        this.registerPointer = registerPointer;
     }
 
     public void elegantClose(){

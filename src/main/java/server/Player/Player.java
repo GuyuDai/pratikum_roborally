@@ -17,8 +17,8 @@ public class Player implements PlayerAction{
   private RR currentGame;
   private ProgrammingDeck ownDeck;
   public Robot ownRobot;
-  private CopyOnWriteArrayList<Card> hands= new CopyOnWriteArrayList<>();
-  private CopyOnWriteArrayList<Card> register=new CopyOnWriteArrayList<>();
+  private CopyOnWriteArrayList<Card> hands = new CopyOnWriteArrayList<>();
+  private CopyOnWriteArrayList<Card> register = new CopyOnWriteArrayList<>();
   public int priority = 1;
   public int energyCubes;
   private boolean isAI = false;
