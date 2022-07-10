@@ -71,13 +71,13 @@ public class ServerThread implements Runnable {
             String HelloClient = helloClient.toString();
             sendMessage(HelloClient);
         } catch (IOException e) {
-            e.printStackTrace();
+            elegantClose();
         }
     }
     @Override
     public void run() {
         try {
-            while (!clientSocket.isClosed()) {
+            while (clientSocket.isConnected()) {
                 String clientMessage = readInput.readLine();
                 //System.out.println(clientMessage + "----------original message");  //test
                 Message message = wrapMessage(clientMessage);
@@ -85,12 +85,9 @@ public class ServerThread implements Runnable {
                 System.out.println(message.toString() + "wrapped message");  //test
                 identifyMessage(message);
             }
-            connectedClients.remove(this);
-            readInput.close();
-            writeOutput.close();
-            clientSocket.close();
+            elegantClose();
         } catch (IOException e) {
-            e.printStackTrace();
+            elegantClose();
         }
     }
 
@@ -617,5 +614,17 @@ public class ServerThread implements Runnable {
 
     public Position getStartingPosition() {
         return startingPosition;
+    }
+
+    public void elegantClose(){
+        sendToAll(new ConnectionUpdate(clientID,false,"remove").toString());
+        connectedClients.remove(this);
+        try {
+            readInput.close();
+            writeOutput.close();
+            clientSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
