@@ -26,7 +26,6 @@ import server.BoardElement.BoardElem;
 import server.BoardTypes.*;
 import server.CardTypes.*;
 import server.Control.Direction;
-import server.Control.Timer;
 import server.Deck.ProgrammingDeck;
 import java.io.IOException;
 import java.net.IDN;
@@ -36,8 +35,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.TimeUnit;
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.Parent;
@@ -70,7 +67,6 @@ public class GameViewModel {
 
     @FXML
     private TextField timer30;
-
 
 
     /**
@@ -664,10 +660,22 @@ public class GameViewModel {
             case 5:
                 register5.setImage(hand1.getImage());
                 hand1Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[0],4,ID).toString());
-                playCardBtn.setVisible(true);
-                Text.setText("Click on 'play cards'! ");
-                timer30Sec();
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[0], 4,ID).toString());
+                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
+                if(Client.getClientReceive().getCounterRegister() == 1){
+                    Client.getClientReceive().setTimer(true);
+                    Text.setText("Other players have 30 seconds left to finish their register.");
+                    //after 30 seconds the play Cards button will appear
+                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
+                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
+                    pauseTransition0.play();
+                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
+                    textAppear2.play();
+                }
+                else{
+                    Client.getClientReceive().setTimer(false);
+                }
                 break;
         }
     }
@@ -699,10 +707,22 @@ public class GameViewModel {
             case 5:
                 register5.setImage(hand2.getImage());
                 hand2Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[1],4,ID).toString());
-                playCardBtn.setVisible(true);
-                Text.setText("Click on 'play cards'! ");
-                timer30Sec();
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[1], 4,ID).toString());
+                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
+                if(Client.getClientReceive().getCounterRegister() == 1){
+                    Client.getClientReceive().setTimer(true);
+                    Text.setText("Other players have 30 seconds left to finish their register.");
+                    //after 30 seconds the play Cards button will appear
+                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
+                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
+                    pauseTransition0.play();
+                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
+                    textAppear2.play();
+                }
+                else{
+                    Client.getClientReceive().setTimer(false);
+                }
                 break;
         }
     }
@@ -735,9 +755,21 @@ public class GameViewModel {
                 register5.setImage(hand3.getImage());
                 hand3Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[2],4,ID).toString());
-                playCardBtn.setVisible(true);
-                Text.setText("Click on 'play cards'! ");
-                timer30Sec();
+                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
+                if(Client.getClientReceive().getCounterRegister() == 1){
+                    Client.getClientReceive().setTimer(true);
+                    Text.setText("Other players have 30 seconds left to finish their register.");
+                    //after 30 seconds the play Cards button will appear
+                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
+                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
+                    pauseTransition0.play();
+                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
+                    textAppear2.play();
+                }
+                else{
+                    Client.getClientReceive().setTimer(false);
+                }
                 break;
         }
     }
@@ -770,9 +802,21 @@ public class GameViewModel {
                 register5.setImage(hand4.getImage());
                 hand4Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[3],4,ID).toString());
-                playCardBtn.setVisible(true);
-                Text.setText("Click on 'play cards'! ");
-                timer30Sec();
+                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
+                if(Client.getClientReceive().getCounterRegister() == 1){
+                    Client.getClientReceive().setTimer(true);
+                    Text.setText("Other players have 30 seconds left to finish their register.");
+                    //after 30 seconds the play Cards button will appear
+                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
+                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
+                    pauseTransition0.play();
+                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
+                    textAppear2.play();
+                }
+                else{
+                    Client.getClientReceive().setTimer(false);
+                }
                 break;
         }
     }
@@ -805,9 +849,21 @@ public class GameViewModel {
                 register5.setImage(hand5.getImage());
                 hand5Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[4],4,ID).toString());
-                playCardBtn.setVisible(true);
-                Text.setText("Click on 'play cards'! ");
-                timer30Sec();
+                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
+                if(Client.getClientReceive().getCounterRegister() == 1){
+                    Client.getClientReceive().setTimer(true);
+                    Text.setText("Other players have 30 seconds left to finish their register.");
+                    //after 30 seconds the play Cards button will appear
+                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
+                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
+                    pauseTransition0.play();
+                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
+                    textAppear2.play();
+                }
+                else{
+                    Client.getClientReceive().setTimer(false);
+                }
                 break;
         }
         ;
@@ -841,9 +897,21 @@ public class GameViewModel {
                 register5.setImage(hand6.getImage());
                 hand6Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[5],4,ID).toString());
-                playCardBtn.setVisible(true);
-                Text.setText("Click on 'play cards'! ");
-                timer30Sec();
+                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
+                if(Client.getClientReceive().getCounterRegister() == 1){
+                    Client.getClientReceive().setTimer(true);
+                    Text.setText("Other players have 30 seconds left to finish their register.");
+                    //after 30 seconds the play Cards button will appear
+                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
+                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
+                    pauseTransition0.play();
+                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
+                    textAppear2.play();
+                }
+                else{
+                    Client.getClientReceive().setTimer(false);
+                }
                 break;
         }
     }
@@ -877,9 +945,21 @@ public class GameViewModel {
                 register5.setImage(hand7.getImage());
                 hand7Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[6],4,ID).toString());
-                playCardBtn.setVisible(true);
-                Text.setText("Click on 'play cards'!");
-                timer30Sec();
+                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
+                if(Client.getClientReceive().getCounterRegister() == 1){
+                    Client.getClientReceive().setTimer(true);
+                    Text.setText("Other players have 30 seconds left to finish their register.");
+                    //after 30 seconds the play Cards button will appear
+                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
+                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
+                    pauseTransition0.play();
+                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
+                    textAppear2.play();
+                }
+                else{
+                    Client.getClientReceive().setTimer(false);
+                }
                 break;
         }
     }
@@ -915,9 +995,21 @@ public class GameViewModel {
                 register5.setImage(hand8.getImage());
                 hand8Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[7],4,ID).toString());
-                playCardBtn.setVisible(true);
-                Text.setText("Click on 'play cards'! ");
-                timer30Sec();
+                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
+                if(Client.getClientReceive().getCounterRegister() == 1){
+                    Client.getClientReceive().setTimer(true);
+                    Text.setText("Other players have 30 seconds left to finish their register.");
+                    //after 30 seconds the play Cards button will appear
+                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
+                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
+                    pauseTransition0.play();
+                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
+                    textAppear2.play();
+                }
+                else{
+                    Client.getClientReceive().setTimer(false);
+                }
                 break;
         }
     }
@@ -950,20 +1042,32 @@ public class GameViewModel {
                 register5.setImage(hand9.getImage());
                 hand9Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[8],4,ID).toString());
-                playCardBtn.setVisible(true);
-                Text.setText("Click on 'play cards'! ");
-                timer30Sec();
+                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
+                if(Client.getClientReceive().getCounterRegister() == 1){
+                    Client.getClientReceive().setTimer(true);
+                    Text.setText("Other players have 30 seconds left to finish their register.");
+                    //after 30 seconds the play Cards button will appear
+                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
+                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
+                    pauseTransition0.play();
+                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
+                    textAppear2.play();
+                }
+                else{
+                    Client.getClientReceive().setTimer(false);
+                }
                 break;
         }
     }
 
 
     /**
-     * pick 5 cards from hands automatically -> when timer is 0 and for AI
+     * pick register cards from hands automatically
      */
-    public void autoFillRegister(){
-        for(int i = 1; i < 10 ; i ++) {
-            if (getRegisterCount() != 5) {
+    public void autoFillRegister() {
+        for (int i = 1; i < 10; i++) {
+            if (getRegisterCount() <= 5) {
                 switch (i) {
                     case 1:
                         try {
@@ -974,7 +1078,6 @@ public class GameViewModel {
                     case 2:
                         try {
                             hand2Button.fire();
-
                         } catch (Exception e) {
                         }
                         break;
@@ -1022,19 +1125,18 @@ public class GameViewModel {
                         }
                         break;
                 }
-            }
-            else{
+            } else {
+                playCardBtn.setVisible(true);
             }
         }
     }
-
 
 
     /**
      * print map button -> map gets printed and starting point selection appears
      */
     public void printMapButtonAction(ActionEvent actionEvent) {
-        String map=Client.getClientReceive().getBoard();
+        String map = Client.getClientReceive().getBoard();
         printMapGUI(map);
 
         Text.setText("Select a starting point.");
@@ -1072,7 +1174,7 @@ public class GameViewModel {
 
 
     public void printMapGUI(String setMapSelection) {
-        Board board = null;
+        Board board=null;
         switch (setMapSelection) {
             case "DizzyHighway":
                 board = new DizzyHighway();
@@ -2274,8 +2376,10 @@ public class GameViewModel {
     }
 
     public void MouseAction(MouseEvent mouseEvent) {
-
-        //TODO connect to refresher here!
+        if(getRegisterCount() < 5){
+            timer30Sec();
+        } else {
+        }
     }
 
 
@@ -2284,148 +2388,153 @@ public class GameViewModel {
      * timer 30 seconds when first player finished selecting register
      */
     public void timer30Sec() {
-        timerText.setVisible(true);
-        Text.setText("Timer started! Pick your register quickly!");
-        timer.setText("30");
+        if (Client.getClientReceive().isTimerStarted() == true) {
+            Client.getClientReceive().setTimer(false);
+            timerText.setVisible(true);
+            Text.setText("Timer started! Pick your register quickly!");
+            timer.setText("30");
 
-        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
-        pauseTransition.setOnFinished(e -> timer.setText("29"));
-        pauseTransition.play();
+            PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
+            pauseTransition.setOnFinished(e -> timer.setText("29"));
+            pauseTransition.play();
 
-        PauseTransition pauseTransition28 = new PauseTransition(Duration.seconds(2));
-        pauseTransition28.setOnFinished(e -> timer.setText("28"));
-        pauseTransition28.play();
+            PauseTransition pauseTransition28 = new PauseTransition(Duration.seconds(2));
+            pauseTransition28.setOnFinished(e -> timer.setText("28"));
+            pauseTransition28.play();
 
-        PauseTransition pauseTransition27 = new PauseTransition(Duration.seconds(3));
-        pauseTransition27.setOnFinished(e -> timer.setText("27"));
-        pauseTransition27.play();
+            PauseTransition pauseTransition27 = new PauseTransition(Duration.seconds(3));
+            pauseTransition27.setOnFinished(e -> timer.setText("27"));
+            pauseTransition27.play();
 
-        PauseTransition pauseTransition26 = new PauseTransition(Duration.seconds(4));
-        pauseTransition26.setOnFinished(e -> timer.setText("26"));
-        pauseTransition26.play();
+            PauseTransition pauseTransition26 = new PauseTransition(Duration.seconds(4));
+            pauseTransition26.setOnFinished(e -> timer.setText("26"));
+            pauseTransition26.play();
 
-        PauseTransition pauseTransition25 = new PauseTransition(Duration.seconds(5));
-        pauseTransition25.setOnFinished(e -> timer.setText("25"));
-        pauseTransition25.play();
+            PauseTransition pauseTransition25 = new PauseTransition(Duration.seconds(5));
+            pauseTransition25.setOnFinished(e -> timer.setText("25"));
+            pauseTransition25.play();
 
-        PauseTransition pauseTransition24 = new PauseTransition(Duration.seconds(6));
-        pauseTransition24.setOnFinished(e -> timer.setText("24"));
-        pauseTransition24.play();
+            PauseTransition pauseTransition24 = new PauseTransition(Duration.seconds(6));
+            pauseTransition24.setOnFinished(e -> timer.setText("24"));
+            pauseTransition24.play();
 
-        PauseTransition pauseTransition23 = new PauseTransition(Duration.seconds(7));
-        pauseTransition23.setOnFinished(e -> timer.setText("23"));
-        pauseTransition23.play();
+            PauseTransition pauseTransition23 = new PauseTransition(Duration.seconds(7));
+            pauseTransition23.setOnFinished(e -> timer.setText("23"));
+            pauseTransition23.play();
 
-        PauseTransition pauseTransition22 = new PauseTransition(Duration.seconds(8));
-        pauseTransition22.setOnFinished(e -> timer.setText("22"));
-        pauseTransition22.play();
+            PauseTransition pauseTransition22 = new PauseTransition(Duration.seconds(8));
+            pauseTransition22.setOnFinished(e -> timer.setText("22"));
+            pauseTransition22.play();
 
-        PauseTransition pauseTransition21 = new PauseTransition(Duration.seconds(9));
-        pauseTransition21.setOnFinished(e -> timer.setText("21"));
-        pauseTransition21.play();
+            PauseTransition pauseTransition21 = new PauseTransition(Duration.seconds(9));
+            pauseTransition21.setOnFinished(e -> timer.setText("21"));
+            pauseTransition21.play();
 
-        PauseTransition pauseTransition20 = new PauseTransition(Duration.seconds(10));
-        pauseTransition20.setOnFinished(e -> timer.setText("20"));
-        pauseTransition20.play();
+            PauseTransition pauseTransition20 = new PauseTransition(Duration.seconds(10));
+            pauseTransition20.setOnFinished(e -> timer.setText("20"));
+            pauseTransition20.play();
 
-        PauseTransition pauseTransition19 = new PauseTransition(Duration.seconds(11));
-        pauseTransition19.setOnFinished(e -> timer.setText("19"));
-        pauseTransition19.play();
+            PauseTransition pauseTransition19 = new PauseTransition(Duration.seconds(11));
+            pauseTransition19.setOnFinished(e -> timer.setText("19"));
+            pauseTransition19.play();
 
-        PauseTransition pauseTransition18 = new PauseTransition(Duration.seconds(12));
-        pauseTransition18.setOnFinished(e -> timer.setText("18"));
-        pauseTransition18.play();
+            PauseTransition pauseTransition18 = new PauseTransition(Duration.seconds(12));
+            pauseTransition18.setOnFinished(e -> timer.setText("18"));
+            pauseTransition18.play();
 
-        PauseTransition pauseTransition17 = new PauseTransition(Duration.seconds(13));
-        pauseTransition17.setOnFinished(e -> timer.setText("17"));
-        pauseTransition17.play();
+            PauseTransition pauseTransition17 = new PauseTransition(Duration.seconds(13));
+            pauseTransition17.setOnFinished(e -> timer.setText("17"));
+            pauseTransition17.play();
 
-        PauseTransition pauseTransition16 = new PauseTransition(Duration.seconds(14));
-        pauseTransition16.setOnFinished(e -> timer.setText("16"));
-        pauseTransition16.play();
+            PauseTransition pauseTransition16 = new PauseTransition(Duration.seconds(14));
+            pauseTransition16.setOnFinished(e -> timer.setText("16"));
+            pauseTransition16.play();
 
-        PauseTransition pauseTransition15 = new PauseTransition(Duration.seconds(15));
-        pauseTransition15.setOnFinished(e -> timer.setText("15"));
-        pauseTransition15.play();
+            PauseTransition pauseTransition15 = new PauseTransition(Duration.seconds(15));
+            pauseTransition15.setOnFinished(e -> timer.setText("15"));
+            pauseTransition15.play();
 
-        PauseTransition pauseTransition14 = new PauseTransition(Duration.seconds(16));
-        pauseTransition14.setOnFinished(e -> timer.setText("14"));
-        pauseTransition14.play();
+            PauseTransition pauseTransition14 = new PauseTransition(Duration.seconds(16));
+            pauseTransition14.setOnFinished(e -> timer.setText("14"));
+            pauseTransition14.play();
 
-        PauseTransition pauseTransition13 = new PauseTransition(Duration.seconds(17));
-        pauseTransition13.setOnFinished(e -> timer.setText("13"));
-        pauseTransition13.play();
+            PauseTransition pauseTransition13 = new PauseTransition(Duration.seconds(17));
+            pauseTransition13.setOnFinished(e -> timer.setText("13"));
+            pauseTransition13.play();
 
-        PauseTransition pauseTransition12 = new PauseTransition(Duration.seconds(18));
-        pauseTransition12.setOnFinished(e -> timer.setText("12"));
-        pauseTransition12.play();
+            PauseTransition pauseTransition12 = new PauseTransition(Duration.seconds(18));
+            pauseTransition12.setOnFinished(e -> timer.setText("12"));
+            pauseTransition12.play();
 
-        PauseTransition pauseTransition11 = new PauseTransition(Duration.seconds(19));
-        pauseTransition11.setOnFinished(e -> timer.setText("11"));
-        pauseTransition11.play();
+            PauseTransition pauseTransition11 = new PauseTransition(Duration.seconds(19));
+            pauseTransition11.setOnFinished(e -> timer.setText("11"));
+            pauseTransition11.play();
 
-        PauseTransition pauseTransition10 = new PauseTransition(Duration.seconds(20));
-        pauseTransition10.setOnFinished(e -> timer.setText("10"));
-        pauseTransition10.play();
+            PauseTransition pauseTransition10 = new PauseTransition(Duration.seconds(20));
+            pauseTransition10.setOnFinished(e -> timer.setText("10"));
+            pauseTransition10.play();
 
-        PauseTransition pauseTransition9 = new PauseTransition(Duration.seconds(21));
-        pauseTransition9.setOnFinished(e -> timer.setText("9"));
-        pauseTransition9.play();
+            PauseTransition pauseTransition9 = new PauseTransition(Duration.seconds(21));
+            pauseTransition9.setOnFinished(e -> timer.setText("9"));
+            pauseTransition9.play();
 
-        PauseTransition pauseTransition8 = new PauseTransition(Duration.seconds(22));
-        pauseTransition8.setOnFinished(e -> timer.setText("8"));
-        pauseTransition8.play();
+            PauseTransition pauseTransition8 = new PauseTransition(Duration.seconds(22));
+            pauseTransition8.setOnFinished(e -> timer.setText("8"));
+            pauseTransition8.play();
 
-        PauseTransition pauseTransition7 = new PauseTransition(Duration.seconds(23));
-        pauseTransition7.setOnFinished(e -> timer.setText("7"));
-        pauseTransition7.play();
+            PauseTransition pauseTransition7 = new PauseTransition(Duration.seconds(23));
+            pauseTransition7.setOnFinished(e -> timer.setText("7"));
+            pauseTransition7.play();
 
-        PauseTransition pauseTransition6 = new PauseTransition(Duration.seconds(24));
-        pauseTransition6.setOnFinished(e -> timer.setText("6"));
-        pauseTransition6.play();
+            PauseTransition pauseTransition6 = new PauseTransition(Duration.seconds(24));
+            pauseTransition6.setOnFinished(e -> timer.setText("6"));
+            pauseTransition6.play();
 
-        PauseTransition pauseTransition5 = new PauseTransition(Duration.seconds(25));
-        pauseTransition5.setOnFinished(e -> timer.setText("5"));
-        pauseTransition5.play();
+            PauseTransition pauseTransition5 = new PauseTransition(Duration.seconds(25));
+            pauseTransition5.setOnFinished(e -> timer.setText("5"));
+            pauseTransition5.play();
 
-        PauseTransition pauseTransition4 = new PauseTransition(Duration.seconds(26));
-        pauseTransition4.setOnFinished(e -> timer.setText("4"));
-        pauseTransition4.play();
+            PauseTransition pauseTransition4 = new PauseTransition(Duration.seconds(26));
+            pauseTransition4.setOnFinished(e -> timer.setText("4"));
+            pauseTransition4.play();
 
-        PauseTransition pauseTransition3 = new PauseTransition(Duration.seconds(27));
-        pauseTransition3.setOnFinished(e -> timer.setText("3"));
-        pauseTransition3.play();
+            PauseTransition pauseTransition3 = new PauseTransition(Duration.seconds(27));
+            pauseTransition3.setOnFinished(e -> timer.setText("3"));
+            pauseTransition3.play();
 
-        PauseTransition pauseTransition2 = new PauseTransition(Duration.seconds(28));
-        pauseTransition2.setOnFinished(e -> timer.setText("2"));
-        pauseTransition2.play();
+            PauseTransition pauseTransition2 = new PauseTransition(Duration.seconds(28));
+            pauseTransition2.setOnFinished(e -> timer.setText("2"));
+            pauseTransition2.play();
 
-        PauseTransition pauseTransition1 = new PauseTransition(Duration.seconds(29));
-        pauseTransition1.setOnFinished(e -> timer.setText("1"));
-        pauseTransition1.play();
+            PauseTransition pauseTransition1 = new PauseTransition(Duration.seconds(29));
+            pauseTransition1.setOnFinished(e -> timer.setText("1"));
+            pauseTransition1.play();
 
-        PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
-        pauseTransition0.setOnFinished(e -> timer.setText("0"));
-        pauseTransition0.play();
+            PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
+            pauseTransition0.setOnFinished(e -> timer.setText("0"));
+            pauseTransition0.play();
+
+            PauseTransition timegone = new PauseTransition(Duration.seconds(31));
+            timegone.setOnFinished(e -> timerText.setVisible(false));
+            timegone.play();
+
+            PauseTransition timegone2 = new PauseTransition(Duration.seconds(31));
+            timegone2.setOnFinished(e -> timer.setVisible(false));
+            timegone2.play();
+
+            PauseTransition timegone3 = new PauseTransition(Duration.seconds(31));
+            timegone3.setOnFinished(e -> Text.setText("Time is gone! Your register will be filled automatically!"));
+            timegone3.play();
+
+            PauseTransition timegone4 = new PauseTransition(Duration.seconds(31));
+            timegone4.setOnFinished(e -> autoFillRegister());
+            timegone4.play();
+
+            PauseTransition textAppear2 = new PauseTransition(Duration.seconds(33));
+            textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
+            textAppear2.play();
+        }
     }
-
-
-
-        /*
-        Timer timer30 = new Timer();
-        try {
-            timerStarted = true;
-            int timeInSeconds = 30;
-            while (timerStarted && timeInSeconds > 0) {
-
-                timer.setText("" + timeInSeconds);
-                TimeUnit.SECONDS.sleep(1);
-                timeInSeconds--;
-            }
-            timerStarted = false;
-
-         */
-
 }
 
 

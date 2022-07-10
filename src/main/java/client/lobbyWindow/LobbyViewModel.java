@@ -204,11 +204,11 @@ public class LobbyViewModel {
       }
       else{
           openGameWindow();
-          setWindowName("Game");
       }
         //close Lobby
         Stage stage = (Stage) selectMap.getScene().getWindow();
         stage.close();
+        setWindowName("Game");
     }
 
     public static void setWindowName (String name){
