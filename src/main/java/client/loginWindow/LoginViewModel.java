@@ -165,7 +165,6 @@ public class LoginViewModel {
             stageGame.setScene(new Scene(rootGame));
             stageGame.show();
         } catch (Exception e){
-            System.out.println("test ");
         }
     }
 

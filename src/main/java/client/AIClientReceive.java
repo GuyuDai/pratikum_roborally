@@ -137,10 +137,7 @@ public class AIClientReceive extends Thread {
         try {
             while (!sockAI.isClosed()) {
                 String serverMessage = readInput.readLine();
-                System.out.println(serverMessage + "-----------original message");  //test
                 Message message = wrapMessage(serverMessage);
-                System.out.println("--------------------------------------------------------------");  //test
-                System.out.println(message);  //test
                 getMessageFromServer(message);
             }
         } catch (IOException e) {
