@@ -171,6 +171,8 @@ public class Robot implements RobotAction {
       togo.setOccupiedRobot(this);
       this.setCurrentPosition(togo);
       currentGame.sendMessageToAll(new Movement(owner.clientID, togo.getX(), togo.getY()));
+    }else {
+      stay();
     }
   }
 
@@ -254,6 +256,8 @@ public class Robot implements RobotAction {
       togo.setOccupiedRobot(this);
       this.setCurrentPosition(togo);
       currentGame.sendMessageToAll(new Movement(owner.clientID, togo.getX(), togo.getY()));
+    }else {
+      stay();
     }
   }
 
@@ -274,6 +278,16 @@ public class Robot implements RobotAction {
       }
       targetRobot.bePushedOneStep(direction);
     }
+  }
+
+  /**
+   * @author dai
+   * robot stay where it is
+   */
+  public void stay() {
+    this.lastPosition = currentPosition;
+    currentGame.sendMessageToAll(new Movement
+        (owner.clientID, currentPosition.getX(), currentPosition.getY()));
   }
 }
 

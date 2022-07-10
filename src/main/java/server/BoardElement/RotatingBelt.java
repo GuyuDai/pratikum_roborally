@@ -31,7 +31,7 @@ public class RotatingBelt extends BoardElem implements Move {
             if(robot.getLastPosition().getTile().getDirection().equals(curvedDirection)){
                 robot.setFaceDirection(straightDirection);
             }
-            robot.getCurrentPosition().stay();
+            robot.stay();
         }
     }
 

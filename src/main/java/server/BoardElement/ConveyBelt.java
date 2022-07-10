@@ -45,7 +45,7 @@ public class ConveyBelt extends BoardElem implements Move {
         Direction moveDirection=robot.getCurrentPosition().getTile().getDirection();
         robot.push(robot,moveDirection,1);
       }
-      robot.getCurrentPosition().stay();
+      robot.stay();
     }
     //check if robot moves out of ConveyBelt,it will move 1 steps anyway.
     //but rotatingBelt is also a belt robot may not move in arrowDirection when it meets a rotatingBelt,it will change moveDirection;

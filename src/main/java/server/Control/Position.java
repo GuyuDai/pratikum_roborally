@@ -20,15 +20,6 @@ public class Position {
     this.board = board;
   }
 
-  /**
-   * @author dai
-   * robot stay where it is
-   */
-  public Position stay() {
-    return new Position(x,y,board);
-  }
-
-
   public void setBoard(Board board){
     this.board=board;
   }
