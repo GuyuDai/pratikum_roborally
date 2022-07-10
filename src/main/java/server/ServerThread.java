@@ -84,6 +84,10 @@ public class ServerThread implements Runnable {
                 System.out.println(message.toString() + "wrapped message");  //test
                 identifyMessage(message);
             }
+            connectedClients.remove(this);
+            readInput.close();
+            writeOutput.close();
+            clientSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

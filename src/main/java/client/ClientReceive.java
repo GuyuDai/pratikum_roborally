@@ -378,12 +378,12 @@ public class ClientReceive extends Thread{
         String fromName = this.getNameById(getFromId());
         if(LobbyViewModel.getWindowName() == "Lobby") {
             Platform.runLater(() -> {
-                LobbyViewModel.show("(private)" + fromName + ": " + msg);
+                LobbyViewModel.show(fromName + ": " + msg);
             });
         }
         else{
             Platform.runLater(() -> {
-                GameViewModel.show("(private)" + fromName + ": " + msg);
+                GameViewModel.show(fromName + ": " + msg);
             });
         }
     }
