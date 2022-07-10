@@ -7,9 +7,7 @@ import com.google.gson.JsonObject;
 import java.io.*;
 import java.net.Socket;
 import com.google.gson.Gson;
-
 import java.util.*;
-
 import javafx.application.Platform;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageAdapter;
@@ -66,6 +64,17 @@ public class ClientReceive extends Thread{
     protected List<Integer> IdList=new ArrayList<>();
     protected Map<Integer,Integer> IdRobot=new HashMap<>();
     protected Map<Integer,Integer>IdStartPoint= new HashMap<>();
+
+    protected int counterRegister = 0;
+
+
+    public void setCounterRegister(int count){
+        this.counterRegister = count;
+    }
+
+    public int getCounterRegister(){
+        return counterRegister;
+    }
 
 
 
@@ -535,6 +544,10 @@ public class ClientReceive extends Thread{
 
     public boolean isTimerStarted() {
         return timerStarted;
+    }
+
+    public void setTimer(boolean settingTimer){
+        this.timerStarted = settingTimer;
     }
 
     public String[] getFilledRegister() {
