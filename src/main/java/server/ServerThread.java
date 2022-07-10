@@ -16,6 +16,7 @@ import protocol.HelloServer.HelloServerBody;
 import protocol.PlayCard.PlayCardBody;
 import protocol.PlayerValues.PlayerValuesBody;
 import protocol.ProtocolFormat.Message;
+import protocol.RebootDirection.RebootDirectionBody;
 import protocol.SelectedDamage.SelectedDamageBody;
 import protocol.ProtocolFormat.MessageType;
 import protocol.SendChat.SendChatBody;
@@ -25,6 +26,7 @@ import protocol.MapSelected.MapSelectedBody;
 import protocol.SelectedCard.SelectedCardBody;
 import server.BoardTypes.*;
 import server.CardTypes.Card;
+import server.Control.Direction;
 import server.Control.DisconnectionController;
 import server.Control.Position;
 import server.Control.Timer;
@@ -59,7 +61,6 @@ public class ServerThread implements Runnable {
     private Position startingPosition;
     private String[] damageCards;
 
-
     public ServerThread(Socket clientSocket) throws IOException {
         this.clientSocket = clientSocket;
         connectedClients = Server.getConnectedClients();
@@ -70,13 +71,13 @@ public class ServerThread implements Runnable {
             String HelloClient = helloClient.toString();
             sendMessage(HelloClient);
         } catch (IOException e) {
-            e.printStackTrace();
+            elegantClose();
         }
     }
     @Override
     public void run() {
         try {
-            while (!clientSocket.isClosed()) {
+            while (clientSocket.isConnected()) {
                 String clientMessage = readInput.readLine();
                 //System.out.println(clientMessage + "----------original message");  //test
                 Message message = wrapMessage(clientMessage);
@@ -84,12 +85,9 @@ public class ServerThread implements Runnable {
                 System.out.println(message.toString() + "wrapped message");  //test
                 identifyMessage(message);
             }
-            connectedClients.remove(this);
-            readInput.close();
-            writeOutput.close();
-            clientSocket.close();
+            elegantClose();
         } catch (IOException e) {
-            e.printStackTrace();
+            elegantClose();
         }
     }
 
@@ -285,8 +283,8 @@ public class ServerThread implements Runnable {
 
             case MessageType.alive:
                 DisconnectionController.updateAlive(this);
-                Timer.countDown(5);
-                sendMessage(new Alive().toString());
+                //Timer.countDown(5);
+                //sendMessage(new Alive().toString());
                 break;
 
             case MessageType.playerValues:
@@ -304,6 +302,7 @@ public class ServerThread implements Runnable {
                     this.figure = tempFigure;
                     player = new Player(name, clientID);
                     player.setOwnRobot(figure);
+                    player.getOwnRobot().setOwner(player);
                     sendToAll(new PlayerAdded(clientID,name,figure).toString());
                 for (ServerThread serverThread: connectedClients) {
                     int othersID = serverThread.getID();
@@ -383,11 +382,11 @@ public class ServerThread implements Runnable {
                 SetStartingPointBody setStartingPointBody = new Gson().fromJson(body,SetStartingPointBody.class);
                 int x = setStartingPointBody.getX();
                 int y = setStartingPointBody.getY();
-                Position tempPosition = new Position(x,y);
-                System.out.println(tempPosition.getX());
+                Position tempPosition = new Position(x,y,board);
+                System.out.println(tempPosition.getX());  //test
                 boolean flagInSetStartingPoint = true;
                 for(ServerThread serverThread : connectedClients){
-                    if(serverThread.getStartingPosition()!=null) {
+                    if(serverThread.getStartingPosition() != null) {
                         if (serverThread.getStartingPosition().equals(tempPosition)) {
                             flagInSetStartingPoint = false;
                         }
@@ -395,7 +394,7 @@ public class ServerThread implements Runnable {
                 }
                 if(flagInSetStartingPoint){
                     startingPosition = tempPosition;
-                    System.out.println(startingPosition.getX());
+                    System.out.println(startingPosition.getX());  //test
                     sendToAll(new StartingPointTaken(x,y,clientID).toString());
                     this.player.getOwnRobot().setStartPosition(this.startingPosition);
                     System.out.println(player.getOwnRobot().getStartPosition().getX());
@@ -431,28 +430,32 @@ public class ServerThread implements Runnable {
                 if(currentGame != null && currentGame.getCurrentState().equals(GameState.ProgrammingPhase)){
                     register = selectedCardBody.getRegister();
                     card = selectedCardBody.getCard();
-                    int i = 0;
-                    while (i < player.getHands().size()) {
-                        Card currentCard = player.getHands().get(i);
-                        if (currentCard != null && currentCard.getCardName().equals(card)) {
-                            player.getRegister().add(currentCard);
-                            player.getHands().remove(currentCard);
-                            i = 0;
-                        }   //if remove one Card in handsList,don't do i++
-                        else {
-                            i++;
+                    int playerID=selectedCardBody.getClientID();
+                    //TODO make sure the card come from the same player
+                    if(playerID==clientID) {
+                        int i = 0;
+
+                        while (i < player.getHands().size()) {
+                            Card currentCard = player.getHands().get(i);
+                            if (currentCard != null && currentCard.getCardName().equals(card)) {
+                                player.getRegister().add(currentCard);
+                                player.getHands().remove(currentCard);
+                                i = 0;
+                            }   //if remove one Card in handsList,don't do i++
+                            else {
+                                i++;
+                            }
+                            //change DoProgrammingPhase later maybe,player can do card selection here;
                         }
-                        //change DoProgrammingPhase later maybe,player can do card selection here;
+                        int filledCardNumber = player.getRegister().size();
+                        String cardSelected = "";
+                        if (filledCardNumber < 5) {
+                            cardSelected = new CardSelected(clientID, register, false).toString();
+                        } else {
+                            cardSelected = new CardSelected(clientID, register, true).toString();
+                        }
+                        sendToAll(cardSelected);
                     }
-                    int filledCardNumber = player.getRegister().size();
-                    String cardSelected="";
-                    if (filledCardNumber<5){
-                        cardSelected = new CardSelected(clientID, register, false).toString();
-                    }
-                    else {
-                        cardSelected = new CardSelected(clientID, register, true).toString();
-                    }
-                    sendToAll(cardSelected);
                 }
                 break;
             case MessageType.selectionFinished:
@@ -462,13 +465,29 @@ public class ServerThread implements Runnable {
                 SelectedDamageBody selectedDamageBody = new Gson().fromJson(body,SelectedDamageBody.class);
                 if(currentGame != null){
                  damageCards = selectedDamageBody.getCards();
-                    // TODO: 2022/7/10 in the
                  for(String damageCard : damageCards){
                      player.drawDamage(damageCard,1);
                     }
                 }
                 break;
 
+            case MessageType.rebootDirection:
+                RebootDirectionBody rebootDirectionBody = new Gson().fromJson(body,RebootDirectionBody.class);
+                String tempDirection = rebootDirectionBody.getDirection().toLowerCase().trim();
+                switch (tempDirection){
+                    case "up":
+                        this.player.getOwnRobot().setRebootDirection(Direction.UP);
+                        break;
+                    case "right":
+                        this.player.getOwnRobot().setRebootDirection(Direction.RIGHT);
+                        break;
+                    case "down":
+                        this.player.getOwnRobot().setRebootDirection(Direction.DOWN);
+                        break;
+                    case "left":
+                        this.player.getOwnRobot().setRebootDirection(Direction.LEFT);
+                        break;
+                }
         }
     }
 
@@ -512,6 +531,7 @@ public class ServerThread implements Runnable {
         if(currentGame == null){
             RR game = new RR(board);
             for(ServerThread serverThread : connectedClients){
+                serverThread.setBoard(board);
                 serverThread.setCurrentGame(game);
                 serverThread.getPlayer().setCurrentGame(game);
                 serverThread.getPlayer().getOwnRobot().setCurrentGame(game);
@@ -599,5 +619,25 @@ public class ServerThread implements Runnable {
 
     public Position getStartingPosition() {
         return startingPosition;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    public void elegantClose(){
+        sendToAll(new ConnectionUpdate(clientID,false,"remove").toString());
+        connectedClients.remove(this);
+        try {
+            readInput.close();
+            writeOutput.close();
+            clientSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -13,7 +13,7 @@ public class ReplaceCard extends Message {
 
     public class ReplaceCardBody extends MessageBody {
         protected int register;
-        protected Card newCard;
+        protected String newCard;
         protected int clientID;
 
         public int getRegister() {
@@ -24,7 +24,7 @@ public class ReplaceCard extends Message {
             return clientID;
         }
 
-        public Card getNewCard() {
+        public String getNewCard() {
             return newCard;
         }
 
@@ -36,11 +36,11 @@ public class ReplaceCard extends Message {
             this.register = register;
         }
 
-        public void setNewCard(Card newCard) {
+        public void setNewCard(String newCard) {
             this.newCard = newCard;
         }
     }
-    public ReplaceCard (int register, Card newCard, int clientID) {
+    public ReplaceCard (int register, String newCard, int clientID) {
         this.messageType = MessageType.replaceCard;
         ReplaceCardBody body = new ReplaceCardBody();
         body.register =register;

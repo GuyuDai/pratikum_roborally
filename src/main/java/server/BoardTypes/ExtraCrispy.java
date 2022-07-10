@@ -15,7 +15,7 @@ public class ExtraCrispy extends Board {
 
         this.map = new BoardElem[10][13][3];
 
-        map[0][0][0] = new Reboot(currentGame);
+        map[0][0][0] = new Reboot(currentGame,Direction.RIGHT);
         map[0][0][1] = empty;
         map[0][0][2] = empty;
 

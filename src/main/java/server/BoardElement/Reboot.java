@@ -1,12 +1,13 @@
 package server.BoardElement;
 
+import server.Control.Direction;
 import server.Game.RR;
 
 public class Reboot extends BoardElem {
-        public Reboot (RR currentGame) {
+        public Reboot (RR currentGame, Direction direction) {
 
             super("Reboot",currentGame);
-
+            this.direction = direction;
         }
 
         @Override

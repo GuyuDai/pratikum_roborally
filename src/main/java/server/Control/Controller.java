@@ -2,6 +2,7 @@ package server.Control;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import protocol.Animation;
 import protocol.CheckPointReached;
 import protocol.ErrorMessage;
@@ -48,6 +49,7 @@ public class Controller {
    */
   public boolean movementCheck(Robot robot, Direction direction) {
     Position currentPosition = robot.getCurrentPosition();
+    System.out.println(currentPosition.getX() + "check");  //test
     Position nextPosition = currentPosition.getNextPosition(direction);
     BoardElem currentBoardElem1=currentPosition.getTile();
     BoardElem nextBoardElem1=nextPosition.getTile();
@@ -162,7 +164,7 @@ public class Controller {
         for(int i=robotY;i<Y;i++){
           if(!(currentGame.getGameBoard().getBoardElem(X,i,0) instanceof Antenna
                   || currentGame.getGameBoard().getBoardElem(X,i,1) instanceof Wall)
-                  || robotOnPositionCheck(new Position(X,i))) {
+                  || robotOnPositionCheck(new Position(X,i, currentGame.getGameBoard()))) {
             robot.getOwner().drawDamage("Spam",1);
             currentGame.sendMessageToClient(new Animation("RobotLaser"),currentGame.getServerThreadById(robot.owner.clientID));
           }
@@ -172,7 +174,7 @@ public class Controller {
         for(int i=Y;i<robotY;i++){
           if(!(currentGame.getGameBoard().getBoardElem(X,i,0) instanceof Antenna
                   || currentGame.getGameBoard().getBoardElem(X,i,1) instanceof Wall
-                  || robotOnPositionCheck(new Position(X,i)))) {
+                  || robotOnPositionCheck(new Position(X,i, currentGame.getGameBoard())))) {
             robot.getOwner().drawDamage("Spam",1);
             currentGame.sendMessageToClient(new Animation("RobotLaser"),currentGame.getServerThreadById(robot.owner.clientID));
           }
@@ -182,7 +184,7 @@ public class Controller {
         for(int i=robotX;i<X;i++){
           if(!(currentGame.getGameBoard().getBoardElem(i,Y,0) instanceof Antenna
                   || currentGame.getGameBoard().getBoardElem(i,Y,1) instanceof Wall
-                  || robotOnPositionCheck(new Position(i,Y)))) {
+                  || robotOnPositionCheck(new Position(i,Y, currentGame.getGameBoard())))) {
             robot.getOwner().drawDamage("Spam",1);
             currentGame.sendMessageToClient(new Animation("RobotLaser"),currentGame.getServerThreadById(robot.owner.clientID));
           }
@@ -192,7 +194,7 @@ public class Controller {
         for(int i=X;i<robotX;i++){
           if(!(currentGame.getGameBoard().getBoardElem(i,Y,0) instanceof Antenna
                   || currentGame.getGameBoard().getBoardElem(i,Y,1) instanceof Wall
-                  ||robotOnPositionCheck(new Position(i,Y)))){
+                  ||robotOnPositionCheck(new Position(i,Y, currentGame.getGameBoard())))){
             robot.getOwner().drawDamage("Spam",1);
             currentGame.sendMessageToClient(new Animation("RobotLaser"),currentGame.getServerThreadById(robot.owner.clientID));
           }
