@@ -427,6 +427,36 @@ public class GameViewModel {
     }
 
 
+    public void setAIBotIcon(){
+        yourBotText.setVisible(true);
+        int aiID = AIClient.getAiClientReceive().getClientID();
+        int aiRobotNumber = AIClient.getAiClientReceive().getaIRobot();
+        Image robotIcon=null;
+        switch(aiRobotNumber){
+            case 1:
+                robotIcon = imageHulk;//hulk
+                break;
+            case 2:
+                robotIcon = imageSpin;//spin
+                break;
+            case 3:
+                robotIcon = imageSquash;//squash
+                break;
+            case 4:
+                robotIcon = imageHammer;//hammer
+                break;
+            case 5:
+                robotIcon = imageTwonkey;//twonkey
+                break;
+            case 6:
+                robotIcon = imageTwitch;//twitch
+                break;
+        }
+        yourBot.setImage(robotIcon);
+
+    }
+
+
     /**
      * sets your own robot icon
      */
@@ -525,6 +555,12 @@ public class GameViewModel {
             }
         }
     }
+
+
+
+
+
+
 
     /**
      * print 9 random cards from a deck of 20
@@ -1126,6 +1162,7 @@ public class GameViewModel {
         selectStartingPoint.setVisible(true);
         printMapButton.setVisible(false);
         setYourBotIcon();
+        setAIBotIcon();
         setOthersBotIcon();
 
         URL empty = getClass().getResource("/Empty.png");
