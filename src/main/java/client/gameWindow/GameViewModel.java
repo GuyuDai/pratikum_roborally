@@ -427,6 +427,36 @@ public class GameViewModel {
     }
 
 
+    public void setAIBotIcon(){
+        yourBotText.setVisible(true);
+        int aiID = AIClient.getAiClientReceive().getClientID();
+        int aiRobotNumber = AIClient.getAiClientReceive().getaIRobot();
+        Image robotIcon=null;
+        switch(aiRobotNumber){
+            case 1:
+                robotIcon = imageHulk;//hulk
+                break;
+            case 2:
+                robotIcon = imageSpin;//spin
+                break;
+            case 3:
+                robotIcon = imageSquash;//squash
+                break;
+            case 4:
+                robotIcon = imageHammer;//hammer
+                break;
+            case 5:
+                robotIcon = imageTwonkey;//twonkey
+                break;
+            case 6:
+                robotIcon = imageTwitch;//twitch
+                break;
+        }
+        yourBot.setImage(robotIcon);
+
+    }
+
+
     /**
      * sets your own robot icon
      */
@@ -525,6 +555,12 @@ public class GameViewModel {
             }
         }
     }
+
+
+
+
+
+
 
     /**
      * print 9 random cards from a deck of 20
@@ -1126,6 +1162,7 @@ public class GameViewModel {
         selectStartingPoint.setVisible(true);
         printMapButton.setVisible(false);
         setYourBotIcon();
+        setAIBotIcon();
         setOthersBotIcon();
 
         URL empty = getClass().getResource("/Empty.png");
@@ -2118,17 +2155,16 @@ public class GameViewModel {
             int moveX = Client.getClientReceive().getPositionById(clientId)[0];
             int moveY = Client.getClientReceive().getPositionById(clientId)[1];
             int robotNumber=Client.getClientReceive().getRobotById(clientId);
-            int oldX=robotOldPosition.get(robotNumber)[0];
-            int oldY=robotOldPosition.get(robotNumber)[1];
+           // int oldX=robotOldPosition.get(robotNumber)[0];
+           // int oldY=robotOldPosition.get(robotNumber)[1];
             ImageView botView=robotOgPicture.get(robotNumber);
             URL empty = getClass().getResource("/Empty.png");
             Image imageEmpty = new Image(empty.toString());
             ImageView emptyView=new ImageView(imageEmpty);
-
-            PauseTransition remove = new PauseTransition(Duration.seconds(1));
-            remove.setOnFinished(e -> robotBoard.add(emptyView,oldX,oldY));
-            remove.play();
-            PauseTransition move1d = new PauseTransition(Duration.seconds(2));
+            //TODO delete startPosition
+           // remove.setOnFinished(e -> robotBoard.add(emptyView,oldX,oldY));
+            robotBoard.getChildren().remove(botView);
+            PauseTransition move1d = new PauseTransition(Duration.seconds(1));
             move1d.setOnFinished(e -> robotBoard.add(botView, moveX, moveY));
             move1d.play();
            // PauseTransition remove2 = new PauseTransition(Duration.seconds(2));
