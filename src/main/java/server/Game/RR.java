@@ -179,7 +179,7 @@ public class RR extends Thread implements GameLogic {
     return true;
   }
 
-  public void gameProgress() {
+  public synchronized void gameProgress() {  //reminder synchronized
     if (currentState == GameState.GameInitializing) {
       doGameInitializing();
     }
@@ -373,17 +373,23 @@ public class RR extends Thread implements GameLogic {
       for (Player player : activePlayers) {
         setPlayerInCurrentTurn(PlayerInListPosition);
         player.getRegister().get(i).action();
-        Robot ownRobot = player.getOwnRobot();
-        int X = ownRobot.getCurrentPosition().getX();
-        int Y = ownRobot.getCurrentPosition().getY();
-        gameBoard.getBoardElem(X, Y, 0).action();
-        if (gameBoard.getBoardElem(X, Y, 1) != null) {
-          gameBoard.getBoardElem(X, Y, 1).action();
+        BoardElem activeBoardElem1 = player.getOwnRobot().getCurrentPosition().getTile();
+        BoardElem activeBoardElem2 = player.getOwnRobot().getCurrentPosition().getSecondTile();
+        if(activeBoardElem1 != null){
+          activeBoardElem1.action();
         }
-        controller.robotLaserController(ownRobot);
+        if(activeBoardElem2 != null){
+          activeBoardElem2.action();
+        }
+        controller.robotLaserController(player.getOwnRobot());
         PlayerInListPosition++;
         if (PlayerInListPosition >= activePlayers.size()) {
           PlayerInListPosition = 0;
+        }
+        try {
+          wait();
+        } catch (InterruptedException e) {
+          e.printStackTrace();
         }
       }
       //send protocol message

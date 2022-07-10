@@ -49,11 +49,14 @@ public class Controller {
    */
   public boolean movementCheck(Robot robot, Direction direction) {
     Position currentPosition = robot.getCurrentPosition();
-    System.out.println(currentPosition.getX() + "check");  //test
+    //System.out.println(currentPosition.getX() + "check");  //test
     Position nextPosition = currentPosition.getNextPosition(direction);
-    BoardElem currentBoardElem1=currentPosition.getTile();
-    BoardElem nextBoardElem1=nextPosition.getTile();
+    if(!positionOutOfBound(nextPosition)){
+      return false;
+    }
+    BoardElem currentBoardElem1 = currentPosition.getTile();
     BoardElem currentBoardElem2 = currentPosition.getSecondTile();//we put all walls in[x][y][1]
+    BoardElem nextBoardElem1 = nextPosition.getTile();
     BoardElem nextBoardElem2 = nextPosition.getSecondTile();
 
     boolean canMoveIn = false;

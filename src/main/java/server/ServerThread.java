@@ -377,6 +377,7 @@ public class ServerThread implements Runnable {
             case MessageType.playCard:
                 PlayCardBody playCardBody = new Gson().fromJson(body,PlayCardBody.class);
                 card = playCardBody.getCard();
+                notifyAll();
                 sendToAll(new CardPlayed(clientID,card).toString());
                 break;
 
@@ -385,7 +386,7 @@ public class ServerThread implements Runnable {
                 int x = setStartingPointBody.getX();
                 int y = setStartingPointBody.getY();
                 Position tempPosition = new Position(x,y,board);
-                System.out.println(tempPosition.getX());  //test
+                //System.out.println(tempPosition.getX());  //test
                 boolean flagInSetStartingPoint = true;
                 for(ServerThread serverThread : connectedClients){
                     if(serverThread.getStartingPosition() != null) {
@@ -433,7 +434,6 @@ public class ServerThread implements Runnable {
                     register = selectedCardBody.getRegister();
                     card = selectedCardBody.getCard();
                     int playerID = selectedCardBody.getClientID();
-                    //TODO make sure the card come from the same player
                     if(playerID == clientID) {
                         int i = 0;
 
@@ -447,7 +447,6 @@ public class ServerThread implements Runnable {
                             } else {  //if remove one Card in handsList,don't do i++
                                 i++;
                             }
-                            //change DoProgrammingPhase later maybe,player can do card selection here;
                         }
                         String cardSelected = "";
                         if (registerPointer < 4) {
