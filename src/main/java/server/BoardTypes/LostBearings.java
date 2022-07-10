@@ -15,7 +15,7 @@ public class LostBearings extends Board {
 
         this.map = new BoardElem[10][13][2];
 
-        map[0][0][0] = new Reboot(currentGame);
+        map[0][0][0] = new Reboot(currentGame,Direction.RIGHT);
         map[0][0][1] = empty;
 
         map[0][1][0] = empty;

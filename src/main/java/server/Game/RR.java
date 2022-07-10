@@ -1,8 +1,5 @@
 package server.Game;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import protocol.ActivePhase;
 import protocol.CurrentCards;
@@ -33,7 +30,7 @@ public class RR extends Thread implements GameLogic {
   protected Board gameBoard;
   public GameDeck gameDeck;
   protected GameState currentState;
-  protected Position positionCheckPoint;
+  protected Position positionReboot;
   protected Position positionAntenna;
   protected int PlayerInListPosition = 0;
   protected int activePhase;  //0 => Aufbauphase, 1 => Upgradephase, 2 => Programmierphase, 3 => Aktivierungsphase
@@ -59,9 +56,9 @@ public class RR extends Thread implements GameLogic {
     for (int i = 0; i <= this.getGameBoard().getHeight(); i++) {
       for (int j = 0; j <= this.getGameBoard().getWidth(); j++) {
         for (BoardElem boardElem : this.getGameBoard().getMap()[j][i]) {
-          if (boardElem.getName().equals("CheckPoint")) {
+          if (boardElem.getName().equals("Reboot")) {
             //this.positionCheckPoint = boardElem.getPosition();
-            this.positionCheckPoint = new Position(j,i);
+            this.positionReboot = new Position(j,i);
           }
         }
       }
@@ -109,8 +106,8 @@ public class RR extends Thread implements GameLogic {
     return positionAntenna;
   }
 
-  public Position getPositionCheckPoint() {
-    return positionCheckPoint;
+  public Position getPositionReboot() {
+    return positionReboot;
   }
 
   public void setCurrentState(GameState currentState) {

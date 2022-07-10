@@ -161,7 +161,7 @@ public class DizzyHighway extends Board {
         map[3][6][1]= new Wall(currentGame, Direction.UP);
         map[3][6][0] = new Laser(currentGame, 1,Direction.UP);
 
-        map[3][7][0]=  new Reboot(currentGame);
+        map[3][7][0]=  new Reboot(currentGame,Direction.DOWN);
         map[3][7][1] = empty;
 
         map[3][8][1]=new Wall(currentGame, Direction.LEFT);
