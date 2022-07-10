@@ -450,7 +450,7 @@ public class ServerThread implements Runnable {
                             //change DoProgrammingPhase later maybe,player can do card selection here;
                         }
                         String cardSelected = "";
-                        if (registerPointer < 5) {
+                        if (registerPointer < 4) {
                             cardSelected = new CardSelected(clientID, register, false).toString();
                         } else {
                             cardSelected = new CardSelected(clientID, register, true).toString();

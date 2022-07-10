@@ -202,7 +202,7 @@ public class Robot implements RobotAction {
     }
   }
 
-  public void reboot(){
+  public synchronized void reboot(){
     currentGame.sendMessageToAll(new Reboot(owner.clientID));
     owner.drawDamage("Spam",2);
     owner.discardRegister();
@@ -244,11 +244,12 @@ public class Robot implements RobotAction {
    * @param step how many steps the target robot will be pushed
    */
   public void push(Robot targetRobot, Direction direction, int step){
-    for (int i = 0; i < step; step++) {
+    for (int i = 0; i < step; i++) {
       Position nextPosition = targetRobot.getCurrentPosition().getNextPosition(direction);
       Boolean flag = this.getCurrentGame().getController().positionOutOfBound(nextPosition);
       if(flag){
         targetRobot.reboot();
+        return;
       }
       targetRobot.bePushedOneStep(direction);
     }
