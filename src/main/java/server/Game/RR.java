@@ -357,7 +357,7 @@ public class RR extends Thread implements GameLogic {
   public void DoActivationPhase () {
     this.activePhase = 3;
     sendMessageToAll(new ActivePhase(activePhase));
-    sendMessageToAll(new ReceivedChat("Programming Phase starts",-1,false));
+    sendMessageToAll(new ReceivedChat("Activation Phase starts",-1,false));
 
     for (int i = 0; i < 5; i++) {  //round i
       //send protocol message

@@ -153,11 +153,11 @@ public class Robot implements RobotAction {
         case "Gear":
         case "Laser":
         case "PushPanel":
+        case "CheckPoint":
+          currentGame.sendMessageToClient(new Animation(type1),currentGame.getServerThreadById(owner.clientID));
         case "EnergySpace":
           currentGame.sendMessageToClient(new Energy
               (owner.clientID,togo.getTile().count,"EnergySpace"),currentGame.getServerThreadById(owner.clientID));
-        case "CheckPoint":
-          currentGame.sendMessageToClient(new Animation(type1),currentGame.getServerThreadById(owner.clientID));
           break;
       }
       switch (type2){
@@ -202,7 +202,7 @@ public class Robot implements RobotAction {
     }
   }
 
-  public void reboot(){
+  public synchronized void reboot(){
     currentGame.sendMessageToAll(new Reboot(owner.clientID));
     owner.drawDamage("Spam",2);
     owner.discardRegister();
@@ -229,10 +229,31 @@ public class Robot implements RobotAction {
     Position togo = this.getCurrentPosition().getNextPosition(direction);
     boolean flag = this.currentGame.getController().movementCheck(this, direction);
     if (flag) {
+      //send protocol message
+      String type1 = togo.getTile().getName();
+      String type2 = togo.getSecondTile().getName();
+      switch (type1){
+        case "ConveyBelt":
+        case "Gear":
+        case "Laser":
+        case "PushPanel":
+        case "CheckPoint":
+          currentGame.sendMessageToClient(new Animation(type1),currentGame.getServerThreadById(owner.clientID));
+        case "EnergySpace":
+          currentGame.sendMessageToClient(new Energy
+              (owner.clientID,togo.getTile().count,"EnergySpace"),currentGame.getServerThreadById(owner.clientID));
+          break;
+      }
+      switch (type2){
+        case "Laser":
+          currentGame.sendMessageToClient(new Animation(type2),currentGame.getServerThreadById(owner.clientID));
+          break;
+      }
       this.setLastPosition(this.getCurrentPosition());
       this.getCurrentPosition().setOccupiedRobot(null);
       togo.setOccupiedRobot(this);
       this.setCurrentPosition(togo);
+      currentGame.sendMessageToAll(new Movement(owner.clientID, togo.getX(), togo.getY()));
     }
   }
 
@@ -244,11 +265,12 @@ public class Robot implements RobotAction {
    * @param step how many steps the target robot will be pushed
    */
   public void push(Robot targetRobot, Direction direction, int step){
-    for (int i = 0; i < step; step++) {
+    for (int i = 0; i < step; i++) {
       Position nextPosition = targetRobot.getCurrentPosition().getNextPosition(direction);
       Boolean flag = this.getCurrentGame().getController().positionOutOfBound(nextPosition);
       if(flag){
         targetRobot.reboot();
+        return;
       }
       targetRobot.bePushedOneStep(direction);
     }
