@@ -146,6 +146,7 @@ public class AIClientReceive extends Thread {
      * Only DeathTrap map has different Starting Positions
      */
     public void setStartingPositions() {
+        /*
         availableDeathTrapStartingPositions.add(new Position(11, 1));
         availableDeathTrapStartingPositions.add(new Position(12, 3));
         availableDeathTrapStartingPositions.add(new Position(11, 4));
@@ -158,6 +159,8 @@ public class AIClientReceive extends Thread {
         availableStartingPositions.add(new Position(1, 5));
         availableStartingPositions.add(new Position(0, 6));
         availableStartingPositions.add(new Position(1, 8));
+
+         */
     }
 
     private Message wrapMessage(String input) {
@@ -411,6 +414,7 @@ public class AIClientReceive extends Thread {
                 if (activePhase.equals("GameInitializing")) {
                     if (map.equals("Death Trap")) {
                         //Position.setX(11);
+                        /*
                         if (availableDeathTrapStartingPositions.contains(new Position(11,1))){
                         x = 11;
                         y = 1;
@@ -481,6 +485,9 @@ public class AIClientReceive extends Thread {
                             //benachrichtigt den Server
                             sendMessage(new SetStartingPoint(x, y).toString());
                         }
+                    }
+
+                         */
                     }
 
                 } else if (activePhase.equals("ActivationPhase")) {
@@ -621,9 +628,9 @@ public class AIClientReceive extends Thread {
                 ReplaceCard.ReplaceCardBody replaceCardBody = new Gson().fromJson(messageBody, ReplaceCard.ReplaceCardBody.class);
                 int clientForReplace = replaceCardBody.getClientID();
                 int registerForReplace = replaceCardBody.getRegister();
-                String replacedCard = replaceCardBody.getNewCard().getCardName();
+                //String replacedCard = replaceCardBody.getNewCard().getCardName();
                 if (clientForReplace == clientID) {
-                    register[registerForReplace] = replacedCard;
+                    //register[registerForReplace] = replacedCard;
                     /*if (registerForReplace == 0) {
                         pointerForRegister = 4;
                     } else {

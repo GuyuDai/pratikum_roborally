@@ -47,7 +47,7 @@ public class RR extends Thread implements GameLogic {
         for (BoardElem boardElem : this.getGameBoard().getMap()[j][i]) {
           if (boardElem.getName().equals("Antenna")) {
             //this.positionAntenna = boardElem.getPosition();
-            this.positionAntenna = new Position(j,i);
+            this.positionAntenna = new Position(j,i,gameBoard);
           }
         }
       }
@@ -58,7 +58,7 @@ public class RR extends Thread implements GameLogic {
         for (BoardElem boardElem : this.getGameBoard().getMap()[j][i]) {
           if (boardElem.getName().equals("Reboot")) {
             //this.positionCheckPoint = boardElem.getPosition();
-            this.positionReboot = new Position(j,i);
+            this.positionReboot = new Position(j,i,gameBoard);
           }
         }
       }
@@ -385,7 +385,7 @@ public class RR extends Thread implements GameLogic {
       for(Player player : activePlayers){
         int newIndex = 0;
         for(Card card : player.getRegister()){
-          sendMessageToClient(new ReplaceCard(newIndex,card,player.clientID),getServerThreadById(player.clientID));
+          sendMessageToClient(new ReplaceCard(newIndex,card.getCardName(),player.clientID),getServerThreadById(player.clientID));
           newIndex++;
         }
       }

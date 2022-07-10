@@ -302,6 +302,7 @@ public class ServerThread implements Runnable {
                     this.figure = tempFigure;
                     player = new Player(name, clientID);
                     player.setOwnRobot(figure);
+                    player.getOwnRobot().setOwner(player);
                     sendToAll(new PlayerAdded(clientID,name,figure).toString());
                 for (ServerThread serverThread: connectedClients) {
                     int othersID = serverThread.getID();
@@ -381,7 +382,7 @@ public class ServerThread implements Runnable {
                 SetStartingPointBody setStartingPointBody = new Gson().fromJson(body,SetStartingPointBody.class);
                 int x = setStartingPointBody.getX();
                 int y = setStartingPointBody.getY();
-                Position tempPosition = new Position(x,y);
+                Position tempPosition = new Position(x,y,board);
                 System.out.println(tempPosition.getX());
                 boolean flagInSetStartingPoint = true;
                 for(ServerThread serverThread : connectedClients){
@@ -429,7 +430,9 @@ public class ServerThread implements Runnable {
                 if(currentGame != null && currentGame.getCurrentState().equals(GameState.ProgrammingPhase)){
                     register = selectedCardBody.getRegister();
                     card = selectedCardBody.getCard();
+                    //TODO make sure the card come from the same player
                     int i = 0;
+
                     while (i < player.getHands().size()) {
                         Card currentCard = player.getHands().get(i);
                         if (currentCard != null && currentCard.getCardName().equals(card)) {
