@@ -1164,7 +1164,7 @@ public class GameViewModel {
         selectStartingPoint.setVisible(true);
         printMapButton.setVisible(false);
         setYourBotIcon();
-        setAIBotIcon();
+        //setAIBotIcon();
         setOthersBotIcon();
 
         URL empty = getClass().getResource("/Empty.png");

@@ -15,12 +15,15 @@ public class AI extends Client {
   }
 
   public void init() {
+
     try {
       //Build client with the local host
       Socket aiSocket = new Socket(SERVER_IP, SERVER_PORT);
       //Start thread for receiving message from server.
+      getClientReceive().getSocket().close();
       aiReceive = new AIReceive(aiSocket);
       aiReceive.start();
+
     } catch (IOException e) {
       e.printStackTrace();
     }

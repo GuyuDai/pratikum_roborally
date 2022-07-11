@@ -255,7 +255,7 @@ public class ServerThread implements Runnable {
                     if(isAI){
                         player = new Player("AI", clientID);
                         int availableFigure = 0;
-                        outer: while(true){
+                       /* outer: while(true){
                             inner: for(ServerThread serverThread : connectedClients){
                                 if(availableFigure == serverThread.getFigure()){
                                     availableFigure++;
@@ -264,7 +264,8 @@ public class ServerThread implements Runnable {
                                 break outer;
                             }
                         }
-                        player.setAI(availableFigure);
+                        */
+                        player.setOwnRobot(figure);
                     }else {
                         for (ServerThread serverThread: connectedClients){
                             int othersID = serverThread.getID();
@@ -386,8 +387,9 @@ public class ServerThread implements Runnable {
                 int x = setStartingPointBody.getX();
                 int y = setStartingPointBody.getY();
                 Position tempPosition = new Position(x,y,board);
+                System.out.println("enter here");
                 //System.out.println(tempPosition.getX());  //test
-                boolean flagInSetStartingPoint = true;
+                /*boolean flagInSetStartingPoint = true;
                 for(ServerThread serverThread : connectedClients){
                     if(serverThread.getStartingPosition() != null) {
                         if (serverThread.getStartingPosition().equals(tempPosition)) {
@@ -395,15 +397,17 @@ public class ServerThread implements Runnable {
                         }
                     }
                 }
-                if(flagInSetStartingPoint){
+
+                 */
+               // if(flagInSetStartingPoint){
                     startingPosition = tempPosition;
                     System.out.println(startingPosition.getX());  //test
                     sendToAll(new StartingPointTaken(x,y,clientID).toString());
                     this.player.getOwnRobot().setStartPosition(this.startingPosition);
                     System.out.println(player.getOwnRobot().getStartPosition().getX());
-                }else {
-                    sendMessage(new ErrorMessage("this position has been taken").toString());
-                }
+               // }else {
+                    //sendMessage(new ErrorMessage("this position has been taken").toString());
+                //}
                 break;
 
             case MessageType.activePhase:
