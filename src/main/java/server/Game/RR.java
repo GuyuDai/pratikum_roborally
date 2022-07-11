@@ -371,6 +371,15 @@ public class RR extends Thread implements GameLogic {
       sendMessageToAll(new CurrentCards(activeCards));
       //active
       for (Player player : activePlayers) {
+
+      /* while(!this.getServerThreadById(player.getClientId()).isClickPlayCard()) {
+         try {
+           sleep(1000);
+         } catch (InterruptedException e) {
+           e.printStackTrace();
+         }
+       }
+       */
         setPlayerInCurrentTurn(PlayerInListPosition);
         player.getRegister().get(i).action();
         BoardElem activeBoardElem1 = player.getOwnRobot().getCurrentPosition().getTile();
@@ -386,11 +395,7 @@ public class RR extends Thread implements GameLogic {
         if (PlayerInListPosition >= activePlayers.size()) {
           PlayerInListPosition = 0;
         }
-        try {
-          wait();
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
+        //this.getServerThreadById(player.getClientId()).setClickPlayCard(false);
       }
       //send protocol message
       for(Player player : activePlayers){

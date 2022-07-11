@@ -50,11 +50,10 @@ public class AIReceive extends ClientReceive {
       case MessageType.alive:
         sendMessage(new Alive().toString());
         break;
-
       case MessageType.welcome:
-        WelcomeBody welcomeBody = new Gson().fromJson(body,WelcomeBody.class);
-        clientID = welcomeBody.getClientID();
-        sendMessage(new HelloServer(GROUP,true,PROTOCOL,clientID).toString());  //
+        WelcomeBody welcomeBody=new Gson().fromJson(body,WelcomeBody.class);
+        clientID=welcomeBody.getClientID();
+        sendMessage(new HelloServer(GROUP,true,PROTOCOL,clientID).toString());
         break;
 
       case MessageType.playerAdded:
@@ -189,11 +188,6 @@ public class AIReceive extends ClientReceive {
   }
 
   private void aiChooseMap(){
-    try {
-      sleep(6000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
     int mapIndex = random.nextInt(maps.length - 1);
     sendMessage(new MapSelected(maps[mapIndex]).toString());
   }

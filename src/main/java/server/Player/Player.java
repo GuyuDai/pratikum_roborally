@@ -49,6 +49,10 @@ public class Player implements PlayerAction{
     this.name = name;
   }
 
+  public int getClientId(){
+    return clientID;
+  }
+
   public boolean getReady() {
     return isReady;
   }

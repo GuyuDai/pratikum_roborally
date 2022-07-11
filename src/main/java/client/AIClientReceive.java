@@ -1,4 +1,4 @@
-package client;
+/*package client;
 
 import com.google.gson.*;
 import protocol.*;
@@ -17,7 +17,7 @@ import java.util.*;
  * The AIClient just builds up a Socket and connects to the server
  * Here you will find the simple AI logic for playing the game
  *
- */
+
 public class AIClientReceive extends Thread {
 
     private volatile Socket sockAI;
@@ -146,8 +146,7 @@ public class AIClientReceive extends Thread {
     }
 
     /**Sets the available StartingPositions
-     * Only DeathTrap map has different Starting Positions
-     */
+     * Onl
     Board deathTrap= new DeathTrap();
     Board dizzyHighway = new DizzyHighway();
     public void setStartingPositions() {
@@ -360,9 +359,7 @@ public class AIClientReceive extends Thread {
 
 
     /**
-     * choses a free robot for the AIClient and notifies the server about
-     * the his PlayerValues
-     */
+
     public void setAIRobot(){
         if(!robotsOfPlayers.containsValue(1)){
             aIRobot=1;
@@ -496,8 +493,7 @@ public class AIClientReceive extends Thread {
                     }*/
 
 
-
-                break;
+/*                break;
             case MessageType.currentPlayer:
                 /*if (activePhase.equals("GameInitializing")) {
                     if (map.equals("Death Trap")) {
@@ -576,7 +572,7 @@ public class AIClientReceive extends Thread {
                     }
 
 
-                    }*/
+                    }
 
                   if (activePhase.equals("ActivationPhase")) {
                     //If its your turn it will always play the first register and deletes the card from the register after action.
@@ -608,7 +604,7 @@ public class AIClientReceive extends Thread {
                 int otherPlayerYPosition = startingPointTakenBody.getY();
 
                 removeStartPointsInHashSet(otherPlayerXPosition, otherPlayerYPosition);
-    /*
+
                 // store the start position
                 startingPointsOfPlayers.get(startingPositionSetbyOtherPlayer)[0] = otherPlayerXPosition;
                 startingPointsOfPlayers.get(startingPositionSetbyOtherPlayer)[1] = otherPlayerYPosition;
@@ -616,7 +612,7 @@ public class AIClientReceive extends Thread {
                 activePositionsOfAllPlayers.get(startingPositionSetbyOtherPlayer)[0] = otherPlayerXPosition;
                 activePositionsOfAllPlayers.get(startingPositionSetbyOtherPlayer)[1] = otherPlayerYPosition;*/
                 //Todo sendmessage
-                if(x!=1 && y!=8){
+                /*if(x!=1 && y!=8){
                 x=1;
                 y=8;
                 sendMessage(new SetStartingPoint(x,y).toString());}
@@ -728,7 +724,7 @@ public class AIClientReceive extends Thread {
                     } else {
                         pointerForRegister--;
                     }*/
-                }
+                /*}
                 break;
             case MessageType.reboot:
                 Reboot.RebootBody rebootBody = new Gson().fromJson(messageBody, Reboot.RebootBody.class);
@@ -814,6 +810,7 @@ public class AIClientReceive extends Thread {
      *
      *
      */
+/*
     public void removeStartPointsInHashSet(int x, int y) {
         HashSet<Position> delete = new HashSet<>();
         if (map.equals("Death Trap")) {
@@ -833,3 +830,8 @@ public class AIClientReceive extends Thread {
         }
     }
 }
+
+ */
+
+
+

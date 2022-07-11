@@ -1,4 +1,4 @@
-package client;
+/*package client;
 
 import java.io.*;
 import java.net.*;
@@ -41,7 +41,7 @@ public class AIClient  {
         sender= new PrintWriter(sockAI.getOutputStream(),true);
         reader= new BufferedReader(new InputStreamReader(sockAI.getInputStream()));
         clientAIReceive = new ClientReceive(sockAI);
-    }*/
+    }
 
     public void init() {
         try {
@@ -61,4 +61,7 @@ public class AIClient  {
 
 
 }
+
+ */
+
 

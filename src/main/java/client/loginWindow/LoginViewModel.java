@@ -2,6 +2,7 @@ package client.loginWindow;
 
 
 import client.*;
+import client.AI.AI;
 import com.google.gson.*;
 import javafx.beans.binding.*;
 import javafx.event.*;
@@ -35,6 +36,8 @@ public class LoginViewModel {
     private Button sendNameButton;
 
     List<Integer> takenRobotNumbers=new ArrayList<>();
+
+    List<Integer> freeRobotNumber=new ArrayList<>();
 
 
     /**
@@ -74,7 +77,7 @@ public class LoginViewModel {
         gsonBuilder.setPrettyPrinting();
         nameInput.textProperty().bindBidirectional(model.getTextFieldContent());
         sendNameButton.disableProperty().bind(nameInput.textProperty().isEmpty().or (Bindings.isNull(ToggleGroupRobot.selectedToggleProperty())));
-        //AIButton.disableProperty().bind();
+       // AIButton.disableProperty().bind();
         checkRobot();
     }
 
@@ -188,25 +191,28 @@ public class LoginViewModel {
 
     //init AI with Robot and Name
     public void initAI(ActionEvent actionEvent) throws IOException {
-        AIClient newAIClient= new AIClient();
+        new AI().init();
         //AI newAIClient=new AI();
-        newAIClient.init();
         nameInput.setText("AI");
         String name = nameInput.getText();
-        checkRobot();
-        //AIClient.getAiReceive().setAIRobot();
-        //figure= AIClient.getAiReceive().getaIRobot();
-        figure= 4;
-        //Message message = new PlayerValues(name, figure);
-        newAIClient.getAiClientReceive().sendMessage(new PlayerValues(name,figure).toString());
-        //newAIClient.getAiReceive().sendMessage(new PlayerValues(name,figure).toString());
-        //AIClient.getAiClientReceive().getWriteOutput().write(aiMessage);
-        //AIClient.getAiClientReceive().getWriteOutput().newLine();
-        //AIClient.getAiClientReceive().getWriteOutput().flush();
-        //Stage stage = (Stage) AIButton.getScene().getWindow();
-        //stage.close();
-        setWindowName("Game");
-        openGameWindow();
+        for (int j = 1; j <= 6; j++) {
+            freeRobotNumber.add(j);
+        }
+        int i = 0;
+        while (i < freeRobotNumber.size()) {
+            for (int number : Client.getClientReceive().getRobotNumbers()) {
+                if (freeRobotNumber.get(i) == number) {
+                    freeRobotNumber.remove(i);
+                    i=0;
+                }
+                else{
+                    i++;
+            }
+        }
+    }
+        figure=freeRobotNumber.get(0);
+        AI.getAiReceive().sendMessage(new PlayerValues(name,figure).toString());
+        AI.getAiReceive().sendMessage(new SetStatus(true).toString());
     }
     public void openGameWindow(){
         try {
