@@ -35,6 +35,7 @@ public class RR extends Thread implements GameLogic {
   protected int PlayerInListPosition = 0;
   protected int activePhase;  //0 => Aufbauphase, 1 => Upgradephase, 2 => Programmierphase, 3 => Aktivierungsphase
   private int finishedPlayers = 0;  //this attribution is used to check whether all player have down a certain behavior
+  private CopyOnWriteArrayList<String> activeCards = new CopyOnWriteArrayList<String>();  //reminder: have bug
 
 
 
@@ -117,6 +118,10 @@ public class RR extends Thread implements GameLogic {
 
   public CopyOnWriteArrayList<ServerThread> getActiveClients() {
     return activeClients;
+  }
+
+  public CopyOnWriteArrayList<String> getActiveCards() {
+    return activeCards;
   }
 
   public void nextGameState() {
@@ -360,26 +365,23 @@ public class RR extends Thread implements GameLogic {
     sendMessageToAll(new ReceivedChat("Activation Phase starts",-1,false));
 
     for (int i = 0; i < 5; i++) {  //round i
+      //wait for each player click playRegister  //reminder: have bug
+      while(true){
+        if(activeCards.size() == activePlayers.size()){
+          break;
+        }
+      }
       //send protocol message
-      ActiveCard[] activeCards = new ActiveCard[activePlayers.size()];
+      ActiveCard[] messageActiveCards = new ActiveCard[activePlayers.size()];
       int index = 0;
       for(Player player : activePlayers){
         ActiveCard activeCard = new ActiveCard(player.clientID,player.getRegister().get(0));
-        activeCards[index] = activeCard;
+        messageActiveCards[index] = activeCard;
         index++;
       }
-      sendMessageToAll(new CurrentCards(activeCards));
+      sendMessageToAll(new CurrentCards(messageActiveCards));
       //active
       for (Player player : activePlayers) {
-
-      /* while(!this.getServerThreadById(player.getClientId()).isClickPlayCard()) {
-         try {
-           sleep(1000);
-         } catch (InterruptedException e) {
-           e.printStackTrace();
-         }
-       }
-       */
         setPlayerInCurrentTurn(PlayerInListPosition);
         player.getRegister().get(i).action();
         BoardElem activeBoardElem1 = player.getOwnRobot().getCurrentPosition().getTile();

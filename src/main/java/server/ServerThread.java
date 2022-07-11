@@ -377,7 +377,7 @@ public class ServerThread implements Runnable {
             case MessageType.playCard:
                 PlayCardBody playCardBody = new Gson().fromJson(body,PlayCardBody.class);
                 card = playCardBody.getCard();
-                notifyAll();
+                currentGame.getActiveCards().add(card);
                 sendToAll(new CardPlayed(clientID,card).toString());
                 break;
 
