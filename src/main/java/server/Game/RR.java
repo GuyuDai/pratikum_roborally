@@ -34,6 +34,8 @@ public class RR extends Thread implements GameLogic {
   protected Position positionAntenna;
   protected int PlayerInListPosition = 0;
   protected int activePhase;  //0 => Aufbauphase, 1 => Upgradephase, 2 => Programmierphase, 3 => Aktivierungsphase
+
+  protected int currentRound;
   private int finishedPlayers = 0;  //this attribution is used to check whether all player have down a certain behavior
 
 
@@ -117,6 +119,14 @@ public class RR extends Thread implements GameLogic {
 
   public CopyOnWriteArrayList<ServerThread> getActiveClients() {
     return activeClients;
+  }
+
+  public int getCurrentRound() {
+    return currentRound;
+  }
+
+  public void setCurrentRound(int currentRound) {
+    this.currentRound = currentRound;
   }
 
   public void nextGameState() {
@@ -358,7 +368,14 @@ public class RR extends Thread implements GameLogic {
     this.activePhase = 3;
     sendMessageToAll(new ActivePhase(activePhase));
     sendMessageToAll(new ReceivedChat("Activation Phase starts",-1,false));
-
+    boolean flagInActivation = false;
+    while(true){
+      if(currentRound == activePlayers.size()){
+        flagInActivation = true;
+        break;
+      }
+    }
+    //if(flagInActivation && i < 5){}  //reminder
     for (int i = 0; i < 5; i++) {  //round i
       //send protocol message
       ActiveCard[] activeCards = new ActiveCard[activePlayers.size()];
