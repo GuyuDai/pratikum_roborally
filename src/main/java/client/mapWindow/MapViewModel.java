@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
@@ -32,6 +33,8 @@ public class MapViewModel {
     @FXML
     private Button map4Image;
     @FXML
+    private Button map5Image;
+    @FXML
     private ToggleButton map4Btn;
     @FXML
     private ToggleGroup ToggleGroupMap;
@@ -41,6 +44,8 @@ public class MapViewModel {
     private ToggleButton map2Btn;
     @FXML
     private ToggleButton map3Btn;
+    @FXML
+    private ToggleButton map5Btn;
 
     public static String mapSelection;
 
@@ -75,6 +80,15 @@ public class MapViewModel {
         Client.getClientReceive().sendMessage(new MapSelected("LostBearings").toString());
         openGameWindow();
     }
+
+    public void selectTwister(ActionEvent actionEvent) {
+        Stage stage = (Stage) map5Btn.getScene().getWindow();
+        stage.close();
+        setMapSelection("Twister");
+        Client.getClientReceive().sendMessage(new MapSelected("Twister").toString());
+        openGameWindow();
+    }
+
 
     /**
      * by clicking on each of the map images, it will appear as an enlarged image
@@ -126,6 +140,20 @@ public class MapViewModel {
         } catch (Exception e){
         }
     }
+
+    public void map5ImageAction(ActionEvent actionEvent) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Twister.fxml"));
+            Parent rootMap1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Twister");
+            stage.setScene(new Scene(rootMap1));
+            stage.show();
+        } catch (Exception e){
+        }
+    }
+
+
     public void openGameWindow(){
         try {
             FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Game.fxml"));

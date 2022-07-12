@@ -1210,6 +1210,9 @@ public class GameViewModel {
             case "LostBearings":
                 board = new LostBearings();
                 break;
+            case "Twister":
+                board = new Twister();
+                break;
         }
 
                 /**
@@ -1480,6 +1483,18 @@ public class GameViewModel {
                 URL pp24Left = getClass().getResource("/pushpanel/pp24Left.png");
                 Image imagePP24Left = new Image(pp24Left.toString());
 
+        /**
+         * URLs for Twister
+         */
+
+        URL blueRBDownRight = getClass().getResource("/RBTwister/blueRBDownRight.png");
+        Image imageBlueRBDownRight = new Image(blueRBDownRight.toString());
+
+        URL blueRBUpLeft = getClass().getResource("/RBTwister/blueRBUpLeft.png");
+        Image imageBlueRBUpLeft = new Image(blueRBUpLeft.toString());
+
+
+
 
 
 
@@ -1720,6 +1735,7 @@ public class GameViewModel {
                                                 }
                                                 break;
                                         }
+                                        break;
                                     case 3:
                                         if(board.getName().equals("LostBearings")) {
                                             switch(direction1){
@@ -1747,6 +1763,7 @@ public class GameViewModel {
                                                     break;
                                             }
                                         }
+                                        break;
                                     case 4:
                                         if(board.getName().equals("DeathTrap")) {
                                             switch(direction1) {
@@ -1795,7 +1812,29 @@ public class GameViewModel {
                                                     break;
                                             }
                                         }
+                                        break;
+                                    case 5:
+                                        if(board.getName().equals("Twister")){
+                                            switch (direction1) {
+                                                case RIGHT:
+                                                    elmImage = imageBlueRotatingUpRight;
+                                                    break;
 
+                                                case LEFT:
+                                                    elmImage = imageBlueRotatingDownLeft;
+                                                    break;
+
+                                                case DOWN:
+                                                    elmImage = imageBlueRBDownRight;
+                                                    break;
+
+                                                case UP:
+                                                    elmImage = imageRBUpLeft;
+                                                    break;
+
+                                            }
+                                        }
+                                        break;
                                 }
                                 break;
                             case"Antenna":
@@ -1916,23 +1955,32 @@ public class GameViewModel {
                         boardElemSecond.setFitHeight(43);
                         gameboard.add(boardElem,y,x);
                         gameboard.add(boardElemSecond,y,x);
+
+                        ImageView checkPointOne=new ImageView(imageCheckPoint1);
+                        ImageView checkPointTwo=new ImageView(imageCheckPoint2);
+                        ImageView checkPointThree=new ImageView(imageCheckPoint3);
+                        ImageView checkPointFour=new ImageView(imageCheckPoint4);
+                        checkPointThree.setFitHeight(43);
+                        checkPointOne.setFitHeight(43);
+                        checkPointTwo.setFitHeight(43);
+                        checkPointFour.setFitHeight(43);
+                        checkPointOne.setFitWidth(43);
+                        checkPointThree.setFitWidth(43);
+                        checkPointTwo.setFitWidth(43);
+                        checkPointFour.setFitWidth(43);
+
                         if(board.getName().equals("ExtraCrispy")){
-                            ImageView checkPointOne=new ImageView(imageCheckPoint1);
-                            ImageView checkPointTwo=new ImageView(imageCheckPoint2);
-                            ImageView checkPointThree=new ImageView(imageCheckPoint3);
-                            ImageView checkPointFour=new ImageView(imageCheckPoint4);
-                            checkPointThree.setFitHeight(43);
-                            checkPointOne.setFitHeight(43);
-                            checkPointTwo.setFitHeight(43);
-                            checkPointFour.setFitHeight(43);
-                            checkPointOne.setFitWidth(43);
-                            checkPointThree.setFitWidth(43);
-                            checkPointTwo.setFitWidth(43);
-                            checkPointFour.setFitWidth(43);
                              gameboard.add(checkPointFour,5,2);
                              gameboard.add(checkPointOne,10,2);
                              gameboard.add(checkPointTwo,5,7);
                              gameboard.add(checkPointThree,10,7);
+                        }
+
+                        if(board.getName().equals("Twister")){
+                            gameboard.add(checkPointFour,9,7);
+                            gameboard.add(checkPointOne,10,1);//
+                            gameboard.add(checkPointThree,5,3);//
+                            gameboard.add(checkPointTwo,6,7);
                         }
                     }
 

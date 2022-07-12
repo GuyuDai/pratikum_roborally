@@ -357,6 +357,10 @@ public class ServerThread implements Runnable {
                         board = new DeathTrap();
                         sendToAll(new MapSelected("DeathTrap").toString());
                         break;
+                    case "Twister":
+                        board = new Twister();
+                        sendToAll(new MapSelected("Twister").toString());
+                        break;
                 }
                 if (allPlayerReady() && connectedClients.size() >= 2 && board != null){
                     startGame(this.board);
