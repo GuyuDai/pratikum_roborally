@@ -8,6 +8,8 @@ import java.io.*;
 import java.net.Socket;
 import com.google.gson.Gson;
 import java.util.*;
+import java.util.logging.Logger;
+
 import javafx.application.Platform;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageAdapter;
@@ -23,6 +25,9 @@ import server.Server;
 
 
 public class ClientReceive extends Thread{
+
+    private static final Logger logger = Logger.getLogger(ClientReceive.class.getName());
+    public static final String ANSI_GREEN = "\u001B[32m";
 
     protected int clientID;
     protected Socket socket;
@@ -99,7 +104,7 @@ public class ClientReceive extends Thread{
                 //System.out.println(serverMessage + "-----------original message");  //test
                 Message message = wrapMessage(serverMessage);
                 //System.out.println("--------------------------------------------------------------");  //test
-                System.out.println(message + "wrapped message");  //test
+                logger.info( ANSI_GREEN + message + "wrapped message");  //test
                 identifyMessage(message);
             }
         } catch (IOException e) {

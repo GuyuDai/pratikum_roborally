@@ -18,6 +18,15 @@ import server.Player.Player;
 public class Server{
 
     public static final Logger logger = Logger.getLogger(Server.class.getName());
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
     private final ServerSocket serverSocket;
 
     public ServerSocket getServerSocket() {
@@ -48,11 +57,12 @@ public class Server{
     public void run() {
         try {
             while (!serverSocket.isClosed()) {
-                logger.log(Level.INFO, "listening for new clients");
+                logger.info(ANSI_GREEN + "Listening for new clients. ");
+                //logger.log(Level.INFO, "listening for new clients");
                 //System.out.println("listening for new clients");
                 Socket clientSocket = serverSocket.accept();
                 clientConnectedIn(clientSocket);
-                logger.log(Level.INFO, "new client connected");
+                logger.info(ANSI_GREEN + "A new client connected to the server.");
                 //System.out.println("new client connected");
             }
         } catch (IOException e) {
@@ -105,12 +115,12 @@ public class Server{
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void clientDisconnected(ServerThread client) {
-        System.out.println("Client (" + client.getID() + ") disconnected");
+        logger.info(ANSI_GREEN + "Client (" + client.getID() + ") disconnected");
         disconnectClient(client);
     }
 
     public void disconnectClient(ServerThread client){
-        System.out.println("Removed client " + client.getID());
+        logger.info(ANSI_GREEN + "Removed client " + client.getID());
         connectedClients.remove(client.getID());
     }
 
@@ -170,7 +180,7 @@ public class Server{
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     public static void main(String[] args) {
-        System.out.println("server starts");
+        logger.info(ANSI_GREEN + "Server is running");
         server.run();
         new DisconnectionController().start();
     }

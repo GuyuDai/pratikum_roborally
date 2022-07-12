@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import protocol.*;
 import protocol.PlayerAdded.PlayerAddedBody;
@@ -17,6 +18,9 @@ import protocol.Welcome.WelcomeBody;
 import server.CardTypes.Card;
 
 public class AIReceive extends ClientReceive {
+
+  private static final Logger logger = Logger.getLogger(AIReceive.class.getName());
+  public static final String ANSI_GREEN = "\u001B[32m";
 
   Random random = new Random();
 
@@ -32,7 +36,7 @@ public class AIReceive extends ClientReceive {
         //System.out.println(serverMessage + "-----------original message");  //test
         Message message = wrapMessage(serverMessage);
         //System.out.println("--------------------------------------------------------------");  //test
-        System.out.println(message + "wrapped message");  //test
+        logger.info(ANSI_GREEN+ message + "wrapped message");  //test
         identifyMessage(message);
       }
     } catch (IOException e) {
@@ -123,7 +127,7 @@ public class AIReceive extends ClientReceive {
         playerId = startingPointTakenBody.getClientID();
         startingPositionAdd(takenX,takenY,playerId);
         sendMessage(new SetStartingPoint(8,1).toString());
-        System.out.println("already send msg");
+        logger.info(ANSI_GREEN + "already send msg");
         break;
 
       case MessageType.timerStarted:

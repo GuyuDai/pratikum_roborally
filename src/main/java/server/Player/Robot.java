@@ -1,6 +1,9 @@
 package server.Player;
 
 import java.util.Random;
+import java.util.logging.Logger;
+
+import client.ClientReceive;
 import protocol.Animation;
 import protocol.Energy;
 import protocol.Movement;
@@ -13,6 +16,10 @@ import server.Control.Position;
 import server.Game.RR;
 
 public class Robot implements RobotAction {
+
+  private static final Logger logger = Logger.getLogger(Robot.class.getName());
+  public static final String ANSI_GREEN = "\u001B[32m";
+  public static final String ANSI_YELLOW = "\u001B[33m";
 
   public String name;
   public int hp = 10;
@@ -215,7 +222,7 @@ public class Robot implements RobotAction {
     try {
       wait(5000);  //wait player to make decision
     } catch (InterruptedException e) {
-      System.out.println("error in reboot");
+      logger.warning(ANSI_YELLOW + "error in reboot");
     }
     this.faceDirection = rebootDirection;
     if(flag){

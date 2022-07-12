@@ -5,7 +5,9 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import client.ClientReceive;
 import protocol.*;
 import com.google.gson.Gson;
 import protocol.ActivePhase.ActivePhaseBody;
@@ -37,6 +39,9 @@ import server.Player.Player;
 
 
 public class ServerThread implements Runnable {
+
+    private static final Logger logger = Logger.getLogger(ServerThread.class.getName());
+    public static final String ANSI_GREEN = "\u001B[32m";
 
     private static final String PROTOCOL = "Version 1.0";
     private Socket clientSocket;
@@ -84,7 +89,7 @@ public class ServerThread implements Runnable {
                 //System.out.println(clientMessage + "----------original message");  //test
                 Message message = wrapMessage(clientMessage);
                 //System.out.println("-----------------------------------------------------");  //test
-                System.out.println(message.toString() + "wrapped message");  //test
+                logger.info(ANSI_GREEN + message.toString() + "wrapped message");  //test
                 identifyMessage(message);
             }
             elegantClose();
@@ -393,7 +398,7 @@ public class ServerThread implements Runnable {
                 int x = setStartingPointBody.getX();
                 int y = setStartingPointBody.getY();
                 Position tempPosition = new Position(x,y,board);
-                System.out.println("enter here");
+                logger.info(ANSI_GREEN + "enter here");
                 //System.out.println(tempPosition.getX());  //test
                 /*boolean flagInSetStartingPoint = true;
                 for(ServerThread serverThread : connectedClients){
@@ -407,10 +412,10 @@ public class ServerThread implements Runnable {
                  */
                // if(flagInSetStartingPoint){
                     startingPosition = tempPosition;
-                    System.out.println(startingPosition.getX());  //test
+                    logger.info(ANSI_GREEN + startingPosition.getX());  //test
                     sendToAll(new StartingPointTaken(x,y,clientID).toString());
                     this.player.getOwnRobot().setStartPosition(this.startingPosition);
-                    System.out.println(player.getOwnRobot().getStartPosition().getX());
+                    logger.info(ANSI_GREEN + player.getOwnRobot().getStartPosition().getX());
                // }else {
                     //sendMessage(new ErrorMessage("this position has been taken").toString());
                 //}
