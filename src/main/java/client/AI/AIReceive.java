@@ -78,6 +78,7 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.selectMap:
+        //Chooses a random Map
         SelectMap.SelectMapBody selectMapBody = new Gson().fromJson(body,SelectMap.SelectMapBody.class);
         maps = selectMapBody.getAvailableMaps();
         aiChooseMap();
