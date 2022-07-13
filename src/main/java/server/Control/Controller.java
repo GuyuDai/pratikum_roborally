@@ -51,7 +51,7 @@ public class Controller {
     Position currentPosition = robot.getCurrentPosition();
     //System.out.println(currentPosition.getX() + "check");  //test
     Position nextPosition = currentPosition.getNextPosition(direction);
-    if(!positionOutOfBound(nextPosition)){
+    if(positionOutOfBound(nextPosition)){
       return false;
     }
     BoardElem currentBoardElem1 = currentPosition.getTile();
