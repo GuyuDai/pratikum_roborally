@@ -1,25 +1,18 @@
 package server.Game;
 
-import java.util.ArrayList;
-import protocol.ActivePhase;
-import protocol.CurrentCards;
-import protocol.NotYourCards;
-import protocol.ProtocolFormat.ActiveCard;
-import protocol.ProtocolFormat.Message;
-import protocol.ReceivedChat;
-import protocol.ReplaceCard;
-import protocol.TimerEnded;
-import protocol.TimerStarted;
-import protocol.YourCards;
+import protocol.*;
+import protocol.ProtocolFormat.*;
 import server.BoardElement.*;
 import server.BoardTypes.*;
-import server.CardTypes.Card;
+import server.CardTypes.*;
+import server.Control.Timer;
 import server.Control.*;
-import server.Deck.GameDeck;
+import server.Deck.*;
 import server.Player.*;
+import server.*;
 
+import java.util.*;
 import java.util.concurrent.*;
-import server.ServerThread;
 
 public class RR extends Thread implements GameLogic {
   private Boolean isGoingOn;
@@ -124,6 +117,10 @@ public class RR extends Thread implements GameLogic {
 
   public CopyOnWriteArrayList<String> getActiveCards() {
     return activeCards;
+  }
+
+  public void setActiveCards(CopyOnWriteArrayList<String> activeCards) {
+    this.activeCards = activeCards;
   }
 
   public int getCurrentRound() {
@@ -373,21 +370,17 @@ public class RR extends Thread implements GameLogic {
     this.activePhase = 3;
     sendMessageToAll(new ActivePhase(activePhase));
     sendMessageToAll(new ReceivedChat("Activation Phase starts",-1,false));
-    boolean flagInActivation = false;
-    while(true){
-      if(currentRound == activePlayers.size()){
-        flagInActivation = true;
-        break;
-      }
-    }
+
     //if(flagInActivation && i < 5){}  //reminder
     for (int i = 0; i < 5; i++) {  //round i
       //wait for each player click playRegister  //reminder: have bug
+      System.out.println("enter while loop");//test
       while(true){
         if(activeCards.size() == activePlayers.size()){
           break;
         }
       }
+      System.out.println("break while loop");
       //send protocol message
       ActiveCard[] messageActiveCards = new ActiveCard[activePlayers.size()];
       int index = 0;
@@ -399,15 +392,6 @@ public class RR extends Thread implements GameLogic {
       sendMessageToAll(new CurrentCards(messageActiveCards));
       //active
       for (Player player : activePlayers) {
-
-      /* while(!this.getServerThreadById(player.getClientId()).isClickPlayCard()) {
-         try {
-           sleep(1000);
-         } catch (InterruptedException e) {
-           e.printStackTrace();
-         }
-       }
-       */
         setPlayerInCurrentTurn(PlayerInListPosition);
         player.getRegister().get(i).action();
         BoardElem activeBoardElem1 = player.getOwnRobot().getCurrentPosition().getTile();

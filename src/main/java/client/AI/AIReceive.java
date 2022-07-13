@@ -1,21 +1,19 @@
 package client.AI;
 
-import client.ClientReceive;
-import com.google.gson.Gson;
-
-import java.io.IOException;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.logging.Logger;
-
+import client.*;
+import com.google.gson.*;
 import protocol.*;
-import protocol.PlayerAdded.PlayerAddedBody;
-import protocol.ProtocolFormat.Message;
-import protocol.ProtocolFormat.MessageType;
-import protocol.ReceivedChat.ReceivedChatBody;
-import protocol.Welcome.WelcomeBody;
-import server.CardTypes.Card;
+import protocol.PlayerAdded.*;
+import protocol.ProtocolFormat.*;
+import protocol.ReceivedChat.*;
+import protocol.Welcome.*;
+import server.BoardTypes.*;
+import server.Control.*;
+
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import java.util.logging.*;
 
 public class AIReceive extends ClientReceive {
 
@@ -23,6 +21,8 @@ public class AIReceive extends ClientReceive {
   public static final String ANSI_GREEN = "\u001B[32m";
 
   Random random = new Random();
+  int pointerForRegister = 0;
+  private String[] registerCards = new String[5];
 
   public AIReceive(Socket socket) {
     super(socket);
@@ -78,6 +78,7 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.selectMap:
+        //Chooses a random Map
         SelectMap.SelectMapBody selectMapBody = new Gson().fromJson(body,SelectMap.SelectMapBody.class);
         maps = selectMapBody.getAvailableMaps();
         aiChooseMap();
@@ -99,7 +100,13 @@ public class AIReceive extends ClientReceive {
       case MessageType.yourCards:
         YourCards.YourCardsBody yourCardsBody = new Gson().fromJson(body, YourCards.YourCardsBody.class);
         cards = yourCardsBody.getCardsInHand();
-        aiProgramming();
+        List<String> cardsInHand = List.of(yourCardsBody.getCardsInHand());
+        // Save all the Cards on your own CardsPile
+        for (String card : cardsInHand) {
+          myNineCardsOnPile.add(card);
+        }
+        //The Programming schould be done if its your turn and the programming phase is set
+        //aiProgramming();
         break;
 
       case MessageType.cardSelected:
@@ -126,7 +133,15 @@ public class AIReceive extends ClientReceive {
         int takenY = startingPointTakenBody.getY();
         playerId = startingPointTakenBody.getClientID();
         startingPositionAdd(takenX,takenY,playerId);
-        sendMessage(new SetStartingPoint(8,1).toString());
+        //Wenn die gewünschte Position valide ist, werden alle Spieler darüber benachrichtigt.
+
+        int startingPositionSetbyOtherPlayer = startingPointTakenBody.getClientID();
+        int otherPlayerXPosition = startingPointTakenBody.getX();
+        int otherPlayerYPosition = startingPointTakenBody.getY();
+
+        removeStartPointsInHashSet(otherPlayerXPosition, otherPlayerYPosition);
+
+        //sendMessage(new SetStartingPoint(8,1).toString());
         logger.info(ANSI_GREEN + "already send msg");
         break;
 
@@ -170,6 +185,7 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.activePhase:
+        //0 => Aufbauphase, 1 => Upgradephase, 2 => Programmierphase, 3 => Aktivierungsphase
         ActivePhase.ActivePhaseBody activePhaseBody = new Gson().fromJson(body,ActivePhase.ActivePhaseBody.class);
         activePhaseNumber = activePhaseBody.getPhase();
         break;
@@ -179,6 +195,104 @@ public class AIReceive extends ClientReceive {
         rebootClientId = rebootBody.getClientID();
         aiReboot();
         break;
+
+      case MessageType.currentPlayer:
+                if (activePhaseNumber==0) {
+                    if (board.equals("Death Trap")) {
+
+
+                        if (availableDeathTrapStartingPositions.contains(new Position(1,11, deathTrap))){
+                        x = 1;
+                        y = 11;
+                        //benachrichtigt den Server
+                        sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if (availableDeathTrapStartingPositions.contains(new Position(3,12, deathTrap))){
+                            x = 3;
+                            y = 12;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if (availableDeathTrapStartingPositions.contains(new Position(4,11, deathTrap))) {
+                            x = 4;
+                            y = 11;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if (availableDeathTrapStartingPositions.contains(new Position(5,11, deathTrap))) {
+                            x = 5;
+                            y = 11;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if (availableDeathTrapStartingPositions.contains(new Position(6,12, deathTrap))) {
+                            x = 6;
+                            y = 12;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if (availableDeathTrapStartingPositions.contains(new Position(8,11,deathTrap))) {
+                            x = 8;
+                            y = 11;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        }
+
+                    } else {
+                        if(availableStartingPositions.contains(new Position(1,1,dizzyHighway))){
+                        //There is the same Startpoint on every MAP exept DeathTrap
+                        x = 1;
+                        y = 1;
+                        //benachrichtigt den Server
+                        sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if(availableStartingPositions.contains(new Position(3,0,dizzyHighway))){
+                            //There is the same Startpoint on every MAP exept DeathTrap
+                            x = 3;
+                            y = 0;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if(availableStartingPositions.contains(new Position(4,1,dizzyHighway))){
+                            //There is the same Startpoint on every MAP exept DeathTrap
+                            x = 4;
+                            y = 1;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if(availableStartingPositions.contains(new Position(5,1,dizzyHighway))){
+                            //There is the same Startpoint on every MAP exept DeathTrap
+                            x = 5;
+                            y = 1;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if(availableStartingPositions.contains(new Position(6,0,dizzyHighway))){
+                            //There is the same Startpoint on every MAP exept DeathTrap
+                            x = 6;
+                            y = 0;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        } else if(availableStartingPositions.contains(new Position(8,1,dizzyHighway))){
+                            //There is the same Startpoint on every MAP exept DeathTrap
+                            x = 8;
+                            y = 1;
+                            //benachrichtigt den Server
+                            sendMessage(new SetStartingPoint(x, y).toString());
+                        }
+                    }
+
+
+                    }
+                  //ActivationPhase
+                  if (activePhaseNumber==3) {
+                    //If its your turn it will always play the first register and deletes the card from the register after action.
+                    String reg1 = registerCards[pointerForRegister];
+                    //reg1.action();
+                    pointerForRegister++;
+                    //benachrichtigt den Server welche Karte gespielt wird
+                    //auf dem Server wird die KartenAction aufgerufen
+                    sendMessage(new PlayCard(reg1).toString());
+
+                  //UpgradePhase
+                } else if (activePhaseNumber==1) {
+                    //upgradePhaseAI();
+                  //ProgrammingPhase
+                } else if (activePhaseNumber==2) {
+                    programmingPhaseAI();
+                }
+                break;
     }
   }
 
@@ -213,6 +327,24 @@ public class AIReceive extends ClientReceive {
     register = 0;
   }
 
+  private List<String> myNineCardsOnPile = new ArrayList<>();
+  public void programmingPhaseAI() {
+    // draw from pile 9 cards automatically
+
+    //Choose the first five cards and put in your register
+    registerCards[0] = String.valueOf(myNineCardsOnPile.get(0));
+    registerCards[1] = String.valueOf(myNineCardsOnPile.get(1));
+    registerCards[2] = String.valueOf(myNineCardsOnPile.get(2));
+    registerCards[3] = String.valueOf(myNineCardsOnPile.get(3));
+    registerCards[4] = String.valueOf(myNineCardsOnPile.get(4));
+
+    sendMessage(new SelectedCard(registerCards[0],0,getClientID()).toString());
+    sendMessage(new SelectedCard(registerCards[1],1,getClientID()).toString());
+    sendMessage(new SelectedCard(registerCards[2],2,getClientID()).toString());
+    sendMessage(new SelectedCard(registerCards[3],3,getClientID()).toString());
+    sendMessage(new SelectedCard(registerCards[4],4,getClientID()).toString());
+  }
+
   private void aiPickDamage(){
     try {
       sleep(6000);
@@ -230,6 +362,49 @@ public class AIReceive extends ClientReceive {
 
   private void aiReboot(){
     // TODO: 2022/7/9 after finish reboot
+  }
+
+  private HashSet<Position> availableStartingPositions = new HashSet<>();
+  private HashSet<Position> availableDeathTrapStartingPositions = new HashSet<>();
+
+  Board deathTrap= new DeathTrap();
+  Board dizzyHighway = new DizzyHighway();
+  public void setStartingPositions() {
+    //DeathTrap
+    availableDeathTrapStartingPositions.add(new Position(1, 11, deathTrap ));
+    availableDeathTrapStartingPositions.add(new Position(3, 12, deathTrap));
+    availableDeathTrapStartingPositions.add(new Position(4, 11, deathTrap));
+    availableDeathTrapStartingPositions.add(new Position(5, 11, deathTrap));
+    availableDeathTrapStartingPositions.add(new Position(6, 12, deathTrap));
+    availableDeathTrapStartingPositions.add(new Position(8, 11, deathTrap));
+    //DizzyHighway
+    availableStartingPositions.add(new Position(1, 1,dizzyHighway ));
+    availableStartingPositions.add(new Position(3, 0,dizzyHighway));
+    availableStartingPositions.add(new Position(4, 1,dizzyHighway));
+    availableStartingPositions.add(new Position(5, 1,dizzyHighway));
+    availableStartingPositions.add(new Position(6, 0,dizzyHighway));
+    availableStartingPositions.add(new Position(8, 1,dizzyHighway));
+
+
+  }
+
+  public void removeStartPointsInHashSet(int x, int y) {
+    HashSet<Position> delete = new HashSet<>();
+    if (board.equals("Death Trap")) {
+      for (Position position : availableDeathTrapStartingPositions) {
+        if (position.getX() == x && position.getY() == y) {
+          delete.add(position);
+        }
+      }
+
+    } else {
+      for (Position position : availableStartingPositions) {
+        if (position.getX() == x && position.getY() == y) {
+          delete.add(position);
+        }
+      }
+
+    }
   }
 
   private Message wrapMessage(String input){
