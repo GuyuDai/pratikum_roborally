@@ -23,6 +23,8 @@ public class AI extends Client {
       getClientReceive().getSocket().close();
       aiReceive = new AIReceive(aiSocket);
       aiReceive.start();
+      //initialisiert alle verfügbaren Startpositionen
+      aiReceive.setStartingPositions();
 
     } catch (IOException e) {
       e.printStackTrace();
