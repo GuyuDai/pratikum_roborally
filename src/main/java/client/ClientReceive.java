@@ -31,6 +31,8 @@ public class ClientReceive extends Thread{
 
     protected int clientID;
     protected Socket socket;
+
+    protected GameViewModel model;
     protected BufferedReader readInput;
     protected BufferedWriter writeOutput;
     protected static final String PROTOCOL = "Version 1.0";
@@ -69,6 +71,8 @@ public class ClientReceive extends Thread{
     protected List<Integer> IdList=new ArrayList<>();
     protected Map<Integer,Integer> IdRobot=new HashMap<>();
     protected Map<Integer,Integer>IdStartPoint= new HashMap<>();
+
+    protected Map<Integer,String> IdDirection=new HashMap<>();
 
     protected int counterRegister = 0;
 
@@ -368,6 +372,8 @@ public class ClientReceive extends Thread{
             case MessageType.playerTurning:
                 PlayerTurning.PlayerTurningBody playerTurningBody=new Gson().fromJson(body, PlayerTurning.PlayerTurningBody.class);
                 turnDirection=playerTurningBody.getRotation();
+                playerId=playerTurningBody.getClientID();
+                IdDirection.put(playerId,turnDirection);
                 break;
 
             case MessageType.animation:
@@ -518,6 +524,22 @@ public class ClientReceive extends Thread{
 
     public List<Integer> getRobotNumbers() {
         return robotNumbers;
+    }
+
+    public String getTurnDirection() {
+        return turnDirection;
+    }
+
+    public String getDirectionById(int id){
+        return getIdDirection().get(id);
+    }
+
+    public Map<Integer, String> getIdDirection() {
+        return IdDirection;
+    }
+
+    public void setIdDirection(Map<Integer, String> idDirection) {
+        IdDirection = idDirection;
     }
 
     public List<Integer> getStartNumbers(){
