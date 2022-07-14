@@ -197,8 +197,9 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.currentPlayer:
+
                 if (activePhaseNumber==0) {
-                    if (board.equals("Death Trap")) {
+                    if (board.equals("DeathTrap")) {
 
 
                         if (availableDeathTrapStartingPositions.contains(new Position(1,11, deathTrap))){

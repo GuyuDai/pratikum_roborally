@@ -2450,7 +2450,6 @@ public class GameViewModel {
                  register4.setImage(register5.getImage());
                  register5.setImage(null);
                  playCardBtn.setText("play register 2");
-                 moveRobot();
                  break;
              case 2:
                  setClickCounter(getClickCounter() + 1);
@@ -2459,7 +2458,6 @@ public class GameViewModel {
                  register3.setImage(register4.getImage());
                  register4.setImage(null);
                  playCardBtn.setText("play register 3");
-                 moveRobot();
                  break;
              case 3:
                  setClickCounter(getClickCounter() + 1);
@@ -2467,14 +2465,12 @@ public class GameViewModel {
                  register2.setImage(register3.getImage());
                  register3.setImage(null);
                  playCardBtn.setText("play register 4");
-                 moveRobot();
                  break;
              case 4:
                  setClickCounter(getClickCounter() + 1);
                  register1.setImage(register2.getImage());
                  register2.setImage(null);
                  playCardBtn.setText("play register 5");
-                 moveRobot();
                  break;
              case 5:
                  setClickCounter(getClickCounter() + 1);
@@ -2486,7 +2482,6 @@ public class GameViewModel {
                  setClickCounter(getClickCounter() + 1);
                  register1.setImage(null);
                  playCardBtn.setText("next round!");
-                 moveRobot();
                  break;
 
          }
