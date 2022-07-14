@@ -88,7 +88,7 @@ public class AIReceive extends ClientReceive {
         availableFigures.remove((Integer) tempFigure);
         IdList.add(playerId);
         robotNumbers.add(tempFigure);
-        IdRobot.put(playerId,figure);
+        IdRobot.put(playerId,tempFigure);
         IdName.put(playerName,playerId);
         if(playerId == clientID){
           figure = tempFigure;
@@ -277,7 +277,7 @@ public class AIReceive extends ClientReceive {
   private void aiReady(){
     isReady = true;
     try {
-      sleep(6000);
+      sleep(2000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -291,7 +291,7 @@ public class AIReceive extends ClientReceive {
 
   private void aiChooseStartPoint(){
     try {
-      sleep(2000);
+      sleep(1000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }

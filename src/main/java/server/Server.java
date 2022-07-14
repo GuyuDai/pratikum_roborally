@@ -84,7 +84,7 @@ public class Server{
         ServerThread connectedClient = new ServerThread(clientSocket);
         connectedClient.setID(count);
         count ++;
-        connectedClient.setAI(false);
+        //connectedClient.setAI(false);
         connectedClient.setAlive(true);
         connectedClients.add(connectedClient);
         Thread clientThread = new Thread(connectedClient);
