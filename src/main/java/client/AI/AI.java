@@ -14,6 +14,8 @@ public class AI extends Client {
   public static AIReceive getAiReceive() {
     return aiReceive;
   }
+
+  //Starting AI from here
   public static void main(String[] args) throws IOException {
     AI ki = new AI();
     ki.init();
