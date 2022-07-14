@@ -228,6 +228,16 @@ public class AIReceive extends ClientReceive {
         }
         break;
 
+      case MessageType.checkpointReached:
+        //Saves the number of Checkpoints reached
+        CheckPointReached.CheckPointReachedBody checkPointReachedBody = new Gson().fromJson(body, CheckPointReached.CheckPointReachedBody.class);
+        int clientIDCheckReached= checkPointReachedBody.getClientID();
+        int numberOfCheckpointsReached= checkPointReachedBody.getNumber();
+        //Sets the number of checkpoints reached
+        if(clientIDCheckReached==clientID){
+          checkPointNumber=numberOfCheckpointsReached;
+        }
+        break;
     }
   }
 

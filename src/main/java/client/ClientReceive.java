@@ -33,6 +33,8 @@ public class ClientReceive extends Thread{
     protected int figure;
     protected String chatMsg;
 
+    protected int checkPointNumber;
+
     protected int energyStorage;
     protected int fromId;
     protected int register;
@@ -396,6 +398,17 @@ public class ClientReceive extends Thread{
                 //If its the you the energy will be added to your storage
                 if (supposedClient == clientID) {
                     energyStorage = energyStorage + amount;
+                }
+                break;
+
+            case MessageType.checkpointReached:
+                //Saves the number of Checkpoints reached
+                CheckPointReached.CheckPointReachedBody checkPointReachedBody = new Gson().fromJson(body, CheckPointReached.CheckPointReachedBody.class);
+                int clientIDCheckReached= checkPointReachedBody.getClientID();
+                int numberOfCheckpointsReached= checkPointReachedBody.getNumber();
+                //Sets the number of checkpoints reached
+                if(clientIDCheckReached==clientID){
+                    checkPointNumber=numberOfCheckpointsReached;
                 }
                 break;
         }
