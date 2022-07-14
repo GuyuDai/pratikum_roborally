@@ -47,10 +47,10 @@ public class ClientReceive extends Thread{
     protected boolean isFilled;
     protected boolean timerStarted=false;
     protected String cardPlayed;
-    protected Map<Integer,String> IdCardPlayed=new HashMap<>();
-    protected Map<Integer,Boolean> IdReady=new HashMap<>();
-    protected List<Integer> robotNumbers=new ArrayList<>();
-    protected List<Integer> startNumbers=new ArrayList<>();
+    protected Map<Integer,String> IdCardPlayed = new HashMap<>();
+    protected Map<Integer,Boolean> IdReady = new HashMap<>();
+    protected List<Integer> robotNumbers = new ArrayList<>();
+    protected List<Integer> startNumbers = new ArrayList<>();
     protected Map<String,Integer> IdName = new HashMap<>();
     protected List<Boolean> readyList=new ArrayList<>();
     protected String[] maps;
@@ -66,9 +66,9 @@ public class ClientReceive extends Thread{
     protected int activePhaseNumber;
     protected int rebootClientId;
     protected Map<Integer,Integer[]> IdPosition = new HashMap<>();
-    protected List<Integer> IdList=new ArrayList<>();
-    protected Map<Integer,Integer> IdRobot=new HashMap<>();
-    protected Map<Integer,Integer>IdStartPoint= new HashMap<>();
+    protected List<Integer> IdList = new ArrayList<>();
+    protected Map<Integer,Integer> IdRobot = new HashMap<>();
+    protected Map<Integer,Integer>IdStartPoint = new HashMap<>();
 
     protected int counterRegister = 0;
 
@@ -277,6 +277,7 @@ public class ClientReceive extends Thread{
                 clientID=welcomeBody.getClientID();
                 sendMessage(new HelloServer(GROUP,false,PROTOCOL,clientID).toString());
                 break;
+
             case MessageType.playerAdded:
                 PlayerAddedBody playerAddedBody=new Gson().fromJson(body,PlayerAddedBody.class);
                 playerId=playerAddedBody.getClientID();
@@ -287,6 +288,7 @@ public class ClientReceive extends Thread{
                 IdRobot.put(playerId,figure);
                 IdName.put(playerName,playerId);
                 break;
+
             case MessageType.receivedChat:
                 ReceivedChatBody receivedChatBody=new Gson().fromJson(body,ReceivedChatBody.class);
                  chatMsg=receivedChatBody.getMessage();
@@ -294,10 +296,12 @@ public class ClientReceive extends Thread{
                  isPrivate=receivedChatBody.isPrivate();
                  receiveChat(chatMsg);
                  break;
+
             case MessageType.selectMap:
                 SelectMap.SelectMapBody selectMapBody = new Gson().fromJson(body,SelectMap.SelectMapBody.class);
                 maps = selectMapBody.getAvailableMaps();
                 break;
+
             case MessageType.playerStatus:
                 PlayerStatus.PlayerStatusBody playerStatusBody=new Gson().fromJson(body, PlayerStatus.PlayerStatusBody.class);
                 isReady=playerStatusBody.isReady();
@@ -305,14 +309,17 @@ public class ClientReceive extends Thread{
                 readyList.add(isReady);
                 IdReady.put(playerId,isReady);
                 break;
+
             case MessageType.mapSelected:
                 MapSelected.MapSelectedBody mapSelectedBody=new Gson().fromJson(body,MapSelected.MapSelectedBody.class);
                 board = mapSelectedBody.getMap();
                 break;
+
             case MessageType.yourCards:
                 YourCards.YourCardsBody yourCardsBody=new Gson().fromJson(body, YourCards.YourCardsBody.class);
                 cards=yourCardsBody.getCardsInHand();
                 break;
+
             case MessageType.cardSelected:
                 CardSelected.CardSelectedBody cardSelectedBody=new Gson().fromJson(body, CardSelected.CardSelectedBody.class);
                 playerId=cardSelectedBody.getClientID();
@@ -322,11 +329,13 @@ public class ClientReceive extends Thread{
                     sendMessage(new SelectionFinished(playerId).toString());
                 }
                 break;
+
             case MessageType.pickDamage:
                 PickDamage.PickDamageBody pickDamageBody=new Gson().fromJson(body, PickDamage.PickDamageBody.class);
                 damageDecks=pickDamageBody.getAvailablePiles();
                 damageCount=pickDamageBody.getCount();
                 break;
+
             case MessageType.startingPointTaken:
                 StartingPointTaken.StartingPointTakenBody startingPointTakenBody = new Gson().fromJson(body,
                         StartingPointTaken.StartingPointTakenBody.class);
