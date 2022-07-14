@@ -331,6 +331,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
+                  <Button fx:id="moveRobotButton" layoutX="475.0" layoutY="26.0" mnemonicParsing="false" onAction="#moveRobotButtonAction" prefHeight="40.0" prefWidth="82.0" text="move robot" visible="false" />
                </children>
             </AnchorPane>
             <GridPane fx:id="register" gridLinesVisible="true" prefHeight="107.0" prefWidth="557.0">

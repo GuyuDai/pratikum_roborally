@@ -19,7 +19,6 @@ import server.BoardElement.*;
 import server.BoardTypes.*;
 import server.Control.*;
 import server.Deck.*;
-
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -118,6 +117,9 @@ public class GameViewModel {
 
     @FXML
     private Button printMapButton;
+
+    @FXML
+    private Button moveRobotButton;
 
 
     /**
@@ -572,6 +574,19 @@ public class GameViewModel {
      * print 9 random cards from a deck of 20
      */
     public void printCards() {
+        Text.setText("Select 5 of these cards for your register.");
+        //make 9 hands visible
+        hand1Button.setVisible(true);
+        hand2Button.setVisible(true);
+        hand3Button.setVisible(true);
+        hand4Button.setVisible(true);
+        hand5Button.setVisible(true);
+        hand6Button.setVisible(true);
+        hand7Button.setVisible(true);
+        hand8Button.setVisible(true);
+        hand9Button.setVisible(true);
+        //set Register count back to 0 for each round
+        setRegisterCount(0);
         cards=Client.getClientReceive().getCards();
         for (int i = 0; i < 9; i++) {
             String card = cards[i];
@@ -646,14 +661,14 @@ public class GameViewModel {
      */
     int registerCount = 0;
 
-    public void setRegisterCount(int count) {
-        this.registerCount = count;
-    }
+    public void setRegisterCount(int count) { this.registerCount = count; }
 
-    public int getRegisterCount() {
-        return registerCount;
-    }
+    public int getRegisterCount() { return registerCount; }
 
+    int timerCounter = 0;
+    public void setTimerCounter(int count){ this.timerCounter = count; }
+
+    public int getTimerCounter(){return timerCounter; }
 
     /**
      * pick your register of 5 cards from your hands of 9 cards
@@ -663,9 +678,14 @@ public class GameViewModel {
         setRegisterCount(getRegisterCount() + 1);
         switch (getRegisterCount()) {
             case 1:
-                register1.setImage(hand1.getImage());
-                hand1Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[0],0, ID).toString());
+                if (hand1.getImage().equals(imageAgain)){
+                    Text.setText("You can't play AGAIN as your first register!");
+                    setRegisterCount(getRegisterCount() - 1);
+                } else {
+                    register1.setImage(hand1.getImage());
+                    hand1Button.setVisible(false);
+                    Client.getClientReceive().sendMessage(new SelectedCard(cards[0],0, ID).toString());
+                }
                 break;
             case 2:
                 register2.setImage(hand1.getImage());
@@ -686,21 +706,14 @@ public class GameViewModel {
                 register5.setImage(hand1.getImage());
                 hand1Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[0], 4,ID).toString());
-                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
-                if(Client.getClientReceive().getCounterRegister() == 1){
-                    Client.getClientReceive().setTimer(true);
-                    Text.setText("Players have 30 seconds left to finish their register.");
-                    //after 30 seconds the play Cards button will appear
-                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
-                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
-                    pauseTransition0.play();
-                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
-                    textAppear2.play();
-                }
-                else{
-                    Client.getClientReceive().setTimer(false);
-                }
+                Text.setText("Players have 30 seconds left to finish their register.");
+                //after 30 seconds the play Cards button will appear
+                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
+                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
+                thirty.play();
+                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
+                textAppear2.play();
                 break;
         }
     }
@@ -710,9 +723,14 @@ public class GameViewModel {
         setRegisterCount(getRegisterCount() + 1);
         switch (getRegisterCount()) {
             case 1:
-                register1.setImage(hand2.getImage());
-                hand2Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[1],0,ID).toString());
+                if (hand2.getImage().equals(imageAgain)){
+                    Text.setText("You can't play AGAIN as your first register!");
+                    setRegisterCount(getRegisterCount() - 1);
+                } else {
+                    register1.setImage(hand2.getImage());
+                    hand2Button.setVisible(false);
+                    Client.getClientReceive().sendMessage(new SelectedCard(cards[1],0,ID).toString());
+                }
                 break;
             case 2:
                 register2.setImage(hand2.getImage());
@@ -732,22 +750,15 @@ public class GameViewModel {
             case 5:
                 register5.setImage(hand2.getImage());
                 hand2Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[1], 4,ID).toString());
-                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
-                if(Client.getClientReceive().getCounterRegister() == 1){
-                    Client.getClientReceive().setTimer(true);
-                    Text.setText("Players have 30 seconds left to finish their register.");
-                    //after 30 seconds the play Cards button will appear
-                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
-                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
-                    pauseTransition0.play();
-                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
-                    textAppear2.play();
-                }
-                else{
-                    Client.getClientReceive().setTimer(false);
-                }
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[1], 4, ID).toString());
+                Text.setText("Players have 30 seconds left to finish their register.");
+                //after 30 seconds the play Cards button will appear
+                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
+                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
+                thirty.play();
+                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
+                textAppear2.play();
                 break;
         }
     }
@@ -757,9 +768,14 @@ public class GameViewModel {
         setRegisterCount(getRegisterCount() + 1);
         switch (getRegisterCount()) {
             case 1:
-                register1.setImage(hand3.getImage());
-                hand3Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[2],0,ID).toString());
+                if (hand3.getImage().equals(imageAgain)){
+                    Text.setText("You can't play AGAIN as your first register!");
+                    setRegisterCount(getRegisterCount() - 1);
+                } else {
+                    register1.setImage(hand3.getImage());
+                    hand3Button.setVisible(false);
+                    Client.getClientReceive().sendMessage(new SelectedCard(cards[2],0,ID).toString());
+                }
                 break;
             case 2:
                 register2.setImage(hand3.getImage());
@@ -779,22 +795,15 @@ public class GameViewModel {
             case 5:
                 register5.setImage(hand3.getImage());
                 hand3Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[2],4,ID).toString());
-                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
-                if(Client.getClientReceive().getCounterRegister() == 1){
-                    Client.getClientReceive().setTimer(true);
-                    Text.setText("Players have 30 seconds left to finish their register.");
-                    //after 30 seconds the play Cards button will appear
-                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
-                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
-                    pauseTransition0.play();
-                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
-                    textAppear2.play();
-                }
-                else{
-                    Client.getClientReceive().setTimer(false);
-                }
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[2], 4, ID).toString());
+                Text.setText("Players have 30 seconds left to finish their register.");
+                //after 30 seconds the play Cards button will appear
+                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
+                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
+                thirty.play();
+                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
+                textAppear2.play();
                 break;
         }
     }
@@ -804,9 +813,14 @@ public class GameViewModel {
         setRegisterCount(getRegisterCount() + 1);
         switch (getRegisterCount()) {
             case 1:
-                register1.setImage(hand4.getImage());
-                hand4Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[3],0,ID).toString());
+                if (hand4.getImage().equals(imageAgain)){
+                    Text.setText("You can't play AGAIN as your first register!");
+                    setRegisterCount(getRegisterCount() - 1);
+                } else {
+                    register1.setImage(hand4.getImage());
+                    hand4Button.setVisible(false);
+                    Client.getClientReceive().sendMessage(new SelectedCard(cards[3],0,ID).toString());
+                }
                 break;
             case 2:
                 register2.setImage(hand4.getImage());
@@ -827,21 +841,14 @@ public class GameViewModel {
                 register5.setImage(hand4.getImage());
                 hand4Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[3],4,ID).toString());
-                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
-                if(Client.getClientReceive().getCounterRegister() == 1){
-                    Client.getClientReceive().setTimer(true);
-                    Text.setText("Players have 30 seconds left to finish their register.");
-                    //after 30 seconds the play Cards button will appear
-                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
-                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
-                    pauseTransition0.play();
-                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
-                    textAppear2.play();
-                }
-                else{
-                    Client.getClientReceive().setTimer(false);
-                }
+                Text.setText("Players have 30 seconds left to finish their register.");
+                //after 30 seconds the play Cards button will appear
+                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
+                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
+                thirty.play();
+                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
+                textAppear2.play();
                 break;
         }
     }
@@ -851,9 +858,14 @@ public class GameViewModel {
         setRegisterCount(getRegisterCount() + 1);
         switch (getRegisterCount()) {
             case 1:
-                register1.setImage(hand5.getImage());
-                hand5Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[4],0,ID).toString());
+                if (hand5.getImage().equals(imageAgain)){
+                    Text.setText("You can't play AGAIN as your first register!");
+                    setRegisterCount(getRegisterCount() - 1);
+                } else {
+                    register1.setImage(hand5.getImage());
+                    hand5Button.setVisible(false);
+                    Client.getClientReceive().sendMessage(new SelectedCard(cards[4],0,ID).toString());
+                }
                 break;
             case 2:
                 register2.setImage(hand5.getImage());
@@ -874,21 +886,14 @@ public class GameViewModel {
                 register5.setImage(hand5.getImage());
                 hand5Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[4],4,ID).toString());
-                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
-                if(Client.getClientReceive().getCounterRegister() == 1){
-                    Client.getClientReceive().setTimer(true);
-                    Text.setText("Players have 30 seconds left to finish their register.");
-                    //after 30 seconds the play Cards button will appear
-                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
-                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
-                    pauseTransition0.play();
-                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
-                    textAppear2.play();
-                }
-                else{
-                    Client.getClientReceive().setTimer(false);
-                }
+                Text.setText("Players have 30 seconds left to finish their register.");
+                //after 30 seconds the play Cards button will appear
+                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
+                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
+                thirty.play();
+                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
+                textAppear2.play();
                 break;
         }
         ;
@@ -899,9 +904,14 @@ public class GameViewModel {
         setRegisterCount(getRegisterCount() + 1);
         switch (getRegisterCount()) {
             case 1:
-                register1.setImage(hand6.getImage());
-                hand6Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[5],0,ID).toString());
+                if (hand6.getImage().equals(imageAgain)){
+                    Text.setText("You can't play AGAIN as your first register!");
+                    setRegisterCount(getRegisterCount() - 1);
+                } else {
+                    register1.setImage(hand6.getImage());
+                    hand6Button.setVisible(false);
+                    Client.getClientReceive().sendMessage(new SelectedCard(cards[5],0,ID).toString());
+                }
                 break;
             case 2:
                 register2.setImage(hand6.getImage());
@@ -921,22 +931,15 @@ public class GameViewModel {
             case 5:
                 register5.setImage(hand6.getImage());
                 hand6Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[5],4,ID).toString());
-                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
-                if(Client.getClientReceive().getCounterRegister() == 1){
-                    Client.getClientReceive().setTimer(true);
-                    Text.setText("Players have 30 seconds left to finish their register.");
-                    //after 30 seconds the play Cards button will appear
-                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
-                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
-                    pauseTransition0.play();
-                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
-                    textAppear2.play();
-                }
-                else{
-                    Client.getClientReceive().setTimer(false);
-                }
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[5], 4, ID).toString());
+                Text.setText("Players have 30 seconds left to finish their register.");
+                //after 30 seconds the play Cards button will appear
+                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
+                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
+                thirty.play();
+                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
+                textAppear2.play();
                 break;
         }
     }
@@ -946,10 +949,14 @@ public class GameViewModel {
         setRegisterCount(getRegisterCount() + 1);
         switch (getRegisterCount()) {
             case 1:
-                register1.setImage(hand7.getImage());
-                hand7Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[6],0,ID).toString());
-
+                if (hand7.getImage().equals(imageAgain)){
+                    Text.setText("You can't play AGAIN as your first register!");
+                    setRegisterCount(getRegisterCount() - 1);
+                } else{
+                    register1.setImage(hand7.getImage());
+                    hand7Button.setVisible(false);
+                    Client.getClientReceive().sendMessage(new SelectedCard(cards[6],0,ID).toString());
+                }
                 break;
             case 2:
                 register2.setImage(hand7.getImage());
@@ -969,22 +976,15 @@ public class GameViewModel {
             case 5:
                 register5.setImage(hand7.getImage());
                 hand7Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[6],4,ID).toString());
-                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
-                if(Client.getClientReceive().getCounterRegister() == 1){
-                    Client.getClientReceive().setTimer(true);
-                    Text.setText("Players have 30 seconds left to finish their register.");
-                    //after 30 seconds the play Cards button will appear
-                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
-                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
-                    pauseTransition0.play();
-                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
-                    textAppear2.play();
-                }
-                else{
-                    Client.getClientReceive().setTimer(false);
-                }
+                Client.getClientReceive().sendMessage(new SelectedCard(cards[6], 4, ID).toString());
+                Text.setText("Players have 30 seconds left to finish their register.");
+                //after 30 seconds the play Cards button will appear
+                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
+                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
+                thirty.play();
+                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
+                textAppear2.play();
                 break;
         }
     }
@@ -994,9 +994,14 @@ public class GameViewModel {
         setRegisterCount(getRegisterCount() + 1);
         switch (getRegisterCount()) {
             case 1:
-                register1.setImage(hand8.getImage());
-                hand8Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[7],0,ID).toString());
+                if (hand8.getImage().equals(imageAgain)){
+                    Text.setText("You can't play AGAIN as your first register!");
+                    setRegisterCount(getRegisterCount() - 1);
+                } else{
+                    register1.setImage(hand8.getImage());
+                    hand8Button.setVisible(false);
+                    Client.getClientReceive().sendMessage(new SelectedCard(cards[7],0,ID).toString());
+                }
                 break;
             case 2:
                 register2.setImage(hand8.getImage());
@@ -1020,21 +1025,14 @@ public class GameViewModel {
                 register5.setImage(hand8.getImage());
                 hand8Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[7],4,ID).toString());
-                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
-                if(Client.getClientReceive().getCounterRegister() == 1){
-                    Client.getClientReceive().setTimer(true);
-                    Text.setText("Players have 30 seconds left to finish their register.");
-                    //after 30 seconds the play Cards button will appear
-                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
-                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
-                    pauseTransition0.play();
-                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
-                    textAppear2.play();
-                }
-                else{
-                    Client.getClientReceive().setTimer(false);
-                }
+                Text.setText("Players have 30 seconds left to finish their register.");
+                //after 30 seconds the play Cards button will appear
+                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
+                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
+                thirty.play();
+                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
+                textAppear2.play();
                 break;
         }
     }
@@ -1044,9 +1042,14 @@ public class GameViewModel {
         setRegisterCount(getRegisterCount() + 1);
         switch (getRegisterCount()) {
             case 1:
-                register1.setImage(hand9.getImage());
-                hand9Button.setVisible(false);
-                Client.getClientReceive().sendMessage(new SelectedCard(cards[8],0,ID).toString());
+                if (hand9.getImage().equals(imageAgain)){
+                    Text.setText("You can't play AGAIN as your first register!");
+                    setRegisterCount(getRegisterCount() - 1);
+                } else{
+                    register1.setImage(hand9.getImage());
+                    hand9Button.setVisible(false);
+                    Client.getClientReceive().sendMessage(new SelectedCard(cards[8],0,ID).toString());
+                }
                 break;
             case 2:
                 register2.setImage(hand9.getImage());
@@ -1067,24 +1070,18 @@ public class GameViewModel {
                 register5.setImage(hand9.getImage());
                 hand9Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[8],4,ID).toString());
-                Client.getClientReceive().setCounterRegister(Client.getClientReceive().getCounterRegister() + 1);
-                if(Client.getClientReceive().getCounterRegister() == 1){
-                    Client.getClientReceive().setTimer(true);
-                    Text.setText("Players have 30 seconds left to finish their register.");
-                    //after 30 seconds the play Cards button will appear
-                    PauseTransition pauseTransition0 = new PauseTransition(Duration.seconds(30));
-                    pauseTransition0.setOnFinished(e -> playCardBtn.setVisible(true));
-                    pauseTransition0.play();
-                    PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                    textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
-                    textAppear2.play();
-                }
-                else{
-                    Client.getClientReceive().setTimer(false);
-                }
+                Text.setText("Players have 30 seconds left to finish their register.");
+                //after 30 seconds the play Cards button will appear
+                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
+                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
+                thirty.play();
+                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
+                textAppear2.play();
                 break;
         }
     }
+
 
 
     /**
@@ -1093,6 +1090,7 @@ public class GameViewModel {
     public void autoFillRegister() {
         for (int i = 1; i < 10; i++) {
             if (getRegisterCount() <= 5) {
+                Text.setText("Time is gone! Your register will be filled automatically!");
                 switch (i) {
                     case 1:
                         try {
@@ -2216,7 +2214,7 @@ public class GameViewModel {
             Image imageEmpty = new Image(empty.toString());
             ImageView emptyView=new ImageView(imageEmpty);
             //TODO delete startPosition
-           // remove.setOnFinished(e -> robotBoard.add(emptyView,oldX,oldY));
+            // remove.setOnFinished(e -> robotBoard.add(emptyView,oldX,oldY));
             robotBoard.getChildren().remove(botView);
             PauseTransition move1d = new PauseTransition(Duration.seconds(1));
             move1d.setOnFinished(e -> robotBoard.add(botView, moveX, moveY));
@@ -2436,11 +2434,14 @@ public class GameViewModel {
         return clickCounter;
     }
 
+    /**
+     * function of the play register button/ new round button
+     */
     public void playCardBtnAction(ActionEvent actionEvent) {
+         playCardBtn.setText("play register 1");
          Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
          logger.info("Send out message: ");
-         /*moveRobot();
-          */
+
          switch(getClickCounter()){
              case 1:
                  setClickCounter(getClickCounter() + 1);
@@ -2450,6 +2451,7 @@ public class GameViewModel {
                  register4.setImage(register5.getImage());
                  register5.setImage(null);
                  playCardBtn.setText("play register 2");
+                 moveRobot();
                  break;
              case 2:
                  setClickCounter(getClickCounter() + 1);
@@ -2458,6 +2460,9 @@ public class GameViewModel {
                  register3.setImage(register4.getImage());
                  register4.setImage(null);
                  playCardBtn.setText("play register 3");
+                 moveRobot();
+                 moveRobotButton.setVisible(true);
+                 playCardBtn.setVisible(false);
                  break;
              case 3:
                  setClickCounter(getClickCounter() + 1);
@@ -2465,27 +2470,35 @@ public class GameViewModel {
                  register2.setImage(register3.getImage());
                  register3.setImage(null);
                  playCardBtn.setText("play register 4");
+                 moveRobot();
+                 moveRobotButton.setVisible(true);
+                 playCardBtn.setVisible(false);
                  break;
              case 4:
                  setClickCounter(getClickCounter() + 1);
                  register1.setImage(register2.getImage());
                  register2.setImage(null);
                  playCardBtn.setText("play register 5");
+                 moveRobot();
+                 moveRobotButton.setVisible(true);
+                 playCardBtn.setVisible(false);
                  break;
              case 5:
                  setClickCounter(getClickCounter() + 1);
-                 register1.setImage(register2.getImage());
-                 register2.setImage(null);
-                 playCardBtn.setText("play register 4");
-                 break;
-             case 6:
-                 setClickCounter(getClickCounter() + 1);
                  register1.setImage(null);
                  playCardBtn.setText("next round!");
+                 moveRobotButton.setVisible(true);
+                 playCardBtn.setVisible(false);
                  break;
-
+             case 6:
+                 //set back counters for next round
+                 setClickCounter(1);
+                 setTimerCounter(0);
+                 setRegisterCount(0);
+                 playCardBtn.setVisible(false);
+                 printCards();
+                 break;
          }
-
     }
 
     public void getCardsButtonAction(ActionEvent actionEvent) {
@@ -2502,11 +2515,11 @@ public class GameViewModel {
         hand8Button.setVisible(true);
         hand9Button.setVisible(true);
 
-        Text.setText("Select 5 of these cards for your register.");
         printCards();
     }
 
     public void MouseAction(MouseEvent mouseEvent) {
+        //timer only appears for the players that need to finish their register
         if(getRegisterCount() < 5){
             timer30Sec();
         } else {
@@ -2519,8 +2532,7 @@ public class GameViewModel {
      * timer 30 seconds when first player finished selecting register
      */
     public void timer30Sec() {
-        if (Client.getClientReceive().isTimerStarted() == true) {
-            Client.getClientReceive().setTimer(false);
+        if (Client.getClientReceive().isTimerStarted()) {
             timerText.setVisible(true);
             Text.setText("Players have 30 seconds left to finish their register.");
             timer.setText("30");
@@ -2646,25 +2658,28 @@ public class GameViewModel {
             pauseTransition0.play();
 
             PauseTransition timegone = new PauseTransition(Duration.seconds(31));
-            timegone.setOnFinished(e -> timerText.setVisible(false));
+            timegone.setOnFinished(e -> timerText.setText(""));
             timegone.play();
 
             PauseTransition timegone2 = new PauseTransition(Duration.seconds(31));
-            timegone2.setOnFinished(e -> timer.setVisible(false));
+            timegone2.setOnFinished(e -> timer.setText(""));
             timegone2.play();
-
-            PauseTransition timegone3 = new PauseTransition(Duration.seconds(31));
-            timegone3.setOnFinished(e -> Text.setText("Time is gone! Your register will be filled automatically!"));
-            timegone3.play();
 
             PauseTransition timegone4 = new PauseTransition(Duration.seconds(31));
             timegone4.setOnFinished(e -> autoFillRegister());
             timegone4.play();
 
             PauseTransition textAppear2 = new PauseTransition(Duration.seconds(33));
-            textAppear2.setOnFinished(e -> Text.setText("Click on 'play cards'!"));
+            textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
             textAppear2.play();
+        } else {
+
         }
+    }
+
+    public void moveRobotButtonAction(ActionEvent actionEvent) {
+        moveRobotButton.setVisible(false);
+        playCardBtn.setVisible(true);
     }
 }
 
