@@ -1,27 +1,20 @@
 package client;
 
-import client.gameWindow.GameViewModel;
-import client.lobbyWindow.LobbyViewModel;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import java.io.*;
-import java.net.Socket;
-import com.google.gson.Gson;
-import java.util.*;
-import java.util.logging.Logger;
-
-import javafx.application.Platform;
-import protocol.ProtocolFormat.Message;
-import protocol.ProtocolFormat.MessageAdapter;
-import protocol.ProtocolFormat.MessageType;
-import protocol.SendChat;
+import client.gameWindow.*;
+import client.lobbyWindow.*;
+import com.google.gson.*;
+import javafx.application.*;
 import protocol.*;
-import protocol.PlayerAdded.PlayerAddedBody;
-import protocol.ReceivedChat.ReceivedChatBody;
-import protocol.Welcome.WelcomeBody;
-import protocol.HelloClient.HelloClientBody;
-import server.Player.Player;
-import server.Server;
+import protocol.PlayerAdded.*;
+import protocol.ProtocolFormat.*;
+import protocol.ReceivedChat.*;
+import protocol.Welcome.*;
+
+import java.io.*;
+import java.net.*;
+import java.util.Map;
+import java.util.*;
+import java.util.logging.*;
 
 
 public class ClientReceive extends Thread{
@@ -39,6 +32,8 @@ public class ClientReceive extends Thread{
     protected String playerName;
     protected int figure;
     protected String chatMsg;
+
+    protected int energyStorage;
     protected int fromId;
     protected int register;
     protected int damageCount;
@@ -394,6 +389,15 @@ public class ClientReceive extends Thread{
                 rebootClientId=rebootBody.getClientID();
                 break;
 
+            case MessageType.energy:
+                Energy.EnergyBody energyBody = new Gson().fromJson(body, Energy.EnergyBody.class);
+                int supposedClient = energyBody.getClientID();
+                int amount = energyBody.getCount();
+                //If its the you the energy will be added to your storage
+                if (supposedClient == clientID) {
+                    energyStorage = energyStorage + amount;
+                }
+                break;
         }
     }
 

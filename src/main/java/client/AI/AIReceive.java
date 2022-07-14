@@ -2,7 +2,6 @@ package client.AI;
 
 import client.*;
 import com.google.gson.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 import protocol.*;
 import protocol.PlayerAdded.*;
 import protocol.ProtocolFormat.*;
@@ -14,6 +13,7 @@ import server.Control.*;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.logging.*;
 
 public class AIReceive extends ClientReceive {
@@ -62,6 +62,7 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.welcome:
+        //gets the ClientID from Server
         WelcomeBody welcomeBody = new Gson().fromJson(body,WelcomeBody.class);
         clientID = welcomeBody.getClientID();
         sendMessage(new HelloServer(GROUP,true,PROTOCOL,clientID).toString());
@@ -138,6 +139,7 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.startingPointTaken:
+        //Saves all taken Startingpoints and removes them from the available Startingpoints.
         StartingPointTaken.StartingPointTakenBody startingPointTakenBody = new Gson().fromJson
             (body, StartingPointTaken.StartingPointTakenBody.class);
         int takenX = startingPointTakenBody.getX();
@@ -180,6 +182,7 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.playerTurning:
+        //Saves the direction of each player who faces
         PlayerTurning.PlayerTurningBody playerTurningBody = new Gson().fromJson(body, PlayerTurning.PlayerTurningBody.class);
         turnDirection = playerTurningBody.getRotation();
         break;
@@ -212,6 +215,16 @@ public class AIReceive extends ClientReceive {
         pointerForRegister++;
         if(pointerForRegister == 5){
           pointerForRegister = 0;
+        }
+        break;
+
+      case MessageType.energy:
+        Energy.EnergyBody energyBody = new Gson().fromJson(body, Energy.EnergyBody.class);
+        int supposedClient = energyBody.getClientID();
+        int amount = energyBody.getCount();
+        //If its the AI the energy will be added to your storage
+        if (supposedClient == clientID) {
+          energyStorage = energyStorage + amount;
         }
         break;
 
