@@ -276,14 +276,17 @@ public class ClientReceive extends Thread{
                 break;
 
             case MessageType.playerAdded:
-                PlayerAddedBody playerAddedBody=new Gson().fromJson(body,PlayerAddedBody.class);
-                playerId=playerAddedBody.getClientID();
-                playerName=playerAddedBody.getName();
-                figure=playerAddedBody.getFigure();
+                PlayerAddedBody playerAddedBody = new Gson().fromJson(body,PlayerAddedBody.class);
+                playerId = playerAddedBody.getClientID();
+                playerName = playerAddedBody.getName();
+                int tempFigure = playerAddedBody.getFigure();
                 IdList.add(playerId);
-                robotNumbers.add(figure);
+                robotNumbers.add(tempFigure);
                 IdRobot.put(playerId,figure);
                 IdName.put(playerName,playerId);
+                if(playerId == clientID){
+                    figure = tempFigure;
+                }
                 break;
 
             case MessageType.receivedChat:
@@ -291,8 +294,8 @@ public class ClientReceive extends Thread{
                  chatMsg=receivedChatBody.getMessage();
                  fromId=receivedChatBody.getFrom();
                  isPrivate=receivedChatBody.isPrivate();
-                 receiveChat(chatMsg);
-                 break;
+                //receiveChat(chatMsg);  //reminder: there cause a "Toolkit not initialized" error
+                break;
 
             case MessageType.selectMap:
                 SelectMap.SelectMapBody selectMapBody = new Gson().fromJson(body,SelectMap.SelectMapBody.class);

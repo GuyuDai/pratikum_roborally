@@ -257,33 +257,36 @@ public class ServerThread implements Runnable {
                     group = helloServerBody.getGroup();
                     isAI = helloServerBody.isAI();
                     setAI(isAI);
+                    /*
                     if(isAI){
-                        player = new Player("AI", clientID);
+                        player = new Player("AI_" + clientID, clientID);
                         int availableFigure = 0;
-                       /* outer: while(true){
+                        outer: while(true){
                             inner: for(ServerThread serverThread : connectedClients){
                                 if(availableFigure == serverThread.getFigure()){
                                     availableFigure++;
+                                }else {
                                     break inner;
                                 }
-                                break outer;
                             }
+                            break outer;
                         }
-                        */
                         player.setOwnRobot(figure);
-                    }else {
-                        for (ServerThread serverThread: connectedClients){
-                            int othersID = serverThread.getID();
-                            String othersName = serverThread.getName();
-                            int othersFigure = serverThread.getFigure();
-                            if(othersID != clientID){
-                                sendMessage( new PlayerAdded(othersID,othersName,othersFigure).toString());
-                            }
-                        }
-
-                        Timer.countDown(5);
-                        sendMessage(new Alive().toString());
                     }
+
+                     */
+                    //send information from clients who are already connected in to the new client
+                    for (ServerThread serverThread: connectedClients){
+                        int othersID = serverThread.getID();
+                        String othersName = serverThread.getName();
+                        int othersFigure = serverThread.getFigure();
+                        if(othersID != clientID){
+                            sendMessage( new PlayerAdded(othersID,othersName,othersFigure).toString());
+                        }
+                    }
+                    sendMessage(new ReceivedChat("Choose your robot",-1,true).toString());
+                    Timer.countDown(5);
+                    sendMessage(new Alive().toString());
                 }else {
                     sendMessage(new ErrorMessage("your protocol version is unsupported").toString());
                 }
@@ -312,15 +315,13 @@ public class ServerThread implements Runnable {
                     player.setOwnRobot(figure);
                     player.getOwnRobot().setOwner(player);
                     sendToAll(new PlayerAdded(clientID,name,figure).toString());
-                for (ServerThread serverThread: connectedClients) {
-                    int othersID = serverThread.getID();
-                    boolean othersReady = serverThread.isReady();
-                    if (othersID != clientID && othersReady) {
-                        sendMessage(new PlayerStatus(othersID,othersReady).toString());
+                    for (ServerThread serverThread: connectedClients) {
+                        int othersID = serverThread.getID();
+                        boolean othersReady = serverThread.isReady();
+                        if (othersID != clientID && othersReady) {
+                            sendMessage(new PlayerStatus(othersID,othersReady).toString());
+                        }
                     }
-                }
-
-                    ;
                 }else {
                     sendMessage(new ErrorMessage("this robot has been taken").toString());
                 }
