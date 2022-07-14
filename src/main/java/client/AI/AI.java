@@ -1,8 +1,9 @@
 package client.AI;
 
-import client.Client;
-import java.io.IOException;
-import java.net.Socket;
+import client.*;
+
+import java.io.*;
+import java.net.*;
 
 public class AI extends Client {
   private static final int SERVER_PORT = 1788;
@@ -13,6 +14,12 @@ public class AI extends Client {
   public static AIReceive getAiReceive() {
     return aiReceive;
   }
+  public static void main(String[] args) throws IOException {
+    AI ki = new AI();
+    ki.init();
+  }
+
+
 
   public void init() {
 
@@ -20,7 +27,7 @@ public class AI extends Client {
       //Build client with the local host
       Socket aiSocket = new Socket(SERVER_IP, SERVER_PORT);
       //Start thread for receiving message from server.
-      getClientReceive().getSocket().close();
+      //getClientReceive().getSocket().close();
       aiReceive = new AIReceive(aiSocket);
       aiReceive.start();
       //initialisiert alle verfügbaren Startpositionen
@@ -31,4 +38,6 @@ public class AI extends Client {
     }
   }
 
+
 }
+
