@@ -416,7 +416,7 @@ public class ClientReceive extends Thread{
 
     public void receiveChat(String msg){
         String fromName = this.getNameById(getFromId());
-        if(LobbyViewModel.getWindowName() == "Lobby") {
+        if(LobbyViewModel.getWindowName().equals("Lobby")) {
             Platform.runLater(() -> {
                 LobbyViewModel.show(fromName + ": " + msg);
             });

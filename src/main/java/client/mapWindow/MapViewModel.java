@@ -53,7 +53,7 @@ public class MapViewModel {
     public void selectDizzyHighway(ActionEvent actionEvent) {
         Stage stage = (Stage) DizzyHighwayBtn.getScene().getWindow();
         stage.close();
-        setMapSelection("Dizzy Highway");
+        setMapSelection("DizzyHighway");
         Client.getClientReceive().sendMessage(new MapSelected("DizzyHighway").toString());
         openGameWindow();
     }
@@ -61,7 +61,7 @@ public class MapViewModel {
     public void selectDeathTrap(ActionEvent actionEvent) {
         Stage stage = (Stage) map2Btn.getScene().getWindow();
         stage.close();
-        setMapSelection("Death Trap");
+        setMapSelection("DeathTrap");
         Client.getClientReceive().sendMessage(new MapSelected("DeathTrap").toString());
         openGameWindow();
     }
@@ -69,14 +69,14 @@ public class MapViewModel {
     public void selectExtraCrispy(ActionEvent actionEvent) {
         Stage stage = (Stage) map3Btn.getScene().getWindow();
         stage.close();
-        setMapSelection("Extra Crispy");
+        setMapSelection("ExtraCrispy");
         Client.getClientReceive().sendMessage(new MapSelected("ExtraCrispy").toString());
         openGameWindow();
     }
     public void selectLostBearings(ActionEvent actionEvent) {
         Stage stage = (Stage) map4Btn.getScene().getWindow();
         stage.close();
-        setMapSelection("Lost Bearings");
+        setMapSelection("LostBearings");
         Client.getClientReceive().sendMessage(new MapSelected("LostBearings").toString());
         openGameWindow();
     }
