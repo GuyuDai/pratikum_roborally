@@ -51,6 +51,7 @@ public class MessageType {
     public static final String chooseRegister = "ChooseRegister";
     public static final String registerChosen = "RegisterChosen";
     public static final String returnCards = "ReturnCards";
+    public static final String discardSome = "DiscardSome";
 }
 
 
