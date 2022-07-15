@@ -484,6 +484,21 @@ public class ClientReceive extends Thread{
         }
     }
 
+    Map checkPointPositions = new HashMap<Integer, int[]>();
+   public void setCheckpoints(){
+        if(board.equals("DizzyHighway")){
+            int [] pos= {3,12};
+            checkPointPositions.put(1, pos);
+        } else if (board.equals("DeathTrap")) {
+            int [] pos4= {2,8};
+            checkPointPositions.put(1,pos4);
+            int [] pos1= {7,1};
+            checkPointPositions.put(1,pos1);
+            checkPointPositions.put(3,new int[]{8,7});
+            checkPointPositions.put(2,new int[]{4,4});
+        }
+   }
+
     public int getFigure() {
         return figure;
     }
