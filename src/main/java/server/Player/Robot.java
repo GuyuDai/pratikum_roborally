@@ -48,7 +48,7 @@ public class Robot implements RobotAction {
   }
   public void setFaceDirection(Direction faceDirection) {
     Direction currentDirection = this.faceDirection;
-    int difference = currentDirection.getAngel() - faceDirection.getAngel();
+    int difference = faceDirection.getAngel()-currentDirection.getAngel();
     String rotation = "";
     switch (difference){
       case -90:
@@ -151,7 +151,7 @@ public class Robot implements RobotAction {
   private void moveOneStep() {
     Position togo = this.getCurrentPosition().getNextPosition(this.getFaceDirection());
     boolean flag = this.currentGame.getController().movementCheck(this, this.getFaceDirection());
-    System.out.println(flag);
+    System.out.println(flag + "+move");
     if (flag) {
       //send protocol message
       String type1 = togo.getTile().getName();

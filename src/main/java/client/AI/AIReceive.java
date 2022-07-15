@@ -235,6 +235,8 @@ public class AIReceive extends ClientReceive {
 
       case MessageType.currentPlayer:
         sendMessage(new PlayCard(cards[pointerForRegister]).toString());
+        //Um ein Register für die aktuelle Runde auszuwählen, schickt der Client folgende Nachricht.
+        sendMessage(new ChooseRegister(pointerForRegister).toString());
         pointerForRegister++;
         if(pointerForRegister == 5){
           pointerForRegister = 0;
@@ -269,19 +271,29 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.boink:
+        //kind of upgrade Card
         break;
 
       case MessageType.checkPointMoved:
+        //If a checkpoint moves its position
+        CheckPointMoved.CheckPointMovedBody checkPointMovedBody= new Gson().fromJson(body, CheckPointMoved.CheckPointMovedBody.class);
+        int checkPointIDMoved = checkPointMovedBody.getCheckPointID();
+        int newXPosition = checkPointMovedBody.getX();
+        int newYPosition = checkPointMovedBody.getY();
+        setCheckPointXPosition(newXPosition);
+        setCheckPointYPosition(newYPosition);
         break;
 
-      case MessageType.chooseRegister:
-        break;
 
       case MessageType.registerChosen:
+        //Der Server quittiert die Auswahl und schickt diese zur Information an alle Clients.
+        RegisterChosen.RegisterChosenBody registerChosenBody= new Gson().fromJson(body, RegisterChosen.RegisterChosenBody.class);
+        int clientID = registerChosenBody.getClientID();
+        int register = registerChosenBody.getRegister();
+
         break;
 
-      case MessageType.returnCards:
-        break;
+
     }
   }
 

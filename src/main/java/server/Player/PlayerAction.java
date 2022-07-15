@@ -1,6 +1,6 @@
 package server.Player;
 
 public interface PlayerAction {
-  void draw();
+  void draw(int j);
 
 }
