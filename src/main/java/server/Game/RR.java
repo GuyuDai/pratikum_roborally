@@ -26,9 +26,8 @@ public class RR extends Thread implements GameLogic {
   protected GameState currentState;
   protected Position positionReboot;
   protected Position positionAntenna;
-  protected int PlayerInListPosition = 0;
+  protected int playerInListPosition = 0;
   protected int activePhase;  //0 => Aufbauphase, 1 => Upgradephase, 2 => Programmierphase, 3 => Aktivierungsphase
-  protected int currentRound;
   private int finishedPlayers = 0;  //this attribution is used to check whether all player have down a certain behavior
   protected CopyOnWriteArrayList<Integer> checkPoints = new CopyOnWriteArrayList<Integer>();
   private CopyOnWriteArrayList<String> activeCards = new CopyOnWriteArrayList<String>();
@@ -80,7 +79,6 @@ public class RR extends Thread implements GameLogic {
     return playerInCurrentTurn;
   }
 
-
   public void setPlayerInCurrentTurn(Player player) {
     this.playerInCurrentTurn = player;
   }
@@ -123,14 +121,6 @@ public class RR extends Thread implements GameLogic {
 
   public void setActiveCards(CopyOnWriteArrayList<String> activeCards) {
     this.activeCards = activeCards;
-  }
-
-  public int getCurrentRound() {
-    return currentRound;
-  }
-
-  public void setCurrentRound(int currentRound) {
-    this.currentRound = currentRound;
   }
 
   public void nextGameState() {
@@ -409,7 +399,8 @@ public class RR extends Thread implements GameLogic {
     //if(flagInActivation && i < 5){}  //reminder
     for (int i = 0; i < 5; i++) {  //round i
       sendMessageToAll(new ReceivedChat("Round: " + i,-1,false));
-      //wait for each player click playRegister  //reminder: have bug
+      //wait for each player click playRegister
+      notifyCurrentPlayer();
       System.out.println("enter while loop");//test
       while(true){
         if(activeCards.size() == activePlayers.size()){
@@ -429,15 +420,12 @@ public class RR extends Thread implements GameLogic {
       //active
       for (Player player : activePlayers) {
         setPlayerInCurrentTurn(player);
-        sendMessageToAll(new CurrentPlayer(playerInCurrentTurn.clientID));
+        //sendMessageToAll(new CurrentPlayer(playerInCurrentTurn.clientID));
+        sendMessageToAll(new ReceivedChat("Player" + player.clientID + " actions",-1,false));
         playerInCurrentTurn.getRegister().get(i).action();
         checkPointMove();  //before interact with tiles
         interactWithTile();
         controller.robotLaserController(playerInCurrentTurn.getOwnRobot());
-        PlayerInListPosition++;
-        if (PlayerInListPosition >= activePlayers.size()) {
-          PlayerInListPosition = 0;
-        }
         //this.getServerThreadById(player.getClientId()).setClickPlayCard(false);
       }
       //send protocol message
@@ -560,6 +548,16 @@ public class RR extends Thread implements GameLogic {
         checkPointMovementCount = 0;
       }
     }
+  }
+
+  public void notifyCurrentPlayer(){
+    setPlayerInCurrentTurn(activePlayers.get(playerInListPosition));
+    sendMessageToClient(new CurrentPlayer(playerInCurrentTurn.clientID),getServerThreadById(playerInCurrentTurn.clientID));
+    playerInListPosition++;
+    if (playerInListPosition >= activePlayers.size()) {
+      playerInListPosition = 0;
+    }
+
   }
 
   public void sendMessageToClient(Message msg, ServerThread client) {

@@ -409,8 +409,8 @@ public class ServerThread implements Runnable {
                 PlayCardBody playCardBody = new Gson().fromJson(body,PlayCardBody.class);
                 card = playCardBody.getCard();
                 currentGame.getActiveCards().add(card);
-                currentGame.setCurrentRound(currentGame.getCurrentRound()+1);
-                notifyAll();
+                currentGame.notifyCurrentPlayer();
+                //notifyAll();
                 sendToAll(new CardPlayed(clientID,card).toString());
                 break;
 

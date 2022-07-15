@@ -3,6 +3,7 @@ package client.AI;
 import client.*;
 import com.google.gson.*;
 import protocol.*;
+import protocol.CurrentPlayer.CurrentPlayerBody;
 import protocol.ErrorMessage.ErrorMessageBody;
 import protocol.PlayerAdded.*;
 import protocol.ProtocolFormat.*;
@@ -235,13 +236,16 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.currentPlayer:
-        sendMessage(new PlayCard(cardsInRegister[pointerForRegister]).toString());
-        //Um ein Register für die aktuelle Runde auszuwählen, schickt der Client folgende Nachricht.
-        sendMessage(new ChooseRegister(pointerForRegister).toString());
-        pointerForRegister++;
-        if(pointerForRegister == 5){
-          pointerForRegister = 0;
-          cardsInRegister = new String[5];
+        CurrentPlayerBody currentPlayerBody = new Gson().fromJson(body, CurrentPlayerBody.class);
+        if(clientID == currentPlayerBody.getClientID()){
+          sendMessage(new PlayCard(cardsInRegister[pointerForRegister]).toString());
+          //Um ein Register für die aktuelle Runde auszuwählen, schickt der Client folgende Nachricht.
+          sendMessage(new ChooseRegister(pointerForRegister).toString());
+          pointerForRegister++;
+          if(pointerForRegister == 5){
+            pointerForRegister = 0;
+            cardsInRegister = new String[5];
+          }
         }
         break;
 

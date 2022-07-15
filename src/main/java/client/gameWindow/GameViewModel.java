@@ -529,6 +529,7 @@ public class GameViewModel {
                     case 6:
                         playerBot6.setImage(otherRobotIcon);
                         playerName6.setText(playerName);
+                        break;
                 }
             }
         }
