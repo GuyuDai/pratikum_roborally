@@ -24,17 +24,17 @@ public class ClientReceive extends Thread{
 
     protected int clientID;
     protected Socket socket;
+
+    protected GameViewModel model;
     protected BufferedReader readInput;
     protected BufferedWriter writeOutput;
-    protected static final String PROTOCOL = "Version 1.0";
+    protected static final String PROTOCOL = "Version 2.0";
     protected static final String GROUP = "Origionelle Oktopusse";
     protected int playerId;
     protected String playerName;
     protected int figure;
     protected String chatMsg;
-
     protected int checkPointNumber;
-
     protected int energyStorage;
     protected int fromId;
     protected int register;
@@ -42,7 +42,7 @@ public class ClientReceive extends Thread{
     protected boolean isPrivate;
     protected boolean isReady;
     protected boolean isFilled;
-    protected boolean timerStarted=false;
+    protected boolean timerStarted = false;
     protected String cardPlayed;
     protected Map<Integer,String> IdCardPlayed = new HashMap<>();
     protected Map<Integer,Boolean> IdReady = new HashMap<>();
@@ -51,7 +51,7 @@ public class ClientReceive extends Thread{
     protected Map<String,Integer> IdName = new HashMap<>();
     protected List<Boolean> readyList=new ArrayList<>();
     protected String[] maps;
-    protected String[] cards;
+    protected String[] cards = new String[9];
     protected String[]damageDecks;
     protected String board;
     protected String[] filledRegister;
@@ -66,6 +66,8 @@ public class ClientReceive extends Thread{
     protected List<Integer> IdList = new ArrayList<>();
     protected Map<Integer,Integer> IdRobot = new HashMap<>();
     protected Map<Integer,Integer>IdStartPoint = new HashMap<>();
+
+    protected Map<Integer,String> IdDirection=new HashMap<>();
 
     protected int counterRegister = 0;
 
@@ -276,23 +278,26 @@ public class ClientReceive extends Thread{
                 break;
 
             case MessageType.playerAdded:
-                PlayerAddedBody playerAddedBody=new Gson().fromJson(body,PlayerAddedBody.class);
-                playerId=playerAddedBody.getClientID();
-                playerName=playerAddedBody.getName();
-                figure=playerAddedBody.getFigure();
+                PlayerAddedBody playerAddedBody = new Gson().fromJson(body,PlayerAddedBody.class);
+                playerId = playerAddedBody.getClientID();
+                playerName = playerAddedBody.getName();
+                int tempFigure = playerAddedBody.getFigure();
                 IdList.add(playerId);
-                robotNumbers.add(figure);
-                IdRobot.put(playerId,figure);
+                robotNumbers.add(tempFigure);
+                IdRobot.put(playerId,tempFigure);
                 IdName.put(playerName,playerId);
+                if(playerId == clientID){
+                    figure = tempFigure;
+                }
                 break;
 
             case MessageType.receivedChat:
                 ReceivedChatBody receivedChatBody=new Gson().fromJson(body,ReceivedChatBody.class);
-                 chatMsg=receivedChatBody.getMessage();
-                 fromId=receivedChatBody.getFrom();
-                 isPrivate=receivedChatBody.isPrivate();
-                 receiveChat(chatMsg);
-                 break;
+                chatMsg=receivedChatBody.getMessage();
+                fromId=receivedChatBody.getFrom();
+                isPrivate=receivedChatBody.isPrivate();
+                receiveChat(chatMsg);  //reminder: there cause a "Toolkit not initialized" error
+                break;
 
             case MessageType.selectMap:
                 SelectMap.SelectMapBody selectMapBody = new Gson().fromJson(body,SelectMap.SelectMapBody.class);
@@ -300,9 +305,9 @@ public class ClientReceive extends Thread{
                 break;
 
             case MessageType.playerStatus:
-                PlayerStatus.PlayerStatusBody playerStatusBody=new Gson().fromJson(body, PlayerStatus.PlayerStatusBody.class);
-                isReady=playerStatusBody.isReady();
-                playerId=playerStatusBody.getClientID();
+                PlayerStatus.PlayerStatusBody playerStatusBody = new Gson().fromJson(body, PlayerStatus.PlayerStatusBody.class);
+                isReady = playerStatusBody.isReady();
+                playerId = playerStatusBody.getClientID();
                 readyList.add(isReady);
                 IdReady.put(playerId,isReady);
                 break;
@@ -374,6 +379,8 @@ public class ClientReceive extends Thread{
             case MessageType.playerTurning:
                 PlayerTurning.PlayerTurningBody playerTurningBody=new Gson().fromJson(body, PlayerTurning.PlayerTurningBody.class);
                 turnDirection=playerTurningBody.getRotation();
+                playerId=playerTurningBody.getClientID();
+                IdDirection.put(playerId,turnDirection);
                 break;
 
             case MessageType.animation:
@@ -404,11 +411,11 @@ public class ClientReceive extends Thread{
             case MessageType.checkpointReached:
                 //Saves the number of Checkpoints reached
                 CheckPointReached.CheckPointReachedBody checkPointReachedBody = new Gson().fromJson(body, CheckPointReached.CheckPointReachedBody.class);
-                int clientIDCheckReached= checkPointReachedBody.getClientID();
-                int numberOfCheckpointsReached= checkPointReachedBody.getNumber();
+                int clientIDCheckReached = checkPointReachedBody.getClientID();
+                int numberOfCheckpointsReached = checkPointReachedBody.getNumber();
                 //Sets the number of checkpoints reached
-                if(clientIDCheckReached==clientID){
-                    checkPointNumber=numberOfCheckpointsReached;
+                if(clientIDCheckReached == clientID){
+                    checkPointNumber = numberOfCheckpointsReached;
                 }
                 break;
         }
@@ -544,6 +551,22 @@ public class ClientReceive extends Thread{
 
     public List<Integer> getRobotNumbers() {
         return robotNumbers;
+    }
+
+    public String getTurnDirection() {
+        return turnDirection;
+    }
+
+    public String getDirectionById(int id){
+        return getIdDirection().get(id);
+    }
+
+    public Map<Integer, String> getIdDirection() {
+        return IdDirection;
+    }
+
+    public void setIdDirection(Map<Integer, String> idDirection) {
+        IdDirection = idDirection;
     }
 
     public List<Integer> getStartNumbers(){

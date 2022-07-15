@@ -3,6 +3,7 @@ package client.AI;
 import client.*;
 import com.google.gson.*;
 import protocol.*;
+import protocol.ErrorMessage.ErrorMessageBody;
 import protocol.PlayerAdded.*;
 import protocol.ProtocolFormat.*;
 import protocol.ReceivedChat.*;
@@ -24,14 +25,24 @@ public class AIReceive extends ClientReceive {
   private int pointerForRegister = 0;
   private CopyOnWriteArrayList<Integer> availableStartingPoints = new CopyOnWriteArrayList<Integer>();
 
+  private CopyOnWriteArrayList<Integer> availableFigures = new CopyOnWriteArrayList<Integer>();
+
   public AIReceive(Socket socket) {
     super(socket);
+    //initialize available starting positions
     availableStartingPoints.add(1);
     availableStartingPoints.add(2);
     availableStartingPoints.add(3);
     availableStartingPoints.add(4);
     availableStartingPoints.add(5);
     availableStartingPoints.add(6);
+    //initialize available figures
+    availableFigures.add(1);
+    availableFigures.add(2);
+    availableFigures.add(3);
+    availableFigures.add(4);
+    availableFigures.add(5);
+    availableFigures.add(6);
   }
 
   public void run() {
@@ -66,16 +77,23 @@ public class AIReceive extends ClientReceive {
         WelcomeBody welcomeBody = new Gson().fromJson(body,WelcomeBody.class);
         clientID = welcomeBody.getClientID();
         sendMessage(new HelloServer(GROUP,true,PROTOCOL,clientID).toString());
+
         break;
 
       case MessageType.playerAdded:
         PlayerAddedBody playerAddedBody = new Gson().fromJson(body,PlayerAddedBody.class);
         playerId = playerAddedBody.getClientID();
         playerName = playerAddedBody.getName();
-        figure = playerAddedBody.getFigure();
-        robotNumbers.add(figure);
+        int tempFigure = playerAddedBody.getFigure();
+        availableFigures.remove((Integer) tempFigure);
+        IdList.add(playerId);
+        robotNumbers.add(tempFigure);
+        IdRobot.put(playerId,tempFigure);
         IdName.put(playerName,playerId);
-        aiReady();
+        if(playerId == clientID){
+          figure = tempFigure;
+          aiReady();
+        }
         break;
 
       case MessageType.receivedChat:
@@ -83,7 +101,10 @@ public class AIReceive extends ClientReceive {
         chatMsg = receivedChatBody.getMessage();
         fromId = receivedChatBody.getFrom();
         isPrivate = receivedChatBody.isPrivate();
-        receiveChat(chatMsg);
+        //receiveChat(chatMsg);  //reminder: there cause a "Toolkit not initialized" error
+        if(fromId == -1){
+          aiTrigger(chatMsg);
+        }
         break;
 
       case MessageType.selectMap:
@@ -149,7 +170,7 @@ public class AIReceive extends ClientReceive {
         //Wenn die gewünschte Position valide ist, werden alle Spieler darüber benachrichtigt.
         removeStartPointsInHashSet(takenX, takenY);
         //sendMessage(new SetStartingPoint(8,1).toString());
-        logger.info(ANSI_GREEN + "already send msg");
+        logger.info(ANSI_GREEN + "already send msg");//test
         break;
 
       case MessageType.timerStarted:
@@ -207,11 +228,13 @@ public class AIReceive extends ClientReceive {
       case MessageType.reboot:
         Reboot.RebootBody rebootBody = new Gson().fromJson(body, Reboot.RebootBody.class);
         rebootClientId = rebootBody.getClientID();
-        aiReboot();
+        if(rebootClientId == clientID){
+          aiReboot();
+        }
         break;
 
       case MessageType.currentPlayer:
-        sendMessage(new SelectedCard(cards[pointerForRegister],pointerForRegister,clientID).toString());
+        sendMessage(new PlayCard(cards[pointerForRegister]).toString());
         pointerForRegister++;
         if(pointerForRegister == 5){
           pointerForRegister = 0;
@@ -238,13 +261,25 @@ public class AIReceive extends ClientReceive {
           checkPointNumber=numberOfCheckpointsReached;
         }
         break;
+
+      case MessageType.error:
+        ErrorMessageBody errorMessageBody = new Gson().fromJson(body,ErrorMessageBody.class);
+        String serverMsg = errorMessageBody.getError();
+        aiTrigger(serverMsg);
     }
+  }
+
+  private void aiChooseRobot(){
+    int figureIndex = random.nextInt(availableFigures.size() - 1);
+    figure = availableFigures.get(figureIndex);
+    String name = "AI_" + clientID;
+    sendMessage(new PlayerValues(name,figure).toString());
   }
 
   private void aiReady(){
     isReady = true;
     try {
-      sleep(6000);
+      sleep(2000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -258,7 +293,7 @@ public class AIReceive extends ClientReceive {
 
   private void aiChooseStartPoint(){
     try {
-      sleep(2000);
+      sleep(1000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -342,9 +377,18 @@ public class AIReceive extends ClientReceive {
   }
 
   private void aiReboot(){
-    // TODO: 2022/7/9 after finish reboot
+    //do nothing
   }
 
+  private void aiTrigger(String serverMsg){
+    switch (serverMsg){
+      case "Choose your robot":
+      case "this robot has been taken":
+        aiChooseRobot();
+        break;
+
+    }
+  }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   private HashSet<Position> availableStartingPositions = new HashSet<>();
   private HashSet<Position> availableDeathTrapStartingPositions = new HashSet<>();

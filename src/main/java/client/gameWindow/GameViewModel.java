@@ -346,7 +346,6 @@ public class GameViewModel {
     @FXML
     public void sendButtonAction(ActionEvent actionEvent) throws IOException {
         String message = model.getTextFieldContent().get();
-        System.out.println(message); //TODO message is always empty
         checkInput(message);
         model.getTextFieldContent().set("");
         input.requestFocus();
@@ -372,7 +371,7 @@ public class GameViewModel {
         }
     }
     private String createMessage(String message){
-        String sendChat = new SendChat(message,-1).toString();
+        String sendChat=new SendChat(message,-1).toString();
         return sendChat;
     }
 
@@ -386,7 +385,7 @@ public class GameViewModel {
         String target=splittingTarget[0].trim();
         int to=Client.getClientReceive().getIdByName(target);
         String messageToSend=realMessage.toString().trim();
-        String sendChat = new SendChat("(private) " + messageToSend,to).toString();
+        String sendChat=new SendChat(messageToSend,to).toString();
 
         return sendChat;
     }
@@ -2007,13 +2006,13 @@ public class GameViewModel {
                              gameboard.add(checkPointTwo,5,7);
                              gameboard.add(checkPointThree,10,7);
                         }
-                        if(board.getName().equals("Twister")){
-                            checkBoard.add(checkPointFour,9,7);
-                            checkBoard.add(checkPointOne,10,1);
-                            checkBoard.add(checkPointThree,5,3);
-                            checkBoard.add(checkPointTwo,6,7);
-                        }
 
+                        if(board.getName().equals("Twister")){
+                            gameboard.add(checkPointFour,9,7);
+                            gameboard.add(checkPointOne,10,1);//
+                            gameboard.add(checkPointThree,5,3);//
+                            gameboard.add(checkPointTwo,6,7);
+                        }
                     }
 
                 }
@@ -2300,73 +2299,35 @@ public class GameViewModel {
 
 
     public void moveRobot() {
+
         for (int clientId : Client.getClientReceive().getIdPosition().keySet()) {
             int moveX = Client.getClientReceive().getPositionById(clientId)[0];
             int moveY = Client.getClientReceive().getPositionById(clientId)[1];
             int robotNumber=Client.getClientReceive().getRobotById(clientId);
-            // int oldX=robotOldPosition.get(robotNumber)[0];
-            // int oldY=robotOldPosition.get(robotNumber)[1];
+           // int oldX=robotOldPosition.get(robotNumber)[0];
+           // int oldY=robotOldPosition.get(robotNumber)[1];
             ImageView botView=robotOgPicture.get(robotNumber);
-
-            URL empty = getClass().getResource("/Empty.png");
-            Image imageEmpty = new Image(empty.toString());
-
-            ImageView emptyView=new ImageView(imageEmpty);
-            emptyView.setFitHeight(43);
-            emptyView.setFitWidth(43);
-
-            //robotBoard.getChildren().remove(emptyView, 1, 1);
-
-
-            //robotBoard.add(emptyView, 1, 1);
-
-
-
+            if(Client.getClientReceive().getIdDirection()!=null &&
+                    Client.getClientReceive().getIdDirection().containsKey(clientId)) {
+                rotateRobot(botView,clientId);
+                PauseTransition move1d = new PauseTransition(Duration.seconds(1));
+                ImageView finalBotView = botView;
+                robotOgPicture.put(clientId,finalBotView);
+                move1d.setOnFinished(e -> robotBoard.add(finalBotView, moveX, moveY));
+                move1d.play();
+            }
             //TODO delete startPosition
-            // remove.setOnFinished(e -> robotBoard.add(emptyView,oldX,oldY));
-            robotBoard.getChildren().remove(botView);
-
-            checkYourbotImageView().setRotate(90);
-
-
-
-            botView.setRotate(270);
-
-
-            if(register1.getImage().equals(imageMove1)) {
+            else {
+                // remove.setOnFinished(e -> robotBoard.add(emptyView,oldX,oldY));
+                robotBoard.getChildren().remove(botView);
                 PauseTransition move1d = new PauseTransition(Duration.seconds(1));
-                move1d.setOnFinished(e -> robotBoard.add(botView, moveX + 1, moveY));
+                ImageView finalBotView = botView;
+                move1d.setOnFinished(e -> robotBoard.add(finalBotView, moveX, moveY));
                 move1d.play();
-                System.out.println("move 1");
             }
-            if(register1.getImage().equals(imageMove2)){
-                PauseTransition move1sd = new PauseTransition(Duration.seconds(1));
-                move1sd.setOnFinished(e -> robotBoard.add(botView, moveX + 2, moveY));
-                move1sd.play();
-                System.out.println("move 2");
-            }
-            if(register1.getImage().equals(imageMove3)){
-                PauseTransition move1d = new PauseTransition(Duration.seconds(1));
-                move1d.setOnFinished(e -> robotBoard.add(botView, moveX + 3, moveY));
-                move1d.play();
-                System.out.println("move 3");
-            }
-            if(register1.getImage().equals(imageBTurnLeft)){
-                botView.setRotate(270);
-                PauseTransition move1d = new PauseTransition(Duration.seconds(1));
-                move1d.setOnFinished(e -> robotBoard.add(botView, moveX, moveY));
-                move1d.play();
-                System.out.println("rotate left");
-            }
-            else{
-                System.out.println("no movement yet");
-            }
-
-
-
-            // PauseTransition remove2 = new PauseTransition(Duration.seconds(2));
-            // remove2.setOnFinished(e -> robotBoard.getChildren().remove(1));
-            //  remove2.play();
+           // PauseTransition remove2 = new PauseTransition(Duration.seconds(2));
+           // remove2.setOnFinished(e -> robotBoard.getChildren().remove(1));
+          //  remove2.play();
         }
     }
 
@@ -2582,20 +2543,17 @@ public class GameViewModel {
         return clickCounter;
     }
 
-
-
-
     /**
      * function of the play register button/ new round button
      */
     public void playCardBtnAction(ActionEvent actionEvent) {
          playCardBtn.setText("play register 1");
-         Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
          logger.info("Send out message: ");
 
          switch(getClickCounter()){
              case 1:
                  setClickCounter(getClickCounter() + 1);
+                 Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
                  register1.setImage(register2.getImage());
                  register2.setImage(register3.getImage());
                  register3.setImage(register4.getImage());
@@ -2617,6 +2575,7 @@ public class GameViewModel {
                  break;
              case 2:
                  setClickCounter(getClickCounter() + 1);
+                 Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
                  register1.setImage(register2.getImage());
                  register2.setImage(register3.getImage());
                  register3.setImage(register4.getImage());
@@ -2627,6 +2586,7 @@ public class GameViewModel {
                  break;
              case 3:
                  setClickCounter(getClickCounter() + 1);
+                 Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
                  register1.setImage(register2.getImage());
                  register2.setImage(register3.getImage());
                  register3.setImage(null);
@@ -2636,6 +2596,7 @@ public class GameViewModel {
                  break;
              case 4:
                  setClickCounter(getClickCounter() + 1);
+                 Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
                  register1.setImage(register2.getImage());
                  register2.setImage(null);
                  playCardBtn.setText("play register 5");
@@ -2644,6 +2605,7 @@ public class GameViewModel {
                  break;
              case 5:
                  setClickCounter(getClickCounter() + 1);
+                 Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
                  register1.setImage(null);
                  playCardBtn.setText("next round!");
                  moveRobotButton.setVisible(true);
@@ -2685,6 +2647,22 @@ public class GameViewModel {
         }
     }
 
+    public void rotateRobot(ImageView robotPic,int id) {
+            switch (Client.getClientReceive().getIdDirection().get(id)) {
+                case "counterclockwise":
+                    robotPic.setRotate(robotPic.getRotate()-90);
+                    break;
+                case "clockwise":
+                    robotPic.setRotate(robotPic.getRotate()+90);
+                    break;
+                case "turn 180":
+                    robotPic.setRotate(robotPic.getRotate()+180);
+                    break;
+                default:
+                    break;
+            }
+        Client.getClientReceive().setIdDirection(new HashMap<>());
+    }
 
 
     /**
@@ -2923,6 +2901,8 @@ public class GameViewModel {
         }
         moveRobotButton.setVisible(false);
         playCardBtn.setVisible(true);
+        moveRobot();
+
 
         //shootRobotLaser();
         //ToDo robot laser

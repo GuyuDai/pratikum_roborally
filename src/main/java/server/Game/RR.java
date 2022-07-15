@@ -27,10 +27,10 @@ public class RR extends Thread implements GameLogic {
   protected Position positionAntenna;
   protected int PlayerInListPosition = 0;
   protected int activePhase;  //0 => Aufbauphase, 1 => Upgradephase, 2 => Programmierphase, 3 => Aktivierungsphase
-
   protected int currentRound;
   private int finishedPlayers = 0;  //this attribution is used to check whether all player have down a certain behavior
-  private CopyOnWriteArrayList<String> activeCards = new CopyOnWriteArrayList<String>();  //reminder: have bug
+  protected CopyOnWriteArrayList<Integer> checkPoints = new CopyOnWriteArrayList<Integer>();
+  private CopyOnWriteArrayList<String> activeCards = new CopyOnWriteArrayList<String>();
 
 
 
@@ -274,6 +274,32 @@ public class RR extends Thread implements GameLogic {
     }
     for(Player player : getActivePlayers()){
       player.setCurrentGame(this);
+    }
+
+    switch (gameBoard.getName()){
+      case "DizzyHighway":
+        checkPoints.add(1);
+        break;
+
+      case "ExtraCrispy":
+      case "LostBearings":
+      case "Twister":
+        checkPoints.add(1);
+        checkPoints.add(2);
+        checkPoints.add(3);
+        checkPoints.add(4);
+        break;
+
+      case "DeathTrap":
+        checkPoints.add(1);
+        checkPoints.add(2);
+        checkPoints.add(3);
+        checkPoints.add(4);
+        checkPoints.add(5);
+        break;
+    }
+    for(Player player : getActivePlayers()){
+      player.setCheckPoints(this.checkPoints);
     }
     nextGameState();
   }
