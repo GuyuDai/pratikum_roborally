@@ -10,11 +10,13 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.logging.Level;
-
-
+import java.util.logging.Logger;
 
 
 public class Client {
+
+    public static final Logger logger = Log.logFile("ClientLog");
+
     private static final int SERVER_PORT = 1788;
     private static final String SERVER_IP = "localhost";
 
@@ -35,5 +37,10 @@ public class Client {
             e.printStackTrace();
         }
     }
+
+    public static Logger getLogger(){
+        return logger;
+    }
+
 
 }

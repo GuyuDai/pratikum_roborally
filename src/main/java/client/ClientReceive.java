@@ -19,7 +19,6 @@ import java.util.logging.*;
 
 public class ClientReceive extends Thread{
 
-    private static final Logger logger = Logger.getLogger(ClientReceive.class.getName());
     public static final String ANSI_GREEN = "\u001B[32m";
 
     protected int clientID;
@@ -114,7 +113,7 @@ public class ClientReceive extends Thread{
                 //System.out.println(serverMessage + "-----------original message");  //test
                 Message message = wrapMessage(serverMessage);
                 //System.out.println("--------------------------------------------------------------");  //test
-                logger.info( ANSI_GREEN + message + "wrapped message");  //test
+                Client.getLogger().info( ANSI_GREEN + message + "wrapped message");  //test
                 identifyMessage(message);
             }
         } catch (IOException e) {
