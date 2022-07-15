@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1251.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
+<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1251.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
    <children>
       <Pane layoutX="6.0" layoutY="3.0" prefHeight="795.0" prefWidth="305.0" stylesheets="@../styles.css">
          <children>
@@ -29,17 +29,12 @@
             </ImageView>
             <HBox layoutX="-2.0" layoutY="1.0" prefHeight="28.0" prefWidth="306.0" styleClass="radius" stylesheets="@../styles.css">
                <children>
-                  <Button fx:id="chatBtn" mnemonicParsing="false" onAction="#chatBtnAction" prefHeight="31.0" prefWidth="114.0" stylesheets="@../styles.css" text="OPEN CHAT">
+                  <Button fx:id="chatBtn" mnemonicParsing="false" onAction="#chatBtnAction" prefHeight="35.0" prefWidth="155.0" stylesheets="@../styles.css" text="OPEN CHAT">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="110.0" text="SHOP">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitGame" prefHeight="31.0" prefWidth="101.0" stylesheets="@../styles.css" text="EXIT">
+                  <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitGame" prefHeight="35.0" prefWidth="152.0" stylesheets="@../styles.css" text="EXIT">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -50,14 +45,13 @@
                <children>
                   <VBox fx:id="container" prefHeight="171.0" prefWidth="305.0" style="-fx-background-radius: 10;" styleClass="backgroundColor" visible="false">
                      <children>
-                        <Label fx:id="chatwindow" prefHeight="17.0" prefWidth="443.0" text="                                                                              Chat" textAlignment="CENTER" textFill="WHITE" />
                         <ListView fx:id="list" prefHeight="489.0" prefWidth="244.0" style="-fx-background-radius: 10;" />
                         <Separator prefWidth="200.0" />
                         <HBox prefHeight="77.0" prefWidth="263.0">
                            <children>
                               <TextField fx:id="input" onKeyPressed="#keyboardAction" prefHeight="25.0" prefWidth="368.0" promptText="Chat with the other players!" style="-fx-background-color: white;" />
                               <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Button fx:id="sendBtn" mnemonicParsing="false" onAction="#sendButtonAction" prefHeight="39.0" prefWidth="65.0" text="Send" />
+                              <Button fx:id="sendBtn" mnemonicParsing="false" onAction="#sendButtonAction" prefHeight="25.0" prefWidth="53.0" text="Send" />
                            </children>
                         </HBox>
                      </children>
@@ -103,45 +97,7 @@
                   <ImageView fx:id="playerBot41" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
-            <VBox layoutX="6.0" layoutY="597.0" prefHeight="188.0" prefWidth="82.0" styleClass="backgroundColor" stylesheets="@../styles.css">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="139.0" prefWidth="82.0">
-                     <graphic>
-                        <ImageView fitHeight="122.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-                  <Separator opacity="0.0" prefHeight="18.0" prefWidth="82.0" />
-                  <Label prefHeight="43.0" prefWidth="82.0" text="      Label" textFill="WHITE" />
-               </children>
-            </VBox>
-            <VBox layoutX="208.0" layoutY="597.0" prefHeight="188.0" prefWidth="82.0" styleClass="backgroundColor" stylesheets="@../styles.css">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="139.0" prefWidth="82.0">
-                     <graphic>
-                        <ImageView fitHeight="122.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-                  <Separator opacity="0.0" prefHeight="18.0" prefWidth="82.0" />
-                  <Label prefHeight="43.0" prefWidth="82.0" text="      Label" textFill="WHITE" />
-               </children>
-            </VBox>
-            <VBox layoutX="106.0" layoutY="597.0" prefHeight="188.0" prefWidth="82.0" styleClass="backgroundColor" stylesheets="@../styles.css">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="139.0" prefWidth="82.0">
-                     <graphic>
-                        <ImageView fitHeight="122.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-                  <Separator opacity="0.0" prefHeight="18.0" prefWidth="82.0" />
-                  <Label prefHeight="43.0" prefWidth="82.0" text="      Label" textFill="WHITE" />
-               </children>
-            </VBox>
-            <Label layoutX="3.0" layoutY="531.0" prefHeight="59.0" prefWidth="305.0" text="       USE YOUR UPGRADE CARDS" textFill="#fcfafa">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <GridPane fx:id="damageRegister" layoutX="-2.0" layoutY="389.0" prefHeight="135.0" prefWidth="309.0" style="-fx-background-radius: 20;">
+            <GridPane fx:id="damageRegister" layoutX="-5.0" layoutY="630.0" prefHeight="135.0" prefWidth="309.0" style="-fx-background-radius: 20;">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="79.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -175,7 +131,7 @@
                   <Button fx:id="trojan" mnemonicParsing="false" onAction="#playDamageCards" styleClass="trojan" stylesheets="@../styles.css" GridPane.columnIndex="3" />
                </children>
             </GridPane>
-            <Label layoutX="90.0" layoutY="323.0" prefHeight="59.0" prefWidth="130.0" text="DAMAGE CARDS" textFill="#fcfafa">
+            <Label layoutX="91.0" layoutY="554.0" prefHeight="59.0" prefWidth="130.0" text="DAMAGE CARDS" textFill="#fcfafa">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -186,7 +142,7 @@
          <children>
             <HBox prefHeight="108.0" prefWidth="557.0">
                <children>
-                  <Label fx:id="phase" prefHeight="98.0" prefWidth="561.0" text="PHASES" textFill="WHITE">
+                  <Label fx:id="phase" prefHeight="92.0" prefWidth="557.0" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="39.0" />
                      </font>

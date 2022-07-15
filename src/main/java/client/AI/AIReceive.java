@@ -234,7 +234,9 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.currentPlayer:
-        sendMessage(new SelectedCard(cards[pointerForRegister],pointerForRegister,clientID).toString());
+        sendMessage(new PlayCard(cards[pointerForRegister]).toString());
+        //Um ein Register für die aktuelle Runde auszuwählen, schickt der Client folgende Nachricht.
+        sendMessage(new ChooseRegister(pointerForRegister).toString());
         pointerForRegister++;
         if(pointerForRegister == 5){
           pointerForRegister = 0;
@@ -266,6 +268,32 @@ public class AIReceive extends ClientReceive {
         ErrorMessageBody errorMessageBody = new Gson().fromJson(body,ErrorMessageBody.class);
         String serverMsg = errorMessageBody.getError();
         aiTrigger(serverMsg);
+        break;
+
+      case MessageType.boink:
+        //kind of upgrade Card
+        break;
+
+      case MessageType.checkPointMoved:
+        //If a checkpoint moves its position
+        CheckPointMoved.CheckPointMovedBody checkPointMovedBody= new Gson().fromJson(body, CheckPointMoved.CheckPointMovedBody.class);
+        int checkPointIDMoved = checkPointMovedBody.getCheckPointID();
+        int newXPosition = checkPointMovedBody.getX();
+        int newYPosition = checkPointMovedBody.getY();
+        setCheckPointXPosition(newXPosition);
+        setCheckPointYPosition(newYPosition);
+        break;
+
+
+      case MessageType.registerChosen:
+        //Der Server quittiert die Auswahl und schickt diese zur Information an alle Clients.
+        RegisterChosen.RegisterChosenBody registerChosenBody= new Gson().fromJson(body, RegisterChosen.RegisterChosenBody.class);
+        int clientID = registerChosenBody.getClientID();
+        int register = registerChosenBody.getRegister();
+
+        break;
+
+
     }
   }
 
@@ -581,6 +609,21 @@ public class AIReceive extends ClientReceive {
     }
     if(input.contains("\"messageType\":\"Welcome\",\"messageBody\"")){
       return new Gson().fromJson(input, Welcome.class);
+    }
+    if(input.contains("\"messageType\":\"Boink\",\"messageBody\"")){
+      return new Gson().fromJson(input, Boink.class);
+    }
+    if(input.contains("\"messageType\":\"ChooseRegister\",\"messageBody\"")){
+      return new Gson().fromJson(input, ChooseRegister.class);
+    }
+    if(input.contains("\"messageType\":\"RegisterChosen\",\"messageBody\"")){
+      return new Gson().fromJson(input, RegisterChosen.class);
+    }
+    if(input.contains("\"messageType\":\"ReturnCards\",\"messageBody\"")){
+      return new Gson().fromJson(input, ReturnCards.class);
+    }
+    if(input.contains("\"messageType\":\"CheckPointMoved\",\"messageBody\"")){
+      return new Gson().fromJson(input, CheckPointMoved.class);
     }
     if(input.contains("\"messageType\":\"YourCards\",\"messageBody\"")){
       return new Gson().fromJson(input, YourCards.class);

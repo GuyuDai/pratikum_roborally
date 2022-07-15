@@ -1,5 +1,6 @@
 package server.Player;
 
+import protocol.DiscardSome;
 import protocol.DrawDamage;
 import protocol.ErrorMessage;
 import protocol.PickDamage;
@@ -218,10 +219,14 @@ public class Player implements PlayerAction{
   }
 
   public void discardHands(){
+    CopyOnWriteArrayList<String> discardHands = new CopyOnWriteArrayList<String>();
     for(Card card : getHands()){
       getOwnDeck().getDiscardPile().add(card);
+      discardHands.add(card.getCardName());
       this.hands.remove(card);
     }
+    String[] discardSomeMsg = discardHands.toArray(new String[0]);
+    currentGame.sendMessageToClient(new DiscardSome(discardSomeMsg),currentGame.getServerThreadById(clientID));
   }
 
   public void discardRegister(){

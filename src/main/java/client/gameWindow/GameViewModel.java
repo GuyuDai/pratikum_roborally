@@ -223,19 +223,26 @@ public class GameViewModel {
 
 
     /**
+     * other players mat
+     */
+    @FXML
+    ImageView playerBot1, playerBot2, playerBot3,playerBot4, playerBot5, playerBot6;
+    @FXML
+    Label playerName1, playerName2, playerName3, playerName4, playerName5, playerName6 ;
+
+    /**
      * others
      */
     @FXML
     private AnchorPane gameContainer;
     @FXML
     private Label Text;
-
+    @FXML
+    private Label phase;
     @FXML
     private Label yourBotText;
-
     @FXML
     private ImageView yourBot;
-
     @FXML
     GridPane gameboard, startBoard, robotBoard, checkBoard;
 
@@ -349,7 +356,6 @@ public class GameViewModel {
         checkInput(message);
         model.getTextFieldContent().set("");
         input.requestFocus();
-        System.out.println("test");
     }
 
     public void checkInput(String message){
@@ -434,38 +440,6 @@ public class GameViewModel {
         LobbyViewModel.setWindowName("Lobby");
     }
 
-
-    public void setAIBotIcon(){
-        yourBotText.setVisible(true);
-        int aiID = AI.getAiReceive().getClientID();
-        int aiRobotNumber = AI.getAiReceive().getRobotById(aiID);
-        Image robotIcon=null;
-        switch(aiRobotNumber){
-            case 1:
-                robotIcon = imageHulk;//hulk
-                break;
-            case 2:
-                robotIcon = imageSpin;//spin
-                break;
-            case 3:
-                robotIcon = imageSquash;//squash
-                break;
-            case 4:
-                robotIcon = imageHammer;//hammer
-                break;
-            case 5:
-                robotIcon = imageTwonkey;//twonkey
-                break;
-            case 6:
-                robotIcon = imageTwitch;//twitch
-                break;
-        }
-        yourBot.setImage(robotIcon);
-    }
-
-
-
-
     /**
      * sets your own robot icon
      */
@@ -500,11 +474,6 @@ public class GameViewModel {
         yourBotText.setText(yourName);
     }
 
-
-    @FXML
-    ImageView playerBot1, playerBot2, playerBot3,playerBot4, playerBot5, playerBot6;
-    @FXML
-    Label playerName1, playerName2, playerName3, playerName4, playerName5, playerName6 ;
 
     /**
      * Set other player´s icon and name on board.
@@ -564,10 +533,6 @@ public class GameViewModel {
             }
         }
     }
-
-
-
-
 
 
 
@@ -653,6 +618,7 @@ public class GameViewModel {
                     hand9.setImage(cardImage);
                     break;
             }
+
         }
     }
 
@@ -666,10 +632,6 @@ public class GameViewModel {
 
     public int getRegisterCount() { return registerCount; }
 
-    int timerCounter = 0;
-    public void setTimerCounter(int count){ this.timerCounter = count; }
-
-    public int getTimerCounter(){return timerCounter; }
 
     /**
      * pick your register of 5 cards from your hands of 9 cards
@@ -897,7 +859,6 @@ public class GameViewModel {
                 textAppear2.play();
                 break;
         }
-        ;
     }
 
     @FXML
@@ -1008,19 +969,16 @@ public class GameViewModel {
                 register2.setImage(hand8.getImage());
                 hand8Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[7],1,ID).toString());
-
                 break;
             case 3:
                 register3.setImage(hand8.getImage());
                 hand8Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[7],2,ID).toString());
-
                 break;
             case 4:
                 register4.setImage(hand8.getImage());
                 hand8Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[7],3,ID).toString());
-
                 break;
             case 5:
                 register5.setImage(hand8.getImage());
@@ -1163,11 +1121,11 @@ public class GameViewModel {
         String map = Client.getClientReceive().getBoard();
         printMapGUI(map);
 
+        phase.setText("PROGRAMMING PHASE");
         Text.setText("Select a starting point.");
         selectStartingPoint.setVisible(true);
         printMapButton.setVisible(false);
         setYourBotIcon();
-        //setAIBotIcon();
         setOthersBotIcon();
 
         URL empty = getClass().getResource("/Empty.png");
@@ -2016,10 +1974,10 @@ public class GameViewModel {
                         }
 
                         if(board.getName().equals("Twister")){
-                            gameboard.add(checkPointFour,9,7);
-                            gameboard.add(checkPointOne,10,1);//
-                            gameboard.add(checkPointThree,5,3);//
-                            gameboard.add(checkPointTwo,6,7);
+                            checkBoard.add(checkPointFour,9,7);
+                            checkBoard.add(checkPointOne,10,1);//
+                            checkBoard.add(checkPointThree,5,3);//
+                            checkBoard.add(checkPointTwo,6,7);
                         }
                     }
 
@@ -2041,8 +1999,77 @@ public class GameViewModel {
     }
 
 
+    public void moveCheckpointTwister(int moveNumber){
+
+        /**
+         * checkpoints
+         */
+        URL checkPoint1 = getClass().getResource("/Checkpoints/Checkpoint1.png");
+        Image imageCheckPoint1 = new Image(checkPoint1.toString());
+
+        URL checkPoint2 = getClass().getResource("/Checkpoints/Checkpoint2.png");
+        Image imageCheckPoint2 = new Image(checkPoint2.toString());
+
+        URL checkPoint3 = getClass().getResource("/Checkpoints/Checkpoint3.png");
+        Image imageCheckPoint3 = new Image(checkPoint3.toString());
+
+        URL checkPoint4 = getClass().getResource("/Checkpoints/Checkpoint4.png");
+        Image imageCheckPoint4 = new Image(checkPoint4.toString());
+
+        ImageView checkPointOne=new ImageView(imageCheckPoint1);
+        ImageView checkPointTwo=new ImageView(imageCheckPoint2);
+        ImageView checkPointThree=new ImageView(imageCheckPoint3);
+        ImageView checkPointFour=new ImageView(imageCheckPoint4);
+        checkPointThree.setFitHeight(43);
+        checkPointOne.setFitHeight(43);
+        checkPointTwo.setFitHeight(43);
+        checkPointFour.setFitHeight(43);
+        checkPointOne.setFitWidth(43);
+        checkPointThree.setFitWidth(43);
+        checkPointTwo.setFitWidth(43);
+        checkPointFour.setFitWidth(43);
+
+
+        switch(moveNumber){
+
+            case 1:
+                checkBoard.getChildren().clear();
+
+                checkBoard.add(checkPointOne,11,2);
+                checkBoard.add(checkPointTwo,5,8);
+                checkBoard.add(checkPointThree,4,2);
+                checkBoard.add(checkPointFour,10,6);
+                break;
+            case 2:
+                checkBoard.getChildren().clear();
+
+                checkBoard.add(checkPointOne,10,3);
+                checkBoard.add(checkPointTwo,4,7);
+                checkBoard.add(checkPointThree,5,1);
+                checkBoard.add(checkPointFour,11,7);
+                break;
+            case 3:
+                checkBoard.getChildren().clear();
+
+                checkBoard.add(checkPointOne,9,2);
+                checkBoard.add(checkPointTwo,5,6);
+                checkBoard.add(checkPointThree,6,2);
+                checkBoard.add(checkPointFour,10,8);
+                break;
+            case 4: //like beginning
+                checkBoard.getChildren().clear();
+
+                checkBoard.add(checkPointOne,10,1);
+                checkBoard.add(checkPointTwo,6,7);
+                checkBoard.add(checkPointThree,5,3);
+                checkBoard.add(checkPointFour,9,7);
+                break;
+        }
+    }
+
+
+
     /**
-     *
      * @return imageView of your own robot
      */
     public ImageView checkYourbotImageView(){
@@ -2229,18 +2256,13 @@ public class GameViewModel {
         //checkStart();
         startGameButton.setVisible(true);
         selectStartingPoint.setVisible(false);
-
-
-
-       // moveRobot(); //movement just for testing
-
     }
 
 
 
 
     public void moveRobot() {
-
+        robotBoard.getChildren().clear();
         for (int clientId : Client.getClientReceive().getIdPosition().keySet()) {
             int moveX = Client.getClientReceive().getPositionById(clientId)[0];
             int moveY = Client.getClientReceive().getPositionById(clientId)[1];
@@ -2251,20 +2273,20 @@ public class GameViewModel {
             if(Client.getClientReceive().getIdDirection()!=null &&
                     Client.getClientReceive().getIdDirection().containsKey(clientId)) {
                 rotateRobot(botView,clientId);
-                PauseTransition move1d = new PauseTransition(Duration.seconds(1));
+                PauseTransition move = new PauseTransition(Duration.seconds(1));
                 ImageView finalBotView = botView;
                 robotOgPicture.put(clientId,finalBotView);
-                move1d.setOnFinished(e -> robotBoard.add(finalBotView, moveX, moveY));
-                move1d.play();
+                move.setOnFinished(e -> robotBoard.add(finalBotView, moveX, moveY));
+                move.play();
             }
             //TODO delete startPosition
             else {
                 // remove.setOnFinished(e -> robotBoard.add(emptyView,oldX,oldY));
                 robotBoard.getChildren().remove(botView);
-                PauseTransition move1d = new PauseTransition(Duration.seconds(1));
+                PauseTransition move1 = new PauseTransition(Duration.seconds(1));
                 ImageView finalBotView = botView;
-                move1d.setOnFinished(e -> robotBoard.add(finalBotView, moveX, moveY));
-                move1d.play();
+                move1.setOnFinished(e -> robotBoard.add(finalBotView, moveX, moveY));
+                move1.play();
             }
            // PauseTransition remove2 = new PauseTransition(Duration.seconds(2));
            // remove2.setOnFinished(e -> robotBoard.getChildren().remove(1));
@@ -2301,6 +2323,7 @@ public class GameViewModel {
             }
         }
     }
+
 
     public void setRobotOnBoard(int startingPointNumber){
         int yourId=Client.getClientReceive().getClientID();
@@ -2378,7 +2401,6 @@ public class GameViewModel {
                     robotBoard.add(robotPic,1,8);
                 }
                 break;
-
         }
     }
 
@@ -2470,7 +2492,9 @@ public class GameViewModel {
     }
 
 
-
+    /**
+     * counter helpers
+     */
     int clickCounter = 1;
 
     public void setClickCounter(int count){
@@ -2492,12 +2516,23 @@ public class GameViewModel {
              case 1:
                  setClickCounter(getClickCounter() + 1);
                  Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
+                 phase.setText("ACTIVATION PHASE");
                  register1.setImage(register2.getImage());
                  register2.setImage(register3.getImage());
                  register3.setImage(register4.getImage());
                  register4.setImage(register5.getImage());
                  register5.setImage(null);
                  playCardBtn.setText("play register 2");
+                 //remove remaining cards from hand
+                 hand1Button.setVisible(false);
+                 hand2Button.setVisible(false);
+                 hand3Button.setVisible(false);
+                 hand4Button.setVisible(false);
+                 hand5Button.setVisible(false);
+                 hand6Button.setVisible(false);
+                 hand7Button.setVisible(false);
+                 hand8Button.setVisible(false);
+                 hand9Button.setVisible(false);
                  moveRobotButton.setVisible(true);
                  playCardBtn.setVisible(false);
                  break;
@@ -2541,8 +2576,8 @@ public class GameViewModel {
                  break;
              case 6:
                  //set back counters for next round
+                 phase.setText("PROGRAMMING PHASE");
                  setClickCounter(1);
-                 setTimerCounter(0);
                  setRegisterCount(0);
                  playCardBtn.setVisible(false);
                  printCards();
@@ -2578,10 +2613,10 @@ public class GameViewModel {
     public void rotateRobot(ImageView robotPic,int id) {
             switch (Client.getClientReceive().getIdDirection().get(id)) {
                 case "counterclockwise":
-                    robotPic.setRotate(robotPic.getRotate()-90);
+                    robotPic.setRotate(robotPic.getRotate()+90);
                     break;
                 case "clockwise":
-                    robotPic.setRotate(robotPic.getRotate()+90);
+                    robotPic.setRotate(robotPic.getRotate()-90);
                     break;
                 case "turn 180":
                     robotPic.setRotate(robotPic.getRotate()+180);
@@ -2599,6 +2634,7 @@ public class GameViewModel {
     public void timer30Sec() {
         if (Client.getClientReceive().isTimerStarted()) {
             timerText.setVisible(true);
+            Client.getClientReceive().setTimer(false);
             Text.setText("Players have 30 seconds left to finish their register.");
             timer.setText("30");
 
@@ -2742,11 +2778,92 @@ public class GameViewModel {
         }
     }
 
+
+
+    public void shootRobotLaser(){
+
+        URL robotLaser = getClass().getResource("/robotLaser.png");
+        Image imageRobotLaser = new Image(robotLaser.toString());
+
+        ImageView laserView0 = new ImageView(imageRobotLaser);
+        ImageView laserView1 = new ImageView(imageRobotLaser);
+        ImageView laserView2 = new ImageView(imageRobotLaser);
+        ImageView laserView3 = new ImageView(imageRobotLaser);
+        ImageView laserView4 = new ImageView(imageRobotLaser);
+        ImageView laserView5 = new ImageView(imageRobotLaser);
+        ImageView laserView6 = new ImageView(imageRobotLaser);
+        ImageView laserView7 = new ImageView(imageRobotLaser);
+        ImageView laserView8 = new ImageView(imageRobotLaser);
+        ImageView laserView9 = new ImageView(imageRobotLaser);
+        ImageView laserView10 = new ImageView(imageRobotLaser);
+        ImageView laserView11 = new ImageView(imageRobotLaser);
+        ImageView laserView12 = new ImageView(imageRobotLaser);
+
+
+
+        URL robotLaserVertical = getClass().getResource("/robotLaserVertical.png");
+        Image imageRobotLaserVertical = new Image(robotLaserVertical.toString());
+
+        ImageView imageRobotLaserVertical0 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical1 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical2 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical3 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical4 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical5 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical6 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical7 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical8 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical9 = new ImageView(imageRobotLaser);
+
+
+
+        startBoard.add(laserView1, 1, 1);
+        startBoard.add(laserView2, 2, 1);
+        startBoard.add(laserView3, 3, 1);
+        startBoard.add(laserView4, 4, 1);
+
+    }
+
+    int checkpointMoveCounter = 1;
+
+    public void setcheckpointMoveCounter(int count){
+        this.checkpointMoveCounter = count;
+    }
+
+    public int getcheckpointMoveCounter(){
+        return checkpointMoveCounter;
+    }
+
+
+    /**
+     * robots of all players will move and the checkpoints of Twister as well
+     */
     public void moveRobotButtonAction(ActionEvent actionEvent) {
+        String selectedMap = Client.getClientReceive().getBoard();
+        if(selectedMap.equals("Twister")){
+            switch (checkpointMoveCounter) {
+                case 1:
+                    setcheckpointMoveCounter(2);
+                    moveCheckpointTwister(1);
+                    break;
+                case 2:
+                    setcheckpointMoveCounter(3);
+                    moveCheckpointTwister(2);
+                    break;
+                case 3:
+                    setcheckpointMoveCounter(4);
+                    moveCheckpointTwister(3);
+                    break;
+                case 4:
+                    setcheckpointMoveCounter(1);
+                    moveCheckpointTwister(4);
+                    break;
+            }
+        } else {
+        }
         moveRobotButton.setVisible(false);
         playCardBtn.setVisible(true);
         moveRobot();
-
     }
 }
 
