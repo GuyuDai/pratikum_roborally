@@ -322,7 +322,7 @@ public class ClientReceive extends Thread{
                 chatMsg=receivedChatBody.getMessage();
                 fromId=receivedChatBody.getFrom();
                 isPrivate=receivedChatBody.isPrivate();
-                receiveChat(chatMsg);  //reminder: there cause a "Toolkit not initialized" error
+                receiveChat(chatMsg);
                 break;
 
             case MessageType.selectMap:
