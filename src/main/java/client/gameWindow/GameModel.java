@@ -45,12 +45,8 @@ public class GameModel {
     public StringProperty getTextFieldContent(){
         return textFieldContent; }
 
-    public void addNewListItem(String listItem) {
+    public void addNewListItem(String listItem) { //TODO here
         listContent.add(listItem);
+        listContent.get(1);
     }
-
-    /*
-   private ObservableList<Image> handObservableList;
-     */
-
 }
