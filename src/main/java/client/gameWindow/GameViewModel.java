@@ -2008,10 +2008,10 @@ public class GameViewModel {
                         }
 
                         if(board.getName().equals("Twister")){
-                            gameboard.add(checkPointFour,9,7);
-                            gameboard.add(checkPointOne,10,1);//
-                            gameboard.add(checkPointThree,5,3);//
-                            gameboard.add(checkPointTwo,6,7);
+                            checkBoard.add(checkPointFour,9,7);
+                            checkBoard.add(checkPointOne,10,1);//
+                            checkBoard.add(checkPointThree,5,3);//
+                            checkBoard.add(checkPointTwo,6,7);
                         }
                     }
 
@@ -2854,8 +2854,6 @@ public class GameViewModel {
 
 
 
-
-
         startBoard.add(laserView1, 1, 1);
         startBoard.add(laserView2, 2, 1);
         startBoard.add(laserView3, 3, 1);
@@ -2874,8 +2872,9 @@ public class GameViewModel {
     }
 
 
-
-
+    /**
+     * robots of all players will move and the checkpoints of Twister as well
+     */
     public void moveRobotButtonAction(ActionEvent actionEvent) {
         String selectedMap = Client.getClientReceive().getBoard();
         if(selectedMap.equals("Twister")){
@@ -2902,11 +2901,6 @@ public class GameViewModel {
         moveRobotButton.setVisible(false);
         playCardBtn.setVisible(true);
         moveRobot();
-
-
-        //shootRobotLaser();
-        //ToDo robot laser
-
     }
 }
 
