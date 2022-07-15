@@ -170,7 +170,7 @@ public class AIReceive extends ClientReceive {
         //Wenn die gewünschte Position valide ist, werden alle Spieler darüber benachrichtigt.
         removeStartPointsInHashSet(takenX, takenY);
         //sendMessage(new SetStartingPoint(8,1).toString());
-        logger.info(ANSI_GREEN + "already send msg");
+        logger.info(ANSI_GREEN + "already send msg");//test
         break;
 
       case MessageType.timerStarted:

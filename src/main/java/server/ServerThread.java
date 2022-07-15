@@ -338,6 +338,7 @@ public class ServerThread implements Runnable {
                         sendMessage(new SelectMap(MAPS).toString());
                     }
                 }
+                //System.out.println("connectedClients:" + connectedClients.size());//test
                 if (allPlayerReady() && connectedClients.size()>=2 && board != null){
                     startGame(this.board);
                 }
@@ -367,6 +368,9 @@ public class ServerThread implements Runnable {
                         board = new Twister();
                         sendToAll(new MapSelected("Twister").toString());
                         break;
+                }
+                for(ServerThread serverThread : connectedClients){
+                    serverThread.setBoard(this.board);
                 }
                 if (allPlayerReady() && connectedClients.size() >= 2 && board != null){
                     startGame(this.board);
@@ -399,7 +403,7 @@ public class ServerThread implements Runnable {
                 int x = setStartingPointBody.getX();
                 int y = setStartingPointBody.getY();
                 Position tempPosition = new Position(x,y,board);
-                logger.info(ANSI_GREEN + "enter here");
+                logger.info(ANSI_GREEN + "enter here");//test
                 //System.out.println(tempPosition.getX());  //test
                 /*boolean flagInSetStartingPoint = true;
                 for(ServerThread serverThread : connectedClients){
@@ -477,7 +481,9 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.selectionFinished:
-                  sendToAll(new TimerStarted().toString());
+                sendToAll(message.toString());
+                sendToAll(new TimerStarted().toString());
+                break;
 
             case MessageType.selectedDamage:
                 SelectedDamageBody selectedDamageBody = new Gson().fromJson(body,SelectedDamageBody.class);
@@ -508,6 +514,7 @@ public class ServerThread implements Runnable {
                         this.player.getOwnRobot().setRebootDirection(Direction.LEFT);
                         break;
                 }
+                break;
         }
     }
 

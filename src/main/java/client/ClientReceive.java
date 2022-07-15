@@ -305,9 +305,9 @@ public class ClientReceive extends Thread{
                 break;
 
             case MessageType.playerStatus:
-                PlayerStatus.PlayerStatusBody playerStatusBody=new Gson().fromJson(body, PlayerStatus.PlayerStatusBody.class);
-                isReady=playerStatusBody.isReady();
-                playerId=playerStatusBody.getClientID();
+                PlayerStatus.PlayerStatusBody playerStatusBody = new Gson().fromJson(body, PlayerStatus.PlayerStatusBody.class);
+                isReady = playerStatusBody.isReady();
+                playerId = playerStatusBody.getClientID();
                 readyList.add(isReady);
                 IdReady.put(playerId,isReady);
                 break;
