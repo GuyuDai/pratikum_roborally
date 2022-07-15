@@ -24,8 +24,6 @@ public class ClientReceive extends Thread{
 
     protected int clientID;
     protected Socket socket;
-
-    protected GameViewModel model;
     protected BufferedReader readInput;
     protected BufferedWriter writeOutput;
     protected static final String PROTOCOL = "Version 2.0";
@@ -35,9 +33,6 @@ public class ClientReceive extends Thread{
     protected int figure;
     protected String chatMsg;
     protected int checkPointNumber;
-
-
-
     protected int checkPointXPosition;
     protected int checkPointYPosition;
     protected int energyStorage;

@@ -90,7 +90,7 @@ public class Controller {
       return false;
     }
 
-    if (nextBoardElem1 instanceof AirWall || nextBoardElem1 instanceof Antenna) {
+    if (nextBoardElem1.getName().equals("AirWall") || nextBoardElem1.getName().equals("Antenna")) {
       return false;
     }//we put all AirWall and Antenna in [x][y][0]
 
@@ -147,10 +147,10 @@ public class Controller {
     Position currentPosition = robot.getCurrentPosition();
     BoardElem currentBoardElem1=currentPosition.getTile();
     BoardElem currentBoardElem2 = currentPosition.getSecondTile();
-    if(currentBoardElem1 instanceof Laser ){
+    if(currentBoardElem1.getName().equals("Laser")){
       currentBoardElem1.action();
     }
-    if(currentBoardElem2 instanceof Laser){
+    if(currentBoardElem2.getName().equals("Laser")){
       currentBoardElem2.action();
     }
 
@@ -165,8 +165,8 @@ public class Controller {
       int robotY=robot.getCurrentPosition().getY();
       if(robotX==X && robotY<Y && laserDirection.equals(Direction.LEFT)){
         for(int i=robotY;i<Y;i++){
-          if(!(currentGame.getGameBoard().getBoardElem(X,i,0) instanceof Antenna
-                  || currentGame.getGameBoard().getBoardElem(X,i,1) instanceof Wall)
+          if(!(currentGame.getGameBoard().getBoardElem(X,i,0).getName().equals("Antenna")
+                  || currentGame.getGameBoard().getBoardElem(X,i,1).getName().equals("Wall"))
                   || robotOnPositionCheck(new Position(X,i, currentGame.getGameBoard()))) {
             robot.getOwner().drawDamage("Spam",1);
             currentGame.sendMessageToClient(new Animation("RobotLaser"),currentGame.getServerThreadById(robot.owner.clientID));
@@ -175,8 +175,8 @@ public class Controller {
       }
       if(robotX==X && robotY>Y && laserDirection.equals(Direction.RIGHT)){
         for(int i=Y;i<robotY;i++){
-          if(!(currentGame.getGameBoard().getBoardElem(X,i,0) instanceof Antenna
-                  || currentGame.getGameBoard().getBoardElem(X,i,1) instanceof Wall
+          if(!(currentGame.getGameBoard().getBoardElem(X,i,0).getName().equals("Antenna")
+                  || currentGame.getGameBoard().getBoardElem(X,i,1).getName().equals("Wall")
                   || robotOnPositionCheck(new Position(X,i, currentGame.getGameBoard())))) {
             robot.getOwner().drawDamage("Spam",1);
             currentGame.sendMessageToClient(new Animation("RobotLaser"),currentGame.getServerThreadById(robot.owner.clientID));
@@ -185,8 +185,8 @@ public class Controller {
       }
       if(robotY==Y && robotX<X && laserDirection.equals(Direction.UP)){
         for(int i=robotX;i<X;i++){
-          if(!(currentGame.getGameBoard().getBoardElem(i,Y,0) instanceof Antenna
-                  || currentGame.getGameBoard().getBoardElem(i,Y,1) instanceof Wall
+          if(!(currentGame.getGameBoard().getBoardElem(i,Y,0).getName().equals("Antenna")
+                  || currentGame.getGameBoard().getBoardElem(i,Y,1).getName().equals("Wall")
                   || robotOnPositionCheck(new Position(i,Y, currentGame.getGameBoard())))) {
             robot.getOwner().drawDamage("Spam",1);
             currentGame.sendMessageToClient(new Animation("RobotLaser"),currentGame.getServerThreadById(robot.owner.clientID));
@@ -195,8 +195,8 @@ public class Controller {
       }
       if(robotY==Y && robotX>X && laserDirection.equals(Direction.DOWN)){
         for(int i=X;i<robotX;i++){
-          if(!(currentGame.getGameBoard().getBoardElem(i,Y,0) instanceof Antenna
-                  || currentGame.getGameBoard().getBoardElem(i,Y,1) instanceof Wall
+          if(!(currentGame.getGameBoard().getBoardElem(i,Y,0).getName().equals("Antenna")
+                  || currentGame.getGameBoard().getBoardElem(i,Y,1).getName().equals("Wall")
                   ||robotOnPositionCheck(new Position(i,Y, currentGame.getGameBoard())))){
             robot.getOwner().drawDamage("Spam",1);
             currentGame.sendMessageToClient(new Animation("RobotLaser"),currentGame.getServerThreadById(robot.owner.clientID));
@@ -235,7 +235,7 @@ public class Controller {
    * @return true if the desired position is empty and no robot here
    */
   public Boolean robotStartingPositionCheck(Position desiredPosition){
-    if(desiredPosition.getTile() instanceof Empty && desiredPosition.getOccupiedRobot() == null){
+    if(desiredPosition.getTile().getName().equals("Empty") && desiredPosition.getOccupiedRobot() == null){
       return true;
     }
     return false;
