@@ -113,7 +113,7 @@ public class LobbyViewModel {
     @FXML
     public void sendButtonAction(ActionEvent actionEvent) throws IOException {
         String message = model.getTextFieldContent().get();
-
+        System.out.println(message); //test
         checkInput(message);
 
         model.getTextFieldContent().set("");
