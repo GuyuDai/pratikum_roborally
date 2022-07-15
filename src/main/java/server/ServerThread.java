@@ -42,8 +42,9 @@ public class ServerThread implements Runnable {
 
     private static final Logger logger = Logger.getLogger(ServerThread.class.getName());
     public static final String ANSI_GREEN = "\u001B[32m";
-
-    private static final String PROTOCOL = "Version 1.0";
+    private static final String PROTOCOL = "Version 2.0";
+    private static final String[] MAPS = new String[]
+        {"DizzyHighway","ExtraCrispy","DeathTrap","LostBearings"};
     private Socket clientSocket;
     private BufferedReader readInput;
     private  BufferedWriter writeOutput;
@@ -334,8 +335,7 @@ public class ServerThread implements Runnable {
                 sendToAll(new PlayerStatus(clientID,true).toString());
                 if(firstPlayerReady() != null){
                     if (firstPlayerReady().equals(player)) {
-                        sendMessage(new SelectMap(
-                            new String[]{"DizzyHighway","ExtraCrispy","DeathTrap","LostBearings"}).toString());
+                        sendMessage(new SelectMap(MAPS).toString());
                     }
                 }
                 if (allPlayerReady() && connectedClients.size()>=2 && board != null){

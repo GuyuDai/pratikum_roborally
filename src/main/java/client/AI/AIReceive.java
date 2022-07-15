@@ -228,7 +228,9 @@ public class AIReceive extends ClientReceive {
       case MessageType.reboot:
         Reboot.RebootBody rebootBody = new Gson().fromJson(body, Reboot.RebootBody.class);
         rebootClientId = rebootBody.getClientID();
-        aiReboot();
+        if(rebootClientId == clientID){
+          aiReboot();
+        }
         break;
 
       case MessageType.currentPlayer:
@@ -375,7 +377,7 @@ public class AIReceive extends ClientReceive {
   }
 
   private void aiReboot(){
-    // TODO: 2022/7/9 after finish reboot
+    //do nothing
   }
 
   private void aiTrigger(String serverMsg){

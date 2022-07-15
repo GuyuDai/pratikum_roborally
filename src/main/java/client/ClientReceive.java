@@ -26,15 +26,13 @@ public class ClientReceive extends Thread{
     protected Socket socket;
     protected BufferedReader readInput;
     protected BufferedWriter writeOutput;
-    protected static final String PROTOCOL = "Version 1.0";
+    protected static final String PROTOCOL = "Version 2.0";
     protected static final String GROUP = "Origionelle Oktopusse";
     protected int playerId;
     protected String playerName;
     protected int figure;
     protected String chatMsg;
-
     protected int checkPointNumber;
-
     protected int energyStorage;
     protected int fromId;
     protected int register;
@@ -42,7 +40,7 @@ public class ClientReceive extends Thread{
     protected boolean isPrivate;
     protected boolean isReady;
     protected boolean isFilled;
-    protected boolean timerStarted=false;
+    protected boolean timerStarted = false;
     protected String cardPlayed;
     protected Map<Integer,String> IdCardPlayed = new HashMap<>();
     protected Map<Integer,Boolean> IdReady = new HashMap<>();
@@ -407,11 +405,11 @@ public class ClientReceive extends Thread{
             case MessageType.checkpointReached:
                 //Saves the number of Checkpoints reached
                 CheckPointReached.CheckPointReachedBody checkPointReachedBody = new Gson().fromJson(body, CheckPointReached.CheckPointReachedBody.class);
-                int clientIDCheckReached= checkPointReachedBody.getClientID();
-                int numberOfCheckpointsReached= checkPointReachedBody.getNumber();
+                int clientIDCheckReached = checkPointReachedBody.getClientID();
+                int numberOfCheckpointsReached = checkPointReachedBody.getNumber();
                 //Sets the number of checkpoints reached
-                if(clientIDCheckReached==clientID){
-                    checkPointNumber=numberOfCheckpointsReached;
+                if(clientIDCheckReached == clientID){
+                    checkPointNumber = numberOfCheckpointsReached;
                 }
                 break;
         }

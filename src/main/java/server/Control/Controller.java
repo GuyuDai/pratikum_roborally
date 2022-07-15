@@ -271,13 +271,17 @@ public class Controller {
       BoardElem elem1 = player.getOwnRobot().getCurrentPosition().getTile();
       BoardElem elem2 = player.getOwnRobot().getCurrentPosition().getSecondTile();
       if(elem1.getName().equals("CheckPoint")){
-        flag = true;
+        int checkPointNum1 = elem1.getCount();
+        player.getCheckPoints().remove((Integer) checkPointNum1);
         currentGame.sendMessageToAll(new CheckPointReached(player.clientID, elem1.count));
-        currentGame.sendMessageToAll(new GameFinished(player.clientID));
       }
       if(elem2.getName().equals("CheckPoint")){
-        flag = true;
+        int checkPointNum2 = elem2.getCount();
+        player.getCheckPoints().remove((Integer) checkPointNum2);
         currentGame.sendMessageToAll(new CheckPointReached(player.clientID, elem2.count));
+      }
+      if(player.getCheckPoints().size() == 0){
+        flag = true;
         currentGame.sendMessageToAll(new GameFinished(player.clientID));
       }
     }

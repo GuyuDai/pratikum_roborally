@@ -19,8 +19,9 @@ public class Player implements PlayerAction{
   public Robot ownRobot;
   private CopyOnWriteArrayList<Card> hands = new CopyOnWriteArrayList<>();
   private CopyOnWriteArrayList<Card> register = new CopyOnWriteArrayList<>();
-  public int priority = 1;
+  private int priority = 1;
   public int energyCubes;
+  private CopyOnWriteArrayList<Integer> checkPoints = new CopyOnWriteArrayList<Integer>();
   private boolean isAI = false;
   private boolean isReady = false;
   private static final String[] AINameArray = new String[] {"AIBob","AIAlice","AIJay","AIMax","AICarl","AITom"};
@@ -40,45 +41,41 @@ public class Player implements PlayerAction{
   public Robot getOwnRobot() {
     return ownRobot;
   }
-
   public String getName() {
     return name;
   }
-
   public void setName(String name) {
     this.name = name;
   }
-
   public int getClientId(){
     return clientID;
   }
-
   public boolean getReady() {
     return isReady;
   }
-
   public void setReady(boolean ready) {
     isReady = ready;
   }
-
   public RR getCurrentGame() {
     return currentGame;
   }
-
   public void setCurrentGame(RR currentGame) {
     this.currentGame = currentGame;
   }
-
   public CopyOnWriteArrayList<Card> getHands() {
     return hands;
   }
-
   public int getEnergyCubes(){
     return energyCubes;
   }
-
   public void setEnergyCubes(int energyCubes) {
     this.energyCubes = energyCubes;
+  }
+  public CopyOnWriteArrayList<Integer> getCheckPoints() {
+    return checkPoints;
+  }
+  public void setCheckPoints(CopyOnWriteArrayList<Integer> checkPoints) {
+    this.checkPoints = checkPoints;
   }
 
   public void setOwnRobot(int robotNumber) {
