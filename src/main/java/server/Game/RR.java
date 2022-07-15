@@ -3,6 +3,7 @@ package server.Game;
 import protocol.*;
 import protocol.ProtocolFormat.*;
 import server.BoardElement.*;
+import server.BoardElement.CheckPoint;
 import server.BoardTypes.*;
 import server.CardTypes.*;
 import server.Control.Timer;
@@ -31,6 +32,7 @@ public class RR extends Thread implements GameLogic {
   private int finishedPlayers = 0;  //this attribution is used to check whether all player have down a certain behavior
   protected CopyOnWriteArrayList<Integer> checkPoints = new CopyOnWriteArrayList<Integer>();
   private CopyOnWriteArrayList<String> activeCards = new CopyOnWriteArrayList<String>();
+  private int checkPointMovementCount = 0;
 
 
 
@@ -209,7 +211,7 @@ public class RR extends Thread implements GameLogic {
         DoActivationPhase();
       }
       if (currentState == GameState.GameEnding) {
-        DoGameEnding();
+        doGameEnding();
       }
     }
   }
@@ -428,6 +430,7 @@ public class RR extends Thread implements GameLogic {
         setPlayerInCurrentTurn(player);
         sendMessageToAll(new CurrentPlayer(playerInCurrentTurn.clientID));
         playerInCurrentTurn.getRegister().get(i).action();
+        checkPointMove();  //before interact with tiles
         interactWithTile();
         controller.robotLaserController(playerInCurrentTurn.getOwnRobot());
         PlayerInListPosition++;
@@ -452,8 +455,110 @@ public class RR extends Thread implements GameLogic {
     nextGameState();
   }
 
-  public void DoGameEnding () {
+  public void doGameEnding() {
 
+  }
+
+  private void checkPointMove(){
+    if(gameBoard.getName().equals("Twister")){
+      int tempID;
+      checkPointMovementCount++;
+      switch (checkPointMovementCount){
+        case 0:
+          tempID = gameBoard.getBoardElem(2,6,1).getCount();
+          gameBoard.getMap()[2][6][1] = new Empty(this);
+          gameBoard.getMap()[3][5][1] = new CheckPoint(this,tempID);
+          sendMessageToAll(new CheckPointMoved(tempID,3,5));
+
+          tempID = gameBoard.getBoardElem(2,9,1).getCount();
+          gameBoard.getMap()[2][9][1] = new Empty(this);
+          gameBoard.getMap()[1][10][1] = new CheckPoint(this,tempID);
+          sendMessageToAll(new CheckPointMoved(tempID,1,10));
+
+          tempID = gameBoard.getBoardElem(6,5,1).getCount();
+          gameBoard.getMap()[6][5][1] = new Empty(this);
+          gameBoard.getMap()[7][6][1] = new CheckPoint(this,tempID);
+          sendMessageToAll(new CheckPointMoved(tempID,7,6));
+
+          tempID = gameBoard.getBoardElem(8,10,1).getCount();
+          gameBoard.getMap()[8][10][1] = new Empty(this);
+          gameBoard.getMap()[7][9][1] = new CheckPoint(this,tempID);
+          sendMessageToAll(new CheckPointMoved(tempID,7,9));
+          break;
+
+        case 1:
+          tempID = gameBoard.getBoardElem(3,5,1).getCount();
+          gameBoard.getMap()[3][5][1] = new Empty(this);
+          gameBoard.getMap()[2][4][1] = new CheckPoint(this,tempID);
+          sendMessageToAll(new CheckPointMoved(tempID,2,4));
+
+          tempID = gameBoard.getBoardElem(1,10,1).getCount();
+          gameBoard.getMap()[1][10][1] = new Empty(this);
+          gameBoard.getMap()[2][11][1] = new CheckPoint(this,tempID);
+          sendMessageToAll(new CheckPointMoved(tempID,2,11));
+
+          tempID = gameBoard.getBoardElem(7,6,1).getCount();
+          gameBoard.getMap()[7][6][1] = new Empty(this);
+          gameBoard.getMap()[8][5][1] = new CheckPoint(this,tempID);
+          sendMessageToAll(new CheckPointMoved(tempID,8,5));
+
+          tempID = gameBoard.getBoardElem(7,9,1).getCount();
+          gameBoard.getMap()[7][9][1] = new Empty(this);
+          gameBoard.getMap()[6][10][1] = new CheckPoint(this,tempID);
+          sendMessageToAll(new CheckPointMoved(tempID,6,10));
+
+          break;
+
+        case 2:
+          tempID = gameBoard.getBoardElem(2,4,1).getCount();
+          gameBoard.getMap()[2][4][1] = new Empty(this);
+          gameBoard.getMap()[1][5][1] = new CheckPoint(this,tempID);
+          sendMessageToAll(new CheckPointMoved(tempID,1,5));
+
+          tempID = gameBoard.getBoardElem(2,11,1).getCount();
+          gameBoard.getMap()[2][11][1] = new Empty(this);
+          gameBoard.getMap()[3][10][1] = new CheckPoint(this,tempID);
+          sendMessageToAll(new CheckPointMoved(tempID,3,10));
+
+          tempID = gameBoard.getBoardElem(8,5,1).getCount();
+          gameBoard.getMap()[8][5][1] = new Empty(this);
+          gameBoard.getMap()[7][4][1] = new CheckPoint(this,tempID);
+          sendMessageToAll(new CheckPointMoved(tempID,7,4));
+
+          tempID = gameBoard.getBoardElem(6,10,1).getCount();
+          gameBoard.getMap()[6][10][1] = new Empty(this);
+          gameBoard.getMap()[7][11][1] = new CheckPoint(this,tempID);
+          sendMessageToAll(new CheckPointMoved(tempID,7,11));
+
+          break;
+
+        case 3:
+          tempID = gameBoard.getBoardElem(1,5,1).getCount();
+          gameBoard.getMap()[1][5][1] = new Empty(this);
+          gameBoard.getMap()[2][6][1] = new CheckPoint(this,tempID);
+          sendMessageToAll(new CheckPointMoved(tempID,2,6));
+
+          tempID = gameBoard.getBoardElem(3,10,1).getCount();
+          gameBoard.getMap()[3][10][1] = new Empty(this);
+          gameBoard.getMap()[2][9][1] = new CheckPoint(this,tempID);
+          sendMessageToAll(new CheckPointMoved(tempID,2,9));
+
+          tempID = gameBoard.getBoardElem(7,4,1).getCount();
+          gameBoard.getMap()[7][4][1] = new Empty(this);
+          gameBoard.getMap()[6][5][1] = new CheckPoint(this,tempID);
+          sendMessageToAll(new CheckPointMoved(tempID,6,5));
+
+          tempID = gameBoard.getBoardElem(7,11,1).getCount();
+          gameBoard.getMap()[7][11][1] = new Empty(this);
+          gameBoard.getMap()[8][10][1] = new CheckPoint(this,tempID);
+          sendMessageToAll(new CheckPointMoved(tempID,8,10));
+          break;
+      }
+      //reset the counter
+      if(checkPointMovementCount >= 3){
+        checkPointMovementCount = 0;
+      }
+    }
   }
 
   public void sendMessageToClient(Message msg, ServerThread client) {
