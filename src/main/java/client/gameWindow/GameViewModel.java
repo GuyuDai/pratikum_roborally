@@ -567,6 +567,10 @@ public class GameViewModel {
 
 
 
+
+
+
+
     /**
      * print 9 random cards from a deck of 20
      */
@@ -649,7 +653,6 @@ public class GameViewModel {
                     hand9.setImage(cardImage);
                     break;
             }
-
         }
     }
 
@@ -894,6 +897,7 @@ public class GameViewModel {
                 textAppear2.play();
                 break;
         }
+        ;
     }
 
     @FXML
@@ -1004,16 +1008,19 @@ public class GameViewModel {
                 register2.setImage(hand8.getImage());
                 hand8Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[7],1,ID).toString());
+
                 break;
             case 3:
                 register3.setImage(hand8.getImage());
                 hand8Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[7],2,ID).toString());
+
                 break;
             case 4:
                 register4.setImage(hand8.getImage());
                 hand8Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[7],3,ID).toString());
+
                 break;
             case 5:
                 register5.setImage(hand8.getImage());
@@ -2222,75 +2229,46 @@ public class GameViewModel {
         //checkStart();
         startGameButton.setVisible(true);
         selectStartingPoint.setVisible(false);
+
+
+
+       // moveRobot(); //movement just for testing
+
     }
 
 
 
 
     public void moveRobot() {
+
         for (int clientId : Client.getClientReceive().getIdPosition().keySet()) {
             int moveX = Client.getClientReceive().getPositionById(clientId)[0];
             int moveY = Client.getClientReceive().getPositionById(clientId)[1];
             int robotNumber=Client.getClientReceive().getRobotById(clientId);
-            // int oldX=robotOldPosition.get(robotNumber)[0];
-            // int oldY=robotOldPosition.get(robotNumber)[1];
+           // int oldX=robotOldPosition.get(robotNumber)[0];
+           // int oldY=robotOldPosition.get(robotNumber)[1];
             ImageView botView=robotOgPicture.get(robotNumber);
-
-            URL empty = getClass().getResource("/Empty.png");
-            Image imageEmpty = new Image(empty.toString());
-
-            ImageView emptyView=new ImageView(imageEmpty);
-            emptyView.setFitHeight(43);
-            emptyView.setFitWidth(43);
-
-            //robotBoard.getChildren().remove(emptyView, 1, 1);
-
-
-            //robotBoard.add(emptyView, 1, 1);
-
-
-
+            if(Client.getClientReceive().getIdDirection()!=null &&
+                    Client.getClientReceive().getIdDirection().containsKey(clientId)) {
+                rotateRobot(botView,clientId);
+                PauseTransition move1d = new PauseTransition(Duration.seconds(1));
+                ImageView finalBotView = botView;
+                robotOgPicture.put(clientId,finalBotView);
+                move1d.setOnFinished(e -> robotBoard.add(finalBotView, moveX, moveY));
+                move1d.play();
+            }
             //TODO delete startPosition
-            // remove.setOnFinished(e -> robotBoard.add(emptyView,oldX,oldY));
-            robotBoard.getChildren().remove(botView);
-
-            checkYourbotImageView().setRotate(90);
-
-
-            if(register1.getImage().equals(imageMove1)) {
+            else {
+                // remove.setOnFinished(e -> robotBoard.add(emptyView,oldX,oldY));
+                robotBoard.getChildren().remove(botView);
                 PauseTransition move1d = new PauseTransition(Duration.seconds(1));
-                move1d.setOnFinished(e -> robotBoard.add(botView, moveX + 1, moveY));
+                ImageView finalBotView = botView;
+                move1d.setOnFinished(e -> robotBoard.add(finalBotView, moveX, moveY));
                 move1d.play();
-                System.out.println("move 1");
             }
-            if(register1.getImage().equals(imageMove2)){
-                PauseTransition move1sd = new PauseTransition(Duration.seconds(1));
-                move1sd.setOnFinished(e -> robotBoard.add(botView, moveX + 2, moveY));
-                move1sd.play();
-                System.out.println("move 2");
-            }
-            if(register1.getImage().equals(imageMove3)){
-                PauseTransition move1d = new PauseTransition(Duration.seconds(1));
-                move1d.setOnFinished(e -> robotBoard.add(botView, moveX + 3, moveY));
-                move1d.play();
-                System.out.println("move 3");
-            }
-            if(register1.getImage().equals(imageBTurnLeft)){
-                botView.setRotate(270);
-                PauseTransition move1d = new PauseTransition(Duration.seconds(1));
-                move1d.setOnFinished(e -> robotBoard.add(botView, moveX, moveY));
-                move1d.play();
-                System.out.println("rotate left");
-            }
-            else{
-                System.out.println("no movement yet");
-            }
-
-
-
-            // PauseTransition remove2 = new PauseTransition(Duration.seconds(2));
-            // remove2.setOnFinished(e -> robotBoard.getChildren().remove(1));
-            //  remove2.play();
+           // PauseTransition remove2 = new PauseTransition(Duration.seconds(2));
+           // remove2.setOnFinished(e -> robotBoard.getChildren().remove(1));
+          //  remove2.play();
         }
     }
 
@@ -2323,7 +2301,6 @@ public class GameViewModel {
             }
         }
     }
-
 
     public void setRobotOnBoard(int startingPointNumber){
         int yourId=Client.getClientReceive().getClientID();
@@ -2492,6 +2469,8 @@ public class GameViewModel {
     public void playDamageCards(ActionEvent actionEvent) {
     }
 
+
+
     int clickCounter = 1;
 
     public void setClickCounter(int count){
@@ -2507,64 +2486,54 @@ public class GameViewModel {
      */
     public void playCardBtnAction(ActionEvent actionEvent) {
          playCardBtn.setText("play register 1");
-         Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
          logger.info("Send out message: ");
 
          switch(getClickCounter()){
              case 1:
                  setClickCounter(getClickCounter() + 1);
+                 Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
                  register1.setImage(register2.getImage());
                  register2.setImage(register3.getImage());
                  register3.setImage(register4.getImage());
                  register4.setImage(register5.getImage());
                  register5.setImage(null);
                  playCardBtn.setText("play register 2");
-                 moveRobot();
-                 //remove remaining cards from hand
-                 hand1Button.setVisible(false);
-                 hand2Button.setVisible(false);
-                 hand3Button.setVisible(false);
-                 hand4Button.setVisible(false);
-                 hand5Button.setVisible(false);
-                 hand6Button.setVisible(false);
-                 hand7Button.setVisible(false);
-                 hand8Button.setVisible(false);
-                 hand9Button.setVisible(false);
                  moveRobotButton.setVisible(true);
                  playCardBtn.setVisible(false);
                  break;
              case 2:
                  setClickCounter(getClickCounter() + 1);
+                 Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
                  register1.setImage(register2.getImage());
                  register2.setImage(register3.getImage());
                  register3.setImage(register4.getImage());
                  register4.setImage(null);
                  playCardBtn.setText("play register 3");
-                 moveRobot();
                  moveRobotButton.setVisible(true);
                  playCardBtn.setVisible(false);
                  break;
              case 3:
                  setClickCounter(getClickCounter() + 1);
+                 Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
                  register1.setImage(register2.getImage());
                  register2.setImage(register3.getImage());
                  register3.setImage(null);
                  playCardBtn.setText("play register 4");
-                 moveRobot();
                  moveRobotButton.setVisible(true);
                  playCardBtn.setVisible(false);
                  break;
              case 4:
                  setClickCounter(getClickCounter() + 1);
+                 Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
                  register1.setImage(register2.getImage());
                  register2.setImage(null);
                  playCardBtn.setText("play register 5");
-                 moveRobot();
                  moveRobotButton.setVisible(true);
                  playCardBtn.setVisible(false);
                  break;
              case 5:
                  setClickCounter(getClickCounter() + 1);
+                 Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
                  register1.setImage(null);
                  playCardBtn.setText("next round!");
                  moveRobotButton.setVisible(true);
@@ -2606,6 +2575,22 @@ public class GameViewModel {
         }
     }
 
+    public void rotateRobot(ImageView robotPic,int id) {
+            switch (Client.getClientReceive().getIdDirection().get(id)) {
+                case "counterclockwise":
+                    robotPic.setRotate(robotPic.getRotate()-90);
+                    break;
+                case "clockwise":
+                    robotPic.setRotate(robotPic.getRotate()+90);
+                    break;
+                case "turn 180":
+                    robotPic.setRotate(robotPic.getRotate()+180);
+                    break;
+                default:
+                    break;
+            }
+        Client.getClientReceive().setIdDirection(new HashMap<>());
+    }
 
 
     /**
@@ -2760,6 +2745,8 @@ public class GameViewModel {
     public void moveRobotButtonAction(ActionEvent actionEvent) {
         moveRobotButton.setVisible(false);
         playCardBtn.setVisible(true);
+        moveRobot();
+
     }
 }
 
