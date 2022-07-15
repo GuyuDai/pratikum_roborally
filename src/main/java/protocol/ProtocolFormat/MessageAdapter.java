@@ -12,8 +12,10 @@ public class MessageAdapter implements JsonDeserializer<Message>{
         try {
             return context.deserialize(jsonObject, Class.forName(type));
         } catch (ClassNotFoundException e) {
-            throw new JsonParseException("Element type '" + type + "' not found: ", e);
+            System.out.println("Element type '" + type + "' not found ");
+            e.printStackTrace();
         }
+        return null;
     }
 
 }
