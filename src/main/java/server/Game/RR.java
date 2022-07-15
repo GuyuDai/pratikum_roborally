@@ -27,10 +27,10 @@ public class RR extends Thread implements GameLogic {
   protected Position positionAntenna;
   protected int PlayerInListPosition = 0;
   protected int activePhase;  //0 => Aufbauphase, 1 => Upgradephase, 2 => Programmierphase, 3 => Aktivierungsphase
-
   protected int currentRound;
   private int finishedPlayers = 0;  //this attribution is used to check whether all player have down a certain behavior
-  private CopyOnWriteArrayList<String> activeCards = new CopyOnWriteArrayList<String>();  //reminder: have bug
+  protected CopyOnWriteArrayList<Integer> checkPoints = new CopyOnWriteArrayList<Integer>();
+  private CopyOnWriteArrayList<String> activeCards = new CopyOnWriteArrayList<String>();
 
 
 
@@ -79,8 +79,8 @@ public class RR extends Thread implements GameLogic {
   }
 
 
-  public void setPlayerInCurrentTurn(int ListPosition) {
-    this.playerInCurrentTurn = activePlayers.get(ListPosition);
+  public void setPlayerInCurrentTurn(Player player) {
+    this.playerInCurrentTurn = player;
   }
 
   public CopyOnWriteArrayList<Player> getActivePlayers() {
@@ -212,7 +212,6 @@ public class RR extends Thread implements GameLogic {
         DoGameEnding();
       }
     }
-
   }
 
   public boolean leaveGame(Player player) {
@@ -231,7 +230,14 @@ public class RR extends Thread implements GameLogic {
   }
 
   public void interactWithTile() {
-    this.getPlayerInCurrentTurn().getOwnRobot().getCurrentPosition().getTile().action();
+    BoardElem activeBoardElem1 = playerInCurrentTurn.getOwnRobot().getCurrentPosition().getTile();
+    BoardElem activeBoardElem2 = playerInCurrentTurn.getOwnRobot().getCurrentPosition().getSecondTile();
+    if(activeBoardElem1 != null){
+      activeBoardElem1.action();
+    }
+    if(activeBoardElem2 != null){
+      activeBoardElem2.action();
+    }
   }
 
   public void setPriority() {
@@ -268,6 +274,32 @@ public class RR extends Thread implements GameLogic {
     }
     for(Player player : getActivePlayers()){
       player.setCurrentGame(this);
+    }
+
+    switch (gameBoard.getName()){
+      case "DizzyHighway":
+        checkPoints.add(1);
+        break;
+
+      case "ExtraCrispy":
+      case "LostBearings":
+      case "Twister":
+        checkPoints.add(1);
+        checkPoints.add(2);
+        checkPoints.add(3);
+        checkPoints.add(4);
+        break;
+
+      case "DeathTrap":
+        checkPoints.add(1);
+        checkPoints.add(2);
+        checkPoints.add(3);
+        checkPoints.add(4);
+        checkPoints.add(5);
+        break;
+    }
+    for(Player player : getActivePlayers()){
+      player.setCheckPoints(this.checkPoints);
     }
     nextGameState();
   }
@@ -373,6 +405,7 @@ public class RR extends Thread implements GameLogic {
 
     //if(flagInActivation && i < 5){}  //reminder
     for (int i = 0; i < 5; i++) {  //round i
+      sendMessageToAll(new ReceivedChat("Round: " + i,-1,false));
       //wait for each player click playRegister  //reminder: have bug
       System.out.println("enter while loop");//test
       while(true){
@@ -380,8 +413,8 @@ public class RR extends Thread implements GameLogic {
           break;
         }
       }
-      System.out.println("break while loop");
-      //send protocol message
+      System.out.println("break while loop");//test
+      //send protocol message  //from now on, only activePlayers can be used, because it has the correct order
       ActiveCard[] messageActiveCards = new ActiveCard[activePlayers.size()];
       int index = 0;
       for(Player player : activePlayers){
@@ -392,17 +425,11 @@ public class RR extends Thread implements GameLogic {
       sendMessageToAll(new CurrentCards(messageActiveCards));
       //active
       for (Player player : activePlayers) {
-        setPlayerInCurrentTurn(PlayerInListPosition);
-        player.getRegister().get(i).action();
-        BoardElem activeBoardElem1 = player.getOwnRobot().getCurrentPosition().getTile();
-        BoardElem activeBoardElem2 = player.getOwnRobot().getCurrentPosition().getSecondTile();
-        if(activeBoardElem1 != null){
-          activeBoardElem1.action();
-        }
-        if(activeBoardElem2 != null){
-          activeBoardElem2.action();
-        }
-        controller.robotLaserController(player.getOwnRobot());
+        setPlayerInCurrentTurn(player);
+        sendMessageToAll(new CurrentPlayer(playerInCurrentTurn.clientID));
+        playerInCurrentTurn.getRegister().get(i).action();
+        interactWithTile();
+        controller.robotLaserController(playerInCurrentTurn.getOwnRobot());
         PlayerInListPosition++;
         if (PlayerInListPosition >= activePlayers.size()) {
           PlayerInListPosition = 0;

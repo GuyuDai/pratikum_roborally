@@ -15,7 +15,7 @@ public class CheckPoint extends BoardElem {
   public CheckPoint (RR currentGame, int number) {
 
     super("CheckPoint",currentGame);
-    this.count=number;
+    this.count = number;
   }
 
   @Override

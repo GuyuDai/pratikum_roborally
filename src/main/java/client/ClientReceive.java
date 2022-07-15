@@ -1,27 +1,20 @@
 package client;
 
-import client.gameWindow.GameViewModel;
-import client.lobbyWindow.LobbyViewModel;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import java.io.*;
-import java.net.Socket;
-import com.google.gson.Gson;
-import java.util.*;
-import java.util.logging.Logger;
-
-import javafx.application.Platform;
-import protocol.ProtocolFormat.Message;
-import protocol.ProtocolFormat.MessageAdapter;
-import protocol.ProtocolFormat.MessageType;
-import protocol.SendChat;
+import client.gameWindow.*;
+import client.lobbyWindow.*;
+import com.google.gson.*;
+import javafx.application.*;
 import protocol.*;
-import protocol.PlayerAdded.PlayerAddedBody;
-import protocol.ReceivedChat.ReceivedChatBody;
-import protocol.Welcome.WelcomeBody;
-import protocol.HelloClient.HelloClientBody;
-import server.Player.Player;
-import server.Server;
+import protocol.PlayerAdded.*;
+import protocol.ProtocolFormat.*;
+import protocol.ReceivedChat.*;
+import protocol.Welcome.*;
+
+import java.io.*;
+import java.net.*;
+import java.util.Map;
+import java.util.*;
+import java.util.logging.*;
 
 
 public class ClientReceive extends Thread{
@@ -35,28 +28,30 @@ public class ClientReceive extends Thread{
     protected GameViewModel model;
     protected BufferedReader readInput;
     protected BufferedWriter writeOutput;
-    protected static final String PROTOCOL = "Version 1.0";
+    protected static final String PROTOCOL = "Version 2.0";
     protected static final String GROUP = "Origionelle Oktopusse";
     protected int playerId;
     protected String playerName;
     protected int figure;
     protected String chatMsg;
+    protected int checkPointNumber;
+    protected int energyStorage;
     protected int fromId;
     protected int register;
     protected int damageCount;
     protected boolean isPrivate;
     protected boolean isReady;
     protected boolean isFilled;
-    protected boolean timerStarted=false;
+    protected boolean timerStarted = false;
     protected String cardPlayed;
-    protected Map<Integer,String> IdCardPlayed=new HashMap<>();
-    protected Map<Integer,Boolean> IdReady=new HashMap<>();
-    protected List<Integer> robotNumbers=new ArrayList<>();
-    protected List<Integer> startNumbers=new ArrayList<>();
+    protected Map<Integer,String> IdCardPlayed = new HashMap<>();
+    protected Map<Integer,Boolean> IdReady = new HashMap<>();
+    protected List<Integer> robotNumbers = new ArrayList<>();
+    protected List<Integer> startNumbers = new ArrayList<>();
     protected Map<String,Integer> IdName = new HashMap<>();
     protected List<Boolean> readyList=new ArrayList<>();
     protected String[] maps;
-    protected String[] cards;
+    protected String[] cards = new String[9];
     protected String[]damageDecks;
     protected String board;
     protected String[] filledRegister;
@@ -68,9 +63,9 @@ public class ClientReceive extends Thread{
     protected int activePhaseNumber;
     protected int rebootClientId;
     protected Map<Integer,Integer[]> IdPosition = new HashMap<>();
-    protected List<Integer> IdList=new ArrayList<>();
-    protected Map<Integer,Integer> IdRobot=new HashMap<>();
-    protected Map<Integer,Integer>IdStartPoint= new HashMap<>();
+    protected List<Integer> IdList = new ArrayList<>();
+    protected Map<Integer,Integer> IdRobot = new HashMap<>();
+    protected Map<Integer,Integer>IdStartPoint = new HashMap<>();
 
     protected Map<Integer,String> IdDirection=new HashMap<>();
 
@@ -281,27 +276,34 @@ public class ClientReceive extends Thread{
                 clientID=welcomeBody.getClientID();
                 sendMessage(new HelloServer(GROUP,false,PROTOCOL,clientID).toString());
                 break;
+
             case MessageType.playerAdded:
-                PlayerAddedBody playerAddedBody=new Gson().fromJson(body,PlayerAddedBody.class);
-                playerId=playerAddedBody.getClientID();
-                playerName=playerAddedBody.getName();
-                figure=playerAddedBody.getFigure();
+                PlayerAddedBody playerAddedBody = new Gson().fromJson(body,PlayerAddedBody.class);
+                playerId = playerAddedBody.getClientID();
+                playerName = playerAddedBody.getName();
+                int tempFigure = playerAddedBody.getFigure();
                 IdList.add(playerId);
-                robotNumbers.add(figure);
-                IdRobot.put(playerId,figure);
+                robotNumbers.add(tempFigure);
+                IdRobot.put(playerId,tempFigure);
                 IdName.put(playerName,playerId);
+                if(playerId == clientID){
+                    figure = tempFigure;
+                }
                 break;
+
             case MessageType.receivedChat:
                 ReceivedChatBody receivedChatBody=new Gson().fromJson(body,ReceivedChatBody.class);
-                 chatMsg=receivedChatBody.getMessage();
-                 fromId=receivedChatBody.getFrom();
-                 isPrivate=receivedChatBody.isPrivate();
-                 receiveChat(chatMsg);
-                 break;
+                chatMsg=receivedChatBody.getMessage();
+                fromId=receivedChatBody.getFrom();
+                isPrivate=receivedChatBody.isPrivate();
+                receiveChat(chatMsg);  //reminder: there cause a "Toolkit not initialized" error
+                break;
+
             case MessageType.selectMap:
                 SelectMap.SelectMapBody selectMapBody = new Gson().fromJson(body,SelectMap.SelectMapBody.class);
                 maps = selectMapBody.getAvailableMaps();
                 break;
+
             case MessageType.playerStatus:
                 PlayerStatus.PlayerStatusBody playerStatusBody=new Gson().fromJson(body, PlayerStatus.PlayerStatusBody.class);
                 isReady=playerStatusBody.isReady();
@@ -309,14 +311,17 @@ public class ClientReceive extends Thread{
                 readyList.add(isReady);
                 IdReady.put(playerId,isReady);
                 break;
+
             case MessageType.mapSelected:
                 MapSelected.MapSelectedBody mapSelectedBody=new Gson().fromJson(body,MapSelected.MapSelectedBody.class);
                 board = mapSelectedBody.getMap();
                 break;
+
             case MessageType.yourCards:
                 YourCards.YourCardsBody yourCardsBody=new Gson().fromJson(body, YourCards.YourCardsBody.class);
                 cards=yourCardsBody.getCardsInHand();
                 break;
+
             case MessageType.cardSelected:
                 CardSelected.CardSelectedBody cardSelectedBody=new Gson().fromJson(body, CardSelected.CardSelectedBody.class);
                 playerId=cardSelectedBody.getClientID();
@@ -326,11 +331,13 @@ public class ClientReceive extends Thread{
                     sendMessage(new SelectionFinished(playerId).toString());
                 }
                 break;
+
             case MessageType.pickDamage:
                 PickDamage.PickDamageBody pickDamageBody=new Gson().fromJson(body, PickDamage.PickDamageBody.class);
                 damageDecks=pickDamageBody.getAvailablePiles();
                 damageCount=pickDamageBody.getCount();
                 break;
+
             case MessageType.startingPointTaken:
                 StartingPointTaken.StartingPointTakenBody startingPointTakenBody = new Gson().fromJson(body,
                         StartingPointTaken.StartingPointTakenBody.class);
@@ -391,12 +398,32 @@ public class ClientReceive extends Thread{
                 rebootClientId=rebootBody.getClientID();
                 break;
 
+            case MessageType.energy:
+                Energy.EnergyBody energyBody = new Gson().fromJson(body, Energy.EnergyBody.class);
+                int supposedClient = energyBody.getClientID();
+                int amount = energyBody.getCount();
+                //If its the you the energy will be added to your storage
+                if (supposedClient == clientID) {
+                    energyStorage = energyStorage + amount;
+                }
+                break;
+
+            case MessageType.checkpointReached:
+                //Saves the number of Checkpoints reached
+                CheckPointReached.CheckPointReachedBody checkPointReachedBody = new Gson().fromJson(body, CheckPointReached.CheckPointReachedBody.class);
+                int clientIDCheckReached = checkPointReachedBody.getClientID();
+                int numberOfCheckpointsReached = checkPointReachedBody.getNumber();
+                //Sets the number of checkpoints reached
+                if(clientIDCheckReached == clientID){
+                    checkPointNumber = numberOfCheckpointsReached;
+                }
+                break;
         }
     }
 
     public void receiveChat(String msg){
         String fromName = this.getNameById(getFromId());
-        if(LobbyViewModel.getWindowName() == "Lobby") {
+        if(LobbyViewModel.getWindowName().equals("Lobby")) {
             Platform.runLater(() -> {
                 LobbyViewModel.show(fromName + ": " + msg);
             });

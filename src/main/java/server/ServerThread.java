@@ -42,8 +42,9 @@ public class ServerThread implements Runnable {
 
     private static final Logger logger = Logger.getLogger(ServerThread.class.getName());
     public static final String ANSI_GREEN = "\u001B[32m";
-
-    private static final String PROTOCOL = "Version 1.0";
+    private static final String PROTOCOL = "Version 2.0";
+    private static final String[] MAPS = new String[]
+        {"DizzyHighway","ExtraCrispy","DeathTrap","LostBearings"};
     private Socket clientSocket;
     private BufferedReader readInput;
     private  BufferedWriter writeOutput;
@@ -257,33 +258,36 @@ public class ServerThread implements Runnable {
                     group = helloServerBody.getGroup();
                     isAI = helloServerBody.isAI();
                     setAI(isAI);
+                    /*
                     if(isAI){
-                        player = new Player("AI", clientID);
+                        player = new Player("AI_" + clientID, clientID);
                         int availableFigure = 0;
-                       /* outer: while(true){
+                        outer: while(true){
                             inner: for(ServerThread serverThread : connectedClients){
                                 if(availableFigure == serverThread.getFigure()){
                                     availableFigure++;
+                                }else {
                                     break inner;
                                 }
-                                break outer;
                             }
+                            break outer;
                         }
-                        */
                         player.setOwnRobot(figure);
-                    }else {
-                        for (ServerThread serverThread: connectedClients){
-                            int othersID = serverThread.getID();
-                            String othersName = serverThread.getName();
-                            int othersFigure = serverThread.getFigure();
-                            if(othersID != clientID){
-                                sendMessage( new PlayerAdded(othersID,othersName,othersFigure).toString());
-                            }
-                        }
-
-                        Timer.countDown(5);
-                        sendMessage(new Alive().toString());
                     }
+
+                     */
+                    //send information from clients who are already connected in to the new client
+                    for (ServerThread serverThread: connectedClients){
+                        int othersID = serverThread.getID();
+                        String othersName = serverThread.getName();
+                        int othersFigure = serverThread.getFigure();
+                        if(othersID != clientID){
+                            sendMessage( new PlayerAdded(othersID,othersName,othersFigure).toString());
+                        }
+                    }
+                    sendMessage(new ReceivedChat("Choose your robot",-1,true).toString());
+                    Timer.countDown(5);
+                    sendMessage(new Alive().toString());
                 }else {
                     sendMessage(new ErrorMessage("your protocol version is unsupported").toString());
                 }
@@ -312,15 +316,13 @@ public class ServerThread implements Runnable {
                     player.setOwnRobot(figure);
                     player.getOwnRobot().setOwner(player);
                     sendToAll(new PlayerAdded(clientID,name,figure).toString());
-                for (ServerThread serverThread: connectedClients) {
-                    int othersID = serverThread.getID();
-                    boolean othersReady = serverThread.isReady();
-                    if (othersID != clientID && othersReady) {
-                        sendMessage(new PlayerStatus(othersID,othersReady).toString());
+                    for (ServerThread serverThread: connectedClients) {
+                        int othersID = serverThread.getID();
+                        boolean othersReady = serverThread.isReady();
+                        if (othersID != clientID && othersReady) {
+                            sendMessage(new PlayerStatus(othersID,othersReady).toString());
+                        }
                     }
-                }
-
-                    ;
                 }else {
                     sendMessage(new ErrorMessage("this robot has been taken").toString());
                 }
@@ -333,8 +335,7 @@ public class ServerThread implements Runnable {
                 sendToAll(new PlayerStatus(clientID,true).toString());
                 if(firstPlayerReady() != null){
                     if (firstPlayerReady().equals(player)) {
-                        sendMessage(new SelectMap(
-                            new String[]{"DizzyHighway","ExtraCrispy","DeathTrap","LostBearings"}).toString());
+                        sendMessage(new SelectMap(MAPS).toString());
                     }
                 }
                 if (allPlayerReady() && connectedClients.size()>=2 && board != null){
