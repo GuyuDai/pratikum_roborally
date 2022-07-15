@@ -234,7 +234,7 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.currentPlayer:
-        sendMessage(new SelectedCard(cards[pointerForRegister],pointerForRegister,clientID).toString());
+        sendMessage(new PlayCard(cards[pointerForRegister]).toString());
         pointerForRegister++;
         if(pointerForRegister == 5){
           pointerForRegister = 0;
