@@ -346,10 +346,10 @@ public class GameViewModel {
     @FXML
     public void sendButtonAction(ActionEvent actionEvent) throws IOException {
         String message = model.getTextFieldContent().get();
+        System.out.println(message); //TODO message is always empty
         checkInput(message);
         model.getTextFieldContent().set("");
         input.requestFocus();
-        System.out.println("test");
     }
 
     public void checkInput(String message){
@@ -372,7 +372,7 @@ public class GameViewModel {
         }
     }
     private String createMessage(String message){
-        String sendChat=new SendChat(message,-1).toString();
+        String sendChat = new SendChat(message,-1).toString();
         return sendChat;
     }
 
@@ -386,7 +386,7 @@ public class GameViewModel {
         String target=splittingTarget[0].trim();
         int to=Client.getClientReceive().getIdByName(target);
         String messageToSend=realMessage.toString().trim();
-        String sendChat=new SendChat(messageToSend,to).toString();
+        String sendChat = new SendChat("(private) " + messageToSend,to).toString();
 
         return sendChat;
     }
@@ -2007,13 +2007,13 @@ public class GameViewModel {
                              gameboard.add(checkPointTwo,5,7);
                              gameboard.add(checkPointThree,10,7);
                         }
-
                         if(board.getName().equals("Twister")){
-                            gameboard.add(checkPointFour,9,7);
-                            gameboard.add(checkPointOne,10,1);//
-                            gameboard.add(checkPointThree,5,3);//
-                            gameboard.add(checkPointTwo,6,7);
+                            checkBoard.add(checkPointFour,9,7);
+                            checkBoard.add(checkPointOne,10,1);
+                            checkBoard.add(checkPointThree,5,3);
+                            checkBoard.add(checkPointTwo,6,7);
                         }
+
                     }
 
                 }
@@ -2032,6 +2032,78 @@ public class GameViewModel {
     public int getStartingPointCount(){
         return startingPointCount;
     }
+
+
+    public void moveCheckpointTwister(int moveNumber){
+
+        /**
+         * checkpoints
+         */
+        URL checkPoint1 = getClass().getResource("/Checkpoints/Checkpoint1.png");
+        Image imageCheckPoint1 = new Image(checkPoint1.toString());
+
+        URL checkPoint2 = getClass().getResource("/Checkpoints/Checkpoint2.png");
+        Image imageCheckPoint2 = new Image(checkPoint2.toString());
+
+        URL checkPoint3 = getClass().getResource("/Checkpoints/Checkpoint3.png");
+        Image imageCheckPoint3 = new Image(checkPoint3.toString());
+
+        URL checkPoint4 = getClass().getResource("/Checkpoints/Checkpoint4.png");
+        Image imageCheckPoint4 = new Image(checkPoint4.toString());
+
+        ImageView checkPointOne=new ImageView(imageCheckPoint1);
+        ImageView checkPointTwo=new ImageView(imageCheckPoint2);
+        ImageView checkPointThree=new ImageView(imageCheckPoint3);
+        ImageView checkPointFour=new ImageView(imageCheckPoint4);
+        checkPointThree.setFitHeight(43);
+        checkPointOne.setFitHeight(43);
+        checkPointTwo.setFitHeight(43);
+        checkPointFour.setFitHeight(43);
+        checkPointOne.setFitWidth(43);
+        checkPointThree.setFitWidth(43);
+        checkPointTwo.setFitWidth(43);
+        checkPointFour.setFitWidth(43);
+
+        //ToDo move all board URL to the top of code
+
+
+        switch(moveNumber){
+
+            case 1: // clockwise
+                checkBoard.getChildren().clear();
+
+                checkBoard.add(checkPointOne,11,2);
+                checkBoard.add(checkPointTwo,5,8);
+                checkBoard.add(checkPointThree,4,2);
+                checkBoard.add(checkPointFour,10,6);
+                break;
+            case 2:
+                checkBoard.getChildren().clear();
+
+                checkBoard.add(checkPointOne,10,3);
+                checkBoard.add(checkPointTwo,4,7);
+                checkBoard.add(checkPointThree,5,1);
+                checkBoard.add(checkPointFour,11,7);
+                break;
+            case 3:
+                checkBoard.getChildren().clear();
+
+                checkBoard.add(checkPointOne,9,2);
+                checkBoard.add(checkPointTwo,5,6);
+                checkBoard.add(checkPointThree,6,2);
+                checkBoard.add(checkPointFour,10,8);
+                break;
+            case 4: //like beginning
+            checkBoard.getChildren().clear();
+
+            checkBoard.add(checkPointOne,10,1);
+            checkBoard.add(checkPointTwo,6,7);
+            checkBoard.add(checkPointThree,5,3);
+            checkBoard.add(checkPointFour,9,7);
+            break;
+        }
+    }
+
 
 
     /**
@@ -2255,6 +2327,10 @@ public class GameViewModel {
             robotBoard.getChildren().remove(botView);
 
             checkYourbotImageView().setRotate(90);
+
+
+
+            botView.setRotate(270);
 
 
             if(register1.getImage().equals(imageMove1)) {
@@ -2492,6 +2568,10 @@ public class GameViewModel {
     public void playDamageCards(ActionEvent actionEvent) {
     }
 
+
+    /**
+     * counter helpers
+     */
     int clickCounter = 1;
 
     public void setClickCounter(int count){
@@ -2501,6 +2581,9 @@ public class GameViewModel {
     public int getClickCounter(){
         return clickCounter;
     }
+
+
+
 
     /**
      * function of the play register button/ new round button
@@ -2519,7 +2602,6 @@ public class GameViewModel {
                  register4.setImage(register5.getImage());
                  register5.setImage(null);
                  playCardBtn.setText("play register 2");
-                 moveRobot();
                  //remove remaining cards from hand
                  hand1Button.setVisible(false);
                  hand2Button.setVisible(false);
@@ -2540,7 +2622,6 @@ public class GameViewModel {
                  register3.setImage(register4.getImage());
                  register4.setImage(null);
                  playCardBtn.setText("play register 3");
-                 moveRobot();
                  moveRobotButton.setVisible(true);
                  playCardBtn.setVisible(false);
                  break;
@@ -2550,7 +2631,6 @@ public class GameViewModel {
                  register2.setImage(register3.getImage());
                  register3.setImage(null);
                  playCardBtn.setText("play register 4");
-                 moveRobot();
                  moveRobotButton.setVisible(true);
                  playCardBtn.setVisible(false);
                  break;
@@ -2559,7 +2639,6 @@ public class GameViewModel {
                  register1.setImage(register2.getImage());
                  register2.setImage(null);
                  playCardBtn.setText("play register 5");
-                 moveRobot();
                  moveRobotButton.setVisible(true);
                  playCardBtn.setVisible(false);
                  break;
@@ -2614,6 +2693,7 @@ public class GameViewModel {
     public void timer30Sec() {
         if (Client.getClientReceive().isTimerStarted()) {
             timerText.setVisible(true);
+            Client.getClientReceive().setTimer(false);
             Text.setText("Players have 30 seconds left to finish their register.");
             timer.setText("30");
 
@@ -2757,9 +2837,96 @@ public class GameViewModel {
         }
     }
 
+
+
+    public void shootRobotLaser(){
+
+        URL robotLaser = getClass().getResource("/robotLaser.png");
+        Image imageRobotLaser = new Image(robotLaser.toString());
+
+        ImageView laserView0 = new ImageView(imageRobotLaser);
+        ImageView laserView1 = new ImageView(imageRobotLaser);
+        ImageView laserView2 = new ImageView(imageRobotLaser);
+        ImageView laserView3 = new ImageView(imageRobotLaser);
+        ImageView laserView4 = new ImageView(imageRobotLaser);
+        ImageView laserView5 = new ImageView(imageRobotLaser);
+        ImageView laserView6 = new ImageView(imageRobotLaser);
+        ImageView laserView7 = new ImageView(imageRobotLaser);
+        ImageView laserView8 = new ImageView(imageRobotLaser);
+        ImageView laserView9 = new ImageView(imageRobotLaser);
+        ImageView laserView10 = new ImageView(imageRobotLaser);
+        ImageView laserView11 = new ImageView(imageRobotLaser);
+        ImageView laserView12 = new ImageView(imageRobotLaser);
+
+
+
+        URL robotLaserVertical = getClass().getResource("/robotLaserVertical.png");
+        Image imageRobotLaserVertical = new Image(robotLaserVertical.toString());
+
+        ImageView imageRobotLaserVertical0 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical1 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical2 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical3 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical4 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical5 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical6 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical7 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical8 = new ImageView(imageRobotLaser);
+        ImageView imageRobotLaserVertical9 = new ImageView(imageRobotLaser);
+
+
+
+
+
+        startBoard.add(laserView1, 1, 1);
+        startBoard.add(laserView2, 2, 1);
+        startBoard.add(laserView3, 3, 1);
+        startBoard.add(laserView4, 4, 1);
+
+    }
+
+    int checkpointMoveCounter = 1;
+
+    public void setcheckpointMoveCounter(int count){
+        this.checkpointMoveCounter = count;
+    }
+
+    public int getcheckpointMoveCounter(){
+        return checkpointMoveCounter;
+    }
+
+
+
+
     public void moveRobotButtonAction(ActionEvent actionEvent) {
+        String selectedMap = Client.getClientReceive().getBoard();
+        if(selectedMap.equals("Twister")){
+            switch (checkpointMoveCounter) {
+                case 1:
+                    setcheckpointMoveCounter(2);
+                    moveCheckpointTwister(1);
+                    break;
+                case 2:
+                    setcheckpointMoveCounter(3);
+                    moveCheckpointTwister(2);
+                    break;
+                case 3:
+                    setcheckpointMoveCounter(4);
+                    moveCheckpointTwister(3);
+                    break;
+                case 4:
+                    setcheckpointMoveCounter(1);
+                    moveCheckpointTwister(4);
+                    break;
+            }
+        } else {
+        }
         moveRobotButton.setVisible(false);
         playCardBtn.setVisible(true);
+
+        //shootRobotLaser();
+        //ToDo robot laser
+
     }
 }
 
