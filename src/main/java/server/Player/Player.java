@@ -143,8 +143,8 @@ public class Player implements PlayerAction{
     }
   }
   @Override
-  public void draw() {
-    for(int i = 9; i > 0; i--){
+  public void draw(int j) {
+    for(int i = j; i > 0; i--){
       currentGame.getController().drawCardCheck(this);
       hands.add(ownDeck.getRemainingCards().get(0));
       ownDeck.getRemainingCards().remove(0);

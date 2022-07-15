@@ -41,8 +41,12 @@ public class ConveyBelt extends BoardElem implements Move {
         robot.push(robot, arrowDirection, 1);
       }
       if(robot.getCurrentPosition().getTile().getName()=="RotatingBelt"){
-        robot.getCurrentPosition().getTile().action();
+        Direction curvedDirection=robot.getCurrentPosition().getTile().getDirection2();
         Direction moveDirection=robot.getCurrentPosition().getTile().getDirection();
+          if(robot.getLastPosition().getTile().getDirection().equals(curvedDirection)){
+            robot.setFaceDirection(moveDirection);
+            robot.push(robot,moveDirection,1);
+          }
         robot.push(robot,moveDirection,1);
       }
       else {

@@ -347,7 +347,7 @@ public class RR extends Thread implements GameLogic {
     sendMessageToAll(new ReceivedChat("Programming Phase starts",-1,false));
     //each player draws 9 cards
     for(Player player : getActivePlayers()){
-      player.draw();
+      player.draw(9-player.getHands().size());
       String[] cards = new String[9];
       int i = 0;
       for(Card card : player.getHands()){
@@ -368,6 +368,7 @@ public class RR extends Thread implements GameLogic {
         }
       }
     }
+    finishedPlayers=0;
     //timer starts
     sendMessageToAll(new TimerStarted());
     Timer.countDown(30);
