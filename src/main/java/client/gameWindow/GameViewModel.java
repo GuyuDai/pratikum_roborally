@@ -2288,10 +2288,13 @@ public class GameViewModel {
                 move1.setOnFinished(e -> robotBoard.add(finalBotView, moveX, moveY));
                 move1.play();
             }
+
            // PauseTransition remove2 = new PauseTransition(Duration.seconds(2));
            // remove2.setOnFinished(e -> robotBoard.getChildren().remove(1));
           //  remove2.play();
         }
+        printRobotLaser();
+
     }
 
 
@@ -2613,10 +2616,10 @@ public class GameViewModel {
     public void rotateRobot(ImageView robotPic,int id) {
             switch (Client.getClientReceive().getIdDirection().get(id)) {
                 case "counterclockwise":
-                    robotPic.setRotate(robotPic.getRotate()+90);
+                    robotPic.setRotate(robotPic.getRotate()-90);
                     break;
                 case "clockwise":
-                    robotPic.setRotate(robotPic.getRotate()-90);
+                    robotPic.setRotate(robotPic.getRotate()+90);
                     break;
                 case "turn 180":
                     robotPic.setRotate(robotPic.getRotate()+180);
@@ -2780,49 +2783,8 @@ public class GameViewModel {
 
 
 
-    public void shootRobotLaser(){
-
-        URL robotLaser = getClass().getResource("/robotLaser.png");
-        Image imageRobotLaser = new Image(robotLaser.toString());
-
-        ImageView laserView0 = new ImageView(imageRobotLaser);
-        ImageView laserView1 = new ImageView(imageRobotLaser);
-        ImageView laserView2 = new ImageView(imageRobotLaser);
-        ImageView laserView3 = new ImageView(imageRobotLaser);
-        ImageView laserView4 = new ImageView(imageRobotLaser);
-        ImageView laserView5 = new ImageView(imageRobotLaser);
-        ImageView laserView6 = new ImageView(imageRobotLaser);
-        ImageView laserView7 = new ImageView(imageRobotLaser);
-        ImageView laserView8 = new ImageView(imageRobotLaser);
-        ImageView laserView9 = new ImageView(imageRobotLaser);
-        ImageView laserView10 = new ImageView(imageRobotLaser);
-        ImageView laserView11 = new ImageView(imageRobotLaser);
-        ImageView laserView12 = new ImageView(imageRobotLaser);
 
 
-
-        URL robotLaserVertical = getClass().getResource("/robotLaserVertical.png");
-        Image imageRobotLaserVertical = new Image(robotLaserVertical.toString());
-
-        ImageView imageRobotLaserVertical0 = new ImageView(imageRobotLaser);
-        ImageView imageRobotLaserVertical1 = new ImageView(imageRobotLaser);
-        ImageView imageRobotLaserVertical2 = new ImageView(imageRobotLaser);
-        ImageView imageRobotLaserVertical3 = new ImageView(imageRobotLaser);
-        ImageView imageRobotLaserVertical4 = new ImageView(imageRobotLaser);
-        ImageView imageRobotLaserVertical5 = new ImageView(imageRobotLaser);
-        ImageView imageRobotLaserVertical6 = new ImageView(imageRobotLaser);
-        ImageView imageRobotLaserVertical7 = new ImageView(imageRobotLaser);
-        ImageView imageRobotLaserVertical8 = new ImageView(imageRobotLaser);
-        ImageView imageRobotLaserVertical9 = new ImageView(imageRobotLaser);
-
-
-
-        startBoard.add(laserView1, 1, 1);
-        startBoard.add(laserView2, 2, 1);
-        startBoard.add(laserView3, 3, 1);
-        startBoard.add(laserView4, 4, 1);
-
-    }
 
     int checkpointMoveCounter = 1;
 
@@ -2865,6 +2827,71 @@ public class GameViewModel {
         playCardBtn.setVisible(true);
         moveRobot();
     }
+  public void printRobotLaser() {
+      URL robotLaser = getClass().getResource("/robotLaser.png");
+      Image imageRobotLaser = new Image(robotLaser.toString());
+      URL robotLaserVertical = getClass().getResource("/robotLaserVertical.png");
+      Image imageRobotLaserVertical = new Image(robotLaserVertical.toString());
+      List<Integer> xList = new ArrayList<Integer>();
+      List<Integer> yList = new ArrayList<Integer>();
+      List<int[]> result = new ArrayList<int[]>();
+      if (Client.getClientReceive().isDoRobotLaser()) {
+          for (int clientId : Client.getClientReceive().getIdPosition().keySet()) {
+              int robotX = Client.getClientReceive().getPositionById(clientId)[0];
+              xList.add(robotX);
+              int robotY = Client.getClientReceive().getPositionById(clientId)[1];
+              yList.add(robotY);
+          }
+
+          int size = xList.size();
+          for (int index = 0; index < size; index++) {
+              int xPointer = xList.get(index);
+              int yPointer = yList.get(index);
+              for (int i = index + 1; i < size; i++) {
+                  int tempX = xList.get(i);
+                  int tempY = yList.get(i);
+                  if (xPointer == tempX || yPointer == tempY) {
+                      result.add(new int[]{tempX, tempY});
+                      xList.remove((Integer) tempX);
+                      yList.remove((Integer) tempY);
+                  }
+              }
+          }
+          int printX = result.get(0)[0];
+          int printY = result.get(0)[1];
+          int printX2 = result.get(1)[0];
+          int printY2 = result.get(1)[1];
+          if (printX == printX2) {
+              if (printY < printY2) {
+                  for (int i = printY; i <= printY2; i++) {
+                      ImageView laser = new ImageView(imageRobotLaser);
+                      startBoard.add(laser, i, printX);
+                  }
+                  if (printY > printY2) {
+                      for (int i = printY2; i <= printY; i++) {
+                          ImageView laser = new ImageView(imageRobotLaser);
+                          startBoard.add(laser, i, printX);
+                      }
+                  }
+              }
+          }
+          if (printY == printY2) {
+              if (printX < printX2) {
+                  for (int i = printX; i <= printX2; i++) {
+                      ImageView laserVertical = new ImageView(imageRobotLaserVertical);
+                      startBoard.add(laserVertical, printY, i);
+                  }
+                  if (printX > printX2) {
+                      for (int i = printX2; i <= printX; i++) {
+                          ImageView laserVertical = new ImageView(imageRobotLaserVertical);
+                          startBoard.add(laserVertical, printY, i);
+                      }
+                  }
+              }
+
+          }
+      }
+  }
 }
 
 

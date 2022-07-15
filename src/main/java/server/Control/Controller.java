@@ -169,7 +169,7 @@ public class Controller {
                   || currentGame.getGameBoard().getBoardElem(X,i,1) instanceof Wall)
                   || robotOnPositionCheck(new Position(X,i, currentGame.getGameBoard()))) {
             robot.getOwner().drawDamage("Spam",1);
-            currentGame.sendMessageToClient(new Animation("RobotLaser"),currentGame.getServerThreadById(robot.owner.clientID));
+            currentGame.sendMessageToAll(new Animation("RobotLaser"));
           }
         }
       }
@@ -179,7 +179,7 @@ public class Controller {
                   || currentGame.getGameBoard().getBoardElem(X,i,1) instanceof Wall
                   || robotOnPositionCheck(new Position(X,i, currentGame.getGameBoard())))) {
             robot.getOwner().drawDamage("Spam",1);
-            currentGame.sendMessageToClient(new Animation("RobotLaser"),currentGame.getServerThreadById(robot.owner.clientID));
+            currentGame.sendMessageToAll(new Animation("RobotLaser"));
           }
         }
       }
@@ -189,7 +189,7 @@ public class Controller {
                   || currentGame.getGameBoard().getBoardElem(i,Y,1) instanceof Wall
                   || robotOnPositionCheck(new Position(i,Y, currentGame.getGameBoard())))) {
             robot.getOwner().drawDamage("Spam",1);
-            currentGame.sendMessageToClient(new Animation("RobotLaser"),currentGame.getServerThreadById(robot.owner.clientID));
+            currentGame.sendMessageToAll(new Animation("RobotLaser"));
           }
         }
       }
@@ -199,7 +199,7 @@ public class Controller {
                   || currentGame.getGameBoard().getBoardElem(i,Y,1) instanceof Wall
                   ||robotOnPositionCheck(new Position(i,Y, currentGame.getGameBoard())))){
             robot.getOwner().drawDamage("Spam",1);
-            currentGame.sendMessageToClient(new Animation("RobotLaser"),currentGame.getServerThreadById(robot.owner.clientID));
+            currentGame.sendMessageToAll(new Animation("RobotLaser"));
           }
         }
       }

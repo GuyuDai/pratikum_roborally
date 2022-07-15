@@ -76,6 +76,8 @@ public class ClientReceive extends Thread{
 
     protected int counterRegister = 0;
 
+    protected boolean doRobotLaser=false;
+
 
     public void setCounterRegister(int count){
         this.counterRegister = count;
@@ -412,6 +414,9 @@ public class ClientReceive extends Thread{
             case MessageType.animation:
                 Animation.AnimationBody animationBody=new Gson().fromJson(body,Animation.AnimationBody.class);
                 animationType=animationBody.getType();
+                if(animationType.equals("RobotLaser")){
+                    doRobotLaser=true;
+                }
                 break;
 
             case MessageType.activePhase:
@@ -465,6 +470,7 @@ public class ClientReceive extends Thread{
                 int clientID = registerChosenBody.getClientID();
                 int register = registerChosenBody.getRegister();
                 break;
+
 
 
         }
@@ -659,6 +665,14 @@ public class ClientReceive extends Thread{
 
     public List<Integer> getIdList() {
         return IdList;
+    }
+
+    public boolean isDoRobotLaser() {
+        return doRobotLaser;
+    }
+
+    public void setDoRobotLaser(boolean doRobotLaser) {
+        this.doRobotLaser = doRobotLaser;
     }
 
     public String[] getCards() {
