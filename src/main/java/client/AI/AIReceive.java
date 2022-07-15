@@ -266,6 +266,22 @@ public class AIReceive extends ClientReceive {
         ErrorMessageBody errorMessageBody = new Gson().fromJson(body,ErrorMessageBody.class);
         String serverMsg = errorMessageBody.getError();
         aiTrigger(serverMsg);
+        break;
+
+      case MessageType.boink:
+        break;
+
+      case MessageType.checkPointMoved:
+        break;
+
+      case MessageType.chooseRegister:
+        break;
+
+      case MessageType.registerChosen:
+        break;
+
+      case MessageType.returnCards:
+        break;
     }
   }
 
@@ -581,6 +597,21 @@ public class AIReceive extends ClientReceive {
     }
     if(input.contains("\"messageType\":\"Welcome\",\"messageBody\"")){
       return new Gson().fromJson(input, Welcome.class);
+    }
+    if(input.contains("\"messageType\":\"Boink\",\"messageBody\"")){
+      return new Gson().fromJson(input, Boink.class);
+    }
+    if(input.contains("\"messageType\":\"ChooseRegister\",\"messageBody\"")){
+      return new Gson().fromJson(input, ChooseRegister.class);
+    }
+    if(input.contains("\"messageType\":\"RegisterChosen\",\"messageBody\"")){
+      return new Gson().fromJson(input, RegisterChosen.class);
+    }
+    if(input.contains("\"messageType\":\"ReturnCards\",\"messageBody\"")){
+      return new Gson().fromJson(input, ReturnCards.class);
+    }
+    if(input.contains("\"messageType\":\"CheckPointMoved\",\"messageBody\"")){
+      return new Gson().fromJson(input, CheckPointMoved.class);
     }
     if(input.contains("\"messageType\":\"YourCards\",\"messageBody\"")){
       return new Gson().fromJson(input, YourCards.class);

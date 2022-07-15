@@ -44,10 +44,13 @@ public class MessageType {
     public static final String mapSelected = "MapSelected";
     public static final String replaceCard = "ReplaceCard";
     public static final String animation = "Animation";
-
     public static final String rebootDirection = "RebootDirection";
     public static final String gameFinished = "GameFinished";
-    public static String activeCards;
+    public static final String boink = "Boink";
+    public static final String checkPointMoved = "CheckPointMoved";
+    public static final String chooseRegister = "ChooseRegister";
+    public static final String registerChosen = "RegisterChosen";
+    public static final String returnCards = "ReturnCards";
 }
 
 
