@@ -226,6 +226,12 @@ public class GameViewModel {
     @FXML
     GridPane gameboard, startBoard, robotBoard, checkBoard;
 
+
+    @FXML
+    Button showDamage;
+
+
+
     public String window = "Game";
     public ProgrammingDeck deck = new ProgrammingDeck();
 
@@ -2928,17 +2934,21 @@ public class GameViewModel {
      }
 
     }
-  public void registerDamageAction(ActionEvent event){
-     String[] selectedDamageCards= tempDrawDamage.toArray(new String[tempDrawDamage.size()]);
-     Client.getClientReceive().sendMessage(new SelectedDamage(selectedDamageCards).toString());
-     tempDrawDamage=new ArrayList<>();
-     clickCounter=1;
-     spam.setVisible(false);
-     worm.setVisible(false);
-     trojan.setVisible(false);
-     virus.setVisible(false);
+    public void registerDamageAction(ActionEvent event) {
+        String[] selectedDamageCards = tempDrawDamage.toArray(new String[tempDrawDamage.size()]);
+        Client.getClientReceive().sendMessage(new SelectedDamage(selectedDamageCards).toString());
+        tempDrawDamage = new ArrayList<>();
+        clickCounter = 1;
+        spam.setVisible(false);
+        worm.setVisible(false);
+        trojan.setVisible(false);
+        virus.setVisible(false);
 
-  }
+    }
+
+    public void showDamageCards(ActionEvent event) {
+        // name of Button is showDamage
+    }
 
 
 

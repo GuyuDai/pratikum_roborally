@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1251.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
+<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1251.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
    <children>
       <Pane layoutX="6.0" layoutY="3.0" prefHeight="795.0" prefWidth="305.0" stylesheets="@../styles.css">
          <children>
@@ -65,31 +65,6 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Pane fx:id="selectStartingPoint" layoutX="40.0" layoutY="86.0" prefHeight="188.0" prefWidth="253.0">
-                     <children>
-                        <Label fx:id="textStartingPoint" layoutX="20.0" layoutY="1.0" prefHeight="27.0" prefWidth="358.0" text="Select your Starting Point" textFill="WHITE">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <ToggleButton fx:id="startingPoint2" layoutX="14.0" layoutY="75.0" mnemonicParsing="false" onAction="#startingPoint2Action" text="Starting Point 2">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="StartingPoint" />
-                           </toggleGroup>
-                        </ToggleButton>
-                        <ToggleButton fx:id="startingPoint1" layoutX="14.0" layoutY="41.0" mnemonicParsing="false" onAction="#startingPoint1Action" text="Starting Point 1" toggleGroup="$StartingPoint" />
-                        <ToggleButton fx:id="startingPoint4" layoutX="139.0" layoutY="41.0" mnemonicParsing="false" onAction="#startingPoint4Action" text="Starting Point 4" toggleGroup="$StartingPoint" />
-                        <ToggleButton fx:id="startingPoint3" layoutX="14.0" layoutY="108.0" mnemonicParsing="false" onAction="#startingPoint3Action" text="Starting Point 3" toggleGroup="$StartingPoint" />
-                        <ToggleButton fx:id="startingPoint5" layoutX="139.0" layoutY="75.0" mnemonicParsing="false" onAction="#startingPoint5Action" text="Starting Point 5" toggleGroup="$StartingPoint" />
-                        <ToggleButton fx:id="startingPoint6" layoutX="139.0" layoutY="108.0" mnemonicParsing="false" onAction="#startingPoint6Action" text="Starting Point 6" toggleGroup="$StartingPoint" />
-                        <Button fx:id="startPointOK" layoutX="110.0" layoutY="149.0" mnemonicParsing="false" onAction="#startPointOKAction" text="OK" />
-                        <Label layoutX="20.0" layoutY="174.0" prefHeight="48.0" prefWidth="415.0" text="This starting point is already taken" textFill="WHITE" visible="false">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
                </children>
             </Pane>
             <AnchorPane fx:id="upgradeShop" layoutX="-5.0" layoutY="505.0" opacity="0.5" prefHeight="292.0" prefWidth="309.0" styleClass="backgroundColor" stylesheets="@../styles.css" visible="false">
@@ -97,7 +72,7 @@
                   <ImageView fx:id="playerBot41" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
-            <GridPane fx:id="damageRegister" layoutX="-3.0" layoutY="561.0" prefHeight="135.0" prefWidth="309.0" style="-fx-background-radius: 20;">
+            <GridPane fx:id="damageRegister" layoutX="-1.0" layoutY="606.0" prefHeight="107.0" prefWidth="309.0" style="-fx-background-radius: 20;">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="79.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -106,37 +81,41 @@
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="99.0" minHeight="10.0" prefHeight="99.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label fx:id="wormNumber" prefHeight="17.0" prefWidth="74.0" text="Worm 0x" textFill="#fffefe" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="11.0" />
-                     </font></Label>
-                  <Label fx:id="virusNumber" prefHeight="17.0" prefWidth="74.0" text="Virus  0x" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="11.0" />
-                     </font></Label>
-                  <Label fx:id="spamNumber" prefHeight="17.0" prefWidth="74.0" text="Spam 0x" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="11.0" />
-                     </font></Label>
-                  <Label fx:id="trojanNumber" prefHeight="25.0" prefWidth="97.0" text="Trojan 0x" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="11.0" />
-                     </font></Label>
-                  <Button fx:id="worm" graphicTextGap="0.0" minWidth="77.0" mnemonicParsing="false" onAction="#playWormCards" prefHeight="100.0" prefWidth="77.0" styleClass="worm" stylesheets="@../styles.css" />
-                  <Button fx:id="virus" mnemonicParsing="false" onAction="#playVirusCards" styleClass="virus" stylesheets="@../styles.css" GridPane.columnIndex="1" />
-                  <Button fx:id="spam" mnemonicParsing="false" onAction="#playSpamCards" styleClass="spam" stylesheets="@../styles.css" GridPane.columnIndex="2" />
-                  <Button fx:id="trojan" mnemonicParsing="false" onAction="#playTrojanCards" styleClass="trojan" stylesheets="@../styles.css" GridPane.columnIndex="3" />
+                  <Button fx:id="worm" graphicTextGap="0.0" minWidth="77.0" mnemonicParsing="false" onAction="#playWormCards" prefHeight="100.0" prefWidth="77.0" styleClass="worm" stylesheets="@../styles.css" visible="false" />
+                  <Button fx:id="virus" mnemonicParsing="false" onAction="#playVirusCards" styleClass="virus" stylesheets="@../styles.css" visible="false" GridPane.columnIndex="1" />
+                  <Button fx:id="spam" mnemonicParsing="false" onAction="#playSpamCards" styleClass="spam" stylesheets="@../styles.css" visible="false" GridPane.columnIndex="2" />
+                  <Button fx:id="trojan" mnemonicParsing="false" onAction="#playTrojanCards" styleClass="trojan" stylesheets="@../styles.css" visible="false" GridPane.columnIndex="3" />
                </children>
             </GridPane>
-            <Label layoutX="88.0" layoutY="489.0" prefHeight="59.0" prefWidth="130.0" text="DAMAGE CARDS" textFill="#fcfafa">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Button fx:id="registerDamage" layoutX="72.0" layoutY="720.0" mnemonicParsing="false" onAction="#registerDamageAction" prefHeight="26.0" prefWidth="155.0" text="Register DamageCard" />
+            <Button fx:id="registerDamage" layoutX="72.0" layoutY="720.0" mnemonicParsing="false" onAction="#registerDamageAction" prefHeight="26.0" prefWidth="155.0" text="Register DamageCard" visible="false" />
+            <Button fx:id="showDamage" layoutX="52.0" layoutY="545.0" mnemonicParsing="false" onAction="#showDamageCards" prefHeight="26.0" prefWidth="204.0" text="Show DamageCards" />
+            <Pane fx:id="selectStartingPoint" layoutX="28.0" layoutY="246.0" prefHeight="188.0" prefWidth="253.0" visible="false">
+               <children>
+                  <Label fx:id="textStartingPoint" layoutX="34.0" layoutY="1.0" prefHeight="27.0" prefWidth="185.0" text="Select your Starting Point" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ToggleButton fx:id="startingPoint2" layoutX="14.0" layoutY="75.0" mnemonicParsing="false" onAction="#startingPoint2Action" text="Starting Point 2">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="StartingPoint" />
+                     </toggleGroup>
+                  </ToggleButton>
+                  <ToggleButton fx:id="startingPoint1" layoutX="14.0" layoutY="41.0" mnemonicParsing="false" onAction="#startingPoint1Action" text="Starting Point 1" toggleGroup="$StartingPoint" />
+                  <ToggleButton fx:id="startingPoint4" layoutX="139.0" layoutY="41.0" mnemonicParsing="false" onAction="#startingPoint4Action" text="Starting Point 4" toggleGroup="$StartingPoint" />
+                  <ToggleButton fx:id="startingPoint3" layoutX="14.0" layoutY="108.0" mnemonicParsing="false" onAction="#startingPoint3Action" text="Starting Point 3" toggleGroup="$StartingPoint" />
+                  <ToggleButton fx:id="startingPoint5" layoutX="139.0" layoutY="75.0" mnemonicParsing="false" onAction="#startingPoint5Action" text="Starting Point 5" toggleGroup="$StartingPoint" />
+                  <ToggleButton fx:id="startingPoint6" layoutX="139.0" layoutY="108.0" mnemonicParsing="false" onAction="#startingPoint6Action" text="Starting Point 6" toggleGroup="$StartingPoint" />
+                  <Button fx:id="startPointOK" layoutX="110.0" layoutY="149.0" mnemonicParsing="false" onAction="#startPointOKAction" text="OK" />
+                  <Label layoutX="20.0" layoutY="174.0" prefHeight="48.0" prefWidth="415.0" text="This starting point is already taken" textFill="WHITE" visible="false">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
       </Pane>
       <VBox layoutX="322.0" layoutY="1.0" prefHeight="797.0" prefWidth="557.0">
