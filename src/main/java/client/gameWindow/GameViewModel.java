@@ -622,6 +622,17 @@ public class GameViewModel {
     public int getRegisterCount() { return registerCount; }
 
 
+    public void handle5thRegister() {
+        Text.setText("Players have 30 seconds left to finish their register.");
+        PauseTransition thirty = new PauseTransition(Duration.seconds(30));
+        thirty.setOnFinished(e -> playCardBtn.setVisible(true));
+        thirty.play();
+        PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+        textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
+        textAppear2.play();
+    }
+
+
     /**
      * pick your register of 5 cards from your hands of 9 cards
      */
@@ -658,14 +669,8 @@ public class GameViewModel {
                 register5.setImage(hand1.getImage());
                 hand1Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[0], 4,ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
                 //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -703,14 +708,8 @@ public class GameViewModel {
                 register5.setImage(hand2.getImage());
                 hand2Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[1], 4, ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
                 //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -748,14 +747,8 @@ public class GameViewModel {
                 register5.setImage(hand3.getImage());
                 hand3Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[2], 4, ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
                 //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -793,14 +786,8 @@ public class GameViewModel {
                 register5.setImage(hand4.getImage());
                 hand4Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[3],4,ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
                 //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -838,14 +825,7 @@ public class GameViewModel {
                 register5.setImage(hand5.getImage());
                 hand5Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[4],4,ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
-                //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -883,14 +863,7 @@ public class GameViewModel {
                 register5.setImage(hand6.getImage());
                 hand6Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[5], 4, ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
-                //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -928,14 +901,7 @@ public class GameViewModel {
                 register5.setImage(hand7.getImage());
                 hand7Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[6], 4, ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
-                //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -973,14 +939,7 @@ public class GameViewModel {
                 register5.setImage(hand8.getImage());
                 hand8Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[7],4,ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
-                //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -1018,14 +977,7 @@ public class GameViewModel {
                 register5.setImage(hand9.getImage());
                 hand9Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[8],4,ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
-                //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
