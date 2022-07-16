@@ -104,7 +104,7 @@ public class ExtraCrispy extends Board {
 
         map[1][8][0] = empty;
         map[1][8][1] = empty;
-        map[1][0][2] = empty;
+        map[1][8][2] = empty;
 
         map[1][9][0] = empty;
         map[1][9][1] = empty;
@@ -214,7 +214,7 @@ public class ExtraCrispy extends Board {
 
         map[3][8][0]= new Laser(currentGame, 1,Direction.LEFT);
         map[3][8][1]= new Wall(currentGame, Direction.RIGHT);
-        map[3][9][2] = empty;
+        map[3][8][2] = empty;
 
         map[3][9][0]= new Pit(currentGame);
         map[3][9][1] = empty;

@@ -386,6 +386,9 @@ public class ServerThread implements Runnable {
                 }
                 for(ServerThread serverThread : connectedClients){
                     serverThread.setBoard(this.board);
+                    if (this.board.getName().equals("DeathTrap")){
+                        serverThread.getPlayer().getOwnRobot().setDeathTrapDirection();
+                    }
                 }
                 if (allPlayerReady() && connectedClients.size() >= 2 && board != null){
                     startGame(this.board);
