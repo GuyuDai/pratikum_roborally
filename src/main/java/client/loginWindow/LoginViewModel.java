@@ -2,7 +2,6 @@ package client.loginWindow;
 
 
 import client.*;
-import client.AI.AI;
 import com.google.gson.*;
 import javafx.beans.binding.*;
 import javafx.event.*;
@@ -13,7 +12,6 @@ import javafx.scene.layout.*;
 import javafx.stage.*;
 import protocol.*;
 import protocol.ProtocolFormat.*;
-
 import java.io.*;
 import java.util.*;
 
@@ -25,7 +23,6 @@ public class LoginViewModel {
 
     public static String window = "Login";
     public int figure;
-
     public boolean robotSelected=false;
     private static LoginViewModel instance;
     @FXML
@@ -82,7 +79,7 @@ public class LoginViewModel {
     }
 
     /**
-     * function when robot is selected
+     * function when robot button is selected
      */
     public void selectBot(ActionEvent actionEvent){
         if(buttonHammer.isSelected()){
@@ -119,7 +116,7 @@ public class LoginViewModel {
 
 
     /**
-     * disable button when it is selected by a player
+     * check which robots are already taken and disable button accordingly
      */
       public void checkRobot() {
           takenRobotNumbers = Client.getClientReceive().getRobotNumbers();
@@ -146,6 +143,10 @@ public class LoginViewModel {
               }
           }
       }
+
+    /**
+     * initialize player with chosen name and robot -> Lobby window opens
+     */
     public void initPlayer(ActionEvent actionEvent) throws IOException {
         String name =nameInput.getText();
         Message message = new PlayerValues(name, figure);
@@ -158,6 +159,7 @@ public class LoginViewModel {
         setWindowName("Lobby");
         openLobbyWindow();
     }
+
 
     public void openLobbyWindow(){
         try {
@@ -184,45 +186,4 @@ public class LoginViewModel {
         return window;
     }
 
-
-
-    @FXML
-    public Button AIButton;
-
-    //init AI with Robot and Name
-    public void initAI(ActionEvent actionEvent) throws IOException {
-        new AI().init();
-        //AI newAIClient=new AI();
-        nameInput.setText("AI");
-        String name = nameInput.getText();
-        for (int j = 1; j <= 6; j++) {
-            freeRobotNumber.add(j);
-        }
-        int i = 0;
-        while (i < freeRobotNumber.size()) {
-            for (int number : Client.getClientReceive().getRobotNumbers()) {
-                if (freeRobotNumber.get(i) == number) {
-                    freeRobotNumber.remove(i);
-                    i=0;
-                }
-                else{
-                    i++;
-            }
-        }
-    }
-        figure=freeRobotNumber.get(0);
-        AI.getAiReceive().sendMessage(new PlayerValues(name,figure).toString());
-        AI.getAiReceive().sendMessage(new SetStatus(true).toString());
-    }
-    public void openGameWindow(){
-        try {
-            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Game.fxml"));
-            Parent rootGame = (Parent) fxmlLoaderGame.load();
-            Stage stageGame = new Stage();
-            stageGame.setTitle("Dizzy Highway");
-            stageGame.setScene(new Scene(rootGame));
-            stageGame.show();
-        } catch (Exception e){
-        }
-    }
 }

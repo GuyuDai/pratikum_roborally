@@ -1,7 +1,6 @@
 package client.gameWindow;
 
 import client.*;
-import client.AI.AI;
 import client.lobbyWindow.*;
 import com.google.gson.*;
 import javafx.animation.*;
@@ -105,18 +104,14 @@ public class GameViewModel {
     private Button sendBtn;
     @FXML
     private Button playCardBtn;
-
     @FXML
     private Button startGameButton;
-
     @FXML
     private Button selectMapButton;
     @FXML
     private Button getCardsButton;
-
     @FXML
     private Button printMapButton;
-
     @FXML
     private Button moveRobotButton;
 
@@ -125,22 +120,7 @@ public class GameViewModel {
      * starting points
      */
     @FXML
-    private Button start1;
-
-    @FXML
-    private Button start2;
-
-    @FXML
-    private Button start3;
-
-    @FXML
-    private Button start4;
-
-    @FXML
-    private Button start5;
-
-    @FXML
-    private Button start6;
+    private Button start1, start2, start3, start4, start5, start6;
 
 
     /**
@@ -228,6 +208,7 @@ public class GameViewModel {
     ImageView playerBot1, playerBot2, playerBot3,playerBot4, playerBot5, playerBot6;
     @FXML
     Label playerName1, playerName2, playerName3, playerName4, playerName5, playerName6 ;
+
 
     /**
      * others
@@ -328,8 +309,6 @@ public class GameViewModel {
         this.list = list;
         this.input = input;
         this.sendBtn = sendBtn;
-        this.hand = hand;
-        //this.currentPlayer = currentPlayer;
     }
 
 
@@ -351,15 +330,19 @@ public class GameViewModel {
 
     @FXML
     public void sendButtonAction(ActionEvent actionEvent) throws IOException {
-        String message = model.getTextFieldContent().get();
+        String message = input.getText();
         checkInput(message);
-        model.getTextFieldContent().set("");
+        input.setText("");
         input.requestFocus();
+        list.setItems(model.getListContentProperty());
     }
 
+
+    /**
+     * checks if it is a direct message or a message for all
+     */
     public void checkInput(String message){
         String chatToSend = "";
-
         if(message.startsWith("@")) {
             chatToSend = createDirectMessage(message);
 
@@ -618,7 +601,6 @@ public class GameViewModel {
                     hand9.setImage(cardImage);
                     break;
             }
-
         }
     }
 
@@ -1048,8 +1030,11 @@ public class GameViewModel {
      */
     public void autoFillRegister() {
         for (int i = 1; i < 10; i++) {
-            if (getRegisterCount() <= 5) {
+            if (getRegisterCount() < 5) {
                 Text.setText("Time is gone! Your register will be filled automatically!");
+            } else {
+            }
+            if (getRegisterCount() <= 5) {
                 switch (i) {
                     case 1:
                         try {
@@ -1141,7 +1126,6 @@ public class GameViewModel {
     /**
      * start game button -> show button get Cards
      */
-
     public void startGameButtonAction(ActionEvent actionEvent) {
         for(int id:Client.getClientReceive().getIdList()){
                int robotNumber=Client.getClientReceive().getRobotById(id);
@@ -1156,6 +1140,9 @@ public class GameViewModel {
     }
 
 
+    /**
+     * selected map gets printed on the GUI as well as the player characters
+     */
     public void printMapGUI(String setMapSelection) {
         Board board=null;
         switch (setMapSelection) {
@@ -1385,7 +1372,6 @@ public class GameViewModel {
                 /**
                  * URLs for Extra Crispy
                  */
-
                 URL blueRotatingDownLeft = getClass().getResource("/bluePanelExtraCrispy/blueRotatingDownLeft.png");
                 Image imageBlueRotatingDownLeft = new Image(blueRotatingDownLeft.toString());
 
@@ -1403,7 +1389,6 @@ public class GameViewModel {
                 /**
                  * green Conveyor belt for Death trap and Lost Bearings
                  */
-
                 URL RBGreenUpLeft2 = getClass().getResource("/greenPanelDeathTrap/RBGreenUpLeft2.png");
                 Image imageRBGreenUpLeft2 = new Image(RBGreenUpLeft2.toString());
 
@@ -1453,8 +1438,6 @@ public class GameViewModel {
 
                 URL blueRBUpLeft = getClass().getResource("/RBTwister/blueRBUpLeft.png");
                 Image imageBlueRBUpLeft = new Image(blueRBUpLeft.toString());
-
-
 
 
 
@@ -1998,12 +1981,11 @@ public class GameViewModel {
         return startingPointCount;
     }
 
-
+    /**
+     * move Checkpoints on Conveyorbelt in Twister Map
+     */
     public void moveCheckpointTwister(int moveNumber){
 
-        /**
-         * checkpoints
-         */
         URL checkPoint1 = getClass().getResource("/Checkpoints/Checkpoint1.png");
         Image imageCheckPoint1 = new Image(checkPoint1.toString());
 
@@ -2031,7 +2013,6 @@ public class GameViewModel {
 
 
         switch(moveNumber){
-
             case 1:
                 checkBoard.getChildren().clear();
 
@@ -2066,7 +2047,6 @@ public class GameViewModel {
                 break;
         }
     }
-
 
 
     /**
@@ -2253,14 +2233,14 @@ public class GameViewModel {
                    setRobotOnBoard(6);
                    break;
            }
-        //checkStart();
         startGameButton.setVisible(true);
         selectStartingPoint.setVisible(false);
     }
 
 
-
-
+    /**
+     * show robot movement on map
+     */
     public void moveRobot() {
         robotBoard.getChildren().clear();
         for (int clientId : Client.getClientReceive().getIdPosition().keySet()) {
@@ -2328,6 +2308,9 @@ public class GameViewModel {
     }
 
 
+    /**
+     * set your robot on its starting point on the GUI
+     */
     public void setRobotOnBoard(int startingPointNumber){
         int yourId=Client.getClientReceive().getClientID();
         int yourRobotNumber=Client.getClientReceive().getRobotById(yourId);
@@ -2409,7 +2392,7 @@ public class GameViewModel {
 
 
     /**
-     * see other robots on their starting point on your GUI
+     * set other robots on their starting point on the GUI
      */
     public void setOtherRobotOnBoard(int otherRobotNumber,int startingPointNumber){
                 Image otherRobotImage = null;
@@ -2496,7 +2479,7 @@ public class GameViewModel {
 
 
     /**
-     * counter helpers
+     * counter helper
      */
     int clickCounter = 1;
 
@@ -2588,10 +2571,12 @@ public class GameViewModel {
          }
     }
 
+    /**
+     * show 9 hand cards to choose from
+     */
     public void getCardsButtonAction(ActionEvent actionEvent) {
         getCardsButton.setVisible(false);
 
-        //make hand buttons visible
         hand1Button.setVisible(true);
         hand2Button.setVisible(true);
         hand3Button.setVisible(true);
@@ -2613,6 +2598,9 @@ public class GameViewModel {
         }
     }
 
+    /**
+     * rotation movement of the robot
+     */
     public void rotateRobot(ImageView robotPic,int id) {
             switch (Client.getClientReceive().getIdDirection().get(id)) {
                 case "counterclockwise":
@@ -2792,13 +2780,9 @@ public class GameViewModel {
         this.checkpointMoveCounter = count;
     }
 
-    public int getcheckpointMoveCounter(){
-        return checkpointMoveCounter;
-    }
-
 
     /**
-     * robots of all players will move and the checkpoints of Twister as well
+     * show movement of all robots and board elements
      */
     public void moveRobotButtonAction(ActionEvent actionEvent) {
         String selectedMap = Client.getClientReceive().getBoard();
