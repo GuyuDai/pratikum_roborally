@@ -356,7 +356,7 @@ public class Twister extends Board{
         map[8][4][1] = empty;
 
         map[8][5][0] = new ConveyBelt(currentGame,2, Direction.LEFT);
-        map[8][5][1] = new CheckPoint(currentGame,3);
+        map[8][5][1] = empty;
 
         map[8][6][0] = new RotatingBelt(currentGame,2,Direction.LEFT, Direction.DOWN);
         map[8][6][1] = empty;

@@ -51,8 +51,8 @@ public class ExtraCrispy extends Board {
         map[0][8][1] = empty;
         map[0][8][2] = empty;
 
-        map[0][9][1] = new Wall(currentGame, Direction.LEFT);
         map[0][9][0] = new Laser(currentGame, 1,Direction.LEFT);
+        map[0][9][1] = new Wall(currentGame, Direction.LEFT);
         map[0][9][2] = empty;
 
         map[0][10][0] = new Laser(currentGame, 1,Direction.LEFT);
@@ -243,8 +243,8 @@ public class ExtraCrispy extends Board {
         map[4][1][1] = empty;
         map[4][1][2] = empty;
 
-        map[4][2][1]= new Wall(currentGame, Direction.RIGHT);
         map[4][2][0] = empty;
+        map[4][2][1]= new Wall(currentGame, Direction.RIGHT);
         map[4][2][2] = empty;
 
         map[4][3][1] = new Wall(currentGame, Direction.UP);
@@ -295,12 +295,12 @@ public class ExtraCrispy extends Board {
         map[5][1][1] = empty;
         map[5][1][2] = empty;
 
-        map[5][2][1]= new Wall(currentGame, Direction.RIGHT);
         map[5][2][0] = empty;
+        map[5][2][1]= new Wall(currentGame, Direction.RIGHT);
         map[5][2][2] = empty;
 
-        map[5][3][1] = new Wall(currentGame, Direction.DOWN);
         map[5][3][0] = empty;
+        map[5][3][1] = new Wall(currentGame, Direction.DOWN);
         map[5][3][2] = empty;
 
         map[5][4][0] = empty;
@@ -437,9 +437,9 @@ public class ExtraCrispy extends Board {
         map[7][9][1] = empty;
         map[7][9][2] = empty;
 
-        map[7][10][2] = new CheckPoint(currentGame,3);
-        map[7][10][1]= new Wall(currentGame,Direction.DOWN);
         map[7][10][0]= new Laser(currentGame, 1, Direction.DOWN);
+        map[7][10][1]= new Wall(currentGame,Direction.DOWN);
+        map[7][10][2] = new CheckPoint(currentGame,3);
 
         map[7][11][0] = new ConveyBelt(currentGame,2, Direction.UP);
         map[7][11][1] = empty;
@@ -523,8 +523,8 @@ public class ExtraCrispy extends Board {
         map[9][3][1] = empty;
         map[9][3][2] = empty;
 
-        map[9][4][1] = new Wall(currentGame,Direction.LEFT);
         map[9][4][0] = new Laser(currentGame, 1, Direction.RIGHT);
+        map[9][4][1] = new Wall(currentGame,Direction.LEFT);
         map[9][4][2] = empty;
 
         map[9][5][0] = new Laser(currentGame, 1, Direction.RIGHT);

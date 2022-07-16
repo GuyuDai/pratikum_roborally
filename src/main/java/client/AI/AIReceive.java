@@ -3,6 +3,7 @@ package client.AI;
 import client.*;
 import com.google.gson.*;
 import protocol.*;
+import protocol.CurrentPlayer.CurrentPlayerBody;
 import protocol.ErrorMessage.ErrorMessageBody;
 import protocol.PlayerAdded.*;
 import protocol.ProtocolFormat.*;
@@ -22,6 +23,7 @@ public class AIReceive extends ClientReceive {
   public static final String ANSI_GREEN = "\u001B[32m";
   private Random random = new Random();
   private int pointerForRegister = 0;
+  private String[] cardsInRegister = new String[5];
   private CopyOnWriteArrayList<Integer> availableStartingPoints = new CopyOnWriteArrayList<Integer>();
 
   private CopyOnWriteArrayList<Integer> availableFigures = new CopyOnWriteArrayList<Integer>();
@@ -233,12 +235,16 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.currentPlayer:
-        sendMessage(new PlayCard(cards[pointerForRegister]).toString());
-        //Um ein Register für die aktuelle Runde auszuwählen, schickt der Client folgende Nachricht.
-        sendMessage(new ChooseRegister(pointerForRegister).toString());
-        pointerForRegister++;
-        if(pointerForRegister == 5){
-          pointerForRegister = 0;
+        CurrentPlayerBody currentPlayerBody = new Gson().fromJson(body, CurrentPlayerBody.class);
+        if(clientID == currentPlayerBody.getClientID()){
+          sendMessage(new PlayCard(cardsInRegister[pointerForRegister]).toString());
+          //Um ein Register für die aktuelle Runde auszuwählen, schickt der Client folgende Nachricht.
+          sendMessage(new ChooseRegister(pointerForRegister).toString());
+          pointerForRegister++;
+          if(pointerForRegister == 5){
+            pointerForRegister = 0;
+            cardsInRegister = new String[5];
+          }
         }
         break;
 
@@ -289,9 +295,7 @@ public class AIReceive extends ClientReceive {
         RegisterChosen.RegisterChosenBody registerChosenBody= new Gson().fromJson(body, RegisterChosen.RegisterChosenBody.class);
         int clientID = registerChosenBody.getClientID();
         int register = registerChosenBody.getRegister();
-
         break;
-
 
     }
   }
@@ -382,6 +386,7 @@ public class AIReceive extends ClientReceive {
     for(int i = 0; i < 5; i++){
       //int cardIndex = random.nextInt(cards.length - 1);
       sendMessage(new SelectedCard(cards[i],register,getClientID()).toString());
+      cardsInRegister[i] = cards[i];
       register++;
     }
     //reset attributions
@@ -400,7 +405,7 @@ public class AIReceive extends ClientReceive {
       cardsList.add(damageDecks[damageIndex]);
       damageCount--;
     }
-    sendMessage(new SelectedDamage(cardsList.toArray(new String[0])).toString());
+    sendMessage(new SelectedDamage(cardsList.toArray(new String[cardsList.size()])).toString());
   }
 
   private void aiReboot(){

@@ -2,6 +2,7 @@ package server;
 
 import client.ClientReceive;
 import com.google.gson.Gson;
+import java.util.HashMap;
 import server.BoardElement.BoardElem;
 import server.BoardElement.ConveyBelt;
 import server.BoardTypes.Board;

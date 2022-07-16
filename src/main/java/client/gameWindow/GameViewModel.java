@@ -228,10 +228,17 @@ public class GameViewModel {
     @FXML
     GridPane gameboard, startBoard, robotBoard, checkBoard;
 
+
+    @FXML
+    Button showDamage;
+
+
+
     public String window = "Game";
     public ProgrammingDeck deck = new ProgrammingDeck();
 
-    String[] allTakenStaringPoint;
+    ArrayList<String> tempDrawDamage = new ArrayList<String>();
+
 
 
     /**
@@ -536,6 +543,7 @@ public class GameViewModel {
                     case 6:
                         playerBot6.setImage(otherRobotIcon);
                         playerName6.setText(playerName);
+                        break;
                 }
             }
         }
@@ -639,6 +647,17 @@ public class GameViewModel {
     public int getRegisterCount() { return registerCount; }
 
 
+    public void handle5thRegister() {
+        Text.setText("Players have 30 seconds left to finish their register.");
+        PauseTransition thirty = new PauseTransition(Duration.seconds(30));
+        thirty.setOnFinished(e -> playCardBtn.setVisible(true));
+        thirty.play();
+        PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
+        textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
+        textAppear2.play();
+    }
+
+
     /**
      * pick your register of 5 cards from your hands of 9 cards
      */
@@ -675,14 +694,8 @@ public class GameViewModel {
                 register5.setImage(hand1.getImage());
                 hand1Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[0], 4,ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
                 //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -720,14 +733,8 @@ public class GameViewModel {
                 register5.setImage(hand2.getImage());
                 hand2Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[1], 4, ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
                 //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -765,14 +772,8 @@ public class GameViewModel {
                 register5.setImage(hand3.getImage());
                 hand3Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[2], 4, ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
                 //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -810,14 +811,8 @@ public class GameViewModel {
                 register5.setImage(hand4.getImage());
                 hand4Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[3],4,ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
                 //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -855,14 +850,7 @@ public class GameViewModel {
                 register5.setImage(hand5.getImage());
                 hand5Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[4],4,ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
-                //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -900,14 +888,7 @@ public class GameViewModel {
                 register5.setImage(hand6.getImage());
                 hand6Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[5], 4, ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
-                //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -945,14 +926,7 @@ public class GameViewModel {
                 register5.setImage(hand7.getImage());
                 hand7Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[6], 4, ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
-                //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -990,14 +964,7 @@ public class GameViewModel {
                 register5.setImage(hand8.getImage());
                 hand8Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[7],4,ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
-                //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -1035,14 +1002,7 @@ public class GameViewModel {
                 register5.setImage(hand9.getImage());
                 hand9Button.setVisible(false);
                 Client.getClientReceive().sendMessage(new SelectedCard(cards[8],4,ID).toString());
-                Text.setText("Players have 30 seconds left to finish their register.");
-                //after 30 seconds the play Cards button will appear
-                PauseTransition thirty = new PauseTransition(Duration.seconds(30));
-                thirty.setOnFinished(e -> playCardBtn.setVisible(true));
-                thirty.play();
-                PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-                textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
-                textAppear2.play();
+                handle5thRegister();
                 break;
         }
     }
@@ -2297,6 +2257,10 @@ public class GameViewModel {
            // remove2.setOnFinished(e -> robotBoard.getChildren().remove(1));
           //  remove2.play();
         }
+        if(Client.getClientReceive().isPickDamage()){
+            showDamage.setVisible(true);
+            //TODO: set a text to remind player pickDamageCard
+        }
         printRobotLaser();
 
     }
@@ -2498,8 +2462,7 @@ public class GameViewModel {
 
 
 
-    public void playDamageCards(ActionEvent actionEvent) {
-    }
+
 
 
     /**
@@ -2918,6 +2881,97 @@ public class GameViewModel {
           }
       }
   }
+  int clickDamageCounter=1;
+    @FXML
+    private Button registerDamage;
+    @FXML
+    private Button spam;
+    @FXML
+    private Button worm;
+    @FXML
+    private Button virus;
+    @FXML
+    private Button trojan;
+
+
+    public void  playSpamCards(ActionEvent event){
+        if(clickDamageCounter<=Client.getClientReceive().getDamageCount()) {
+            tempDrawDamage.add("Spam");
+            clickCounter++;
+        }
+        else {
+            registerDamage.setVisible(true);
+        }
+ }
+    public void  playVirusCards(ActionEvent event){
+     if(clickCounter<=Client.getClientReceive().getDamageCount()){
+         tempDrawDamage.add("Virus");
+         clickCounter++;
+     }
+     else {
+         registerDamage.setVisible(true);
+     }
+
+    }
+    public void  playWormCards(ActionEvent event){
+     if(clickCounter<=Client.getClientReceive().getDamageCount()){
+         tempDrawDamage.add("Worm");
+         clickCounter++;
+     }
+     else {
+         registerDamage.setVisible(true);
+     }
+
+    }
+    public void  playTrojanCards(ActionEvent event){
+     if(clickCounter<=Client.getClientReceive().getDamageCount()){
+         tempDrawDamage.add("Trojan");
+         clickCounter++;
+     }
+     else {
+         registerDamage.setVisible(true);
+     }
+
+    }
+    public void registerDamageAction(ActionEvent event) {
+        String[] selectedDamageCards = tempDrawDamage.toArray(new String[tempDrawDamage.size()]);
+        Client.getClientReceive().sendMessage(new SelectedDamage(selectedDamageCards).toString());
+        tempDrawDamage = new ArrayList<>();
+        clickCounter = 1;
+        spam.setVisible(false);
+        worm.setVisible(false);
+        trojan.setVisible(false);
+        virus.setVisible(false);
+        Client.getClientReceive().setPickDamage(false);
+        showDamage.setVisible(false);
+        registerDamage.setVisible(false);
+
+    }
+
+    public void showDamageCards(ActionEvent event) {
+
+        for(String damageCard: Client.getClientReceive().getDamageDecks()){
+            switch (damageCard){
+                case "Spam":
+                    spam.setVisible(true);
+                    break;
+                case "Worm":
+                    worm.setVisible(true);
+                    break;
+                case "Trojan":
+                    trojan.setVisible(true);
+                    break;
+                case"Virus":
+                    virus.setVisible(true);
+                    break;
+            }
+
+        }
+
+    }
+
+
+
 }
 
 

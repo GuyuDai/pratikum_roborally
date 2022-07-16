@@ -14,7 +14,6 @@ import java.io.*;
 import java.net.*;
 import java.util.Map;
 import java.util.*;
-import java.util.logging.*;
 
 
 public class ClientReceive extends Thread{
@@ -23,8 +22,6 @@ public class ClientReceive extends Thread{
 
     protected int clientID;
     protected Socket socket;
-
-    protected GameViewModel model;
     protected BufferedReader readInput;
     protected BufferedWriter writeOutput;
     protected static final String PROTOCOL = "Version 2.0";
@@ -76,6 +73,8 @@ public class ClientReceive extends Thread{
     protected int counterRegister = 0;
 
     protected boolean doRobotLaser=false;
+
+    protected boolean pickDamage =false;
 
 
     public void setCounterRegister(int count){
@@ -323,7 +322,7 @@ public class ClientReceive extends Thread{
                 chatMsg=receivedChatBody.getMessage();
                 fromId=receivedChatBody.getFrom();
                 isPrivate=receivedChatBody.isPrivate();
-                receiveChat(chatMsg);  //reminder: there cause a "Toolkit not initialized" error
+                receiveChat(chatMsg);
                 break;
 
             case MessageType.selectMap:
@@ -363,6 +362,7 @@ public class ClientReceive extends Thread{
                 PickDamage.PickDamageBody pickDamageBody=new Gson().fromJson(body, PickDamage.PickDamageBody.class);
                 damageDecks=pickDamageBody.getAvailablePiles();
                 damageCount=pickDamageBody.getCount();
+                pickDamage =true;
                 break;
 
             case MessageType.startingPointTaken:
@@ -469,8 +469,6 @@ public class ClientReceive extends Thread{
                 int clientID = registerChosenBody.getClientID();
                 int register = registerChosenBody.getRegister();
                 break;
-
-
 
         }
     }
@@ -668,6 +666,29 @@ public class ClientReceive extends Thread{
 
     public boolean isDoRobotLaser() {
         return doRobotLaser;
+    }
+
+    public String[] getDamageDecks() {
+        return damageDecks;
+    }
+
+    public int getDamageCount() {
+        return damageCount;
+    }
+
+    public boolean isPickDamage() {
+        return pickDamage;
+    }
+    public void setPickDamage(boolean pickDamage){
+        this.pickDamage = pickDamage;
+    }
+
+    public void setDamageCount(int damageCount) {
+        this.damageCount = damageCount;
+    }
+
+    public void setDamageDecks(String[] damageDecks) {
+        this.damageDecks = damageDecks;
     }
 
     public void setDoRobotLaser(boolean doRobotLaser) {
