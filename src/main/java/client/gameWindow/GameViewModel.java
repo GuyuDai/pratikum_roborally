@@ -326,7 +326,6 @@ public class GameViewModel {
     }
 
     public static void show(String message) {
-        System.out.println(message); //test
         model.addNewListItem(message);
     }
 
@@ -336,8 +335,13 @@ public class GameViewModel {
         checkInput(message);
         input.setText("");
         input.requestFocus();
+        list.setItems(model.getListContentProperty());
     }
 
+
+    /**
+     * checks if it is a direct message or a message for all
+     */
     public void checkInput(String message){
         String chatToSend = "";
         if(message.startsWith("@")) {

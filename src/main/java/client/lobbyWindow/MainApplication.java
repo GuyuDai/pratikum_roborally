@@ -1,6 +1,5 @@
 package client.lobbyWindow;
 
-import client.gameWindow.GameView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -66,7 +65,6 @@ public class MainApplication extends Application {
             }
         } else {
             root = new LobbyView();
-            root = new GameView();
         }
         return new Scene(root);
     }
