@@ -2876,6 +2876,13 @@ public class GameViewModel {
           }
       }
   }
+
+  public void registerDamageAction(ActionEvent event){
+
+  }
+
+
+
 }
 
 
