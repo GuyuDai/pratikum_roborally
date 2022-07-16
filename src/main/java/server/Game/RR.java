@@ -486,16 +486,16 @@ public class RR extends Thread implements GameLogic {
 
   public String[] getAvailablePiles(){
     ArrayList<String> tempAvailablePiles = new ArrayList<String>();
-    if(controller.isCardListEmpty(gameDeck.getSpamPile())){
+    if(!controller.isCardListEmpty(gameDeck.getSpamPile())){
       tempAvailablePiles.add("Spam");
     }
-    if(controller.isCardListEmpty(gameDeck.getWormPile())){
+    if(!controller.isCardListEmpty(gameDeck.getWormPile())){
       tempAvailablePiles.add("Worm");
     }
-    if(controller.isCardListEmpty(gameDeck.getVirusPile())){
+    if(!controller.isCardListEmpty(gameDeck.getVirusPile())){
       tempAvailablePiles.add("Virus");
     }
-    if(controller.isCardListEmpty(gameDeck.getTrojanPile())){
+    if(!controller.isCardListEmpty(gameDeck.getTrojanPile())){
       tempAvailablePiles.add("Trojan");
     }
     String[] availablePiles = tempAvailablePiles.toArray(new String[0]);

@@ -470,8 +470,6 @@ public class ClientReceive extends Thread{
                 int register = registerChosenBody.getRegister();
                 break;
 
-
-
         }
     }
 
@@ -668,6 +666,22 @@ public class ClientReceive extends Thread{
 
     public boolean isDoRobotLaser() {
         return doRobotLaser;
+    }
+
+    public String[] getDamageDecks() {
+        return damageDecks;
+    }
+
+    public int getDamageCount() {
+        return damageCount;
+    }
+
+    public void setDamageCount(int damageCount) {
+        this.damageCount = damageCount;
+    }
+
+    public void setDamageDecks(String[] damageDecks) {
+        this.damageDecks = damageDecks;
     }
 
     public void setDoRobotLaser(boolean doRobotLaser) {
