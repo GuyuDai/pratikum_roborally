@@ -2621,7 +2621,6 @@ public class GameViewModel {
         } else {
         }
 
-
         //TODO if only one connected client is left he will be the winner
         System.out.println(Client.getClientReceive().getIdList().size());
         if(Client.getClientReceive().getIdList().size() < 2){
