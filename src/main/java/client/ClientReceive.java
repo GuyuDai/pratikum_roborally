@@ -31,16 +31,15 @@ public class ClientReceive extends Thread{
     protected static final String GROUP = "Origionelle Oktopusse";
     protected int playerId;
     protected String playerName;
+
     protected int figure;
     protected String chatMsg;
     protected int checkPointNumber;
-
-
-
     protected int checkPointXPosition;
     protected int checkPointYPosition;
     protected int energyStorage;
     protected int fromId;
+
     protected int register;
     protected int damageCount;
     protected boolean isPrivate;
@@ -62,7 +61,9 @@ public class ClientReceive extends Thread{
     protected Integer[] positions;
     protected String turnDirection;
     protected String animationType;
+
     protected int x;
+
     protected int y;
     protected int activePhaseNumber;
     protected int rebootClientId;
@@ -70,7 +71,6 @@ public class ClientReceive extends Thread{
     protected List<Integer> IdList = new ArrayList<>();
     protected Map<Integer,Integer> IdRobot = new HashMap<>();
     protected Map<Integer,Integer>IdStartPoint = new HashMap<>();
-
     protected Map<Integer,String> IdDirection=new HashMap<>();
 
     protected int counterRegister = 0;

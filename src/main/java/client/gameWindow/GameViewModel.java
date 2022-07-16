@@ -18,6 +18,8 @@ import server.BoardElement.*;
 import server.BoardTypes.*;
 import server.Control.*;
 import server.Deck.*;
+import server.ServerThread;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -409,6 +411,8 @@ public class GameViewModel {
     public void exitGame(ActionEvent actionEvent) {
         Stage stage = (Stage) exitBtn.getScene().getWindow();
         stage.close();
+
+        /*
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Lobby.fxml"));
             Parent rootMap = (Parent) fxmlLoader.load();
@@ -420,6 +424,27 @@ public class GameViewModel {
             Client.getLogger().severe( "Window can not open.");
         }
         LobbyViewModel.setWindowName("Lobby");
+
+         */
+
+
+        int yourId = Client.getClientReceive().getClientID();
+        String exitMessage = new ConnectionUpdate(yourId, false, "").toString();
+        Client.getClientReceive().sendMessage(exitMessage);
+
+        switch (yourId){
+            case 1:
+                Client.getClientReceive().getIdList().remove(0);
+                break;
+            case 2:
+                Client.getClientReceive().getIdList().remove(1);
+                break;
+        }
+
+        System.out.println(yourId + " has left."); //test
+        System.out.println(Client.getClientReceive().getIdList());
+
+        //TODO remove client from connected clients list
     }
 
     /**
@@ -427,10 +452,10 @@ public class GameViewModel {
      */
     public void setYourBotIcon(){
         yourBotText.setVisible(true);
-        int yourId=Client.getClientReceive().getClientID();
-        String yourName=Client.getClientReceive().getNameById(yourId);
-        int yourRobotNumber=Client.getClientReceive().getRobotById(yourId);
-        Image robotIcon=null;
+        int yourId = Client.getClientReceive().getClientID();
+        String yourName = Client.getClientReceive().getNameById(yourId);
+        int yourRobotNumber = Client.getClientReceive().getRobotById(yourId);
+        Image robotIcon = null;
         //int aiID=AIClient.getAiClientReceive().getClientID();
         switch (yourRobotNumber) {
             case 1:
@@ -2595,6 +2620,25 @@ public class GameViewModel {
             timer30Sec();
         } else {
         }
+
+
+        //TODO if only one connected client is left he will be the winner
+        System.out.println(Client.getClientReceive().getIdList().size());
+        if(Client.getClientReceive().getIdList().size() < 2){
+            Stage stage = (Stage) exitBtn.getScene().getWindow();
+            stage.close();
+
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Winner.fxml"));
+                Parent rootMap = (Parent) fxmlLoader.load();
+                Stage stageLobby = new Stage();
+                stageLobby.setTitle("Winner");
+                stageLobby.setScene(new Scene(rootMap));
+                stageLobby.show();
+            } catch (Exception e) {
+                Client.getLogger().severe( "Window can not open.");
+            }
+        }
     }
 
     /**
@@ -2770,9 +2814,6 @@ public class GameViewModel {
 
 
 
-
-
-
     int checkpointMoveCounter = 1;
 
     public void setcheckpointMoveCounter(int count){
@@ -2810,6 +2851,8 @@ public class GameViewModel {
         playCardBtn.setVisible(true);
         moveRobot();
     }
+
+
   public void printRobotLaser() {
       URL robotLaser = getClass().getResource("/robotLaser.png");
       Image imageRobotLaser = new Image(robotLaser.toString());
