@@ -229,7 +229,8 @@ public class GameViewModel {
     public String window = "Game";
     public ProgrammingDeck deck = new ProgrammingDeck();
 
-    String[] allTakenStaringPoint;
+    ArrayList<String> tempDrawDamage = new ArrayList<String>();
+
 
 
     /**
@@ -2474,8 +2475,7 @@ public class GameViewModel {
 
 
 
-    public void playDamageCards(ActionEvent actionEvent) {
-    }
+
 
 
     /**
@@ -2876,8 +2876,67 @@ public class GameViewModel {
           }
       }
   }
+  int clickDamageCounter=1;
+    @FXML
+    private Button registerDamage;
+    @FXML
+    private Button spam;
+    @FXML
+    private Button worm;
+    @FXML
+    private Button virus;
+    @FXML
+    private Button trojan;
 
+
+    public void  playSpamCards(ActionEvent event){
+        if(clickDamageCounter<=Client.getClientReceive().getDamageCount()) {
+            tempDrawDamage.add("Spam");
+            clickCounter++;
+        }
+        else {
+            registerDamage.setVisible(true);
+        }
+ }
+    public void  playVirusCards(ActionEvent event){
+     if(clickCounter<=Client.getClientReceive().getDamageCount()){
+         tempDrawDamage.add("Virus");
+         clickCounter++;
+     }
+     else {
+         registerDamage.setVisible(true);
+     }
+
+    }
+    public void  playWormCards(ActionEvent event){
+     if(clickCounter<=Client.getClientReceive().getDamageCount()){
+         tempDrawDamage.add("Worm");
+         clickCounter++;
+     }
+     else {
+         registerDamage.setVisible(true);
+     }
+
+    }
+    public void  playTrojanCards(ActionEvent event){
+     if(clickCounter<=Client.getClientReceive().getDamageCount()){
+         tempDrawDamage.add("Trojan");
+         clickCounter++;
+     }
+     else {
+         registerDamage.setVisible(true);
+     }
+
+    }
   public void registerDamageAction(ActionEvent event){
+     String[] selectedDamageCards= tempDrawDamage.toArray(new String[tempDrawDamage.size()]);
+     Client.getClientReceive().sendMessage(new SelectedDamage(selectedDamageCards).toString());
+     tempDrawDamage=new ArrayList<>();
+     clickCounter=1;
+     spam.setVisible(false);
+     worm.setVisible(false);
+     trojan.setVisible(false);
+     virus.setVisible(false);
 
   }
 

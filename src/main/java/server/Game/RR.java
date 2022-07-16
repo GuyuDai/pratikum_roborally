@@ -601,7 +601,7 @@ public class RR extends Thread implements GameLogic {
     if(!controller.isCardListEmpty(gameDeck.getTrojanPile())){
       tempAvailablePiles.add("Trojan");
     }
-    String[] availablePiles = tempAvailablePiles.toArray(new String[0]);
+    String[] availablePiles = tempAvailablePiles.toArray(new String[tempAvailablePiles.size()]);
     return availablePiles;
   }
 }

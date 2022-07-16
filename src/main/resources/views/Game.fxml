@@ -125,10 +125,10 @@
                      <font>
                         <Font size="11.0" />
                      </font></Label>
-                  <Button fx:id="worm" graphicTextGap="0.0" minWidth="77.0" mnemonicParsing="false" onAction="#playDamageCards" prefHeight="100.0" prefWidth="77.0" styleClass="worm" stylesheets="@../styles.css" />
-                  <Button fx:id="virus" mnemonicParsing="false" onAction="#playDamageCards" styleClass="virus" stylesheets="@../styles.css" GridPane.columnIndex="1" />
-                  <Button fx:id="spam" mnemonicParsing="false" onAction="#playDamageCards" styleClass="spam" stylesheets="@../styles.css" GridPane.columnIndex="2" />
-                  <Button fx:id="trojan" mnemonicParsing="false" onAction="#playDamageCards" styleClass="trojan" stylesheets="@../styles.css" GridPane.columnIndex="3" />
+                  <Button fx:id="worm" graphicTextGap="0.0" minWidth="77.0" mnemonicParsing="false" onAction="#playWormCards" prefHeight="100.0" prefWidth="77.0" styleClass="worm" stylesheets="@../styles.css" />
+                  <Button fx:id="virus" mnemonicParsing="false" onAction="#playVirusCards" styleClass="virus" stylesheets="@../styles.css" GridPane.columnIndex="1" />
+                  <Button fx:id="spam" mnemonicParsing="false" onAction="#playSpamCards" styleClass="spam" stylesheets="@../styles.css" GridPane.columnIndex="2" />
+                  <Button fx:id="trojan" mnemonicParsing="false" onAction="#playTrojanCards" styleClass="trojan" stylesheets="@../styles.css" GridPane.columnIndex="3" />
                </children>
             </GridPane>
             <Label layoutX="88.0" layoutY="489.0" prefHeight="59.0" prefWidth="130.0" text="DAMAGE CARDS" textFill="#fcfafa">
