@@ -2614,6 +2614,7 @@ public class GameViewModel {
         printCards();
     }
 
+
     public void MouseAction(MouseEvent mouseEvent) {
         //timer only appears for the players that need to finish their register
         if(getRegisterCount() < 5){
