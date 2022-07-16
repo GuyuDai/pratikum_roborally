@@ -72,5 +72,3 @@ public class MainApplication extends Application {
         launch(args);
     }
 }
-
-    /**/

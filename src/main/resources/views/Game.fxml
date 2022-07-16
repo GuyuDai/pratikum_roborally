@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1251.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
+<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1251.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
    <children>
       <Pane layoutX="6.0" layoutY="3.0" prefHeight="795.0" prefWidth="305.0" stylesheets="@../styles.css">
          <children>
@@ -65,7 +65,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Pane fx:id="selectStartingPoint" layoutX="40.0" layoutY="86.0" prefHeight="188.0" prefWidth="253.0" visible="false">
+                  <Pane fx:id="selectStartingPoint" layoutX="40.0" layoutY="86.0" prefHeight="188.0" prefWidth="253.0">
                      <children>
                         <Label fx:id="textStartingPoint" layoutX="20.0" layoutY="1.0" prefHeight="27.0" prefWidth="358.0" text="Select your Starting Point" textFill="WHITE">
                            <font>
@@ -97,7 +97,7 @@
                   <ImageView fx:id="playerBot41" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
-            <GridPane fx:id="damageRegister" layoutX="-5.0" layoutY="630.0" prefHeight="135.0" prefWidth="309.0" style="-fx-background-radius: 20;">
+            <GridPane fx:id="damageRegister" layoutX="-3.0" layoutY="561.0" prefHeight="135.0" prefWidth="309.0" style="-fx-background-radius: 20;">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="79.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -131,11 +131,12 @@
                   <Button fx:id="trojan" mnemonicParsing="false" onAction="#playDamageCards" styleClass="trojan" stylesheets="@../styles.css" GridPane.columnIndex="3" />
                </children>
             </GridPane>
-            <Label layoutX="91.0" layoutY="554.0" prefHeight="59.0" prefWidth="130.0" text="DAMAGE CARDS" textFill="#fcfafa">
+            <Label layoutX="88.0" layoutY="489.0" prefHeight="59.0" prefWidth="130.0" text="DAMAGE CARDS" textFill="#fcfafa">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
+            <Button fx:id="registerDamage" layoutX="72.0" layoutY="720.0" mnemonicParsing="false" onAction="#registerDamageAction" prefHeight="26.0" prefWidth="155.0" text="Register DamageCard" />
          </children>
       </Pane>
       <VBox layoutX="322.0" layoutY="1.0" prefHeight="797.0" prefWidth="557.0">

@@ -1,7 +1,6 @@
 package client.lobbyWindow;
 
 import java.io.IOException;
-
 import client.Client;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
@@ -22,7 +21,7 @@ import protocol.SetStatus;
 
 
 /**
- * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
+ * @author Nargess Ahmadi, Felicia Saruba, Minghao Li
  */
 
 
@@ -66,18 +65,6 @@ public class LobbyViewModel {
     }
 
 
-    public void openGameWindow(){
-        try {
-            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Game.fxml"));
-            Parent rootGame = (Parent) fxmlLoaderGame.load();
-            Stage stageGame = new Stage();
-            stageGame.setTitle("Dizzy Highway");
-            stageGame.setScene(new Scene(rootGame));
-            stageGame.show();
-        } catch (Exception e){
-        }
-    }
-
     public LobbyViewModel() {
         model = LobbyModel.getInstance();
     }
@@ -98,6 +85,28 @@ public class LobbyViewModel {
         model.addNewListItem(message);
     }
 
+    public void openGameWindow(){
+        try {
+            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Game.fxml"));
+            Parent rootGame = (Parent) fxmlLoaderGame.load();
+            Stage stageGame = new Stage();
+            stageGame.setTitle("Dizzy Highway");
+            stageGame.setScene(new Scene(rootGame));
+            stageGame.show();
+        } catch (Exception e){
+        }
+    }
+
+    @FXML
+    public void sendButtonAction(ActionEvent actionEvent) throws IOException {
+        String message = model.getTextFieldContent().get();
+        System.out.println(message);
+        checkInput(message);
+
+        model.getTextFieldContent().set("");
+        input.requestFocus();
+    }
+
 
     /**
      * send messages using keyboard "Enter" key
@@ -108,18 +117,6 @@ public class LobbyViewModel {
             sendButtonAction(null);
         }
     }
-
-
-    @FXML
-    public void sendButtonAction(ActionEvent actionEvent) throws IOException {
-        String message = model.getTextFieldContent().get();
-        System.out.println(message); //test
-        checkInput(message);
-
-        model.getTextFieldContent().set("");
-        input.requestFocus();
-    }
-
 
     /**
      * checks if it is a direct message or a message for all

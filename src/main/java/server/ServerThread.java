@@ -15,6 +15,7 @@ import protocol.ActivePhase.ActivePhaseBody;
 import protocol.Animation.AnimationBody;
 import protocol.CardPlayed.CardPlayedBody;
 import protocol.CardSelected.CardSelectedBody;
+import protocol.ChooseRegister.ChooseRegisterBody;
 import protocol.HelloServer.HelloServerBody;
 import protocol.PlayCard.PlayCardBody;
 import protocol.PlayerValues.PlayerValuesBody;
@@ -44,7 +45,7 @@ public class ServerThread implements Runnable {
     public static final String ANSI_GREEN = "\u001B[32m";
     private static final String PROTOCOL = "Version 2.0";
     private static final String[] MAPS = new String[]
-        {"DizzyHighway","ExtraCrispy","DeathTrap","LostBearings"};
+        {"DizzyHighway","ExtraCrispy","DeathTrap","LostBearings","Twister"};
     private Socket clientSocket;
     private BufferedReader readInput;
     private  BufferedWriter writeOutput;
@@ -411,8 +412,8 @@ public class ServerThread implements Runnable {
                 PlayCardBody playCardBody = new Gson().fromJson(body,PlayCardBody.class);
                 card = playCardBody.getCard();
                 currentGame.getActiveCards().add(card);
-                currentGame.setCurrentRound(currentGame.getCurrentRound()+1);
-                notifyAll();
+                currentGame.notifyCurrentPlayer();
+                //notifyAll();
                 sendToAll(new CardPlayed(clientID,card).toString());
                 break;
 
@@ -536,20 +537,12 @@ public class ServerThread implements Runnable {
                 }
                 break;
 
-            case MessageType.boink:
-                break;
-
-            case MessageType.checkPointMoved:
-                break;
-
             case MessageType.chooseRegister:
+                ChooseRegisterBody chooseRegisterBody = new Gson().fromJson(body, ChooseRegisterBody.class);
+                int tempRegister = chooseRegisterBody.getRegister();
+                sendToAll(new RegisterChosen(clientID,tempRegister).toString());
                 break;
 
-            case MessageType.registerChosen:
-                break;
-
-            case MessageType.returnCards:
-                break;
         }
     }
 

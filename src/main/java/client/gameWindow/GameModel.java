@@ -1,14 +1,12 @@
 package client.gameWindow;
 
 
+import client.lobbyWindow.LobbyViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
-
 
 
 /**
@@ -48,9 +46,4 @@ public class GameModel {
     public void addNewListItem(String listItem) {
         listContent.add(listItem);
     }
-
-    /*
-   private ObservableList<Image> handObservableList;
-     */
-
 }
