@@ -40,6 +40,9 @@ public class Robot implements RobotAction {
     this.faceDirection=Direction.RIGHT;
   }
 
+  public void setDeathTrapDirection(){
+    this.faceDirection=Direction.LEFT;
+  }
   public void setOwner(Player player){
     this.owner=player;
   }
