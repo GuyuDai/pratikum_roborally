@@ -20,7 +20,6 @@ import java.util.logging.*;
 
 public class AIReceive extends ClientReceive {
 
-  private static final Logger logger = Logger.getLogger(AIReceive.class.getName());
   public static final String ANSI_GREEN = "\u001B[32m";
   private Random random = new Random();
   private int pointerForRegister = 0;
@@ -55,7 +54,7 @@ public class AIReceive extends ClientReceive {
         //System.out.println(serverMessage + "-----------original message");  //test
         Message message = wrapMessage(serverMessage);
         //System.out.println("--------------------------------------------------------------");  //test
-        logger.info(ANSI_GREEN+ message + "wrapped message");  //test
+        AI.getLogger().info(ANSI_GREEN+ message + "wrapped message");  //test
         identifyMessage(message);
       }
     } catch (IOException e) {
@@ -172,7 +171,7 @@ public class AIReceive extends ClientReceive {
         //Wenn die gewünschte Position valide ist, werden alle Spieler darüber benachrichtigt.
         removeStartPointsInHashSet(takenX, takenY);
         //sendMessage(new SetStartingPoint(8,1).toString());
-        logger.info(ANSI_GREEN + "already send msg");//test
+        AI.getLogger().info(ANSI_GREEN + "already send msg");//test
         break;
 
       case MessageType.timerStarted:

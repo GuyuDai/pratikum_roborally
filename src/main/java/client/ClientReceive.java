@@ -19,7 +19,6 @@ import java.util.logging.*;
 
 public class ClientReceive extends Thread{
 
-    private static final Logger logger = Logger.getLogger(ClientReceive.class.getName());
     public static final String ANSI_GREEN = "\u001B[32m";
 
     protected int clientID;
@@ -71,6 +70,8 @@ public class ClientReceive extends Thread{
 
     protected int counterRegister = 0;
 
+    protected boolean doRobotLaser=false;
+
 
     public void setCounterRegister(int count){
         this.counterRegister = count;
@@ -109,7 +110,7 @@ public class ClientReceive extends Thread{
                 //System.out.println(serverMessage + "-----------original message");  //test
                 Message message = wrapMessage(serverMessage);
                 //System.out.println("--------------------------------------------------------------");  //test
-                logger.info( ANSI_GREEN + message + "wrapped message");  //test
+                Client.getLogger().info( ANSI_GREEN + message + "wrapped message");  //test
                 identifyMessage(message);
             }
         } catch (IOException e) {
@@ -407,6 +408,9 @@ public class ClientReceive extends Thread{
             case MessageType.animation:
                 Animation.AnimationBody animationBody=new Gson().fromJson(body,Animation.AnimationBody.class);
                 animationType=animationBody.getType();
+                if(animationType.equals("RobotLaser")){
+                    doRobotLaser=true;
+                }
                 break;
 
             case MessageType.activePhase:
@@ -460,6 +464,7 @@ public class ClientReceive extends Thread{
                 int clientID = registerChosenBody.getClientID();
                 int register = registerChosenBody.getRegister();
                 break;
+
 
 
         }
@@ -654,6 +659,14 @@ public class ClientReceive extends Thread{
 
     public List<Integer> getIdList() {
         return IdList;
+    }
+
+    public boolean isDoRobotLaser() {
+        return doRobotLaser;
+    }
+
+    public void setDoRobotLaser(boolean doRobotLaser) {
+        this.doRobotLaser = doRobotLaser;
     }
 
     public String[] getCards() {

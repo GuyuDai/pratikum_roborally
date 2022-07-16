@@ -8,16 +8,16 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
+import client.Log;
 import protocol.*;
 import protocol.ProtocolFormat.Message;
 import server.Control.DisconnectionController;
 import server.Player.Player;
 
-public class Server{
+public class Server {
 
-    public static final Logger logger = Logger.getLogger(Server.class.getName());
+    public static final Logger logger = Log.logFile("ServerLog");
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
@@ -57,12 +57,12 @@ public class Server{
     public void run() {
         try {
             while (!serverSocket.isClosed()) {
-                logger.info(ANSI_GREEN + "Listening for new clients. ");
+                Server.getLogger().info(ANSI_GREEN + "Listening for new clients. ");
                 //logger.log(Level.INFO, "listening for new clients");
                 //System.out.println("listening for new clients");
                 Socket clientSocket = serverSocket.accept();
                 clientConnectedIn(clientSocket);
-                logger.info(ANSI_GREEN + "A new client connected to the server.");
+                Server.getLogger().info(ANSI_GREEN + "A new client connected to the server.");
                 //System.out.println("new client connected");
             }
         } catch (IOException e) {
@@ -83,14 +83,14 @@ public class Server{
     public void clientConnectedIn(Socket clientSocket) throws IOException {
         ServerThread connectedClient = new ServerThread(clientSocket);
         connectedClient.setID(count);
-        count ++;
+        count++;
         //connectedClient.setAI(false);
         connectedClient.setAlive(true);
         connectedClients.add(connectedClient);
         Thread clientThread = new Thread(connectedClient);
         clientThread.setName("ServerThread:" + connectedClient.getID());
         clientThread.start();
-        sendMessageToClient(new Welcome(connectedClient.getID()),connectedClient);
+        sendMessageToClient(new Welcome(connectedClient.getID()), connectedClient);
     }
 
     public void sendMessageToClient(Message msg, ServerThread client) {
@@ -106,8 +106,8 @@ public class Server{
         }
     }
 
-    public void sendMessageToAll(Message msg){
-        for(ServerThread client : this.connectedClients){
+    public void sendMessageToAll(Message msg) {
+        for (ServerThread client : this.connectedClients) {
             sendMessageToClient(msg, client);
         }
     }
@@ -115,12 +115,12 @@ public class Server{
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void clientDisconnected(ServerThread client) {
-        logger.info(ANSI_GREEN + "Client (" + client.getID() + ") disconnected");
+        Server.getLogger().info(ANSI_GREEN + "Client (" + client.getID() + ") disconnected");
         disconnectClient(client);
     }
 
-    public void disconnectClient(ServerThread client){
-        logger.info(ANSI_GREEN + "Removed client " + client.getID());
+    public void disconnectClient(ServerThread client) {
+        Server.getLogger().info(ANSI_GREEN + "Removed client " + client.getID());
         connectedClients.remove(client.getID());
     }
 
@@ -129,32 +129,32 @@ public class Server{
     }
 
 
-    public Player firstPlayerReady(){
-        int readyPlayer=0;
-        Player firstReadyPlayer=null;
-        for(ServerThread target: getConnectedClients()) {
+    public Player firstPlayerReady() {
+        int readyPlayer = 0;
+        Player firstReadyPlayer = null;
+        for (ServerThread target : getConnectedClients()) {
             if (target.isReady()) {
                 readyPlayer++;
                 firstReadyPlayer = target.getPlayer();
             }
         }
-           if (readyPlayer==1){
-               return firstReadyPlayer;
-           }
-           return null;
+        if (readyPlayer == 1) {
+            return firstReadyPlayer;
+        }
+        return null;
     }
 
 
-
-    public static ServerThread getServerThreadById(int id){
-        for(ServerThread target : getConnectedClients()){
-            if(target.getID() == id){
+    public static ServerThread getServerThreadById(int id) {
+        for (ServerThread target : getConnectedClients()) {
+            if (target.getID() == id) {
                 return target;
             }
         }
         return null;
     }
-    public void messageHandle(){
+
+    public void messageHandle() {
         /*
         while(!messageHandler.getMessagesFromClient().isEmpty()){
             messageHandler.getMessagesFromClient().forEach((key,value) ->{
@@ -180,8 +180,14 @@ public class Server{
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     public static void main(String[] args) {
-        logger.info(ANSI_GREEN + "Server is running");
+        Server.getLogger().info(ANSI_GREEN + "Server is running");
         server.run();
         new DisconnectionController().start();
     }
+
+    public static Logger getLogger(){
+        return logger;
+    }
+
+
 }
