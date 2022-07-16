@@ -210,7 +210,7 @@ public class Player implements PlayerAction{
       default:
         currentGame.sendMessageToAll(new ErrorMessage("unknown damage type"));
     }
-    currentGame.sendMessageToAll(new DrawDamage(clientID, tempCards.toArray(new String[0])));
+    currentGame.sendMessageToAll(new DrawDamage(clientID, tempCards.toArray(new String[tempCards.size()])));
   }
 
   public void chooseDamage(int count){
@@ -225,7 +225,7 @@ public class Player implements PlayerAction{
       discardHands.add(card.getCardName());
       this.hands.remove(card);
     }
-    String[] discardSomeMsg = discardHands.toArray(new String[0]);
+    String[] discardSomeMsg = discardHands.toArray(new String[discardHands.size()]);
     currentGame.sendMessageToClient(new DiscardSome(discardSomeMsg),currentGame.getServerThreadById(clientID));
   }
 

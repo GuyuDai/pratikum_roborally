@@ -617,7 +617,7 @@ public class AIClientReceive extends Thread {
                 y=8;
                 sendMessage(new SetStartingPoint(x,y).toString());}
                 break;
-            case MessageType.drawDamage:
+            case MessageType.pickDamage:
                 //All damage cards will be transmitted at once
                 DrawDamage.DrawDamageBody drawDamageBody = new Gson().fromJson(messageBody, DrawDamage.DrawDamageBody.class);
                 //Damage cards put on the cards[]

@@ -2280,6 +2280,10 @@ public class GameViewModel {
            // remove2.setOnFinished(e -> robotBoard.getChildren().remove(1));
           //  remove2.play();
         }
+        if(Client.getClientReceive().isPickDamage()){
+            showDamage.setVisible(true);
+            //TODO: set a text to remind player pickDamageCard
+        }
         printRobotLaser();
 
     }
@@ -2943,11 +2947,32 @@ public class GameViewModel {
         worm.setVisible(false);
         trojan.setVisible(false);
         virus.setVisible(false);
+        Client.getClientReceive().setPickDamage(false);
+        showDamage.setVisible(false);
+        registerDamage.setVisible(false);
 
     }
 
     public void showDamageCards(ActionEvent event) {
-        // name of Button is showDamage
+
+        for(String damageCard: Client.getClientReceive().getDamageDecks()){
+            switch (damageCard){
+                case "Spam":
+                    spam.setVisible(true);
+                    break;
+                case "Worm":
+                    worm.setVisible(true);
+                    break;
+                case "Trojan":
+                    trojan.setVisible(true);
+                    break;
+                case"Virus":
+                    virus.setVisible(true);
+                    break;
+            }
+
+        }
+
     }
 
 

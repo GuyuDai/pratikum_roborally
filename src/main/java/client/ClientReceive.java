@@ -14,7 +14,6 @@ import java.io.*;
 import java.net.*;
 import java.util.Map;
 import java.util.*;
-import java.util.logging.*;
 
 
 public class ClientReceive extends Thread{
@@ -71,6 +70,8 @@ public class ClientReceive extends Thread{
     protected int counterRegister = 0;
 
     protected boolean doRobotLaser=false;
+
+    protected boolean pickDamage =false;
 
 
     public void setCounterRegister(int count){
@@ -358,6 +359,7 @@ public class ClientReceive extends Thread{
                 PickDamage.PickDamageBody pickDamageBody=new Gson().fromJson(body, PickDamage.PickDamageBody.class);
                 damageDecks=pickDamageBody.getAvailablePiles();
                 damageCount=pickDamageBody.getCount();
+                pickDamage =true;
                 break;
 
             case MessageType.startingPointTaken:
@@ -669,6 +671,13 @@ public class ClientReceive extends Thread{
 
     public int getDamageCount() {
         return damageCount;
+    }
+
+    public boolean isPickDamage() {
+        return pickDamage;
+    }
+    public void setPickDamage(boolean pickDamage){
+        this.pickDamage = pickDamage;
     }
 
     public void setDamageCount(int damageCount) {

@@ -405,7 +405,7 @@ public class AIReceive extends ClientReceive {
       cardsList.add(damageDecks[damageIndex]);
       damageCount--;
     }
-    sendMessage(new SelectedDamage(cardsList.toArray(new String[0])).toString());
+    sendMessage(new SelectedDamage(cardsList.toArray(new String[cardsList.size()])).toString());
   }
 
   private void aiReboot(){
