@@ -30,7 +30,6 @@ import java.util.logging.Logger;
  */
 public class GameViewModel {
 
-    private static final Logger logger = Logger.getLogger(GameViewModel.class.getName());
     public static final String ANSI_GREEN = "\u001B[32m";
 
     private static GameModel model;
@@ -435,7 +434,7 @@ public class GameViewModel {
             stageLobby.setScene(new Scene(rootMap));
             stageLobby.show();
         } catch (Exception e) {
-            logger.severe( "Window can not open.");
+            Client.getLogger().severe( "Window can not open.");
         }
         LobbyViewModel.setWindowName("Lobby");
     }
@@ -2513,7 +2512,7 @@ public class GameViewModel {
      */
     public void playCardBtnAction(ActionEvent actionEvent) {
          playCardBtn.setText("play register 1");
-         logger.info("Send out message: ");
+         Client.getLogger().info("Send out message: ");
 
          switch(getClickCounter()){
              case 1:

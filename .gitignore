@@ -161,7 +161,7 @@ fabric.properties
 # Compiled class file
 *.class
 
-# Log file
+# client.Log file
 *.log
 
 # BlueJ files

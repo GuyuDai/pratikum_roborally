@@ -4,8 +4,11 @@ import client.*;
 
 import java.io.*;
 import java.net.*;
+import java.util.logging.Logger;
 
 public class AI extends Client {
+  public static final Logger logger = Log.logFile("AILog");
+
   private static final int SERVER_PORT = 1788;
   private static final String SERVER_IP = "localhost";
 
@@ -39,6 +42,11 @@ public class AI extends Client {
       e.printStackTrace();
     }
   }
+
+  public static Logger getLogger(){
+    return logger;
+  }
+
 
 
 }
