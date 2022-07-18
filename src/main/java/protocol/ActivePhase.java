@@ -5,7 +5,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class ActivePhase extends Message {
-
+    public ActivePhaseBody messageBody;
     public class ActivePhaseBody extends MessageBody {
         protected int phase;
 
@@ -21,7 +21,11 @@ public class ActivePhase extends Message {
         this.messageType = MessageType.activePhase;
         ActivePhaseBody body = new ActivePhaseBody();
         body.phase = phase;
-        this.messageBody = body.toString();
+        this.messageBody = body;
+    }
+
+    public ActivePhaseBody getMessageBody() {
+        return messageBody;
     }
 }
 

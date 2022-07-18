@@ -1,5 +1,6 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
@@ -10,6 +11,7 @@ import server.CardTypes.*;
  */
 
 public class ReplaceCard extends Message {
+    public ReplaceCardBody messageBody;
 
     public class ReplaceCardBody extends MessageBody {
         protected int register;
@@ -46,7 +48,11 @@ public class ReplaceCard extends Message {
         body.register =register;
         body.newCard = newCard;
         body.clientID = clientID;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public ReplaceCardBody getMessageBody() {
+        return messageBody;
     }
 }

@@ -6,7 +6,6 @@ import com.google.gson.GsonBuilder;
 
 public abstract class Message{
     public String messageType;
-    public String messageBody;
 
     @Override
     public String toString(){
@@ -24,7 +23,4 @@ public abstract class Message{
         return messageType;
     }
 
-    public String getMessageBody() {
-        return messageBody;
-    }
 }

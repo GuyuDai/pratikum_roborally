@@ -1,5 +1,6 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
@@ -10,6 +11,7 @@ import protocol.ProtocolFormat.MessageType;
  */
 
 public class CardSelected extends Message {
+    public CardSelectedBody messageBody;
 
     public class CardSelectedBody extends MessageBody {
         protected int clientID;
@@ -47,7 +49,11 @@ public class CardSelected extends Message {
         body.clientID = clientID;
         body.register = register;
         body.filled = filled;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public CardSelectedBody getMessageBody() {
+        return messageBody;
     }
 }

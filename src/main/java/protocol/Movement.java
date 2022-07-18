@@ -1,5 +1,6 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
@@ -10,6 +11,7 @@ import protocol.ProtocolFormat.MessageType;
  */
 
 public class Movement extends Message {
+    public MovementBody messageBody;
 
     public class MovementBody extends MessageBody {
         protected int clientID;
@@ -46,7 +48,11 @@ public class Movement extends Message {
         body.clientID = clientID;
         body.x = x;
         body.y = y;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public MovementBody getMessageBody() {
+        return messageBody;
     }
 }

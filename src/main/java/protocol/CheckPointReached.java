@@ -1,10 +1,12 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class CheckPointReached extends Message {
+    public CheckPointReachedBody messageBody;
 
     public class CheckPointReachedBody extends MessageBody {
         protected int clientID;
@@ -31,7 +33,11 @@ public class CheckPointReached extends Message {
         CheckPointReachedBody body = new CheckPointReachedBody();
         body.clientID = clientID;
         body.number = number;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public CheckPointReachedBody getMessageBody() {
+        return messageBody;
     }
 }

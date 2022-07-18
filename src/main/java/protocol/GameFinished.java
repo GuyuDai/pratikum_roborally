@@ -1,10 +1,12 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class GameFinished extends Message {
+    public GameFinishedBody messageBody;
 
     public class GameFinishedBody extends MessageBody {
         protected int clientID;
@@ -21,7 +23,11 @@ public class GameFinished extends Message {
         this.messageType = MessageType.gameFinished;
         GameFinishedBody body = new GameFinishedBody();
         body.clientID = clientID;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public GameFinishedBody getMessageBody() {
+        return messageBody;
     }
 }

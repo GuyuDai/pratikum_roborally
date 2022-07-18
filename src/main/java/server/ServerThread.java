@@ -261,12 +261,12 @@ public class ServerThread implements Runnable {
          */
 
         String messageType = message.getMessageType();
-        String body = message.getMessageBody();
         //MessageBody messageBody = gson.fromJson(body,MessageBody.class);
 
         switch (messageType){
             case MessageType.helloServer:
-                HelloServerBody helloServerBody = new Gson().fromJson(body,HelloServerBody.class);
+                HelloServer helloServer = (HelloServer) message;
+                HelloServerBody helloServerBody = helloServer.getMessageBody();
                 String clientProtocol = helloServerBody.getProtocol();
 
                 if(PROTOCOL.equals(clientProtocol)){
@@ -316,7 +316,8 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.playerValues:
-                PlayerValuesBody playerValuesBody = new Gson().fromJson(body,PlayerValuesBody.class);
+                PlayerValues playerValues = (PlayerValues) message;
+                PlayerValuesBody playerValuesBody = playerValues.getMessageBody();
                 boolean flagInPlayerValues = true;
                 String tempName = playerValuesBody.getName();
                 int tempFigure = playerValuesBody.getFigure();
@@ -345,7 +346,8 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.setStatus:
-                SetStatusBody setStatusBody = new Gson().fromJson(body,SetStatusBody.class);
+                SetStatus setStatus = (SetStatus) message;
+                SetStatusBody setStatusBody = setStatus.getMessageBody();
                 ready = setStatusBody.isReady();
                 player.setReady(ready);
                 sendToAll(new PlayerStatus(clientID,true).toString());
@@ -361,7 +363,8 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.mapSelected:
-                MapSelectedBody mapSelectedBody = new Gson().fromJson(body, MapSelectedBody.class);
+                MapSelected mapSelected = (MapSelected) message;
+                MapSelectedBody mapSelectedBody = mapSelected.getMessageBody();
                 map = mapSelectedBody.getMap();
                 switch (map){
                     case "DizzyHighway":
@@ -397,7 +400,8 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.sendChat:
-                SendChatBody sendChatBody = new Gson().fromJson(body,SendChatBody.class);
+                SendChat sendChat = (SendChat) message;
+                SendChatBody sendChatBody = sendChat.getMessageBody();
                 String msg = sendChatBody.getMessage();
                 int targetId = sendChatBody.getTo();
                 if(targetId == -1){
@@ -409,7 +413,8 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.playCard:
-                PlayCardBody playCardBody = new Gson().fromJson(body,PlayCardBody.class);
+                PlayCard playCard = (PlayCard) message;
+                PlayCardBody playCardBody = playCard.getMessageBody();
                 card = playCardBody.getCard();
                 currentGame.getActiveCards().add(card);
                 currentGame.notifyCurrentPlayer();
@@ -418,7 +423,8 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.setStartingPoint:
-                SetStartingPointBody setStartingPointBody = new Gson().fromJson(body,SetStartingPointBody.class);
+                SetStartingPoint setStartingPoint = (SetStartingPoint) message;
+                SetStartingPointBody setStartingPointBody = setStartingPoint.getMessageBody();
                 int x = setStartingPointBody.getX();
                 int y = setStartingPointBody.getY();
                 Position tempPosition = new Position(x,y,board);
@@ -446,29 +452,34 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.activePhase:
-                ActivePhaseBody activePhaseBody = new Gson().fromJson(body,ActivePhaseBody.class);
+                ActivePhase activePhase = (ActivePhase) message;
+                ActivePhaseBody activePhaseBody = activePhase.getMessageBody();
                 phase = activePhaseBody.getPhase();
                 break;
 
             case MessageType.animation:
-                AnimationBody animationBody = new Gson().fromJson(body,AnimationBody.class);
+                Animation animation = (Animation) message;
+                AnimationBody animationBody = animation.getMessageBody();
                 type = animationBody.getType();
                 break;
 
             case MessageType.cardPlayed:
-                CardPlayedBody cardPlayedBody = new Gson().fromJson(body,CardPlayedBody.class);
+                CardPlayed cardPlayed = (CardPlayed) message;
+                CardPlayedBody cardPlayedBody = cardPlayed.getMessageBody();
                 clientID = cardPlayedBody.getClientID();
                 card = cardPlayedBody.getCard();
                 break;
 
             case MessageType.cardSelected:
-                CardSelectedBody cardSelectedBody = new Gson().fromJson(body,CardSelectedBody.class);
+                CardSelected cardSelected = (CardSelected) message;
+                CardSelectedBody cardSelectedBody = cardSelected.getMessageBody();
                 clientID = cardSelectedBody.getClientID();
                 register = cardSelectedBody.getRegister();
                 break;
 
             case MessageType.selectedCard:
-                SelectedCardBody selectedCardBody = new Gson().fromJson(body,SelectedCardBody.class);
+                SelectedCard selectedCard = (SelectedCard) message;
+                SelectedCardBody selectedCardBody = selectedCard.getMessageBody();
                 if(currentGame != null && currentGame.getCurrentState().equals(GameState.ProgrammingPhase)){
                     register = selectedCardBody.getRegister();
                     card = selectedCardBody.getCard();
@@ -487,14 +498,14 @@ public class ServerThread implements Runnable {
                                 i++;
                             }
                         }
-                        String cardSelected = "";
+                        String cardSelectedMsg = "";
                         if (registerPointer < 4) {
-                            cardSelected = new CardSelected(clientID, register, false).toString();
+                            cardSelectedMsg = new CardSelected(clientID, register, false).toString();
                         } else {
-                            cardSelected = new CardSelected(clientID, register, true).toString();
+                            cardSelectedMsg = new CardSelected(clientID, register, true).toString();
                         }
                         registerPointer++;
-                        sendToAll(cardSelected);
+                        sendToAll(cardSelectedMsg);
                     }
                 }
                 break;
@@ -505,7 +516,8 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.selectedDamage:
-                SelectedDamageBody selectedDamageBody = new Gson().fromJson(body,SelectedDamageBody.class);
+                SelectedDamage selectedDamage = (SelectedDamage) message;
+                SelectedDamageBody selectedDamageBody = selectedDamage.getMessageBody();
                 if(currentGame != null){
                  damageCards = selectedDamageBody.getCards();
                  if(damageCards!=null) {
@@ -519,7 +531,8 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.rebootDirection:
-                RebootDirectionBody rebootDirectionBody = new Gson().fromJson(body,RebootDirectionBody.class);
+                RebootDirection rebootDirection = (RebootDirection) message;
+                RebootDirectionBody rebootDirectionBody = rebootDirection.getMessageBody();
                 String tempDirection = rebootDirectionBody.getDirection().toLowerCase().trim();
                 switch (tempDirection){
                     case "up":
@@ -538,7 +551,8 @@ public class ServerThread implements Runnable {
                 break;
 
             case MessageType.chooseRegister:
-                ChooseRegisterBody chooseRegisterBody = new Gson().fromJson(body, ChooseRegisterBody.class);
+                ChooseRegister chooseRegister = (ChooseRegister) message;
+                ChooseRegisterBody chooseRegisterBody = chooseRegister.getMessageBody();
                 int tempRegister = chooseRegisterBody.getRegister();
                 sendToAll(new RegisterChosen(clientID,tempRegister).toString());
                 break;

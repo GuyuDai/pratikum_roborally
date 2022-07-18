@@ -1,5 +1,6 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
@@ -9,6 +10,7 @@ import protocol.ProtocolFormat.MessageType;
  */
 
 public class PlayerTurning extends Message {
+    public PlayerTurningBody messageBody;
 
     public class PlayerTurningBody extends MessageBody {
         protected int clientID;
@@ -35,7 +37,11 @@ public class PlayerTurning extends Message {
         PlayerTurningBody body = new PlayerTurningBody();
         body.clientID  = clientID;
         body.rotation = rotation;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public PlayerTurningBody getMessageBody() {
+        return messageBody;
     }
 }

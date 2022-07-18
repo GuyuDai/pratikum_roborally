@@ -1,10 +1,12 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class SendChat extends Message {
+    public SendChatBody messageBody;
 
     public class SendChatBody extends MessageBody {
         protected String message;
@@ -31,7 +33,11 @@ public class SendChat extends Message {
         SendChatBody body = new SendChatBody();
         body.message = message;
         body.to = to;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public SendChatBody getMessageBody() {
+        return messageBody;
     }
 }

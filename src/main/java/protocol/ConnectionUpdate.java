@@ -1,10 +1,12 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class ConnectionUpdate extends Message {
+    public ConnectionUpdateBody messageBody;
 
     public class ConnectionUpdateBody extends MessageBody {
         protected int clientID;
@@ -41,7 +43,11 @@ public class ConnectionUpdate extends Message {
         body.clientID = clientID;
         body.isConnected = isConnected;
         body.action = action;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public ConnectionUpdateBody getMessageBody() {
+        return messageBody;
     }
 }

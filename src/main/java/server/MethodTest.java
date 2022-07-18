@@ -4,6 +4,7 @@ import client.ClientReceive;
 import com.google.gson.Gson;
 import java.util.HashMap;
 import protocol.HelloServer;
+import protocol.NotYourCards;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.ProtocolParser;
 import server.BoardElement.BoardElem;
@@ -24,9 +25,10 @@ public class MethodTest {
 
   public static void main(String[] args) {
     //Message msg = new HelloServer("OO",false,"Version 1.0",1);
-    Card msg = new MoveOne();
-    ProtocolParser p = new ProtocolParser
-        (new Gson().toJson(msg));
-    System.out.println(p.parse());
+    //Card msg = new MoveOne();
+    //ProtocolParser p = new ProtocolParser(new Gson().toJson(msg));
+    //System.out.println(p.parse());
+    Message msg = new HelloServer("OO",false,"Version 1.0",1);
+    System.out.println(new Gson().toJson(msg));
   }
 }

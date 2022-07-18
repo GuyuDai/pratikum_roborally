@@ -1,10 +1,12 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class ReceivedChat extends Message {
+    public ReceivedChatBody messageBody;
 
     public class ReceivedChatBody extends MessageBody {
         protected String message;
@@ -41,7 +43,11 @@ public class ReceivedChat extends Message {
         body.message = message;
         body.from = from;
         body.isPrivate = isPrivate;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public ReceivedChatBody getMessageBody() {
+        return messageBody;
     }
 }

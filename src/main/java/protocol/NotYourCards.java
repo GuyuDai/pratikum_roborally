@@ -6,6 +6,7 @@ import protocol.ProtocolFormat.MessageType;
 
 
 public class NotYourCards extends Message {
+    public NotYourCardsBody messageBody;
 
     public class NotYourCardsBody extends MessageBody {
         protected int clientID;
@@ -32,7 +33,11 @@ public class NotYourCards extends Message {
         NotYourCardsBody body = new NotYourCardsBody();
         body.clientID = clientID;
         body.cardsInHand = cardsInHand;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public NotYourCardsBody getMessageBody() {
+        return messageBody;
     }
 }

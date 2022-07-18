@@ -1,5 +1,6 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
@@ -9,6 +10,7 @@ import protocol.ProtocolFormat.MessageType;
  */
 
 public class DrawDamage extends Message {
+    public DrawDamageBody messageBody;
 
     public class DrawDamageBody extends MessageBody {
         protected int clientID;
@@ -35,7 +37,11 @@ public class DrawDamage extends Message {
         DrawDamageBody body = new DrawDamageBody();
         body.clientID = clientID;
         body.cards = cards;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public DrawDamageBody getMessageBody() {
+        return messageBody;
     }
 }

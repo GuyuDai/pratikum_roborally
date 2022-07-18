@@ -1,5 +1,6 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
@@ -10,6 +11,7 @@ import protocol.ProtocolFormat.MessageType;
  */
 
 public class Animation extends Message {
+    public AnimationBody messageBody;
 
     public class AnimationBody extends MessageBody {
         protected String type;
@@ -26,7 +28,11 @@ public class Animation extends Message {
         this.messageType = MessageType.animation;
         AnimationBody body = new AnimationBody();
         body.type = type;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public AnimationBody getMessageBody() {
+        return messageBody;
     }
 }

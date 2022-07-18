@@ -1,5 +1,6 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
@@ -13,6 +14,7 @@ import protocol.ProtocolFormat.MessageType;
  */
 
 public class SelectedDamage extends Message {
+    public SelectedDamageBody messageBody;
 
     public class SelectedDamageBody extends MessageBody {
         protected String[] cards;
@@ -29,7 +31,11 @@ public class SelectedDamage extends Message {
         this.messageType = MessageType.selectedDamage;
         SelectedDamageBody body = new SelectedDamageBody();
         body.cards = cards;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public SelectedDamageBody getMessageBody() {
+        return messageBody;
     }
 }

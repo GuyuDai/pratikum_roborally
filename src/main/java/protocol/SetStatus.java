@@ -1,10 +1,12 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class SetStatus extends Message {
+    public SetStatusBody messageBody;
 
     public class SetStatusBody extends MessageBody {
         protected boolean ready;
@@ -21,7 +23,11 @@ public class SetStatus extends Message {
         this.messageType = MessageType.setStatus;
         SetStatusBody body = new SetStatusBody();
         body.ready = ready;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public SetStatusBody getMessageBody() {
+        return messageBody;
     }
 }

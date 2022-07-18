@@ -1,5 +1,6 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
@@ -12,6 +13,7 @@ import protocol.ProtocolFormat.MessageType;
  */
 
 public class PickDamage extends Message {
+    public PickDamageBody messageBody;
 
     public class PickDamageBody extends MessageBody {
         protected int count;
@@ -38,7 +40,11 @@ public class PickDamage extends Message {
         PickDamageBody body = new PickDamageBody();
         body.count = count;
         body.availablePiles = availablePiles;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public PickDamageBody getMessageBody() {
+        return messageBody;
     }
 }

@@ -1,5 +1,6 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
@@ -10,6 +11,7 @@ import protocol.ProtocolFormat.MessageType;
  */
 
 public class SelectionFinished extends Message {
+    public SelectedFinishedBody messageBody;
 
     public class SelectedFinishedBody extends MessageBody {
         protected int clientID;
@@ -27,7 +29,11 @@ public class SelectionFinished extends Message {
         this.messageType = MessageType.selectionFinished;
         SelectedFinishedBody body = new SelectedFinishedBody();
         body.clientID = clientID;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public SelectedFinishedBody getMessageBody() {
+        return messageBody;
     }
 }

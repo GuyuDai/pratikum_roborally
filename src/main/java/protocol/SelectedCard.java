@@ -1,10 +1,12 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class SelectedCard extends Message {
+    public SelectedCardBody messageBody;
 
     public class SelectedCardBody extends MessageBody {
         protected String card;
@@ -38,6 +40,10 @@ public class SelectedCard extends Message {
         body.card = cardName;
         body.register = register;
         body.clientID=clientID;
-        this.messageBody = body.toString();
+        this.messageBody = body;
+    }
+
+    public SelectedCardBody getMessageBody() {
+        return messageBody;
     }
 }

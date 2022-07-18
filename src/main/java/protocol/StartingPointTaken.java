@@ -1,10 +1,12 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class StartingPointTaken extends Message {
+    public StartingPointTakenBody messageBody;
 
     public class StartingPointTakenBody extends MessageBody {
         protected int x;
@@ -41,7 +43,11 @@ public class StartingPointTaken extends Message {
         body.x = x;
         body.y = y;
         body.clientID = clientID;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public StartingPointTakenBody getMessageBody() {
+        return messageBody;
     }
 }

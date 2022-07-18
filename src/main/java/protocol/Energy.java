@@ -1,10 +1,12 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class Energy extends Message {
+    public EnergyBody messageBody;
 
     public class EnergyBody extends MessageBody {
         protected int clientID;
@@ -41,7 +43,11 @@ public class Energy extends Message {
         body.clientID = clientID;
         body.count = count;
         body.source = source;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public EnergyBody getMessageBody() {
+        return messageBody;
     }
 }

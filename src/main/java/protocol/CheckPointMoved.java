@@ -1,12 +1,12 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.*;
 
 public class CheckPointMoved extends Message {
+    public CheckPointMovedBody messageBody;
 
     public class CheckPointMovedBody extends MessageBody{
-
-
         protected int checkPointID;
         protected int x;
         protected int y;
@@ -29,6 +29,10 @@ public class CheckPointMoved extends Message {
         body.checkPointID = checkPointID;
         body.x = x;
         body.y = y;
-        this.messageBody = body.toString();
+        this.messageBody = body;
+    }
+
+    public CheckPointMovedBody getMessageBody() {
+        return messageBody;
     }
 }

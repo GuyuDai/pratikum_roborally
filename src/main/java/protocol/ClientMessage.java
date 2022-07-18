@@ -1,5 +1,6 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
@@ -8,6 +9,7 @@ import protocol.ProtocolFormat.MessageType;
  * most general message type, just send a String to client
  */
 public class ClientMessage extends Message {
+  public ClientMessageBody messageBody;
 
   public class ClientMessageBody extends MessageBody {
     protected String message;
@@ -24,6 +26,10 @@ public class ClientMessage extends Message {
     this.messageType = MessageType.clientMessage;
     ClientMessageBody body = new ClientMessageBody();
     body.message = str;
-    this.messageBody = body.toString();
+    this.messageBody = body;
+  }
+
+  public ClientMessageBody getMessageBody() {
+    return messageBody;
   }
 }

@@ -1,5 +1,6 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
@@ -11,6 +12,7 @@ import protocol.ProtocolFormat.MessageType;
  */
 
 public class Reboot extends Message {
+    public RebootBody messageBody;
 
     public class RebootBody extends MessageBody {
         protected int clientID;
@@ -28,7 +30,11 @@ public class Reboot extends Message {
         this.messageType = MessageType.reboot;
         RebootBody body = new RebootBody();
         body.clientID = clientID;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public RebootBody getMessageBody() {
+        return messageBody;
     }
 }

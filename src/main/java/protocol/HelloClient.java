@@ -1,10 +1,12 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class HelloClient extends Message {
+  public HelloClientBody messageBody;
 
   public class HelloClientBody extends MessageBody {
     protected String protocol;
@@ -22,8 +24,12 @@ public class HelloClient extends Message {
     HelloClientBody body = new HelloClientBody();
     body.protocol = str;
 
-    //this.messageBody = body;
-    this.messageBody = body.toString();
+    this.messageBody = body;
+    //this.messageBody = body.toString();
+  }
+
+  public HelloClientBody getMessageBody() {
+    return messageBody;
   }
 
   /*

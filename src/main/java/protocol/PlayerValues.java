@@ -1,10 +1,12 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class PlayerValues extends Message {
+    public PlayerValuesBody messageBody;
 
     public class PlayerValuesBody extends MessageBody {
         protected String name;
@@ -31,7 +33,11 @@ public class PlayerValues extends Message {
         PlayerValuesBody body = new PlayerValuesBody();
         body.name = name;
         body.figure = figure;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public PlayerValuesBody getMessageBody() {
+        return messageBody;
     }
 }

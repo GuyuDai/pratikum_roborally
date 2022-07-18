@@ -1,10 +1,12 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class PlayerStatus extends Message {
+    public PlayerStatusBody messageBody;
 
     public class PlayerStatusBody extends MessageBody {
         protected int clientID;
@@ -31,8 +33,12 @@ public class PlayerStatus extends Message {
         PlayerStatusBody body = new PlayerStatusBody();
         body.clientID = clientID;
         body.ready = ready;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public PlayerStatusBody getMessageBody() {
+        return messageBody;
     }
 }
 

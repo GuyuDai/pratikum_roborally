@@ -1,5 +1,6 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Map;
 import protocol.ProtocolFormat.Message;
@@ -8,6 +9,7 @@ import protocol.ProtocolFormat.MessageType;
 import java.util.List;
 
 public class GameStarted extends Message {
+  public GameStartedBody messageBody;
 
   public class GameStartedBody extends MessageBody {
     protected List<Map> gameMap;
@@ -25,6 +27,10 @@ public class GameStarted extends Message {
       this.messageType = MessageType.gameStarted;
       GameStartedBody body = new GameStartedBody();
       body.gameMap = gameMap;
-      this.messageBody = body.toString();
+      this.messageBody = body;
     }
+
+  public GameStartedBody getMessageBody() {
+    return messageBody;
+  }
 }

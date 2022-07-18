@@ -1,10 +1,13 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.MessageType;
 
 public class ReturnCards extends Message {
+  public ReturnCardsBody messageBody;
+
   public class ReturnCardsBody extends MessageBody{
     protected String[] cards;
 
@@ -21,7 +24,11 @@ public class ReturnCards extends Message {
     this.messageType = MessageType.returnCards;
     ReturnCardsBody body = new ReturnCardsBody();
     body.cards = cards;
-    this.messageBody = body.toString();
+    this.messageBody = body;
+  }
+
+  public ReturnCardsBody getMessageBody() {
+    return messageBody;
   }
 
 }

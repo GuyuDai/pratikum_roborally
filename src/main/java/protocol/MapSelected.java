@@ -1,10 +1,12 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class MapSelected extends Message {
+    public MapSelectedBody messageBody;
 
     public class MapSelectedBody extends MessageBody {
         protected String map;
@@ -21,7 +23,11 @@ public class MapSelected extends Message {
         this.messageType = MessageType.mapSelected;
         MapSelectedBody body = new MapSelectedBody();
         body.map = map;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public MapSelectedBody getMessageBody() {
+        return messageBody;
     }
 }

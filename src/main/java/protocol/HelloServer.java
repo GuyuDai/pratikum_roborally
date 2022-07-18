@@ -1,11 +1,13 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 
 public class HelloServer extends Message {
+    public HelloServerBody messageBody;
 
     public class HelloServerBody extends MessageBody {
         protected String group;
@@ -54,9 +56,13 @@ public class HelloServer extends Message {
         body.protocol = protocol;
         body.clientID = clientID;
 
-        //this.messageBody = body;
-        this.messageBody = body.toString();
+        this.messageBody = body;
+        //this.messageBody = body.toString();
 
+    }
+
+    public HelloServerBody getMessageBody() {
+        return messageBody;
     }
 
     /*

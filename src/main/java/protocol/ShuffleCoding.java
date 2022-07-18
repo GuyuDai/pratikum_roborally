@@ -1,10 +1,12 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class ShuffleCoding extends Message {
+    public ShuffleCodingBody messageBody;
 
     public class ShuffleCodingBody extends MessageBody {
         protected int clientID;
@@ -21,8 +23,12 @@ public class ShuffleCoding extends Message {
         this.messageType = MessageType.shuffleCoding;
         ShuffleCodingBody body = new ShuffleCodingBody();
         body.clientID = clientID;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public ShuffleCodingBody getMessageBody() {
+        return messageBody;
     }
 }
 

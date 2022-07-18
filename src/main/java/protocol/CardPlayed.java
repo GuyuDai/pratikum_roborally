@@ -1,10 +1,12 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 public class CardPlayed extends Message {
+    public CardPlayedBody messageBody;
 
     public class CardPlayedBody extends MessageBody {
         protected int clientID;
@@ -31,6 +33,10 @@ public class CardPlayed extends Message {
         CardPlayedBody body = new CardPlayedBody();
         body.clientID = clientID;
         body.card = card;
-        this.messageBody = body.toString();
+        this.messageBody = body;
+    }
+
+    public CardPlayedBody getMessageBody() {
+        return messageBody;
     }
 }

@@ -1,5 +1,6 @@
 package protocol;
 
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.ActiveCard;
 import protocol.ProtocolFormat.Message;
@@ -16,6 +17,7 @@ import java.util.List;
  */
 
 public class CurrentCards extends Message {
+    public CurrentCardsBody messageBody;
 
     public class CurrentCardsBody extends MessageBody {
         protected ActiveCard[] activeCards;
@@ -32,7 +34,11 @@ public class CurrentCards extends Message {
         this.messageType = MessageType.currentCards;
         CurrentCardsBody body = new CurrentCardsBody();
         body.activeCards = activeCards;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public CurrentCardsBody getMessageBody() {
+        return messageBody;
     }
 }
