@@ -51,7 +51,7 @@ public class AIReceive extends ClientReceive {
     try {
       while (!socket.isClosed()) {
         String serverMessage = readInput.readLine();
-        //System.out.println(serverMessage + "-----------original message");  //test
+        System.out.println(serverMessage + "-----------original message");  //test
         Message message = wrapMessage(serverMessage);
         //System.out.println("--------------------------------------------------------------");  //test
         AI.getLogger().info(ANSI_GREEN+ message + "wrapped message");  //test
@@ -505,6 +505,7 @@ public class AIReceive extends ClientReceive {
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
+  /*
   private Message wrapMessage(String input){
     if(input.contains("\"messageType\":\"ActivePhase\",\"messageBody\"")){
       return new Gson().fromJson(input, ActivePhase.class);
@@ -656,4 +657,164 @@ public class AIReceive extends ClientReceive {
 
     return new ErrorMessage("Error when parsing String to Message");
   }
+
+   */
+
+  /**
+   * this method is for the LMU Server, for our own game, please use the above wrapMessage()
+   * @param input Json String
+   * @return specific Message
+   */
+  private Message wrapMessage(String input){
+  if(input.contains("\"messageType\":\"ActivePhase\"")){
+    return new Gson().fromJson(input, ActivePhase.class);
+  }
+  if(input.contains("\"messageType\":\"Alive\"")){
+    return new Gson().fromJson(input, Alive.class);
+  }
+  if(input.contains("\"messageType\":\"Animation\"")){
+    return new Gson().fromJson(input, Animation.class);
+  }
+  if(input.contains("\"messageType\":\"CardPlayed\"")){
+    return new Gson().fromJson(input, CardPlayed.class);
+  }
+  if(input.contains("\"messageType\":\"CardSelected\"")){
+    return new Gson().fromJson(input, CardSelected.class);
+  }
+  if(input.contains("\"messageType\":\"CardsYouGotNow\"")){
+    return new Gson().fromJson(input, CardsYouGotNow.class);
+  }
+  if(input.contains("\"messageType\":\"CheckPointReached\"")){
+    return new Gson().fromJson(input, CheckPointReached.class);
+  }
+  if(input.contains("\"messageType\":\"ClientMessage\"")){
+    return new Gson().fromJson(input, ClientMessage.class);
+  }
+  if(input.contains("\"messageType\":\"ConnectionUpdate\"")){
+    return new Gson().fromJson(input, ConnectionUpdate.class);
+  }
+  if(input.contains("\"messageType\":\"CurrentCards\"")){
+    return new Gson().fromJson(input, CurrentCards.class);
+  }
+  if(input.contains("\"messageType\":\"CurrentPlayer\"")){
+    return new Gson().fromJson(input, CurrentPlayer.class);
+  }
+  if(input.contains("\"messageType\":\"DrawDamage\"")){
+    return new Gson().fromJson(input, DrawDamage.class);
+  }
+  if(input.contains("\"messageType\":\"Energy\"")){
+    return new Gson().fromJson(input, Energy.class);
+  }
+  if(input.contains("\"messageType\":\"Error\"")){
+    return new Gson().fromJson(input, ErrorMessage.class);
+  }
+  if(input.contains("\"messageType\":\"GameFinished\"")){
+    return new Gson().fromJson(input, GameFinished.class);
+  }
+  if(input.contains("\"messageType\":\"GameStarted\"")){
+    return new Gson().fromJson(input, GameStarted.class);
+  }
+  if(input.contains("\"messageType\":\"HelloClient\"")){
+    return new Gson().fromJson(input, HelloClient.class);
+  }
+  if(input.contains("\"messageType\":\"HelloServer\"")){
+    return new Gson().fromJson(input, HelloServer.class);
+  }
+  if(input.contains("\"messageType\":\"MapSelected\"")){
+    return new Gson().fromJson(input, MapSelected.class);
+  }
+  if(input.contains("\"messageType\":\"Movement\"")){
+    return new Gson().fromJson(input, Movement.class);
+  }
+  if(input.contains("\"messageType\":\"NotYourCards\"")){
+    return new Gson().fromJson(input, NotYourCards.class);
+  }
+  if(input.contains("\"messageType\":\"PickDamage\"")){
+    return new Gson().fromJson(input, PickDamage.class);
+  }
+  if(input.contains("\"messageType\":\"PlayCard\"")){
+    return new Gson().fromJson(input, PlayCard.class);
+  }
+  if(input.contains("\"messageType\":\"PlayerAdded\"")){
+    return new Gson().fromJson(input, PlayerAdded.class);
+  }
+  if(input.contains("\"messageType\":\"PlayerStatus\"")){
+    return new Gson().fromJson(input, PlayerStatus.class);
+  }
+  if(input.contains("\"messageType\":\"PlayerTurning\"")){
+    return new Gson().fromJson(input, PlayerTurning.class);
+  }
+  if(input.contains("\"messageType\":\"PlayerValues\"")){
+    return new Gson().fromJson(input, PlayerValues.class);
+  }
+  if(input.contains("\"messageType\":\"Reboot\"")){
+    return new Gson().fromJson(input, Reboot.class);
+  }
+  if(input.contains("\"messageType\":\"RebootDirection\"")){
+    return new Gson().fromJson(input, RebootDirection.class);
+  }
+  if(input.contains("\"messageType\":\"ReceivedChat\"")){
+    return new Gson().fromJson(input, ReceivedChat.class);
+  }
+  if(input.contains("\"messageType\":\"ReplaceCard\"")){
+    return new Gson().fromJson(input, ReplaceCard.class);
+  }
+  if(input.contains("\"messageType\":\"SelectedCard\"")){
+    return new Gson().fromJson(input, SelectedCard.class);
+  }
+  if(input.contains("\"messageType\":\"SelectedDamage\"")){
+    return new Gson().fromJson(input, SelectedDamage.class);
+  }
+  if(input.contains("\"messageType\":\"SelectionFinished\"")){
+    return new Gson().fromJson(input, SelectionFinished.class);
+  }
+  if(input.contains("\"messageType\":\"SelectMap\"")){
+    return new Gson().fromJson(input, SelectMap.class);
+  }
+  if(input.contains("\"messageType\":\"SendChat\"")){
+    return new Gson().fromJson(input, SendChat.class);
+  }
+  if(input.contains("\"messageType\":\"SetStartingPoint\"")){
+    return new Gson().fromJson(input, SetStartingPoint.class);
+  }
+  if(input.contains("\"messageType\":\"SetStatus\"")){
+    return new Gson().fromJson(input, SetStatus.class);
+  }
+  if(input.contains("\"messageType\":\"ShuffleCoding\"")){
+    return new Gson().fromJson(input, ShuffleCoding.class);
+  }
+  if(input.contains("\"messageType\":\"StartingPointTaken\"")){
+    return new Gson().fromJson(input, StartingPointTaken.class);
+  }
+  if(input.contains("\"messageType\":\"TimerEnded\"")){
+    return new Gson().fromJson(input, TimerEnded.class);
+  }
+  if(input.contains("\"messageType\":\"TimerStarted\"")){
+    return new Gson().fromJson(input, TimerStarted.class);
+  }
+  if(input.contains("\"messageType\":\"Welcome\"")){
+    return new Gson().fromJson(input, Welcome.class);
+  }
+  if(input.contains("\"messageType\":\"Boink\"")){
+    return new Gson().fromJson(input, Boink.class);
+  }
+  if(input.contains("\"messageType\":\"ChooseRegister\"")){
+    return new Gson().fromJson(input, ChooseRegister.class);
+  }
+  if(input.contains("\"messageType\":\"RegisterChosen\"")){
+    return new Gson().fromJson(input, RegisterChosen.class);
+  }
+  if(input.contains("\"messageType\":\"ReturnCards\"")){
+    return new Gson().fromJson(input, ReturnCards.class);
+  }
+  if(input.contains("\"messageType\":\"CheckPointMoved\"")){
+    return new Gson().fromJson(input, CheckPointMoved.class);
+  }
+  if(input.contains("\"messageType\":\"YourCards\"")){
+    return new Gson().fromJson(input, YourCards.class);
+  }
+
+  return new ErrorMessage("Error when parsing String to Message");
+}
+
 }
