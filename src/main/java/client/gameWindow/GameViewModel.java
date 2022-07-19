@@ -555,7 +555,7 @@ public class GameViewModel {
      * print 9 random cards from a deck of 20
      */
     public void printCards() {
-        Text.setText("Select 5 of these cards for your register.");
+        Text.setText("Select 5 of these cards for your register");
         //make 9 hands visible
         hand1Button.setVisible(true);
         hand2Button.setVisible(true);
@@ -648,12 +648,12 @@ public class GameViewModel {
 
 
     public void handle5thRegister() {
-        Text.setText("Players have 30 seconds left to finish their register.");
+        Text.setText("Players have 30 seconds left to finish their register");
         PauseTransition thirty = new PauseTransition(Duration.seconds(30));
         thirty.setOnFinished(e -> playCardBtn.setVisible(true));
         thirty.play();
         PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-        textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
+        textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'"));
         textAppear2.play();
     }
 
@@ -1091,7 +1091,7 @@ public class GameViewModel {
         printMapGUI(map);
 
         phase.setText("PROGRAMMING PHASE");
-        Text.setText("Select a starting point.");
+        Text.setText("Select a starting point");
         selectStartingPoint.setVisible(true);
         printMapButton.setVisible(false);
         setYourBotIcon();
@@ -1120,7 +1120,7 @@ public class GameViewModel {
         }
         getCardsButton.setVisible(true);
         startGameButton.setVisible(false);
-        Text.setText("Click on 'get cards'!");
+        Text.setText("Click on 'get cards'");
     }
 
 
@@ -2219,6 +2219,7 @@ public class GameViewModel {
            }
         startGameButton.setVisible(true);
         selectStartingPoint.setVisible(false);
+        Text.setText("Click on 'start game'");
     }
 
 
@@ -2633,7 +2634,7 @@ public class GameViewModel {
         if (Client.getClientReceive().isTimerStarted()) {
             timerText.setVisible(true);
             Client.getClientReceive().setTimer(false);
-            Text.setText("Players have 30 seconds left to finish their register.");
+            Text.setText("Players have 30 seconds left to finish their register");
             timer.setText("30");
 
             PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
@@ -2769,7 +2770,7 @@ public class GameViewModel {
             timegone4.play();
 
             PauseTransition textAppear2 = new PauseTransition(Duration.seconds(33));
-            textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'!"));
+            textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'"));
             textAppear2.play();
         } else {
 

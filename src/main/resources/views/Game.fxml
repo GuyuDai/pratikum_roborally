@@ -57,16 +57,6 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <Label fx:id="timer" layoutX="169.0" layoutY="14.0" prefHeight="71.0" prefWidth="116.0" textFill="WHITE">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="timerText" layoutX="72.0" layoutY="20.0" prefHeight="59.0" prefWidth="116.0" text="time left:" textFill="WHITE" visible="false">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
                </children>
             </Pane>
             <AnchorPane fx:id="upgradeShop" layoutX="-5.0" layoutY="505.0" opacity="0.5" prefHeight="292.0" prefWidth="309.0" styleClass="backgroundColor" stylesheets="@../styles.css" visible="false">
@@ -111,7 +101,7 @@
             <Button fx:id="showDamage" layoutX="52.0" layoutY="545.0" mnemonicParsing="false" onAction="#showDamageCards" prefHeight="26.0" prefWidth="204.0" text="Show DamageCards" visible="false" />
             <Pane fx:id="selectStartingPoint" layoutX="28.0" layoutY="246.0" prefHeight="188.0" prefWidth="253.0" visible="false">
                <children>
-                  <Label fx:id="textStartingPoint" layoutX="41.0" layoutY="1.0" prefHeight="27.0" prefWidth="213.0" text="Select your Starting Point" textFill="WHITE">
+                  <Label fx:id="textStartingPoint" layoutX="26.0" layoutY="1.0" prefHeight="27.0" prefWidth="228.0" text="Select your Starting Point" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -134,6 +124,16 @@
                   </Label>
                </children>
             </Pane>
+            <Label fx:id="timer" layoutX="169.0" layoutY="470.0" prefHeight="71.0" prefWidth="116.0" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="timerText" layoutX="72.0" layoutY="476.0" prefHeight="59.0" prefWidth="116.0" text="time left:" textFill="WHITE" visible="false">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <VBox layoutX="322.0" layoutY="1.0" prefHeight="797.0" prefWidth="557.0">
@@ -275,7 +275,7 @@
             <AnchorPane prefHeight="91.0" prefWidth="557.0">
                <children>
                   <ImageView fx:id="yourBot" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="Text" layoutX="90.0" prefHeight="77.0" prefWidth="467.0" textFill="WHITE">
+                  <Label fx:id="Text" layoutX="90.0" prefHeight="77.0" prefWidth="467.0" text="Click on 'print map' to begin" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -285,7 +285,6 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Button fx:id="moveRobotButton" layoutX="475.0" layoutY="26.0" mnemonicParsing="false" onAction="#moveRobotButtonAction" prefHeight="40.0" prefWidth="82.0" text="move robot" visible="false" />
                </children>
             </AnchorPane>
             <GridPane fx:id="register" gridLinesVisible="true" prefHeight="107.0" prefWidth="557.0">
@@ -302,7 +301,8 @@
                </rowConstraints>
                <children>
                   <ImageView fx:id="register2" fitHeight="104.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-                  <Button fx:id="playCardBtn" mnemonicParsing="false" onAction="#playCardBtnAction" prefHeight="56.0" prefWidth="93.0" text="play register 1" visible="false" GridPane.columnIndex="5" />
+                  <Button fx:id="playCardBtn" mnemonicParsing="false" onAction="#playCardBtnAction" prefHeight="56.0" prefWidth="104.0" text="play register 1" visible="false" GridPane.columnIndex="5" />
+                  <Button fx:id="moveRobotButton" mnemonicParsing="false" onAction="#moveRobotButtonAction" prefHeight="57.0" prefWidth="93.0" text="move robot" visible="false" GridPane.columnIndex="5" />
                   <ImageView fx:id="register1" fitHeight="104.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="register3" fitHeight="104.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
                   <ImageView fx:id="register4" fitHeight="104.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
@@ -386,7 +386,7 @@
             </GridPane>
             <Button fx:id="startGameButton" layoutX="269.0" layoutY="620.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="48.0" prefWidth="80.0" text="start game" visible="false" />
             <Button fx:id="getCardsButton" layoutX="269.0" layoutY="678.0" mnemonicParsing="false" onAction="#getCardsButtonAction" prefHeight="48.0" prefWidth="80.0" text="get cards" visible="false" />
-            <Button fx:id="printMapButton" layoutX="269.0" layoutY="565.0" mnemonicParsing="false" onAction="#printMapButtonAction" prefHeight="48.0" prefWidth="80.0" text="print Map" />
+            <Button fx:id="printMapButton" layoutX="269.0" layoutY="565.0" mnemonicParsing="false" onAction="#printMapButtonAction" prefHeight="48.0" prefWidth="80.0" text="print map" />
             <AnchorPane fx:id="player11" layoutY="80.0" opacity="0.5" prefHeight="50.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <ImageView fx:id="playerBot2" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
