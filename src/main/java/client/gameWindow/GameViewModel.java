@@ -77,8 +77,6 @@ public class GameViewModel {
     @FXML
     private Label textStartingPoint;
 
-    @FXML
-    private Button startingPointOK;
 
     List<Integer> takenStartNumbers=new ArrayList<>();
 
@@ -123,6 +121,8 @@ public class GameViewModel {
      */
     @FXML
     private Button start1, start2, start3, start4, start5, start6;
+    @FXML
+    private Button startPointOK;
 
 
     /**
@@ -2083,6 +2083,7 @@ public class GameViewModel {
             checkStart();
             setStartingPointCount(1);
         }
+        startPointOK.setVisible(true);
     }
 
     public void startingPoint2Action(ActionEvent actionEvent) {
@@ -2098,6 +2099,7 @@ public class GameViewModel {
             checkStart();
             setStartingPointCount(2);
         }
+        startPointOK.setVisible(true);
     }
 
     public void startingPoint3Action(ActionEvent actionEvent) {
@@ -2113,6 +2115,7 @@ public class GameViewModel {
             checkStart();
             setStartingPointCount(3);
         }
+        startPointOK.setVisible(true);
     }
 
     public void startingPoint4Action(ActionEvent actionEvent) {
@@ -2128,6 +2131,7 @@ public class GameViewModel {
             checkStart();
             setStartingPointCount(4);
         }
+        startPointOK.setVisible(true);
     }
 
     public void startingPoint5Action(ActionEvent actionEvent) {
@@ -2143,6 +2147,7 @@ public class GameViewModel {
             checkStart();
             setStartingPointCount(5);
         }
+        startPointOK.setVisible(true);
     }
 
     public void startingPoint6Action(ActionEvent actionEvent) {
@@ -2158,6 +2163,7 @@ public class GameViewModel {
             checkStart();
             setStartingPointCount(6);
         }
+        startPointOK.setVisible(true);
     }
 
 

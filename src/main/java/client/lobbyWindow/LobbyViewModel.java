@@ -179,6 +179,12 @@ public class LobbyViewModel {
             selectMap.setText("open game");
             selectMap.setVisible(true);
         }
+        if(readyButton.isSelected()){
+            System.out.println("ok");
+        }
+        else{
+            LobbyText.setText("hui");
+        }
     }
 
     /**

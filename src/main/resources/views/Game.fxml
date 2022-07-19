@@ -116,7 +116,7 @@
                   <ToggleButton fx:id="startingPoint3" layoutX="14.0" layoutY="108.0" mnemonicParsing="false" onAction="#startingPoint3Action" text="Starting Point 3" toggleGroup="$StartingPoint" />
                   <ToggleButton fx:id="startingPoint5" layoutX="139.0" layoutY="75.0" mnemonicParsing="false" onAction="#startingPoint5Action" text="Starting Point 5" toggleGroup="$StartingPoint" />
                   <ToggleButton fx:id="startingPoint6" layoutX="139.0" layoutY="108.0" mnemonicParsing="false" onAction="#startingPoint6Action" text="Starting Point 6" toggleGroup="$StartingPoint" />
-                  <Button fx:id="startPointOK" layoutX="110.0" layoutY="149.0" mnemonicParsing="false" onAction="#startPointOKAction" text="OK" />
+                  <Button fx:id="startPointOK" layoutX="110.0" layoutY="149.0" mnemonicParsing="false" onAction="#startPointOKAction" text="OK" visible="false" />
                   <Label layoutX="20.0" layoutY="174.0" prefHeight="48.0" prefWidth="415.0" text="This starting point is already taken" textFill="WHITE" visible="false">
                      <font>
                         <Font size="14.0" />
