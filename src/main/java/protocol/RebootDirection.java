@@ -1,11 +1,19 @@
 package protocol;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 
-public class RebootDirection extends Message {
+public class RebootDirection implements Message {
+    public String messageType;
+    public String getMessageType() {
+        return messageType;
+    }
+    public RebootDirectionBody messageBody;
 
     public class RebootDirectionBody extends MessageBody {
         protected String direction;
@@ -22,7 +30,21 @@ public class RebootDirection extends Message {
         this.messageType = MessageType.rebootDirection;
         RebootDirectionBody body = new RebootDirectionBody();
         body.direction = direction;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public RebootDirectionBody getMessageBody() {
+        return messageBody;
+    }
+
+    @Override
+    public String toString(){
+        Gson gson = new GsonBuilder().create();
+        //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        //GsonBuilder gsonBuilder = new GsonBuilder();
+        //gsonBuilder.registerTypeAdapter(Message.class, new MessageAdapter());
+        //Gson gson = gsonBuilder.create();
+        return gson.toJson(this);
     }
 }

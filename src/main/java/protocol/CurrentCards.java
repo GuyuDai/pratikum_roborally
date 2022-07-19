@@ -1,5 +1,8 @@
 package protocol;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.ActiveCard;
 import protocol.ProtocolFormat.Message;
@@ -15,7 +18,12 @@ import java.util.List;
  * The priorities of the cards have to be recalculated after each register.
  */
 
-public class CurrentCards extends Message {
+public class CurrentCards implements Message {
+    public String messageType;
+    public String getMessageType() {
+        return messageType;
+    }
+    public CurrentCardsBody messageBody;
 
     public class CurrentCardsBody extends MessageBody {
         protected ActiveCard[] activeCards;
@@ -32,7 +40,21 @@ public class CurrentCards extends Message {
         this.messageType = MessageType.currentCards;
         CurrentCardsBody body = new CurrentCardsBody();
         body.activeCards = activeCards;
-        this.messageBody = body.toString();
+        this.messageBody = body;
 
+    }
+
+    public CurrentCardsBody getMessageBody() {
+        return messageBody;
+    }
+
+    @Override
+    public String toString(){
+        Gson gson = new GsonBuilder().create();
+        //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        //GsonBuilder gsonBuilder = new GsonBuilder();
+        //gsonBuilder.registerTypeAdapter(Message.class, new MessageAdapter());
+        //Gson gson = gsonBuilder.create();
+        return gson.toJson(this);
     }
 }
