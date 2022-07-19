@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="GBK" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-07-19T13:55:01.320964600Z</date>
+  <millis>1658238901320</millis>
+  <nanos>964600</nanos>
+  <sequence>0</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>24</thread>
+  <message>[32m{"messageType":"HelloClient","messageBody":{"protocol":"Version 2.0"}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-19T13:55:01.352878300Z</date>
+  <millis>1658238901352</millis>
+  <nanos>878300</nanos>
+  <sequence>1</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>24</thread>
+  <message>[32m{"messageType":"Welcome","messageBody":{"clientID":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-19T13:55:01.374819700Z</date>
+  <millis>1658238901374</millis>
+  <nanos>819700</nanos>
+  <sequence>2</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>24</thread>
+  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"Choose your robot","from":-1,"isPrivate":true}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-19T13:55:06.378539800Z</date>
+  <millis>1658238906378</millis>
+  <nanos>539800</nanos>
+  <sequence>3</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>24</thread>
+  <message>[32m{"messageType":"Alive","messageBody":{}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-19T13:55:06.385520800Z</date>
+  <millis>1658238906385</millis>
+  <nanos>520800</nanos>
+  <sequence>4</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>24</thread>
+  <message>[32m{"messageType":"PlayerAdded","messageBody":{"clientID":1,"name":"AI_1","figure":3}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-19T13:55:08.392430900Z</date>
+  <millis>1658238908392</millis>
+  <nanos>430900</nanos>
+  <sequence>5</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>24</thread>
+  <message>[32m{"messageType":"PlayerStatus","messageBody":{"clientID":1,"ready":true}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-19T13:55:08.394425400Z</date>
+  <millis>1658238908394</millis>
+  <nanos>425400</nanos>
+  <sequence>6</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>24</thread>
+  <message>[32m{"messageType":"SelectMap","messageBody":{"availableMaps":["DizzyHighway","ExtraCrispy","DeathTrap","LostBearings","Twister"]}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-19T13:55:08.402403700Z</date>
+  <millis>1658238908402</millis>
+  <nanos>403700</nanos>
+  <sequence>7</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>24</thread>
+  <message>[32m{"messageType":"MapSelected","messageBody":{"map":"DizzyHighway"}}wrapped message</message>
+</record>
