@@ -34,9 +34,12 @@ public class ClientReceive extends Thread{
     protected String playerName;
     protected int figure;
     protected String chatMsg;
+
+    public int getCheckPointNumber() {
+        return checkPointNumber;
+    }
+
     protected int checkPointNumber;
-
-
 
     protected int checkPointXPosition;
     protected int checkPointYPosition;
