@@ -51,7 +51,6 @@ public class AIReceive extends ClientReceive {
     try {
       while (!socket.isClosed()) {
         String serverMessage = readInput.readLine();
-        System.out.println(serverMessage + "-----------original message");  //test
         Message message = wrapMessage(serverMessage);
         //System.out.println("--------------------------------------------------------------");  //test
         AI.getLogger().info(ANSI_GREEN+ message + "wrapped message");  //test
@@ -505,7 +504,7 @@ public class AIReceive extends ClientReceive {
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-  /*
+
   private Message wrapMessage(String input){
     if(input.contains("\"messageType\":\"ActivePhase\",\"messageBody\"")){
       return new Gson().fromJson(input, ActivePhase.class);
@@ -658,13 +657,14 @@ public class AIReceive extends ClientReceive {
     return new ErrorMessage("Error when parsing String to Message");
   }
 
-   */
+
 
   /**
    * this method is for the LMU Server, for our own game, please use the above wrapMessage()
    * @param input Json String
    * @return specific Message
    */
+  /*
   private Message wrapMessage(String input){
   if(input.contains("\"messageType\":\"ActivePhase\"")){
     return new Gson().fromJson(input, ActivePhase.class);
@@ -816,5 +816,7 @@ public class AIReceive extends ClientReceive {
 
   return new ErrorMessage("Error when parsing String to Message");
 }
+
+   */
 
 }
