@@ -4,19 +4,15 @@ ___
 ### Hallo und willkommen bei den originellen Oktupussen,
 
 hier sind ein paar Infos, wie ihr unsere jars zum Laufen bringen könnt.
-Server.jar sollte ohne Probleme laufen. Für die Client.jar und AI.jar gibt 2 Möglichkeiten: entweder über IntelliJ, oder über die Eingabeaufforderung CMD
+Server.jar sollte ohne Probleme laufen. Für die Client.jar und AI.jar macht ihr Folgendes:
 
-**Mit IntelliJ:**
-1. Zu Run Configurations gehen
-2. Add VM Options
-3. Einfügen: --module-path " * "--add-modules javafx.controls, javafx.fxml -jar " ** "
-4. Statt * fügt ihr den Dateipfad zur javafx lib (z.B. C:\Program Files\Java\javafx-sdk-17.0.2\lib)
-   und statt ** fügt ihr den Dateipfad zur jar Datei ein (z.B. C:\originelle_oktopusse\out\artifacts\Client_jar\Client.jar)
 
 **Mit CMD:**
 1. cd Dateipfad von jar Datei
-2. java --module-path D:\openjfx-18.0.1_windows-x64_bin-sdk\javafx-sdk-17.0.2\lib --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.web -jar Client.jar
-3. Den Pfad für javafx lib anpassen
+2. java --module-path " * "  --add-modules javafx.controls,javafx.fxml -jar Client.jar
+3. Statt * fügt ihr den Dateipfad zur javafx lib (z.B. C:\Program Files\Java\javafx-sdk-17.0.2\lib) und die " " mitschreiben!
+
+
 
 
 ___
