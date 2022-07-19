@@ -13,6 +13,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import javafx.util.*;
+import org.w3c.dom.Text;
 import protocol.*;
 import server.BoardElement.*;
 import server.BoardTypes.*;
@@ -2227,6 +2228,7 @@ public class GameViewModel {
      */
     public void moveRobot() {
         robotBoard.getChildren().clear();
+        startBoard.getChildren().clear();
         for (int clientId : Client.getClientReceive().getIdPosition().keySet()) {
             int moveX = Client.getClientReceive().getPositionById(clientId)[0];
             int moveY = Client.getClientReceive().getPositionById(clientId)[1];
@@ -2237,32 +2239,40 @@ public class GameViewModel {
             if(Client.getClientReceive().getIdDirection()!=null &&
                     Client.getClientReceive().getIdDirection().containsKey(clientId)) {
                 rotateRobot(botView,clientId);
-                PauseTransition move = new PauseTransition(Duration.seconds(1));
                 ImageView finalBotView = botView;
                 robotOgPicture.put(clientId,finalBotView);
-                move.setOnFinished(e -> robotBoard.add(finalBotView, moveX, moveY));
-                move.play();
+                robotBoard.add(finalBotView, moveX, moveY);
             }
             //TODO delete startPosition
             else {
                 // remove.setOnFinished(e -> robotBoard.add(emptyView,oldX,oldY));
                 robotBoard.getChildren().remove(botView);
-                PauseTransition move1 = new PauseTransition(Duration.seconds(1));
+                //PauseTransition move1 = new PauseTransition(Duration.seconds(1));
                 ImageView finalBotView = botView;
-                move1.setOnFinished(e -> robotBoard.add(finalBotView, moveX, moveY));
-                move1.play();
+                robotBoard.add(finalBotView, moveX, moveY);
+                //move1.play();
             }
 
            // PauseTransition remove2 = new PauseTransition(Duration.seconds(2));
            // remove2.setOnFinished(e -> robotBoard.getChildren().remove(1));
           //  remove2.play();
         }
+        Client.getClientReceive().setIdDirection(new HashMap<>());
         if(Client.getClientReceive().isPickDamage()){
             showDamage.setVisible(true);
+            Text.setText("pick damage Cards");
             //TODO: set a text to remind player pickDamageCard
         }
-        printRobotLaser();
 
+        if(Client.getClientReceive().isGameEnded()){
+            if (Client.getClientReceive().getClientID()==Client.getClientReceive().getWinnerID()){
+                openWinnerWindow();
+            }
+            else {
+                openLoserWindow();
+            }
+        }
+        printRobotLaser();
     }
 
 
@@ -2622,7 +2632,7 @@ public class GameViewModel {
                 default:
                     break;
             }
-        Client.getClientReceive().setIdDirection(new HashMap<>());
+
     }
 
 
@@ -2833,14 +2843,14 @@ public class GameViewModel {
               yList.add(robotY);
           }
 
-          int size = xList.size();
-          for (int index = 0; index < size; index++) {
+          for (int index = 0; index < xList.size(); index++) {
               int xPointer = xList.get(index);
               int yPointer = yList.get(index);
-              for (int i = index + 1; i < size; i++) {
+              for (int i = index + 1; i < xList.size(); i++) {
                   int tempX = xList.get(i);
                   int tempY = yList.get(i);
                   if (xPointer == tempX || yPointer == tempY) {
+                      result.add(new int[]{xPointer,yPointer});
                       result.add(new int[]{tempX, tempY});
                       xList.remove((Integer) tempX);
                       yList.remove((Integer) tempY);
@@ -2853,34 +2863,37 @@ public class GameViewModel {
           int printY2 = result.get(1)[1];
           if (printX == printX2) {
               if (printY < printY2) {
-                  for (int i = printY; i <= printY2; i++) {
-                      ImageView laser = new ImageView(imageRobotLaser);
-                      startBoard.add(laser, i, printX);
-                  }
-                  if (printY > printY2) {
-                      for (int i = printY2; i <= printY; i++) {
-                          ImageView laser = new ImageView(imageRobotLaser);
-                          startBoard.add(laser, i, printX);
-                      }
+                  for (int i = printY+1; i < printY2; i++) {
+                      ImageView laserVertical = new ImageView(imageRobotLaserVertical);
+                      startBoard.add(laserVertical,printX,i);
                   }
               }
-          }
-          if (printY == printY2) {
-              if (printX < printX2) {
-                  for (int i = printX; i <= printX2; i++) {
-                      ImageView laserVertical = new ImageView(imageRobotLaserVertical);
-                      startBoard.add(laserVertical, printY, i);
-                  }
-                  if (printX > printX2) {
-                      for (int i = printX2; i <= printX; i++) {
+                  if (printY > printY2) {
+                      for (int i = printY2+1; i < printY; i++) {
                           ImageView laserVertical = new ImageView(imageRobotLaserVertical);
-                          startBoard.add(laserVertical, printY, i);
+                          startBoard.add(laserVertical,printX,i);
+                      }
+                  }
+
+          }
+          else {
+              if (printX < printX2) {
+                  for (int i = printX+1; i < printX2; i++) {
+                      ImageView laser = new ImageView(imageRobotLaser);
+                      startBoard.add(laser, i, printY);
+                  }
+              }
+                  if (printX > printX2) {
+                      for (int i = printX2+1; i < printX; i++) {
+                          ImageView laser = new ImageView(imageRobotLaser);
+                          startBoard.add(laser, i, printY);
                       }
                   }
               }
 
-          }
+          Client.getClientReceive().setDoRobotLaser(false);
       }
+
   }
   int clickDamageCounter=1;
     @FXML
@@ -2971,6 +2984,37 @@ public class GameViewModel {
 
     }
 
+    public void openWinnerWindow(){
+            Stage stage = (Stage) exitBtn.getScene().getWindow();
+            stage.close();
+
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Winner.fxml"));
+                Parent rootMap = (Parent) fxmlLoader.load();
+                Stage stageLobby = new Stage();
+                stageLobby.setTitle("Winner");
+                stageLobby.setScene(new Scene(rootMap));
+                stageLobby.show();
+            } catch (Exception e) {
+                Client.getLogger().severe( "Window can not open.");
+            }
+        }
+
+        public void openLoserWindow(){
+            Stage stage = (Stage) exitBtn.getScene().getWindow();
+            stage.close();
+
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Loser.fxml"));
+                Parent rootMap = (Parent) fxmlLoader.load();
+                Stage stageLobby = new Stage();
+                stageLobby.setTitle("Loser");
+                stageLobby.setScene(new Scene(rootMap));
+                stageLobby.show();
+            } catch (Exception e) {
+                Client.getLogger().severe( "Window can not open.");
+            }
+        }
 
 
 }

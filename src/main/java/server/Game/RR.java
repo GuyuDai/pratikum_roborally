@@ -407,7 +407,6 @@ public class RR extends Thread implements GameLogic {
           break;
         }
       }
-      System.out.println("break while loop");//test
       //send protocol message  //from now on, only activePlayers can be used, because it has the correct order
       ActiveCard[] messageActiveCards = new ActiveCard[activePlayers.size()];
       int index = 0;
@@ -425,11 +424,11 @@ public class RR extends Thread implements GameLogic {
         playerInCurrentTurn.getRegister().get(i).action();
         checkPointMove();  //before interact with tiles
         interactWithTile();
-        controller.robotLaserController(playerInCurrentTurn.getOwnRobot());
         //this.getServerThreadById(player.getClientId()).setClickPlayCard(false);
       }
       //send protocol message
       for(Player player : activePlayers){
+        controller.robotLaserController(player.getOwnRobot());
         int newIndex = 0;
         for(Card card : player.getRegister()){
           sendMessageToClient(new ReplaceCard(newIndex,card.getCardName(),player.clientID),getServerThreadById(player.clientID));

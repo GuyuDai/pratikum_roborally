@@ -157,7 +157,7 @@ public class Player implements PlayerAction{
     switch (type.trim().toLowerCase()){
       case "spam":
         for(int i=0; i<count; i++){
-          if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getSpamPile())){
+          if(!currentGame.getController().isCardListEmpty(currentGame.gameDeck.getSpamPile())){
             Card addedCard = currentGame.gameDeck.getSpamPile().get(0);
             ownDeck.getDiscardPile().add(addedCard);
             tempCards.add(addedCard.getCardName());
@@ -170,7 +170,7 @@ public class Player implements PlayerAction{
 
       case "worm":
         for(int i=0; i<count; i++){
-          if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getWormPile())){
+          if(!currentGame.getController().isCardListEmpty(currentGame.gameDeck.getWormPile())){
             Card addedCard = currentGame.gameDeck.getWormPile().get(0);
             ownDeck.getDiscardPile().add(addedCard);
             tempCards.add(addedCard.getCardName());
@@ -183,7 +183,7 @@ public class Player implements PlayerAction{
 
       case "virus":
         for(int i=0; i<count; i++){
-          if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getVirusPile())){
+          if(!currentGame.getController().isCardListEmpty(currentGame.gameDeck.getVirusPile())){
             Card addedCard = currentGame.gameDeck.getVirusPile().get(0);
             ownDeck.getDiscardPile().add(addedCard);
             tempCards.add(addedCard.getCardName());
@@ -196,7 +196,7 @@ public class Player implements PlayerAction{
 
       case "trojan":
         for(int i=0; i<count; i++){
-          if(currentGame.getController().isCardListEmpty(currentGame.gameDeck.getTrojanPile())){
+          if(!currentGame.getController().isCardListEmpty(currentGame.gameDeck.getTrojanPile())){
             Card addedCard = currentGame.gameDeck.getTrojanPile().get(0);
             ownDeck.getDiscardPile().add(addedCard);
             tempCards.add(addedCard.getCardName());

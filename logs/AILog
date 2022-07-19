@@ -97,3 +97,28 @@
   <thread>24</thread>
   <message>[32m{"messageType":"MapSelected","messageBody":{"map":"DizzyHighway"}}wrapped message</message>
 </record>
+<record>
+  <date>2022-07-19T14:33:02.982333500Z</date>
+  <millis>1658241182982</millis>
+  <nanos>333500</nanos>
+  <sequence>8</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>24</thread>
+  <message>[32m{"messageType":"PlayerAdded","messageBody":{"clientID":2,"name":"hi","figure":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-19T14:33:04.067568300Z</date>
+  <millis>1658241184067</millis>
+  <nanos>568300</nanos>
+  <sequence>9</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>24</thread>
+  <message>[32m{"messageType":"PlayerStatus","messageBody":{"clientID":2,"ready":true}}wrapped message</message>
+</record>
+</log>

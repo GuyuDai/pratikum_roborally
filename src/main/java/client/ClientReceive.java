@@ -76,6 +76,10 @@ public class ClientReceive extends Thread{
 
     protected boolean pickDamage =false;
 
+    protected  boolean gameEnded=false;
+
+    protected  int winnerID;
+
 
     public void setCounterRegister(int count){
         this.counterRegister = count;
@@ -480,6 +484,11 @@ public class ClientReceive extends Thread{
                 setCheckPointYPosition(newYPosition);
                 break;
 
+            case MessageType.gameFinished:
+                GameFinished gameFinished= (GameFinished) message;
+                GameFinished.GameFinishedBody gameFinishedBody=gameFinished.getMessageBody();
+                winnerID=gameFinishedBody.getClientID();
+                gameEnded=true;
 
             case MessageType.registerChosen:
                 RegisterChosen registerChosen = (RegisterChosen) message;
@@ -697,6 +706,14 @@ public class ClientReceive extends Thread{
 
     public boolean isPickDamage() {
         return pickDamage;
+    }
+
+    public boolean isGameEnded() {
+        return gameEnded;
+    }
+
+    public int getWinnerID() {
+        return winnerID;
     }
     public void setPickDamage(boolean pickDamage){
         this.pickDamage = pickDamage;

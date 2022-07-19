@@ -166,8 +166,7 @@ public class Controller {
       if(robotX==X && robotY<Y && laserDirection.equals(Direction.LEFT)){
         for(int i=robotY;i<Y;i++){
           if(!(currentGame.getGameBoard().getBoardElem(X,i,0).getName().equals("Antenna")
-                  || currentGame.getGameBoard().getBoardElem(X,i,1).getName().equals("Wall"))
-                  || robotOnPositionCheck(new Position(X,i, currentGame.getGameBoard()))) {
+                  || currentGame.getGameBoard().getBoardElem(X,i,1).getName().equals("Wall"))) {
             robot.getOwner().drawDamage("Spam",1);
             currentGame.sendMessageToAll(new Animation("RobotLaser"));
           }
@@ -176,8 +175,7 @@ public class Controller {
       if(robotX==X && robotY>Y && laserDirection.equals(Direction.RIGHT)){
         for(int i=Y;i<robotY;i++){
           if(!(currentGame.getGameBoard().getBoardElem(X,i,0).getName().equals("Antenna")
-                  || currentGame.getGameBoard().getBoardElem(X,i,1).getName().equals("Wall")
-                  || robotOnPositionCheck(new Position(X,i, currentGame.getGameBoard())))) {
+                  || currentGame.getGameBoard().getBoardElem(X,i,1).getName().equals("Wall"))) {
             robot.getOwner().drawDamage("Spam",1);
             currentGame.sendMessageToAll(new Animation("RobotLaser"));
           }
@@ -186,8 +184,7 @@ public class Controller {
       if(robotY==Y && robotX<X && laserDirection.equals(Direction.UP)){
         for(int i=robotX;i<X;i++){
           if(!(currentGame.getGameBoard().getBoardElem(i,Y,0).getName().equals("Antenna")
-                  || currentGame.getGameBoard().getBoardElem(i,Y,1).getName().equals("Wall")
-                  || robotOnPositionCheck(new Position(i,Y, currentGame.getGameBoard())))) {
+                  || currentGame.getGameBoard().getBoardElem(i,Y,1).getName().equals("Wall"))) {
             robot.getOwner().drawDamage("Spam",1);
             currentGame.sendMessageToAll(new Animation("RobotLaser"));
           }
@@ -196,8 +193,7 @@ public class Controller {
       if(robotY==Y && robotX>X && laserDirection.equals(Direction.DOWN)){
         for(int i=X;i<robotX;i++){
           if(!(currentGame.getGameBoard().getBoardElem(i,Y,0).getName().equals("Antenna")
-                  || currentGame.getGameBoard().getBoardElem(i,Y,1).getName().equals("Wall")
-                  ||robotOnPositionCheck(new Position(i,Y, currentGame.getGameBoard())))){
+                  || currentGame.getGameBoard().getBoardElem(i,Y,1).getName().equals("Wall"))){
             robot.getOwner().drawDamage("Spam",1);
             currentGame.sendMessageToAll(new Animation("RobotLaser"));
           }
@@ -267,18 +263,23 @@ public class Controller {
       currentGame.sendMessageToAll(new ReceivedChat("Game end. No winner",-1,false));
       flag = true;
     }
+    if(currentGame.getActivePlayers().size()==1){
+      for(Player player : currentGame.getActivePlayers()) {
+        currentGame.sendMessageToAll(new GameFinished(player.clientID));
+      }
+    }
     for(Player player : currentGame.getActivePlayers()){
       BoardElem elem1 = player.getOwnRobot().getCurrentPosition().getTile();
       BoardElem elem2 = player.getOwnRobot().getCurrentPosition().getSecondTile();
       if(elem1.getName().equals("CheckPoint")){
         int checkPointNum1 = elem1.getCount();
         player.getCheckPoints().remove((Integer) checkPointNum1);
-        currentGame.sendMessageToAll(new CheckPointReached(player.clientID, elem1.count));
+        currentGame.sendMessageToAll(new CheckPointReached(player.clientID, elem1.getCount()));
       }
       if(elem2.getName().equals("CheckPoint")){
         int checkPointNum2 = elem2.getCount();
         player.getCheckPoints().remove((Integer) checkPointNum2);
-        currentGame.sendMessageToAll(new CheckPointReached(player.clientID, elem2.count));
+        currentGame.sendMessageToAll(new CheckPointReached(player.clientID, elem2.getCount()));
       }
       if(player.getCheckPoints().size() == 0){
         flag = true;
