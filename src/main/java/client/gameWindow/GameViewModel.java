@@ -280,8 +280,8 @@ public class GameViewModel {
     Image imagePowerUp = new Image(urlPowerUp.toString());
 
 
-    URL urlCardHidden = getClass().getResource("/programmingCards/cardHidden.png");
-    Image imageCardHidden = new Image(urlCardHidden.toString());
+    //URL urlCardHidden = getClass().getResource("/programmingCards/cardHidden.png");
+    //Image imageCardHidden = new Image(urlCardHidden.toString());
 
     URL hammer = getClass().getResource("/Robots/hammer bot.png");
     Image imageHammer = new Image(hammer.toString());
@@ -600,8 +600,8 @@ public class GameViewModel {
                 case "UTurn":
                     cardImage = imageUTurn;
                     break;
-                default:
-                    cardImage = imageCardHidden;
+                //default:
+                  //  cardImage = imageCardHidden;
 
             }
             switch (i) {
@@ -1111,7 +1111,7 @@ public class GameViewModel {
      * start game button -> show button get Cards
      */
     public void startGameButtonAction(ActionEvent actionEvent) {
-        for(int id:Client.getClientReceive().getIdList()){
+        for (int id:Client.getClientReceive().getIdList()){
                int robotNumber=Client.getClientReceive().getRobotById(id);
                int startingPointNumber=Client.getClientReceive().getStartPointById(id);
                Integer[] position=Client.getClientReceive().getPositionById(id);

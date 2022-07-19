@@ -79,3 +79,7 @@
     -fx-font-weight: bold;
     -fx-font-size: 16;
 }
+
+.buttonHand{
+    -fx-background-color: transparent;
+}

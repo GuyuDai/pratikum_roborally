@@ -25,11 +25,11 @@ public class Gear extends BoardElem implements Move {
 
   @Override
   public void move(Robot robot) {
-    if (this.getTurnDirection()=="turnRight") {
+    if (this.getTurnDirection().equals("turnRight")) {
       robot.setFaceDirection(robot.getFaceDirection().turnRight());
 
     }
-    if (this.getTurnDirection()=="turnLeft") {
+    if (this.getTurnDirection().equals("turnLeft")) {
       robot.setFaceDirection(robot.getFaceDirection().turnLeft());
     }
 

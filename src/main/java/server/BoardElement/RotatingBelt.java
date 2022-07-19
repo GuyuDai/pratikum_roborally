@@ -27,8 +27,8 @@ public class RotatingBelt extends BoardElem implements Move {
         Direction straightDirection=this.getDirection();//arrowDirection
         Direction curvedDirection=this.getDirection2();//anotherDirection  for example：  ↵ ,← is straightDirection ↓is curvedDirection
         int speed=this.getSpeed();
-        if((robot.getLastPosition().getTile().getName()=="ConveyBelt"||
-                robot.getLastPosition().getTile().getName()=="RotatingBelt") &&
+        if((robot.getLastPosition().getTile().getName().equals("ConveyBelt") ||
+                robot.getLastPosition().getTile().getName().equals("RotatingBelt")) &&
                 robot.getLastPosition().getTile().getDirection().equals(curvedDirection) ){
                 robot.setFaceDirection(straightDirection);
                 if (speed == 1) {
@@ -36,10 +36,10 @@ public class RotatingBelt extends BoardElem implements Move {
                 }
                 if (speed == 2) {
                     robot.push(robot, straightDirection, 1);
-                    if (robot.getCurrentPosition().getTile().getName() == "ConveyBelt") {
+                    if (robot.getCurrentPosition().getTile().getName().equals("ConveyBelt")) {
                         robot.push(robot, straightDirection, 1);
                     }
-                    if (robot.getCurrentPosition().getTile().getName() == "RotatingBelt") {
+                    if (robot.getCurrentPosition().getTile().getName().equals("RotatingBelt")) {
                         Direction moveDirection = robot.getCurrentPosition().getTile().getDirection();
                         robot.push(robot, moveDirection, 1);
                     } else {
@@ -53,10 +53,10 @@ public class RotatingBelt extends BoardElem implements Move {
                 }
                 if(speed==2){
                     robot.push(robot, straightDirection, 1);
-                    if(robot.getCurrentPosition().getTile().getName()=="ConveyBelt"){
+                    if(robot.getCurrentPosition().getTile().getName().equals("ConveyBelt")){
                         robot.push(robot,straightDirection, 1);
                     }
-                    if(robot.getCurrentPosition().getTile().getName()=="RotatingBelt"){
+                    if(robot.getCurrentPosition().getTile().getName().equals("RotatingBelt")){
                         Direction moveDirection=robot.getCurrentPosition().getTile().getDirection();
                         robot.push(robot,moveDirection,1);
                     }
