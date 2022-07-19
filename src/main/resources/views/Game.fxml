@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -18,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1251.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
+<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1251.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
    <children>
       <Pane layoutX="6.0" layoutY="3.0" prefHeight="795.0" prefWidth="305.0" stylesheets="@../styles.css">
          <children>
@@ -46,25 +47,16 @@
                   <VBox fx:id="container" prefHeight="171.0" prefWidth="305.0" style="-fx-background-radius: 10;" styleClass="backgroundColor" visible="false">
                      <children>
                         <ListView fx:id="list" prefHeight="489.0" prefWidth="244.0" style="-fx-background-radius: 10;" />
-                        <Separator prefWidth="200.0" />
+                        <Separator opacity="0.0" prefWidth="200.0" />
                         <HBox prefHeight="77.0" prefWidth="263.0">
                            <children>
-                              <TextField fx:id="input" onKeyPressed="#keyboardAction" prefHeight="25.0" prefWidth="368.0" promptText="Chat with the other players!" style="-fx-background-color: white;" />
-                              <Separator orientation="VERTICAL" prefHeight="200.0" />
-                              <Button fx:id="sendBtn" mnemonicParsing="false" onAction="#sendButtonAction" prefHeight="25.0" prefWidth="53.0" text="Send" />
+                              <TextField fx:id="input" onKeyPressed="#keyboardAction" prefHeight="26.0" prefWidth="247.0" promptText="Chat with the other players!" style="-fx-background-color: white;" />
+                              <Separator opacity="0.0" orientation="VERTICAL" prefHeight="200.0" />
+                              <Button fx:id="sendBtn" mnemonicParsing="false" onAction="#sendButtonAction" prefHeight="26.0" prefWidth="50.0" text="Send" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
-                  <Label fx:id="timer" layoutX="169.0" layoutY="14.0" prefHeight="71.0" prefWidth="116.0" textFill="WHITE">
-                     <font>
-                        <Font size="24.0" />
-                     </font></Label>
-                  <Label fx:id="timerText" layoutX="72.0" layoutY="20.0" prefHeight="59.0" prefWidth="116.0" text="time left:" textFill="WHITE" visible="false">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
                </children>
             </Pane>
             <AnchorPane fx:id="upgradeShop" layoutX="-5.0" layoutY="505.0" opacity="0.5" prefHeight="292.0" prefWidth="309.0" styleClass="backgroundColor" stylesheets="@../styles.css" visible="false">
@@ -83,17 +75,33 @@
                   <RowConstraints maxHeight="99.0" minHeight="10.0" prefHeight="99.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="worm" graphicTextGap="0.0" minWidth="77.0" mnemonicParsing="false" onAction="#playWormCards" prefHeight="100.0" prefWidth="77.0" styleClass="worm" stylesheets="@../styles.css" visible="false" />
-                  <Button fx:id="virus" mnemonicParsing="false" onAction="#playVirusCards" styleClass="virus" stylesheets="@../styles.css" visible="false" GridPane.columnIndex="1" />
-                  <Button fx:id="spam" mnemonicParsing="false" onAction="#playSpamCards" styleClass="spam" stylesheets="@../styles.css" visible="false" GridPane.columnIndex="2" />
-                  <Button fx:id="trojan" mnemonicParsing="false" onAction="#playTrojanCards" styleClass="trojan" stylesheets="@../styles.css" visible="false" GridPane.columnIndex="3" />
+                  <Button fx:id="worm" graphicTextGap="0.0" minWidth="77.0" mnemonicParsing="false" onAction="#playWormCards" prefHeight="100.0" prefWidth="77.0" stylesheets="@../styles.css" visible="false">
+                     <styleClass>
+                        <String fx:value="worm" />
+                        <String fx:value="buttonHand" />
+                     </styleClass></Button>
+                  <Button fx:id="virus" mnemonicParsing="false" onAction="#playVirusCards" stylesheets="@../styles.css" visible="false" GridPane.columnIndex="1">
+                     <styleClass>
+                        <String fx:value="virus" />
+                        <String fx:value="buttonHand" />
+                     </styleClass></Button>
+                  <Button fx:id="spam" mnemonicParsing="false" onAction="#playSpamCards" stylesheets="@../styles.css" visible="false" GridPane.columnIndex="2">
+                     <styleClass>
+                        <String fx:value="spam" />
+                        <String fx:value="buttonHand" />
+                     </styleClass></Button>
+                  <Button fx:id="trojan" mnemonicParsing="false" onAction="#playTrojanCards" stylesheets="@../styles.css" visible="false" GridPane.columnIndex="3">
+                     <styleClass>
+                        <String fx:value="trojan" />
+                        <String fx:value="buttonHand" />
+                     </styleClass></Button>
                </children>
             </GridPane>
             <Button fx:id="registerDamage" layoutX="72.0" layoutY="720.0" mnemonicParsing="false" onAction="#registerDamageAction" prefHeight="26.0" prefWidth="155.0" text="Register DamageCard" visible="false" />
-            <Button fx:id="showDamage" layoutX="52.0" layoutY="545.0" mnemonicParsing="false" onAction="#showDamageCards" prefHeight="26.0" prefWidth="204.0" text="Show DamageCards" visible="false"/>
+            <Button fx:id="showDamage" layoutX="52.0" layoutY="545.0" mnemonicParsing="false" onAction="#showDamageCards" prefHeight="26.0" prefWidth="204.0" text="Show DamageCards" visible="false" />
             <Pane fx:id="selectStartingPoint" layoutX="28.0" layoutY="246.0" prefHeight="188.0" prefWidth="253.0" visible="false">
                <children>
-                  <Label fx:id="textStartingPoint" layoutX="34.0" layoutY="1.0" prefHeight="27.0" prefWidth="185.0" text="Select your Starting Point" textFill="WHITE">
+                  <Label fx:id="textStartingPoint" layoutX="26.0" layoutY="1.0" prefHeight="27.0" prefWidth="228.0" text="Select your Starting Point" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -108,7 +116,7 @@
                   <ToggleButton fx:id="startingPoint3" layoutX="14.0" layoutY="108.0" mnemonicParsing="false" onAction="#startingPoint3Action" text="Starting Point 3" toggleGroup="$StartingPoint" />
                   <ToggleButton fx:id="startingPoint5" layoutX="139.0" layoutY="75.0" mnemonicParsing="false" onAction="#startingPoint5Action" text="Starting Point 5" toggleGroup="$StartingPoint" />
                   <ToggleButton fx:id="startingPoint6" layoutX="139.0" layoutY="108.0" mnemonicParsing="false" onAction="#startingPoint6Action" text="Starting Point 6" toggleGroup="$StartingPoint" />
-                  <Button fx:id="startPointOK" layoutX="110.0" layoutY="149.0" mnemonicParsing="false" onAction="#startPointOKAction" text="OK" />
+                  <Button fx:id="startPointOK" layoutX="110.0" layoutY="149.0" mnemonicParsing="false" onAction="#startPointOKAction" text="OK" visible="false" />
                   <Label layoutX="20.0" layoutY="174.0" prefHeight="48.0" prefWidth="415.0" text="This starting point is already taken" textFill="WHITE" visible="false">
                      <font>
                         <Font size="14.0" />
@@ -116,6 +124,16 @@
                   </Label>
                </children>
             </Pane>
+            <Label fx:id="timer" layoutX="169.0" layoutY="470.0" prefHeight="71.0" prefWidth="116.0" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="timerText" layoutX="72.0" layoutY="476.0" prefHeight="59.0" prefWidth="116.0" text="time left:" textFill="WHITE" visible="false">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <VBox layoutX="322.0" layoutY="1.0" prefHeight="797.0" prefWidth="557.0">
@@ -257,7 +275,7 @@
             <AnchorPane prefHeight="91.0" prefWidth="557.0">
                <children>
                   <ImageView fx:id="yourBot" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="Text" layoutX="90.0" prefHeight="77.0" prefWidth="467.0" textFill="WHITE">
+                  <Label fx:id="Text" layoutX="90.0" prefHeight="77.0" prefWidth="467.0" text="Click on 'print map' to begin" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -267,7 +285,6 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Button fx:id="moveRobotButton" layoutX="475.0" layoutY="26.0" mnemonicParsing="false" onAction="#moveRobotButtonAction" prefHeight="40.0" prefWidth="82.0" text="move robot" visible="false" />
                </children>
             </AnchorPane>
             <GridPane fx:id="register" gridLinesVisible="true" prefHeight="107.0" prefWidth="557.0">
@@ -284,7 +301,8 @@
                </rowConstraints>
                <children>
                   <ImageView fx:id="register2" fitHeight="104.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-                  <Button fx:id="playCardBtn" mnemonicParsing="false" onAction="#playCardBtnAction" prefHeight="56.0" prefWidth="93.0" text="play register 1" visible="false" GridPane.columnIndex="5" />
+                  <Button fx:id="playCardBtn" mnemonicParsing="false" onAction="#playCardBtnAction" prefHeight="56.0" prefWidth="104.0" text="play register 1" visible="false" GridPane.columnIndex="5" />
+                  <Button fx:id="moveRobotButton" mnemonicParsing="false" onAction="#moveRobotButtonAction" prefHeight="57.0" prefWidth="93.0" text="move robot" visible="false" GridPane.columnIndex="5" />
                   <ImageView fx:id="register1" fitHeight="104.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="register3" fitHeight="104.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
                   <ImageView fx:id="register4" fitHeight="104.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
@@ -319,47 +337,47 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="hand1Button" mnemonicParsing="false" onAction="#hand1ButtonAction" prefHeight="89.0" prefWidth="74.0" stylesheets="@../styles.css" visible="false">
+                  <Button fx:id="hand1Button" mnemonicParsing="false" onAction="#hand1ButtonAction" prefHeight="89.0" prefWidth="74.0" styleClass="buttonHand" stylesheets="@../styles.css" visible="false">
                      <graphic>
                         <ImageView fx:id="hand1" fitHeight="85.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
-                  <Button fx:id="hand2Button" mnemonicParsing="false" onAction="#hand2ButtonAction" prefHeight="89.0" prefWidth="74.0" visible="false" GridPane.columnIndex="1">
+                  <Button fx:id="hand2Button" mnemonicParsing="false" onAction="#hand2ButtonAction" prefHeight="89.0" prefWidth="74.0" styleClass="buttonHand" stylesheets="@../styles.css" visible="false" GridPane.columnIndex="1">
                      <graphic>
                         <ImageView fx:id="hand2" fitHeight="85.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
-                  <Button fx:id="hand3Button" mnemonicParsing="false" onAction="#hand3ButtonAction" prefHeight="89.0" prefWidth="74.0" visible="false" GridPane.columnIndex="2">
+                  <Button fx:id="hand3Button" mnemonicParsing="false" onAction="#hand3ButtonAction" prefHeight="89.0" prefWidth="74.0" styleClass="buttonHand" stylesheets="@../styles.css" visible="false" GridPane.columnIndex="2">
                      <graphic>
                         <ImageView fx:id="hand3" fitHeight="85.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
-                  <Button fx:id="hand4Button" mnemonicParsing="false" onAction="#hand4ButtonAction" prefHeight="89.0" prefWidth="74.0" visible="false" GridPane.rowIndex="1">
+                  <Button fx:id="hand4Button" mnemonicParsing="false" onAction="#hand4ButtonAction" prefHeight="89.0" prefWidth="74.0" styleClass="buttonHand" stylesheets="@../styles.css" visible="false" GridPane.rowIndex="1">
                      <graphic>
                         <ImageView fx:id="hand4" fitHeight="85.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
-                  <Button fx:id="hand5Button" mnemonicParsing="false" onAction="#hand5ButtonAction" prefHeight="89.0" prefWidth="74.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Button fx:id="hand5Button" mnemonicParsing="false" onAction="#hand5ButtonAction" prefHeight="89.0" prefWidth="74.0" styleClass="buttonHand" stylesheets="@../styles.css" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <graphic>
                         <ImageView fx:id="hand5" fitHeight="85.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
-                  <Button fx:id="hand6Button" mnemonicParsing="false" onAction="#hand6ButtonAction" prefHeight="89.0" prefWidth="74.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Button fx:id="hand6Button" mnemonicParsing="false" onAction="#hand6ButtonAction" prefHeight="89.0" prefWidth="74.0" styleClass="buttonHand" stylesheets="@../styles.css" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <graphic>
                         <ImageView fx:id="hand6" fitHeight="85.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
-                  <Button fx:id="hand7Button" mnemonicParsing="false" onAction="#hand7ButtonAction" prefHeight="89.0" prefWidth="74.0" visible="false" GridPane.rowIndex="2">
+                  <Button fx:id="hand7Button" mnemonicParsing="false" onAction="#hand7ButtonAction" prefHeight="89.0" prefWidth="74.0" styleClass="buttonHand" stylesheets="@../styles.css" visible="false" GridPane.rowIndex="2">
                      <graphic>
                         <ImageView fx:id="hand7" fitHeight="85.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
-                  <Button fx:id="hand8Button" mnemonicParsing="false" onAction="#hand8ButtonAction" prefHeight="89.0" prefWidth="74.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="hand8Button" mnemonicParsing="false" onAction="#hand8ButtonAction" prefHeight="89.0" prefWidth="74.0" styleClass="buttonHand" stylesheets="@../styles.css" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <graphic>
                         <ImageView fx:id="hand8" fitHeight="85.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
-                  <Button fx:id="hand9Button" mnemonicParsing="false" onAction="#hand9ButtonAction" prefHeight="89.0" prefWidth="74.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Button fx:id="hand9Button" mnemonicParsing="false" onAction="#hand9ButtonAction" prefHeight="89.0" prefWidth="74.0" styleClass="buttonHand" stylesheets="@../styles.css" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <graphic>
                         <ImageView fx:id="hand9" fitHeight="85.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
@@ -368,7 +386,7 @@
             </GridPane>
             <Button fx:id="startGameButton" layoutX="269.0" layoutY="620.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="48.0" prefWidth="80.0" text="start game" visible="false" />
             <Button fx:id="getCardsButton" layoutX="269.0" layoutY="678.0" mnemonicParsing="false" onAction="#getCardsButtonAction" prefHeight="48.0" prefWidth="80.0" text="get cards" visible="false" />
-            <Button fx:id="printMapButton" layoutX="269.0" layoutY="565.0" mnemonicParsing="false" onAction="#printMapButtonAction" prefHeight="48.0" prefWidth="80.0" text="print Map" />
+            <Button fx:id="printMapButton" layoutX="269.0" layoutY="565.0" mnemonicParsing="false" onAction="#printMapButtonAction" prefHeight="48.0" prefWidth="80.0" text="print map" />
             <AnchorPane fx:id="player11" layoutY="80.0" opacity="0.5" prefHeight="50.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <ImageView fx:id="playerBot2" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />

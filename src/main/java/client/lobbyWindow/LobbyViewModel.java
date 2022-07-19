@@ -5,7 +5,7 @@ import client.Client;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
@@ -13,9 +13,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import protocol.SendChat;
 import protocol.SetStatus;
 
@@ -35,6 +32,8 @@ public class LobbyViewModel {
 
     @FXML
     private CheckBox readyButton;
+    @FXML
+    private Label LobbyText;
 
     /**
      * chat properties
@@ -180,32 +179,42 @@ public class LobbyViewModel {
             selectMap.setText("open game");
             selectMap.setVisible(true);
         }
+        if(readyButton.isSelected()){
+            System.out.println("ok");
+        }
+        else{
+            LobbyText.setText("hui");
+        }
     }
 
     /**
-     * selecting a map by opening map selection window
+     * selecting a map by opening map selection window, when at least 2 players are online
      */
     public void selectMapAction(ActionEvent actionEvent) {
-      if(Client.getClientReceive().getMaps()!=null) {
-          try {
-              FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/views/Map.fxml"));
-              Parent rootGame = (Parent) fxmlLoaderGame.load();
-              Stage stageGame = new Stage();
-              stageGame.setTitle("Map Selection");
-              stageGame.setScene(new Scene(rootGame));
-              stageGame.show();
-          } catch (Exception e) {
+        if (Client.getClientReceive().getReadyList().size() == 1) {
+            LobbyText.setVisible(true);
+        } else {
+            LobbyText.setVisible(false);
+            if (Client.getClientReceive().getMaps() != null) {
+                try {
+                    FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/views/Map.fxml"));
+                    Parent rootGame = (Parent) fxmlLoaderGame.load();
+                    Stage stageGame = new Stage();
+                    stageGame.setTitle("Map Selection");
+                    stageGame.setScene(new Scene(rootGame));
+                    stageGame.show();
+                } catch (Exception e) {
 
-          }
+                }
 
-      }
-      else{
-          openGameWindow();
-      }
-        //close Lobby
-        Stage stage = (Stage) selectMap.getScene().getWindow();
-        stage.close();
-        setWindowName("Game");
+            } else {
+                openGameWindow();
+            }
+            //close Lobby
+            Stage stage = (Stage) selectMap.getScene().getWindow();
+            stage.close();
+            setWindowName("Game");
+        }
     }
 
     public static void setWindowName (String name){
