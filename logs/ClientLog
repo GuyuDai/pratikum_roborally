@@ -2,110 +2,110 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-07-19T11:26:13.855544700Z</date>
-  <millis>1658229973855</millis>
-  <nanos>544700</nanos>
+  <date>2022-07-19T12:03:19.750115600Z</date>
+  <millis>1658232199750</millis>
+  <nanos>115600</nanos>
   <sequence>0</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
   <class>client.ClientReceive</class>
   <method>run</method>
-  <thread>30</thread>
+  <thread>31</thread>
   <message>[32m{"messageType":"HelloClient","messageBody":"{\"protocol\":\"Version 2.0\"}"}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T11:26:13.892448800Z</date>
-  <millis>1658229973892</millis>
-  <nanos>448800</nanos>
+  <date>2022-07-19T12:03:19.790008800Z</date>
+  <millis>1658232199790</millis>
+  <nanos>8800</nanos>
   <sequence>1</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
   <class>client.ClientReceive</class>
   <method>run</method>
-  <thread>30</thread>
+  <thread>31</thread>
   <message>[32m{"messageType":"Welcome","messageBody":"{\"clientID\":1}"}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T11:26:13.925359900Z</date>
-  <millis>1658229973925</millis>
-  <nanos>359900</nanos>
+  <date>2022-07-19T12:03:19.850843800Z</date>
+  <millis>1658232199850</millis>
+  <nanos>843800</nanos>
   <sequence>2</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
   <class>client.ClientReceive</class>
   <method>run</method>
-  <thread>30</thread>
+  <thread>31</thread>
   <message>[32m{"messageType":"ReceivedChat","messageBody":"{\"message\":\"Choose your robot\",\"from\":-1,\"isPrivate\":true}"}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T11:26:18.930581100Z</date>
-  <millis>1658229978930</millis>
-  <nanos>581100</nanos>
+  <date>2022-07-19T12:03:24.892226200Z</date>
+  <millis>1658232204892</millis>
+  <nanos>226200</nanos>
   <sequence>3</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
   <class>client.ClientReceive</class>
   <method>run</method>
-  <thread>30</thread>
+  <thread>31</thread>
   <message>[32m{"messageType":"Alive","messageBody":"{}"}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T11:26:19.244935800Z</date>
-  <millis>1658229979244</millis>
-  <nanos>935800</nanos>
+  <date>2022-07-19T12:03:25.146539700Z</date>
+  <millis>1658232205146</millis>
+  <nanos>539700</nanos>
   <sequence>4</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
   <class>client.ClientReceive</class>
   <method>run</method>
-  <thread>30</thread>
-  <message>[32m{"messageType":"PlayerAdded","messageBody":"{\"clientID\":1,\"name\":\"hello\",\"figure\":1}"}wrapped message</message>
+  <thread>31</thread>
+  <message>[32m{"messageType":"PlayerAdded","messageBody":"{\"clientID\":1,\"name\":\"hello\",\"figure\":6}"}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T11:26:20.453818500Z</date>
-  <millis>1658229980453</millis>
-  <nanos>818500</nanos>
+  <date>2022-07-19T12:03:26.416108600Z</date>
+  <millis>1658232206416</millis>
+  <nanos>108600</nanos>
   <sequence>5</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
   <class>client.ClientReceive</class>
   <method>run</method>
-  <thread>30</thread>
+  <thread>31</thread>
   <message>[32m{"messageType":"PlayerStatus","messageBody":"{\"clientID\":1,\"ready\":true}"}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T11:26:20.456809300Z</date>
-  <millis>1658229980456</millis>
-  <nanos>809300</nanos>
+  <date>2022-07-19T12:03:26.425084700Z</date>
+  <millis>1658232206425</millis>
+  <nanos>84700</nanos>
   <sequence>6</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
   <class>client.ClientReceive</class>
   <method>run</method>
-  <thread>30</thread>
+  <thread>31</thread>
   <message>[32m{"messageType":"SelectMap","messageBody":"{\"availableMaps\":[\"DizzyHighway\",\"ExtraCrispy\",\"DeathTrap\",\"LostBearings\",\"Twister\"]}"}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T11:26:30.227773700Z</date>
-  <millis>1658229990227</millis>
-  <nanos>773700</nanos>
+  <date>2022-07-19T12:03:29.206959100Z</date>
+  <millis>1658232209206</millis>
+  <nanos>959100</nanos>
   <sequence>7</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
   <class>client.ClientReceive</class>
   <method>run</method>
-  <thread>30</thread>
-  <message>[32m{"messageType":"PlayerAdded","messageBody":"{\"clientID\":2,\"name\":\"nih\",\"figure\":6}"}wrapped message</message>
+  <thread>31</thread>
+  <message>[32m{"messageType":"MapSelected","messageBody":"{\"map\":\"DizzyHighway\"}"}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T11:26:31.336776900Z</date>
-  <millis>1658229991336</millis>
-  <nanos>776900</nanos>
+  <date>2022-07-19T12:03:35.009476500Z</date>
+  <millis>1658232215009</millis>
+  <nanos>476500</nanos>
   <sequence>8</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
   <class>client.ClientReceive</class>
   <method>run</method>
-  <thread>30</thread>
-  <message>[32m{"messageType":"PlayerStatus","messageBody":"{\"clientID\":2,\"ready\":true}"}wrapped message</message>
+  <thread>31</thread>
+  <message>[32m{"messageType":"StartingPointTaken","messageBody":"{\"x\":6,\"y\":0,\"clientID\":1}"}wrapped message</message>
 </record>
