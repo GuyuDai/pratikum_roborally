@@ -63,7 +63,6 @@ public class AIReceive extends ClientReceive {
   }
   private void identifyMessage(Message message) {
     String type = message.getMessageType();
-    String body = message.getMessageBody();
 
     switch (type){
       case MessageType.helloClient:
@@ -74,15 +73,17 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.welcome:
+        Welcome welcome = (Welcome) message;
         //gets the ClientID from Server
-        WelcomeBody welcomeBody = new Gson().fromJson(body,WelcomeBody.class);
+        WelcomeBody welcomeBody = welcome.getMessageBody();
         clientID = welcomeBody.getClientID();
         sendMessage(new HelloServer(GROUP,true,PROTOCOL,clientID).toString());
 
         break;
 
       case MessageType.playerAdded:
-        PlayerAddedBody playerAddedBody = new Gson().fromJson(body,PlayerAddedBody.class);
+        PlayerAdded playerAdded = (PlayerAdded) message;
+        PlayerAddedBody playerAddedBody = playerAdded.getMessageBody();
         playerId = playerAddedBody.getClientID();
         playerName = playerAddedBody.getName();
         int tempFigure = playerAddedBody.getFigure();
@@ -98,7 +99,8 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.receivedChat:
-        ReceivedChatBody receivedChatBody = new Gson().fromJson(body,ReceivedChatBody.class);
+        ReceivedChat receivedChat = (ReceivedChat) message;
+        ReceivedChatBody receivedChatBody = receivedChat.getMessageBody();
         chatMsg = receivedChatBody.getMessage();
         fromId = receivedChatBody.getFrom();
         isPrivate = receivedChatBody.isPrivate();
@@ -109,14 +111,16 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.selectMap:
+        SelectMap selectMap = (SelectMap) message;
         //Chooses a random Map
-        SelectMap.SelectMapBody selectMapBody = new Gson().fromJson(body,SelectMap.SelectMapBody.class);
+        SelectMap.SelectMapBody selectMapBody = selectMap.getMessageBody();
         maps = selectMapBody.getAvailableMaps();
         aiChooseMap();
         break;
 
       case MessageType.playerStatus:
-        PlayerStatus.PlayerStatusBody playerStatusBody = new Gson().fromJson(body, PlayerStatus.PlayerStatusBody.class);
+        PlayerStatus playerStatus = (PlayerStatus) message;
+        PlayerStatus.PlayerStatusBody playerStatusBody = playerStatus.getMessageBody();
         isReady = playerStatusBody.isReady();
         playerId = playerStatusBody.getClientID();
         readyList.add(isReady);
@@ -124,12 +128,14 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.mapSelected:
-        MapSelected.MapSelectedBody mapSelectedBody = new Gson().fromJson(body,MapSelected.MapSelectedBody.class);
+        MapSelected mapSelected = (MapSelected) message;
+        MapSelected.MapSelectedBody mapSelectedBody = mapSelected.getMessageBody();
         board = mapSelectedBody.getMap();
         break;
 
       case MessageType.yourCards:
-        YourCards.YourCardsBody yourCardsBody = new Gson().fromJson(body, YourCards.YourCardsBody.class);
+        YourCards yourCards = (YourCards) message;
+        YourCards.YourCardsBody yourCardsBody = yourCards.getMessageBody();
         cards = yourCardsBody.getCardsInHand();
         /*
         List<String> cardsInHand = List.of(yourCardsBody.getCardsInHand());
@@ -144,7 +150,8 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.cardSelected:
-        CardSelected.CardSelectedBody cardSelectedBody = new Gson().fromJson(body, CardSelected.CardSelectedBody.class);
+        CardSelected cardSelected = (CardSelected) message;
+        CardSelected.CardSelectedBody cardSelectedBody = cardSelected.getMessageBody();
         playerId = cardSelectedBody.getClientID();
         register = cardSelectedBody.getRegister();
         isFilled = cardSelectedBody.isFilled();
@@ -154,16 +161,17 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.pickDamage:
-        PickDamage.PickDamageBody pickDamageBody = new Gson().fromJson(body, PickDamage.PickDamageBody.class);
+        PickDamage pickDamage1 = (PickDamage) message;
+        PickDamage.PickDamageBody pickDamageBody = pickDamage1.getMessageBody();
         damageDecks = pickDamageBody.getAvailablePiles();
         damageCount = pickDamageBody.getCount();
         aiPickDamage();
         break;
 
       case MessageType.startingPointTaken:
+        StartingPointTaken startingPointTaken = (StartingPointTaken) message;
         //Saves all taken Startingpoints and removes them from the available Startingpoints.
-        StartingPointTaken.StartingPointTakenBody startingPointTakenBody = new Gson().fromJson
-            (body, StartingPointTaken.StartingPointTakenBody.class);
+        StartingPointTaken.StartingPointTakenBody startingPointTakenBody = startingPointTaken.getMessageBody();
         int takenX = startingPointTakenBody.getX();
         int takenY = startingPointTakenBody.getY();
         playerId = startingPointTakenBody.getClientID();
@@ -183,19 +191,22 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.cardPlayed:
-        CardPlayed.CardPlayedBody cardPlayedBody = new Gson().fromJson(body, CardPlayed.CardPlayedBody.class);
+        CardPlayed cardPlayed1 = (CardPlayed) message;
+        CardPlayed.CardPlayedBody cardPlayedBody = cardPlayed1.getMessageBody();
         cardPlayed = cardPlayedBody.getCard();
         playerId = cardPlayedBody.getClientID();
         IdCardPlayed.put(playerId,cardPlayed);
         break;
 
       case MessageType.cardsYouGotNow:
-        CardsYouGotNow.CardYouGotNowBody cardYouGotNowBody = new Gson().fromJson(body, CardsYouGotNow.CardYouGotNowBody.class);
+        CardsYouGotNow cardsYouGotNow = (CardsYouGotNow) message;
+        CardsYouGotNow.CardYouGotNowBody cardYouGotNowBody = cardsYouGotNow.getMessageBody();
         filledRegister = cardYouGotNowBody.getCards();
         break;
 
       case MessageType.movement:
-        Movement.MovementBody movementBody = new Gson().fromJson(body,Movement.MovementBody.class);
+        Movement movement = (Movement) message;
+        Movement.MovementBody movementBody = movement.getMessageBody();
         playerId = movementBody.getClientID();
         y = movementBody.getX();
         x = movementBody.getY();
@@ -204,19 +215,22 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.playerTurning:
+        PlayerTurning playerTurning = (PlayerTurning) message;
         //Saves the direction of each player who faces
-        PlayerTurning.PlayerTurningBody playerTurningBody = new Gson().fromJson(body, PlayerTurning.PlayerTurningBody.class);
+        PlayerTurning.PlayerTurningBody playerTurningBody = playerTurning.getMessageBody();
         turnDirection = playerTurningBody.getRotation();
         break;
 
       case MessageType.animation:
-        Animation.AnimationBody animationBody = new Gson().fromJson(body,Animation.AnimationBody.class);
+        Animation animation = (Animation) message;
+        Animation.AnimationBody animationBody = animation.getMessageBody();
         animationType = animationBody.getType();
         break;
 
       case MessageType.activePhase:
+        ActivePhase activePhase = (ActivePhase) message;
         //0 => Aufbauphase, 1 => Upgradephase, 2 => Programmierphase, 3 => Aktivierungsphase
-        ActivePhase.ActivePhaseBody activePhaseBody = new Gson().fromJson(body,ActivePhase.ActivePhaseBody.class);
+        ActivePhase.ActivePhaseBody activePhaseBody = activePhase.getMessageBody();
         activePhaseNumber = activePhaseBody.getPhase();
         if(activePhaseNumber == 0){
           aiChooseStartPoint();
@@ -227,7 +241,8 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.reboot:
-        Reboot.RebootBody rebootBody = new Gson().fromJson(body, Reboot.RebootBody.class);
+        Reboot reboot = (Reboot) message;
+        Reboot.RebootBody rebootBody = reboot.getMessageBody();
         rebootClientId = rebootBody.getClientID();
         if(rebootClientId == clientID){
           aiReboot();
@@ -235,7 +250,8 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.currentPlayer:
-        CurrentPlayerBody currentPlayerBody = new Gson().fromJson(body, CurrentPlayerBody.class);
+        CurrentPlayer currentPlayer = (CurrentPlayer) message;
+        CurrentPlayerBody currentPlayerBody = currentPlayer.getMessageBody();
         if(clientID == currentPlayerBody.getClientID()){
           sendMessage(new PlayCard(cardsInRegister[pointerForRegister]).toString());
           //Um ein Register für die aktuelle Runde auszuwählen, schickt der Client folgende Nachricht.
@@ -249,7 +265,8 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.energy:
-        Energy.EnergyBody energyBody = new Gson().fromJson(body, Energy.EnergyBody.class);
+        Energy energy = (Energy) message;
+        Energy.EnergyBody energyBody = energy.getMessageBody();
         int supposedClient = energyBody.getClientID();
         int amount = energyBody.getCount();
         //If its the AI the energy will be added to your storage
@@ -259,8 +276,9 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.checkpointReached:
+        CheckPointReached checkPointReached = (CheckPointReached) message;
         //Saves the number of Checkpoints reached
-        CheckPointReached.CheckPointReachedBody checkPointReachedBody = new Gson().fromJson(body, CheckPointReached.CheckPointReachedBody.class);
+        CheckPointReached.CheckPointReachedBody checkPointReachedBody = checkPointReached.getMessageBody();
         int clientIDCheckReached= checkPointReachedBody.getClientID();
         int numberOfCheckpointsReached= checkPointReachedBody.getNumber();
         //Sets the number of checkpoints reached
@@ -270,7 +288,8 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.error:
-        ErrorMessageBody errorMessageBody = new Gson().fromJson(body,ErrorMessageBody.class);
+        ErrorMessage errorMessage = (ErrorMessage) message;
+        ErrorMessageBody errorMessageBody = errorMessage.getMessageBody();
         String serverMsg = errorMessageBody.getError();
         aiTrigger(serverMsg);
         break;
@@ -280,8 +299,9 @@ public class AIReceive extends ClientReceive {
         break;
 
       case MessageType.checkPointMoved:
+        CheckPointMoved checkPointMoved = (CheckPointMoved) message;
         //If a checkpoint moves its position
-        CheckPointMoved.CheckPointMovedBody checkPointMovedBody= new Gson().fromJson(body, CheckPointMoved.CheckPointMovedBody.class);
+        CheckPointMoved.CheckPointMovedBody checkPointMovedBody= checkPointMoved.getMessageBody();
         int checkPointIDMoved = checkPointMovedBody.getCheckPointID();
         int newXPosition = checkPointMovedBody.getX();
         int newYPosition = checkPointMovedBody.getY();
@@ -291,8 +311,9 @@ public class AIReceive extends ClientReceive {
 
 
       case MessageType.registerChosen:
+        RegisterChosen registerChosen = (RegisterChosen) message;
         //Der Server quittiert die Auswahl und schickt diese zur Information an alle Clients.
-        RegisterChosen.RegisterChosenBody registerChosenBody= new Gson().fromJson(body, RegisterChosen.RegisterChosenBody.class);
+        RegisterChosen.RegisterChosenBody registerChosenBody= registerChosen.getMessageBody();
         int clientID = registerChosenBody.getClientID();
         int register = registerChosenBody.getRegister();
         break;

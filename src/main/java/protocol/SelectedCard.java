@@ -1,11 +1,17 @@
 package protocol;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
-public class SelectedCard extends Message {
+public class SelectedCard implements Message {
+    public String messageType;
+    public String getMessageType() {
+        return messageType;
+    }
     public SelectedCardBody messageBody;
 
     public class SelectedCardBody extends MessageBody {
@@ -45,5 +51,15 @@ public class SelectedCard extends Message {
 
     public SelectedCardBody getMessageBody() {
         return messageBody;
+    }
+
+    @Override
+    public String toString(){
+        Gson gson = new GsonBuilder().create();
+        //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        //GsonBuilder gsonBuilder = new GsonBuilder();
+        //gsonBuilder.registerTypeAdapter(Message.class, new MessageAdapter());
+        //Gson gson = gsonBuilder.create();
+        return gson.toJson(this);
     }
 }

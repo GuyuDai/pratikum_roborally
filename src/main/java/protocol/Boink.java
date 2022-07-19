@@ -1,9 +1,15 @@
 package protocol;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.*;
 
-public class Boink extends Message{
+public class Boink implements Message{
+    public String messageType;
+    public String getMessageType() {
+        return messageType;
+    }
     public BoinkBody messageBody;
 
     public class BoinkBody extends MessageBody{
@@ -23,5 +29,15 @@ public class Boink extends Message{
 
     public BoinkBody getMessageBody() {
         return messageBody;
+    }
+
+    @Override
+    public String toString(){
+        Gson gson = new GsonBuilder().create();
+        //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        //GsonBuilder gsonBuilder = new GsonBuilder();
+        //gsonBuilder.registerTypeAdapter(Message.class, new MessageAdapter());
+        //Gson gson = gsonBuilder.create();
+        return gson.toJson(this);
     }
 }
