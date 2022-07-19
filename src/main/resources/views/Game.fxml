@@ -90,7 +90,7 @@
                </children>
             </GridPane>
             <Button fx:id="registerDamage" layoutX="72.0" layoutY="720.0" mnemonicParsing="false" onAction="#registerDamageAction" prefHeight="26.0" prefWidth="155.0" text="Register DamageCard" visible="false" />
-            <Button fx:id="showDamage" layoutX="52.0" layoutY="545.0" mnemonicParsing="false" onAction="#showDamageCards" prefHeight="26.0" prefWidth="204.0" text="Show DamageCards" />
+            <Button fx:id="showDamage" layoutX="52.0" layoutY="545.0" mnemonicParsing="false" onAction="#showDamageCards" prefHeight="26.0" prefWidth="204.0" text="Show DamageCards" visible="false"/>
             <Pane fx:id="selectStartingPoint" layoutX="28.0" layoutY="246.0" prefHeight="188.0" prefWidth="253.0" visible="false">
                <children>
                   <Label fx:id="textStartingPoint" layoutX="34.0" layoutY="1.0" prefHeight="27.0" prefWidth="185.0" text="Select your Starting Point" textFill="WHITE">

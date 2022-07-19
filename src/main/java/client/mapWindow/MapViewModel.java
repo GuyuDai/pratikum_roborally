@@ -155,7 +155,7 @@ public class MapViewModel {
 
     public void openGameWindow(){
         try {
-            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Game.fxml"));
+            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/views/Game.fxml"));
             Parent rootGame = (Parent) fxmlLoaderGame.load();
             Stage stageGame = new Stage();
             stageGame.setTitle("Robo Rally");

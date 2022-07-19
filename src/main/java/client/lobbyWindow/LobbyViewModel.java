@@ -87,7 +87,7 @@ public class LobbyViewModel {
 
     public void openGameWindow(){
         try {
-            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Game.fxml"));
+            FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/views/Game.fxml"));
             Parent rootGame = (Parent) fxmlLoaderGame.load();
             Stage stageGame = new Stage();
             stageGame.setTitle("Dizzy Highway");
@@ -188,7 +188,7 @@ public class LobbyViewModel {
     public void selectMapAction(ActionEvent actionEvent) {
       if(Client.getClientReceive().getMaps()!=null) {
           try {
-              FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/Views/Map.fxml"));
+              FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/views/Map.fxml"));
               Parent rootGame = (Parent) fxmlLoaderGame.load();
               Stage stageGame = new Stage();
               stageGame.setTitle("Map Selection");

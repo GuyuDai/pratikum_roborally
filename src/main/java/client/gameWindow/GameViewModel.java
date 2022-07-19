@@ -2586,8 +2586,7 @@ public class GameViewModel {
         }
 
         //TODO if only one connected client is left he will be the winner
-        System.out.println(Client.getClientReceive().getIdList().size());
-        if(Client.getClientReceive().getIdList().size() < 2){
+      /*  if(Client.getClientReceive().getIdList().size() < 2){
             Stage stage = (Stage) exitBtn.getScene().getWindow();
             stage.close();
 
@@ -2602,6 +2601,8 @@ public class GameViewModel {
                 Client.getLogger().severe( "Window can not open.");
             }
         }
+
+       */
     }
 
     /**
