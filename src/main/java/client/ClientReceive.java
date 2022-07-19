@@ -454,8 +454,9 @@ public class ClientReceive extends Thread{
                 int checkPointIDMoved = checkPointMovedBody.getCheckPointID();
                 int newXPosition = checkPointMovedBody.getX();
                 int newYPosition = checkPointMovedBody.getY();
-                setCheckPointXPosition(newXPosition);
-                setCheckPointYPosition(newYPosition);
+                //setCheckPointXPosition(newXPosition);
+                //setCheckPointYPosition(newYPosition);
+                checkPointPositions.replace(checkPointIDMoved, new int[]{newXPosition,newYPosition});
                 break;
 
 
@@ -491,11 +492,27 @@ public class ClientReceive extends Thread{
             checkPointPositions.put(1, pos);
         } else if (board.equals("DeathTrap")) {
             int [] pos4= {2,8};
-            checkPointPositions.put(1,pos4);
+            checkPointPositions.put(4,pos4);
             int [] pos1= {7,1};
             checkPointPositions.put(1,pos1);
             checkPointPositions.put(3,new int[]{8,7});
             checkPointPositions.put(2,new int[]{4,4});
+        } else if (board.equals("ExtraCrispy")){
+            checkPointPositions.put(1,new int[]{2,10});
+            checkPointPositions.put(2,new int[]{7,5});
+            checkPointPositions.put(3,new int[]{7,10});
+            checkPointPositions.put(4,new int[]{2,5});
+        } else if (board.equals("LostBearings")){
+            checkPointPositions.put(1, new int[]{4,11});
+            checkPointPositions.put(2, new int[]{5,4});
+            checkPointPositions.put(3, new int[]{2,8});
+            checkPointPositions.put(4, new int[]{7,8});
+        } else if (board.equals("Twister")){
+            checkPointPositions.put(1, new int[]{1,10});
+            checkPointPositions.put(2, new int[]{7,6});
+            checkPointPositions.put(3, new int[]{3,5});
+            checkPointPositions.put(3, new int[]{7,9});
+
         }
    }
 
