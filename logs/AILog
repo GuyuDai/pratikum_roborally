@@ -1,124 +1,904 @@
-<?xml version="1.0" encoding="GBK" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-07-19T13:55:01.320964600Z</date>
-  <millis>1658238901320</millis>
-  <nanos>964600</nanos>
+  <date>2022-07-20T12:33:00.200487300Z</date>
+  <millis>1658320380200</millis>
+  <nanos>487300</nanos>
   <sequence>0</sequence>
   <logger>AILog</logger>
   <level>INFO</level>
   <class>client.AI.AIReceive</class>
   <method>run</method>
-  <thread>24</thread>
+  <thread>25</thread>
   <message>[32m{"messageType":"HelloClient","messageBody":{"protocol":"Version 2.0"}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T13:55:01.352878300Z</date>
-  <millis>1658238901352</millis>
-  <nanos>878300</nanos>
+  <date>2022-07-20T12:33:00.249356900Z</date>
+  <millis>1658320380249</millis>
+  <nanos>356900</nanos>
   <sequence>1</sequence>
   <logger>AILog</logger>
   <level>INFO</level>
   <class>client.AI.AIReceive</class>
   <method>run</method>
-  <thread>24</thread>
+  <thread>25</thread>
   <message>[32m{"messageType":"Welcome","messageBody":{"clientID":1}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T13:55:01.374819700Z</date>
-  <millis>1658238901374</millis>
-  <nanos>819700</nanos>
+  <date>2022-07-20T12:33:00.284265100Z</date>
+  <millis>1658320380284</millis>
+  <nanos>265100</nanos>
   <sequence>2</sequence>
   <logger>AILog</logger>
   <level>INFO</level>
   <class>client.AI.AIReceive</class>
   <method>run</method>
-  <thread>24</thread>
+  <thread>25</thread>
   <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"Choose your robot","from":-1,"isPrivate":true}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T13:55:06.378539800Z</date>
-  <millis>1658238906378</millis>
-  <nanos>539800</nanos>
+  <date>2022-07-20T12:33:05.288346500Z</date>
+  <millis>1658320385288</millis>
+  <nanos>346500</nanos>
   <sequence>3</sequence>
   <logger>AILog</logger>
   <level>INFO</level>
   <class>client.AI.AIReceive</class>
   <method>run</method>
-  <thread>24</thread>
+  <thread>25</thread>
   <message>[32m{"messageType":"Alive","messageBody":{}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T13:55:06.385520800Z</date>
-  <millis>1658238906385</millis>
-  <nanos>520800</nanos>
+  <date>2022-07-20T12:33:05.296326400Z</date>
+  <millis>1658320385296</millis>
+  <nanos>326400</nanos>
   <sequence>4</sequence>
   <logger>AILog</logger>
   <level>INFO</level>
   <class>client.AI.AIReceive</class>
   <method>run</method>
-  <thread>24</thread>
-  <message>[32m{"messageType":"PlayerAdded","messageBody":{"clientID":1,"name":"AI_1","figure":3}}wrapped message</message>
+  <thread>25</thread>
+  <message>[32m{"messageType":"PlayerAdded","messageBody":{"clientID":1,"name":"AI_1","figure":4}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T13:55:08.392430900Z</date>
-  <millis>1658238908392</millis>
-  <nanos>430900</nanos>
+  <date>2022-07-20T12:33:07.311932200Z</date>
+  <millis>1658320387311</millis>
+  <nanos>932200</nanos>
   <sequence>5</sequence>
   <logger>AILog</logger>
   <level>INFO</level>
   <class>client.AI.AIReceive</class>
   <method>run</method>
-  <thread>24</thread>
+  <thread>25</thread>
   <message>[32m{"messageType":"PlayerStatus","messageBody":{"clientID":1,"ready":true}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T13:55:08.394425400Z</date>
-  <millis>1658238908394</millis>
-  <nanos>425400</nanos>
+  <date>2022-07-20T12:33:07.316918200Z</date>
+  <millis>1658320387316</millis>
+  <nanos>918200</nanos>
   <sequence>6</sequence>
   <logger>AILog</logger>
   <level>INFO</level>
   <class>client.AI.AIReceive</class>
   <method>run</method>
-  <thread>24</thread>
+  <thread>25</thread>
   <message>[32m{"messageType":"SelectMap","messageBody":{"availableMaps":["DizzyHighway","ExtraCrispy","DeathTrap","LostBearings","Twister"]}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T13:55:08.402403700Z</date>
-  <millis>1658238908402</millis>
-  <nanos>403700</nanos>
+  <date>2022-07-20T12:33:07.332879100Z</date>
+  <millis>1658320387332</millis>
+  <nanos>879100</nanos>
   <sequence>7</sequence>
   <logger>AILog</logger>
   <level>INFO</level>
   <class>client.AI.AIReceive</class>
   <method>run</method>
-  <thread>24</thread>
-  <message>[32m{"messageType":"MapSelected","messageBody":{"map":"DizzyHighway"}}wrapped message</message>
+  <thread>25</thread>
+  <message>[32m{"messageType":"MapSelected","messageBody":{"map":"ExtraCrispy"}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T14:33:02.982333500Z</date>
-  <millis>1658241182982</millis>
-  <nanos>333500</nanos>
+  <date>2022-07-20T12:33:12.966977600Z</date>
+  <millis>1658320392966</millis>
+  <nanos>977600</nanos>
   <sequence>8</sequence>
   <logger>AILog</logger>
   <level>INFO</level>
   <class>client.AI.AIReceive</class>
   <method>run</method>
-  <thread>24</thread>
-  <message>[32m{"messageType":"PlayerAdded","messageBody":{"clientID":2,"name":"hi","figure":1}}wrapped message</message>
+  <thread>25</thread>
+  <message>[32m{"messageType":"PlayerAdded","messageBody":{"clientID":2,"name":"hihi","figure":2}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-19T14:33:04.067568300Z</date>
-  <millis>1658241184067</millis>
-  <nanos>568300</nanos>
+  <date>2022-07-20T12:33:16.304049800Z</date>
+  <millis>1658320396304</millis>
+  <nanos>49800</nanos>
   <sequence>9</sequence>
   <logger>AILog</logger>
   <level>INFO</level>
   <class>client.AI.AIReceive</class>
   <method>run</method>
-  <thread>24</thread>
+  <thread>25</thread>
   <message>[32m{"messageType":"PlayerStatus","messageBody":{"clientID":2,"ready":true}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:16.334967500Z</date>
+  <millis>1658320396334</millis>
+  <nanos>967500</nanos>
+  <sequence>10</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"ActivePhase","messageBody":{"phase":0}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:17.346261900Z</date>
+  <millis>1658320397346</millis>
+  <nanos>261900</nanos>
+  <sequence>11</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"choose your starting position","from":-1,"isPrivate":false}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:17.375191700Z</date>
+  <millis>1658320397375</millis>
+  <nanos>191700</nanos>
+  <sequence>12</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"StartingPointTaken","messageBody":{"x":6,"y":0,"clientID":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:17.377177900Z</date>
+  <millis>1658320397377</millis>
+  <nanos>177900</nanos>
+  <sequence>13</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>identifyMessage</method>
+  <thread>25</thread>
+  <message>[32malready send msg</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:25.207220100Z</date>
+  <millis>1658320405207</millis>
+  <nanos>220100</nanos>
+  <sequence>14</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"StartingPointTaken","messageBody":{"x":6,"y":0,"clientID":2}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:25.208217Z</date>
+  <millis>1658320405208</millis>
+  <nanos>217000</nanos>
+  <sequence>15</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>identifyMessage</method>
+  <thread>25</thread>
+  <message>[32malready send msg</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:25.210212Z</date>
+  <millis>1658320405210</millis>
+  <nanos>212000</nanos>
+  <sequence>16</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"ActivePhase","messageBody":{"phase":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:25.212206800Z</date>
+  <millis>1658320405212</millis>
+  <nanos>206800</nanos>
+  <sequence>17</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"Upgrade Phase starts","from":-1,"isPrivate":false}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:25.214201700Z</date>
+  <millis>1658320405214</millis>
+  <nanos>201700</nanos>
+  <sequence>18</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"ActivePhase","messageBody":{"phase":2}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:25.216195700Z</date>
+  <millis>1658320405216</millis>
+  <nanos>195700</nanos>
+  <sequence>19</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"Programming Phase starts","from":-1,"isPrivate":false}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:25.221183100Z</date>
+  <millis>1658320405221</millis>
+  <nanos>183100</nanos>
+  <sequence>20</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"YourCards","messageBody":{"cardsInHand":["BackUp","MoveOne","PowerUp","MoveOne","MoveOne","TurnRight","Again","Again","MoveTwo"]}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:31.229103600Z</date>
+  <millis>1658320411229</millis>
+  <nanos>103600</nanos>
+  <sequence>21</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"NotYourCards","messageBody":{"clientID":2,"cardsInHand":9}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:31.231098Z</date>
+  <millis>1658320411231</millis>
+  <nanos>98000</nanos>
+  <sequence>22</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"fill your register","from":-1,"isPrivate":false}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:31.234089900Z</date>
+  <millis>1658320411234</millis>
+  <nanos>89900</nanos>
+  <sequence>23</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardSelected","messageBody":{"clientID":1,"register":0,"filled":false}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:31.236085Z</date>
+  <millis>1658320411236</millis>
+  <nanos>85000</nanos>
+  <sequence>24</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardSelected","messageBody":{"clientID":1,"register":1,"filled":false}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:31.238079800Z</date>
+  <millis>1658320411238</millis>
+  <nanos>79800</nanos>
+  <sequence>25</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardSelected","messageBody":{"clientID":1,"register":2,"filled":false}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:31.240074700Z</date>
+  <millis>1658320411240</millis>
+  <nanos>74700</nanos>
+  <sequence>26</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardSelected","messageBody":{"clientID":1,"register":3,"filled":false}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:31.242069300Z</date>
+  <millis>1658320411242</millis>
+  <nanos>69300</nanos>
+  <sequence>27</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardSelected","messageBody":{"clientID":1,"register":4,"filled":true}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:31.246058400Z</date>
+  <millis>1658320411246</millis>
+  <nanos>58400</nanos>
+  <sequence>28</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"TimerStarted","messageBody":{}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:31.249051600Z</date>
+  <millis>1658320411249</millis>
+  <nanos>51600</nanos>
+  <sequence>29</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"SelectionFinished","messageBody":{"clientID":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:31.250050800Z</date>
+  <millis>1658320411250</millis>
+  <nanos>50800</nanos>
+  <sequence>30</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"SelectionFinished","messageBody":{"clientID":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:31.251047900Z</date>
+  <millis>1658320411251</millis>
+  <nanos>47900</nanos>
+  <sequence>31</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"TimerStarted","messageBody":{}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:33:31.252042300Z</date>
+  <millis>1658320411252</millis>
+  <nanos>42300</nanos>
+  <sequence>32</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"TimerStarted","messageBody":{}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:01.257769700Z</date>
+  <millis>1658320441257</millis>
+  <nanos>769700</nanos>
+  <sequence>33</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"TimerEnded","messageBody":{"clientIDs":[1,2]}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:01.259768300Z</date>
+  <millis>1658320441259</millis>
+  <nanos>768300</nanos>
+  <sequence>34</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"Error","messageBody":{"error":"Error when parsing String to Message"}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:01.260765900Z</date>
+  <millis>1658320441260</millis>
+  <nanos>765900</nanos>
+  <sequence>35</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"ActivePhase","messageBody":{"phase":3}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:01.261763100Z</date>
+  <millis>1658320441261</millis>
+  <nanos>763100</nanos>
+  <sequence>36</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"Activation Phase starts","from":-1,"isPrivate":false}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:01.262757300Z</date>
+  <millis>1658320441262</millis>
+  <nanos>757300</nanos>
+  <sequence>37</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"Round: 0","from":-1,"isPrivate":false}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:01.265748500Z</date>
+  <millis>1658320441265</millis>
+  <nanos>748500</nanos>
+  <sequence>38</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CurrentPlayer","messageBody":{"clientID":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:01.275725900Z</date>
+  <millis>1658320441275</millis>
+  <nanos>725900</nanos>
+  <sequence>39</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardPlayed","messageBody":{"clientID":1,"card":"BackUp"}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:01.282703900Z</date>
+  <millis>1658320441282</millis>
+  <nanos>703900</nanos>
+  <sequence>40</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"RegisterChosen","messageBody":{"clientID":1,"register":0}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:50.384778800Z</date>
+  <millis>1658320490384</millis>
+  <nanos>778800</nanos>
+  <sequence>41</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CurrentPlayer","messageBody":{"clientID":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:50.387770500Z</date>
+  <millis>1658320490387</millis>
+  <nanos>770500</nanos>
+  <sequence>42</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardPlayed","messageBody":{"clientID":2,"card":"PlayedCard"}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:50.390762700Z</date>
+  <millis>1658320490390</millis>
+  <nanos>762700</nanos>
+  <sequence>43</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardPlayed","messageBody":{"clientID":1,"card":"MoveOne"}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:50.393756100Z</date>
+  <millis>1658320490393</millis>
+  <nanos>756100</nanos>
+  <sequence>44</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"RegisterChosen","messageBody":{"clientID":1,"register":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:50.418689900Z</date>
+  <millis>1658320490418</millis>
+  <nanos>689900</nanos>
+  <sequence>45</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CurrentCards","messageBody":{"activeCards":[{"playerId":1,"card":"BackUp"},{"playerId":2,"card":"MoveThree"}]}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:50.420682300Z</date>
+  <millis>1658320490420</millis>
+  <nanos>682300</nanos>
+  <sequence>46</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"Player1 actions","from":-1,"isPrivate":false}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:50.438634400Z</date>
+  <millis>1658320490438</millis>
+  <nanos>634400</nanos>
+  <sequence>47</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"Reboot","messageBody":{"clientID":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:50.450602400Z</date>
+  <millis>1658320490450</millis>
+  <nanos>602400</nanos>
+  <sequence>48</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"DrawDamage","messageBody":{"clientID":1,"cards":["Spam","Spam"]}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:50.452597200Z</date>
+  <millis>1658320490452</millis>
+  <nanos>597200</nanos>
+  <sequence>49</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"decide your reboot direction","from":-1,"isPrivate":true}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:53.310993800Z</date>
+  <millis>1658320493310</millis>
+  <nanos>993800</nanos>
+  <sequence>50</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CurrentPlayer","messageBody":{"clientID":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:53.314981500Z</date>
+  <millis>1658320493314</millis>
+  <nanos>981500</nanos>
+  <sequence>51</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardPlayed","messageBody":{"clientID":2,"card":"PlayedCard"}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:53.319966600Z</date>
+  <millis>1658320493319</millis>
+  <nanos>966600</nanos>
+  <sequence>52</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardPlayed","messageBody":{"clientID":1,"card":"PowerUp"}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:53.324949800Z</date>
+  <millis>1658320493324</millis>
+  <nanos>949800</nanos>
+  <sequence>53</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"RegisterChosen","messageBody":{"clientID":1,"register":2}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:55.404612500Z</date>
+  <millis>1658320495404</millis>
+  <nanos>612500</nanos>
+  <sequence>54</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CurrentPlayer","messageBody":{"clientID":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:55.405608Z</date>
+  <millis>1658320495405</millis>
+  <nanos>608000</nanos>
+  <sequence>55</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardPlayed","messageBody":{"clientID":2,"card":"PlayedCard"}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:55.407601700Z</date>
+  <millis>1658320495407</millis>
+  <nanos>601700</nanos>
+  <sequence>56</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardPlayed","messageBody":{"clientID":1,"card":"MoveOne"}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:55.409597Z</date>
+  <millis>1658320495409</millis>
+  <nanos>597000</nanos>
+  <sequence>57</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"RegisterChosen","messageBody":{"clientID":1,"register":3}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:55.456471100Z</date>
+  <millis>1658320495456</millis>
+  <nanos>471100</nanos>
+  <sequence>58</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"Movement","messageBody":{"clientID":1,"x":0,"y":0}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:55.457468700Z</date>
+  <millis>1658320495457</millis>
+  <nanos>468700</nanos>
+  <sequence>59</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"Player2 actions","from":-1,"isPrivate":false}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:55.461458900Z</date>
+  <millis>1658320495461</millis>
+  <nanos>458900</nanos>
+  <sequence>60</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"Movement","messageBody":{"clientID":2,"x":6,"y":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:55.462455600Z</date>
+  <millis>1658320495462</millis>
+  <nanos>455600</nanos>
+  <sequence>61</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"Movement","messageBody":{"clientID":2,"x":6,"y":2}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:55.463453200Z</date>
+  <millis>1658320495463</millis>
+  <nanos>453200</nanos>
+  <sequence>62</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"Movement","messageBody":{"clientID":2,"x":6,"y":3}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:55.470433900Z</date>
+  <millis>1658320495470</millis>
+  <nanos>433900</nanos>
+  <sequence>63</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"Round: 1","from":-1,"isPrivate":false}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:55.471431100Z</date>
+  <millis>1658320495471</millis>
+  <nanos>431100</nanos>
+  <sequence>64</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CurrentPlayer","messageBody":{"clientID":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:55.475421600Z</date>
+  <millis>1658320495475</millis>
+  <nanos>421600</nanos>
+  <sequence>65</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardPlayed","messageBody":{"clientID":1,"card":"MoveOne"}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:34:55.476693900Z</date>
+  <millis>1658320495476</millis>
+  <nanos>693900</nanos>
+  <sequence>66</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"RegisterChosen","messageBody":{"clientID":1,"register":4}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:35:00.538940400Z</date>
+  <millis>1658320500538</millis>
+  <nanos>940400</nanos>
+  <sequence>67</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CurrentPlayer","messageBody":{"clientID":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:35:00.539939200Z</date>
+  <millis>1658320500539</millis>
+  <nanos>939200</nanos>
+  <sequence>68</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardPlayed","messageBody":{"clientID":2,"card":"PlayedCard"}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:35:00.541932800Z</date>
+  <millis>1658320500541</millis>
+  <nanos>932800</nanos>
+  <sequence>69</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardPlayed","messageBody":{"clientID":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:35:00.543927500Z</date>
+  <millis>1658320500543</millis>
+  <nanos>927500</nanos>
+  <sequence>70</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"RegisterChosen","messageBody":{"clientID":1,"register":0}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:35:02.039986400Z</date>
+  <millis>1658320502039</millis>
+  <nanos>986400</nanos>
+  <sequence>71</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CurrentPlayer","messageBody":{"clientID":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:35:02.041982500Z</date>
+  <millis>1658320502041</millis>
+  <nanos>982500</nanos>
+  <sequence>72</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardPlayed","messageBody":{"clientID":2,"card":"PlayedCard"}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:35:02.043976600Z</date>
+  <millis>1658320502043</millis>
+  <nanos>976600</nanos>
+  <sequence>73</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"CardPlayed","messageBody":{"clientID":1}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-20T12:35:02.045973700Z</date>
+  <millis>1658320502045</millis>
+  <nanos>973700</nanos>
+  <sequence>74</sequence>
+  <logger>AILog</logger>
+  <level>INFO</level>
+  <class>client.AI.AIReceive</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"RegisterChosen","messageBody":{"clientID":1,"register":1}}wrapped message</message>
 </record>
 </log>
