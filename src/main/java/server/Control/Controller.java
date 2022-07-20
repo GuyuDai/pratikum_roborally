@@ -18,7 +18,7 @@ import server.Player.Robot;
 
 
 /**
- * @author dai
+ * @author dai,Li
  * detect the potential problems in the game flow
  */
 public class Controller {
@@ -164,39 +164,75 @@ public class Controller {
       int robotX=robot.getCurrentPosition().getX();
       int robotY=robot.getCurrentPosition().getY();
       if(robotX==X && robotY<Y && laserDirection.equals(Direction.LEFT)){
+        boolean flag=true;
         for(int i=robotY;i<Y;i++){
-          if(!(currentGame.getGameBoard().getBoardElem(X,i,0).getName().equals("Antenna")
-                  || currentGame.getGameBoard().getBoardElem(X,i,1).getName().equals("Wall"))) {
-            robot.getOwner().drawDamage("Spam",1);
-            currentGame.sendMessageToAll(new Animation("RobotLaser"));
+          if(currentGame.getGameBoard().getBoardElem(X,i,0).getName().equals("Antenna")){
+            flag=false;
           }
+          if(currentGame.getGameBoard().getBoardElem(X,i,1).getName().equals("Wall")) {
+            if(currentGame.getGameBoard().getBoardElem(X,i,1).getDirection().equals(Direction.RIGHT)
+                    ||currentGame.getGameBoard().getBoardElem(X,i,1).getDirection().equals(Direction.LEFT)) {
+              flag = false;
+            }
+          }
+        }
+        if(flag) {
+          robot.getOwner().drawDamage("Spam", 1);
+          currentGame.sendMessageToAll(new Animation("RobotLaser"));
         }
       }
       if(robotX==X && robotY>Y && laserDirection.equals(Direction.RIGHT)){
+        boolean flag=true;
         for(int i=Y;i<robotY;i++){
-          if(!(currentGame.getGameBoard().getBoardElem(X,i,0).getName().equals("Antenna")
-                  || currentGame.getGameBoard().getBoardElem(X,i,1).getName().equals("Wall"))) {
-            robot.getOwner().drawDamage("Spam",1);
-            currentGame.sendMessageToAll(new Animation("RobotLaser"));
+          if(currentGame.getGameBoard().getBoardElem(X,i,0).getName().equals("Antenna")){
+            flag=false;
           }
+          if(currentGame.getGameBoard().getBoardElem(X,i,1).getName().equals("Wall")) {
+            if(currentGame.getGameBoard().getBoardElem(X,i,1).getDirection().equals(Direction.RIGHT)
+            ||currentGame.getGameBoard().getBoardElem(X,i,1).getDirection().equals(Direction.LEFT)) {
+              flag = false;
+            }
+          }
+        }
+        if (flag) {
+          robot.getOwner().drawDamage("Spam", 1);
+          currentGame.sendMessageToAll(new Animation("RobotLaser"));
         }
       }
       if(robotY==Y && robotX<X && laserDirection.equals(Direction.UP)){
+        boolean flag=true;
         for(int i=robotX;i<X;i++){
-          if(!(currentGame.getGameBoard().getBoardElem(i,Y,0).getName().equals("Antenna")
-                  || currentGame.getGameBoard().getBoardElem(i,Y,1).getName().equals("Wall"))) {
-            robot.getOwner().drawDamage("Spam",1);
-            currentGame.sendMessageToAll(new Animation("RobotLaser"));
+          if(currentGame.getGameBoard().getBoardElem(i,Y,0).getName().equals("Antenna")){
+             flag=false;
           }
+          if(currentGame.getGameBoard().getBoardElem(i,Y,1).getName().equals("Wall")) {
+            if(currentGame.getGameBoard().getBoardElem(i,Y,1).getDirection().equals(Direction.UP)
+                    ||currentGame.getGameBoard().getBoardElem(i,Y,1).getDirection().equals(Direction.DOWN)) {
+              flag = false;
+            }
+          }
+        }
+        if (flag) {
+          robot.getOwner().drawDamage("Spam", 1);
+          currentGame.sendMessageToAll(new Animation("RobotLaser"));
         }
       }
       if(robotY==Y && robotX>X && laserDirection.equals(Direction.DOWN)){
+        boolean flag=true;
         for(int i=X;i<robotX;i++){
-          if(!(currentGame.getGameBoard().getBoardElem(i,Y,0).getName().equals("Antenna")
-                  || currentGame.getGameBoard().getBoardElem(i,Y,1).getName().equals("Wall"))){
-            robot.getOwner().drawDamage("Spam",1);
-            currentGame.sendMessageToAll(new Animation("RobotLaser"));
+          if(currentGame.getGameBoard().getBoardElem(i,Y,0).getName().equals("Antenna")){
+            flag=false;
           }
+          if(currentGame.getGameBoard().getBoardElem(i,Y,1).getName().equals("Wall")) {
+            if(currentGame.getGameBoard().getBoardElem(i,Y,1).getDirection().equals(Direction.UP)
+                    ||currentGame.getGameBoard().getBoardElem(i,Y,1).getDirection().equals(Direction.DOWN)) {
+              flag = false;
+            }
+          }
+        }
+        if(flag) {
+          robot.getOwner().drawDamage("Spam", 1);
+          currentGame.sendMessageToAll(new Animation("RobotLaser"));
         }
       }
     }
