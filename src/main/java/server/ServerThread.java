@@ -297,11 +297,13 @@ public class ServerThread implements Runnable {
                         int othersID = serverThread.getID();
                         String othersName = serverThread.getName();
                         int othersFigure = serverThread.getFigure();
-                        if(othersID != clientID){
+                        if(othersID != clientID && othersFigure!=0){
                             sendMessage( new PlayerAdded(othersID,othersName,othersFigure).toString());
                         }
                     }
-                    sendMessage(new ReceivedChat("Choose your robot",-1,true).toString());
+                    if(isAI) {
+                        sendMessage(new ReceivedChat("Choose your robot", -1, true).toString());
+                    }
                     Timer.countDown(5);
                     sendMessage(new Alive().toString());
                 }else {

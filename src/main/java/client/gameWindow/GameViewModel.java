@@ -1112,16 +1112,22 @@ public class GameViewModel {
      * start game button -> show button get Cards
      */
     public void startGameButtonAction(ActionEvent actionEvent) {
-        for (int id:Client.getClientReceive().getIdList()){
-               int robotNumber=Client.getClientReceive().getRobotById(id);
-               int startingPointNumber=Client.getClientReceive().getStartPointById(id);
-               Integer[] position=Client.getClientReceive().getPositionById(id);
-               robotOldPosition.put(robotNumber,position);
-               setOtherRobotOnBoard(robotNumber,startingPointNumber);
+        if (Client.getClientReceive().getIdList().size() > Client.getClientReceive().getStartNumbers().size()) {
+            Text.setText("Wait others choosing StartPoint");
         }
-        getCardsButton.setVisible(true);
-        startGameButton.setVisible(false);
-        Text.setText("Click on 'get cards'");
+        else
+        {
+            for (int id : Client.getClientReceive().getIdList()) {
+                int robotNumber = Client.getClientReceive().getRobotById(id);
+                int startingPointNumber = Client.getClientReceive().getStartPointById(id);
+                Integer[] position = Client.getClientReceive().getPositionById(id);
+                robotOldPosition.put(robotNumber, position);
+                setOtherRobotOnBoard(robotNumber, startingPointNumber);
+            }
+            getCardsButton.setVisible(true);
+            startGameButton.setVisible(false);
+            Text.setText("Click on 'get cards'");
+        }
     }
 
 

@@ -69,6 +69,9 @@ public class Robot implements RobotAction {
         rotation += "turn 180";
         break;
     }
+    if(currentPosition.equals(startPosition)){
+      stay();
+    }
     currentGame.sendMessageToAll(new PlayerTurning(owner.clientID, rotation));
     this.faceDirection = faceDirection;
   }
