@@ -140,7 +140,7 @@ public class AISmartReceive extends ClientReceive {
         //The Programming schould be done if its your turn and the programming phase is set
 
          */
-        aiProgramming();
+        aiSmartProgramming();
         break;
 
       case MessageType.cardSelected:
@@ -411,29 +411,313 @@ public class AISmartReceive extends ClientReceive {
     int[] posOfNextCheckPoint = (int[]) checkPointPositions.get(nextCheckPoint);
     int nextCheckPointXPosition= posOfNextCheckPoint[0];
     int nextCheckPointYPosition= posOfNextCheckPoint[1];
+    List<Integer> usedCards = new ArrayList<>();
     //Idea: Identify the direction towards the Checkpoint and move there straight
-    //falls der Checpoint oberhalb von aktueller position liegt
+    //If Checkpoint is on the upper side
+    try {
+      sleep(6000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     if(nextCheckPointXPosition<x){
       //Direction Controller
       if(getDirectionById(clientID)=="UP"){
         //move upwards
+
+        for (int i=0; i < 9; i++) {
+          if (!usedCards.contains(i)) {
+            if (cards[i].equals("MoveOne")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            } else if (cards[i].equals("MoveTwo")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            } else if (cards[i].equals("MoveThree")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            }
+          }
+          if (register < 5) {
+            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+            register++;
+          } //reset attributions
+          cards = null;
+          register = 0;
+        } usedCards.clear();
       } else if (getDirectionById(clientID)=="RIGHT") {
         //try to make left turn first and then move up
+        //First register
+        for (int i=0; i < 9; i++) {
+          if (!usedCards.contains(i)) {
+          if (cards[i].equals("TurnLeft")) {
+            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+            register++;
+            usedCards.add(i);
+          }  }}
+        //next registers
+        for (int i=0; i < 9; i++) {
+          if (!usedCards.contains(i)){
+            if (cards[i].equals("MoveOne")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            } else if (cards[i].equals("MoveTwo")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            } else if (cards[i].equals("MoveThree")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            }
+          }
+          if (register < 5) {
+            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+            register++;
+          } //reset attributions
+          cards = null;
+          register = 0;
+        } usedCards.clear();
+
+
       } else if (getDirectionById(clientID)=="LEFT"){
         //try to make right turn first and then move up
+        //First register
+        for (int i=0; i < 9; i++) {
+          if (!usedCards.contains(i)) {
+            if (cards[i].equals("TurnRight")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            }  }}
+        //next registers
+        for (int i=0; i < 9; i++) {
+          if (!usedCards.contains(i)){
+            if (cards[i].equals("MoveOne")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            } else if (cards[i].equals("MoveTwo")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            } else if (cards[i].equals("MoveThree")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            }
+          }
+          if (register < 5) {
+            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+            register++;
+          } //reset attributions
+          cards = null;
+          register = 0;
+        } usedCards.clear();
       } else if (getDirectionById(clientID)=="DOWN"){
         //try to make U turn and then move up
+        //First register
+        for (int i=0; i < 9; i++) {
+          if (!usedCards.contains(i)) {
+            if (cards[i].equals("TurnLeft")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            }
+          }
+        }
+        //Second register
+        for (int i=0; i<9;i++){
+          if (!usedCards.contains(i)){
+            if (cards[i].equals("TurnLeft")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+          }
+        }//oder UTurn
+          if(!usedCards.get(0).equals("TurnLeft")){
+            if (cards[i].equals("UTurn")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            }
+          }
+        }
+        //next registers fill with move cards
+        for (int i=0; i < 9; i++) {
+          if (!usedCards.contains(i)){
+            if (cards[i].equals("MoveOne")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            } else if (cards[i].equals("MoveTwo")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            } else if (cards[i].equals("MoveThree")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            }
+          }
+          if (register < 5) {
+            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+            register++;
+          } //reset attributions
+          cards = null;
+          register = 0;
+        } usedCards.clear();
       }
-      //If Chjeckpoint is on the lower part of the board compared to your Position
+      //If Checkpoint is on the lower part of the board compared to your Position
     } else if(nextCheckPointXPosition>x){
       if(getDirectionById(clientID)=="UP"){
         //try Uturn and then move down
+        for (int i=0; i < 9; i++) {
+          if (!usedCards.contains(i)) {
+            if (cards[i].equals("TurnLeft")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            }
+          }
+        }
+        //Second register
+        for (int i=0; i<9;i++){
+          if (!usedCards.contains(i)){
+            if (cards[i].equals("TurnLeft")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            }
+          }//oder UTurn
+          if(!usedCards.get(0).equals("TurnLeft")){
+            if (cards[i].equals("UTurn")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            }
+          }
+        }
+        //next registers fill with move cards
+        for (int i=0; i < 9; i++) {
+          if (!usedCards.contains(i)){
+            if (cards[i].equals("MoveOne")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            } else if (cards[i].equals("MoveTwo")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            } else if (cards[i].equals("MoveThree")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            }
+          }
+          if (register < 5) {
+            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+            register++;
+          } //reset attributions
+          cards = null;
+          register = 0;
+        } usedCards.clear();
+
       } else if (getDirectionById(clientID)=="RIGHT") {
         //try to make right turn first and then move down
+        //First register
+        for (int i=0; i < 9; i++) {
+          if (!usedCards.contains(i)) {
+            if (cards[i].equals("TurnRight")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            }  }}
+        //next registers
+        for (int i=0; i < 9; i++) {
+          if (!usedCards.contains(i)){
+            if (cards[i].equals("MoveOne")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            } else if (cards[i].equals("MoveTwo")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            } else if (cards[i].equals("MoveThree")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            }
+          }
+          if (register < 5) {
+            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+            register++;
+          } //reset attributions
+          cards = null;
+          register = 0;
+        } usedCards.clear();
       } else if (getDirectionById(clientID)=="LEFT"){
         //try to make left turn first and then move down
+        for (int i=0; i < 9; i++) {
+          if (!usedCards.contains(i)) {
+            if (cards[i].equals("TurnLeft")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            }  }}
+        //next registers
+        for (int i=0; i < 9; i++) {
+          if (!usedCards.contains(i)){
+            if (cards[i].equals("MoveOne")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            } else if (cards[i].equals("MoveTwo")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            } else if (cards[i].equals("MoveThree")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            }
+          }
+          if (register < 5) {
+            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+            register++;
+          } //reset attributions
+          cards = null;
+          register = 0;
+        } usedCards.clear();
       } else if (getDirectionById(clientID)=="DOWN"){
         //move down
+        for (int i=0; i < 9; i++) {
+          if (!usedCards.contains(i)) {
+            if (cards[i].equals("MoveOne")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            } else if (cards[i].equals("MoveTwo")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            } else if (cards[i].equals("MoveThree")) {
+              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+              register++;
+              usedCards.add(i);
+            }
+          }
+          if (register < 5) {
+            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+            register++;
+          } //reset attributions
+          cards = null;
+          register = 0;
+        } usedCards.clear();
       }
     }
   }
@@ -442,6 +726,7 @@ public class AISmartReceive extends ClientReceive {
     //maybe we will implement
   }
 
+  /*
   private void aiProgramming(){
     try {
       sleep(6000);
@@ -456,7 +741,7 @@ public class AISmartReceive extends ClientReceive {
     //reset attributions
     cards = null;
     register = 0;
-  }
+  }*/
   private void aiPickDamage(){
     try {
       sleep(6000);
