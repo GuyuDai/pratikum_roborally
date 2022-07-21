@@ -17,6 +17,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1251.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
@@ -135,6 +136,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
+            <MediaView fx:id="sound" fitHeight="200.0" fitWidth="200.0" layoutX="43.0" layoutY="298.0" visible="false" />
          </children>
       </Pane>
       <VBox layoutX="322.0" layoutY="1.0" prefHeight="797.0" prefWidth="557.0">
