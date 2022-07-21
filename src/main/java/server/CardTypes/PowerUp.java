@@ -6,7 +6,7 @@ public class PowerUp extends Card{
   }
   @Override
   public void action() {
-
+    this.getOwner().setEnergyCubes(this.getOwner().getEnergyCubes()+1);
   }
 }
 

@@ -41,6 +41,7 @@ public class RotatingBelt extends BoardElem implements Move {
                     }
                     if (robot.getCurrentPosition().getTile().getName().equals("RotatingBelt")) {
                         Direction moveDirection = robot.getCurrentPosition().getTile().getDirection();
+                        robot.setFaceDirection(moveDirection);
                         robot.push(robot, moveDirection, 1);
                     } else {
                         robot.stay();
@@ -58,6 +59,7 @@ public class RotatingBelt extends BoardElem implements Move {
                     }
                     if(robot.getCurrentPosition().getTile().getName().equals("RotatingBelt")){
                         Direction moveDirection=robot.getCurrentPosition().getTile().getDirection();
+                        robot.setFaceDirection(moveDirection);
                         robot.push(robot,moveDirection,1);
                     }
                     else {

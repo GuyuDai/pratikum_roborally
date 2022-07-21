@@ -169,21 +169,32 @@ public class LobbyViewModel {
     /**
      * click on ready Button -> first player to click will select map
      */
+    int clickCount=0;
     public void readyButtonAction(ActionEvent actionEvent) {
-        String readyMessage=new SetStatus(true).toString();
-        Client.getClientReceive().sendMessage(readyMessage);
-        if(Client.getClientReceive().getReadyList().size()<1) {
-            selectMap.setVisible(true);
+        clickCount++;
+        if (clickCount == 1) {
+            String readyMessage = new SetStatus(true).toString();
+            Client.getClientReceive().sendMessage(readyMessage);
+            if (Client.getClientReceive().getReadyList().size() < 1) {
+                selectMap.setVisible(true);
+            } else {
+                selectMap.setText("open game");
+                selectMap.setVisible(true);
+            }
+           /* if (readyButton.isSelected()) {
+                System.out.println("ok");
+            } else {
+                LobbyText.setText("hui");
+            }
+
+            */
         }
-        else{
-            selectMap.setText("open game");
-            selectMap.setVisible(true);
-        }
-        if(readyButton.isSelected()){
-            System.out.println("ok");
-        }
-        else{
-            LobbyText.setText("hui");
+        if(clickCount == 2){
+            String notReadyMessage = new SetStatus(false).toString();
+            Client.getClientReceive().sendMessage(notReadyMessage);
+            selectMap.setVisible(false);
+            Client.getClientReceive().setMaps(null);
+            clickCount=0;
         }
     }
 

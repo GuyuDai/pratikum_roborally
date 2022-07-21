@@ -418,7 +418,7 @@
             <AnchorPane fx:id="player15" layoutX="1.0" layoutY="320.0" opacity="0.5" prefHeight="50.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <ImageView fx:id="playerBot5" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="playerName15" layoutX="97.0" layoutY="20.0" prefHeight="33.0" prefWidth="86.0" stylesheets="@../styles.css" />
+                  <Label fx:id="playerName5" layoutX="97.0" layoutY="20.0" prefHeight="33.0" prefWidth="86.0" stylesheets="@../styles.css" />
                   <Pane layoutX="225.0" layoutY="14.0" prefHeight="50.0" prefWidth="51.0" styleClass="setCheckPointImage" stylesheets="@../styles.css" />
                </children>
             </AnchorPane>
