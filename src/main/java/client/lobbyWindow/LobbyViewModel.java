@@ -213,7 +213,7 @@ public class LobbyViewModel {
             if (Client.getClientReceive().getReadyList().size() < 1) {
                 selectMap.setVisible(true);
             } else {
-                selectMap.setText("open game");
+                selectMap.setText("OPEN GAME");
                 selectMap.setVisible(true);
             }
            /* if (readyButton.isSelected()) {
