@@ -9,10 +9,14 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.*;
 import protocol.*;
 import protocol.ProtocolFormat.*;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.util.*;
 
 /**
@@ -88,6 +92,7 @@ public class LoginViewModel {
             checkRobot();
         }
         else if (buttonHulk.isSelected()){
+            //playHulk();
             figure=1;
             robotSelected=true;
             checkRobot();
@@ -185,5 +190,29 @@ public class LoginViewModel {
     public static String getWindowName(){
         return window;
     }
+
+    @FXML
+    private MediaView sound;
+
+    @FXML
+    Button soundOn;
+    @FXML
+    Button soundOff;
+
+
+    public void playHulk() {
+        if(sound.getMediaPlayer()==null){
+            try {
+                String fileName = getClass().getResource("/sounds/hulkSound.mp3").toURI().toString();
+                Media media = new Media(fileName);
+                MediaPlayer player = new MediaPlayer(media);
+                sound.setMediaPlayer(player);
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        sound.getMediaPlayer().play();
+    }
+
 
 }

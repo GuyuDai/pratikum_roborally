@@ -8,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="934.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.loginWindow.LoginViewModel">
@@ -59,7 +60,7 @@
          </ToggleButton>
          <ToggleButton fx:id="buttonHulk" layoutX="280.0" layoutY="90.0" mnemonicParsing="false" onAction="#selectBot" prefHeight="91.0" prefWidth="84.0" toggleGroup="$ToggleGroupRobot">
             <graphic>
-               <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fx:id="hulk" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@../Robots/hulk x90.png" />
                   </image></ImageView>
@@ -121,4 +122,5 @@
          </Label>
       </children>
    </AnchorPane>
+   <MediaView fx:id="sound" fitHeight="200.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" opacity="0.0" />
 </AnchorPane>
