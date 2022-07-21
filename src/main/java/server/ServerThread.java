@@ -352,16 +352,25 @@ public class ServerThread implements Runnable {
                 SetStatusBody setStatusBody = setStatus.getMessageBody();
                 ready = setStatusBody.isReady();
                 player.setReady(ready);
-                sendToAll(new PlayerStatus(clientID,true).toString());
-                if(firstPlayerReady() != null){
-                    if (firstPlayerReady().equals(player)) {
-                        sendMessage(new SelectMap(MAPS).toString());
+                if(ready) {
+                    sendToAll(new PlayerStatus(clientID, true).toString());
+                    if(firstPlayerReady() != null){
+                        if (firstPlayerReady().equals(player)) {
+                            sendMessage(new SelectMap(MAPS).toString());
+                        }
+                    }
+                    if (allPlayerReady() && connectedClients.size()>=2 && board != null){
+                        startGame(this.board);
                     }
                 }
-                //System.out.println("connectedClients:" + connectedClients.size());//test
-                if (allPlayerReady() && connectedClients.size()>=2 && board != null){
-                    startGame(this.board);
+                else{
+                    sendToAll(new PlayerStatus(clientID, false).toString());
+                    if(nextPlayerReady() != null){
+                        int playerID=nextPlayerReady().getClientId();
+                        sendPrivate(new SelectMap(MAPS).toString(),playerID);
+                    }
                 }
+
                 break;
 
             case MessageType.mapSelected:
@@ -629,6 +638,21 @@ public class ServerThread implements Runnable {
             if (target.isReady()) {
                 readyPlayer++;
                 firstReadyPlayer = target.getPlayer();
+            }
+        }
+        if (readyPlayer==1){
+            return firstReadyPlayer;
+        }
+        return null;
+    }
+    public Player nextPlayerReady(){
+        int readyPlayer = 0;
+        Player firstReadyPlayer = null;
+        for(ServerThread target: connectedClients) {
+            if (target.isReady()) {
+                readyPlayer++;
+                firstReadyPlayer = target.getPlayer();
+                break;
             }
         }
         if (readyPlayer==1){

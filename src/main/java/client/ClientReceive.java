@@ -342,8 +342,14 @@ public class ClientReceive extends Thread{
                 PlayerStatus.PlayerStatusBody playerStatusBody = playerStatus.getMessageBody();
                 isReady = playerStatusBody.isReady();
                 playerId = playerStatusBody.getClientID();
-                readyList.add(isReady);
-                IdReady.put(playerId,isReady);
+                if(isReady) {
+                    readyList.add(isReady);
+                    IdReady.put(playerId, isReady);
+                }
+                else{
+                    readyList.remove(0);
+                    IdReady.put(playerId,isReady);
+                }
                 break;
 
             case MessageType.mapSelected:
@@ -710,6 +716,10 @@ public class ClientReceive extends Thread{
 
     public boolean isGameEnded() {
         return gameEnded;
+    }
+
+    public void setMaps(String[] maps) {
+        this.maps = maps;
     }
 
     public int getWinnerID() {

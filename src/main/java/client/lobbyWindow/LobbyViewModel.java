@@ -64,6 +64,18 @@ public class LobbyViewModel {
      * other players mat
      */
     @FXML
+    ImageView playerBot1, playerBot2, playerBot3,playerBot4, playerBot5, playerBot6;
+    @FXML
+    Label playerName1, playerName2, playerName3, playerName4, playerName5, playerName6 ;
+    @FXML
+    private Label yourBotText;
+    @FXML
+    private ImageView yourRobot;
+
+    /**
+     * other players mat
+     */
+    @FXML
     private Label yourRobotText;
     @FXML
     private Label otherRobotText;
@@ -76,7 +88,6 @@ public class LobbyViewModel {
 
 
     public void initialize() {
-
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
         selectMap.setVisible(false);
@@ -213,7 +224,25 @@ public class LobbyViewModel {
     /**
      * click on ready Button -> first player to click will select map
      */
+    int clickCount=0;
     public void readyButtonAction(ActionEvent actionEvent) {
+        clickCount++;
+        if (clickCount == 1) {
+            String readyMessage = new SetStatus(true).toString();
+            Client.getClientReceive().sendMessage(readyMessage);
+            if (Client.getClientReceive().getReadyList().size() < 1) {
+                selectMap.setVisible(true);
+            } else {
+                selectMap.setText("OPEN GAME");
+                selectMap.setVisible(true);
+            }
+           /* if (readyButton.isSelected()) {
+                System.out.println("ok");
+            } else {
+                LobbyText.setText("hui");
+            }
+
+            */
         String readyMessage=new SetStatus(true).toString();
         Client.getClientReceive().sendMessage(readyMessage);
         if(Client.getClientReceive().getReadyList().size()<1) {
@@ -228,6 +257,13 @@ public class LobbyViewModel {
         }
         else{
             LobbyText.setText("HUI");
+        }
+        if(clickCount == 2){
+            String notReadyMessage = new SetStatus(false).toString();
+            Client.getClientReceive().sendMessage(notReadyMessage);
+            selectMap.setVisible(false);
+            Client.getClientReceive().setMaps(null);
+            clickCount=0;
         }
     }
 
