@@ -1,18 +1,25 @@
 package client.lobbyWindow;
 
 import java.io.IOException;
+import java.net.URL;
+
 import client.Client;
 import com.google.gson.Gson;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import protocol.SendChat;
 import protocol.SetStatus;
 
@@ -48,9 +55,28 @@ public class LobbyViewModel {
     private Button sendBtn;
     @FXML
     private Button selectMap;
+    @FXML
+    private Label yourBotText;
+    @FXML
+    private ImageView yourRobot;
+
+    /**
+     * other players mat
+     */
+    @FXML
+    private Label yourRobotText;
+    @FXML
+    private Label otherRobotText;
+    @FXML
+    ImageView playerBot1, playerBot2, playerBot3,playerBot4, playerBot5, playerBot6;
+    @FXML
+    ImageView box1,box2;
+    @FXML
+    Label playerName1, playerName2, playerName3, playerName4, playerName5, playerName6 ;
 
 
     public void initialize() {
+
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
         selectMap.setVisible(false);
@@ -62,6 +88,24 @@ public class LobbyViewModel {
         this.input = input;
         this.sendBtn = sendBtn;
     }
+
+    URL hammer = getClass().getResource("/Robots/hammer bot.png");
+    Image imageHammer = new Image(hammer.toString());
+
+    URL hulk = getClass().getResource("/Robots/hulk x90.png");
+    Image imageHulk = new Image(hulk.toString());
+
+    URL spin = getClass().getResource("/Robots/spin bot.png");
+    Image imageSpin = new Image(spin.toString());
+
+    URL squash = getClass().getResource("/Robots/squash bot.png");
+    Image imageSquash = new Image(squash.toString());
+
+    URL twitch = getClass().getResource("/Robots/twitch.png");
+    Image imageTwitch = new Image(twitch.toString());
+
+    URL twonkey = getClass().getResource("/Robots/twonkey.png");
+    Image imageTwonkey = new Image(twonkey.toString());
 
 
     public LobbyViewModel() {
@@ -176,14 +220,14 @@ public class LobbyViewModel {
             selectMap.setVisible(true);
         }
         else{
-            selectMap.setText("open game");
+            selectMap.setText("OPEN GAME");
             selectMap.setVisible(true);
         }
         if(readyButton.isSelected()){
-            System.out.println("ok");
+            System.out.println("OK");
         }
         else{
-            LobbyText.setText("hui");
+            LobbyText.setText("HUI");
         }
     }
 
@@ -193,6 +237,9 @@ public class LobbyViewModel {
     public void selectMapAction(ActionEvent actionEvent) {
         if (Client.getClientReceive().getReadyList().size() == 1) {
             LobbyText.setVisible(true);
+            PauseTransition pauseTransition26 = new PauseTransition(Duration.seconds(4));
+            pauseTransition26.setOnFinished(e -> LobbyText.setVisible(false));
+            pauseTransition26.play();
         } else {
             LobbyText.setVisible(false);
             if (Client.getClientReceive().getMaps() != null) {
@@ -217,6 +264,108 @@ public class LobbyViewModel {
         }
     }
 
+
+    public void setYourBotIcon(){
+        yourRobotText.setVisible(true);
+        yourBotText.setVisible(true);
+        int yourId = Client.getClientReceive().getClientID();
+        String yourName = Client.getClientReceive().getNameById(yourId);
+        int yourRobotNumber = Client.getClientReceive().getRobotById(yourId);
+        Image robotIcon = null;
+        //int aiID=AIClient.getAiClientReceive().getClientID();
+        switch (yourRobotNumber) {
+            case 1:
+                robotIcon = imageHulk;//hulk
+                break;
+            case 2:
+                robotIcon = imageSpin;//spin
+                break;
+            case 3:
+                robotIcon = imageSquash;//squash
+                break;
+            case 4:
+                robotIcon = imageHammer;//hammer
+                break;
+            case 5:
+                robotIcon = imageTwonkey;//twonkey
+                break;
+            case 6:
+                robotIcon = imageTwitch;//twitch
+                break;
+        }
+        yourRobot.setImage(robotIcon);
+        yourBotText.setText(yourName);
+        box1.setVisible(true);
+    }
+
+
+    /**
+     * Set other player´s icon and name on board.
+     */
+    public void setOthersBotIcon() {
+        for (int id : Client.getClientReceive().getIdRobot().keySet()) {
+            if (id != Client.getClientReceive().getClientID()) {
+                int otherRobotNumber = Client.getClientReceive().getIdRobot().get(id);
+                String playerName = Client.getClientReceive().getNameById(id);
+                Image otherRobotIcon = null;
+                switch (otherRobotNumber) {
+                    case 1:
+                        otherRobotIcon = imageHulk;
+                        break;
+                    case 2:
+                        otherRobotIcon = imageSpin;
+                        break;
+                    case 3:
+                        otherRobotIcon = imageSquash;
+                        break;
+                    case 4:
+                        otherRobotIcon = imageHammer;
+                        break;
+                    case 5:
+                        otherRobotIcon = imageTwonkey;
+                        break;
+                    case 6:
+                        otherRobotIcon = imageTwitch;
+                        break;
+                }
+
+                switch (otherRobotNumber) {
+                    case 1:
+                        playerBot1.setImage(otherRobotIcon);
+                        playerName1.setText(playerName);
+                        break;
+                    case 2:
+                        playerBot2.setImage(otherRobotIcon);
+                        playerName2.setText(playerName);
+                        break;
+                    case 3:
+                        playerBot3.setImage(otherRobotIcon);
+                        playerName3.setText(playerName);
+                        break;
+                    case 4:
+                        playerBot4.setImage(otherRobotIcon);
+                        playerName4.setText(playerName);
+                        break;
+                    case 5:
+                        playerBot5.setImage(otherRobotIcon);
+                        playerName5.setText(playerName);
+                        break;
+                    case 6:
+                        playerBot6.setImage(otherRobotIcon);
+                        playerName6.setText(playerName);
+                        break;
+                }
+                otherRobotText.setVisible(true);
+                box2.setVisible(true);
+            }
+        }
+    }
+
+
+    public void MouseAction(MouseEvent mouseEvent) {
+        setYourBotIcon();
+        setOthersBotIcon();
+    }
     public static void setWindowName (String name){
         window = name;
     }

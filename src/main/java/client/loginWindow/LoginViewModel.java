@@ -88,37 +88,31 @@ public class LoginViewModel {
      */
     public void selectBot(ActionEvent actionEvent){
         if(buttonHammer.isSelected()){
-            playHammerbot();
             figure=4;
             robotSelected=true;
             checkRobot();
         }
         else if (buttonHulk.isSelected()){
-            playHulk();
             figure=1;
             robotSelected=true;
             checkRobot();
         }
         else if (buttonSpin.isSelected()){
-            playSpinbot();
             figure=2;
             robotSelected=true;
             checkRobot();
         }
         else if (buttonSquash.isSelected()){
-            playSquashbot();
             figure=3;
             robotSelected=true;
             checkRobot();
         }
         else if (buttonTwonkey.isSelected()){
-            playTwonkey();
             figure=5;
             robotSelected=true;
             checkRobot();
         }
         else if (buttonTwitch.isSelected()){
-            playTwitch();
             figure=6;
             robotSelected=true;
             checkRobot();
