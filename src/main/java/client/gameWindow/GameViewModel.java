@@ -406,10 +406,10 @@ public class GameViewModel {
     public void chatBtnAction(ActionEvent actionEvent) {
         if (container.isVisible()) {
             container.setVisible(false);
-            chatBtn.setText("Open Chat");
+            chatBtn.setText("OPEN CHAT");
         } else {
             container.setVisible(true);
-            chatBtn.setText("Close Chat");
+            chatBtn.setText("CLOSE CHAT");
         }
     }
 
@@ -654,7 +654,7 @@ public class GameViewModel {
         thirty.setOnFinished(e -> playCardBtn.setVisible(true));
         thirty.play();
         PauseTransition textAppear2 = new PauseTransition(Duration.seconds(30));
-        textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'"));
+        textAppear2.setOnFinished(e -> Text.setText("Click on 'PLAY REGISTER'"));
         textAppear2.play();
     }
 
@@ -1112,16 +1112,22 @@ public class GameViewModel {
      * start game button -> show button get Cards
      */
     public void startGameButtonAction(ActionEvent actionEvent) {
-        for (int id:Client.getClientReceive().getIdList()){
-               int robotNumber=Client.getClientReceive().getRobotById(id);
-               int startingPointNumber=Client.getClientReceive().getStartPointById(id);
-               Integer[] position=Client.getClientReceive().getPositionById(id);
-               robotOldPosition.put(robotNumber,position);
-               setOtherRobotOnBoard(robotNumber,startingPointNumber);
+        if (Client.getClientReceive().getIdList().size() > Client.getClientReceive().getStartNumbers().size()) {
+            Text.setText("Wait for the other players to choose a starting point");
         }
-        getCardsButton.setVisible(true);
-        startGameButton.setVisible(false);
-        Text.setText("Click on 'get cards'");
+        else
+        {
+            for (int id : Client.getClientReceive().getIdList()) {
+                int robotNumber = Client.getClientReceive().getRobotById(id);
+                int startingPointNumber = Client.getClientReceive().getStartPointById(id);
+                Integer[] position = Client.getClientReceive().getPositionById(id);
+                robotOldPosition.put(robotNumber, position);
+                setOtherRobotOnBoard(robotNumber, startingPointNumber);
+            }
+            getCardsButton.setVisible(true);
+            startGameButton.setVisible(false);
+            Text.setText("Click on 'GET CARDS'");
+        }
     }
 
 
@@ -2226,7 +2232,7 @@ public class GameViewModel {
            }
         startGameButton.setVisible(true);
         selectStartingPoint.setVisible(false);
-        Text.setText("Click on 'start game'");
+        Text.setText("Click on 'START GAME'");
     }
 
 
@@ -2267,7 +2273,7 @@ public class GameViewModel {
         Client.getClientReceive().setIdDirection(new HashMap<>());
         if(Client.getClientReceive().isPickDamage()){
             showDamage.setVisible(true);
-            Text.setText("pick damage Cards");
+            Text.setText("Pick Damage Cards");
             //TODO: set a text to remind player pickDamageCard
         }
 
@@ -2499,7 +2505,7 @@ public class GameViewModel {
      * function of the play register button/ new round button
      */
     public void playCardBtnAction(ActionEvent actionEvent) {
-         playCardBtn.setText("play register 1");
+         playCardBtn.setText("PLAY REGISTER 1");
          Client.getLogger().info("Send out message: ");
 
          switch(getClickCounter()){
@@ -2512,7 +2518,7 @@ public class GameViewModel {
                  register3.setImage(register4.getImage());
                  register4.setImage(register5.getImage());
                  register5.setImage(null);
-                 playCardBtn.setText("play register 2");
+                 playCardBtn.setText("PLAY REGISTER 2");
                  //remove remaining cards from hand
                  hand1Button.setVisible(false);
                  hand2Button.setVisible(false);
@@ -2533,7 +2539,7 @@ public class GameViewModel {
                  register2.setImage(register3.getImage());
                  register3.setImage(register4.getImage());
                  register4.setImage(null);
-                 playCardBtn.setText("play register 3");
+                 playCardBtn.setText("PLAY REGISTER 3");
                  moveRobotButton.setVisible(true);
                  playCardBtn.setVisible(false);
                  break;
@@ -2543,7 +2549,7 @@ public class GameViewModel {
                  register1.setImage(register2.getImage());
                  register2.setImage(register3.getImage());
                  register3.setImage(null);
-                 playCardBtn.setText("play register 4");
+                 playCardBtn.setText("PLAY REGISTER 4");
                  moveRobotButton.setVisible(true);
                  playCardBtn.setVisible(false);
                  break;
@@ -2552,7 +2558,7 @@ public class GameViewModel {
                  Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
                  register1.setImage(register2.getImage());
                  register2.setImage(null);
-                 playCardBtn.setText("play register 5");
+                 playCardBtn.setText("PLAY REGISTER 5");
                  moveRobotButton.setVisible(true);
                  playCardBtn.setVisible(false);
                  break;
@@ -2560,7 +2566,7 @@ public class GameViewModel {
                  setClickCounter(getClickCounter() + 1);
                  Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
                  register1.setImage(null);
-                 playCardBtn.setText("next round!");
+                 playCardBtn.setText("NEXT ROUND!");
                  moveRobotButton.setVisible(true);
                  playCardBtn.setVisible(false);
                  break;
@@ -2786,7 +2792,7 @@ public class GameViewModel {
             timegone4.play();
 
             PauseTransition textAppear2 = new PauseTransition(Duration.seconds(33));
-            textAppear2.setOnFinished(e -> Text.setText("Click on 'play register'"));
+            textAppear2.setOnFinished(e -> Text.setText("Click on 'PLAY REGISTER'"));
             textAppear2.play();
         } else {
 

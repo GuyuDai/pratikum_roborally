@@ -9,10 +9,14 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.*;
 import protocol.*;
 import protocol.ProtocolFormat.*;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.util.*;
 
 /**
@@ -70,6 +74,7 @@ public class LoginViewModel {
      * can only press OK button when both a robot is selected and a name inserted
      */
     public void initialize() {
+        playWelcome();
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setPrettyPrinting();
         nameInput.textProperty().bindBidirectional(model.getTextFieldContent());
@@ -83,31 +88,37 @@ public class LoginViewModel {
      */
     public void selectBot(ActionEvent actionEvent){
         if(buttonHammer.isSelected()){
+            playHammerbot();
             figure=4;
             robotSelected=true;
             checkRobot();
         }
         else if (buttonHulk.isSelected()){
+            playHulk();
             figure=1;
             robotSelected=true;
             checkRobot();
         }
         else if (buttonSpin.isSelected()){
+            playSpinbot();
             figure=2;
             robotSelected=true;
             checkRobot();
         }
         else if (buttonSquash.isSelected()){
+            playSquashbot();
             figure=3;
             robotSelected=true;
             checkRobot();
         }
         else if (buttonTwonkey.isSelected()){
+            playTwonkey();
             figure=5;
             robotSelected=true;
             checkRobot();
         }
         else if (buttonTwitch.isSelected()){
+            playTwitch();
             figure=6;
             robotSelected=true;
             checkRobot();
@@ -184,6 +195,99 @@ public class LoginViewModel {
 
     public static String getWindowName(){
         return window;
+    }
+
+    @FXML
+    private MediaView sound;
+
+    @FXML
+    Button soundOn;
+    @FXML
+    Button soundOff;
+
+
+    public void playHulk() {
+        try {
+            String fileName = getClass().getResource("/sounds/Hulk x 90.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        sound.getMediaPlayer().play();
+    }
+
+    public void playSpinbot() {
+        try {
+            String fileName = getClass().getResource("/sounds/Spin bot.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        sound.getMediaPlayer().play();
+    }
+
+    public void playHammerbot() {
+        try {
+            String fileName = getClass().getResource("/sounds/Hammer bot.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        sound.getMediaPlayer().play();
+    }
+
+    public void playSquashbot() {
+        try {
+            String fileName = getClass().getResource("/sounds/Squash bot.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        sound.getMediaPlayer().play();
+    }
+
+    public void playTwonkey() {
+        try {
+            String fileName = getClass().getResource("/sounds/Twonkey.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        sound.getMediaPlayer().play();
+    }
+
+    public void playTwitch() {
+        try {
+            String fileName = getClass().getResource("/sounds/Twitch.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        sound.getMediaPlayer().play();
+    }
+
+    public void playWelcome() {
+        try {
+            String fileName = getClass().getResource("/sounds/Welcome.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        sound.getMediaPlayer().play();
     }
 
 }

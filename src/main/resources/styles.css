@@ -26,8 +26,17 @@
 }
 
 .buttonColor {
-    -fx-background-radius: 15;
-    -fx-background-color: #98c0d4;
+    -fx-background-color: linear-gradient(to right, #ada996, #f2f2f2,  #dbdbdb, #eaeaea);
+    -fx-opacity: .7;
+    -fx-font-weight: bold;
+    -fx-font-size: 10;
+
+}
+
+.buttonColor1 {
+    -fx-background-color: linear-gradient(to left, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
+    -fx-opacity: .7;
+    -fx-font-weight: bold;
 }
 
 .worm {
@@ -78,8 +87,16 @@
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 16;
+    -fx-text-alignment: center;
 }
 
 .buttonHand{
     -fx-background-color: transparent;
+}
+
+.startPoint{
+    -fx-background-color: linear-gradient(to bottom, #ddefbb, #ffeeee, #ddefbb);
+}
+.buttonColor2{
+    -fx-background-color: #ddefbb;
 }
