@@ -11,6 +11,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.*;
 import javafx.util.*;
 import org.w3c.dom.Text;
@@ -203,6 +206,8 @@ public class GameViewModel {
     @FXML
     private Label chatwindow;
 
+    @FXML
+    private MediaView sound;
 
     /**
      * other players mat
@@ -2879,12 +2884,14 @@ public class GameViewModel {
                   for (int i = printY+1; i < printY2; i++) {
                       ImageView laserVertical = new ImageView(imageRobotLaserVertical);
                       startBoard.add(laserVertical,printX,i);
+                      playLaserSound();
                   }
               }
                   if (printY > printY2) {
                       for (int i = printY2+1; i < printY; i++) {
                           ImageView laserVertical = new ImageView(imageRobotLaserVertical);
                           startBoard.add(laserVertical,printX,i);
+                          playLaserSound();
                       }
                   }
 
@@ -2894,19 +2901,20 @@ public class GameViewModel {
                   for (int i = printX+1; i < printX2; i++) {
                       ImageView laser = new ImageView(imageRobotLaser);
                       startBoard.add(laser, i, printY);
+                      playLaserSound();
                   }
               }
                   if (printX > printX2) {
                       for (int i = printX2+1; i < printX; i++) {
                           ImageView laser = new ImageView(imageRobotLaser);
                           startBoard.add(laser, i, printY);
+                          playLaserSound();
                       }
                   }
               }
 
           Client.getClientReceive().setDoRobotLaser(false);
       }
-
   }
   int clickDamageCounter=1;
     @FXML
@@ -3027,7 +3035,19 @@ public class GameViewModel {
             } catch (Exception e) {
                 Client.getLogger().severe( "Window can not open.");
             }
+    }
+
+    public void playLaserSound() {
+        try {
+            String fileName = getClass().getResource("/sounds/laser.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
         }
+        sound.getMediaPlayer().play();
+    }
 
 
 }

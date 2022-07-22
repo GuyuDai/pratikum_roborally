@@ -74,6 +74,7 @@ public class LoginViewModel {
      * can only press OK button when both a robot is selected and a name inserted
      */
     public void initialize() {
+        playWelcome();
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setPrettyPrinting();
         nameInput.textProperty().bindBidirectional(model.getTextFieldContent());
@@ -92,7 +93,6 @@ public class LoginViewModel {
             checkRobot();
         }
         else if (buttonHulk.isSelected()){
-            //playHulk();
             figure=1;
             robotSelected=true;
             checkRobot();
@@ -201,18 +201,87 @@ public class LoginViewModel {
 
 
     public void playHulk() {
-        if(sound.getMediaPlayer()==null){
-            try {
-                String fileName = getClass().getResource("/sounds/hulkSound.mp3").toURI().toString();
-                Media media = new Media(fileName);
-                MediaPlayer player = new MediaPlayer(media);
-                sound.setMediaPlayer(player);
-            } catch (URISyntaxException e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            String fileName = getClass().getResource("/sounds/Hulk x 90.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
         }
         sound.getMediaPlayer().play();
     }
 
+    public void playSpinbot() {
+        try {
+            String fileName = getClass().getResource("/sounds/Spin bot.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        sound.getMediaPlayer().play();
+    }
+
+    public void playHammerbot() {
+        try {
+            String fileName = getClass().getResource("/sounds/Hammer bot.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        sound.getMediaPlayer().play();
+    }
+
+    public void playSquashbot() {
+        try {
+            String fileName = getClass().getResource("/sounds/Squash bot.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        sound.getMediaPlayer().play();
+    }
+
+    public void playTwonkey() {
+        try {
+            String fileName = getClass().getResource("/sounds/Twonkey.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        sound.getMediaPlayer().play();
+    }
+
+    public void playTwitch() {
+        try {
+            String fileName = getClass().getResource("/sounds/Twitch.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        sound.getMediaPlayer().play();
+    }
+
+    public void playWelcome() {
+        try {
+            String fileName = getClass().getResource("/sounds/Welcome.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        sound.getMediaPlayer().play();
+    }
 
 }
