@@ -254,12 +254,20 @@ public class LobbyViewModel {
                 }
 
             } else {
-                openGameWindow();
+                if (Client.getClientReceive().isGameStarted()) {
+                    openGameWindow();
+                }
             }
             //close Lobby
-            Stage stage = (Stage) selectMap.getScene().getWindow();
-            stage.close();
-            setWindowName("Game");
+            if (Client.getClientReceive().isGameStarted()) {
+                Stage stage = (Stage) selectMap.getScene().getWindow();
+                stage.close();
+                setWindowName("Game");
+            }
+            else{
+                LobbyText.setText("Game already started");
+                LobbyText.setVisible(true);
+            }
         }
     }
 
