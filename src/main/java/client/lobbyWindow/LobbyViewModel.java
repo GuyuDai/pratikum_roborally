@@ -72,9 +72,9 @@ public class LobbyViewModel {
      * other players mat
      */
     @FXML
-    private Label yourRobotText;
+    private ImageView yourRobotText;
     @FXML
-    private Label otherRobotText;
+    private ImageView otherRobotText;
     @FXML
     ImageView box1, box2;
 
@@ -246,12 +246,12 @@ public class LobbyViewModel {
     }
 
         /**
-         * selecting a map by opening map selection window, when at least 2 players are online
+         * selecting a map by opening map selection window, when at least 2 players are ready and game has not started yet
          */
         public void selectMapAction (ActionEvent actionEvent){
             if (Client.getClientReceive().getReadyList().size() == 1) {
                 LobbyText.setVisible(true);
-                PauseTransition pauseTransition26 = new PauseTransition(Duration.seconds(4));
+                PauseTransition pauseTransition26 = new PauseTransition(Duration.seconds(3));
                 pauseTransition26.setOnFinished(e -> LobbyText.setVisible(false));
                 pauseTransition26.play();
             } else {
@@ -265,29 +265,33 @@ public class LobbyViewModel {
                         stageGame.setScene(new Scene(rootGame));
                         stageGame.show();
                     } catch (Exception e) {
-
                     }
+                    //close Lobby
+                    Stage stage = (Stage) selectMap.getScene().getWindow();
+                    stage.close();
+                    setWindowName("Game");
 
-            } else {
+                } else {
+                    if (Client.getClientReceive().isGameStarted()) {
+                        openGameWindow();
+                    }
+                }
                 if (Client.getClientReceive().isGameStarted()) {
-                    openGameWindow();
+                    Stage stage = (Stage) selectMap.getScene().getWindow();
+                    stage.close();
+                    setWindowName("Game");
+                }
+                else{
+                    LobbyText.setText("Game already started! You can't join anymore.");
+                    LobbyText.setVisible(true);
+                    selectMap.setVisible(false);
                 }
             }
-            //close Lobby
-            if (Client.getClientReceive().isGameStarted()) {
-                Stage stage = (Stage) selectMap.getScene().getWindow();
-                stage.close();
-                setWindowName("Game");
-            }
-            else{
-                LobbyText.setText("Game already started");
-                LobbyText.setVisible(true);
-            }
         }
-    }
 
 
-        public void setYourBotIcon () {
+
+    public void setYourBotIcon () {
             yourRobotText.setVisible(true);
             yourBotText.setVisible(true);
             int yourId = Client.getClientReceive().getClientID();
