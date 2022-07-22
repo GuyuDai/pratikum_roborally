@@ -69,9 +69,9 @@ public class LobbyViewModel {
     private ImageView yourRobot;
 
     @FXML
-    private ImageView yourRobotText;
+    private Label yourRobotText;
     @FXML
-    private ImageView otherRobotText;
+    private Label otherRobotText;
     @FXML
     ImageView box1, box2;
 
