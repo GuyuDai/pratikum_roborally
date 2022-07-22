@@ -14,29 +14,37 @@ import java.io.*;
 import java.net.*;
 import java.util.Map;
 import java.util.*;
+import java.util.logging.*;
 
 
 public class ClientReceive extends Thread{
 
+    private static final Logger logger = Logger.getLogger(ClientReceive.class.getName());
     public static final String ANSI_GREEN = "\u001B[32m";
 
     protected int clientID;
     protected Socket socket;
+
+    protected GameViewModel model;
     protected BufferedReader readInput;
     protected BufferedWriter writeOutput;
     protected static final String PROTOCOL = "Version 2.0";
     protected static final String GROUP = "Origionelle Oktopusse";
     protected int playerId;
     protected String playerName;
-
     protected int figure;
     protected String chatMsg;
+
+    public int getCheckPointNumber() {
+        return checkPointNumber;
+    }
+
     protected int checkPointNumber;
+
     protected int checkPointXPosition;
     protected int checkPointYPosition;
     protected int energyStorage;
     protected int fromId;
-
     protected int register;
     protected int damageCount;
     protected boolean isPrivate;
@@ -58,9 +66,7 @@ public class ClientReceive extends Thread{
     protected Integer[] positions;
     protected String turnDirection;
     protected String animationType;
-
     protected int x;
-
     protected int y;
     protected int activePhaseNumber;
     protected int rebootClientId;
@@ -68,17 +74,10 @@ public class ClientReceive extends Thread{
     protected List<Integer> IdList = new ArrayList<>();
     protected Map<Integer,Integer> IdRobot = new HashMap<>();
     protected Map<Integer,Integer>IdStartPoint = new HashMap<>();
+
     protected Map<Integer,String> IdDirection=new HashMap<>();
 
     protected int counterRegister = 0;
-
-    protected boolean doRobotLaser=false;
-
-    protected boolean pickDamage =false;
-
-    protected  boolean gameEnded=false;
-
-    protected  int winnerID;
 
 
     public void setCounterRegister(int count){
@@ -118,7 +117,7 @@ public class ClientReceive extends Thread{
                 //System.out.println(serverMessage + "-----------original message");  //test
                 Message message = wrapMessage(serverMessage);
                 //System.out.println("--------------------------------------------------------------");  //test
-                Client.getLogger().info( ANSI_GREEN + message + "wrapped message");  //test
+                logger.info( ANSI_GREEN + message + "wrapped message");  //test
                 identifyMessage(message);
             }
         } catch (IOException e) {
@@ -292,6 +291,7 @@ public class ClientReceive extends Thread{
 
     private void identifyMessage(Message message) {
         String type = message.getMessageType();
+        String body = message.getMessageBody();
         switch (type){
             case MessageType.helloClient:
                 break;
@@ -301,15 +301,13 @@ public class ClientReceive extends Thread{
                 break;
 
             case MessageType.welcome:
-                Welcome welcome = (Welcome) message;
-                WelcomeBody welcomeBody = welcome.getMessageBody();
+                WelcomeBody welcomeBody=new Gson().fromJson(body,WelcomeBody.class);
                 clientID=welcomeBody.getClientID();
                 sendMessage(new HelloServer(GROUP,false,PROTOCOL,clientID).toString());
                 break;
 
             case MessageType.playerAdded:
-                PlayerAdded playerAdded = (PlayerAdded) message;
-                PlayerAddedBody playerAddedBody = playerAdded.getMessageBody();
+                PlayerAddedBody playerAddedBody = new Gson().fromJson(body,PlayerAddedBody.class);
                 playerId = playerAddedBody.getClientID();
                 playerName = playerAddedBody.getName();
                 int tempFigure = playerAddedBody.getFigure();
@@ -323,50 +321,38 @@ public class ClientReceive extends Thread{
                 break;
 
             case MessageType.receivedChat:
-                ReceivedChat receivedChat = (ReceivedChat) message;
-                ReceivedChatBody receivedChatBody = receivedChat.getMessageBody();
+                ReceivedChatBody receivedChatBody=new Gson().fromJson(body,ReceivedChatBody.class);
                 chatMsg=receivedChatBody.getMessage();
                 fromId=receivedChatBody.getFrom();
                 isPrivate=receivedChatBody.isPrivate();
-                receiveChat(chatMsg);
+                receiveChat(chatMsg);  //reminder: there cause a "Toolkit not initialized" error
                 break;
 
             case MessageType.selectMap:
-                SelectMap selectMap = (SelectMap) message;
-                SelectMap.SelectMapBody selectMapBody = selectMap.getMessageBody();
+                SelectMap.SelectMapBody selectMapBody = new Gson().fromJson(body,SelectMap.SelectMapBody.class);
                 maps = selectMapBody.getAvailableMaps();
                 break;
 
             case MessageType.playerStatus:
-                PlayerStatus playerStatus = (PlayerStatus) message;
-                PlayerStatus.PlayerStatusBody playerStatusBody = playerStatus.getMessageBody();
+                PlayerStatus.PlayerStatusBody playerStatusBody = new Gson().fromJson(body, PlayerStatus.PlayerStatusBody.class);
                 isReady = playerStatusBody.isReady();
                 playerId = playerStatusBody.getClientID();
-                if(isReady) {
-                    readyList.add(isReady);
-                    IdReady.put(playerId, isReady);
-                }
-                else{
-                    readyList.remove(0);
-                    IdReady.put(playerId,isReady);
-                }
+                readyList.add(isReady);
+                IdReady.put(playerId,isReady);
                 break;
 
             case MessageType.mapSelected:
-                MapSelected mapSelected = (MapSelected) message;
-                MapSelected.MapSelectedBody mapSelectedBody = mapSelected.getMessageBody();
+                MapSelected.MapSelectedBody mapSelectedBody=new Gson().fromJson(body,MapSelected.MapSelectedBody.class);
                 board = mapSelectedBody.getMap();
                 break;
 
             case MessageType.yourCards:
-                YourCards yourCards = (YourCards) message;
-                YourCards.YourCardsBody yourCardsBody = yourCards.getMessageBody();
+                YourCards.YourCardsBody yourCardsBody=new Gson().fromJson(body, YourCards.YourCardsBody.class);
                 cards=yourCardsBody.getCardsInHand();
                 break;
 
             case MessageType.cardSelected:
-                CardSelected cardSelected = (CardSelected) message;
-                CardSelected.CardSelectedBody cardSelectedBody = cardSelected.getMessageBody();
+                CardSelected.CardSelectedBody cardSelectedBody=new Gson().fromJson(body, CardSelected.CardSelectedBody.class);
                 playerId=cardSelectedBody.getClientID();
                 register=cardSelectedBody.getRegister();
                 isFilled=cardSelectedBody.isFilled();
@@ -376,16 +362,14 @@ public class ClientReceive extends Thread{
                 break;
 
             case MessageType.pickDamage:
-                PickDamage pickDamage1 = (PickDamage) message;
-                PickDamage.PickDamageBody pickDamageBody = pickDamage1.getMessageBody();
-                damageDecks = pickDamageBody.getAvailablePiles();
-                damageCount = pickDamageBody.getCount();
-                pickDamage = true;
+                PickDamage.PickDamageBody pickDamageBody=new Gson().fromJson(body, PickDamage.PickDamageBody.class);
+                damageDecks=pickDamageBody.getAvailablePiles();
+                damageCount=pickDamageBody.getCount();
                 break;
 
             case MessageType.startingPointTaken:
-                StartingPointTaken startingPointTaken = (StartingPointTaken) message;
-                StartingPointTaken.StartingPointTakenBody startingPointTakenBody = startingPointTaken.getMessageBody();
+                StartingPointTaken.StartingPointTakenBody startingPointTakenBody = new Gson().fromJson(body,
+                        StartingPointTaken.StartingPointTakenBody.class);
                 int takenX = startingPointTakenBody.getX();
                 int takenY = startingPointTakenBody.getY();
                 playerId = startingPointTakenBody.getClientID();
@@ -401,22 +385,19 @@ public class ClientReceive extends Thread{
                 break;
 
             case MessageType.cardPlayed:
-                CardPlayed cardPlayed1 = (CardPlayed) message;
-                CardPlayed.CardPlayedBody cardPlayedBody = cardPlayed1.getMessageBody();
+                CardPlayed.CardPlayedBody cardPlayedBody=new Gson().fromJson(body, CardPlayed.CardPlayedBody.class);
                 cardPlayed=cardPlayedBody.getCard();
                 playerId=cardPlayedBody.getClientID();
                 IdCardPlayed.put(playerId,cardPlayed);
                 break;
 
             case MessageType.cardsYouGotNow:
-                CardsYouGotNow cardsYouGotNow = (CardsYouGotNow) message;
-                CardsYouGotNow.CardYouGotNowBody cardYouGotNowBody = cardsYouGotNow.getMessageBody();
+                CardsYouGotNow.CardYouGotNowBody cardYouGotNowBody=new Gson().fromJson(body, CardsYouGotNow.CardYouGotNowBody.class);
                 filledRegister=cardYouGotNowBody.getCards();
                 break;
 
             case MessageType.movement:
-                Movement movement = (Movement) message;
-                Movement.MovementBody movementBody = movement.getMessageBody();
+                Movement.MovementBody movementBody=new Gson().fromJson(body,Movement.MovementBody.class);
                 playerId=movementBody.getClientID();
                 y=movementBody.getX();
                 x=movementBody.getY();
@@ -425,37 +406,29 @@ public class ClientReceive extends Thread{
                 break;
 
             case MessageType.playerTurning:
-                PlayerTurning playerTurning = (PlayerTurning) message;
-                PlayerTurning.PlayerTurningBody playerTurningBody = playerTurning.getMessageBody();
+                PlayerTurning.PlayerTurningBody playerTurningBody=new Gson().fromJson(body, PlayerTurning.PlayerTurningBody.class);
                 turnDirection=playerTurningBody.getRotation();
                 playerId=playerTurningBody.getClientID();
                 IdDirection.put(playerId,turnDirection);
                 break;
 
             case MessageType.animation:
-                Animation animation = (Animation) message;
-                Animation.AnimationBody animationBody = animation.getMessageBody();
+                Animation.AnimationBody animationBody=new Gson().fromJson(body,Animation.AnimationBody.class);
                 animationType=animationBody.getType();
-                if(animationType.equals("RobotLaser")){
-                    doRobotLaser=true;
-                }
                 break;
 
             case MessageType.activePhase:
-                ActivePhase activePhase = (ActivePhase) message;
-                ActivePhase.ActivePhaseBody activePhaseBody = activePhase.getMessageBody();
+                ActivePhase.ActivePhaseBody activePhaseBody=new Gson().fromJson(body,ActivePhase.ActivePhaseBody.class);
                 activePhaseNumber=activePhaseBody.getPhase();
                 break;
 
             case MessageType.reboot:
-                Reboot reboot = (Reboot) message;
-                Reboot.RebootBody rebootBody = reboot.getMessageBody();
+                Reboot.RebootBody rebootBody=new Gson().fromJson(body, Reboot.RebootBody.class);
                 rebootClientId=rebootBody.getClientID();
                 break;
 
             case MessageType.energy:
-                Energy energy = (Energy) message;
-                Energy.EnergyBody energyBody = energy.getMessageBody();
+                Energy.EnergyBody energyBody = new Gson().fromJson(body, Energy.EnergyBody.class);
                 int supposedClient = energyBody.getClientID();
                 int amount = energyBody.getCount();
                 //If its the you the energy will be added to your storage
@@ -465,9 +438,8 @@ public class ClientReceive extends Thread{
                 break;
 
             case MessageType.checkpointReached:
-                CheckPointReached checkPointReached = (CheckPointReached) message;
                 //Saves the number of Checkpoints reached
-                CheckPointReached.CheckPointReachedBody checkPointReachedBody = checkPointReached.getMessageBody();
+                CheckPointReached.CheckPointReachedBody checkPointReachedBody = new Gson().fromJson(body, CheckPointReached.CheckPointReachedBody.class);
                 int clientIDCheckReached = checkPointReachedBody.getClientID();
                 int numberOfCheckpointsReached = checkPointReachedBody.getNumber();
                 //Sets the number of checkpoints reached
@@ -480,29 +452,24 @@ public class ClientReceive extends Thread{
                 break;
 
             case MessageType.checkPointMoved:
-                CheckPointMoved checkPointMoved = (CheckPointMoved) message;
                 //If a checkpoint moves its position
-                CheckPointMoved.CheckPointMovedBody checkPointMovedBody= checkPointMoved.getMessageBody();
+                CheckPointMoved.CheckPointMovedBody checkPointMovedBody= new Gson().fromJson(body, CheckPointMoved.CheckPointMovedBody.class);
                 int checkPointIDMoved = checkPointMovedBody.getCheckPointID();
                 int newXPosition = checkPointMovedBody.getX();
                 int newYPosition = checkPointMovedBody.getY();
-                setCheckPointXPosition(newXPosition);
-                setCheckPointYPosition(newYPosition);
+                //setCheckPointXPosition(newXPosition);
+                //setCheckPointYPosition(newYPosition);
+                checkPointPositions.replace(checkPointIDMoved, new int[]{newXPosition,newYPosition});
                 break;
 
-            case MessageType.gameFinished:
-                GameFinished gameFinished= (GameFinished) message;
-                GameFinished.GameFinishedBody gameFinishedBody=gameFinished.getMessageBody();
-                winnerID=gameFinishedBody.getClientID();
-                gameEnded=true;
 
             case MessageType.registerChosen:
-                RegisterChosen registerChosen = (RegisterChosen) message;
                 //Der Server quittiert die Auswahl und schickt diese zur Information an alle Clients.
-                RegisterChosen.RegisterChosenBody registerChosenBody= registerChosen.getMessageBody();
+                RegisterChosen.RegisterChosenBody registerChosenBody= new Gson().fromJson(body, RegisterChosen.RegisterChosenBody.class);
                 int clientID = registerChosenBody.getClientID();
                 int register = registerChosenBody.getRegister();
                 break;
+
 
         }
     }
@@ -520,6 +487,37 @@ public class ClientReceive extends Thread{
             });
         }
     }
+
+    Map checkPointPositions = new HashMap<Integer, int[]>();
+   public void setCheckpoints(){
+        if(board.equals("DizzyHighway")){
+            int [] pos= {3,12};
+            checkPointPositions.put(1, pos);
+        } else if (board.equals("DeathTrap")) {
+            int [] pos4= {2,8};
+            checkPointPositions.put(4,pos4);
+            int [] pos1= {7,1};
+            checkPointPositions.put(1,pos1);
+            checkPointPositions.put(3,new int[]{8,7});
+            checkPointPositions.put(2,new int[]{4,4});
+        } else if (board.equals("ExtraCrispy")){
+            checkPointPositions.put(1,new int[]{2,10});
+            checkPointPositions.put(2,new int[]{7,5});
+            checkPointPositions.put(3,new int[]{7,10});
+            checkPointPositions.put(4,new int[]{2,5});
+        } else if (board.equals("LostBearings")){
+            checkPointPositions.put(1, new int[]{4,11});
+            checkPointPositions.put(2, new int[]{5,4});
+            checkPointPositions.put(3, new int[]{2,8});
+            checkPointPositions.put(4, new int[]{7,8});
+        } else if (board.equals("Twister")){
+            checkPointPositions.put(1, new int[]{1,10});
+            checkPointPositions.put(2, new int[]{7,6});
+            checkPointPositions.put(3, new int[]{3,5});
+            checkPointPositions.put(3, new int[]{7,9});
+
+        }
+   }
 
     public int getFigure() {
         return figure;
@@ -696,49 +694,6 @@ public class ClientReceive extends Thread{
 
     public List<Integer> getIdList() {
         return IdList;
-    }
-
-    public boolean isDoRobotLaser() {
-        return doRobotLaser;
-    }
-
-    public String[] getDamageDecks() {
-        return damageDecks;
-    }
-
-    public int getDamageCount() {
-        return damageCount;
-    }
-
-    public boolean isPickDamage() {
-        return pickDamage;
-    }
-
-    public boolean isGameEnded() {
-        return gameEnded;
-    }
-
-    public void setMaps(String[] maps) {
-        this.maps = maps;
-    }
-
-    public int getWinnerID() {
-        return winnerID;
-    }
-    public void setPickDamage(boolean pickDamage){
-        this.pickDamage = pickDamage;
-    }
-
-    public void setDamageCount(int damageCount) {
-        this.damageCount = damageCount;
-    }
-
-    public void setDamageDecks(String[] damageDecks) {
-        this.damageDecks = damageDecks;
-    }
-
-    public void setDoRobotLaser(boolean doRobotLaser) {
-        this.doRobotLaser = doRobotLaser;
     }
 
     public String[] getCards() {
