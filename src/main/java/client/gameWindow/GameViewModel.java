@@ -221,7 +221,7 @@ public class GameViewModel {
     @FXML
     private Label Text;
     @FXML
-    private Label phase;
+    private ImageView phaseView;
     @FXML
     private Label yourBotText;
     @FXML
@@ -303,6 +303,18 @@ public class GameViewModel {
     Image imageTwonkey = new Image(twonkey.toString());
 
     int ID=Client.getClientReceive().getClientID();
+
+
+    /**
+     * URL adress to png file font
+     */
+    URL activation = getClass().getResource("/fonts/ActivationPhase.png");
+    Image imageActivation = new Image(activation.toString());
+
+    URL programming = getClass().getResource("/fonts/ProgrammingPhase.png");
+    Image imageProgramming = new Image(programming.toString());
+
+
 
 
     public void initialize(Client client) {
@@ -1091,7 +1103,7 @@ public class GameViewModel {
         String map = Client.getClientReceive().getBoard();
         printMapGUI(map);
 
-        phase.setText("PROGRAMMING PHASE");
+        phaseView.setVisible(true);
         Text.setText("Select a starting point");
         selectStartingPoint.setVisible(true);
         printMapButton.setVisible(false);
@@ -2512,7 +2524,7 @@ public class GameViewModel {
              case 1:
                  setClickCounter(getClickCounter() + 1);
                  Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
-                 phase.setText("ACTIVATION PHASE");
+                 phaseView.setImage(imageActivation);
                  register1.setImage(register2.getImage());
                  register2.setImage(register3.getImage());
                  register3.setImage(register4.getImage());
@@ -2571,8 +2583,8 @@ public class GameViewModel {
                  playCardBtn.setVisible(false);
                  break;
              case 6:
+                 phaseView.setImage(imageProgramming);
                  //set back counters for next round
-                 phase.setText("PROGRAMMING PHASE");
                  setClickCounter(1);
                  setRegisterCount(0);
                  playCardBtn.setVisible(false);
