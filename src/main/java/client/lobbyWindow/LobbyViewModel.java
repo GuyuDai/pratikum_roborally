@@ -229,11 +229,12 @@ public class LobbyViewModel {
                 selectMap.setText("OPEN GAME");
                 selectMap.setVisible(true);
             }
-            if (readyButton.isSelected()) {
+           /* if (readyButton.isSelected()) {
                 System.out.println("OK");
             } else {
                 LobbyText.setText("HUI");
             }
+            */
             if (clickCount == 2) {
                 String notReadyMessage = new SetStatus(false).toString();
                 Client.getClientReceive().sendMessage(notReadyMessage);
