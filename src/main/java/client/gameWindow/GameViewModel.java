@@ -242,6 +242,7 @@ public class GameViewModel {
 
 
 
+
     public String window = "Game";
     public ProgrammingDeck deck = new ProgrammingDeck();
 
@@ -1116,7 +1117,7 @@ public class GameViewModel {
         String map = Client.getClientReceive().getBoard();
         printMapGUI(map);
 
-        phaseView.setVisible(true);
+        //phaseView.setVisible(true);
         Text.setText("Select a starting point");
         selectStartingPoint.setVisible(true);
         printMapButton.setVisible(false);
@@ -2611,6 +2612,7 @@ public class GameViewModel {
      */
     public void getCardsButtonAction(ActionEvent actionEvent) {
         getCardsButton.setVisible(false);
+        phaseView.setVisible(true);
 
         hand1Button.setVisible(true);
         hand2Button.setVisible(true);

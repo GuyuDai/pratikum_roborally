@@ -20,7 +20,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1251.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
+<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1195.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
    <children>
       <Pane layoutX="6.0" layoutY="3.0" prefHeight="795.0" prefWidth="305.0" stylesheets="@../styles.css">
          <children>
@@ -141,23 +141,19 @@
       </Pane>
       <VBox layoutX="322.0" layoutY="1.0" prefHeight="797.0" prefWidth="557.0">
          <children>
-            <HBox prefHeight="108.0" prefWidth="557.0">
-               <children>
-                  <ImageView fx:id="phaseView" fitHeight="125.0" fitWidth="556.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../fonts/ProgrammingPhase.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
+            <ImageView fx:id="phaseView" fitHeight="125.0" fitWidth="556.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../fonts/ProgrammingPhase.png" />
+               </image>
+            </ImageView>
             <AnchorPane prefHeight="430.0" prefWidth="558.0">
                <children>
-                  <ImageView fitHeight="428.0" fitWidth="557.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="428.0" fitWidth="557.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../bgImages/MapBG.jpg" />
                      </image>
                   </ImageView>
-                  <GridPane fx:id="gameboard" gridLinesVisible="true" prefHeight="428.0" prefWidth="557.0">
+                  <GridPane fx:id="gameboard" gridLinesVisible="true" layoutY="14.0" prefHeight="428.0" prefWidth="557.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
@@ -186,7 +182,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <GridPane fx:id="startBoard" gridLinesVisible="true" prefHeight="428.0" prefWidth="557.0">
+                  <GridPane fx:id="startBoard" gridLinesVisible="true" layoutY="14.0" prefHeight="428.0" prefWidth="557.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
@@ -215,7 +211,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <GridPane fx:id="robotBoard" gridLinesVisible="true" prefHeight="428.0" prefWidth="557.0">
+                  <GridPane fx:id="robotBoard" gridLinesVisible="true" layoutY="14.0" prefHeight="428.0" prefWidth="557.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
@@ -244,7 +240,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <GridPane fx:id="checkBoard" gridLinesVisible="true" prefHeight="428.0" prefWidth="557.0">
+                  <GridPane fx:id="checkBoard" gridLinesVisible="true" layoutY="14.0" prefHeight="428.0" prefWidth="557.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
@@ -310,25 +306,28 @@
                   <ImageView fx:id="register3" fitHeight="104.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
                   <ImageView fx:id="register4" fitHeight="104.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
                   <ImageView fx:id="register5" fitHeight="104.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" />
+                  <Button fx:id="printMapButton" mnemonicParsing="false" onAction="#printMapButtonAction" prefHeight="45.0" prefWidth="126.0" styleClass="buttonColor2" text="PRINT MAP" GridPane.columnIndex="5" />
+                  <Button fx:id="startGameButton" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="45.0" prefWidth="129.0" styleClass="buttonColor2" text="START GAME" visible="false" GridPane.columnIndex="5" />
+                  <Button fx:id="getCardsButton" mnemonicParsing="false" onAction="#getCardsButtonAction" prefHeight="45.0" prefWidth="129.0" styleClass="buttonColor2" text="GET CARDS" visible="false" GridPane.columnIndex="5" />
                </children>
             </GridPane>
          </children>
       </VBox>
-      <AnchorPane layoutX="886.0" layoutY="6.0" prefHeight="790.0" prefWidth="356.0">
+      <AnchorPane layoutX="886.0" layoutY="6.0" prefHeight="790.0" prefWidth="305.0">
          <children>
             <ImageView fitHeight="790.0" fitWidth="356.0" layoutX="1.0" layoutY="-2.0" opacity="0.16" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../bgImages/white2BG.png" />
+                  <Image url="@../bgImages/whiteBG.png" />
                </image>
             </ImageView>
-            <AnchorPane fx:id="player1" layoutX="1.0" opacity="0.5" prefHeight="50.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@../styles.css">
+            <AnchorPane fx:id="player1" layoutX="1.0" opacity="0.5" prefHeight="77.0" prefWidth="306.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <ImageView fx:id="playerBot1" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="playerName1" layoutX="97.0" layoutY="20.0" prefHeight="33.0" prefWidth="86.0" stylesheets="@../styles.css" />
-                  <Pane fx:id="cp1" layoutX="225.0" layoutY="14.0" prefHeight="50.0" prefWidth="51.0" styleClass="setCheckPointImage" stylesheets="@../styles.css" visible="false" />
+                  <Label fx:id="playerName1" layoutX="95.0" layoutY="20.0" prefHeight="33.0" prefWidth="86.0" stylesheets="@../styles.css" />
+                  <Pane fx:id="cp1" layoutX="180.0" layoutY="14.0" prefHeight="50.0" prefWidth="51.0" styleClass="setCheckPointImage" stylesheets="@../styles.css" visible="false" />
                </children>
             </AnchorPane>
-            <GridPane fx:id="hand" layoutX="23.0" layoutY="495.0" prefHeight="287.0" prefWidth="220.0">
+            <GridPane fx:id="hand" layoutX="42.0" layoutY="495.0" prefHeight="287.0" prefWidth="220.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" prefWidth="50.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" prefWidth="5.0" />
@@ -387,42 +386,39 @@
                   </Button>
                </children>
             </GridPane>
-            <Button fx:id="startGameButton" layoutX="250.0" layoutY="620.0" mnemonicParsing="false" onAction="#startGameButtonAction" prefHeight="45.0" prefWidth="100.0" styleClass="buttonColor2" text="START GAME" visible="false" />
-            <Button fx:id="getCardsButton" layoutX="250.0" layoutY="620.0" mnemonicParsing="false" onAction="#getCardsButtonAction" prefHeight="45.0" prefWidth="100.0" styleClass="buttonColor2" text="GET CARDS" visible="false" />
-            <Button fx:id="printMapButton" layoutX="250.0" layoutY="620.0" mnemonicParsing="false" onAction="#printMapButtonAction" prefHeight="45.0" prefWidth="100.0" styleClass="buttonColor2" text="PRINT MAP" />
-            <AnchorPane fx:id="player11" layoutY="80.0" opacity="0.5" prefHeight="50.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@../styles.css">
+            <AnchorPane fx:id="player11" layoutY="80.0" opacity="0.5" prefHeight="77.0" prefWidth="306.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <ImageView fx:id="playerBot2" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="playerName2" layoutX="97.0" layoutY="20.0" prefHeight="33.0" prefWidth="86.0" stylesheets="@../styles.css" />
-                  <Pane fx:id="cp2" layoutX="225.0" layoutY="14.0" prefHeight="50.0" prefWidth="51.0" styleClass="setCheckPointImage" stylesheets="@../styles.css" visible="false" />
+                  <Label fx:id="playerName2" layoutX="95.0" layoutY="20.0" prefHeight="33.0" prefWidth="86.0" stylesheets="@../styles.css" />
+                  <Pane fx:id="cp2" layoutX="180.0" layoutY="14.0" prefHeight="50.0" prefWidth="51.0" styleClass="setCheckPointImage" stylesheets="@../styles.css" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="player12" layoutX="1.0" layoutY="400.0" opacity="0.5" prefHeight="50.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@../styles.css">
+            <AnchorPane fx:id="player12" layoutX="1.0" layoutY="400.0" opacity="0.5" prefHeight="77.0" prefWidth="306.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <ImageView fx:id="playerBot6" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="playerName6" layoutX="97.0" layoutY="20.0" prefHeight="33.0" prefWidth="86.0" stylesheets="@../styles.css" />
-                  <Pane fx:id="cp6" layoutX="225.0" layoutY="14.0" prefHeight="50.0" prefWidth="51.0" styleClass="setCheckPointImage" stylesheets="@../styles.css" visible="false" />
+                  <Label fx:id="playerName6" layoutX="95.0" layoutY="20.0" prefHeight="33.0" prefWidth="86.0" stylesheets="@../styles.css" />
+                  <Pane fx:id="cp6" layoutX="180.0" layoutY="14.0" prefHeight="50.0" prefWidth="51.0" styleClass="setCheckPointImage" stylesheets="@../styles.css" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="player13" layoutX="1.0" layoutY="160.0" opacity="0.5" prefHeight="50.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@../styles.css">
+            <AnchorPane fx:id="player13" layoutX="1.0" layoutY="160.0" opacity="0.5" prefHeight="50.0" prefWidth="305.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <ImageView fx:id="playerBot3" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="playerName3" layoutX="97.0" layoutY="20.0" prefHeight="33.0" prefWidth="86.0" stylesheets="@../styles.css" />
-                  <Pane fx:id="cp3" layoutX="225.0" layoutY="14.0" prefHeight="50.0" prefWidth="51.0" styleClass="setCheckPointImage" stylesheets="@../styles.css" visible="false" />
+                  <Label fx:id="playerName3" layoutX="95.0" layoutY="20.0" prefHeight="33.0" prefWidth="86.0" stylesheets="@../styles.css" />
+                  <Pane fx:id="cp3" layoutX="180.0" layoutY="14.0" prefHeight="50.0" prefWidth="51.0" styleClass="setCheckPointImage" stylesheets="@../styles.css" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="player14" layoutX="1.0" layoutY="240.0" opacity="0.5" prefHeight="50.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@../styles.css">
+            <AnchorPane fx:id="player14" layoutX="1.0" layoutY="240.0" opacity="0.5" prefHeight="77.0" prefWidth="306.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <ImageView fx:id="playerBot4" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="playerName4" layoutX="97.0" layoutY="20.0" prefHeight="33.0" prefWidth="86.0" stylesheets="@../styles.css" />
-                  <Pane fx:id="cp4" layoutX="225.0" layoutY="14.0" prefHeight="50.0" prefWidth="51.0" styleClass="setCheckPointImage" stylesheets="@../styles.css" visible="false" />
+                  <Label fx:id="playerName4" layoutX="95.0" layoutY="20.0" prefHeight="33.0" prefWidth="86.0" stylesheets="@../styles.css" />
+                  <Pane fx:id="cp4" layoutX="180.0" layoutY="14.0" prefHeight="50.0" prefWidth="51.0" styleClass="setCheckPointImage" stylesheets="@../styles.css" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="player15" layoutX="1.0" layoutY="320.0" opacity="0.5" prefHeight="50.0" prefWidth="356.0" styleClass="backgroundColor" stylesheets="@../styles.css">
+            <AnchorPane fx:id="player15" layoutX="1.0" layoutY="320.0" opacity="0.5" prefHeight="77.0" prefWidth="306.0" styleClass="backgroundColor" stylesheets="@../styles.css">
                <children>
                   <ImageView fx:id="playerBot5" fitHeight="71.0" fitWidth="73.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="playerName5" layoutX="97.0" layoutY="20.0" prefHeight="33.0" prefWidth="86.0" stylesheets="@../styles.css" />
-                  <Pane fx:id="cp5" layoutX="225.0" layoutY="14.0" prefHeight="50.0" prefWidth="51.0" styleClass="setCheckPointImage" stylesheets="@../styles.css" visible="false" />
+                  <Label fx:id="playerName5" layoutX="95.0" layoutY="20.0" prefHeight="33.0" prefWidth="86.0" stylesheets="@../styles.css" />
+                  <Pane fx:id="cp5" layoutX="180.0" layoutY="14.0" prefHeight="50.0" prefWidth="51.0" styleClass="setCheckPointImage" stylesheets="@../styles.css" visible="false" />
                </children>
             </AnchorPane>
          </children>
