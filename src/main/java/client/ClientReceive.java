@@ -80,6 +80,8 @@ public class ClientReceive extends Thread{
 
     protected  int winnerID;
 
+    protected boolean gameStarted=false;
+
 
     public void setCounterRegister(int count){
         this.counterRegister = count;
@@ -313,12 +315,14 @@ public class ClientReceive extends Thread{
                 playerId = playerAddedBody.getClientID();
                 playerName = playerAddedBody.getName();
                 int tempFigure = playerAddedBody.getFigure();
-                IdList.add(playerId);
-                robotNumbers.add(tempFigure);
-                IdRobot.put(playerId,tempFigure);
-                IdName.put(playerName,playerId);
-                if(playerId == clientID){
-                    figure = tempFigure;
+                if(!gameStarted) {
+                    IdList.add(playerId);
+                    robotNumbers.add(tempFigure);
+                    IdRobot.put(playerId, tempFigure);
+                    IdName.put(playerName, playerId);
+                    if (playerId == clientID) {
+                        figure = tempFigure;
+                    }
                 }
                 break;
 
@@ -445,6 +449,9 @@ public class ClientReceive extends Thread{
                 ActivePhase activePhase = (ActivePhase) message;
                 ActivePhase.ActivePhaseBody activePhaseBody = activePhase.getMessageBody();
                 activePhaseNumber=activePhaseBody.getPhase();
+                if(activePhaseNumber==0){
+                    gameStarted=true;
+                }
                 break;
 
             case MessageType.reboot:
@@ -739,6 +746,10 @@ public class ClientReceive extends Thread{
 
     public void setDoRobotLaser(boolean doRobotLaser) {
         this.doRobotLaser = doRobotLaser;
+    }
+
+    public boolean isGameStarted() {
+        return gameStarted;
     }
 
     public String[] getCards() {

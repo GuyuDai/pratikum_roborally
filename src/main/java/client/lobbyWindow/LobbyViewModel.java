@@ -68,6 +68,9 @@ public class LobbyViewModel {
     @FXML
     private ImageView yourRobot;
 
+    /**
+     * other players mat
+     */
     @FXML
     private Label yourRobotText;
     @FXML
@@ -226,11 +229,12 @@ public class LobbyViewModel {
                 selectMap.setText("OPEN GAME");
                 selectMap.setVisible(true);
             }
-            if (readyButton.isSelected()) {
+           /* if (readyButton.isSelected()) {
                 System.out.println("OK");
             } else {
                 LobbyText.setText("HUI");
             }
+            */
             if (clickCount == 2) {
                 String notReadyMessage = new SetStatus(false).toString();
                 Client.getClientReceive().sendMessage(notReadyMessage);
@@ -264,15 +268,23 @@ public class LobbyViewModel {
 
                     }
 
-                } else {
+            } else {
+                if (Client.getClientReceive().isGameStarted()) {
                     openGameWindow();
                 }
-                //close Lobby
+            }
+            //close Lobby
+            if (Client.getClientReceive().isGameStarted()) {
                 Stage stage = (Stage) selectMap.getScene().getWindow();
                 stage.close();
                 setWindowName("Game");
             }
+            else{
+                LobbyText.setText("Game already started");
+                LobbyText.setVisible(true);
+            }
         }
+    }
 
 
         public void setYourBotIcon () {
