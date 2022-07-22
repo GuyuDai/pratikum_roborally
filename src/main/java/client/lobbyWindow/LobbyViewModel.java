@@ -280,8 +280,9 @@ public class LobbyViewModel {
                 setWindowName("Game");
             }
             else{
-                LobbyText.setText("Game already started");
+                LobbyText.setText("Game already started!");
                 LobbyText.setVisible(true);
+                selectMap.setVisible(false);
             }
         }
     }

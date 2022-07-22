@@ -16,12 +16,12 @@
 
 <Pane fx:id="yourBot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="543.0" prefWidth="842.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.lobbyWindow.LobbyViewModel">
    <children>
-      <ImageView fx:id="box2" blendMode="OVERLAY" cache="true" cacheHint="QUALITY" fitHeight="134.0" fitWidth="501.0" layoutX="311.0" layoutY="313.0" pickOnBounds="true" visible="false">
+      <ImageView fx:id="box2" blendMode="OVERLAY" cache="true" cacheHint="QUALITY" fitHeight="134.0" fitWidth="501.0" layoutX="311.0" layoutY="313.0" pickOnBounds="true">
          <image>
             <Image url="@../box3.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="box1" blendMode="OVERLAY" fitHeight="161.0" fitWidth="200.0" layoutX="315.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="box1" blendMode="OVERLAY" fitHeight="161.0" fitWidth="200.0" layoutX="311.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../box.png" />
          </image>
@@ -35,7 +35,7 @@
          <items>
             <VBox fx:id="container" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 10;" styleClass="backgroundColor">
                <children>
-                  <Label prefHeight="0.0" prefWidth="261.0" text="                           Chat" textAlignment="CENTER" textFill="WHITE" />
+                  <Label prefHeight="0.0" prefWidth="261.0" text="                                   Chat" textAlignment="CENTER" textFill="WHITE" />
                   <ListView fx:id="list" prefHeight="489.0" prefWidth="263.0" style="-fx-background-radius: 10;" />
                   <Separator prefWidth="200.0" />
                   <HBox prefHeight="77.0" prefWidth="263.0">
@@ -69,9 +69,9 @@
       <ImageView fx:id="playerBot2" fitHeight="62.0" fitWidth="62.0" layoutX="401.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="yourRobotText" layoutX="339.0" layoutY="145.0" prefHeight="25.0" prefWidth="164.0" text="This is your robot:" visible="false" />
       <ImageView fx:id="yourRobot" fitHeight="95.0" fitWidth="100.0" layoutX="361.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="yourBotText" layoutX="369.0" layoutY="261.0" prefHeight="25.0" prefWidth="84.0" textAlignment="RIGHT" />
+      <Label fx:id="yourBotText" layoutX="372.0" layoutY="261.0" prefHeight="25.0" prefWidth="84.0" textAlignment="RIGHT" />
       <Label fx:id="playerName4" layoutX="576.0" layoutY="419.0" prefHeight="24.0" prefWidth="71.0" />
-      <Label fx:id="playerName3" layoutX="495.0" layoutY="420.0" prefHeight="24.0" prefWidth="71.0" />
+      <Label fx:id="playerName3" layoutX="499.0" layoutY="420.0" prefHeight="24.0" prefWidth="71.0" />
       <Label fx:id="playerName2" layoutX="411.0" layoutY="420.0" prefHeight="24.0" prefWidth="71.0" />
       <Label fx:id="playerName5" layoutX="657.0" layoutY="420.0" prefHeight="24.0" prefWidth="71.0" />
       <Label fx:id="playerName6" layoutX="748.0" layoutY="419.0" prefHeight="24.0" prefWidth="71.0" />
