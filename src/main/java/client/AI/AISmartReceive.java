@@ -77,7 +77,7 @@ public class AISmartReceive extends ClientReceive {
   }
   private void identifyMessage(Message message) {
     String type = message.getMessageType();
-    String body = message.getMessageBody();
+    String body = String.valueOf(message.getMessageBody());
 
     switch (type){
       case MessageType.helloClient:
