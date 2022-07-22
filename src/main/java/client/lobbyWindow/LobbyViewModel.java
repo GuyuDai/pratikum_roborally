@@ -291,7 +291,7 @@ public class LobbyViewModel {
 
 
 
-    public void setYourBotIcon () {
+        public void setYourBotIcon () {
             yourRobotText.setVisible(true);
             yourBotText.setVisible(true);
             int yourId = Client.getClientReceive().getClientID();

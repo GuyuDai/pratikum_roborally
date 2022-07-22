@@ -216,6 +216,8 @@ public class GameViewModel {
     ImageView playerBot1, playerBot2, playerBot3,playerBot4, playerBot5, playerBot6;
     @FXML
     Label playerName1, playerName2, playerName3, playerName4, playerName5, playerName6 ;
+    @FXML
+    private Pane cp1,  cp2, cp3, cp4, cp5, cp6;
 
 
     /**
@@ -541,26 +543,32 @@ public class GameViewModel {
                     case 1:
                         playerBot1.setImage(otherRobotIcon);
                         playerName1.setText(playerName);
+                        cp1.setVisible(true);
                         break;
                     case 2:
                         playerBot2.setImage(otherRobotIcon);
                         playerName2.setText(playerName);
+                        cp2.setVisible(true);
                         break;
                     case 3:
                         playerBot3.setImage(otherRobotIcon);
                         playerName3.setText(playerName);
+                        cp3.setVisible(true);
                         break;
                     case 4:
                         playerBot4.setImage(otherRobotIcon);
                         playerName4.setText(playerName);
+                        cp4.setVisible(true);
                         break;
                     case 5:
                         playerBot5.setImage(otherRobotIcon);
                         playerName5.setText(playerName);
+                        cp5.setVisible(true);
                         break;
                     case 6:
                         playerBot6.setImage(otherRobotIcon);
                         playerName6.setText(playerName);
+                        cp6.setVisible(true);
                         break;
                 }
             }
