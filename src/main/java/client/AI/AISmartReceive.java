@@ -5,18 +5,22 @@ import com.google.gson.*;
 import protocol.*;
 import protocol.ErrorMessage.*;
 import protocol.PlayerAdded.*;
+import protocol.Reboot;
 import protocol.ProtocolFormat.*;
 import protocol.ReceivedChat.*;
 import protocol.Welcome.*;
+import server.BoardElement.*;
 import server.BoardTypes.*;
 import server.Control.*;
 
 import java.io.*;
 import java.net.*;
-import java.util.*;
 import java.util.Map;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.logging.*;
+
+import static server.ServerThread.*;
 
 public class AISmartReceive extends ClientReceive {
 
@@ -25,9 +29,19 @@ public class AISmartReceive extends ClientReceive {
   private Random random = new Random();
   private int pointerForRegister = 0;
   private CopyOnWriteArrayList<Integer> availableStartingPoints = new CopyOnWriteArrayList<Integer>();
+  List<Integer> usedCards = new ArrayList<>();
 
   private CopyOnWriteArrayList<Integer> availableFigures = new CopyOnWriteArrayList<Integer>();
 
+  public String getCurrentFacingDirection() {
+    return currentFacingDirection;
+  }
+
+  public void setCurrentFacingDirection(String currentFacingDirection) {
+    this.currentFacingDirection = currentFacingDirection;
+  }
+
+  private String currentFacingDirection;
   public AISmartReceive(Socket socket) {
     super(socket);
     //initialize available starting positions
@@ -207,6 +221,7 @@ public class AISmartReceive extends ClientReceive {
         //Saves the direction of each player who faces
         PlayerTurning.PlayerTurningBody playerTurningBody = new Gson().fromJson(body, PlayerTurning.PlayerTurningBody.class);
         turnDirection = playerTurningBody.getRotation();
+        aiSaveFacingDirection(turnDirection);
         break;
 
       case MessageType.animation:
@@ -320,6 +335,29 @@ public class AISmartReceive extends ClientReceive {
     sendMessage(new MapSelected(maps[mapIndex]).toString());
   }
 
+  /**
+   * @author: Nik
+   * @param turndirection saves the facing direction of the robot accordingly
+   */
+  private void aiSaveFacingDirection(String turndirection){
+    if (getCurrentFacingDirection().equals("UP") & turndirection=="clockwise"){
+      setCurrentFacingDirection("RIGHT");
+    } else if(getCurrentFacingDirection().equals("RIGHT") & turndirection=="clockwise") {
+      setCurrentFacingDirection("DOWN");
+    } else if (getCurrentFacingDirection().equals("DOWN") & turndirection=="clockwise") {
+      setCurrentFacingDirection("LEFT");
+    } else if (getCurrentFacingDirection().equals("LEFT") & turndirection=="clockwise") {
+      setCurrentFacingDirection("UP");
+    } else if (getCurrentFacingDirection().equals("UP") & turndirection=="counterclockwise") {
+      setCurrentFacingDirection("LEFT");
+    } else if (getCurrentFacingDirection().equals("RIGHT") & turndirection=="counterclockwise") {
+      setCurrentFacingDirection("UP");
+    } else if (getCurrentFacingDirection().equals("DOWN") & turndirection=="counterclockwise") {
+      setCurrentFacingDirection("RIGHT");
+    } else if (getCurrentFacingDirection().equals("LEFT") & turndirection=="counterclockwise") {
+      setCurrentFacingDirection("DOWN");
+    }
+  }
   private void aiChooseStartPoint(){
     try {
       sleep(1000);
@@ -371,6 +409,11 @@ public class AISmartReceive extends ClientReceive {
     }
   }
 
+  /**
+   * @author: Nik
+   * sets the Checkpoints based on the maps accordingly
+   * is used for the AI to know where the next checkpoint that should be reached is located
+   */
   Map checkPointPositions = new HashMap<Integer, int[]>();
   public void setCheckpoints(){
     if(board.equals("DizzyHighway")){
@@ -403,15 +446,18 @@ public class AISmartReceive extends ClientReceive {
   }
 
 
+
   /**
+   * @author: Nik
    * Go to nearest Checkpoint in the right order
+   *
    */
-  private void aiSmartProgramming(){
+  private void aiSmartProgramming() {
     int nextCheckPoint = getCheckPointNumber()+1;
     int[] posOfNextCheckPoint = (int[]) checkPointPositions.get(nextCheckPoint);
     int nextCheckPointXPosition= posOfNextCheckPoint[0];
     int nextCheckPointYPosition= posOfNextCheckPoint[1];
-    List<Integer> usedCards = new ArrayList<>();
+
     //Idea: Identify the direction towards the Checkpoint and move there straight
     //If Checkpoint is on the upper side
     try {
@@ -421,7 +467,8 @@ public class AISmartReceive extends ClientReceive {
     }
     if(nextCheckPointXPosition<x){
       //Direction Controller
-      if(getDirectionById(clientID)=="UP"){
+      pitCheck();
+      if(currentFacingDirection=="UP"){
         //move upwards
 
         for (int i=0; i < 9; i++) {
@@ -447,7 +494,7 @@ public class AISmartReceive extends ClientReceive {
           cards = null;
           register = 0;
         } usedCards.clear();
-      } else if (getDirectionById(clientID)=="RIGHT") {
+      } else if (currentFacingDirection=="RIGHT") {
         //try to make left turn first and then move up
         //First register
         for (int i=0; i < 9; i++) {
@@ -483,7 +530,7 @@ public class AISmartReceive extends ClientReceive {
         } usedCards.clear();
 
 
-      } else if (getDirectionById(clientID)=="LEFT"){
+      } else if (currentFacingDirection=="LEFT"){
         //try to make right turn first and then move up
         //First register
         for (int i=0; i < 9; i++) {
@@ -517,7 +564,7 @@ public class AISmartReceive extends ClientReceive {
           cards = null;
           register = 0;
         } usedCards.clear();
-      } else if (getDirectionById(clientID)=="DOWN"){
+      } else if (currentFacingDirection=="DOWN"){
         //try to make U turn and then move up
         //First register
         for (int i=0; i < 9; i++) {
@@ -573,7 +620,8 @@ public class AISmartReceive extends ClientReceive {
       }
       //If Checkpoint is on the lower part of the board compared to your Position
     } else if(nextCheckPointXPosition>x){
-      if(getDirectionById(clientID)=="UP"){
+      pitCheck();
+      if(currentFacingDirection=="UP"){
         //try Uturn and then move down
         for (int i=0; i < 9; i++) {
           if (!usedCards.contains(i)) {
@@ -626,7 +674,7 @@ public class AISmartReceive extends ClientReceive {
           register = 0;
         } usedCards.clear();
 
-      } else if (getDirectionById(clientID)=="RIGHT") {
+      } else if (currentFacingDirection=="RIGHT") {
         //try to make right turn first and then move down
         //First register
         for (int i=0; i < 9; i++) {
@@ -660,7 +708,7 @@ public class AISmartReceive extends ClientReceive {
           cards = null;
           register = 0;
         } usedCards.clear();
-      } else if (getDirectionById(clientID)=="LEFT"){
+      } else if (currentFacingDirection=="LEFT"){
         //try to make left turn first and then move down
         for (int i=0; i < 9; i++) {
           if (!usedCards.contains(i)) {
@@ -693,7 +741,7 @@ public class AISmartReceive extends ClientReceive {
           cards = null;
           register = 0;
         } usedCards.clear();
-      } else if (getDirectionById(clientID)=="DOWN"){
+      } else if (currentFacingDirection=="DOWN"){
         //move down
         for (int i=0; i < 9; i++) {
           if (!usedCards.contains(i)) {
@@ -722,9 +770,71 @@ public class AISmartReceive extends ClientReceive {
     }
   }
 
-  private void aiUpgrade(){
-    //maybe we will implement
+  /**
+   * @author: Nik
+   * Checks if there is a pit nearby and changes the facing direction of the robot accordingly if such cards are available
+   * @throws NoSuchMethodException
+   */
+  private void pitCheck() {
+    Pit pit = new Pit(currentGame);
+    Board boardType;
+
+    switch (board) {
+      case "DizzyHighway":
+        boardType = new DizzyHighway();
+      case "DeathTrap":
+        boardType = new DeathTrap();
+      case "ExtraCrispy":
+        boardType = new ExtraCrispy();
+      case "LostBearings":
+        boardType = new LostBearings();
+      case "TWister":
+        boardType = new Twister();
+
+
+        if (boardType.getBoardElem(x + 1, y, 0).equals(pit) && currentFacingDirection.equals("DOWN")) {
+          for (int i = 0; i < 9; i++) {
+            if (!usedCards.contains(i)) {
+              if (cards[i].equals("TurnLeft") || cards[i].equals("TurnRight") || cards[i].equals("UTurn")) {
+                sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+                register++;
+              }
+            }
+          }
+        } else if (boardType.getBoardElem(x - 1, y, 0).equals(pit) && currentFacingDirection.equals("UP")) {
+          for (int i = 0; i < 9; i++) {
+            if (!usedCards.contains(i)) {
+              if (cards[i].equals("TurnLeft") || cards[i].equals("TurnRight") || cards[i].equals("UTurn")) {
+                sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+                register++;
+              }
+            }
+          }
+        } else if (boardType.getBoardElem(x, y+1, 0).equals(pit) && currentFacingDirection.equals("RIGHT")) {
+          for (int i = 0; i < 9; i++) {
+            if (!usedCards.contains(i)) {
+              if (cards[i].equals("TurnLeft") || cards[i].equals("TurnRight") || cards[i].equals("UTurn")) {
+                sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+                register++;
+              }
+            }
+          }
+        } else if (boardType.getBoardElem(x, y-1, 0).equals(pit) && currentFacingDirection.equals("LEFT")) {
+          for (int i = 0; i < 9; i++) {
+            if (!usedCards.contains(i)) {
+              if (cards[i].equals("TurnLeft") || cards[i].equals("TurnRight") || cards[i].equals("UTurn")) {
+                sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+                register++;
+              }
+            }
+          }
+        }
+    }
   }
+
+      private void aiUpgrade () {
+        //maybe we will implement
+      }
 
   /*
   private void aiProgramming(){
@@ -742,246 +852,229 @@ public class AISmartReceive extends ClientReceive {
     cards = null;
     register = 0;
   }*/
-  private void aiPickDamage(){
-    try {
-      sleep(6000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    ArrayList<String> cardsList = new ArrayList<String>();
-    while(damageCount > 0){
-      int damageIndex = random.nextInt(damageDecks.length - 1);
-      cardsList.add(damageDecks[damageIndex]);
-      damageCount--;
-    }
-    sendMessage(new SelectedDamage(cardsList.toArray(new String[0])).toString());
-  }
+      private void aiPickDamage () {
+        try {
+          sleep(6000);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+        ArrayList<String> cardsList = new ArrayList<String>();
+        while (damageCount > 0) {
+          int damageIndex = random.nextInt(damageDecks.length - 1);
+          cardsList.add(damageDecks[damageIndex]);
+          damageCount--;
+        }
+        sendMessage(new SelectedDamage(cardsList.toArray(new String[0])).toString());
+      }
 
-  private void aiReboot(){
-    //do nothing
-  }
+      private void aiReboot () {
+        //do nothing
+      }
 
-  private void aiTrigger(String serverMsg){
-    switch (serverMsg){
-      case "Choose your robot":
-      case "this robot has been taken":
-        aiChooseRobot();
-        break;
+      private void aiTrigger (String serverMsg){
+        switch (serverMsg) {
+          case "Choose your robot":
+          case "this robot has been taken":
+            aiChooseRobot();
+            break;
 
-    }
-  }
+        }
+      }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  private HashSet<Position> availableStartingPositions = new HashSet<>();
-  private HashSet<Position> availableDeathTrapStartingPositions = new HashSet<>();
-  Board deathTrap= new DeathTrap();
-  Board dizzyHighway = new DizzyHighway();
-  private List<String> myNineCardsOnPile = new ArrayList<>();
-  private String[] registerCards = new String[5];
+      private HashSet<Position> availableStartingPositions = new HashSet<>();
+      private HashSet<Position> availableDeathTrapStartingPositions = new HashSet<>();
+      Board deathTrap = new DeathTrap();
 
-  public void programmingPhaseAI() {
-    // draw from pile 9 cards automatically
+      private List<String> myNineCardsOnPile = new ArrayList<>();
+      private String[] registerCards = new String[5];
 
-    //Choose the first five cards and put in your register
-    registerCards[0] = String.valueOf(myNineCardsOnPile.get(0));
-    registerCards[1] = String.valueOf(myNineCardsOnPile.get(1));
-    registerCards[2] = String.valueOf(myNineCardsOnPile.get(2));
-    registerCards[3] = String.valueOf(myNineCardsOnPile.get(3));
-    registerCards[4] = String.valueOf(myNineCardsOnPile.get(4));
+      public void programmingPhaseAI () {
+        // draw from pile 9 cards automatically
 
-    sendMessage(new SelectedCard(registerCards[0],0,getClientID()).toString());
-    sendMessage(new SelectedCard(registerCards[1],1,getClientID()).toString());
-    sendMessage(new SelectedCard(registerCards[2],2,getClientID()).toString());
-    sendMessage(new SelectedCard(registerCards[3],3,getClientID()).toString());
-    sendMessage(new SelectedCard(registerCards[4],4,getClientID()).toString());
-  }
-  public void setStartingPositions() {
-    //DeathTrap
-    availableDeathTrapStartingPositions.add(new Position(1, 11, deathTrap ));
-    availableDeathTrapStartingPositions.add(new Position(3, 12, deathTrap));
-    availableDeathTrapStartingPositions.add(new Position(4, 11, deathTrap));
-    availableDeathTrapStartingPositions.add(new Position(5, 11, deathTrap));
-    availableDeathTrapStartingPositions.add(new Position(6, 12, deathTrap));
-    availableDeathTrapStartingPositions.add(new Position(8, 11, deathTrap));
-    //DizzyHighway
-    availableStartingPositions.add(new Position(1, 1,dizzyHighway ));
-    availableStartingPositions.add(new Position(3, 0,dizzyHighway));
-    availableStartingPositions.add(new Position(4, 1,dizzyHighway));
-    availableStartingPositions.add(new Position(5, 1,dizzyHighway));
-    availableStartingPositions.add(new Position(6, 0,dizzyHighway));
-    availableStartingPositions.add(new Position(8, 1,dizzyHighway));
+        //Choose the first five cards and put in your register
+        registerCards[0] = String.valueOf(myNineCardsOnPile.get(0));
+        registerCards[1] = String.valueOf(myNineCardsOnPile.get(1));
+        registerCards[2] = String.valueOf(myNineCardsOnPile.get(2));
+        registerCards[3] = String.valueOf(myNineCardsOnPile.get(3));
+        registerCards[4] = String.valueOf(myNineCardsOnPile.get(4));
 
-
-  }
-
-  public void removeStartPointsInHashSet(int x, int y) {
-    HashSet<Position> delete = new HashSet<>();
-    if (board.equals("Death Trap")) {
-      for (Position position : availableDeathTrapStartingPositions) {
-        if (position.getX() == x && position.getY() == y) {
-          delete.add(position);
-        }
+        sendMessage(new SelectedCard(registerCards[0], 0, getClientID()).toString());
+        sendMessage(new SelectedCard(registerCards[1], 1, getClientID()).toString());
+        sendMessage(new SelectedCard(registerCards[2], 2, getClientID()).toString());
+        sendMessage(new SelectedCard(registerCards[3], 3, getClientID()).toString());
+        sendMessage(new SelectedCard(registerCards[4], 4, getClientID()).toString());
       }
 
-    } else {
-      for (Position position : availableStartingPositions) {
-        if (position.getX() == x && position.getY() == y) {
-          delete.add(position);
+
+      public void removeStartPointsInHashSet ( int x, int y){
+        HashSet<Position> delete = new HashSet<>();
+        if (board.equals("Death Trap")) {
+          for (Position position : availableDeathTrapStartingPositions) {
+            if (position.getX() == x && position.getY() == y) {
+              delete.add(position);
+            }
+          }
+
+        } else {
+          for (Position position : availableStartingPositions) {
+            if (position.getX() == x && position.getY() == y) {
+              delete.add(position);
+            }
+          }
+
         }
       }
-
-    }
-  }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-  private Message wrapMessage(String input){
-    if(input.contains("\"messageType\":\"ActivePhase\",\"messageBody\"")){
-      return new Gson().fromJson(input, ActivePhase.class);
-    }
-    if(input.contains("\"messageType\":\"Alive\",\"messageBody\"")){
-      return new Gson().fromJson(input, Alive.class);
-    }
-    if(input.contains("\"messageType\":\"Animation\",\"messageBody\"")){
-      return new Gson().fromJson(input, Animation.class);
-    }
-    if(input.contains("\"messageType\":\"CardPlayed\",\"messageBody\"")){
-      return new Gson().fromJson(input, CardPlayed.class);
-    }
-    if(input.contains("\"messageType\":\"CardSelected\",\"messageBody\"")){
-      return new Gson().fromJson(input, CardSelected.class);
-    }
-    if(input.contains("\"messageType\":\"CardsYouGotNow\",\"messageBody\"")){
-      return new Gson().fromJson(input, CardsYouGotNow.class);
-    }
-    if(input.contains("\"messageType\":\"CheckPointReached\",\"messageBody\"")){
-      return new Gson().fromJson(input, CheckPointReached.class);
-    }
-    if(input.contains("\"messageType\":\"ClientMessage\",\"messageBody\"")){
-      return new Gson().fromJson(input, ClientMessage.class);
-    }
-    if(input.contains("\"messageType\":\"ConnectionUpdate\",\"messageBody\"")){
-      return new Gson().fromJson(input, ConnectionUpdate.class);
-    }
-    if(input.contains("\"messageType\":\"CurrentCards\",\"messageBody\"")){
-      return new Gson().fromJson(input, CurrentCards.class);
-    }
-    if(input.contains("\"messageType\":\"CurrentPlayer\",\"messageBody\"")){
-      return new Gson().fromJson(input, CurrentPlayer.class);
-    }
-    if(input.contains("\"messageType\":\"DrawDamage\",\"messageBody\"")){
-      return new Gson().fromJson(input, DrawDamage.class);
-    }
-    if(input.contains("\"messageType\":\"Energy\",\"messageBody\"")){
-      return new Gson().fromJson(input, Energy.class);
-    }
-    if(input.contains("\"messageType\":\"Error\",\"messageBody\"")){
-      return new Gson().fromJson(input, ErrorMessage.class);
-    }
-    if(input.contains("\"messageType\":\"GameFinished\",\"messageBody\"")){
-      return new Gson().fromJson(input, GameFinished.class);
-    }
-    if(input.contains("\"messageType\":\"GameStarted\",\"messageBody\"")){
-      return new Gson().fromJson(input, GameStarted.class);
-    }
-    if(input.contains("\"messageType\":\"HelloClient\",\"messageBody\"")){
-      return new Gson().fromJson(input, HelloClient.class);
-    }
-    if(input.contains("\"messageType\":\"HelloServer\",\"messageBody\"")){
-      return new Gson().fromJson(input, HelloServer.class);
-    }
-    if(input.contains("\"messageType\":\"MapSelected\",\"messageBody\"")){
-      return new Gson().fromJson(input, MapSelected.class);
-    }
-    if(input.contains("\"messageType\":\"Movement\",\"messageBody\"")){
-      return new Gson().fromJson(input, Movement.class);
-    }
-    if(input.contains("\"messageType\":\"NotYourCards\",\"messageBody\"")){
-      return new Gson().fromJson(input, NotYourCards.class);
-    }
-    if(input.contains("\"messageType\":\"PickDamage\",\"messageBody\"")){
-      return new Gson().fromJson(input, PickDamage.class);
-    }
-    if(input.contains("\"messageType\":\"PlayCard\",\"messageBody\"")){
-      return new Gson().fromJson(input, PlayCard.class);
-    }
-    if(input.contains("\"messageType\":\"PlayerAdded\",\"messageBody\"")){
-      return new Gson().fromJson(input, PlayerAdded.class);
-    }
-    if(input.contains("\"messageType\":\"PlayerStatus\",\"messageBody\"")){
-      return new Gson().fromJson(input, PlayerStatus.class);
-    }
-    if(input.contains("\"messageType\":\"PlayerTurning\",\"messageBody\"")){
-      return new Gson().fromJson(input, PlayerTurning.class);
-    }
-    if(input.contains("\"messageType\":\"PlayerValues\",\"messageBody\"")){
-      return new Gson().fromJson(input, PlayerValues.class);
-    }
-    if(input.contains("\"messageType\":\"Reboot\",\"messageBody\"")){
-      return new Gson().fromJson(input, Reboot.class);
-    }
-    if(input.contains("\"messageType\":\"RebootDirection\",\"messageBody\"")){
-      return new Gson().fromJson(input, RebootDirection.class);
-    }
-    if(input.contains("\"messageType\":\"ReceivedChat\",\"messageBody\"")){
-      return new Gson().fromJson(input, ReceivedChat.class);
-    }
-    if(input.contains("\"messageType\":\"ReplaceCard\",\"messageBody\"")){
-      return new Gson().fromJson(input, ReplaceCard.class);
-    }
-    if(input.contains("\"messageType\":\"SelectedCard\",\"messageBody\"")){
-      return new Gson().fromJson(input, SelectedCard.class);
-    }
-    if(input.contains("\"messageType\":\"SelectedDamage\",\"messageBody\"")){
-      return new Gson().fromJson(input, SelectedDamage.class);
-    }
-    if(input.contains("\"messageType\":\"SelectionFinished\",\"messageBody\"")){
-      return new Gson().fromJson(input, SelectionFinished.class);
-    }
-    if(input.contains("\"messageType\":\"SelectMap\",\"messageBody\"")){
-      return new Gson().fromJson(input, SelectMap.class);
-    }
-    if(input.contains("\"messageType\":\"SendChat\",\"messageBody\"")){
-      return new Gson().fromJson(input, SendChat.class);
-    }
-    if(input.contains("\"messageType\":\"SetStartingPoint\",\"messageBody\"")){
-      return new Gson().fromJson(input, SetStartingPoint.class);
-    }
-    if(input.contains("\"messageType\":\"SetStatus\",\"messageBody\"")){
-      return new Gson().fromJson(input, SetStatus.class);
-    }
-    if(input.contains("\"messageType\":\"ShuffleCoding\",\"messageBody\"")){
-      return new Gson().fromJson(input, ShuffleCoding.class);
-    }
-    if(input.contains("\"messageType\":\"StartingPointTaken\",\"messageBody\"")){
-      return new Gson().fromJson(input, StartingPointTaken.class);
-    }
-    if(input.contains("\"messageType\":\"TimerEnded\",\"messageBody\"")){
-      return new Gson().fromJson(input, TimerEnded.class);
-    }
-    if(input.contains("\"messageType\":\"TimerStarted\",\"messageBody\"")){
-      return new Gson().fromJson(input, TimerStarted.class);
-    }
-    if(input.contains("\"messageType\":\"Welcome\",\"messageBody\"")){
-      return new Gson().fromJson(input, Welcome.class);
-    }
-    if(input.contains("\"messageType\":\"Boink\",\"messageBody\"")){
-      return new Gson().fromJson(input, Boink.class);
-    }
-    if(input.contains("\"messageType\":\"ChooseRegister\",\"messageBody\"")){
-      return new Gson().fromJson(input, ChooseRegister.class);
-    }
-    if(input.contains("\"messageType\":\"RegisterChosen\",\"messageBody\"")){
-      return new Gson().fromJson(input, RegisterChosen.class);
-    }
-    if(input.contains("\"messageType\":\"ReturnCards\",\"messageBody\"")){
-      return new Gson().fromJson(input, ReturnCards.class);
-    }
-    if(input.contains("\"messageType\":\"CheckPointMoved\",\"messageBody\"")){
-      return new Gson().fromJson(input, CheckPointMoved.class);
-    }
-    if(input.contains("\"messageType\":\"YourCards\",\"messageBody\"")){
-      return new Gson().fromJson(input, YourCards.class);
-    }
+      private Message wrapMessage (String input){
+        if (input.contains("\"messageType\":\"ActivePhase\",\"messageBody\"")) {
+          return new Gson().fromJson(input, ActivePhase.class);
+        }
+        if (input.contains("\"messageType\":\"Alive\",\"messageBody\"")) {
+          return new Gson().fromJson(input, Alive.class);
+        }
+        if (input.contains("\"messageType\":\"Animation\",\"messageBody\"")) {
+          return new Gson().fromJson(input, Animation.class);
+        }
+        if (input.contains("\"messageType\":\"CardPlayed\",\"messageBody\"")) {
+          return new Gson().fromJson(input, CardPlayed.class);
+        }
+        if (input.contains("\"messageType\":\"CardSelected\",\"messageBody\"")) {
+          return new Gson().fromJson(input, CardSelected.class);
+        }
+        if (input.contains("\"messageType\":\"CardsYouGotNow\",\"messageBody\"")) {
+          return new Gson().fromJson(input, CardsYouGotNow.class);
+        }
+        if (input.contains("\"messageType\":\"CheckPointReached\",\"messageBody\"")) {
+          return new Gson().fromJson(input, CheckPointReached.class);
+        }
+        if (input.contains("\"messageType\":\"ClientMessage\",\"messageBody\"")) {
+          return new Gson().fromJson(input, ClientMessage.class);
+        }
+        if (input.contains("\"messageType\":\"ConnectionUpdate\",\"messageBody\"")) {
+          return new Gson().fromJson(input, ConnectionUpdate.class);
+        }
+        if (input.contains("\"messageType\":\"CurrentCards\",\"messageBody\"")) {
+          return new Gson().fromJson(input, CurrentCards.class);
+        }
+        if (input.contains("\"messageType\":\"CurrentPlayer\",\"messageBody\"")) {
+          return new Gson().fromJson(input, CurrentPlayer.class);
+        }
+        if (input.contains("\"messageType\":\"DrawDamage\",\"messageBody\"")) {
+          return new Gson().fromJson(input, DrawDamage.class);
+        }
+        if (input.contains("\"messageType\":\"Energy\",\"messageBody\"")) {
+          return new Gson().fromJson(input, Energy.class);
+        }
+        if (input.contains("\"messageType\":\"Error\",\"messageBody\"")) {
+          return new Gson().fromJson(input, ErrorMessage.class);
+        }
+        if (input.contains("\"messageType\":\"GameFinished\",\"messageBody\"")) {
+          return new Gson().fromJson(input, GameFinished.class);
+        }
+        if (input.contains("\"messageType\":\"GameStarted\",\"messageBody\"")) {
+          return new Gson().fromJson(input, GameStarted.class);
+        }
+        if (input.contains("\"messageType\":\"HelloClient\",\"messageBody\"")) {
+          return new Gson().fromJson(input, HelloClient.class);
+        }
+        if (input.contains("\"messageType\":\"HelloServer\",\"messageBody\"")) {
+          return new Gson().fromJson(input, HelloServer.class);
+        }
+        if (input.contains("\"messageType\":\"MapSelected\",\"messageBody\"")) {
+          return new Gson().fromJson(input, MapSelected.class);
+        }
+        if (input.contains("\"messageType\":\"Movement\",\"messageBody\"")) {
+          return new Gson().fromJson(input, Movement.class);
+        }
+        if (input.contains("\"messageType\":\"NotYourCards\",\"messageBody\"")) {
+          return new Gson().fromJson(input, NotYourCards.class);
+        }
+        if (input.contains("\"messageType\":\"PickDamage\",\"messageBody\"")) {
+          return new Gson().fromJson(input, PickDamage.class);
+        }
+        if (input.contains("\"messageType\":\"PlayCard\",\"messageBody\"")) {
+          return new Gson().fromJson(input, PlayCard.class);
+        }
+        if (input.contains("\"messageType\":\"PlayerAdded\",\"messageBody\"")) {
+          return new Gson().fromJson(input, PlayerAdded.class);
+        }
+        if (input.contains("\"messageType\":\"PlayerStatus\",\"messageBody\"")) {
+          return new Gson().fromJson(input, PlayerStatus.class);
+        }
+        if (input.contains("\"messageType\":\"PlayerTurning\",\"messageBody\"")) {
+          return new Gson().fromJson(input, PlayerTurning.class);
+        }
+        if (input.contains("\"messageType\":\"PlayerValues\",\"messageBody\"")) {
+          return new Gson().fromJson(input, PlayerValues.class);
+        }
+        if (input.contains("\"messageType\":\"Reboot\",\"messageBody\"")) {
+          return new Gson().fromJson(input, Reboot.class);
+        }
+        if (input.contains("\"messageType\":\"RebootDirection\",\"messageBody\"")) {
+          return new Gson().fromJson(input, RebootDirection.class);
+        }
+        if (input.contains("\"messageType\":\"ReceivedChat\",\"messageBody\"")) {
+          return new Gson().fromJson(input, ReceivedChat.class);
+        }
+        if (input.contains("\"messageType\":\"ReplaceCard\",\"messageBody\"")) {
+          return new Gson().fromJson(input, ReplaceCard.class);
+        }
+        if (input.contains("\"messageType\":\"SelectedCard\",\"messageBody\"")) {
+          return new Gson().fromJson(input, SelectedCard.class);
+        }
+        if (input.contains("\"messageType\":\"SelectedDamage\",\"messageBody\"")) {
+          return new Gson().fromJson(input, SelectedDamage.class);
+        }
+        if (input.contains("\"messageType\":\"SelectionFinished\",\"messageBody\"")) {
+          return new Gson().fromJson(input, SelectionFinished.class);
+        }
+        if (input.contains("\"messageType\":\"SelectMap\",\"messageBody\"")) {
+          return new Gson().fromJson(input, SelectMap.class);
+        }
+        if (input.contains("\"messageType\":\"SendChat\",\"messageBody\"")) {
+          return new Gson().fromJson(input, SendChat.class);
+        }
+        if (input.contains("\"messageType\":\"SetStartingPoint\",\"messageBody\"")) {
+          return new Gson().fromJson(input, SetStartingPoint.class);
+        }
+        if (input.contains("\"messageType\":\"SetStatus\",\"messageBody\"")) {
+          return new Gson().fromJson(input, SetStatus.class);
+        }
+        if (input.contains("\"messageType\":\"ShuffleCoding\",\"messageBody\"")) {
+          return new Gson().fromJson(input, ShuffleCoding.class);
+        }
+        if (input.contains("\"messageType\":\"StartingPointTaken\",\"messageBody\"")) {
+          return new Gson().fromJson(input, StartingPointTaken.class);
+        }
+        if (input.contains("\"messageType\":\"TimerEnded\",\"messageBody\"")) {
+          return new Gson().fromJson(input, TimerEnded.class);
+        }
+        if (input.contains("\"messageType\":\"TimerStarted\",\"messageBody\"")) {
+          return new Gson().fromJson(input, TimerStarted.class);
+        }
+        if (input.contains("\"messageType\":\"Welcome\",\"messageBody\"")) {
+          return new Gson().fromJson(input, Welcome.class);
+        }
+        if (input.contains("\"messageType\":\"Boink\",\"messageBody\"")) {
+          return new Gson().fromJson(input, Boink.class);
+        }
+        if (input.contains("\"messageType\":\"ChooseRegister\",\"messageBody\"")) {
+          return new Gson().fromJson(input, ChooseRegister.class);
+        }
+        if (input.contains("\"messageType\":\"RegisterChosen\",\"messageBody\"")) {
+          return new Gson().fromJson(input, RegisterChosen.class);
+        }
+        if (input.contains("\"messageType\":\"ReturnCards\",\"messageBody\"")) {
+          return new Gson().fromJson(input, ReturnCards.class);
+        }
+        if (input.contains("\"messageType\":\"CheckPointMoved\",\"messageBody\"")) {
+          return new Gson().fromJson(input, CheckPointMoved.class);
+        }
+        if (input.contains("\"messageType\":\"YourCards\",\"messageBody\"")) {
+          return new Gson().fromJson(input, YourCards.class);
+        }
 
-    return new ErrorMessage("Error when parsing String to Message");
-  }
-}
+        return new ErrorMessage("Error when parsing String to Message");
+      }
+    }
