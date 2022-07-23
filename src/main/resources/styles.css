@@ -100,3 +100,34 @@
 .buttonColor2{
     -fx-background-color: #ddefbb;
 }
+
+.buttonSquash {
+    -fx-background-color: radial-gradient(radius 200%, #ffffff 0%, #f7f7f7 35%, #e9210f 100% );
+    -fx-border-width: 2;
+}
+
+.buttonSpin {
+    -fx-background-color: radial-gradient(radius 200%, #ffffff 0%, #f7f7f7 35%, #1f4de5 100% );
+    -fx-border-width: 2;
+}
+
+.buttonHulk {
+    -fx-background-color: radial-gradient(radius 200%, #ffffff 0%, #f7f7f7 35%, #279625 100% );
+    -fx-border-width: 2;
+}
+
+.buttonTwitch {
+    -fx-background-color: radial-gradient(radius 200%, #ffffff 0%, #f7f7f7 35%, #f18a42 100% );
+    -fx-border-width: 2;
+}
+
+.buttonHammer {
+    -fx-background-color: radial-gradient(radius 200%, #ffffff 0%, #f7f7f7 35%, #f18dd2 100% );
+    -fx-border-width: 2;
+}
+
+.buttonTwonkey {
+    -fx-background-color: radial-gradient(radius 200%, #ffffff 0%, #f7f7f7 35%, #4f1de8 100% );
+    -fx-border-width: 2;
+}
+
