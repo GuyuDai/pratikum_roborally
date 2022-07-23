@@ -35,7 +35,7 @@
          <items>
             <VBox fx:id="container" prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 10;" styleClass="backgroundColor">
                <children>
-                  <Label prefHeight="0.0" prefWidth="261.0" text="                                   Chat" textAlignment="CENTER" textFill="WHITE" />
+                  <Label prefHeight="0.0" prefWidth="261.0" text="                           Chat" textAlignment="CENTER" textFill="WHITE" />
                   <ListView fx:id="list" prefHeight="489.0" prefWidth="263.0" style="-fx-background-radius: 10;" />
                   <Separator prefWidth="200.0" />
                   <HBox prefHeight="77.0" prefWidth="263.0">

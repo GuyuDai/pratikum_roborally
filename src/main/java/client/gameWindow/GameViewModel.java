@@ -95,6 +95,8 @@ public class GameViewModel {
 
     @FXML
     private ImageView image1;
+    @FXML
+    private ImageView  roboRallyImage;
 
 
     /**
@@ -426,9 +428,11 @@ public class GameViewModel {
     public void chatBtnAction(ActionEvent actionEvent) {
         if (container.isVisible()) {
             container.setVisible(false);
+            roboRallyImage.setVisible(true);
             chatBtn.setText("OPEN CHAT");
         } else {
             container.setVisible(true);
+            roboRallyImage.setVisible(false);
             chatBtn.setText("CLOSE CHAT");
         }
     }
@@ -1119,6 +1123,7 @@ public class GameViewModel {
 
         //phaseView.setVisible(true);
         Text.setText("Select a starting point");
+        roboRallyImage.setVisible(false);
         selectStartingPoint.setVisible(true);
         printMapButton.setVisible(false);
         setYourBotIcon();

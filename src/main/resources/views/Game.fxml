@@ -20,16 +20,16 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1195.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
+<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="800.0" prefWidth="1195.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.2.0-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
    <children>
       <Pane layoutX="6.0" layoutY="3.0" prefHeight="795.0" prefWidth="305.0" stylesheets="@../styles.css">
          <children>
-            <ImageView fitHeight="795.0" fitWidth="305.0" layoutX="-1.0" layoutY="-1.0" opacity="0.2" pickOnBounds="true" preserveRatio="true" styleClass="radius">
+            <ImageView fitHeight="795.0" fitWidth="309.0" layoutX="-1.0" layoutY="-1.0" opacity="0.2" pickOnBounds="true" styleClass="radius">
                <image>
                   <Image url="@../bgImages/whiteBG.png" />
                </image>
             </ImageView>
-            <HBox layoutX="-2.0" layoutY="1.0" prefHeight="28.0" prefWidth="306.0" styleClass="radius" stylesheets="@../styles.css">
+            <HBox layoutX="-2.0" layoutY="1.0" prefHeight="35.0" prefWidth="309.0" styleClass="radius" stylesheets="@../styles.css">
                <children>
                   <Button fx:id="chatBtn" mnemonicParsing="false" onAction="#chatBtnAction" prefHeight="35.0" prefWidth="155.0" styleClass="buttonColor" stylesheets="@../styles.css" text="OPEN CHAT">
                      <font>
@@ -37,7 +37,7 @@
                      </font>
                   </Button>
                   <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
-                  <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitGame" prefHeight="35.0" prefWidth="152.0" styleClass="buttonColor1" stylesheets="@../styles.css" text="EXIT">
+                  <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitGame" prefHeight="35.0" prefWidth="163.0" styleClass="buttonColor1" stylesheets="@../styles.css" text="EXIT">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -137,6 +137,11 @@
                </font>
             </Label>
             <MediaView fx:id="sound" fitHeight="200.0" fitWidth="200.0" layoutX="43.0" layoutY="298.0" visible="false" />
+            <ImageView fx:id="roboRallyImage" fitHeight="132.0" fitWidth="309.0" layoutX="-2.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../RoboRallyHeader.jpg" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <VBox layoutX="322.0" layoutY="1.0" prefHeight="797.0" prefWidth="557.0">
@@ -148,6 +153,11 @@
             </ImageView>
             <AnchorPane prefHeight="430.0" prefWidth="558.0">
                <children>
+                  <ImageView fitHeight="443.0" fitWidth="570.0" layoutX="-7.0" layoutY="6.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../Unbenannt.png" />
+                     </image>
+                  </ImageView>
                   <ImageView fitHeight="428.0" fitWidth="557.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../bgImages/MapBG.jpg" />
