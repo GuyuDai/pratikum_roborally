@@ -210,6 +210,12 @@ public class LoginViewModel {
             throw new RuntimeException(e);
         }
         sound.getMediaPlayer().play();
+        buttonSquash.setStyle("-fx-border-color: #ffffff");
+        buttonHulk.setStyle("-fx-border-color: #f11919");
+        buttonHammer.setStyle("-fx-border-color: #ffffff");
+        buttonSpin.setStyle("-fx-border-color: #ffffff");
+        buttonTwitch.setStyle("-fx-border-color: #ffffff");
+        buttonTwonkey.setStyle("-fx-border-color: #ffffff");
     }
 
     public void playSpinbot() {
@@ -222,6 +228,12 @@ public class LoginViewModel {
             throw new RuntimeException(e);
         }
         sound.getMediaPlayer().play();
+        buttonSquash.setStyle("-fx-border-color: #ffffff");
+        buttonHulk.setStyle("-fx-border-color: #ffffff");
+        buttonHammer.setStyle("-fx-border-color: #ffffff");
+        buttonSpin.setStyle("-fx-border-color: #f11919");
+        buttonTwitch.setStyle("-fx-border-color: #ffffff");
+        buttonTwonkey.setStyle("-fx-border-color: #ffffff");
     }
 
     public void playHammerbot() {
@@ -234,6 +246,12 @@ public class LoginViewModel {
             throw new RuntimeException(e);
         }
         sound.getMediaPlayer().play();
+        buttonSquash.setStyle("-fx-border-color: #ffffff");
+        buttonHulk.setStyle("-fx-border-color: #ffffff");
+        buttonHammer.setStyle("-fx-border-color: #f11919");
+        buttonSpin.setStyle("-fx-border-color: #ffffff");
+        buttonTwitch.setStyle("-fx-border-color: #ffffff");
+        buttonTwonkey.setStyle("-fx-border-color: #ffffff");
     }
 
     public void playSquashbot() {
@@ -246,6 +264,12 @@ public class LoginViewModel {
             throw new RuntimeException(e);
         }
         sound.getMediaPlayer().play();
+        buttonSquash.setStyle("-fx-border-color: #f11919");
+        buttonHulk.setStyle("-fx-border-color: #ffffff");
+        buttonHammer.setStyle("-fx-border-color: #ffffff");
+        buttonSpin.setStyle("-fx-border-color: #ffffff");
+        buttonTwitch.setStyle("-fx-border-color: #ffffff");
+        buttonTwonkey.setStyle("-fx-border-color: #ffffff");
     }
 
     public void playTwonkey() {
@@ -258,6 +282,12 @@ public class LoginViewModel {
             throw new RuntimeException(e);
         }
         sound.getMediaPlayer().play();
+        buttonSquash.setStyle("-fx-border-color: #ffffff");
+        buttonHulk.setStyle("-fx-border-color: #ffffff");
+        buttonHammer.setStyle("-fx-border-color: #ffffff");
+        buttonSpin.setStyle("-fx-border-color: #ffffff");
+        buttonTwitch.setStyle("-fx-border-color: #ffffff");
+        buttonTwonkey.setStyle("-fx-border-color: #f11919");
     }
 
     public void playTwitch() {
@@ -270,6 +300,12 @@ public class LoginViewModel {
             throw new RuntimeException(e);
         }
         sound.getMediaPlayer().play();
+        buttonSquash.setStyle("-fx-border-color: #ffffff");
+        buttonHulk.setStyle("-fx-border-color: #ffffff");
+        buttonHammer.setStyle("-fx-border-color: #ffffff");
+        buttonSpin.setStyle("-fx-border-color: #ffffff");
+        buttonTwitch.setStyle("-fx-border-color: #f11919");
+        buttonTwonkey.setStyle("-fx-border-color: #ffffff");
     }
 
     public void playWelcome() {

@@ -27,19 +27,19 @@
          <Font size="18.0" />
       </font>
    </TextField>
-   <ImageView fitHeight="214.0" fitWidth="459.0" layoutX="215.0" layoutY="-11.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="214.0" fitWidth="459.0" layoutX="238.0" layoutY="-11.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../RoboRallyHeader.jpg" />
       </image>
    </ImageView>
    <AnchorPane layoutX="64.0" layoutY="140.0" prefHeight="285.0" prefWidth="807.0">
       <children>
-         <ImageView fitHeight="17.0" fitWidth="313.0" layoutX="268.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="83.0" fitWidth="438.0" layoutX="191.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../buttonImages/selectRobot.png" />
             </image>
          </ImageView>
-         <ToggleButton fx:id="buttonSquash" layoutX="20.0" layoutY="90.0" mnemonicParsing="false" onAction="#selectBot" onMouseClicked="#playSquashbot" prefHeight="91.0" prefWidth="84.0">
+         <ToggleButton fx:id="buttonSquash" layoutX="20.0" layoutY="90.0" mnemonicParsing="false" onAction="#selectBot" onMouseClicked="#playSquashbot" prefHeight="91.0" prefWidth="84.0" styleClass="buttonSquash">
             <graphic>
                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -50,7 +50,7 @@
                <ToggleGroup fx:id="ToggleGroupRobot" />
             </toggleGroup>
          </ToggleButton>
-         <ToggleButton fx:id="buttonSpin" layoutX="150.0" layoutY="90.0" mnemonicParsing="false" onAction="#selectBot" onMouseClicked="#playSpinbot" prefHeight="91.0" prefWidth="84.0" toggleGroup="$ToggleGroupRobot">
+         <ToggleButton fx:id="buttonSpin" layoutX="150.0" layoutY="90.0" mnemonicParsing="false" onAction="#selectBot" onMouseClicked="#playSpinbot" prefHeight="91.0" prefWidth="84.0" styleClass="buttonSpin" toggleGroup="$ToggleGroupRobot">
             <graphic>
                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -58,7 +58,7 @@
                   </image></ImageView>
             </graphic>
          </ToggleButton>
-         <ToggleButton fx:id="buttonHulk" layoutX="280.0" layoutY="90.0" mnemonicParsing="false" onAction="#selectBot" onMouseClicked="#playHulk" prefHeight="91.0" prefWidth="84.0" toggleGroup="$ToggleGroupRobot">
+         <ToggleButton fx:id="buttonHulk" layoutX="280.0" layoutY="90.0" mnemonicParsing="false" onAction="#selectBot" onMouseClicked="#playHulk" prefHeight="91.0" prefWidth="84.0" styleClass="buttonHulk" toggleGroup="$ToggleGroupRobot">
             <graphic>
                <ImageView fx:id="hulk" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -66,7 +66,7 @@
                   </image></ImageView>
             </graphic>
          </ToggleButton>
-         <ToggleButton fx:id="buttonTwitch" layoutX="410.0" layoutY="90.0" mnemonicParsing="false" onAction="#selectBot" onMouseClicked="#playTwitch" prefHeight="91.0" prefWidth="84.0" toggleGroup="$ToggleGroupRobot">
+         <ToggleButton fx:id="buttonTwitch" layoutX="410.0" layoutY="90.0" mnemonicParsing="false" onAction="#selectBot" onMouseClicked="#playTwitch" prefHeight="91.0" prefWidth="84.0" styleClass="buttonTwitch" toggleGroup="$ToggleGroupRobot">
             <graphic>
                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -74,7 +74,7 @@
                   </image></ImageView>
             </graphic>
          </ToggleButton>
-         <ToggleButton fx:id="buttonHammer" layoutX="540.0" layoutY="90.0" mnemonicParsing="false" onAction="#selectBot" onMouseClicked="#playHammerbot" prefHeight="91.0" prefWidth="84.0" toggleGroup="$ToggleGroupRobot">
+         <ToggleButton fx:id="buttonHammer" layoutX="540.0" layoutY="90.0" mnemonicParsing="false" onAction="#selectBot" onMouseClicked="#playHammerbot" prefHeight="91.0" prefWidth="84.0" styleClass="buttonHammer" toggleGroup="$ToggleGroupRobot">
             <graphic>
                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -82,7 +82,7 @@
                   </image></ImageView>
             </graphic>
          </ToggleButton>
-         <ToggleButton fx:id="buttonTwonkey" layoutX="670.0" layoutY="90.0" mnemonicParsing="false" onAction="#selectBot" onMouseClicked="#playTwonkey" prefHeight="91.0" prefWidth="84.0" toggleGroup="$ToggleGroupRobot">
+         <ToggleButton fx:id="buttonTwonkey" layoutX="670.0" layoutY="90.0" mnemonicParsing="false" onAction="#selectBot" onMouseClicked="#playTwonkey" prefHeight="91.0" prefWidth="84.0" styleClass="buttonTwonkey" toggleGroup="$ToggleGroupRobot">
             <graphic>
                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                   <image>

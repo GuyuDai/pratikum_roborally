@@ -737,8 +737,8 @@ public class ServerThread implements Runnable {
     }
 
     public void elegantClose(){
-        sendToAll(new ConnectionUpdate(clientID,false,"remove").toString());
         connectedClients.remove(this);
+        sendToAll(new ConnectionUpdate(clientID,false,"remove").toString());
         try {
             readInput.close();
             writeOutput.close();

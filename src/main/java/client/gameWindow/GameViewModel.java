@@ -95,6 +95,8 @@ public class GameViewModel {
 
     @FXML
     private ImageView image1;
+    @FXML
+    private ImageView  roboRallyImage;
 
 
     /**
@@ -216,6 +218,8 @@ public class GameViewModel {
     ImageView playerBot1, playerBot2, playerBot3,playerBot4, playerBot5, playerBot6;
     @FXML
     Label playerName1, playerName2, playerName3, playerName4, playerName5, playerName6 ;
+    @FXML
+    private Pane cp1,  cp2, cp3, cp4, cp5, cp6;
 
 
     /**
@@ -226,7 +230,7 @@ public class GameViewModel {
     @FXML
     private Label Text;
     @FXML
-    private Label phase;
+    private ImageView phaseView;
     @FXML
     private Label yourBotText;
     @FXML
@@ -237,6 +241,7 @@ public class GameViewModel {
 
     @FXML
     Button showDamage;
+
 
 
 
@@ -308,6 +313,18 @@ public class GameViewModel {
     Image imageTwonkey = new Image(twonkey.toString());
 
     int ID=Client.getClientReceive().getClientID();
+
+
+    /**
+     * URL adress to png file font
+     */
+    URL activation = getClass().getResource("/fonts/ActivationPhase.png");
+    Image imageActivation = new Image(activation.toString());
+
+    URL programming = getClass().getResource("/fonts/ProgrammingPhase.png");
+    Image imageProgramming = new Image(programming.toString());
+
+
 
 
     public void initialize(Client client) {
@@ -411,9 +428,11 @@ public class GameViewModel {
     public void chatBtnAction(ActionEvent actionEvent) {
         if (container.isVisible()) {
             container.setVisible(false);
+            roboRallyImage.setVisible(true);
             chatBtn.setText("OPEN CHAT");
         } else {
             container.setVisible(true);
+            roboRallyImage.setVisible(false);
             chatBtn.setText("CLOSE CHAT");
         }
     }
@@ -529,26 +548,32 @@ public class GameViewModel {
                     case 1:
                         playerBot1.setImage(otherRobotIcon);
                         playerName1.setText(playerName);
+                        cp1.setVisible(true);
                         break;
                     case 2:
                         playerBot2.setImage(otherRobotIcon);
                         playerName2.setText(playerName);
+                        cp2.setVisible(true);
                         break;
                     case 3:
                         playerBot3.setImage(otherRobotIcon);
                         playerName3.setText(playerName);
+                        cp3.setVisible(true);
                         break;
                     case 4:
                         playerBot4.setImage(otherRobotIcon);
                         playerName4.setText(playerName);
+                        cp4.setVisible(true);
                         break;
                     case 5:
                         playerBot5.setImage(otherRobotIcon);
                         playerName5.setText(playerName);
+                        cp5.setVisible(true);
                         break;
                     case 6:
                         playerBot6.setImage(otherRobotIcon);
                         playerName6.setText(playerName);
+                        cp6.setVisible(true);
                         break;
                 }
             }
@@ -1096,8 +1121,9 @@ public class GameViewModel {
         String map = Client.getClientReceive().getBoard();
         printMapGUI(map);
 
-        phase.setText("PROGRAMMING PHASE");
+        //phaseView.setVisible(true);
         Text.setText("Select a starting point");
+        roboRallyImage.setVisible(false);
         selectStartingPoint.setVisible(true);
         printMapButton.setVisible(false);
         setYourBotIcon();
@@ -2517,7 +2543,7 @@ public class GameViewModel {
              case 1:
                  setClickCounter(getClickCounter() + 1);
                  Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
-                 phase.setText("ACTIVATION PHASE");
+                 phaseView.setImage(imageActivation);
                  register1.setImage(register2.getImage());
                  register2.setImage(register3.getImage());
                  register3.setImage(register4.getImage());
@@ -2576,8 +2602,8 @@ public class GameViewModel {
                  playCardBtn.setVisible(false);
                  break;
              case 6:
+                 phaseView.setImage(imageProgramming);
                  //set back counters for next round
-                 phase.setText("PROGRAMMING PHASE");
                  setClickCounter(1);
                  setRegisterCount(0);
                  playCardBtn.setVisible(false);
@@ -2591,6 +2617,7 @@ public class GameViewModel {
      */
     public void getCardsButtonAction(ActionEvent actionEvent) {
         getCardsButton.setVisible(false);
+        phaseView.setVisible(true);
 
         hand1Button.setVisible(true);
         hand2Button.setVisible(true);

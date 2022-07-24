@@ -317,6 +317,11 @@ public class AIReceive extends ClientReceive {
         int register = registerChosenBody.getRegister();
         break;
 
+      case MessageType.connectionUpdate:
+        ConnectionUpdate connectionUpdate = (ConnectionUpdate) message;
+        int targetID = connectionUpdate.getMessageBody().getClientID();
+        removeDisconnectedClient(targetID);
+        break;
     }
   }
 
