@@ -511,6 +511,11 @@ public class ClientReceive extends Thread{
                 int register = registerChosenBody.getRegister();
                 break;
 
+            case MessageType.connectionUpdate:
+                ConnectionUpdate connectionUpdate = (ConnectionUpdate) message;
+                int targetID = connectionUpdate.getMessageBody().getClientID();
+                removeDisconnectedClient(targetID);
+                break;
         }
     }
 
@@ -754,5 +759,28 @@ public class ClientReceive extends Thread{
 
     public String[] getCards() {
         return cards;
+    }
+
+    /*
+    protected Map<Integer,Integer[]> IdPosition = new HashMap<>();
+    ?? protected List<Integer> IdList = new ArrayList<>();
+    protected Map<Integer,Integer> IdRobot = new HashMap<>();
+    protected Map<Integer,Integer>IdStartPoint = new HashMap<>();
+    protected Map<Integer,String> IdDirection=new HashMap<>();
+    protected Map<Integer,String> IdCardPlayed = new HashMap<>();
+    protected Map<Integer,Boolean> IdReady = new HashMap<>();
+    protected Map<String,Integer> IdName = new HashMap<>();
+    ?? protected List<Integer> robotNumbers = new ArrayList<>();
+    ?? protected List<Integer> startNumbers = new ArrayList<>();
+    ?? protected List<Boolean> readyList=new ArrayList<>();
+     */
+    public void removeDisconnectedClient(int targetID){
+        this.IdPosition.remove(targetID);
+        this.IdRobot.remove(targetID);
+        this.IdStartPoint.remove(targetID);
+        this.IdDirection.remove(targetID);
+        this.IdCardPlayed.remove(targetID);
+        this.IdReady.remove(targetID);
+        this.IdName.remove(targetID);
     }
 }
