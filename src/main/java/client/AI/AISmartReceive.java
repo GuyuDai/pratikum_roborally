@@ -61,6 +61,10 @@ public class AISmartReceive extends ClientReceive {
     availableFigures.add(6);
   }
 
+  public int getCheckPointNumber() {
+    return checkPointNumber;
+  }
+
   public void run() {
     IdName.put("Server", -1);
     try {
@@ -962,6 +966,8 @@ public class AISmartReceive extends ClientReceive {
 
     }
   }
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
   /*
