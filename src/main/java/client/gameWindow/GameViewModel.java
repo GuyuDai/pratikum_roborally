@@ -2639,6 +2639,9 @@ public class GameViewModel {
             timer30Sec();
         } else {
         }
+        checkStart();
+        //moveRobot();
+
 
         //TODO if only one connected client is left he will be the winner
       /*  if(Client.getClientReceive().getIdList().size() < 2){

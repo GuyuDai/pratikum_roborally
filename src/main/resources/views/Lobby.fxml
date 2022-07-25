@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="yourBot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#MouseAction" prefHeight="543.0" prefWidth="842.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.lobbyWindow.LobbyViewModel">
+<Pane fx:id="yourBot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#MouseAction" prefHeight="543.0" prefWidth="842.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.lobbyWindow.LobbyViewModel">
    <children>
       <ImageView fx:id="box2" blendMode="OVERLAY" cache="true" cacheHint="QUALITY" fitHeight="134.0" fitWidth="501.0" layoutX="311.0" layoutY="313.0" pickOnBounds="true" visible="false">
          <image>
