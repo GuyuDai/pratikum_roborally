@@ -2,6 +2,7 @@ package client.gameWindow;
 
 import client.*;
 import client.lobbyWindow.*;
+import client.loginWindow.LoginViewModel;
 import com.google.gson.*;
 import javafx.animation.*;
 import javafx.event.*;
@@ -23,7 +24,6 @@ import server.BoardTypes.*;
 import server.Control.*;
 import server.Deck.*;
 import server.ServerThread;
-
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -442,7 +442,8 @@ public class GameViewModel {
      */
     public void exitGame(ActionEvent actionEvent) {
         Stage stage = (Stage) exitBtn.getScene().getWindow();
-        stage.close();
+        //stage.close();
+        LoginViewModel.closeGUI();
 
         /*
         try {

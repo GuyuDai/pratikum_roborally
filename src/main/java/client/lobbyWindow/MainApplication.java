@@ -1,5 +1,6 @@
 package client.lobbyWindow;
 
+import client.loginWindow.LoginViewModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -36,6 +37,11 @@ public class MainApplication extends Application {
         new Client().init();
         window = primaryStage;
         window.setTitle("RoboRally");
+        window.setOnCloseRequest(e-> {
+            e.consume();
+            LoginViewModel.closeGUI();
+
+        });
         lobbyScene = loadScene(0);
         loginScene = loadScene(1);
         window.setScene(loginScene);

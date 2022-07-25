@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import client.Client;
+import client.loginWindow.LoginViewModel;
 import com.google.gson.Gson;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -137,6 +138,10 @@ public class LobbyViewModel {
             Parent rootGame = (Parent) fxmlLoaderGame.load();
             Stage stageGame = new Stage();
             stageGame.setTitle("Dizzy Highway");
+            stageGame.setOnCloseRequest(e -> {
+                e.consume();
+                LoginViewModel.closeGUI();
+            });
             stageGame.setScene(new Scene(rootGame));
             stageGame.show();
         } catch (Exception e) {
