@@ -8,6 +8,7 @@ import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -148,6 +149,9 @@ public class LoginViewModel {
               }
           }
       }
+
+    public void MouseAction(MouseEvent mouseEvent) {
+        checkRobot();    }
 
     /**
      * initialize player with chosen name and robot -> Lobby window opens
