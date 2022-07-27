@@ -288,10 +288,18 @@ public class LobbyViewModel {
                     setWindowName("Game");
                 }
                 else{
-
-                    LobbyText.setText("Wait Map Selection!");
-                    LobbyText.setVisible(true);
-                    //selectMap.setVisible(false);
+                    if(Client.getClientReceive().getMaps()!=null){
+                        LobbyText.setText("The game already started.");
+                        LobbyText.setVisible(true);
+                        selectMap.setVisible(false);
+                    }
+                    else{
+                        LobbyText.setText("Please wait until the first player has chosen the map.");
+                        LobbyText.setVisible(true);
+                        PauseTransition pauseTransition26 = new PauseTransition(Duration.seconds(3));
+                        pauseTransition26.setOnFinished(e -> LobbyText.setVisible(false));
+                        pauseTransition26.play();
+                    }
                 }
             }
         }
@@ -423,6 +431,7 @@ public class LobbyViewModel {
      * if the first player deselects being ready, the player who was ready as 2nd fastest will be able to choose the map
      */
     public void checkForReady() {
+        System.out.println(Client.getClientReceive().getReadyList().size());
         if(Client.getClientReceive().getReadyList().size() == 1 && readyButton.isSelected()){
             selectMap.setText("SELECT MAP");
         } else {
@@ -446,6 +455,10 @@ public class LobbyViewModel {
             Client.getLogger().info(Client.getClientReceive().getNameById(yourId) + "has left the Game");
             String notReadyMessage = new SetStatus(false).toString();
             Client.getClientReceive().sendMessage(notReadyMessage);
+
+
+
+            Client.getClientReceive().getReadyList().remove(0);
         }
     }
 
@@ -463,15 +476,7 @@ public class LobbyViewModel {
         }
         catch (Exception e){
         }
-        try {
-            checkForReady();
-        }
-        catch (Exception e){
-        }
-
-        if(Client.getClientReceive().getMaps()!=null){
-            selectMap.setText("SELECT MAP");
-        }
+        checkForReady();
     }
 
     /**

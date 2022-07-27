@@ -1,19 +1,18 @@
-package client.mapWindow;
+package client.popupWindows;
 
 import client.Client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import java.net.URISyntaxException;
+
 import java.net.URL;
 
 
-public class WinnerWhenOnlyOnePlayerViewModel {
+public class DefaultWinnerViewModel {
 
     @FXML
     private Label nameBot;
@@ -47,7 +46,7 @@ public class WinnerWhenOnlyOnePlayerViewModel {
 
 
     public void initialize(){
-        //playWinnerTune();
+        playWinnerTune();
         setYourBotIcon();
     }
     /**

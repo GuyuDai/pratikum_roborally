@@ -32,6 +32,8 @@ public class Again extends Card {
       }else {
         lastCard.action();
       }
+    }else{
+      this.getOwner().getOwnRobot().stay();
     }
   }
 

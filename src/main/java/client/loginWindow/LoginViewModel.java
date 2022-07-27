@@ -188,16 +188,6 @@ public class LoginViewModel {
     }
 
 
-    /**
-     * send messages using keyboard "Enter" key
-     */
-    @FXML
-    public void keyboardAction(KeyEvent keyEvent) throws IOException {
-        if (keyEvent.getCode() == KeyCode.ENTER) {
-            initPlayer(null);
-        }
-    }
-
     public static LoginViewModel getInstance() {
         return instance;
     }

@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import protocol.SetStatus;
 
 public class ExitWindow {
 
@@ -24,6 +25,7 @@ public class ExitWindow {
         Button noButton = new Button("NO");
 
         yesButton.setOnAction(e-> {
+            Client.getClientReceive().sendMessage(new SetStatus(false).toString());
             answer = true;
             window.close();
         });

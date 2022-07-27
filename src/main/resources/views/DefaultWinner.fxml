@@ -4,8 +4,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.media.MediaView?>
 
-<AnchorPane prefHeight="487.0" prefWidth="550.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.mapWindow.WinnerWhenOnlyOnePlayerViewModel">
+<AnchorPane prefHeight="487.0" prefWidth="550.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.popupWindows.DefaultWinnerViewModel">
    <children>
       <ImageView fitHeight="130.0" fitWidth="479.0" layoutX="126.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -21,5 +22,6 @@
       <Label layoutX="161.0" layoutY="130.0" prefHeight="28.0" prefWidth="232.0" text="You are the only player left. " />
       <Label layoutX="112.0" layoutY="158.0" text="So you win automatically! Congratulations!!" />
       <ImageView fx:id="imageBot" fitHeight="173.0" fitWidth="186.0" layoutX="91.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true" />
+      <MediaView fx:id="sound" fitHeight="200.0" fitWidth="200.0" layoutX="26.0" layoutY="234.0" visible="false" />
    </children>
 </AnchorPane>

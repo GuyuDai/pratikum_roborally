@@ -1,4 +1,4 @@
-package client.mapWindow;
+package client.popupWindows;
 
 
 import client.Client;
