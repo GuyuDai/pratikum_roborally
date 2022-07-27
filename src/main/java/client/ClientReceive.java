@@ -100,7 +100,7 @@ public class ClientReceive extends Thread{
         this.checkPointYPosition = checkPointYPosition;
     }
 
-    private void setUnreachedCheckPoints(){
+    public void setUnreachedCheckPoints(){
         switch (this.board){
             case "DizzyHighway":
                 checkPointsPosition.put(1,new Integer[]{3,12});
@@ -139,7 +139,6 @@ public class ClientReceive extends Thread{
 
     public ClientReceive(Socket socket) {
         this.socket = socket;
-        setUnreachedCheckPoints();
         //sendMessageToServer("test");
         try {
             readInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -399,6 +398,7 @@ public class ClientReceive extends Thread{
                 MapSelected mapSelected = (MapSelected) message;
                 MapSelected.MapSelectedBody mapSelectedBody = mapSelected.getMessageBody();
                 board = mapSelectedBody.getMap();
+                setUnreachedCheckPoints();
                 break;
 
             case MessageType.yourCards:

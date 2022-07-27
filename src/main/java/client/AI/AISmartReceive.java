@@ -61,31 +61,7 @@ public class AISmartReceive extends ClientReceive {
     availableFigures.add(5);
     availableFigures.add(6);
     //initialize unreached checkpoints and facing direction
-    switch (this.board){
-      case "DizzyHighway":
-        unreachedCheckPoints.add(1);
-        currentFacingDirection = "RIGHT";
-        break;
 
-      case "ExtraCrispy":
-      case "LostBearings":
-      case "Twister":
-        unreachedCheckPoints.add(1);
-        unreachedCheckPoints.add(2);
-        unreachedCheckPoints.add(3);
-        unreachedCheckPoints.add(4);
-        currentFacingDirection = "RIGHT";
-        break;
-
-      case "DeathTrap":
-        unreachedCheckPoints.add(1);
-        unreachedCheckPoints.add(2);
-        unreachedCheckPoints.add(3);
-        unreachedCheckPoints.add(4);
-        unreachedCheckPoints.add(5);
-        currentFacingDirection = "LEFT";
-        break;
-    }
   }
 
   public void run() {
@@ -172,6 +148,32 @@ public class AISmartReceive extends ClientReceive {
         MapSelected.MapSelectedBody mapSelectedBody = new Gson().fromJson(body,
             MapSelected.MapSelectedBody.class);
         board = mapSelectedBody.getMap();
+        setUnreachedCheckPoints();
+        switch (this.board){
+          case "DizzyHighway":
+            unreachedCheckPoints.add(1);
+            currentFacingDirection = "RIGHT";
+            break;
+
+          case "ExtraCrispy":
+          case "LostBearings":
+          case "Twister":
+            unreachedCheckPoints.add(1);
+            unreachedCheckPoints.add(2);
+            unreachedCheckPoints.add(3);
+            unreachedCheckPoints.add(4);
+            currentFacingDirection = "RIGHT";
+            break;
+
+          case "DeathTrap":
+            unreachedCheckPoints.add(1);
+            unreachedCheckPoints.add(2);
+            unreachedCheckPoints.add(3);
+            unreachedCheckPoints.add(4);
+            unreachedCheckPoints.add(5);
+            currentFacingDirection = "LEFT";
+            break;
+        }
         break;
 
       case MessageType.yourCards:
@@ -185,7 +187,6 @@ public class AISmartReceive extends ClientReceive {
           myNineCardsOnPile.add(card);
         }
         //The Programming schould be done if its your turn and the programming phase is set
-
          */
         aiSmartProgramming();
         break;
@@ -486,8 +487,8 @@ public class AISmartReceive extends ClientReceive {
 
     if (nextCheckPointXPosition < currentPosition[0]) {
       //Direction Controller
-      pitCheck();
-      if (currentFacingDirection == "UP") {
+      //pitCheck();
+      if (currentFacingDirection.equals("UP")) {
         //move upwards
 
         for (int i = 0; i < 9; i++) {
@@ -510,8 +511,6 @@ public class AISmartReceive extends ClientReceive {
             sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
             register++;
           } //reset attributions
-          cards = null;
-          register = 0;
         }
         usedCards.clear();
       } else if (currentFacingDirection == "RIGHT") {
@@ -528,7 +527,7 @@ public class AISmartReceive extends ClientReceive {
         }
         //next registers
         for (int i = 0; i < 9; i++) {
-          if (!usedCards.contains(i)) {
+          if (!usedCards.contains(i) && register < 5) {
             if (cards[i].equals("MoveOne")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -543,12 +542,6 @@ public class AISmartReceive extends ClientReceive {
               usedCards.add(i);
             }
           }
-          if (register < 5) {
-            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
-            register++;
-          } //reset attributions
-          cards = null;
-          register = 0;
         }
         usedCards.clear();
 
@@ -586,15 +579,15 @@ public class AISmartReceive extends ClientReceive {
             sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
             register++;
           } //reset attributions
-          cards = null;
-          register = 0;
+
         }
         usedCards.clear();
+
       } else if (currentFacingDirection == "DOWN") {
         //try to make U turn and then move up
         //First register
         for (int i = 0; i < 9; i++) {
-          if (!usedCards.contains(i)) {
+          if (!usedCards.contains(i) && register<1) {
             if (cards[i].equals("TurnLeft")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -604,7 +597,7 @@ public class AISmartReceive extends ClientReceive {
         }
         //Second register
         for (int i = 0; i < 9; i++) {
-          if (!usedCards.contains(i)) {
+          if (!usedCards.contains(i) && register<2) {
             if (cards[i].equals("TurnLeft")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -621,7 +614,7 @@ public class AISmartReceive extends ClientReceive {
         }
         //next registers fill with move cards
         for (int i = 0; i < 9; i++) {
-          if (!usedCards.contains(i)) {
+          if (!usedCards.contains(i) && register < 5) {
             if (cards[i].equals("MoveOne")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -636,18 +629,12 @@ public class AISmartReceive extends ClientReceive {
               usedCards.add(i);
             }
           }
-          if (register < 5) {
-            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
-            register++;
-          } //reset attributions
-          cards = null;
-          register = 0;
         }
         usedCards.clear();
       }
       //If Checkpoint is on the lower part of the board compared to your Position
     } else if (nextCheckPointXPosition > x) {
-      pitCheck();
+      //pitCheck();
       if (currentFacingDirection == "UP") {
         //try Uturn and then move down
         for (int i = 0; i < 9; i++) {
@@ -697,8 +684,6 @@ public class AISmartReceive extends ClientReceive {
             sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
             register++;
           } //reset attributions
-          cards = null;
-          register = 0;
         }
         usedCards.clear();
 
@@ -735,8 +720,7 @@ public class AISmartReceive extends ClientReceive {
             sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
             register++;
           } //reset attributions
-          cards = null;
-          register = 0;
+
         }
         usedCards.clear();
       } else if (currentFacingDirection == "LEFT") {
@@ -771,8 +755,6 @@ public class AISmartReceive extends ClientReceive {
             sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
             register++;
           } //reset attributions
-          cards = null;
-          register = 0;
         }
         usedCards.clear();
       } else if (currentFacingDirection == "DOWN") {
@@ -797,8 +779,7 @@ public class AISmartReceive extends ClientReceive {
             sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
             register++;
           } //reset attributions
-          cards = null;
-          register = 0;
+
         }
         usedCards.clear();
       }
