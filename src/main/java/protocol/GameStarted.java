@@ -19,18 +19,18 @@ public class GameStarted implements Message {
   public GameStartedBody messageBody;
 
   public class GameStartedBody extends MessageBody {
-    protected Board gameMap;
+    protected String gameMap;
 
-    public Board getGameMap() {
+    public String getGameMap() {
       return gameMap;
     }
 
-    public void setGameMap(Board gameMap) {
+    public void setGameMap(String gameMap) {
       this.gameMap = gameMap;
     }
   }
 
-    public GameStarted (Board gameMap) {
+    public GameStarted (String gameMap) {
       this.messageType = MessageType.gameStarted;
       GameStartedBody body = new GameStartedBody();
       body.gameMap = gameMap;

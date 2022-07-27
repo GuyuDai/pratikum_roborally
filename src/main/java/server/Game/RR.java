@@ -67,7 +67,7 @@ public class RR extends Thread implements GameLogic {
   public void run() {
     this.setName("GameThread");
     this.controller = new Controller(this);
-    sendMessageToAll(new GameStarted(this.gameBoard));
+    sendMessageToAll(new GameStarted(this.gameBoard.toString()));
     gameProgress();
   }
 

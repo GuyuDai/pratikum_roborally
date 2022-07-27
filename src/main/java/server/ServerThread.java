@@ -752,21 +752,19 @@ public class ServerThread implements Runnable {
 
     /**
      * only for testing whether the checkpoint works or not
+     * usage: after click "play register", send message "/fly to check point 'id'" in chat board
      * @param msg
      */
     private void cheatCheck(String msg){
         if(msg.startsWith("/fly to check point")){
-            int start = msg.lastIndexOf('t');
+            int start = msg.lastIndexOf('t') + 1;
             int checkPointID = Integer.parseInt(msg.substring(start).trim());
             Position targetPosition = null;
-            for(BoardElem[][] elem2d : currentGame.getGameBoard().getMap()){
-                for(BoardElem[] elem1d : elem2d){
-                    for(BoardElem elem : elem1d){
-                        if(elem.getName().equals("CheckPoint")){
-                            CheckPoint temp = (CheckPoint) elem;
-                            if(temp.getCount() == checkPointID){
-                                targetPosition = elem.getPosition();
-                            }
+            for (int i = 0; i <= currentGame.getGameBoard().getHeight(); i++) {
+                for (int j = 0; j <= currentGame.getGameBoard().getWidth(); j++) {
+                    for (BoardElem boardElem : currentGame.getGameBoard().getMap()[j][i]) {
+                        if (boardElem.getName().equals("CheckPoint")) {
+                            targetPosition = new Position(j,i,currentGame.getGameBoard());
                         }
                     }
                 }
