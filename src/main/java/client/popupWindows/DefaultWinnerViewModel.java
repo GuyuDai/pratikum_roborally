@@ -12,7 +12,7 @@ import javafx.scene.media.MediaView;
 import java.net.URL;
 
 
-public class DefaultWinner {
+public class DefaultWinnerViewModel {
 
     @FXML
     private Label nameBot;

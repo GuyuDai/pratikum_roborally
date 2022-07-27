@@ -59,7 +59,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Label fx:id="LobbyText" layoutX="321.0" layoutY="457.0" prefHeight="36.0" prefWidth="546.0" text="You are the only player who is ready. Please wait for the others." textFill="#cd5151" visible="false" />
+      <Label fx:id="LobbyText" layoutX="328.0" layoutY="457.0" prefHeight="36.0" prefWidth="546.0" text="You are the only player who is ready. Please wait for the others." textFill="#cd5151" visible="false" />
       <ImageView fx:id="playerBot6" fitHeight="62.0" fitWidth="62.0" layoutX="742.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="playerName1" layoutX="332.0" layoutY="412.0" prefHeight="25.0" prefWidth="84.0" />
       <ImageView fx:id="playerBot4" fitHeight="62.0" fitWidth="62.0" layoutX="570.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true" />
