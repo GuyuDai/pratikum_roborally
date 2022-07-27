@@ -157,7 +157,6 @@ public class Robot implements RobotAction {
   private void moveOneStep() {
     Position togo = this.getCurrentPosition().getNextPosition(this.getFaceDirection());
     boolean flag = this.currentGame.getController().movementCheck(this, this.getFaceDirection());
-    System.out.println(flag + "+move");
     if (flag) {
       //send protocol message
       String type1 = togo.getTile().getName();
