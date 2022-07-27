@@ -9,7 +9,7 @@ public class BackUp extends Card implements Move{
     super("BackUp");
   }
   /**
-   * @author dai
+   * @author dai,Li
    * move a robot one step back. The robot does not change the direction it is facing.
    */
   @Override
