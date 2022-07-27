@@ -2642,7 +2642,7 @@ public class GameViewModel {
             Stage stage = (Stage) exitBtn.getScene().getWindow();
             stage.close();
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Default.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/DefaultWinner.fxml"));
                 Parent rootMap = (Parent) fxmlLoader.load();
                 Stage stageLobby = new Stage();
                 stageLobby.setTitle("Winner");
