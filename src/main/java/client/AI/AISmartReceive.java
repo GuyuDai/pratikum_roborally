@@ -588,18 +588,22 @@ public class AISmartReceive extends ClientReceive {
         }
         //Second register
         for (int i = 0; i < 9; i++) {
+          if(usedCards.size()==1){
           if (!usedCards.contains(i) && register<2) {
             if (cards[i].equals("TurnLeft")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
               usedCards.add(i);
             }
+          }
           }//oder UTurn
-          if (!cards[usedCards.get(0)].equals("TurnLeft") && register<2) {
-            if (cards[i].equals("UTurn")) {
-              sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
-              register++;
-              usedCards.add(i);
+          else {
+            if (!usedCards.contains(i) && register < 1) {
+              if (cards[i].equals("UTurn")) {
+                sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
+                register++;
+                usedCards.add(i);
+              }
             }
           }
         }
