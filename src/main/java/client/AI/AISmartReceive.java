@@ -15,7 +15,6 @@ import server.Control.*;
 
 import java.io.*;
 import java.net.*;
-import java.util.Map;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.logging.*;
@@ -30,18 +29,20 @@ public class AISmartReceive extends ClientReceive {
   private int pointerForRegister = 0;
   private CopyOnWriteArrayList<Integer> availableStartingPoints = new CopyOnWriteArrayList<Integer>();
   List<Integer> usedCards = new ArrayList<>();
-
   private CopyOnWriteArrayList<Integer> availableFigures = new CopyOnWriteArrayList<Integer>();
-
+  private String currentFacingDirection;
+  private List<Integer> unreachedCheckPoints = new CopyOnWriteArrayList<Integer>();
+  private int[] currentPosition = new int[2];
+  private int targetCheckPoint;
   public String getCurrentFacingDirection() {
     return currentFacingDirection;
   }
-
   public void setCurrentFacingDirection(String currentFacingDirection) {
     this.currentFacingDirection = currentFacingDirection;
   }
-
-  private String currentFacingDirection;
+  public int getCheckPointNumber() {
+    return checkPointNumber;
+  }
 
   public AISmartReceive(Socket socket) {
     super(socket);
@@ -59,10 +60,32 @@ public class AISmartReceive extends ClientReceive {
     availableFigures.add(4);
     availableFigures.add(5);
     availableFigures.add(6);
-  }
+    //initialize unreached checkpoints and facing direction
+    switch (this.board){
+      case "DizzyHighway":
+        unreachedCheckPoints.add(1);
+        currentFacingDirection = "RIGHT";
+        break;
 
-  public int getCheckPointNumber() {
-    return checkPointNumber;
+      case "ExtraCrispy":
+      case "LostBearings":
+      case "Twister":
+        unreachedCheckPoints.add(1);
+        unreachedCheckPoints.add(2);
+        unreachedCheckPoints.add(3);
+        unreachedCheckPoints.add(4);
+        currentFacingDirection = "RIGHT";
+        break;
+
+      case "DeathTrap":
+        unreachedCheckPoints.add(1);
+        unreachedCheckPoints.add(2);
+        unreachedCheckPoints.add(3);
+        unreachedCheckPoints.add(4);
+        unreachedCheckPoints.add(5);
+        currentFacingDirection = "LEFT";
+        break;
+    }
   }
 
   public void run() {
@@ -194,9 +217,10 @@ public class AISmartReceive extends ClientReceive {
         int takenY = startingPointTakenBody.getY();
         playerId = startingPointTakenBody.getClientID();
         startingPositionAdd(takenX, takenY, playerId);
-        //Wenn die gewünschte Position valide ist, werden alle Spieler darüber benachrichtigt.
-        removeStartPointsInHashSet(takenX, takenY);
-        //sendMessage(new SetStartingPoint(8,1).toString());
+        if(playerId == clientID){
+          currentPosition[0] = takenX;
+          currentPosition[1] = takenY;
+        }
         logger.info(ANSI_GREEN + "already send msg");//test
         break;
 
@@ -229,6 +253,10 @@ public class AISmartReceive extends ClientReceive {
         x = movementBody.getY();
         positions = new Integer[]{x, y};
         IdPosition.put(playerId, positions);
+        if(playerId == clientID){
+          currentPosition[0] = y;
+          currentPosition[1] = x;
+        }
         break;
 
       case MessageType.playerTurning:
@@ -294,7 +322,7 @@ public class AISmartReceive extends ClientReceive {
         int numberOfCheckpointsReached = checkPointReachedBody.getNumber();
         //Sets the number of checkpoints reached
         if (clientIDCheckReached == clientID) {
-          checkPointNumber = numberOfCheckpointsReached;
+          unreachedCheckPoints.remove((Integer) numberOfCheckpointsReached);
         }
         break;
 
@@ -309,14 +337,12 @@ public class AISmartReceive extends ClientReceive {
         break;
 
       case MessageType.checkPointMoved:
-        //If a checkpoint moves its position
-        CheckPointMoved.CheckPointMovedBody checkPointMovedBody = new Gson().fromJson(body,
-            CheckPointMoved.CheckPointMovedBody.class);
-        int checkPointIDMoved = checkPointMovedBody.getCheckPointID();
+        CheckPointMoved checkPointMoved = (CheckPointMoved) message;
+        CheckPointMoved.CheckPointMovedBody checkPointMovedBody= checkPointMoved.getMessageBody();
+        int movedCheckPointID = checkPointMovedBody.getCheckPointID();
         int newXPosition = checkPointMovedBody.getX();
         int newYPosition = checkPointMovedBody.getY();
-        setCheckPointXPosition(newXPosition);
-        setCheckPointYPosition(newYPosition);
+        this.checkPointsPosition.replace(movedCheckPointID,new Integer[]{newXPosition,newYPosition});
         break;
 
       case MessageType.registerChosen:
@@ -359,21 +385,21 @@ public class AISmartReceive extends ClientReceive {
    * @author: Nik
    */
   private void aiSaveFacingDirection(String turndirection) {
-    if (getCurrentFacingDirection().equals("UP") & turndirection == "clockwise") {
+    if (getCurrentFacingDirection().equals("UP") && turndirection.equals("clockwise")) {
       setCurrentFacingDirection("RIGHT");
-    } else if (getCurrentFacingDirection().equals("RIGHT") & turndirection == "clockwise") {
+    } else if (getCurrentFacingDirection().equals("RIGHT") & turndirection.equals("clockwise")) {
       setCurrentFacingDirection("DOWN");
-    } else if (getCurrentFacingDirection().equals("DOWN") & turndirection == "clockwise") {
+    } else if (getCurrentFacingDirection().equals("DOWN") & turndirection.equals("clockwise")) {
       setCurrentFacingDirection("LEFT");
-    } else if (getCurrentFacingDirection().equals("LEFT") & turndirection == "clockwise") {
+    } else if (getCurrentFacingDirection().equals("LEFT") & turndirection.equals("clockwise")) {
       setCurrentFacingDirection("UP");
-    } else if (getCurrentFacingDirection().equals("UP") & turndirection == "counterclockwise") {
+    } else if (getCurrentFacingDirection().equals("UP") & turndirection.equals("counterclockwise")) {
       setCurrentFacingDirection("LEFT");
-    } else if (getCurrentFacingDirection().equals("RIGHT") & turndirection == "counterclockwise") {
+    } else if (getCurrentFacingDirection().equals("RIGHT") & turndirection.equals("counterclockwise")) {
       setCurrentFacingDirection("UP");
-    } else if (getCurrentFacingDirection().equals("DOWN") & turndirection == "counterclockwise") {
+    } else if (getCurrentFacingDirection().equals("DOWN") & turndirection.equals("counterclockwise")) {
       setCurrentFacingDirection("RIGHT");
-    } else if (getCurrentFacingDirection().equals("LEFT") & turndirection == "counterclockwise") {
+    } else if (getCurrentFacingDirection().equals("LEFT") & turndirection.equals("counterclockwise")) {
       setCurrentFacingDirection("DOWN");
     }
   }
@@ -430,51 +456,25 @@ public class AISmartReceive extends ClientReceive {
     }
   }
 
-  /**
-   * @author: Nik sets the Checkpoints based on the maps accordingly is used for the AI to know
-   * where the next checkpoint that should be reached is located
-   */
-  Map checkPointPositions = new HashMap<Integer, int[]>();
-
-  public void setCheckpoints() {
-    if (board.equals("DizzyHighway")) {
-      int[] pos = {3, 12};
-      checkPointPositions.put(1, pos);
-    } else if (board.equals("DeathTrap")) {
-      int[] pos4 = {2, 8};
-      checkPointPositions.put(4, pos4);
-      int[] pos1 = {7, 1};
-      checkPointPositions.put(1, pos1);
-      checkPointPositions.put(3, new int[]{8, 7});
-      checkPointPositions.put(2, new int[]{4, 4});
-    } else if (board.equals("ExtraCrispy")) {
-      checkPointPositions.put(1, new int[]{2, 10});
-      checkPointPositions.put(2, new int[]{7, 5});
-      checkPointPositions.put(3, new int[]{7, 10});
-      checkPointPositions.put(4, new int[]{2, 5});
-    } else if (board.equals("LostBearings")) {
-      checkPointPositions.put(1, new int[]{4, 11});
-      checkPointPositions.put(2, new int[]{5, 4});
-      checkPointPositions.put(3, new int[]{2, 8});
-      checkPointPositions.put(4, new int[]{7, 8});
-    } else if (board.equals("Twister")) {
-      checkPointPositions.put(1, new int[]{1, 10});
-      checkPointPositions.put(2, new int[]{7, 6});
-      checkPointPositions.put(3, new int[]{3, 5});
-      checkPointPositions.put(3, new int[]{7, 9});
-
-    }
-  }
-
 
   /**
    * @author: Nik Go to nearest Checkpoint in the right order
    */
   private void aiSmartProgramming() {
-    int nextCheckPoint = getCheckPointNumber() + 1;
-    int[] posOfNextCheckPoint = (int[]) checkPointPositions.get(nextCheckPoint);
-    int nextCheckPointXPosition = posOfNextCheckPoint[0];
-    int nextCheckPointYPosition = posOfNextCheckPoint[1];
+    //find out the nearest check point
+    int distance = 99999;
+    for(Integer i : unreachedCheckPoints){
+      int tempX = checkPointsPosition.get(i)[0];
+      int tempY = checkPointsPosition.get(i)[1];
+      int currentX = currentPosition[0];
+      int currentY = currentPosition[1];
+      int tempDistance = Math.abs(tempX - currentX) + Math.abs(tempY - currentY);
+      if(tempDistance < distance){
+        distance = tempDistance;
+        targetCheckPoint = i;
+      }
+    }
+    int nextCheckPointXPosition = checkPointsPosition.get(targetCheckPoint)[0];
 
     //Idea: Identify the direction towards the Checkpoint and move there straight
     //If Checkpoint is on the upper side
@@ -483,7 +483,8 @@ public class AISmartReceive extends ClientReceive {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-    if (nextCheckPointXPosition < x) {
+
+    if (nextCheckPointXPosition < currentPosition[0]) {
       //Direction Controller
       pitCheck();
       if (currentFacingDirection == "UP") {
@@ -970,7 +971,6 @@ public class AISmartReceive extends ClientReceive {
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-  /*
       private Message wrapMessage (String input){
         if (input.contains("\"messageType\":\"ActivePhase\",\"messageBody\"")) {
           return new Gson().fromJson(input, ActivePhase.class);
@@ -1122,9 +1122,8 @@ public class AISmartReceive extends ClientReceive {
 
         return new ErrorMessage("Error when parsing String to Message");
       }
-    }
 
-   */
+
 
 
   /**
@@ -1133,6 +1132,7 @@ public class AISmartReceive extends ClientReceive {
    * @param input Json String
    * @return specific Message
    */
+  /*
   private Message wrapMessage(String input) {
     if (input.contains("\"messageType\":\"ActivePhase\"")) {
       return new Gson().fromJson(input, ActivePhase.class);
@@ -1284,4 +1284,7 @@ public class AISmartReceive extends ClientReceive {
 
     return new ErrorMessage("Error when parsing String to Message");
   }
+
+   */
+
 }

@@ -58,9 +58,7 @@ public class ClientReceive extends Thread{
     protected Integer[] positions;
     protected String turnDirection;
     protected String animationType;
-
     protected int x;
-
     protected int y;
     protected int activePhaseNumber;
     protected int rebootClientId;
@@ -80,7 +78,10 @@ public class ClientReceive extends Thread{
 
     protected  int winnerID;
 
-    protected boolean gameStarted=false;
+    protected boolean gameStarted = false;
+
+    protected Map<Integer, Integer[]> checkPointsPosition = new HashMap<Integer, Integer[]>();
+
 
 
     public void setCounterRegister(int count){
@@ -99,8 +100,46 @@ public class ClientReceive extends Thread{
         this.checkPointYPosition = checkPointYPosition;
     }
 
+    private void setUnreachedCheckPoints(){
+        switch (this.board){
+            case "DizzyHighway":
+                checkPointsPosition.put(1,new Integer[]{3,12});
+                break;
+
+            case "ExtraCrispy":
+                checkPointsPosition.put(1,new Integer[]{2,10});
+                checkPointsPosition.put(2,new Integer[]{7,5});
+                checkPointsPosition.put(3,new Integer[]{7,10});
+                checkPointsPosition.put(4,new Integer[]{2,5});
+                break;
+
+            case "LostBearings":
+                checkPointsPosition.put(1,new Integer[]{4,11});
+                checkPointsPosition.put(2,new Integer[]{5,4});
+                checkPointsPosition.put(3,new Integer[]{2,8});
+                checkPointsPosition.put(4,new Integer[]{7,8});
+                break;
+
+            case "Twister":
+                checkPointsPosition.put(1,new Integer[]{1,10});
+                checkPointsPosition.put(2,new Integer[]{7,6});
+                checkPointsPosition.put(3,new Integer[]{3,5});
+                checkPointsPosition.put(4,new Integer[]{7,9});
+                break;
+
+            case "DeathTrap":
+                checkPointsPosition.put(1,new Integer[]{7,1});
+                checkPointsPosition.put(2,new Integer[]{4,4});
+                checkPointsPosition.put(3,new Integer[]{3,12});
+                checkPointsPosition.put(4,new Integer[]{8,7});
+                checkPointsPosition.put(5,new Integer[]{1,0});
+                break;
+        }
+    }
+
     public ClientReceive(Socket socket) {
         this.socket = socket;
+        setUnreachedCheckPoints();
         //sendMessageToServer("test");
         try {
             readInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -490,11 +529,10 @@ public class ClientReceive extends Thread{
                 CheckPointMoved checkPointMoved = (CheckPointMoved) message;
                 //If a checkpoint moves its position
                 CheckPointMoved.CheckPointMovedBody checkPointMovedBody= checkPointMoved.getMessageBody();
-                int checkPointIDMoved = checkPointMovedBody.getCheckPointID();
+                int movedCheckPointID = checkPointMovedBody.getCheckPointID();
                 int newXPosition = checkPointMovedBody.getX();
                 int newYPosition = checkPointMovedBody.getY();
-                setCheckPointXPosition(newXPosition);
-                setCheckPointYPosition(newYPosition);
+                this.checkPointsPosition.replace(movedCheckPointID,new Integer[]{newXPosition,newYPosition});
                 break;
 
             case MessageType.gameFinished:
@@ -504,6 +542,7 @@ public class ClientReceive extends Thread{
                 gameEnded=true;
 
             case MessageType.registerChosen:
+                assert message instanceof RegisterChosen;
                 RegisterChosen registerChosen = (RegisterChosen) message;
                 //Der Server quittiert die Auswahl und schickt diese zur Information an alle Clients.
                 RegisterChosen.RegisterChosenBody registerChosenBody= registerChosen.getMessageBody();

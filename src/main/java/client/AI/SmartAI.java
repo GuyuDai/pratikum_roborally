@@ -6,11 +6,11 @@ import java.io.*;
 import java.net.*;
 
 public class SmartAI extends Client {
-  //private static final int SERVER_PORT = 1788;
-  //private static final String SERVER_IP = "localhost";
+  private static final int SERVER_PORT = 1788;
+  private static final String SERVER_IP = "localhost";
 
-  private static final int SERVER_PORT = 52020;
-  private static final String SERVER_IP = "sep21.dbs.ifi.lmu.de";
+  //private static final int SERVER_PORT = 52020;
+  //private static final String SERVER_IP = "sep21.dbs.ifi.lmu.de";
   private static AISmartReceive aiSmartReceive;
 
   public static AISmartReceive getAiSmartReceive() {
