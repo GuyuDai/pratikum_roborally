@@ -284,7 +284,7 @@ public class Robot implements RobotAction {
   public void push(Robot targetRobot, Direction direction, int step){
     for (int i = 0; i < step; i++) {
       Position nextPosition = targetRobot.getCurrentPosition().getNextPosition(direction);
-      Boolean flag = this.getCurrentGame().getController().positionOutOfBound(nextPosition);
+      boolean flag = this.getCurrentGame().getController().positionOutOfBound(nextPosition);
       if(flag){
         targetRobot.reboot();
         return;

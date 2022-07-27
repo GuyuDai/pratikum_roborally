@@ -19,7 +19,6 @@ public class BackUp extends Card implements Move{
 
   /**
    * @author dai
-   * BackUp = UTurn + MoveOne + UTurn
    * @param robot
    */
   @Override
