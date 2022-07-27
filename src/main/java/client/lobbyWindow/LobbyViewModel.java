@@ -289,7 +289,7 @@ public class LobbyViewModel {
                 }
                 else{
 
-                    LobbyText.setText("Please wait and try again later.");
+                    LobbyText.setText("Wait Map Selection!");
                     LobbyText.setVisible(true);
                     //selectMap.setVisible(false);
                 }
@@ -467,6 +467,10 @@ public class LobbyViewModel {
             checkForReady();
         }
         catch (Exception e){
+        }
+
+        if(Client.getClientReceive().getMaps()!=null){
+            selectMap.setText("SELECT MAP");
         }
     }
 
