@@ -223,14 +223,13 @@ public class LobbyViewModel {
     }
 
 
-    int clickCount = 0;
 
     /**
-     * click on ready Button -> first player to click will select map
+     * click on ready Button -> first player to click will select map the others will get to open the game window
      */
     public void readyButtonAction(ActionEvent actionEvent) {
-        clickCount++;
-        if (clickCount == 1) {
+        if (readyButton.isSelected()){
+            checkInput("I AM READY!");
             String readyMessage = new SetStatus(true).toString();
             Client.getClientReceive().sendMessage(readyMessage);
             if (Client.getClientReceive().getReadyList().size() < 1) {
@@ -239,19 +238,14 @@ public class LobbyViewModel {
                 selectMap.setText("OPEN GAME");
                 selectMap.setVisible(true);
             }
-           /* if (readyButton.isSelected()) {
-                System.out.println("OK");
-            } else {
-                LobbyText.setText("HUI");
-            }
-            */
-            if (clickCount == 2) {
-                String notReadyMessage = new SetStatus(false).toString();
-                Client.getClientReceive().sendMessage(notReadyMessage);
-                selectMap.setVisible(false);
-                Client.getClientReceive().setMaps(null);
-                clickCount = 0;
-            }
+        }
+        else{
+            checkInput("I AM NOT READY YET!");
+
+            String notReadyMessage = new SetStatus(false).toString();
+            Client.getClientReceive().sendMessage(notReadyMessage);
+            selectMap.setVisible(false);
+            Client.getClientReceive().setMaps(null);
         }
     }
 
