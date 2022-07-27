@@ -11,7 +11,7 @@ public class Spam extends Card implements DamageCards {
 
   @Override
   public void action() {
-    this.getOwner().getRegister().add(this.getOwner().getOwnDeck().getRemainingCards().get(0));
+    this.getOwner().getOwnDeck().getRemainingCards().get(0).action();
     this.getOwner().getOwnDeck().getRemainingCards().remove(0);
   }
 }

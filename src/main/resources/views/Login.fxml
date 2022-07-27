@@ -11,7 +11,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="934.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.loginWindow.LoginViewModel">
+<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#MouseAction" prefHeight="550.0" prefWidth="934.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.loginWindow.LoginViewModel">
    <Button fx:id="sendNameButton" layoutX="618.0" layoutY="435.0" mnemonicParsing="false" onAction="#initPlayer" prefHeight="83.0" prefWidth="90.0" styleClass="backgroundColor" stylesheets="@../styles.css">
       <font>
          <Font size="22.0" />

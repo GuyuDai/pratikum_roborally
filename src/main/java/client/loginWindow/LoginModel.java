@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
- * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
+ * @author Nargess Ahmadi, Felicia Saruba, Minghao Li
  */
 
 public class LoginModel {

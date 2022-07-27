@@ -8,6 +8,7 @@ import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -27,7 +28,7 @@ public class LoginViewModel {
 
     public static String window = "Login";
     public int figure;
-    public boolean robotSelected=false;
+    public boolean robotSelected = false;
     private static LoginViewModel instance;
     @FXML
     public AnchorPane container;
@@ -36,9 +37,9 @@ public class LoginViewModel {
     @FXML
     private Button sendNameButton;
 
-    List<Integer> takenRobotNumbers=new ArrayList<>();
+    List<Integer> takenRobotNumbers = new ArrayList<>();
 
-    List<Integer> freeRobotNumber=new ArrayList<>();
+    List<Integer> freeRobotNumber = new ArrayList<>();
 
 
     /**
@@ -78,43 +79,38 @@ public class LoginViewModel {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setPrettyPrinting();
         nameInput.textProperty().bindBidirectional(model.getTextFieldContent());
-        sendNameButton.disableProperty().bind(nameInput.textProperty().isEmpty().or (Bindings.isNull(ToggleGroupRobot.selectedToggleProperty())));
-       // AIButton.disableProperty().bind();
+        sendNameButton.disableProperty().bind(nameInput.textProperty().isEmpty().or(Bindings.isNull(ToggleGroupRobot.selectedToggleProperty())));
+        // AIButton.disableProperty().bind();
         checkRobot();
     }
 
     /**
      * function when robot button is selected
      */
-    public void selectBot(ActionEvent actionEvent){
-        if(buttonHammer.isSelected()){
-            figure=4;
-            robotSelected=true;
+    public void selectBot(ActionEvent actionEvent) {
+        if (buttonHammer.isSelected()) {
+            figure = 4;
+            robotSelected = true;
             checkRobot();
-        }
-        else if (buttonHulk.isSelected()){
-            figure=1;
-            robotSelected=true;
+        } else if (buttonHulk.isSelected()) {
+            figure = 1;
+            robotSelected = true;
             checkRobot();
-        }
-        else if (buttonSpin.isSelected()){
-            figure=2;
-            robotSelected=true;
+        } else if (buttonSpin.isSelected()) {
+            figure = 2;
+            robotSelected = true;
             checkRobot();
-        }
-        else if (buttonSquash.isSelected()){
-            figure=3;
-            robotSelected=true;
+        } else if (buttonSquash.isSelected()) {
+            figure = 3;
+            robotSelected = true;
             checkRobot();
-        }
-        else if (buttonTwonkey.isSelected()){
-            figure=5;
-            robotSelected=true;
+        } else if (buttonTwonkey.isSelected()) {
+            figure = 5;
+            robotSelected = true;
             checkRobot();
-        }
-        else if (buttonTwitch.isSelected()){
-            figure=6;
-            robotSelected=true;
+        } else if (buttonTwitch.isSelected()) {
+            figure = 6;
+            robotSelected = true;
             checkRobot();
         }
     }
@@ -123,37 +119,41 @@ public class LoginViewModel {
     /**
      * check which robots are already taken and disable button accordingly
      */
-      public void checkRobot() {
-          takenRobotNumbers = Client.getClientReceive().getRobotNumbers();
-          for (int number : takenRobotNumbers) {
-              switch(number) {
-                  case 1: // Hulk
-                      buttonHulk.setDisable(true);
-                      break;
-                  case 2: //Spin
-                      buttonSpin.setDisable(true);
-                      break;
-                  case 3: //Squash
-                      buttonSquash.setDisable(true);
-                      break;
-                  case 4: //Hammer
-                      buttonHammer.setDisable(true);
-                      break;
-                  case 5: //Twonkey
-                      buttonTwonkey.setDisable(true);
-                      break;
-                  case 6: //Twitch
-                      buttonTwitch.setDisable(true);
-                      break;
-              }
-          }
-      }
+    public void checkRobot() {
+        takenRobotNumbers = Client.getClientReceive().getRobotNumbers();
+        for (int number : takenRobotNumbers) {
+            switch (number) {
+                case 1: // Hulk
+                    buttonHulk.setDisable(true);
+                    break;
+                case 2: //Spin
+                    buttonSpin.setDisable(true);
+                    break;
+                case 3: //Squash
+                    buttonSquash.setDisable(true);
+                    break;
+                case 4: //Hammer
+                    buttonHammer.setDisable(true);
+                    break;
+                case 5: //Twonkey
+                    buttonTwonkey.setDisable(true);
+                    break;
+                case 6: //Twitch
+                    buttonTwitch.setDisable(true);
+                    break;
+            }
+        }
+    }
+
+    public void MouseAction(MouseEvent mouseEvent) {
+        checkRobot();
+    }
 
     /**
      * initialize player with chosen name and robot -> Lobby window opens
      */
     public void initPlayer(ActionEvent actionEvent) throws IOException {
-        String name =nameInput.getText();
+        String name = nameInput.getText();
         Message message = new PlayerValues(name, figure);
         String clientMessage = message.toString();
         Client.getClientReceive().getWriteOutput().write(clientMessage);
@@ -166,15 +166,22 @@ public class LoginViewModel {
     }
 
 
-    public void openLobbyWindow(){
+    /**
+     * opens Lobby window
+     */
+    public void openLobbyWindow() {
         try {
             FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/views/Lobby.fxml"));
             Parent rootGame = (Parent) fxmlLoaderGame.load();
             Stage stageGame = new Stage();
+            stageGame.setOnCloseRequest(e -> {
+                e.consume();
+                closeGUI();
+            });
             stageGame.setTitle("Lobby");
             stageGame.setScene(new Scene(rootGame));
             stageGame.show();
-        } catch (Exception e){
+        } catch (Exception e) {
         }
     }
 
@@ -183,11 +190,11 @@ public class LoginViewModel {
         return instance;
     }
 
-    public static void setWindowName (String name){
+    public static void setWindowName(String name) {
         window = name;
     }
 
-    public static String getWindowName(){
+    public static String getWindowName() {
         return window;
     }
 
@@ -200,6 +207,9 @@ public class LoginViewModel {
     Button soundOff;
 
 
+    /**
+     * sound effect and visual effect when selecting Hulk x90
+     */
     public void playHulk() {
         try {
             String fileName = getClass().getResource("/sounds/Hulk x 90.mp3").toURI().toString();
@@ -218,6 +228,9 @@ public class LoginViewModel {
         buttonTwonkey.setStyle("-fx-border-color: #ffffff");
     }
 
+    /**
+     * sound effect and visual effect when selecting Spin bot
+     */
     public void playSpinbot() {
         try {
             String fileName = getClass().getResource("/sounds/Spin bot.mp3").toURI().toString();
@@ -236,6 +249,9 @@ public class LoginViewModel {
         buttonTwonkey.setStyle("-fx-border-color: #ffffff");
     }
 
+    /**
+     * sound effect and visual effect when selecting Hammer bot
+     */
     public void playHammerbot() {
         try {
             String fileName = getClass().getResource("/sounds/Hammer bot.mp3").toURI().toString();
@@ -254,6 +270,9 @@ public class LoginViewModel {
         buttonTwonkey.setStyle("-fx-border-color: #ffffff");
     }
 
+    /**
+     * sound effect and visual effect when selecting Squash bot
+     */
     public void playSquashbot() {
         try {
             String fileName = getClass().getResource("/sounds/Squash bot.mp3").toURI().toString();
@@ -272,6 +291,9 @@ public class LoginViewModel {
         buttonTwonkey.setStyle("-fx-border-color: #ffffff");
     }
 
+    /**
+     * sound effect and visual effect when selecting Twonkey
+     */
     public void playTwonkey() {
         try {
             String fileName = getClass().getResource("/sounds/Twonkey.mp3").toURI().toString();
@@ -290,6 +312,9 @@ public class LoginViewModel {
         buttonTwonkey.setStyle("-fx-border-color: #f11919");
     }
 
+    /**
+     * sound effect and visual effect when selecting Twitch
+     */
     public void playTwitch() {
         try {
             String fileName = getClass().getResource("/sounds/Twitch.mp3").toURI().toString();
@@ -308,6 +333,9 @@ public class LoginViewModel {
         buttonTwonkey.setStyle("-fx-border-color: #ffffff");
     }
 
+    /**
+     * sound effect for Welcome message
+     */
     public void playWelcome() {
         try {
             String fileName = getClass().getResource("/sounds/Welcome.mp3").toURI().toString();
@@ -320,4 +348,19 @@ public class LoginViewModel {
         sound.getMediaPlayer().play();
     }
 
+    /**
+     * close the Login GUI
+     */
+    public static void closeGUI() {
+        Boolean answer = ExitWindow.display("Exit Game", "Are you sure, you want to quit the game?");
+        if (answer) {
+            System.exit(0);
+            int yourId = Client.getClientReceive().getClientID();
+            String exitMessage = new ConnectionUpdate(yourId, false, "").toString();
+            Client.getClientReceive().sendMessage(exitMessage);
+            System.out.println(yourId + " has left."); //test
+            System.out.println(Client.getClientReceive().getIdList());
+            Client.getLogger().info(Client.getClientReceive().getNameById(yourId) + "has left the Game");
+        }
+    }
 }

@@ -157,7 +157,6 @@ public class Robot implements RobotAction {
   private void moveOneStep() {
     Position togo = this.getCurrentPosition().getNextPosition(this.getFaceDirection());
     boolean flag = this.currentGame.getController().movementCheck(this, this.getFaceDirection());
-    System.out.println(flag + "+move");
     if (flag) {
       //send protocol message
       String type1 = togo.getTile().getName();
@@ -186,6 +185,11 @@ public class Robot implements RobotAction {
       this.setCurrentPosition(togo);
       currentGame.sendMessageToAll(new Movement(owner.clientID, togo.getX(), togo.getY()));
     }else {
+      boolean pushFlag = this.currentGame.getController().isOccupied(togo);
+      if(pushFlag){
+        Robot target = togo.getOccupiedRobot();
+        push(target, this.faceDirection,1);
+      }
       stay();
     }
   }
@@ -286,7 +290,7 @@ public class Robot implements RobotAction {
     for (int i = 0; i < step; i++) {
       Position nextPosition = targetRobot.getCurrentPosition().getNextPosition(direction);
       Boolean flag = this.getCurrentGame().getController().positionOutOfBound(nextPosition);
-      if(flag){
+      if(flag && !this.name.equals(targetRobot.getName())){
         targetRobot.reboot();
         return;
       }

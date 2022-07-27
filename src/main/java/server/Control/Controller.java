@@ -98,10 +98,6 @@ public class Controller {
       return false;
     }
 
-    if (positionOutOfBound(nextPosition)) {
-      return false;
-    }
-
     return true;
   }
 

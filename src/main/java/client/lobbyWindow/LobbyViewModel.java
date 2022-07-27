@@ -2,8 +2,8 @@ package client.lobbyWindow;
 
 import java.io.IOException;
 import java.net.URL;
-
 import client.Client;
+import client.loginWindow.LoginViewModel;
 import com.google.gson.Gson;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -27,7 +27,6 @@ import protocol.SetStatus;
 /**
  * @author Nargess Ahmadi, Felicia Saruba, Minghao Li
  */
-
 
 public class LobbyViewModel {
 
@@ -131,18 +130,28 @@ public class LobbyViewModel {
         model.addNewListItem(message);
     }
 
+    /**
+     * open game window
+     */
     public void openGameWindow() {
         try {
             FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/views/Game.fxml"));
             Parent rootGame = (Parent) fxmlLoaderGame.load();
             Stage stageGame = new Stage();
             stageGame.setTitle("Dizzy Highway");
+            stageGame.setOnCloseRequest(e -> {
+                e.consume();
+                LoginViewModel.closeGUI();
+            });
             stageGame.setScene(new Scene(rootGame));
             stageGame.show();
         } catch (Exception e) {
         }
     }
 
+    /**
+     * message gets send in the chatroom
+     */
     @FXML
     public void sendButtonAction(ActionEvent actionEvent) throws IOException {
         String message = model.getTextFieldContent().get();
@@ -213,14 +222,14 @@ public class LobbyViewModel {
         return sendChat;
     }
 
-    /**
-     * click on ready Button -> first player to click will select map
-     */
-    int clickCount = 0;
 
+
+    /**
+     * click on ready Button -> first player to click will select map the others will get to open the game window
+     */
     public void readyButtonAction(ActionEvent actionEvent) {
-        clickCount++;
-        if (clickCount == 1) {
+        if (readyButton.isSelected()){
+            checkInput("I AM READY!");
             String readyMessage = new SetStatus(true).toString();
             Client.getClientReceive().sendMessage(readyMessage);
             if (Client.getClientReceive().getReadyList().size() < 1) {
@@ -229,19 +238,14 @@ public class LobbyViewModel {
                 selectMap.setText("OPEN GAME");
                 selectMap.setVisible(true);
             }
-           /* if (readyButton.isSelected()) {
-                System.out.println("OK");
-            } else {
-                LobbyText.setText("HUI");
-            }
-            */
-            if (clickCount == 2) {
-                String notReadyMessage = new SetStatus(false).toString();
-                Client.getClientReceive().sendMessage(notReadyMessage);
-                selectMap.setVisible(false);
-                Client.getClientReceive().setMaps(null);
-                clickCount = 0;
-            }
+        }
+        else{
+            checkInput("I AM NOT READY YET!");
+
+            String notReadyMessage = new SetStatus(false).toString();
+            Client.getClientReceive().sendMessage(notReadyMessage);
+            selectMap.setVisible(false);
+            Client.getClientReceive().setMaps(null);
         }
     }
 
@@ -290,7 +294,9 @@ public class LobbyViewModel {
         }
 
 
-
+    /**
+     * Set your own player´s icon and name on board
+     */
         public void setYourBotIcon () {
             yourRobotText.setVisible(true);
             yourBotText.setVisible(true);
@@ -326,7 +332,7 @@ public class LobbyViewModel {
 
 
         /**
-         * Set other player´s icon and name on board.
+         * Set other player´s icon and name on board
          */
         public void setOthersBotIcon () {
             for (int id : Client.getClientReceive().getIdRobot().keySet()) {
@@ -388,16 +394,20 @@ public class LobbyViewModel {
         }
 
 
+    /**
+     * Event to update the other player's board if new player joined
+     */
     public void MouseAction(MouseEvent mouseEvent) {
         setYourBotIcon();
         setOthersBotIcon();
     }
 
+    /**
+     * getter setter for windowname -> for chat to work in both windows
+     */
     public static void setWindowName (String name){
         window = name;
     }
 
-    public static String getWindowName () {
-        return window;
-    }
+    public static String getWindowName () { return window; }
 }
