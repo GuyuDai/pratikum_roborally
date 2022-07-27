@@ -327,7 +327,6 @@ public class GameViewModel {
 
 
 
-
     public void initialize(Client client) {
         this.client = client;
         list.itemsProperty().set(model.getListContentProperty());
@@ -501,6 +500,30 @@ public class GameViewModel {
      * Set other player´s icon and name on board.
      */
     public void setOthersBotIcon() {
+        if (playerBot1.getImage() != (null)){
+            playerBot1.setImage(null);
+            playerName1.setText("");
+        }
+        if (playerBot2.getImage() != (null)){
+            playerBot2.setImage(null);
+            playerName2.setText("");
+        }
+        if (playerBot3.getImage() != (null)){
+            playerBot3.setImage(null);
+            playerName3.setText("");
+        }
+        if (playerBot4.getImage() != (null)){
+            playerBot4.setImage(null);
+            playerName4.setText("");
+        }
+        if (playerBot5.getImage() != (null)){
+            playerBot5.setImage(null);
+            playerName5.setText("");
+        }
+        if (playerBot6.getImage() != (null)){
+            playerBot6.setImage(null);
+            playerName6.setText("");
+        }
         for (int id : Client.getClientReceive().getIdRobot().keySet()) {
             if (id != Client.getClientReceive().getClientID()) {
                 int otherRobotNumber = Client.getClientReceive().getIdRobot().get(id);
@@ -569,6 +592,7 @@ public class GameViewModel {
      * print 9 random cards from a deck of 20
      */
     public void printCards() {
+        playProgrammingPhaseBegins();
         Text.setText("Select 5 of these cards for your register");
         //make 9 hands visible
         hand1Button.setVisible(true);
@@ -1098,7 +1122,6 @@ public class GameViewModel {
         }
     }
 
-
     /**
      * print map button -> map gets printed and starting point selection appears
      */
@@ -1110,8 +1133,6 @@ public class GameViewModel {
         //roboRallyImage.setVisible(false);
         selectStartingPoint.setVisible(true);
         printMapButton.setVisible(false);
-        setYourBotIcon();
-        setOthersBotIcon();
 
         URL empty = getClass().getResource("/Empty.png");
         Image imageEmpty = new Image(empty.toString());
@@ -1121,6 +1142,8 @@ public class GameViewModel {
         emptyView.setFitHeight(43);
 
         robotBoard.add(emptyView, 0, 0);
+        setOk(1);
+
     }
 
     /**
@@ -2612,6 +2635,33 @@ public class GameViewModel {
         printCards();
     }
 
+
+    /**
+     * if only one player is left in the game he automatically wins and the winner window opens
+     */
+    public void checkAmountPlayer(){
+        if(playerBot1.getImage() == null && playerBot2.getImage() == null && playerBot3.getImage() == null && playerBot4.getImage() == null && playerBot5.getImage() == null && playerBot6.getImage() == null && ok == 1) {
+
+            Stage stage = (Stage) exitBtn.getScene().getWindow();
+            stage.close();
+
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/WinnerWhenOnlyOnePlayer.fxml"));
+                Parent rootMap = (Parent) fxmlLoader.load();
+                Stage stageLobby = new Stage();
+                stageLobby.setTitle("Winner");
+                stageLobby.setScene(new Scene(rootMap));
+                stageLobby.show();
+            } catch (Exception e) {
+                Client.getLogger().severe( "Window cannot open.");
+            }
+        }
+
+        else{
+        }
+    }
+
+
     /**
      * Mouse event for updating timer
      */
@@ -2621,27 +2671,21 @@ public class GameViewModel {
             timer30Sec();
         } else {
         }
-        checkStart();
-
-
-        //TODO if only one connected client is left he will be the winner
-      /*  if(Client.getClientReceive().getIdList().size() < 2){
-            Stage stage = (Stage) exitBtn.getScene().getWindow();
-            stage.close();
-
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Winner.fxml"));
-                Parent rootMap = (Parent) fxmlLoader.load();
-                Stage stageLobby = new Stage();
-                stageLobby.setTitle("Winner");
-                stageLobby.setScene(new Scene(rootMap));
-                stageLobby.show();
-            } catch (Exception e) {
-                Client.getLogger().severe( "Window can not open.");
-            }
+        try{
+            checkStart();
         }
-
-       */
+        catch (Exception e){
+        }
+        try {
+            setOthersBotIcon();
+        }
+        catch (Exception e){
+        }
+        try {
+            checkAmountPlayer();
+        }
+        catch (Exception e){
+        }
     }
 
     /**
@@ -2661,9 +2705,19 @@ public class GameViewModel {
                 default:
                     break;
             }
-
     }
 
+    public void playProgrammingPhaseBegins() {
+        try {
+            String fileName = getClass().getResource("/sounds/ProgrammingPhaseBegins.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        sound.getMediaPlayer().play();
+    }
 
     /**
      * timer 30 seconds when first player finished selecting register
@@ -3080,4 +3134,9 @@ public class GameViewModel {
         sound.getMediaPlayer().play();
     }
 
+    int ok = 0;
+
+    public void setOk(int ok){
+        this.ok = ok;
+    }
 }

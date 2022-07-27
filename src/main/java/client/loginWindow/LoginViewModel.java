@@ -8,6 +8,8 @@ import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
@@ -186,6 +188,16 @@ public class LoginViewModel {
     }
 
 
+    /**
+     * send messages using keyboard "Enter" key
+     */
+    @FXML
+    public void keyboardAction(KeyEvent keyEvent) throws IOException {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            initPlayer(null);
+        }
+    }
+
     public static LoginViewModel getInstance() {
         return instance;
     }
@@ -358,7 +370,7 @@ public class LoginViewModel {
             int yourId = Client.getClientReceive().getClientID();
             String exitMessage = new ConnectionUpdate(yourId, false, "").toString();
             Client.getClientReceive().sendMessage(exitMessage);
-            System.out.println(yourId + " has left."); //test
+            //System.out.println(yourId + " has left."); //test
             System.out.println(Client.getClientReceive().getIdList());
             Client.getLogger().info(Client.getClientReceive().getNameById(yourId) + "has left the Game");
         }
