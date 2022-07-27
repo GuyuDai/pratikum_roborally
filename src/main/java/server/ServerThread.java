@@ -29,6 +29,7 @@ import protocol.SetStatus.SetStatusBody;
 import protocol.MapSelected.MapSelectedBody;
 import protocol.SelectedCard.SelectedCardBody;
 import server.BoardElement.BoardElem;
+import server.BoardElement.CheckPoint;
 import server.BoardTypes.*;
 import server.CardTypes.Card;
 import server.Control.Direction;
@@ -417,6 +418,7 @@ public class ServerThread implements Runnable {
                 int targetId = sendChatBody.getTo();
                 if(targetId == -1){
                     sendToAll(new ReceivedChat(msg,clientID,false).toString());
+                    cheatCheck(msg);
                 }
                 else {
                     sendPrivate(new ReceivedChat(msg,clientID,true).toString(),targetId);
@@ -745,6 +747,37 @@ public class ServerThread implements Runnable {
             clientSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * only for testing whether the checkpoint works or not
+     * @param msg
+     */
+    private void cheatCheck(String msg){
+        if(msg.startsWith("/fly to check point")){
+            int start = msg.lastIndexOf('t');
+            int checkPointID = Integer.parseInt(msg.substring(start).trim());
+            Position targetPosition = null;
+            for(BoardElem[][] elem2d : currentGame.getGameBoard().getMap()){
+                for(BoardElem[] elem1d : elem2d){
+                    for(BoardElem elem : elem1d){
+                        if(elem.getName().equals("CheckPoint")){
+                            CheckPoint temp = (CheckPoint) elem;
+                            if(temp.getCount() == checkPointID){
+                                targetPosition = elem.getPosition();
+                            }
+                        }
+                    }
+                }
+            }
+            this.player.getOwnRobot().setLastPosition(this.player.getOwnRobot().getCurrentPosition());
+            if(targetPosition != null){
+                this.player.getOwnRobot().setCurrentPosition(targetPosition);
+                sendToAll(new Movement(this.clientID,targetPosition.getX(),targetPosition.getY()).toString());
+            }else {
+                sendMessage(new ErrorMessage("wanted check point not exist").toString());
+            }
         }
     }
 }
