@@ -2676,6 +2676,11 @@ public class GameViewModel {
         }
         catch (Exception e){
         }
+        try{
+            setYourBotIcon();
+        }
+        catch (Exception e){
+        }
         try {
             setOthersBotIcon();
         }
