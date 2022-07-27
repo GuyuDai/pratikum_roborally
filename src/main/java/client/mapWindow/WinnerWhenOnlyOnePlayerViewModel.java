@@ -5,11 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import java.net.URL;
 
-public class WinnerViewModel {
 
+public class WinnerWhenOnlyOnePlayerViewModel {
 
     @FXML
     private Label nameBot;
@@ -74,5 +73,6 @@ public class WinnerViewModel {
         imageBot.setImage(robotIcon);
         nameBot.setText(yourName);
     }
+
 
 }

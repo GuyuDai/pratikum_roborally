@@ -20,7 +20,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#MouseAction" prefHeight="800.0" prefWidth="1195.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
+<AnchorPane fx:id="gameContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#MouseAction" prefHeight="800.0" prefWidth="1195.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gameWindow.GameViewModel">
    <children>
       <Pane layoutX="6.0" layoutY="3.0" prefHeight="795.0" prefWidth="305.0" stylesheets="@../styles.css">
          <children>
@@ -289,7 +289,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="yourBotText" layoutX="12.0" layoutY="64.0" prefHeight="20.0" prefWidth="62.0" textFill="WHITE" visible="false">
+                  <Label fx:id="yourBotText" layoutX="12.0" layoutY="64.0" prefHeight="25.0" prefWidth="106.0" textFill="WHITE" visible="false">
                      <font>
                         <Font size="16.0" />
                      </font>
