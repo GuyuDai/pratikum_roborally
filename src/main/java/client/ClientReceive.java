@@ -769,7 +769,7 @@ public class ClientReceive extends Thread{
 
     /*
     protected Map<Integer,Integer[]> IdPosition = new HashMap<>();
-    ?? protected List<Integer> IdList = new ArrayList<>();
+    protected List<Integer> IdList = new ArrayList<>();
     protected Map<Integer,Integer> IdRobot = new HashMap<>();
     protected Map<Integer,Integer>IdStartPoint = new HashMap<>();
     protected Map<Integer,String> IdDirection=new HashMap<>();
@@ -781,12 +781,16 @@ public class ClientReceive extends Thread{
     ?? protected List<Boolean> readyList=new ArrayList<>();
      */
     public void removeDisconnectedClient(int targetID){
+        if(IdStartPoint.containsKey(targetID)){
+            this.startNumbers.remove((Integer) getStartPointById(targetID));
+        }
+        this.IdName.remove(getNameById(targetID));
         this.IdPosition.remove(targetID);
         this.IdRobot.remove(targetID);
         this.IdStartPoint.remove(targetID);
         this.IdDirection.remove(targetID);
         this.IdCardPlayed.remove(targetID);
         this.IdReady.remove(targetID);
-        this.IdName.remove(targetID);
+        this.IdList.remove((Integer) targetID);
     }
 }
