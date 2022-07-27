@@ -5,7 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="487.0" prefWidth="550.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.mapWindow.WinnerWhenOnlyOnePlayerViewModel">
+<AnchorPane prefHeight="487.0" prefWidth="550.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.mapWindow.WinnerWhenOnlyOnePlayerViewModel">
    <children>
       <ImageView fitHeight="130.0" fitWidth="479.0" layoutX="126.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
          <image>

@@ -5,6 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 
@@ -14,6 +19,8 @@ public class WinnerWhenOnlyOnePlayerViewModel {
     private Label nameBot;
     @FXML
     private ImageView imageBot;
+    @FXML
+    private MediaView sound;
 
 
     /**
@@ -40,6 +47,7 @@ public class WinnerWhenOnlyOnePlayerViewModel {
 
 
     public void initialize(){
+        //playWinnerTune();
         setYourBotIcon();
     }
     /**
@@ -72,6 +80,17 @@ public class WinnerWhenOnlyOnePlayerViewModel {
         }
         imageBot.setImage(robotIcon);
         nameBot.setText(yourName);
+    }
+
+    public void playWinnerTune() {
+        try {
+            String fileName = getClass().getResource("/sounds/winnerTune.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (Exception e) {
+        }
+        sound.getMediaPlayer().play();
     }
 
 
