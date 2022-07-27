@@ -148,7 +148,7 @@ public class AISmartReceive extends ClientReceive {
         MapSelected.MapSelectedBody mapSelectedBody = new Gson().fromJson(body,
             MapSelected.MapSelectedBody.class);
         board = mapSelectedBody.getMap();
-        setUnreachedCheckPoints();
+        setCheckPointsPosition();
         switch (this.board){
           case "DizzyHighway":
             unreachedCheckPoints.add(1);
