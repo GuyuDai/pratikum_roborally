@@ -54,14 +54,14 @@
             <Font size="24.0" />
          </font>
       </CheckBox>
-      <Button fx:id="selectMap" layoutX="498.0" layoutY="493.0" mnemonicParsing="false" onAction="#selectMapAction" prefHeight="36.0" prefWidth="120.0" styleClass="buttonColor2" text="select map">
+      <Button fx:id="selectMap" layoutX="498.0" layoutY="493.0" mnemonicParsing="false" onAction="#selectMapAction" prefHeight="36.0" prefWidth="120.0" styleClass="buttonColor2" text="SELECT MAP">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
       <Label fx:id="LobbyText" layoutX="321.0" layoutY="457.0" prefHeight="36.0" prefWidth="546.0" text="You are the only player who is ready. Please wait for the others." textFill="#cd5151" visible="false" />
       <ImageView fx:id="playerBot6" fitHeight="62.0" fitWidth="62.0" layoutX="742.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="playerName1" layoutX="332.0" layoutY="412.0" prefHeight="24.0" prefWidth="71.0" />
+      <Label fx:id="playerName1" layoutX="332.0" layoutY="412.0" prefHeight="25.0" prefWidth="84.0" />
       <ImageView fx:id="playerBot4" fitHeight="62.0" fitWidth="62.0" layoutX="570.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerBot3" fitHeight="62.0" fitWidth="62.0" layoutX="487.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerBot1" fitHeight="62.0" fitWidth="62.0" layoutX="319.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true" />
@@ -74,11 +74,11 @@
       </ImageView>
       <ImageView fx:id="yourRobot" fitHeight="95.0" fitWidth="100.0" layoutX="361.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="yourBotText" layoutX="389.0" layoutY="260.0" prefHeight="25.0" prefWidth="84.0" textAlignment="RIGHT" />
-      <Label fx:id="playerName4" layoutX="583.0" layoutY="411.0" prefHeight="24.0" prefWidth="71.0" />
-      <Label fx:id="playerName3" layoutX="501.0" layoutY="412.0" prefHeight="24.0" prefWidth="62.0" />
-      <Label fx:id="playerName2" layoutX="413.0" layoutY="412.0" prefHeight="24.0" prefWidth="71.0" />
-      <Label fx:id="playerName5" layoutX="669.0" layoutY="411.0" prefHeight="24.0" prefWidth="55.0" />
-      <Label fx:id="playerName6" layoutX="748.0" layoutY="411.0" prefHeight="24.0" prefWidth="71.0" />
+      <Label fx:id="playerName4" layoutX="583.0" layoutY="411.0" prefHeight="25.0" prefWidth="78.0" />
+      <Label fx:id="playerName3" layoutX="501.0" layoutY="412.0" prefHeight="25.0" prefWidth="78.0" />
+      <Label fx:id="playerName2" layoutX="413.0" layoutY="412.0" prefHeight="25.0" prefWidth="93.0" />
+      <Label fx:id="playerName5" layoutX="669.0" layoutY="411.0" prefHeight="25.0" prefWidth="84.0" />
+      <Label fx:id="playerName6" layoutX="748.0" layoutY="411.0" prefHeight="25.0" prefWidth="84.0" />
       <ImageView fx:id="otherRobotText" fitHeight="25.0" fitWidth="222.0" layoutX="321.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../fonts/otherRobots.png" />

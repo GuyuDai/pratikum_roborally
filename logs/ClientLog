@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-07-27T17:47:10.656469800Z</date>
-  <millis>1658944030656</millis>
-  <nanos>469800</nanos>
+  <date>2022-07-27T12:08:09.121137600Z</date>
+  <millis>1658923689121</millis>
+  <nanos>137600</nanos>
   <sequence>1</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
@@ -14,9 +14,9 @@
   <message>[32m{"messageType":"HelloClient","messageBody":{"protocol":"Version 2.0"}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-27T17:47:10.664450800Z</date>
-  <millis>1658944030664</millis>
-  <nanos>450800</nanos>
+  <date>2022-07-27T12:08:09.127120400Z</date>
+  <millis>1658923689127</millis>
+  <nanos>120400</nanos>
   <sequence>2</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
@@ -26,9 +26,9 @@
   <message>[32m{"messageType":"Welcome","messageBody":{"clientID":1}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-27T17:47:15.696831900Z</date>
-  <millis>1658944035696</millis>
-  <nanos>831900</nanos>
+  <date>2022-07-27T12:08:14.167696100Z</date>
+  <millis>1658923694167</millis>
+  <nanos>696100</nanos>
   <sequence>3</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
@@ -38,226 +38,46 @@
   <message>[32m{"messageType":"Alive","messageBody":{}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-27T17:47:17.582041Z</date>
-  <millis>1658944037582</millis>
-  <nanos>41000</nanos>
+  <date>2022-07-27T12:08:17.364182200Z</date>
+  <millis>1658923697364</millis>
+  <nanos>182200</nanos>
   <sequence>4</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
   <class>client.ClientReceive</class>
   <method>run</method>
   <thread>31</thread>
-  <message>[32m{"messageType":"PlayerAdded","messageBody":{"clientID":1,"name":"ww","figure":1}}wrapped message</message>
+  <message>[32m{"messageType":"PlayerAdded","messageBody":{"clientID":1,"name":"hi","figure":1}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-27T17:47:27.030732400Z</date>
-  <millis>1658944047030</millis>
-  <nanos>732400</nanos>
+  <date>2022-07-27T12:08:26.594356400Z</date>
+  <millis>1658923706594</millis>
+  <nanos>356400</nanos>
   <sequence>5</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
   <class>client.ClientReceive</class>
   <method>run</method>
   <thread>31</thread>
-  <message>[32m{"messageType":"PlayerAdded","messageBody":{"clientID":2,"name":"qq","figure":2}}wrapped message</message>
+  <message>[32m{"messageType":"PlayerAdded","messageBody":{"clientID":2,"name":"hi","figure":4}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-27T17:47:30.251748300Z</date>
-  <millis>1658944050251</millis>
-  <nanos>748300</nanos>
+  <date>2022-07-27T12:09:11.195269800Z</date>
+  <millis>1658923751195</millis>
+  <nanos>269800</nanos>
   <sequence>6</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
   <class>client.ClientReceive</class>
   <method>run</method>
   <thread>31</thread>
-  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"I AM READY!","from":2,"isPrivate":false}}wrapped message</message>
+  <message>[32m{"messageType":"PlayerAdded","messageBody":{"clientID":3,"name":"hi","figure":3}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-27T17:47:30.256736400Z</date>
-  <millis>1658944050256</millis>
-  <nanos>736400</nanos>
+  <date>2022-07-27T12:10:57.669536700Z</date>
+  <millis>1658923857669</millis>
+  <nanos>536700</nanos>
   <sequence>7</sequence>
-  <logger>ClientLog</logger>
-  <level>INFO</level>
-  <class>client.ClientReceive</class>
-  <method>run</method>
-  <thread>31</thread>
-  <message>[32m{"messageType":"PlayerStatus","messageBody":{"clientID":2,"ready":true}}wrapped message</message>
-</record>
-<record>
-  <date>2022-07-27T17:47:33.017028300Z</date>
-  <millis>1658944053017</millis>
-  <nanos>28300</nanos>
-  <sequence>8</sequence>
-  <logger>ClientLog</logger>
-  <level>INFO</level>
-  <class>client.ClientReceive</class>
-  <method>run</method>
-  <thread>31</thread>
-  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"I AM READY!","from":1,"isPrivate":false}}wrapped message</message>
-</record>
-<record>
-  <date>2022-07-27T17:47:33.018024600Z</date>
-  <millis>1658944053018</millis>
-  <nanos>24600</nanos>
-  <sequence>9</sequence>
-  <logger>ClientLog</logger>
-  <level>INFO</level>
-  <class>client.ClientReceive</class>
-  <method>run</method>
-  <thread>31</thread>
-  <message>[32m{"messageType":"PlayerStatus","messageBody":{"clientID":1,"ready":true}}wrapped message</message>
-</record>
-<record>
-  <date>2022-07-27T17:47:35.860950500Z</date>
-  <millis>1658944055860</millis>
-  <nanos>950500</nanos>
-  <sequence>10</sequence>
-  <logger>ClientLog</logger>
-  <level>INFO</level>
-  <class>client.ClientReceive</class>
-  <method>run</method>
-  <thread>31</thread>
-  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"I AM NOT READY YET!","from":2,"isPrivate":false}}wrapped message</message>
-</record>
-<record>
-  <date>2022-07-27T17:47:35.861946700Z</date>
-  <millis>1658944055861</millis>
-  <nanos>946700</nanos>
-  <sequence>11</sequence>
-  <logger>ClientLog</logger>
-  <level>INFO</level>
-  <class>client.ClientReceive</class>
-  <method>run</method>
-  <thread>31</thread>
-  <message>[32m{"messageType":"PlayerStatus","messageBody":{"clientID":2,"ready":false}}wrapped message</message>
-</record>
-<record>
-  <date>2022-07-27T17:47:35.863943300Z</date>
-  <millis>1658944055863</millis>
-  <nanos>943300</nanos>
-  <sequence>12</sequence>
-  <logger>ClientLog</logger>
-  <level>INFO</level>
-  <class>client.ClientReceive</class>
-  <method>run</method>
-  <thread>31</thread>
-  <message>[32m{"messageType":"SelectMap","messageBody":{"availableMaps":["DizzyHighway","ExtraCrispy","DeathTrap","LostBearings","Twister"]}}wrapped message</message>
-</record>
-<record>
-  <date>2022-07-27T17:47:39.988641800Z</date>
-  <millis>1658944059988</millis>
-  <nanos>641800</nanos>
-  <sequence>13</sequence>
-  <logger>ClientLog</logger>
-  <level>INFO</level>
-  <class>client.ClientReceive</class>
-  <method>run</method>
-  <thread>31</thread>
-  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"I AM READY!","from":2,"isPrivate":false}}wrapped message</message>
-</record>
-<record>
-  <date>2022-07-27T17:47:39.989639700Z</date>
-  <millis>1658944059989</millis>
-  <nanos>639700</nanos>
-  <sequence>14</sequence>
-  <logger>ClientLog</logger>
-  <level>INFO</level>
-  <class>client.ClientReceive</class>
-  <method>run</method>
-  <thread>31</thread>
-  <message>[32m{"messageType":"PlayerStatus","messageBody":{"clientID":2,"ready":true}}wrapped message</message>
-</record>
-<record>
-  <date>2022-07-27T17:52:22.404033600Z</date>
-  <millis>1658944342404</millis>
-  <nanos>33600</nanos>
-  <sequence>15</sequence>
-  <logger>ClientLog</logger>
-  <level>INFO</level>
-  <class>client.ClientReceive</class>
-  <method>run</method>
-  <thread>31</thread>
-  <message>[32m{"messageType":"PlayerAdded","messageBody":{"clientID":3,"name":"qq","figure":4}}wrapped message</message>
-</record>
-<record>
-  <date>2022-07-27T17:52:26.897157200Z</date>
-  <millis>1658944346897</millis>
-  <nanos>157200</nanos>
-  <sequence>16</sequence>
-  <logger>ClientLog</logger>
-  <level>INFO</level>
-  <class>client.ClientReceive</class>
-  <method>run</method>
-  <thread>31</thread>
-  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"I AM READY!","from":3,"isPrivate":false}}wrapped message</message>
-</record>
-<record>
-  <date>2022-07-27T17:52:26.899152900Z</date>
-  <millis>1658944346899</millis>
-  <nanos>152900</nanos>
-  <sequence>17</sequence>
-  <logger>ClientLog</logger>
-  <level>INFO</level>
-  <class>client.ClientReceive</class>
-  <method>run</method>
-  <thread>31</thread>
-  <message>[32m{"messageType":"PlayerStatus","messageBody":{"clientID":3,"ready":true}}wrapped message</message>
-</record>
-<record>
-  <date>2022-07-27T17:52:30.700444400Z</date>
-  <millis>1658944350700</millis>
-  <nanos>444400</nanos>
-  <sequence>18</sequence>
-  <logger>ClientLog</logger>
-  <level>INFO</level>
-  <class>client.ClientReceive</class>
-  <method>run</method>
-  <thread>31</thread>
-  <message>[32m{"messageType":"MapSelected","messageBody":{"map":"DizzyHighway"}}wrapped message</message>
-</record>
-<record>
-  <date>2022-07-27T17:52:30.709422400Z</date>
-  <millis>1658944350709</millis>
-  <nanos>422400</nanos>
-  <sequence>19</sequence>
-  <logger>ClientLog</logger>
-  <level>INFO</level>
-  <class>client.ClientReceive</class>
-  <method>run</method>
-  <thread>31</thread>
-  <message>[32m{"messageType":"ActivePhase","messageBody":{"phase":0}}wrapped message</message>
-</record>
-<record>
-  <date>2022-07-27T17:52:30.710418500Z</date>
-  <millis>1658944350710</millis>
-  <nanos>418500</nanos>
-  <sequence>20</sequence>
-  <logger>ClientLog</logger>
-  <level>INFO</level>
-  <class>client.ClientReceive</class>
-  <method>run</method>
-  <thread>31</thread>
-  <message>[32m{"messageType":"ReceivedChat","messageBody":{"message":"choose your starting position","from":-1,"isPrivate":false}}wrapped message</message>
-</record>
-<record>
-  <date>2022-07-27T17:52:45.137774200Z</date>
-  <millis>1658944365137</millis>
-  <nanos>774200</nanos>
-  <sequence>21</sequence>
-  <logger>ClientLog</logger>
-  <level>INFO</level>
-  <class>client.ClientReceive</class>
-  <method>run</method>
-  <thread>31</thread>
-  <message>[32m{"messageType":"StartingPointTaken","messageBody":{"x":3,"y":0,"clientID":2}}wrapped message</message>
-</record>
-<record>
-  <date>2022-07-27T17:52:48.010697400Z</date>
-  <millis>1658944368010</millis>
-  <nanos>697400</nanos>
-  <sequence>22</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
   <class>client.ClientReceive</class>
@@ -266,10 +86,10 @@
   <message>[32m{"messageType":"ConnectionUpdate","messageBody":{"clientID":2,"isConnected":false,"action":"remove"}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-27T17:52:50.637669600Z</date>
-  <millis>1658944370637</millis>
-  <nanos>669600</nanos>
-  <sequence>23</sequence>
+  <date>2022-07-27T12:21:53.954017700Z</date>
+  <millis>1658924513954</millis>
+  <nanos>17700</nanos>
+  <sequence>8</sequence>
   <logger>ClientLog</logger>
   <level>INFO</level>
   <class>client.ClientReceive</class>
@@ -277,3 +97,4 @@
   <thread>31</thread>
   <message>[32m{"messageType":"ConnectionUpdate","messageBody":{"clientID":3,"isConnected":false,"action":"remove"}}wrapped message</message>
 </record>
+</log>

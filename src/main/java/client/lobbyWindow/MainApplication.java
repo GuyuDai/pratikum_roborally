@@ -11,7 +11,7 @@ import java.util.Objects;
 import client.Client;
 
 /**
- * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
+ * @author Nargess Ahmadi, Felicia Saruba, Minghao Li, Nassrin Djafari
  *
  */
 
