@@ -189,6 +189,9 @@ public class AISmartReceive extends ClientReceive {
         //The Programming schould be done if its your turn and the programming phase is set
          */
         aiSmartProgramming();
+        register=0;
+        usedCards.clear();
+        cards= new String[9];
         break;
 
       case MessageType.cardSelected:
@@ -492,7 +495,7 @@ public class AISmartReceive extends ClientReceive {
         //move upwards
 
         for (int i = 0; i < 9; i++) {
-          if (!usedCards.contains(i)) {
+          if (!usedCards.contains(i) && register<5) {
             if (cards[i].equals("MoveOne")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -507,17 +510,12 @@ public class AISmartReceive extends ClientReceive {
               usedCards.add(i);
             }
           }
-          if (register < 5) {
-            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
-            register++;
-          } //reset attributions
         }
-        usedCards.clear();
       } else if (currentFacingDirection == "RIGHT") {
         //try to make left turn first and then move up
         //First register
         for (int i = 0; i < 9; i++) {
-          if (!usedCards.contains(i)) {
+          if (!usedCards.contains(i) && register<1) {
             if (cards[i].equals("TurnLeft")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -543,14 +541,13 @@ public class AISmartReceive extends ClientReceive {
             }
           }
         }
-        usedCards.clear();
 
 
       } else if (currentFacingDirection == "LEFT") {
         //try to make right turn first and then move up
         //First register
         for (int i = 0; i < 9; i++) {
-          if (!usedCards.contains(i)) {
+          if (!usedCards.contains(i) && register<5) {
             if (cards[i].equals("TurnRight")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -560,7 +557,7 @@ public class AISmartReceive extends ClientReceive {
         }
         //next registers
         for (int i = 0; i < 9; i++) {
-          if (!usedCards.contains(i)) {
+          if (!usedCards.contains(i) && register<5) {
             if (cards[i].equals("MoveOne")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -575,13 +572,7 @@ public class AISmartReceive extends ClientReceive {
               usedCards.add(i);
             }
           }
-          if (register < 5) {
-            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
-            register++;
-          } //reset attributions
-
         }
-        usedCards.clear();
 
       } else if (currentFacingDirection == "DOWN") {
         //try to make U turn and then move up
@@ -604,7 +595,7 @@ public class AISmartReceive extends ClientReceive {
               usedCards.add(i);
             }
           }//oder UTurn
-          if (!usedCards.get(0).equals("TurnLeft")) {
+          if (!cards[usedCards.get(0)].equals("TurnLeft") && register<2) {
             if (cards[i].equals("UTurn")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -630,7 +621,6 @@ public class AISmartReceive extends ClientReceive {
             }
           }
         }
-        usedCards.clear();
       }
       //If Checkpoint is on the lower part of the board compared to your Position
     } else if (nextCheckPointXPosition > x) {
@@ -638,7 +628,7 @@ public class AISmartReceive extends ClientReceive {
       if (currentFacingDirection == "UP") {
         //try Uturn and then move down
         for (int i = 0; i < 9; i++) {
-          if (!usedCards.contains(i)) {
+          if (!usedCards.contains(i) && register<1) {
             if (cards[i].equals("TurnLeft")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -649,13 +639,13 @@ public class AISmartReceive extends ClientReceive {
         //Second register
         for (int i = 0; i < 9; i++) {
           if (!usedCards.contains(i)) {
-            if (cards[i].equals("TurnLeft")) {
+            if (cards[i].equals("TurnLeft") && register<2) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
               usedCards.add(i);
             }
           }//oder UTurn
-          if (!usedCards.get(0).equals("TurnLeft")) {
+          if (!usedCards.get(0).equals("TurnLeft") && register<2) {
             if (cards[i].equals("UTurn")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -665,7 +655,7 @@ public class AISmartReceive extends ClientReceive {
         }
         //next registers fill with move cards
         for (int i = 0; i < 9; i++) {
-          if (!usedCards.contains(i)) {
+          if (!usedCards.contains(i) && register<5) {
             if (cards[i].equals("MoveOne")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -680,18 +670,14 @@ public class AISmartReceive extends ClientReceive {
               usedCards.add(i);
             }
           }
-          if (register < 5) {
-            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
-            register++;
-          } //reset attributions
         }
-        usedCards.clear();
+
 
       } else if (currentFacingDirection == "RIGHT") {
         //try to make right turn first and then move down
         //First register
         for (int i = 0; i < 9; i++) {
-          if (!usedCards.contains(i)) {
+          if (!usedCards.contains(i) && register<1) {
             if (cards[i].equals("TurnRight")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -701,7 +687,7 @@ public class AISmartReceive extends ClientReceive {
         }
         //next registers
         for (int i = 0; i < 9; i++) {
-          if (!usedCards.contains(i)) {
+          if (!usedCards.contains(i) && register<5) {
             if (cards[i].equals("MoveOne")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -716,17 +702,12 @@ public class AISmartReceive extends ClientReceive {
               usedCards.add(i);
             }
           }
-          if (register < 5) {
-            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
-            register++;
-          } //reset attributions
-
         }
         usedCards.clear();
       } else if (currentFacingDirection == "LEFT") {
         //try to make left turn first and then move down
         for (int i = 0; i < 9; i++) {
-          if (!usedCards.contains(i)) {
+          if (!usedCards.contains(i) && register<1) {
             if (cards[i].equals("TurnLeft")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -736,7 +717,7 @@ public class AISmartReceive extends ClientReceive {
         }
         //next registers
         for (int i = 0; i < 9; i++) {
-          if (!usedCards.contains(i)) {
+          if (!usedCards.contains(i) && register<5) {
             if (cards[i].equals("MoveOne")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -751,16 +732,11 @@ public class AISmartReceive extends ClientReceive {
               usedCards.add(i);
             }
           }
-          if (register < 5) {
-            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
-            register++;
-          } //reset attributions
         }
-        usedCards.clear();
       } else if (currentFacingDirection == "DOWN") {
         //move down
         for (int i = 0; i < 9; i++) {
-          if (!usedCards.contains(i)) {
+          if (!usedCards.contains(i) && register<5) {
             if (cards[i].equals("MoveOne")) {
               sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
               register++;
@@ -775,13 +751,7 @@ public class AISmartReceive extends ClientReceive {
               usedCards.add(i);
             }
           }
-          if (register < 5) {
-            sendMessage(new SelectedCard(cards[i], register, getClientID()).toString());
-            register++;
-          } //reset attributions
-
         }
-        usedCards.clear();
       }
     }
   }
