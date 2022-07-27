@@ -1,7 +1,6 @@
 package client.gameWindow;
 
 import client.*;
-import client.lobbyWindow.*;
 import client.loginWindow.LoginViewModel;
 import com.google.gson.*;
 import javafx.animation.*;
@@ -25,7 +24,6 @@ import server.Deck.*;
 import java.io.*;
 import java.net.*;
 import java.util.*;
-import java.util.logging.Logger;
 
 
 /**
@@ -2641,19 +2639,17 @@ public class GameViewModel {
      */
     public void checkAmountPlayer(){
         if(playerBot1.getImage() == null && playerBot2.getImage() == null && playerBot3.getImage() == null && playerBot4.getImage() == null && playerBot5.getImage() == null && playerBot6.getImage() == null && ok == 1) {
-
             Stage stage = (Stage) exitBtn.getScene().getWindow();
             stage.close();
-
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/WinnerWhenOnlyOnePlayer.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Default.fxml"));
                 Parent rootMap = (Parent) fxmlLoader.load();
                 Stage stageLobby = new Stage();
                 stageLobby.setTitle("Winner");
                 stageLobby.setScene(new Scene(rootMap));
                 stageLobby.show();
             } catch (Exception e) {
-                Client.getLogger().severe( "Window cannot open.");
+                Client.getLogger().severe( "Window can not open.");
             }
         }
 
@@ -3124,6 +3120,8 @@ public class GameViewModel {
         }
     }
 
+
+
     /**
      * sound effect for robot Laser
      */
@@ -3144,4 +3142,16 @@ public class GameViewModel {
     public void setOk(int ok){
         this.ok = ok;
     }
+
+    public void playWinnerTune() {
+        try {
+            String fileName = getClass().getResource("/sounds/winnerTune.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (Exception e) {
+        }
+        sound.getMediaPlayer().play();
+    }
+
 }

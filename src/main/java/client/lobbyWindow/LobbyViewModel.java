@@ -288,9 +288,11 @@ public class LobbyViewModel {
                     setWindowName("Game");
                 }
                 else{
-
-                    LobbyText.setText("Wait Map Selection!");
+                    LobbyText.setText("Please wait and try again later.");
                     LobbyText.setVisible(true);
+                    PauseTransition pauseTransition26 = new PauseTransition(Duration.seconds(3));
+                    pauseTransition26.setOnFinished(e -> LobbyText.setVisible(false));
+                    pauseTransition26.play();
                     //selectMap.setVisible(false);
                 }
             }
@@ -468,7 +470,7 @@ public class LobbyViewModel {
         }
         catch (Exception e){
         }
-
+        //TODO ask ming why he added
         if(Client.getClientReceive().getMaps()!=null){
             selectMap.setText("SELECT MAP");
         }

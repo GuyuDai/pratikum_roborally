@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="398.0" prefWidth="454.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.mapWindow.LoserViewModel">
+<AnchorPane prefHeight="398.0" prefWidth="454.0" styleClass="backgroundColor" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.popupWindows.LoserViewModel">
    <children>
       <ImageView fitHeight="130.0" fitWidth="479.0" layoutX="76.0" pickOnBounds="true" preserveRatio="true">
          <image>
