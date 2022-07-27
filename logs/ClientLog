@@ -85,3 +85,16 @@
   <thread>31</thread>
   <message>[32m{"messageType":"ConnectionUpdate","messageBody":{"clientID":2,"isConnected":false,"action":"remove"}}wrapped message</message>
 </record>
+<record>
+  <date>2022-07-27T12:21:53.954017700Z</date>
+  <millis>1658924513954</millis>
+  <nanos>17700</nanos>
+  <sequence>8</sequence>
+  <logger>ClientLog</logger>
+  <level>INFO</level>
+  <class>client.ClientReceive</class>
+  <method>run</method>
+  <thread>31</thread>
+  <message>[32m{"messageType":"ConnectionUpdate","messageBody":{"clientID":3,"isConnected":false,"action":"remove"}}wrapped message</message>
+</record>
+</log>

@@ -287,6 +287,10 @@ public class GameViewModel {
     Image imageUTurn = new Image(urlUTurn.toString());
 
 
+    URL urlSpam=getClass().getResource("/damagingCards/spam.png");
+
+    Image imageSpam=new Image(urlSpam.toString());
+
     URL urlPowerUp = getClass().getResource("/programmingCards/powerUp.png");
     Image imagePowerUp = new Image(urlPowerUp.toString());
 
@@ -632,6 +636,8 @@ public class GameViewModel {
                 case "UTurn":
                     cardImage = imageUTurn;
                     break;
+                case"Spam":
+                    cardImage= imageSpam;
                 //default:
                   //  cardImage = imageCardHidden;
 
