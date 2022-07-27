@@ -143,7 +143,6 @@ public class LoginViewModel {
                     break;
             }
         }
-
     }
 
     public void MouseAction(MouseEvent mouseEvent) {
@@ -167,6 +166,9 @@ public class LoginViewModel {
     }
 
 
+    /**
+     * opens Lobby window
+     */
     public void openLobbyWindow() {
         try {
             FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/views/Lobby.fxml"));
@@ -205,6 +207,9 @@ public class LoginViewModel {
     Button soundOff;
 
 
+    /**
+     * sound effect and visual effect when selecting Hulk x90
+     */
     public void playHulk() {
         try {
             String fileName = getClass().getResource("/sounds/Hulk x 90.mp3").toURI().toString();
@@ -223,6 +228,9 @@ public class LoginViewModel {
         buttonTwonkey.setStyle("-fx-border-color: #ffffff");
     }
 
+    /**
+     * sound effect and visual effect when selecting Spin bot
+     */
     public void playSpinbot() {
         try {
             String fileName = getClass().getResource("/sounds/Spin bot.mp3").toURI().toString();
@@ -241,6 +249,9 @@ public class LoginViewModel {
         buttonTwonkey.setStyle("-fx-border-color: #ffffff");
     }
 
+    /**
+     * sound effect and visual effect when selecting Hammer bot
+     */
     public void playHammerbot() {
         try {
             String fileName = getClass().getResource("/sounds/Hammer bot.mp3").toURI().toString();
@@ -259,6 +270,9 @@ public class LoginViewModel {
         buttonTwonkey.setStyle("-fx-border-color: #ffffff");
     }
 
+    /**
+     * sound effect and visual effect when selecting Squash bot
+     */
     public void playSquashbot() {
         try {
             String fileName = getClass().getResource("/sounds/Squash bot.mp3").toURI().toString();
@@ -277,6 +291,9 @@ public class LoginViewModel {
         buttonTwonkey.setStyle("-fx-border-color: #ffffff");
     }
 
+    /**
+     * sound effect and visual effect when selecting Twonkey
+     */
     public void playTwonkey() {
         try {
             String fileName = getClass().getResource("/sounds/Twonkey.mp3").toURI().toString();
@@ -295,6 +312,9 @@ public class LoginViewModel {
         buttonTwonkey.setStyle("-fx-border-color: #f11919");
     }
 
+    /**
+     * sound effect and visual effect when selecting Twitch
+     */
     public void playTwitch() {
         try {
             String fileName = getClass().getResource("/sounds/Twitch.mp3").toURI().toString();
@@ -313,6 +333,9 @@ public class LoginViewModel {
         buttonTwonkey.setStyle("-fx-border-color: #ffffff");
     }
 
+    /**
+     * sound effect for Welcome message
+     */
     public void playWelcome() {
         try {
             String fileName = getClass().getResource("/sounds/Welcome.mp3").toURI().toString();
@@ -325,6 +348,9 @@ public class LoginViewModel {
         sound.getMediaPlayer().play();
     }
 
+    /**
+     * close the Login GUI
+     */
     public static void closeGUI() {
         Boolean answer = ExitWindow.display("Exit Game", "Are you sure, you want to quit the game?");
         if (answer) {

@@ -7,7 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 
 /**
- * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
+ * @author Nargess Ahmadi, Felicia Saruba, Minghao Li
  */
 
 public class LobbyModel {

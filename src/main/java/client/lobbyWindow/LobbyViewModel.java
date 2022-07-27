@@ -2,7 +2,6 @@ package client.lobbyWindow;
 
 import java.io.IOException;
 import java.net.URL;
-
 import client.Client;
 import client.loginWindow.LoginViewModel;
 import com.google.gson.Gson;
@@ -28,7 +27,6 @@ import protocol.SetStatus;
 /**
  * @author Nargess Ahmadi, Felicia Saruba, Minghao Li
  */
-
 
 public class LobbyViewModel {
 
@@ -132,6 +130,9 @@ public class LobbyViewModel {
         model.addNewListItem(message);
     }
 
+    /**
+     * open game window
+     */
     public void openGameWindow() {
         try {
             FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/views/Game.fxml"));
@@ -148,6 +149,9 @@ public class LobbyViewModel {
         }
     }
 
+    /**
+     * message gets send in the chatroom
+     */
     @FXML
     public void sendButtonAction(ActionEvent actionEvent) throws IOException {
         String message = model.getTextFieldContent().get();
@@ -218,11 +222,12 @@ public class LobbyViewModel {
         return sendChat;
     }
 
+
+    int clickCount = 0;
+
     /**
      * click on ready Button -> first player to click will select map
      */
-    int clickCount = 0;
-
     public void readyButtonAction(ActionEvent actionEvent) {
         clickCount++;
         if (clickCount == 1) {
@@ -295,7 +300,9 @@ public class LobbyViewModel {
         }
 
 
-
+    /**
+     * Set your own player´s icon and name on board
+     */
         public void setYourBotIcon () {
             yourRobotText.setVisible(true);
             yourBotText.setVisible(true);
@@ -331,7 +338,7 @@ public class LobbyViewModel {
 
 
         /**
-         * Set other player´s icon and name on board.
+         * Set other player´s icon and name on board
          */
         public void setOthersBotIcon () {
             for (int id : Client.getClientReceive().getIdRobot().keySet()) {
@@ -393,16 +400,20 @@ public class LobbyViewModel {
         }
 
 
+    /**
+     * Event to update the other player's board if new player joined
+     */
     public void MouseAction(MouseEvent mouseEvent) {
         setYourBotIcon();
         setOthersBotIcon();
     }
 
+    /**
+     * getter setter for windowname -> for chat to work in both windows
+     */
     public static void setWindowName (String name){
         window = name;
     }
 
-    public static String getWindowName () {
-        return window;
-    }
+    public static String getWindowName () { return window; }
 }

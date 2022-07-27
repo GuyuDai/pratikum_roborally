@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 
 
 /**
- * @author Nargess Ahmadi, Nassrin Djafari, Felicia Saruba
+ * @author Nargess Ahmadi, Felicia Saruba, Minghao Li, Nassrin Djafari
  */
 
 public class GameModel {

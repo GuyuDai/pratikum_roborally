@@ -17,13 +17,11 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.*;
 import javafx.util.*;
-import org.w3c.dom.Text;
 import protocol.*;
 import server.BoardElement.*;
 import server.BoardTypes.*;
 import server.Control.*;
 import server.Deck.*;
-import server.ServerThread;
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -51,7 +49,6 @@ public class GameViewModel {
     /**
      * timer
      */
-
     @FXML
     private Label timerText;
 
@@ -360,7 +357,9 @@ public class GameViewModel {
         model.addNewListItem(message);
     }
 
-    @FXML
+    /**
+     * sends message in the chatroom by clicking on the send button
+     */
     public void sendButtonAction(ActionEvent actionEvent) throws IOException {
         String message = input.getText();
         checkInput(message);
@@ -445,22 +444,6 @@ public class GameViewModel {
         //stage.close();
         LoginViewModel.closeGUI();
 
-        /*
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Lobby.fxml"));
-            Parent rootMap = (Parent) fxmlLoader.load();
-            Stage stageLobby = new Stage();
-            stageLobby.setTitle("Lobby");
-            stageLobby.setScene(new Scene(rootMap));
-            stageLobby.show();
-        } catch (Exception e) {
-            Client.getLogger().severe( "Window can not open.");
-        }
-        LobbyViewModel.setWindowName("Lobby");
-
-         */
-
-
         int yourId = Client.getClientReceive().getClientID();
         String exitMessage = new ConnectionUpdate(yourId, false, "").toString();
         Client.getClientReceive().sendMessage(exitMessage);
@@ -473,11 +456,6 @@ public class GameViewModel {
                 Client.getClientReceive().getIdList().remove(1);
                 break;
         }
-
-        System.out.println(yourId + " has left."); //test
-        System.out.println(Client.getClientReceive().getIdList());
-
-        //TODO remove client from connected clients list
     }
 
     /**
@@ -679,7 +657,7 @@ public class GameViewModel {
     public int getRegisterCount() { return registerCount; }
 
 
-    public void handle5thRegister() {
+    private void handle5thRegister() {
         Text.setText("Players have 30 seconds left to finish their register");
         PauseTransition thirty = new PauseTransition(Duration.seconds(30));
         thirty.setOnFinished(e -> playCardBtn.setVisible(true));
@@ -1122,9 +1100,8 @@ public class GameViewModel {
         String map = Client.getClientReceive().getBoard();
         printMapGUI(map);
 
-        //phaseView.setVisible(true);
         Text.setText("Select a starting point");
-        roboRallyImage.setVisible(false);
+        //roboRallyImage.setVisible(false);
         selectStartingPoint.setVisible(true);
         printMapButton.setVisible(false);
         setYourBotIcon();
@@ -1277,7 +1254,6 @@ public class GameViewModel {
                 Image imageRBRightDown = new Image(rbRight.toString());
 
 
-
                 /**
                  * Board Images
                  */
@@ -1368,7 +1344,6 @@ public class GameViewModel {
                 Image imagewallLaser1Right = new Image(wallLaser1Right.toString());
 
 
-
                 /**
                  * others
                  */
@@ -1391,7 +1366,6 @@ public class GameViewModel {
                 Image imageEmpty = new Image(empty.toString());
 
 
-
                 /**
                  * URLs for Extra Crispy
                  */
@@ -1406,7 +1380,6 @@ public class GameViewModel {
 
                 URL blueRotatingUpRight = getClass().getResource("/bluePanelExtraCrispy/blueRotatingUpRight.png");
                 Image imageBlueRotatingUpRight = new Image(blueRotatingUpRight.toString());
-
 
 
                 /**
@@ -1424,10 +1397,10 @@ public class GameViewModel {
                 URL RBGreenDownLeft3 = getClass().getResource("/greenPanelDeathTrap/RBGreenDownLeft3.png");
                 Image imageRBGreenDownLeft3 = new Image(RBGreenDownLeft3.toString());
 
+
                 /**
                  * URLs for Push Panels
                  */
-
                 URL pp135Down = getClass().getResource("/pushpanel/pp135Down.png");
                 Image imagePP135Down = new Image(pp135Down.toString());
 
@@ -1455,13 +1428,11 @@ public class GameViewModel {
                 /**
                 * URLs for Twister
                 */
-
                 URL blueRBDownRight = getClass().getResource("/RBTwister/blueRBDownRight.png");
                 Image imageBlueRBDownRight = new Image(blueRBDownRight.toString());
 
                 URL blueRBUpLeft = getClass().getResource("/RBTwister/blueRBUpLeft.png");
                 Image imageBlueRBUpLeft = new Image(blueRBUpLeft.toString());
-
 
 
 
@@ -1996,6 +1967,9 @@ public class GameViewModel {
     int x;
     int y;
 
+    /**
+     * help counter for starting point selection
+     */
     public void setStartingPointCount(int count){
         this.startingPointCount = count;
     }
@@ -2288,7 +2262,6 @@ public class GameViewModel {
                 robotOgPicture.put(clientId,finalBotView);
                 robotBoard.add(finalBotView, moveX, moveY);
             }
-            //TODO delete startPosition
             else {
                 // remove.setOnFinished(e -> robotBoard.add(emptyView,oldX,oldY));
                 robotBoard.getChildren().remove(botView);
@@ -2633,7 +2606,9 @@ public class GameViewModel {
         printCards();
     }
 
-
+    /**
+     * Mouse event for updating timer
+     */
     public void MouseAction(MouseEvent mouseEvent) {
         //timer only appears for the players that need to finish their register
         if(getRegisterCount() < 5){
@@ -2641,7 +2616,6 @@ public class GameViewModel {
         } else {
         }
         checkStart();
-        //moveRobot();
 
 
         //TODO if only one connected client is left he will be the winner
@@ -2836,7 +2810,6 @@ public class GameViewModel {
     }
 
 
-
     int checkpointMoveCounter = 1;
 
     public void setcheckpointMoveCounter(int count){
@@ -2876,6 +2849,9 @@ public class GameViewModel {
     }
 
 
+    /**
+     * if one robot faces another it will shoot robot laser towards the other one
+     */
   public void printRobotLaser() {
       URL robotLaser = getClass().getResource("/robotLaser.png");
       Image imageRobotLaser = new Image(robotLaser.toString());
@@ -2925,7 +2901,6 @@ public class GameViewModel {
                           playLaserSound();
                       }
                   }
-
           }
           else {
               if (printX < printX2) {
@@ -2960,6 +2935,9 @@ public class GameViewModel {
     private Button trojan;
 
 
+    /**
+     * if player chooses Spam card
+     */
     public void  playSpamCards(ActionEvent event){
         if(clickDamageCounter<=Client.getClientReceive().getDamageCount()) {
             tempDrawDamage.add("Spam");
@@ -2968,37 +2946,47 @@ public class GameViewModel {
         else {
             registerDamage.setVisible(true);
         }
- }
+    }
+
+    /**
+     * if player chooses Virus card
+     */
     public void  playVirusCards(ActionEvent event){
-     if(clickCounter<=Client.getClientReceive().getDamageCount()){
-         tempDrawDamage.add("Virus");
-         clickCounter++;
-     }
-     else {
-         registerDamage.setVisible(true);
-     }
-
+        if(clickCounter<=Client.getClientReceive().getDamageCount()){
+            tempDrawDamage.add("Virus");
+            clickCounter++;
+        }
+        else {
+            registerDamage.setVisible(true);
+        }
     }
+
+    /**
+     * if player chooses Worm card
+     */
     public void  playWormCards(ActionEvent event){
-     if(clickCounter<=Client.getClientReceive().getDamageCount()){
-         tempDrawDamage.add("Worm");
-         clickCounter++;
-     }
-     else {
-         registerDamage.setVisible(true);
-     }
-
+        if(clickCounter<=Client.getClientReceive().getDamageCount()){
+            tempDrawDamage.add("Worm");
+            clickCounter++;
+        }
+        else {
+            registerDamage.setVisible(true);
+        }
     }
+
+    /**
+     * if player chooses Trojan Horse card
+     */
     public void  playTrojanCards(ActionEvent event){
-     if(clickCounter<=Client.getClientReceive().getDamageCount()){
-         tempDrawDamage.add("Trojan");
-         clickCounter++;
-     }
-     else {
-         registerDamage.setVisible(true);
-     }
-
+        if(clickCounter<=Client.getClientReceive().getDamageCount()){
+            tempDrawDamage.add("Trojan");
+            clickCounter++;
+        }
+        else {
+            registerDamage.setVisible(true);
+        }
     }
+
     public void registerDamageAction(ActionEvent event) {
         String[] selectedDamageCards = tempDrawDamage.toArray(new String[tempDrawDamage.size()]);
         Client.getClientReceive().sendMessage(new SelectedDamage(selectedDamageCards).toString());
@@ -3011,7 +2999,6 @@ public class GameViewModel {
         Client.getClientReceive().setPickDamage(false);
         showDamage.setVisible(false);
         registerDamage.setVisible(false);
-
     }
 
     public void showDamageCards(ActionEvent event) {
@@ -3031,43 +3018,50 @@ public class GameViewModel {
                     virus.setVisible(true);
                     break;
             }
-
         }
-
     }
 
+    /**
+     * open winner window to player who wins
+     */
     public void openWinnerWindow(){
-            Stage stage = (Stage) exitBtn.getScene().getWindow();
-            stage.close();
+        Stage stage = (Stage) exitBtn.getScene().getWindow();
+        stage.close();
 
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Winner.fxml"));
-                Parent rootMap = (Parent) fxmlLoader.load();
-                Stage stageLobby = new Stage();
-                stageLobby.setTitle("Winner");
-                stageLobby.setScene(new Scene(rootMap));
-                stageLobby.show();
-            } catch (Exception e) {
-                Client.getLogger().severe( "Window can not open.");
-            }
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Winner.fxml"));
+            Parent rootMap = (Parent) fxmlLoader.load();
+            Stage stageLobby = new Stage();
+            stageLobby.setTitle("Winner");
+            stageLobby.setScene(new Scene(rootMap));
+            stageLobby.show();
+        } catch (Exception e) {
+            Client.getLogger().severe( "Window can not open.");
         }
-
-        public void openLoserWindow(){
-            Stage stage = (Stage) exitBtn.getScene().getWindow();
-            stage.close();
-
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Loser.fxml"));
-                Parent rootMap = (Parent) fxmlLoader.load();
-                Stage stageLobby = new Stage();
-                stageLobby.setTitle("Loser");
-                stageLobby.setScene(new Scene(rootMap));
-                stageLobby.show();
-            } catch (Exception e) {
-                Client.getLogger().severe( "Window can not open.");
-            }
     }
 
+    /**
+     * open loser window for player who loses
+     */
+    public void openLoserWindow(){
+        Stage stage = (Stage) exitBtn.getScene().getWindow();
+        stage.close();
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Loser.fxml"));
+            Parent rootMap = (Parent) fxmlLoader.load();
+            Stage stageLobby = new Stage();
+            stageLobby.setTitle("Loser");
+            stageLobby.setScene(new Scene(rootMap));
+            stageLobby.show();
+        } catch (Exception e) {
+            Client.getLogger().severe( "Window can not open.");
+        }
+    }
+
+    /**
+     * sound effect for robot Laser
+     */
     public void playLaserSound() {
         try {
             String fileName = getClass().getResource("/sounds/laser.mp3").toURI().toString();
@@ -3080,8 +3074,4 @@ public class GameViewModel {
         sound.getMediaPlayer().play();
     }
 
-
 }
-
-
-
