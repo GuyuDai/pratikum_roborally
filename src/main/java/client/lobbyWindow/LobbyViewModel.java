@@ -470,6 +470,10 @@ public class LobbyViewModel {
         }
         catch (Exception e){
         }
+        //TODO ask ming why he added
+        if(Client.getClientReceive().getMaps()!=null){
+            selectMap.setText("SELECT MAP");
+        }
     }
 
     /**
