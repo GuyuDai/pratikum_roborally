@@ -319,7 +319,13 @@ public class ClientReceive extends Thread{
                     IdList.add(playerId);
                     robotNumbers.add(tempFigure);
                     IdRobot.put(playerId, tempFigure);
-                    IdName.put(playerName, playerId);
+                    if(IdName.containsKey(playerName)){
+                        playerName=playerName+"(ID:"+playerId+")";
+                        IdName.put(playerName,playerId);
+                    }
+                    else {
+                        IdName.put(playerName, playerId);
+                    }
                     if (playerId == clientID) {
                         figure = tempFigure;
                     }
