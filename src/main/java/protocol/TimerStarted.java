@@ -20,17 +20,26 @@ public class TimerStarted implements Message {
 
     public class TimerStartedBody extends MessageBody {
     }
+
+    /**
+     * Protocoll for Timer
+     */
     public TimerStarted () {
         this.messageType = MessageType.timerStarted;
         TimerStartedBody body = new TimerStartedBody();
         this.messageBody = body;
 
     }
-
+    /**
+     * MessageBody for TimerStarted
+     */
     public TimerStartedBody getMessageBody() {
         return messageBody;
     }
 
+    /**
+     * Json
+     */
     @Override
     public String toString(){
         Gson gson = new GsonBuilder().create();

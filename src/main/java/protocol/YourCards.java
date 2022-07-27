@@ -2,12 +2,13 @@ package protocol;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 /**
+ * @author Dai
+ *
  * The first 9 programming cards are drawn and given to a player.
  * This message is only sent to the player receiving the programming cards.
  */
@@ -30,6 +31,10 @@ public class YourCards implements Message {
             this.cardsInHand = cardsInHand;
         }
     }
+
+    /**
+     * Protocol for yourCards
+     */
     public YourCards (String[] cardsInHand) {
         this.messageType = MessageType.yourCards;
         YourCardsBody body = new YourCardsBody();
@@ -38,10 +43,16 @@ public class YourCards implements Message {
 
     }
 
+    /**
+     * MessageBody for yourCards
+     */
     public YourCardsBody getMessageBody() {
         return messageBody;
     }
 
+    /**
+     * Json
+     */
     @Override
     public String toString(){
         Gson gson = new GsonBuilder().create();
