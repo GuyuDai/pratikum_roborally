@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-07-27T18:04:41.312409Z</date>
-  <millis>1658945081312</millis>
-  <nanos>409000</nanos>
+  <date>2022-07-27T18:05:50.038838300Z</date>
+  <millis>1658945150038</millis>
+  <nanos>838300</nanos>
   <sequence>0</sequence>
   <logger>ServerLog</logger>
   <level>INFO</level>
@@ -14,9 +14,9 @@
   <message>[32mServer is running</message>
 </record>
 <record>
-  <date>2022-07-27T18:04:41.397181Z</date>
-  <millis>1658945081397</millis>
-  <nanos>181000</nanos>
+  <date>2022-07-27T18:05:50.082721900Z</date>
+  <millis>1658945150082</millis>
+  <nanos>721900</nanos>
   <sequence>1</sequence>
   <logger>ServerLog</logger>
   <level>INFO</level>
@@ -26,9 +26,9 @@
   <message>[32mListening for new clients. </message>
 </record>
 <record>
-  <date>2022-07-27T18:04:47.731427300Z</date>
-  <millis>1658945087731</millis>
-  <nanos>427300</nanos>
+  <date>2022-07-27T18:05:54.383356200Z</date>
+  <millis>1658945154383</millis>
+  <nanos>356200</nanos>
   <sequence>2</sequence>
   <logger>ServerLog</logger>
   <level>INFO</level>
@@ -38,9 +38,9 @@
   <message>[32mA new client connected to the server.</message>
 </record>
 <record>
-  <date>2022-07-27T18:04:47.735416500Z</date>
-  <millis>1658945087735</millis>
-  <nanos>416500</nanos>
+  <date>2022-07-27T18:05:54.383356200Z</date>
+  <millis>1658945154383</millis>
+  <nanos>356200</nanos>
   <sequence>3</sequence>
   <logger>ServerLog</logger>
   <level>INFO</level>
@@ -50,34 +50,22 @@
   <message>[32mListening for new clients. </message>
 </record>
 <record>
-  <date>2022-07-27T18:04:47.901970600Z</date>
-  <millis>1658945087901</millis>
-  <nanos>970600</nanos>
+  <date>2022-07-27T18:05:54.441201500Z</date>
+  <millis>1658945154441</millis>
+  <nanos>201500</nanos>
   <sequence>4</sequence>
   <logger>ServerLog</logger>
   <level>INFO</level>
   <class>server.ServerThread</class>
   <method>run</method>
-  <thread>16</thread>
+  <thread>25</thread>
   <message>[32m{"messageType":"HelloServer","messageBody":{"group":"Origionelle Oktopusse","isAI":false,"protocol":"Version 2.0","clientID":1}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-27T18:04:53.074534500Z</date>
-  <millis>1658945093074</millis>
-  <nanos>534500</nanos>
+  <date>2022-07-27T18:05:58.363227100Z</date>
+  <millis>1658945158363</millis>
+  <nanos>227100</nanos>
   <sequence>5</sequence>
-  <logger>ServerLog</logger>
-  <level>INFO</level>
-  <class>server.ServerThread</class>
-  <method>run</method>
-  <thread>16</thread>
-  <message>[32m{"messageType":"Alive","messageBody":{}}wrapped message</message>
-</record>
-<record>
-  <date>2022-07-27T18:05:02.422034500Z</date>
-  <millis>1658945102422</millis>
-  <nanos>34500</nanos>
-  <sequence>6</sequence>
   <logger>ServerLog</logger>
   <level>INFO</level>
   <class>server.Server</class>
@@ -86,10 +74,10 @@
   <message>[32mA new client connected to the server.</message>
 </record>
 <record>
-  <date>2022-07-27T18:05:02.423032400Z</date>
-  <millis>1658945102423</millis>
-  <nanos>32400</nanos>
-  <sequence>7</sequence>
+  <date>2022-07-27T18:05:58.364224600Z</date>
+  <millis>1658945158364</millis>
+  <nanos>224600</nanos>
+  <sequence>6</sequence>
   <logger>ServerLog</logger>
   <level>INFO</level>
   <class>server.Server</class>
@@ -98,111 +86,218 @@
   <message>[32mListening for new clients. </message>
 </record>
 <record>
-  <date>2022-07-27T18:05:02.785063700Z</date>
-  <millis>1658945102785</millis>
-  <nanos>63700</nanos>
+  <date>2022-07-27T18:05:58.464956200Z</date>
+  <millis>1658945158464</millis>
+  <nanos>956200</nanos>
+  <sequence>7</sequence>
+  <logger>ServerLog</logger>
+  <level>INFO</level>
+  <class>server.ServerThread</class>
+  <method>run</method>
+  <thread>26</thread>
+  <message>[32m{"messageType":"HelloServer","messageBody":{"group":"Origionelle Oktopusse","isAI":false,"protocol":"Version 2.0","clientID":2}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-27T18:05:59.456432900Z</date>
+  <millis>1658945159456</millis>
+  <nanos>432900</nanos>
   <sequence>8</sequence>
   <logger>ServerLog</logger>
   <level>INFO</level>
   <class>server.ServerThread</class>
   <method>run</method>
-  <thread>17</thread>
-  <message>[32m{"messageType":"HelloServer","messageBody":{"group":"Origionelle Oktopusse","isAI":false,"protocol":"Version 2.0","clientID":2}}wrapped message</message>
+  <thread>25</thread>
+  <message>[32m{"messageType":"Alive","messageBody":{}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-27T18:05:07.878513800Z</date>
-  <millis>1658945107878</millis>
-  <nanos>513800</nanos>
+  <date>2022-07-27T18:05:59.474386300Z</date>
+  <millis>1658945159474</millis>
+  <nanos>386300</nanos>
   <sequence>9</sequence>
   <logger>ServerLog</logger>
   <level>INFO</level>
   <class>server.ServerThread</class>
   <method>run</method>
-  <thread>17</thread>
+  <thread>26</thread>
   <message>[32m{"messageType":"Alive","messageBody":{}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-27T18:05:12.581737400Z</date>
-  <millis>1658945112581</millis>
-  <nanos>737400</nanos>
+  <date>2022-07-27T18:06:00.108095100Z</date>
+  <millis>1658945160108</millis>
+  <nanos>95100</nanos>
   <sequence>10</sequence>
   <logger>ServerLog</logger>
   <level>INFO</level>
   <class>server.ServerThread</class>
   <method>run</method>
-  <thread>16</thread>
-  <message>[32m{"messageType":"PlayerValues","messageBody":{"name":"ss","figure":3}}wrapped message</message>
+  <thread>25</thread>
+  <message>[32m{"messageType":"PlayerValues","messageBody":{"name":"ww","figure":6}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-27T18:05:19.260216100Z</date>
-  <millis>1658945119260</millis>
-  <nanos>216100</nanos>
+  <date>2022-07-27T18:06:03.078044600Z</date>
+  <millis>1658945163078</millis>
+  <nanos>44600</nanos>
   <sequence>11</sequence>
   <logger>ServerLog</logger>
   <level>INFO</level>
   <class>server.ServerThread</class>
   <method>run</method>
-  <thread>17</thread>
-  <message>[32m{"messageType":"PlayerValues","messageBody":{"name":"hh","figure":1}}wrapped message</message>
+  <thread>26</thread>
+  <message>[32m{"messageType":"PlayerValues","messageBody":{"name":"qq","figure":4}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-27T18:05:27.220065100Z</date>
-  <millis>1658945127220</millis>
-  <nanos>65100</nanos>
+  <date>2022-07-27T18:06:05.126680700Z</date>
+  <millis>1658945165126</millis>
+  <nanos>680700</nanos>
   <sequence>12</sequence>
   <logger>ServerLog</logger>
   <level>INFO</level>
   <class>server.ServerThread</class>
   <method>run</method>
-  <thread>16</thread>
+  <thread>25</thread>
   <message>[32m{"messageType":"SendChat","messageBody":{"message":"I AM READY!","to":-1}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-27T18:05:27.250982800Z</date>
-  <millis>1658945127250</millis>
-  <nanos>982800</nanos>
+  <date>2022-07-27T18:06:05.131668400Z</date>
+  <millis>1658945165131</millis>
+  <nanos>668400</nanos>
   <sequence>13</sequence>
   <logger>ServerLog</logger>
   <level>INFO</level>
   <class>server.ServerThread</class>
   <method>run</method>
-  <thread>16</thread>
+  <thread>25</thread>
   <message>[32m{"messageType":"SetStatus","messageBody":{"ready":true}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-27T18:05:29.982965600Z</date>
-  <millis>1658945129982</millis>
-  <nanos>965600</nanos>
+  <date>2022-07-27T18:06:07.089158600Z</date>
+  <millis>1658945167089</millis>
+  <nanos>158600</nanos>
   <sequence>14</sequence>
   <logger>ServerLog</logger>
   <level>INFO</level>
   <class>server.ServerThread</class>
   <method>run</method>
-  <thread>17</thread>
+  <thread>26</thread>
   <message>[32m{"messageType":"SendChat","messageBody":{"message":"I AM READY!","to":-1}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-27T18:05:29.997926100Z</date>
-  <millis>1658945129997</millis>
-  <nanos>926100</nanos>
+  <date>2022-07-27T18:06:07.090156100Z</date>
+  <millis>1658945167090</millis>
+  <nanos>156100</nanos>
   <sequence>15</sequence>
   <logger>ServerLog</logger>
   <level>INFO</level>
   <class>server.ServerThread</class>
   <method>run</method>
-  <thread>17</thread>
+  <thread>26</thread>
   <message>[32m{"messageType":"SetStatus","messageBody":{"ready":true}}wrapped message</message>
 </record>
 <record>
-  <date>2022-07-27T18:05:33.783561200Z</date>
-  <millis>1658945133783</millis>
-  <nanos>561200</nanos>
+  <date>2022-07-27T18:06:08.868811400Z</date>
+  <millis>1658945168868</millis>
+  <nanos>811400</nanos>
   <sequence>16</sequence>
   <logger>ServerLog</logger>
   <level>INFO</level>
   <class>server.ServerThread</class>
   <method>run</method>
-  <thread>16</thread>
+  <thread>25</thread>
   <message>[32m{"messageType":"MapSelected","messageBody":{"map":"DizzyHighway"}}wrapped message</message>
 </record>
-</log>
+<record>
+  <date>2022-07-27T18:06:30.076842500Z</date>
+  <millis>1658945190076</millis>
+  <nanos>842500</nanos>
+  <sequence>17</sequence>
+  <logger>ServerLog</logger>
+  <level>INFO</level>
+  <class>server.ServerThread</class>
+  <method>run</method>
+  <thread>25</thread>
+  <message>[32m{"messageType":"SetStartingPoint","messageBody":{"x":6,"y":0}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-27T18:06:30.076842500Z</date>
+  <millis>1658945190076</millis>
+  <nanos>842500</nanos>
+  <sequence>18</sequence>
+  <logger>ServerLog</logger>
+  <level>INFO</level>
+  <class>server.ServerThread</class>
+  <method>identifyMessage</method>
+  <thread>25</thread>
+  <message>[32menter here</message>
+</record>
+<record>
+  <date>2022-07-27T18:06:30.077839700Z</date>
+  <millis>1658945190077</millis>
+  <nanos>839700</nanos>
+  <sequence>19</sequence>
+  <logger>ServerLog</logger>
+  <level>INFO</level>
+  <class>server.ServerThread</class>
+  <method>identifyMessage</method>
+  <thread>25</thread>
+  <message>[32m6</message>
+</record>
+<record>
+  <date>2022-07-27T18:06:30.079834100Z</date>
+  <millis>1658945190079</millis>
+  <nanos>834100</nanos>
+  <sequence>20</sequence>
+  <logger>ServerLog</logger>
+  <level>INFO</level>
+  <class>server.ServerThread</class>
+  <method>identifyMessage</method>
+  <thread>25</thread>
+  <message>[32m6</message>
+</record>
+<record>
+  <date>2022-07-27T18:06:33.442197700Z</date>
+  <millis>1658945193442</millis>
+  <nanos>197700</nanos>
+  <sequence>21</sequence>
+  <logger>ServerLog</logger>
+  <level>INFO</level>
+  <class>server.ServerThread</class>
+  <method>run</method>
+  <thread>26</thread>
+  <message>[32m{"messageType":"SetStartingPoint","messageBody":{"x":3,"y":0}}wrapped message</message>
+</record>
+<record>
+  <date>2022-07-27T18:06:33.442197700Z</date>
+  <millis>1658945193442</millis>
+  <nanos>197700</nanos>
+  <sequence>22</sequence>
+  <logger>ServerLog</logger>
+  <level>INFO</level>
+  <class>server.ServerThread</class>
+  <method>identifyMessage</method>
+  <thread>26</thread>
+  <message>[32menter here</message>
+</record>
+<record>
+  <date>2022-07-27T18:06:33.443194Z</date>
+  <millis>1658945193443</millis>
+  <nanos>194000</nanos>
+  <sequence>23</sequence>
+  <logger>ServerLog</logger>
+  <level>INFO</level>
+  <class>server.ServerThread</class>
+  <method>identifyMessage</method>
+  <thread>26</thread>
+  <message>[32m3</message>
+</record>
+<record>
+  <date>2022-07-27T18:06:33.443194Z</date>
+  <millis>1658945193443</millis>
+  <nanos>194000</nanos>
+  <sequence>24</sequence>
+  <logger>ServerLog</logger>
+  <level>INFO</level>
+  <class>server.ServerThread</class>
+  <method>identifyMessage</method>
+  <thread>26</thread>
+  <message>[32m3</message>
+</record>
