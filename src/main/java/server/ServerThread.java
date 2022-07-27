@@ -370,7 +370,6 @@ public class ServerThread implements Runnable {
                         sendPrivate(new SelectMap(MAPS).toString(),playerID);
                     }
                 }
-
                 break;
 
             case MessageType.mapSelected:
@@ -737,6 +736,7 @@ public class ServerThread implements Runnable {
     }
 
     public void elegantClose(){
+
         connectedClients.remove(this);
         sendToAll(new ConnectionUpdate(clientID,false,"remove").toString());
         try {
