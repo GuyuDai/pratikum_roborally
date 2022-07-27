@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="rootPaneMap" prefHeight="580.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.mapWindow.MapViewModel">
+<AnchorPane fx:id="rootPaneMap" prefHeight="580.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.popupWindows.MapViewModel">
    <children>
       <Button fx:id="map1Image" layoutX="25.0" layoutY="121.0" mnemonicParsing="false" onAction="#map1ImageAction">
          <graphic>

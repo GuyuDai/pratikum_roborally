@@ -131,3 +131,8 @@
     -fx-border-width: 2;
 }
 
+.gameboard {
+    -fx-border-width: 3;
+    -fx-border-color:  #e9210f;
+}
+
