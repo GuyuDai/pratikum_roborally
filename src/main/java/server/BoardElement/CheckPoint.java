@@ -20,6 +20,7 @@ public class CheckPoint extends BoardElem {
 
   @Override
   public void action() {
+    //this.currentGame.getController().ifGameEnd();
   }
 
   @Override

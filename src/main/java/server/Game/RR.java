@@ -440,6 +440,7 @@ public class RR extends Thread implements GameLogic {
       activeCards = new CopyOnWriteArrayList<String>();
       setPriority();
       reorderPlayer();
+      controller.ifGameEnd();
     }
     nextGameState();
   }
