@@ -18,7 +18,7 @@ import java.util.*;
 import java.util.concurrent.*;
 
 /**
- * @author Djafari, Dai
+ * @author Dai
  */
 public class AIReceive extends ClientReceive {
 
