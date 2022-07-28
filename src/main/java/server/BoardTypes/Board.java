@@ -4,6 +4,11 @@ import server.BoardElement.BoardElem;
 import server.Game.RR;
 import server.Control.Position;
 
+
+/**
+ * @author Minghao Li, Yixue Dai.
+ * SuperClass for all maps
+ */
 public abstract class Board {
   public String name;
   public int width = 9;  //x
