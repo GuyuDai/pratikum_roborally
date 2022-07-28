@@ -138,6 +138,7 @@ public class RR extends Thread implements GameLogic {
     this.activeCards = activeCards;
   }
 
+
   /**
    * switch to next game state, and before switching, check if the game end or not
    */
@@ -177,8 +178,8 @@ public class RR extends Thread implements GameLogic {
         break;
 
       case GameEnding:
-        //sendToAll(new Gson().toJson(new ActiveGameState(GameState.GameEnding)));
-        this.isGoingOn = false;
+        System.out.println("current game state is GameEnding");
+        doGameEnding();
         break;
     }
   }
@@ -491,7 +492,8 @@ public class RR extends Thread implements GameLogic {
   }
 
   public void doGameEnding() {
-
+    sendMessageToAll(new ReceivedChat("Game ended!",-1,false));
+    this.isGoingOn = false;
   }
 
   /**
