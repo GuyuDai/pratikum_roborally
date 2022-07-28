@@ -28,6 +28,8 @@ import protocol.SetStatus;
 
 /**
  * @author Nargess Ahmadi, Felicia Saruba, Minghao Li
+ *
+ * window for the Lobby
  */
 
 public class LobbyViewModel {
@@ -79,13 +81,18 @@ public class LobbyViewModel {
     @FXML
     ImageView box1, box2;
 
-
+    /**
+     * initialize elements for loading the Lobby window
+     */
     public void initialize() {
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
         selectMap.setVisible(false);
     }
 
+    /**
+     * node elements for Lobby window
+     */
     public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendBtn) {
         this.container = container;
         this.list = list;
@@ -288,12 +295,18 @@ public class LobbyViewModel {
                     setWindowName("Game");
                 }
                 else{
-                    LobbyText.setText("Please wait and try again later.");
-                    LobbyText.setVisible(true);
-                    PauseTransition pauseTransition26 = new PauseTransition(Duration.seconds(3));
-                    pauseTransition26.setOnFinished(e -> LobbyText.setVisible(false));
-                    pauseTransition26.play();
-                    //selectMap.setVisible(false);
+                    if(Client.getClientReceive().getMaps()!=null){
+                        LobbyText.setText("The game already started.");
+                        LobbyText.setVisible(true);
+                        selectMap.setVisible(false);
+                    }
+                    else{
+                        LobbyText.setText("Please wait until the first player has chosen the map.");
+                        LobbyText.setVisible(true);
+                        PauseTransition pauseTransition26 = new PauseTransition(Duration.seconds(3));
+                        pauseTransition26.setOnFinished(e -> LobbyText.setVisible(false));
+                        pauseTransition26.play();
+                    }
                 }
             }
         }
@@ -425,6 +438,7 @@ public class LobbyViewModel {
      * if the first player deselects being ready, the player who was ready as 2nd fastest will be able to choose the map
      */
     public void checkForReady() {
+        System.out.println(Client.getClientReceive().getReadyList().size());
         if(Client.getClientReceive().getReadyList().size() == 1 && readyButton.isSelected()){
             selectMap.setText("SELECT MAP");
         } else {
@@ -448,6 +462,8 @@ public class LobbyViewModel {
             Client.getLogger().info(Client.getClientReceive().getNameById(yourId) + "has left the Game");
             String notReadyMessage = new SetStatus(false).toString();
             Client.getClientReceive().sendMessage(notReadyMessage);
+
+            Client.getClientReceive().getReadyList().remove(0);
         }
     }
 
@@ -465,23 +481,17 @@ public class LobbyViewModel {
         }
         catch (Exception e){
         }
-        try {
-            checkForReady();
-        }
-        catch (Exception e){
-        }
-        //TODO ask ming why he added
-        if(Client.getClientReceive().getMaps()!=null){
-            selectMap.setText("SELECT MAP");
-        }
+        checkForReady();
     }
 
     /**
-     * getter setter for window name -> for chat to work in both windows
+     * setter for window name -> for chat to work in both windows
      */
     public static void setWindowName (String name){
         window = name;
     }
-
+    /**
+     * getter for window name -> for chat to work in both windows
+     */
     public static String getWindowName () { return window; }
 }

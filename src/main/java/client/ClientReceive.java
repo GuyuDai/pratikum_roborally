@@ -82,6 +82,9 @@ public class ClientReceive extends Thread{
 
     protected Map<Integer, Integer[]> checkPointsPosition = new HashMap<Integer, Integer[]>();
 
+    protected Map<Integer,List<Integer[]>> IdMovePosition=new HashMap<>();
+
+    List<Integer[]> positionList=new ArrayList<>();
 
 
     public void setCounterRegister(int count){
@@ -100,7 +103,7 @@ public class ClientReceive extends Thread{
         this.checkPointYPosition = checkPointYPosition;
     }
 
-    public void setUnreachedCheckPoints(){
+    public void setCheckPointsPosition(){
         switch (this.board){
             case "DizzyHighway":
                 checkPointsPosition.put(1,new Integer[]{3,12});
@@ -404,7 +407,7 @@ public class ClientReceive extends Thread{
                 MapSelected mapSelected = (MapSelected) message;
                 MapSelected.MapSelectedBody mapSelectedBody = mapSelected.getMessageBody();
                 board = mapSelectedBody.getMap();
-                setUnreachedCheckPoints();
+                setCheckPointsPosition();
                 break;
 
             case MessageType.yourCards:
@@ -470,6 +473,7 @@ public class ClientReceive extends Thread{
                 y=movementBody.getX();
                 x=movementBody.getY();
                 positions=new Integer[]{x,y};
+                positionList.add(positions);
                 IdPosition.put(playerId,positions);
                 break;
 

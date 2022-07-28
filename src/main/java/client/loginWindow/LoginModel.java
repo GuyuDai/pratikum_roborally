@@ -5,6 +5,7 @@ import javafx.beans.property.StringProperty;
 
 /**
  * @author Nargess Ahmadi, Felicia Saruba, Minghao Li
+ *
  */
 
 public class LoginModel {

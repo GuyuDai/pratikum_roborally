@@ -43,6 +43,10 @@ public class StartingPointTaken implements Message {
             this.x = x;
         }
     }
+
+    /**
+     * Protocoll for StartingPointTaken
+     */
     public StartingPointTaken(int x, int y, int clientID) {
         this.messageType = MessageType.startingPointTaken;
         StartingPointTakenBody body = new StartingPointTakenBody();
@@ -53,10 +57,16 @@ public class StartingPointTaken implements Message {
 
     }
 
+    /**
+     * MessageBody for StartingPointTaken
+     */
     public StartingPointTakenBody getMessageBody() {
         return messageBody;
     }
 
+    /**
+     * Json
+     */
     @Override
     public String toString(){
         Gson gson = new GsonBuilder().create();

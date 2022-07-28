@@ -24,6 +24,8 @@ import java.util.*;
 
 /**
  * @author Felicia Saruba, Nargess Ahmadi, Minghao Li
+ *
+ * window for the Login
  */
 
 public class LoginViewModel {

@@ -32,6 +32,9 @@ public class MainApplication extends Application {
     public void stop() {
     }
 
+    /**
+     * init a new client and select Login to show up
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
         new Client().init();
@@ -48,6 +51,9 @@ public class MainApplication extends Application {
         window.show();
     }
 
+    /**
+     * get the according scene
+     */
     public static Scene getScene(int scene_number) {
         switch(scene_number) {
             case 0:
@@ -58,6 +64,9 @@ public class MainApplication extends Application {
         return null;
     }
 
+    /**
+     * load the appropriate window
+     */
     public Scene loadScene(int scene_number) throws IOException {
         Parent root = null;
         if (CREATE_VIEW_FROM_FXML) {

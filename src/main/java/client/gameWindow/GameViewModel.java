@@ -28,6 +28,8 @@ import java.util.*;
 
 /**
  * @author Nargess Ahmadi, Felicia Saruba, Li MingHao
+ *
+ * window for the Game
  */
 public class GameViewModel {
 
@@ -324,7 +326,9 @@ public class GameViewModel {
     Image imageProgramming = new Image(programming.toString());
 
 
-
+    /**
+     * initialize elements for loading the Game window
+     */
     public void initialize(Client client) {
         this.client = client;
         list.itemsProperty().set(model.getListContentProperty());
@@ -333,6 +337,9 @@ public class GameViewModel {
     }
 
 
+    /**
+     * add node elements for game window
+     */
     public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendBtn) {
         this.gameContainer = gameContainer;
         this.container = container;
@@ -685,6 +692,9 @@ public class GameViewModel {
     public int getRegisterCount() { return registerCount; }
 
 
+    /**
+     * when 5th register is chosen, the timer will start and afterwardsa the play cards button will appear
+     */
     private void handle5thRegister() {
         Text.setText("Players have 30 seconds left to finish their register");
         PauseTransition thirty = new PauseTransition(Duration.seconds(30));
@@ -697,7 +707,7 @@ public class GameViewModel {
 
 
     /**
-     * pick your register of 5 cards from your hands of 9 cards
+     * pick your register of 5 cards from your hands of 9 cards: if hand 1 is chosen
      */
     @FXML
     void hand1ButtonAction(ActionEvent event) {
@@ -738,6 +748,9 @@ public class GameViewModel {
         }
     }
 
+    /**
+     * pick your register of 5 cards from your hands of 9 cards: if hand 2 is chosen
+     */
     @FXML
     void hand2ButtonAction(ActionEvent event) {
         setRegisterCount(getRegisterCount() + 1);
@@ -777,6 +790,9 @@ public class GameViewModel {
         }
     }
 
+    /**
+     * pick your register of 5 cards from your hands of 9 cards: if hand 3 is chosen
+     */
     @FXML
     void hand3ButtonAction(ActionEvent event) {
         setRegisterCount(getRegisterCount() + 1);
@@ -816,6 +832,9 @@ public class GameViewModel {
         }
     }
 
+    /**
+     * pick your register of 5 cards from your hands of 9 cards: if hand 4 is chosen
+     */
     @FXML
     void hand4ButtonAction(ActionEvent event) {
         setRegisterCount(getRegisterCount() + 1);
@@ -855,6 +874,9 @@ public class GameViewModel {
         }
     }
 
+    /**
+     * pick your register of 5 cards from your hands of 9 cards: if hand 5 is chosen
+     */
     @FXML
     void hand5ButtonAction(ActionEvent event) {
         setRegisterCount(getRegisterCount() + 1);
@@ -893,6 +915,9 @@ public class GameViewModel {
         }
     }
 
+    /**
+     * pick your register of 5 cards from your hands of 9 cards: if hand 6 is chosen
+     */
     @FXML
     void hand6ButtonAction(ActionEvent event) {
         setRegisterCount(getRegisterCount() + 1);
@@ -931,6 +956,9 @@ public class GameViewModel {
         }
     }
 
+    /**
+     * pick your register of 5 cards from your hands of 9 cards: if hand 7 is chosen
+     */
     @FXML
     void hand7ButtonAction(ActionEvent event) {
         setRegisterCount(getRegisterCount() + 1);
@@ -969,6 +997,9 @@ public class GameViewModel {
         }
     }
 
+    /**
+     * pick your register of 5 cards from your hands of 9 cards: if hand 8 is chosen
+     */
     @FXML
     void hand8ButtonAction(ActionEvent event) {
         setRegisterCount(getRegisterCount() + 1);
@@ -1007,6 +1038,9 @@ public class GameViewModel {
         }
     }
 
+    /**
+     * pick your register of 5 cards from your hands of 9 cards: if hand 9 is chosen
+     */
     @FXML
     void hand9ButtonAction(ActionEvent event) {
         setRegisterCount(getRegisterCount() + 1);
@@ -2108,7 +2142,7 @@ public class GameViewModel {
 
 
     /**
-     * when clicking on each starting point button ( 1 - 6 ), user will see where the robot would be on the map
+     * when clicking on starting point button 1, user will see where the robot would be on the map
      */
     public void startingPoint1Action(ActionEvent actionEvent) {
         String selectedMap = Client.getClientReceive().getBoard();
@@ -2126,6 +2160,9 @@ public class GameViewModel {
         startPointOK.setVisible(true);
     }
 
+    /**
+     * when clicking on starting point button 2, user will see where the robot would be on the map
+     */
     public void startingPoint2Action(ActionEvent actionEvent) {
         String selectedMap = Client.getClientReceive().getBoard();
         if (selectedMap.equals("DeathTrap")) {
@@ -2142,6 +2179,9 @@ public class GameViewModel {
         startPointOK.setVisible(true);
     }
 
+    /**
+     * when clicking on starting point button 3, user will see where the robot would be on the map
+     */
     public void startingPoint3Action(ActionEvent actionEvent) {
         String selectedMap = Client.getClientReceive().getBoard();
         if (selectedMap.equals("DeathTrap")) {
@@ -2158,6 +2198,9 @@ public class GameViewModel {
         startPointOK.setVisible(true);
     }
 
+    /**
+     * when clicking on starting point button 4, user will see where the robot would be on the map
+     */
     public void startingPoint4Action(ActionEvent actionEvent) {
         String selectedMap = Client.getClientReceive().getBoard();
         if (selectedMap.equals("DeathTrap")) {
@@ -2174,6 +2217,9 @@ public class GameViewModel {
         startPointOK.setVisible(true);
     }
 
+    /**
+     * when clicking on starting point button 5, user will see where the robot would be on the map
+     */
     public void startingPoint5Action(ActionEvent actionEvent) {
         String selectedMap = Client.getClientReceive().getBoard();
         if (selectedMap.equals("DeathTrap")) {
@@ -2190,6 +2236,9 @@ public class GameViewModel {
         startPointOK.setVisible(true);
     }
 
+    /**
+     * when clicking on starting point button 6, user will see where the robot would be on the map
+     */
     public void startingPoint6Action(ActionEvent actionEvent) {
         String selectedMap = Client.getClientReceive().getBoard();
         if (selectedMap.equals("DeathTrap")) {
@@ -2297,10 +2346,6 @@ public class GameViewModel {
                 robotBoard.add(finalBotView, moveX, moveY);
                 //move1.play();
             }
-
-           // PauseTransition remove2 = new PauseTransition(Duration.seconds(2));
-           // remove2.setOnFinished(e -> robotBoard.getChildren().remove(1));
-          //  remove2.play();
         }
         Client.getClientReceive().setIdDirection(new HashMap<>());
         if(Client.getClientReceive().isPickDamage()){
@@ -2518,8 +2563,6 @@ public class GameViewModel {
 
 
 
-
-
     /**
      * counter helper
      */
@@ -2545,6 +2588,7 @@ public class GameViewModel {
                  setClickCounter(getClickCounter() + 1);
                  Client.getClientReceive().sendMessage(new PlayCard("PlayedCard").toString());
                  phaseView.setImage(imageActivation);
+                 playActivationPhaseBegins();
                  register1.setImage(register2.getImage());
                  register2.setImage(register3.getImage());
                  register3.setImage(register4.getImage());
@@ -2642,7 +2686,7 @@ public class GameViewModel {
             Stage stage = (Stage) exitBtn.getScene().getWindow();
             stage.close();
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Default.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/DefaultWinner.fxml"));
                 Parent rootMap = (Parent) fxmlLoader.load();
                 Stage stageLobby = new Stage();
                 stageLobby.setTitle("Winner");
@@ -2708,9 +2752,28 @@ public class GameViewModel {
             }
     }
 
+    /**
+     * sound effect for beginning of Programming Phase
+     */
     public void playProgrammingPhaseBegins() {
         try {
-            String fileName = getClass().getResource("/sounds/ProgrammingPhaseBegins.mp3").toURI().toString();
+            String fileName = getClass().getResource("/sounds/ProgrammingPhase.mp3").toURI().toString();
+            Media media = new Media(fileName);
+            MediaPlayer player = new MediaPlayer(media);
+            sound.setMediaPlayer(player);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        sound.getMediaPlayer().play();
+    }
+
+
+    /**
+     * sound effect for beginning of Activation Phase
+     */
+    public void playActivationPhaseBegins() {
+        try {
+            String fileName = getClass().getResource("/sounds/ActivationPhase.mp3").toURI().toString();
             Media media = new Media(fileName);
             MediaPlayer player = new MediaPlayer(media);
             sound.setMediaPlayer(player);
@@ -3048,6 +3111,9 @@ public class GameViewModel {
         }
     }
 
+    /**
+     * when shot by laser, damage Action is activated
+     */
     public void registerDamageAction(ActionEvent event) {
         String[] selectedDamageCards = tempDrawDamage.toArray(new String[tempDrawDamage.size()]);
         Client.getClientReceive().sendMessage(new SelectedDamage(selectedDamageCards).toString());
@@ -3062,6 +3128,9 @@ public class GameViewModel {
         registerDamage.setVisible(false);
     }
 
+    /**
+     * damage cards will appear on game window
+     */
     public void showDamageCards(ActionEvent event) {
 
         for(String damageCard: Client.getClientReceive().getDamageDecks()){
@@ -3142,16 +3211,4 @@ public class GameViewModel {
     public void setOk(int ok){
         this.ok = ok;
     }
-
-    public void playWinnerTune() {
-        try {
-            String fileName = getClass().getResource("/sounds/winnerTune.mp3").toURI().toString();
-            Media media = new Media(fileName);
-            MediaPlayer player = new MediaPlayer(media);
-            sound.setMediaPlayer(player);
-        } catch (Exception e) {
-        }
-        sound.getMediaPlayer().play();
-    }
-
 }

@@ -22,6 +22,9 @@ public class GameModel {
     private GameModel(){
     }
 
+    /**
+     * Model for the MVVM of Game
+     */
     public static GameModel getInstance() {
         if (instance == null) {
             synchronized (GameModel.class) {
@@ -43,6 +46,9 @@ public class GameModel {
     public StringProperty getTextFieldContent(){
         return textFieldContent; }
 
+    /**
+     * add new message to the chat which is a ListView
+     */
     public void addNewListItem(String listItem) {
         listContent.add(listItem);
     }

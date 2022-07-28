@@ -3,8 +3,8 @@ package client.AI;
 import client.*;
 import com.google.gson.*;
 import protocol.*;
-import protocol.CurrentPlayer.CurrentPlayerBody;
-import protocol.ErrorMessage.ErrorMessageBody;
+import protocol.CurrentPlayer.*;
+import protocol.ErrorMessage.*;
 import protocol.PlayerAdded.*;
 import protocol.ProtocolFormat.*;
 import protocol.ReceivedChat.*;
@@ -16,7 +16,6 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.logging.*;
 
 public class AIReceive extends ClientReceive {
 
@@ -28,6 +27,11 @@ public class AIReceive extends ClientReceive {
 
   private CopyOnWriteArrayList<Integer> availableFigures = new CopyOnWriteArrayList<Integer>();
 
+  /**
+   * @author: Nik, Dai
+   * @param socket
+   * Initializes avaialbe starting points and available figures to choose from
+   */
   public AIReceive(Socket socket) {
     super(socket);
     //initialize available starting positions
@@ -60,6 +64,11 @@ public class AIReceive extends ClientReceive {
       e.printStackTrace();
     }
   }
+
+  /**
+   * @author: Dai, Li, Nik
+   * @param message
+   */
   private void identifyMessage(Message message) {
     String type = message.getMessageType();
 
@@ -347,6 +356,9 @@ public class AIReceive extends ClientReceive {
     sendMessage(new MapSelected(maps[mapIndex]).toString());
   }
 
+  /**
+   * author: Nik, Dai
+   */
   private void aiChooseStartPoint(){
     try {
       sleep(1000);

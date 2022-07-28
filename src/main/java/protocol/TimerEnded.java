@@ -8,6 +8,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 /**
+ * @author Dai
  * All clients get a message after the timer ends.
  * The message also informs about players who might have been too slow.
  */
@@ -30,6 +31,10 @@ public class TimerEnded implements Message {
             this.clientIDs = clientIDs;
         }
     }
+
+    /**
+     * Protocoll for timerEnded
+     */
     public TimerEnded (int[] clientIDs) {
         this.messageType = MessageType.timerEnded;
         TimerEndedBody body = new TimerEndedBody();
@@ -38,10 +43,16 @@ public class TimerEnded implements Message {
 
     }
 
+    /**
+     * MessageBody for TimerEnded
+     */
     public TimerEndedBody getMessageBody() {
         return messageBody;
     }
 
+    /**
+     * Json
+     */
     @Override
     public String toString(){
         Gson gson = new GsonBuilder().create();

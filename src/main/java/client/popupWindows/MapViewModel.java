@@ -16,7 +16,9 @@ import protocol.MapSelected;
 
 
 /**
- * author Felicia Saruba
+ * @author Felicia Saruba, Nargess Ahmadi
+ *
+ * window for map selection
  */
 
 public class MapViewModel {
@@ -48,6 +50,9 @@ public class MapViewModel {
 
     public static String mapSelection;
 
+    /**
+     * selection of the map Dizzy Highway
+     */
     @FXML
     public void selectDizzyHighway(ActionEvent actionEvent) {
         Stage stage = (Stage) DizzyHighwayBtn.getScene().getWindow();
@@ -56,6 +61,10 @@ public class MapViewModel {
         Client.getClientReceive().sendMessage(new MapSelected("DizzyHighway").toString());
         openGameWindow();
     }
+
+    /**
+     * selection of the map Death Trap
+     */
     @FXML
     public void selectDeathTrap(ActionEvent actionEvent) {
         Stage stage = (Stage) map2Btn.getScene().getWindow();
@@ -64,6 +73,10 @@ public class MapViewModel {
         Client.getClientReceive().sendMessage(new MapSelected("DeathTrap").toString());
         openGameWindow();
     }
+
+    /**
+     * selection of the map Extra Crispy
+     */
     @FXML
     public void selectExtraCrispy(ActionEvent actionEvent) {
         Stage stage = (Stage) map3Btn.getScene().getWindow();
@@ -72,6 +85,10 @@ public class MapViewModel {
         Client.getClientReceive().sendMessage(new MapSelected("ExtraCrispy").toString());
         openGameWindow();
     }
+
+    /**
+     * selection of the map Lost bearings
+     */
     public void selectLostBearings(ActionEvent actionEvent) {
         Stage stage = (Stage) map4Btn.getScene().getWindow();
         stage.close();
@@ -80,6 +97,9 @@ public class MapViewModel {
         openGameWindow();
     }
 
+    /**
+     * selection of the map Twister
+     */
     public void selectTwister(ActionEvent actionEvent) {
         Stage stage = (Stage) map5Btn.getScene().getWindow();
         stage.close();
@@ -90,7 +110,7 @@ public class MapViewModel {
 
 
     /**
-     * by clicking on each of the map images, it will appear as an enlarged image
+     * by clicking on the image of Dizzy Highway, it will appear as an enlarged image
      */
     public void map1ImageAction (ActionEvent actionEvent) {
         try {
@@ -104,6 +124,9 @@ public class MapViewModel {
         }
     }
 
+    /**
+     * by clicking on the image of Death Trap, it will appear as an enlarged image
+     */
     public void map2ImageAction(ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/DeathTrap.fxml"));
@@ -116,6 +139,9 @@ public class MapViewModel {
         }
     }
 
+    /**
+     * by clicking on the image of Extra Crispy, it will appear as an enlarged image
+     */
     public void map3ImageAction(ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ExtraCrispy.fxml"));
@@ -128,6 +154,10 @@ public class MapViewModel {
         }
     }
 
+
+    /**
+     * by clicking on the image of Lost Bearings it will appear as an enlarged image
+     */
     public void map4ImageAction(ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/LostBearings.fxml"));
@@ -140,6 +170,9 @@ public class MapViewModel {
         }
     }
 
+    /**
+     * by clicking on the image of Twister, it will appear as an enlarged image
+     */
     public void map5ImageAction(ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/Twister.fxml"));
@@ -152,7 +185,9 @@ public class MapViewModel {
         }
     }
 
-
+    /**
+     * open Game window
+     */
     public void openGameWindow(){
         try {
             FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource("/views/Game.fxml"));
@@ -165,11 +200,10 @@ public class MapViewModel {
         }
     }
 
+    /**
+     * setter for Map Selection name
+     */
     public static void setMapSelection(String name){
         mapSelection = name;
-    }
-
-    public static String getMapSelection(){
-        return mapSelection;
     }
 }

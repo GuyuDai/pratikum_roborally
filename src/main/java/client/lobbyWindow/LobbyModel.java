@@ -20,6 +20,9 @@ public class LobbyModel {
     }
 
 
+    /**
+     * Model for the MVVM of Lobby
+     */
     public static LobbyModel getInstance() {
         if (instance == null) {
             synchronized (LobbyModel.class) {
@@ -43,6 +46,9 @@ public class LobbyModel {
         return textFieldContent;
     }
 
+    /**
+     * add new message to the chat which is a ListView
+     */
     public void addNewListItem(String listItem) {
         listContent.add(listItem);
     }

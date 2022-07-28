@@ -44,6 +44,11 @@ public class AISmartReceive extends ClientReceive {
     return checkPointNumber;
   }
 
+  /**
+   * @author: Nik
+   * @param socket
+   * Initializes avaialbe starting points and available figures to choose from
+   */
   public AISmartReceive(Socket socket) {
     super(socket);
     //initialize available starting positions
@@ -80,6 +85,12 @@ public class AISmartReceive extends ClientReceive {
     }
   }
 
+  /**
+   * @author: Nik
+   * @param message
+   * identifies incoming messages from the serving accordingly to the protocol
+   * different messagetype leads to different actions of the client ai
+   */
   private void identifyMessage(Message message) {
     String type = message.getMessageType();
     String body = String.valueOf(message.getMessageBody());
@@ -148,7 +159,7 @@ public class AISmartReceive extends ClientReceive {
         MapSelected.MapSelectedBody mapSelectedBody = new Gson().fromJson(body,
             MapSelected.MapSelectedBody.class);
         board = mapSelectedBody.getMap();
-        setUnreachedCheckPoints();
+        setCheckPointsPosition();
         switch (this.board){
           case "DizzyHighway":
             unreachedCheckPoints.add(1);
@@ -408,6 +419,11 @@ public class AISmartReceive extends ClientReceive {
     }
   }
 
+  /**
+   * @author: Niklas
+   * Uses available Starting Points accordingly to the different Maps
+   * This method is necessary for the AI Client to be able to choose a free Startingpoint
+   */
   private void aiChooseStartPoint() {
     try {
       sleep(1000);
@@ -462,7 +478,8 @@ public class AISmartReceive extends ClientReceive {
 
 
   /**
-   * @author: Nik Go to nearest Checkpoint in the right order
+   * @author: Nik
+   * Sets the cards in the Programmingphase of the AIClient, in order that the Checkpoints will be reached in the right order
    */
   private void aiSmartProgramming() {
     //find out the nearest check point

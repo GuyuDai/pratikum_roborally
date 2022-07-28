@@ -9,6 +9,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 import java.util.List;
+import server.BoardTypes.Board;
 
 public class GameStarted implements Message {
   public String messageType;
@@ -18,18 +19,18 @@ public class GameStarted implements Message {
   public GameStartedBody messageBody;
 
   public class GameStartedBody extends MessageBody {
-    protected List<Map> gameMap;
+    protected String gameMap;
 
-    public List<Map> getGameMap() {
+    public String getGameMap() {
       return gameMap;
     }
 
-    public void setGameMap(List<Map> gameMap) {
+    public void setGameMap(String gameMap) {
       this.gameMap = gameMap;
     }
   }
 
-    public GameStarted (List<Map> gameMap) {
+    public GameStarted (String gameMap) {
       this.messageType = MessageType.gameStarted;
       GameStartedBody body = new GameStartedBody();
       body.gameMap = gameMap;

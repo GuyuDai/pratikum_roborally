@@ -25,6 +25,10 @@ public class Welcome implements Message {
             this.clientID = clientID;
         }
     }
+
+    /**
+     * Protocoll for Welcome
+     */
     public Welcome (int clientID) {
         this.messageType = MessageType.welcome;
         WelcomeBody body = new WelcomeBody();
@@ -33,10 +37,17 @@ public class Welcome implements Message {
 
     }
 
+    /**
+     * MessageBody for Welcome
+     */
     public WelcomeBody getMessageBody() {
         return messageBody;
     }
 
+
+    /**
+     * Json
+     */
     @Override
     public String toString(){
         Gson gson = new GsonBuilder().create();

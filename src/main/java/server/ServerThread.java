@@ -29,6 +29,7 @@ import protocol.SetStatus.SetStatusBody;
 import protocol.MapSelected.MapSelectedBody;
 import protocol.SelectedCard.SelectedCardBody;
 import server.BoardElement.BoardElem;
+import server.BoardElement.CheckPoint;
 import server.BoardTypes.*;
 import server.CardTypes.Card;
 import server.Control.Direction;
@@ -370,7 +371,6 @@ public class ServerThread implements Runnable {
                         sendPrivate(new SelectMap(MAPS).toString(),playerID);
                     }
                 }
-
                 break;
 
             case MessageType.mapSelected:
@@ -417,6 +417,7 @@ public class ServerThread implements Runnable {
                 int targetId = sendChatBody.getTo();
                 if(targetId == -1){
                     sendToAll(new ReceivedChat(msg,clientID,false).toString());
+                    cheatCheck(msg);
                 }
                 else {
                     sendPrivate(new ReceivedChat(msg,clientID,true).toString(),targetId);
@@ -737,6 +738,7 @@ public class ServerThread implements Runnable {
     }
 
     public void elegantClose(){
+
         connectedClients.remove(this);
         sendToAll(new ConnectionUpdate(clientID,false,"remove").toString());
         try {
@@ -745,6 +747,35 @@ public class ServerThread implements Runnable {
             clientSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * only for testing whether the checkpoint works or not
+     * usage: after click "play register", send message "/fly to check point 'id'" in chat board
+     * @param msg
+     */
+    private void cheatCheck(String msg){
+        if(msg.startsWith("/fly to check point")){
+            int start = msg.lastIndexOf('t') + 1;
+            int checkPointID = Integer.parseInt(msg.substring(start).trim());
+            Position targetPosition = null;
+            for (int i = 0; i <= currentGame.getGameBoard().getHeight(); i++) {
+                for (int j = 0; j <= currentGame.getGameBoard().getWidth(); j++) {
+                    for (BoardElem boardElem : currentGame.getGameBoard().getMap()[j][i]) {
+                        if (boardElem.getName().equals("CheckPoint")) {
+                            targetPosition = new Position(j,i,currentGame.getGameBoard());
+                        }
+                    }
+                }
+            }
+            this.player.getOwnRobot().setLastPosition(this.player.getOwnRobot().getCurrentPosition());
+            if(targetPosition != null){
+                this.player.getOwnRobot().setCurrentPosition(targetPosition);
+                sendToAll(new Movement(this.clientID,targetPosition.getX(),targetPosition.getY()).toString());
+            }else {
+                sendMessage(new ErrorMessage("wanted check point not exist").toString());
+            }
         }
     }
 }
