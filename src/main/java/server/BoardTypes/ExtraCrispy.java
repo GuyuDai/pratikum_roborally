@@ -4,7 +4,7 @@ import server.BoardElement.*;
 import server.Control.*;
 
 /**
- * @author Li MingHao, Nargess Ahmadi, Felicia Saruba, Niklas Nißl
+ * @author Li Minghao, Nargess Ahmadi, Felicia Saruba, Niklas Nißl
  */
 
 public class ExtraCrispy extends Board {

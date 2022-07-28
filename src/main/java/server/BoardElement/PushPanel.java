@@ -6,6 +6,11 @@ import server.Control.Direction;
 import server.Game.RR;
 import server.Player.Robot;
 
+/**
+ * @author Minghao Li
+ * If  robot moves onto a Pushpannel,if players register is same as PushPannel's number, it will be pushed,
+ * otherwise the robot will stay on PushPannel.
+ */
 public class PushPanel extends BoardElem implements Move {
 
   public PushPanel(RR currentGame, String push, Direction direction) {

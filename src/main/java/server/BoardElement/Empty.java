@@ -3,7 +3,7 @@ package server.BoardElement;
 import server.Game.RR;
 
 /**
- * @author dai
+ * @author Li
  * This class is used to represent that there is nothing at a certain position
  * in order to prevent null printer exception.
  */

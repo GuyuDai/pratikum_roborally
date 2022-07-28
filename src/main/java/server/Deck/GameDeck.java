@@ -13,6 +13,10 @@ public class GameDeck {
   public CopyOnWriteArrayList<Card> TrojanPile;
   public CopyOnWriteArrayList<Card> WormPile;
 
+  /**
+   * @author Minghao Li
+   * intialize DamageCardPile for all players
+   */
   public GameDeck(){
     this.SpamPile=new CopyOnWriteArrayList<Card>();
     this.VirusPile=new CopyOnWriteArrayList<Card>();

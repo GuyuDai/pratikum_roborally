@@ -3,7 +3,10 @@ import server.CardTypes.Move;
 import server.Control.Direction;
 import server.Game.RR;
 import server.Player.Robot;
-
+/**
+ * @author Minghao Li
+ * robot can't move across a wall.
+ */
 public class Wall extends BoardElem {
 
     public  Wall(RR currentGame, Direction direction){
