@@ -11,7 +11,7 @@ public class Virus extends Card implements DamageCards {
      * take a virus card from the draw pile.
      * use two for-loops to see if board within a six-space radius has robot
      * in if condition: Boardelem[i][j] RobotsPosition[x][y] i==x j==y will result true
-     * not so sure,will change it if it doesn't work.*/
+     * */
 
     @Override
     public void action() {

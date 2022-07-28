@@ -7,7 +7,11 @@ import server.Control.Direction;
 import server.Control.Position;
 import server.Game.RR;
 import server.Player.Robot;
-
+/**
+ * @author Minghao Li
+ * RotatingBelt is a kind of ConveyBelt,but it can make robot turn its faceDirection when it moves in the same direction
+ * as RotatingBelt turnDirection arrow.
+ */
 public class RotatingBelt extends BoardElem implements Move {
     public RotatingBelt(RR currentGame, int speed, Direction direction,Direction direction2) {
         super("RotatingBelt", currentGame);
@@ -21,7 +25,11 @@ public class RotatingBelt extends BoardElem implements Move {
         move(currentGame.getPlayerInCurrentTurn().getOwnRobot());
 
     }
-
+    /**
+     * @author Minghao Li
+     * blue belt speed is 2,grenn is 1,if robot moves out of Belt,it will stop being pushed,if robot moveDirection is not
+     * correct,its faceDirection can't be changed,RotatingBelt will do ConveyBelt action
+     */
     @Override
     public void move(Robot robot) {
         Direction straightDirection=this.getDirection();//arrowDirection

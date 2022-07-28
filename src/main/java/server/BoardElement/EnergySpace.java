@@ -2,6 +2,10 @@ package server.BoardElement;
 
 import server.Game.RR;
 
+/**
+ * @author Minghao Li
+ * when robot meet a energySpace its energycube will increase.
+ */
 public class EnergySpace extends BoardElem{
   public EnergySpace (RR currentGame,int count) {
 

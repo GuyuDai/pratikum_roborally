@@ -2,7 +2,10 @@
 package server.BoardElement;
 
 import server.Game.*;
-
+/**
+ * @author Minghao Li
+ * It's a place for robot to start.
+ */
 public class StartingPoint extends BoardElem {
 
     public  StartingPoint(RR currentGame){

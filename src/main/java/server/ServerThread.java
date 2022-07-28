@@ -40,7 +40,10 @@ import server.Game.GameState;
 import server.Game.RR;
 import server.Player.Player;
 
-
+/**
+ * @author  dai, Li
+ * handle message from Client,and send message to Client
+ */
 public class ServerThread implements Runnable {
 
     public static final String ANSI_GREEN = "\u001B[32m";

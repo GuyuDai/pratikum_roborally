@@ -3,6 +3,10 @@ package server.BoardElement;
 import server.Game.RR;
 import server.Player.Robot;
 
+/**
+ * @author Minghao Li
+ * If  robot walks into a Pit, it will reboot.
+ */
 public class Pit extends BoardElem{
   public Pit(RR currentGame) {
     super("Pit", currentGame);

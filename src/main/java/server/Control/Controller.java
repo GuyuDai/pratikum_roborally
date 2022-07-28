@@ -83,7 +83,7 @@ public class Controller {
         canMoveOut = !(currentBoardElem2.getName().equals("Wall") && currentBoardElem2.getDirection().equals(Direction.DOWN));
         break;
     }
-    /**change WallController.
+    /** WallController
      * @author Minghao Li*/
 
     if (!canMoveIn || !canMoveOut) {

@@ -1,7 +1,10 @@
 package server.Control;
 
 
-
+/**
+ * @author Minghao Li
+ * enum Direction for boardElem,Position,and Robot
+ */
 public enum Direction {
     UP(0), RIGHT(90), DOWN(180), LEFT(270);
 
@@ -18,7 +21,10 @@ public enum Direction {
         return ordinal < 0 ?  null : values()[ordinal];
     }
 
-
+    /**
+     * @author Minghao Li
+     * use angel increasing to make Direction change.
+     */
     public Direction turnRight() {
         return Direction.getDirection((angel+90)%360);
     }
