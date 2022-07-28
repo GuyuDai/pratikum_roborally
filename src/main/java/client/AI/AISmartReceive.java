@@ -372,7 +372,12 @@ public class AISmartReceive extends ClientReceive {
 
         break;
 
-
+      case MessageType.gameFinished:
+        GameFinished gameFinished= (GameFinished) message;
+        GameFinished.GameFinishedBody gameFinishedBody=gameFinished.getMessageBody();
+        winnerID=gameFinishedBody.getClientID();
+        gameEnded=true;
+        break;
     }
   }
 
