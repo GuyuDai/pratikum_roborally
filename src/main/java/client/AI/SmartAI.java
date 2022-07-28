@@ -25,7 +25,8 @@ public class SmartAI extends Client {
 
 
   /**
-   * @author: Initializes an Client for the Smart AI
+   * @author: Niklas Nißl
+   * Initializes an Client for the Smart AI
    */
   public void init() {
 

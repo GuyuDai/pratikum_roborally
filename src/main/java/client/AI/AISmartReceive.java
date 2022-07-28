@@ -86,7 +86,7 @@ public class AISmartReceive extends ClientReceive {
   }
 
   /**
-   * @author: Nik
+   * @author: Niklas Nißl
    * @param message
    * identifies incoming messages from the serving accordingly to the protocol
    * different messagetype leads to different actions of the client ai

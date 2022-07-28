@@ -15,6 +15,9 @@ import java.net.*;
 import java.util.Map;
 import java.util.*;
 
+/**
+ * author: Dai, Li, Nik
+ */
 
 public class ClientReceive extends Thread{
 
@@ -332,6 +335,7 @@ public class ClientReceive extends Thread{
 
         return new ErrorMessage("Error when parsing String to Message");
     }
+
 
     private void identifyMessage(Message message) {
         String type = message.getMessageType();
