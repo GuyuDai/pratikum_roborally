@@ -571,6 +571,7 @@ public class ClientReceive extends Thread{
                 GameFinished.GameFinishedBody gameFinishedBody=gameFinished.getMessageBody();
                 winnerID=gameFinishedBody.getClientID();
                 gameEnded=true;
+                break;
 
             case MessageType.registerChosen:
                 assert message instanceof RegisterChosen;

@@ -5,10 +5,7 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
-import client.ClientReceive;
-import client.Log;
 import protocol.*;
 import com.google.gson.Gson;
 import protocol.ActivePhase.ActivePhaseBody;
@@ -29,7 +26,6 @@ import protocol.SetStatus.SetStatusBody;
 import protocol.MapSelected.MapSelectedBody;
 import protocol.SelectedCard.SelectedCardBody;
 import server.BoardElement.BoardElem;
-import server.BoardElement.CheckPoint;
 import server.BoardTypes.*;
 import server.CardTypes.Card;
 import server.Control.Direction;
@@ -817,8 +813,9 @@ public class ServerThread implements Runnable {
             }
         }
         if(msg.equals("/let me win") && currentGame != null){
-            sendToAll(new ReceivedChat("Winner is " + this.name, -1, false).toString());
+            sendToAll(new GameFinished(this.clientID).toString());
             currentGame.setCurrentState(GameState.GameEnding);
         }
+
     }
 }
