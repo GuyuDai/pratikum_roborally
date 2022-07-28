@@ -329,6 +329,13 @@ public class AIReceive extends ClientReceive {
         int targetID = connectionUpdate.getMessageBody().getClientID();
         removeDisconnectedClient(targetID);
         break;
+
+      case MessageType.gameFinished:
+        GameFinished gameFinished= (GameFinished) message;
+        GameFinished.GameFinishedBody gameFinishedBody=gameFinished.getMessageBody();
+        winnerID=gameFinishedBody.getClientID();
+        gameEnded=true;
+        break;
     }
   }
 

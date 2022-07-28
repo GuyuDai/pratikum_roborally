@@ -5,10 +5,7 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
-import client.ClientReceive;
-import client.Log;
 import protocol.*;
 import com.google.gson.Gson;
 import protocol.ActivePhase.ActivePhaseBody;
@@ -42,7 +39,7 @@ import server.Player.Player;
 
 /**
  * handle message from Client,and send message to Client
- * @author  Yixue Dai, Li MingHao, Nassrin Djafari
+ * @author  Yixue Dai, Li MingHao
  */
 public class ServerThread implements Runnable {
 
@@ -791,7 +788,11 @@ public class ServerThread implements Runnable {
 
     /**
      * only for testing whether the checkpoint works or not
-     * usage: after click "play register", send message "/fly to check point 'id'" in chat board
+     * usage:
+     * 1. player A click "play register"
+     * 2. player B send chat "/fly to check point 'number'"
+     * 3. player B click "play register" (this card cannot change the position of this robot)
+     * 4. click "move robot"
      * @param msg
      */
     private void cheatCheck(String msg){
@@ -803,7 +804,10 @@ public class ServerThread implements Runnable {
                 for (int j = 0; j <= currentGame.getGameBoard().getWidth(); j++) {
                     for (BoardElem boardElem : currentGame.getGameBoard().getMap()[j][i]) {
                         if (boardElem.getName().equals("CheckPoint")) {
-                            targetPosition = new Position(j,i,currentGame.getGameBoard());
+                            CheckPoint temp = (CheckPoint) boardElem;
+                            if(temp.getCount() == checkPointID){
+                                targetPosition = new Position(j,i,currentGame.getGameBoard());
+                            }
                         }
                     }
                 }
