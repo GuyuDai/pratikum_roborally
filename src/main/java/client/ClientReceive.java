@@ -18,7 +18,7 @@ import java.util.*;
 /**
  * When a client receive a protocol message from Server, it handles and keep the information here and update the GUI
  *
- * @author: Li MingHao, Yixue Dai, Felicia Saruba, Nargess Ahmadi, Nassrin Djafari, Niklas Nißl
+ * @author: Li MingHao, Yixue Dai
  */
 
 public class ClientReceive extends Thread{
@@ -350,7 +350,7 @@ public class ClientReceive extends Thread{
     }
 
     /**
-     * @author: Li, Nik, Dai
+     * @author: Li
      * Client handle protocol message from Server.
      */
 

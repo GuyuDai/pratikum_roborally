@@ -7,6 +7,7 @@ import server.Game.RR;
 
 /**
  * @author Minghao Li
+ * boardElem for maps
  */
 public abstract class BoardElem {
   public String name;
