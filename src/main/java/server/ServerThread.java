@@ -249,6 +249,9 @@ public class ServerThread implements Runnable {
         if(input.contains("\"messageType\":\"YourCards\",\"messageBody\"")){
             return new Gson().fromJson(input, YourCards.class);
         }
+        if(input.contains("\"messageType\":\"DiscardSome\",\"messageBody\"")){
+            return new Gson().fromJson(input, YourCards.class);
+        }
 
         return new ErrorMessage("Error when parsing String to Message");
     }

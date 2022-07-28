@@ -158,7 +158,7 @@ public class ClientReceive extends Thread{
         try {
             while (!socket.isClosed()) {
                 String serverMessage = readInput.readLine();
-                //System.out.println(serverMessage + "-----------original message");  //test
+                System.out.println(serverMessage + "-----------original message");  //test
                 Message message = wrapMessage(serverMessage);
                 //System.out.println("--------------------------------------------------------------");  //test
                 Client.getLogger().info( ANSI_GREEN + message + "wrapped message");  //test
@@ -327,6 +327,9 @@ public class ClientReceive extends Thread{
             return new Gson().fromJson(input, CheckPointMoved.class);
         }
         if(input.contains("\"messageType\":\"YourCards\",\"messageBody\"")){
+            return new Gson().fromJson(input, YourCards.class);
+        }
+        if(input.contains("\"messageType\":\"DiscardSome\",\"messageBody\"")){
             return new Gson().fromJson(input, YourCards.class);
         }
 

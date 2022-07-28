@@ -670,6 +670,9 @@ public class AIReceive extends ClientReceive {
     if(input.contains("\"messageType\":\"YourCards\",\"messageBody\"")){
       return new Gson().fromJson(input, YourCards.class);
     }
+    if(input.contains("\"messageType\":\"DiscardSome\",\"messageBody\"")){
+      return new Gson().fromJson(input, YourCards.class);
+    }
 
     return new ErrorMessage("Error when parsing String to Message");
   }
@@ -828,6 +831,9 @@ public class AIReceive extends ClientReceive {
     return new Gson().fromJson(input, CheckPointMoved.class);
   }
   if(input.contains("\"messageType\":\"YourCards\"")){
+    return new Gson().fromJson(input, YourCards.class);
+  }
+  if(input.contains("\"messageType\":\"DiscardSome\",\"messageBody\"")){
     return new Gson().fromJson(input, YourCards.class);
   }
 
