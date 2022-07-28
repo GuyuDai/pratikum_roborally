@@ -90,6 +90,9 @@ public class LobbyViewModel {
         selectMap.setVisible(false);
     }
 
+    /**
+     * node elements for Lobby window
+     */
     public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendBtn) {
         this.container = container;
         this.list = list;
@@ -459,8 +462,6 @@ public class LobbyViewModel {
             Client.getLogger().info(Client.getClientReceive().getNameById(yourId) + "has left the Game");
             String notReadyMessage = new SetStatus(false).toString();
             Client.getClientReceive().sendMessage(notReadyMessage);
-
-
 
             Client.getClientReceive().getReadyList().remove(0);
         }

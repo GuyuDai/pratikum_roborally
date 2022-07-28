@@ -337,6 +337,9 @@ public class GameViewModel {
     }
 
 
+    /**
+     * add node elements for game window
+     */
     public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendBtn) {
         this.gameContainer = gameContainer;
         this.container = container;
@@ -3108,6 +3111,9 @@ public class GameViewModel {
         }
     }
 
+    /**
+     * when shot by laser, damage Action is activated
+     */
     public void registerDamageAction(ActionEvent event) {
         String[] selectedDamageCards = tempDrawDamage.toArray(new String[tempDrawDamage.size()]);
         Client.getClientReceive().sendMessage(new SelectedDamage(selectedDamageCards).toString());
@@ -3122,6 +3128,9 @@ public class GameViewModel {
         registerDamage.setVisible(false);
     }
 
+    /**
+     * damage cards will appear on game window
+     */
     public void showDamageCards(ActionEvent event) {
 
         for(String damageCard: Client.getClientReceive().getDamageDecks()){
@@ -3202,16 +3211,4 @@ public class GameViewModel {
     public void setOk(int ok){
         this.ok = ok;
     }
-
-    public void playWinnerTune() {
-        try {
-            String fileName = getClass().getResource("/sounds/winnerTune.mp3").toURI().toString();
-            Media media = new Media(fileName);
-            MediaPlayer player = new MediaPlayer(media);
-            sound.setMediaPlayer(player);
-        } catch (Exception e) {
-        }
-        sound.getMediaPlayer().play();
-    }
-
 }
