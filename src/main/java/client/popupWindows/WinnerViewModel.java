@@ -8,6 +8,13 @@ import javafx.scene.image.ImageView;
 
 import java.net.URL;
 
+
+/**
+ * @author Felicia Saruba, Nargess Ahmadi
+ *
+ * window for winner of the game
+ */
+
 public class WinnerViewModel {
 
 
@@ -39,10 +46,13 @@ public class WinnerViewModel {
     Image imageTwonkey = new Image(twonkey.toString());
 
 
-
+    /**
+     * initialize elements for winner window
+     */
     public void initialize(){
         setYourBotIcon();
     }
+
     /**
      * sets your own bot icon
      */

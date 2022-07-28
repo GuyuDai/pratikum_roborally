@@ -12,6 +12,12 @@ import javafx.scene.media.MediaView;
 import java.net.URL;
 
 
+/**
+ * @author Felicia Saruba, Nargess Ahmadi
+ *
+ * window for winner of the game if only one player is left
+ */
+
 public class DefaultWinnerViewModel {
 
     @FXML
@@ -44,7 +50,9 @@ public class DefaultWinnerViewModel {
     Image imageTwonkey = new Image(twonkey.toString());
 
 
-
+    /**
+     * initialize elements for loading the winner window
+     */
     public void initialize(){
         playWinnerTune();
         setYourBotIcon();
@@ -81,6 +89,9 @@ public class DefaultWinnerViewModel {
         nameBot.setText(yourName);
     }
 
+    /**
+     * play winnter tune
+     */
     public void playWinnerTune() {
         try {
             String fileName = getClass().getResource("/sounds/winnerTune.mp3").toURI().toString();

@@ -28,6 +28,8 @@ import protocol.SetStatus;
 
 /**
  * @author Nargess Ahmadi, Felicia Saruba, Minghao Li
+ *
+ * window for the Lobby
  */
 
 public class LobbyViewModel {
@@ -79,7 +81,9 @@ public class LobbyViewModel {
     @FXML
     ImageView box1, box2;
 
-
+    /**
+     * initialize elements for loading the Lobby window
+     */
     public void initialize() {
         list.itemsProperty().set(model.getListContentProperty());
         input.textProperty().bindBidirectional(model.getTextFieldContent());
@@ -480,11 +484,13 @@ public class LobbyViewModel {
     }
 
     /**
-     * getter setter for window name -> for chat to work in both windows
+     * setter for window name -> for chat to work in both windows
      */
     public static void setWindowName (String name){
         window = name;
     }
-
+    /**
+     * getter for window name -> for chat to work in both windows
+     */
     public static String getWindowName () { return window; }
 }
