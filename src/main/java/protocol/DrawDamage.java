@@ -8,6 +8,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 /**
+ * @author Dai, Djafari
  * The client receives all his damage cards in one message at once.
  */
 

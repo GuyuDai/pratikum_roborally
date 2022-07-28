@@ -8,6 +8,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 /**
+ * @author Djafari, Dai
  * As soon as the player selects his 5th card, no more adjustments can be made.
  * This will be sent to all players.
  */

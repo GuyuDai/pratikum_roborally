@@ -5,6 +5,9 @@ import com.google.gson.GsonBuilder;
 import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.*;
 
+/**
+ * @author Dai, Djafari, Nissl
+ */
 public class CheckPointMoved implements Message {
     public String messageType;
     public String getMessageType() {

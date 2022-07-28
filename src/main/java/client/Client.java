@@ -13,6 +13,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+/**
+ *
+ * @author Li MingHao, Yixue Dai
+ */
+
 public class Client {
 
     public static final Logger logger = Log.logFile("ClientLog");
@@ -27,8 +32,8 @@ public class Client {
     }
 
     /**
-     * @author: Li
-     * initialize Client
+     * initialize a new client
+     * @author Li
      */
     public void init() {
         try {

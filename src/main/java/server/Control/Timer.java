@@ -2,6 +2,10 @@ package server.Control;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author dai
+ * usage: Timer.countDown(time)
+ */
 public class Timer {
 
   public static boolean timerStarted = false;

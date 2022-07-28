@@ -2,6 +2,7 @@ package client.loginWindow;
 
 
 import client.*;
+import client.lobbyWindow.LobbyModel;
 import com.google.gson.*;
 import javafx.beans.binding.*;
 import javafx.event.*;
@@ -23,9 +24,10 @@ import java.net.URISyntaxException;
 import java.util.*;
 
 /**
- * @author Felicia Saruba, Nargess Ahmadi, Minghao Li
+ * Binds the data coming from the {@link LoginModel} with its respective GUI-elements and manages the presentation logic
+ * for the login window.
  *
- * window for the Login
+ * @author Felicia Saruba, Nargess Ahmadi, Minghao Li
  */
 
 public class LoginViewModel {

@@ -7,6 +7,9 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.MessageType;
 
+/**
+ * @author Dai
+ */
 public class ReturnCards implements Message {
   public String messageType;
   public String getMessageType() {

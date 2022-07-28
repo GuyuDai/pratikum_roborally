@@ -5,6 +5,10 @@ import client.*;
 import java.io.*;
 import java.net.*;
 
+/**
+ * @author Yixue Dai, Niklas Nißl
+ */
+
 public class SmartAI extends Client {
   private static final int SERVER_PORT = 1788;
   private static final String SERVER_IP = "localhost";
@@ -25,8 +29,7 @@ public class SmartAI extends Client {
 
 
   /**
-   * @author: Nik,dai
-   * Initializes an Client for the Smart AI
+   * Initializes a Client for the Smart AI
    */
   public void init() {
 

@@ -68,6 +68,7 @@ public class AIReceive extends ClientReceive {
   /**
    * @author: Dai, Li, Nik
    * @param message
+   * get the protocol message from server and react accordingly
    */
   private void identifyMessage(Message message) {
     String type = message.getMessageType();
@@ -184,9 +185,6 @@ public class AIReceive extends ClientReceive {
         int takenY = startingPointTakenBody.getY();
         playerId = startingPointTakenBody.getClientID();
         startingPositionAdd(takenX,takenY,playerId);
-        //Wenn die gewünschte Position valide ist, werden alle Spieler darüber benachrichtigt.
-        removeStartPointsInHashSet(takenX, takenY);
-        //sendMessage(new SetStartingPoint(8,1).toString());
         AI.getLogger().info(ANSI_GREEN + "already send msg");//test
         break;
 
@@ -334,6 +332,10 @@ public class AIReceive extends ClientReceive {
     }
   }
 
+  /**
+   * @author dai
+   * choose an available robot randomly
+   */
   private void aiChooseRobot(){
     int figureIndex = random.nextInt(availableFigures.size() - 1);
     figure = availableFigures.get(figureIndex);
@@ -341,6 +343,10 @@ public class AIReceive extends ClientReceive {
     sendMessage(new PlayerValues(name,figure).toString());
   }
 
+  /**
+   * @author dai
+   * wait for seconds and then get ready
+   */
   private void aiReady(){
     isReady = true;
     try {
@@ -351,6 +357,10 @@ public class AIReceive extends ClientReceive {
     sendMessage(new SetStatus(true).toString());
   }
 
+  /**
+   * @author dai
+   * if AI is the first ready client, choose a map randomly
+   */
   private void aiChooseMap(){
     int mapIndex = random.nextInt(maps.length - 1);
     sendMessage(new MapSelected(maps[mapIndex]).toString());
@@ -358,6 +368,7 @@ public class AIReceive extends ClientReceive {
 
   /**
    * author: Nik, Dai
+   * wait for seconds and then choose an available starting point randomly
    */
   private void aiChooseStartPoint(){
     try {
@@ -414,6 +425,10 @@ public class AIReceive extends ClientReceive {
     //maybe we will implement
   }
 
+  /**
+   * @author dai
+   * select the first 5 cards in its hands
+   */
   private void aiProgramming(){
     try {
       sleep(6000);
@@ -430,6 +445,11 @@ public class AIReceive extends ClientReceive {
     cards = null;
     register = 0;
   }
+
+  /**
+   * @author dai
+   * choose damage cards randomly
+   */
   private void aiPickDamage(){
     try {
       sleep(6000);
@@ -449,6 +469,11 @@ public class AIReceive extends ClientReceive {
     //do nothing
   }
 
+  /**
+   * @author dai
+   * @param serverMsg chat or error message from server
+   * when AI receive some certain kinds of chat or error message from server, react accordingly
+   */
   private void aiTrigger(String serverMsg){
     switch (serverMsg){
       case "Choose your robot":
@@ -458,70 +483,12 @@ public class AIReceive extends ClientReceive {
 
     }
   }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  private HashSet<Position> availableStartingPositions = new HashSet<>();
-  private HashSet<Position> availableDeathTrapStartingPositions = new HashSet<>();
-  Board deathTrap= new DeathTrap();
-  Board dizzyHighway = new DizzyHighway();
-  private List<String> myNineCardsOnPile = new ArrayList<>();
-  private String[] registerCards = new String[5];
 
-  public void programmingPhaseAI() {
-    // draw from pile 9 cards automatically
-
-    //Choose the first five cards and put in your register
-    registerCards[0] = String.valueOf(myNineCardsOnPile.get(0));
-    registerCards[1] = String.valueOf(myNineCardsOnPile.get(1));
-    registerCards[2] = String.valueOf(myNineCardsOnPile.get(2));
-    registerCards[3] = String.valueOf(myNineCardsOnPile.get(3));
-    registerCards[4] = String.valueOf(myNineCardsOnPile.get(4));
-
-    sendMessage(new SelectedCard(registerCards[0],0,getClientID()).toString());
-    sendMessage(new SelectedCard(registerCards[1],1,getClientID()).toString());
-    sendMessage(new SelectedCard(registerCards[2],2,getClientID()).toString());
-    sendMessage(new SelectedCard(registerCards[3],3,getClientID()).toString());
-    sendMessage(new SelectedCard(registerCards[4],4,getClientID()).toString());
-  }
-  public void setStartingPositions() {
-    //DeathTrap
-    availableDeathTrapStartingPositions.add(new Position(1, 11, deathTrap ));
-    availableDeathTrapStartingPositions.add(new Position(3, 12, deathTrap));
-    availableDeathTrapStartingPositions.add(new Position(4, 11, deathTrap));
-    availableDeathTrapStartingPositions.add(new Position(5, 11, deathTrap));
-    availableDeathTrapStartingPositions.add(new Position(6, 12, deathTrap));
-    availableDeathTrapStartingPositions.add(new Position(8, 11, deathTrap));
-    //DizzyHighway
-    availableStartingPositions.add(new Position(1, 1,dizzyHighway ));
-    availableStartingPositions.add(new Position(3, 0,dizzyHighway));
-    availableStartingPositions.add(new Position(4, 1,dizzyHighway));
-    availableStartingPositions.add(new Position(5, 1,dizzyHighway));
-    availableStartingPositions.add(new Position(6, 0,dizzyHighway));
-    availableStartingPositions.add(new Position(8, 1,dizzyHighway));
-
-
-  }
-
-  public void removeStartPointsInHashSet(int x, int y) {
-    HashSet<Position> delete = new HashSet<>();
-    if (board.equals("Death Trap")) {
-      for (Position position : availableDeathTrapStartingPositions) {
-        if (position.getX() == x && position.getY() == y) {
-          delete.add(position);
-        }
-      }
-
-    } else {
-      for (Position position : availableStartingPositions) {
-        if (position.getX() == x && position.getY() == y) {
-          delete.add(position);
-        }
-      }
-
-    }
-  }
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  /**
+   * @author dai
+   * @param input String form reader.readLine()
+   * @return corresponding protocol message
+   */
   private Message wrapMessage(String input){
     if(input.contains("\"messageType\":\"ActivePhase\",\"messageBody\"")){
       return new Gson().fromJson(input, ActivePhase.class);
@@ -670,6 +637,9 @@ public class AIReceive extends ClientReceive {
     if(input.contains("\"messageType\":\"YourCards\",\"messageBody\"")){
       return new Gson().fromJson(input, YourCards.class);
     }
+    if(input.contains("\"messageType\":\"DiscardSome\",\"messageBody\"")){
+      return new Gson().fromJson(input, YourCards.class);
+    }
 
     return new ErrorMessage("Error when parsing String to Message");
   }
@@ -677,9 +647,10 @@ public class AIReceive extends ClientReceive {
 
 
   /**
-   * this method is for the LMU Server, for our own game, please use the above wrapMessage()
-   * @param input Json String
-   * @return specific Message
+   * another wrap message method for the LMU Server, for our own game, please use the above wrapMessage()
+   * @author dai
+   * @param input
+   * @return
    */
   /*
   private Message wrapMessage(String input){
@@ -828,6 +799,9 @@ public class AIReceive extends ClientReceive {
     return new Gson().fromJson(input, CheckPointMoved.class);
   }
   if(input.contains("\"messageType\":\"YourCards\"")){
+    return new Gson().fromJson(input, YourCards.class);
+  }
+  if(input.contains("\"messageType\":\"DiscardSome\",\"messageBody\"")){
     return new Gson().fromJson(input, YourCards.class);
   }
 

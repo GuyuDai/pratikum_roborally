@@ -4,6 +4,13 @@ import com.google.gson.*;
 
 import java.lang.reflect.Type;
 
+/**
+ * @author dai
+ * identify which protocol a String is and seserialize
+ * usage:  GsonBuilder gsonBuilder = new GsonBuilder();
+ *         gsonBuilder.registerTypeAdapter(Message.class, new MessageAdapter());
+ *         gson = gsonBuilder.create();
+ */
 public class MessageAdapter implements JsonDeserializer<Message>{
     @Override
     public Message deserialize(JsonElement json, Type t, JsonDeserializationContext context) throws JsonParseException {

@@ -1,6 +1,8 @@
 package protocol.ProtocolFormat;
 
-
+/**
+ * @author Djafari, Dai
+ */
 public class MessageType {
     public static final String clientMessage = "ClientMessage";
     public static final String helloServer = "HelloServer";
@@ -39,7 +41,7 @@ public class MessageType {
     public static final String reboot = "Reboot";
     public static final String playerTurning = "PlayerTurning";
     public static final String energy = "Energy";
-    public static final String checkpointReached = "CheckpointReached";
+    public static final String checkpointReached = "CheckPointReached";
     public static final String selectMap = "SelectMap";
     public static final String mapSelected = "MapSelected";
     public static final String replaceCard = "ReplaceCard";

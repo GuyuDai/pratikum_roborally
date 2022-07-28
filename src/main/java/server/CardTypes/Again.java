@@ -1,6 +1,10 @@
 package server.CardTypes;
 import server.Player.Robot;
 
+
+/**
+ * @author Dai, Li
+ */
 public class Again extends Card {
 
   /**

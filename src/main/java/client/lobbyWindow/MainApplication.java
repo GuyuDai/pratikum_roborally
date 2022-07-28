@@ -11,8 +11,9 @@ import java.util.Objects;
 import client.Client;
 
 /**
- * @author Nargess Ahmadi, Felicia Saruba, Minghao Li, Nassrin Djafari
+ * Main Class to start the application
  *
+ * @author Nargess Ahmadi, Felicia Saruba, Minghao Li, Nassrin Djafari
  */
 
 public class MainApplication extends Application {

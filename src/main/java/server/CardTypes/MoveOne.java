@@ -3,7 +3,7 @@ package server.CardTypes;
 import server.Player.Robot;
 
 /**
- * @author dai,Li
+ * @author Dai, Li
  * to move forwards one step
  */
 public class

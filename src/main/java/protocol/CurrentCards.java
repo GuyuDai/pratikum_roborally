@@ -12,6 +12,7 @@ import java.util.List;
 
 
 /**
+ * @author Dai, Djafari
  * Active programming cards
  * In each round a message announcing the current active cards will be sent to all players.
  * Only the cards of the current register will be announced.

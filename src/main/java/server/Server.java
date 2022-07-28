@@ -15,6 +15,9 @@ import protocol.ProtocolFormat.Message;
 import server.Control.DisconnectionController;
 import server.Player.Player;
 
+/**
+ * @author dai
+ */
 public class Server {
 
     public static final Logger logger = Log.logFile("ServerLog");
@@ -37,6 +40,10 @@ public class Server {
 
     public static List<ServerThread> getConnectedClients() {
         return connectedClients;
+    }
+
+    public static Logger getLogger(){
+        return logger;
     }
 
     private int count = 1;
@@ -70,7 +77,7 @@ public class Server {
         }
     }
 
-    public void closeServerSocket() {
+    private void closeServerSocket() {
         try {
             if (serverSocket != null) {
                 serverSocket.close();
@@ -80,7 +87,7 @@ public class Server {
         }
     }
 
-    public void clientConnectedIn(Socket clientSocket) throws IOException {
+    private void clientConnectedIn(Socket clientSocket) throws IOException {
         ServerThread connectedClient = new ServerThread(clientSocket);
         connectedClient.setID(count);
         count++;
@@ -93,6 +100,11 @@ public class Server {
         sendMessageToClient(new Welcome(connectedClient.getID()), connectedClient);
     }
 
+    /**
+     * send protocol to a certain client
+     * @param msg
+     * @param client ServerThread
+     */
     public void sendMessageToClient(Message msg, ServerThread client) {
         try {
             BufferedWriter write = new BufferedWriter(new OutputStreamWriter(client.getClientSocket().getOutputStream()));
@@ -106,6 +118,10 @@ public class Server {
         }
     }
 
+    /**
+     * send protocol message to all the connected client
+     * @param msg
+     */
     public void sendMessageToAll(Message msg) {
         for (ServerThread client : this.connectedClients) {
             sendMessageToClient(msg, client);
@@ -145,6 +161,10 @@ public class Server {
     }
 
 
+    /**
+     * @param id wanted client's id
+     * @return client's ServerThread
+     */
     public static ServerThread getServerThreadById(int id) {
         for (ServerThread target : getConnectedClients()) {
             if (target.getID() == id) {
@@ -154,29 +174,6 @@ public class Server {
         return null;
     }
 
-    public void messageHandle() {
-        /*
-        while(!messageHandler.getMessagesFromClient().isEmpty()){
-            messageHandler.getMessagesFromClient().forEach((key,value) ->{
-                switch (value.messageType){
-                    case "SendChat":
-                        SendChatBody body = (SendChatBody) value.messageBody;
-                        int to = body.getTo();
-                        String message = body.getMessage();
-                        if(to < 0){  //public message
-                            sendMessageToAll(new ReceivedChat(message,key,false));
-                        }else {  //private message
-                            sendMessageToClient(new ReceivedChat(message,key,true), getPlayerOnlineById(to));
-                            //in PlayerOnline wrapMessage(), we already ensured that the receiver exist
-                        }
-                    default: // TODO: 2022/6/28 implement handling for other protocols
-                        sendMessageToAll(value);
-                }
-            } );
-        }
-
-         */
-    }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     public static void main(String[] args) {
@@ -184,10 +181,5 @@ public class Server {
         server.run();
         new DisconnectionController().start();
     }
-
-    public static Logger getLogger(){
-        return logger;
-    }
-
 
 }

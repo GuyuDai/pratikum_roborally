@@ -1,9 +1,7 @@
 package server.Player;
 
-import java.util.Random;
 import java.util.logging.Logger;
 
-import client.ClientReceive;
 import protocol.Animation;
 import protocol.Energy;
 import protocol.Movement;
@@ -15,6 +13,9 @@ import server.Control.Direction;
 import server.Control.Position;
 import server.Game.RR;
 
+/**
+ * @author dai
+ */
 public class Robot implements RobotAction {
 
   private static final Logger logger = Logger.getLogger(Robot.class.getName());
@@ -100,7 +101,6 @@ public class Robot implements RobotAction {
   }
 
   /**
-   * @author dai
    * @param difference can be positive or negative
    */
   public void setHp(int difference) {
@@ -194,6 +194,9 @@ public class Robot implements RobotAction {
     }
   }
 
+  /**
+   * used in activation phase, the card in the register activates the effect
+   */
   @Override
   public void act() {
     for (Card card : owner.getRegister()) {
@@ -202,7 +205,6 @@ public class Robot implements RobotAction {
   }
 
   /**
-   * @author dai
    * move the robot
    * @param step how many steps the robot should be moved
    */
@@ -222,6 +224,9 @@ public class Robot implements RobotAction {
     }
   }
 
+  /**
+   * reboot robot
+   */
   public synchronized void reboot(){
     currentGame.sendMessageToAll(new Reboot(owner.clientID));
     owner.drawDamage("Spam",2);
@@ -245,6 +250,7 @@ public class Robot implements RobotAction {
     currentGame.sendMessageToAll(new Movement
         (owner.clientID, currentPosition.getX(), currentPosition.getY()));
   }
+
   private void bePushedOneStep(Direction direction) {
     Position togo = this.getCurrentPosition().getNextPosition(direction);
     boolean flag = this.currentGame.getController().movementCheck(this, direction);
@@ -280,7 +286,6 @@ public class Robot implements RobotAction {
   }
 
   /**
-   * @author dai
    * push another robot
    * @param targetRobot the robot which will be pushed
    * @param direction pushed direction
@@ -299,7 +304,6 @@ public class Robot implements RobotAction {
   }
 
   /**
-   * @author dai
    * robot stay where it is
    */
   public void stay() {

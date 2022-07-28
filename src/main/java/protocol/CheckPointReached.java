@@ -7,6 +7,9 @@ import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
+/**
+ * @author Dai, Djafari, Nissl
+ */
 public class CheckPointReached implements Message {
     public String messageType;
     public String getMessageType() {

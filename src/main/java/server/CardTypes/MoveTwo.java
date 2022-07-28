@@ -2,6 +2,9 @@ package server.CardTypes;
 
 import server.Player.Robot;
 
+/**
+ * @author Dai, Li
+ */
 public class MoveTwo extends Card implements Move{
   public MoveTwo(){
     super("MoveTwo");

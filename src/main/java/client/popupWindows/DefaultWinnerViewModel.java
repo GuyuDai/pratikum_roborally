@@ -13,9 +13,10 @@ import java.net.URL;
 
 
 /**
- * @author Felicia Saruba, Nargess Ahmadi
+ * This class manages the presentation logic for the Default winner window.
+ * Is displayed if only one player is left in the game.
  *
- * window for winner of the game if only one player is left
+ * @author Felicia Saruba, Nargess Ahmadi
  */
 
 public class DefaultWinnerViewModel {
@@ -90,7 +91,7 @@ public class DefaultWinnerViewModel {
     }
 
     /**
-     * play winnter tune
+     * play winner tune
      */
     public void playWinnerTune() {
         try {

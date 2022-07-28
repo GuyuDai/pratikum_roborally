@@ -6,6 +6,11 @@ import java.io.*;
 import java.net.*;
 import java.util.logging.Logger;
 
+
+/**
+ *
+ * @author Yixue Dai, Niklas Nissl,
+ */
 public class AI extends Client {
   public static final Logger logger = Log.logFile("AILog");
 
@@ -29,7 +34,9 @@ public class AI extends Client {
   }
 
 
-
+  /**
+   * initialize a new AI thread.
+   */
   public void init() {
 
     try {

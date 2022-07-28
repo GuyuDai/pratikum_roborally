@@ -12,6 +12,10 @@ import java.util.*;
 import java.util.concurrent.*;
 
 
+/**
+ * @author dai
+ * client, who participaints in the game and has player's behavior
+ */
 public class Player implements PlayerAction{
   public String name;
   public int clientID;
@@ -102,6 +106,11 @@ public class Player implements PlayerAction{
   }
 
 
+  /**
+   * identify if a player is "me"
+   * @param playerName
+   * @return
+   */
   public boolean identifyPlayer(String playerName){
     if(playerName.equals(this.getName())) {
       return true;
@@ -143,6 +152,11 @@ public class Player implements PlayerAction{
       i++;
     }
   }
+
+  /**
+   * draw cards from player's own programming deck
+   * @param j how many cards
+   */
   @Override
   public void draw(int j) {
     for(int i = j; i > 0; i--){
@@ -152,6 +166,11 @@ public class Player implements PlayerAction{
     }
   }
 
+  /**
+   * draw damages cards from game deck
+   * @param type which kind of damage
+   * @param count how many
+   */
   public void drawDamage(String type, int count){
     ArrayList<String> tempCards = new ArrayList<String>();
     switch (type.trim().toLowerCase()){
@@ -213,11 +232,14 @@ public class Player implements PlayerAction{
     currentGame.sendMessageToAll(new DrawDamage(clientID, tempCards.toArray(new String[tempCards.size()])));
   }
 
-  public void chooseDamage(int count){
+  private void chooseDamage(int count){
     currentGame.sendMessageToClient(new PickDamage
         (count, currentGame.getAvailablePiles()),currentGame.getServerThreadById(clientID));
   }
 
+  /**
+   * put the remaining cards in hand to discard pile
+   */
   public void discardHands(){
     CopyOnWriteArrayList<String> discardHands = new CopyOnWriteArrayList<String>();
     for(Card card : getHands()){
@@ -229,6 +251,9 @@ public class Player implements PlayerAction{
     currentGame.sendMessageToClient(new DiscardSome(discardSomeMsg),currentGame.getServerThreadById(clientID));
   }
 
+  /**
+   * put the remaining cards in register to discard pile
+   */
   public void discardRegister(){
     for(Card card : getRegister()){
       getOwnDeck().getDiscardPile().add(card);
@@ -236,6 +261,10 @@ public class Player implements PlayerAction{
     }
   }
 
+  /**
+   * when player's own programming deck has no remaining cards
+   * shuffle the cards in the discard pile and set to remaining cards
+   */
   public void shuffle(){
     ownDeck.setRemainingCards(ownDeck.getDiscardPile());
     Collections.shuffle(ownDeck.getRemainingCards());

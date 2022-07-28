@@ -4,6 +4,9 @@ import server.CardTypes.*;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * @author Minghao Li
+ */
 public class GameDeck {
   public CopyOnWriteArrayList<Card> damageCards;
   public CopyOnWriteArrayList<Card> upgradeCards;

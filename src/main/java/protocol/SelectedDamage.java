@@ -8,6 +8,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 /**
+ * @author Dai, Djafari
  * SelectedDamage()
  * In case there is only one damageCard left in the availablePile but the client has to pick 2 damageCards,
  * the client gets the last damageCard and can continue playing.

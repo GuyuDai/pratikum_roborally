@@ -7,6 +7,9 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 
+/**
+ * @author Djafari, Dai
+ */
 public class NotYourCards implements Message {
     public String messageType;
     public String getMessageType() {

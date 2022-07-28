@@ -6,7 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-
+/**
+ * @author dai
+ * customized serializer
+ * usage: Object obj = new ProtocolParser().parse(String str);
+ */
 public class ProtocolParser {
 
   private final String json;
