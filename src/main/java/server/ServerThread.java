@@ -26,6 +26,7 @@ import protocol.SetStatus.SetStatusBody;
 import protocol.MapSelected.MapSelectedBody;
 import protocol.SelectedCard.SelectedCardBody;
 import server.BoardElement.BoardElem;
+import server.BoardElement.CheckPoint;
 import server.BoardTypes.*;
 import server.CardTypes.Card;
 import server.Control.Direction;
@@ -803,7 +804,10 @@ public class ServerThread implements Runnable {
                 for (int j = 0; j <= currentGame.getGameBoard().getWidth(); j++) {
                     for (BoardElem boardElem : currentGame.getGameBoard().getMap()[j][i]) {
                         if (boardElem.getName().equals("CheckPoint")) {
-                            targetPosition = new Position(j,i,currentGame.getGameBoard());
+                            CheckPoint temp = (CheckPoint) boardElem;
+                            if(temp.getCount() == checkPointID){
+                                targetPosition = new Position(j,i,currentGame.getGameBoard());
+                            }
                         }
                     }
                 }
