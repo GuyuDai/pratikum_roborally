@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 
 /**
+ * Holds the data of the application and manages all the logic for the lobby window.
+ *
  * @author Nargess Ahmadi, Felicia Saruba, Minghao Li
  */
 
@@ -36,10 +38,16 @@ public class LobbyModel {
 
     private final ObservableList<String> listContent = FXCollections.observableArrayList();
 
+    /**
+     * Holds the list of strings we want to show on the screen.
+     */
     public ObservableList<String> getListContentProperty() {
         return listContent;
     }
 
+    /**
+     * This property holds the user's current input.
+     */
     private final StringProperty textFieldContent = new SimpleStringProperty("");
 
     public StringProperty getTextFieldContent(){
@@ -47,7 +55,8 @@ public class LobbyModel {
     }
 
     /**
-     * add new message to the chat which is a ListView
+     * Adds a string as a new item to the list.
+     * @param listItem the string to add
      */
     public void addNewListItem(String listItem) {
         listContent.add(listItem);

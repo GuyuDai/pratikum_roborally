@@ -4,8 +4,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
+ * Holds the data of the application and manages all the logic for the login window.
  * @author Nargess Ahmadi, Felicia Saruba, Minghao Li
- *
  */
 
 public class LoginModel {
@@ -26,6 +26,9 @@ public class LoginModel {
         return instance;
     }
 
+    /**
+     * This property holds the user's current input.
+     */
     private final StringProperty textFieldContent = new SimpleStringProperty("");
     private final String textContent = "";
 

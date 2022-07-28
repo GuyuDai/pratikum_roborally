@@ -51,7 +51,7 @@ public class MapViewModel {
     public static String mapSelection;
 
     /**
-     * selection of the map Dizzy Highway
+     * Selection of the map Dizzy Highway
      */
     @FXML
     public void selectDizzyHighway(ActionEvent actionEvent) {

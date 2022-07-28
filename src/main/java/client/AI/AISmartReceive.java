@@ -21,6 +21,11 @@ import java.util.logging.*;
 
 import static server.ServerThread.*;
 
+
+/**
+ *
+ * @author Yixue Dai, Niklas Nißl, Li MingHao
+ */
 public class AISmartReceive extends ClientReceive {
 
   private static final Logger logger = Logger.getLogger(AISmartReceive.class.getName());
@@ -45,7 +50,6 @@ public class AISmartReceive extends ClientReceive {
   }
 
   /**
-   * @author: Nik
    * @param socket
    * Initializes avaialbe starting points and available figures to choose from
    */
@@ -86,7 +90,6 @@ public class AISmartReceive extends ClientReceive {
   }
 
   /**
-   * @author: Niklas Nißl
    * @param message
    * identifies incoming messages from the serving accordingly to the protocol
    * different messagetype leads to different actions of the client ai
@@ -397,7 +400,6 @@ public class AISmartReceive extends ClientReceive {
 
   /**
    * @param turndirection saves the facing direction of the robot accordingly
-   * @author: Nik
    */
   private void aiSaveFacingDirection(String turndirection) {
     if (getCurrentFacingDirection().equals("UP") && turndirection.equals("clockwise")) {
@@ -420,7 +422,6 @@ public class AISmartReceive extends ClientReceive {
   }
 
   /**
-   * @author: Niklas
    * Uses available Starting Points accordingly to the different Maps
    * This method is necessary for the AI Client to be able to choose a free Startingpoint
    */
@@ -478,7 +479,6 @@ public class AISmartReceive extends ClientReceive {
 
 
   /**
-   * @author: Nik
    * Sets the cards in the Programmingphase of the AIClient, in order that the Checkpoints will be reached in the right order
    */
   private void aiSmartProgramming() {
@@ -783,7 +783,7 @@ public class AISmartReceive extends ClientReceive {
 
   /**
    * @throws NoSuchMethodException
-   * @author: Nik Checks if there is a pit nearby and changes the facing direction of the robot
+   * Checks if there is a pit nearby and changes the facing direction of the robot
    * accordingly if such cards are available
    */
   private void pitCheck() {

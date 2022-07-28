@@ -10,9 +10,8 @@ import java.net.URL;
 
 
 /**
+ * This class manages the presentation logic for the winner window
  * @author Felicia Saruba, Nargess Ahmadi
- *
- * window for winner of the game
  */
 
 public class WinnerViewModel {

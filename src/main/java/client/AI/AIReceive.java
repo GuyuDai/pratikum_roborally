@@ -18,7 +18,8 @@ import java.util.*;
 import java.util.concurrent.*;
 
 /**
- * @author Dai
+ *
+ * @author Yixue Dai, Niklas Nißl, Li MingHao
  */
 public class AIReceive extends ClientReceive {
 
@@ -31,7 +32,6 @@ public class AIReceive extends ClientReceive {
   private CopyOnWriteArrayList<Integer> availableFigures = new CopyOnWriteArrayList<Integer>();
 
   /**
-   * @author: Nik, Dai
    * @param socket
    * Initializes avaialbe starting points and available figures to choose from
    */
@@ -69,7 +69,6 @@ public class AIReceive extends ClientReceive {
   }
 
   /**
-   * @author: Dai, Li, Nik
    * @param message
    */
   private void identifyMessage(Message message) {

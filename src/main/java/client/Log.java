@@ -6,11 +6,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *  setup for LogFiles
+ *  Setup for LogFiles
+ *
+ * @author Nargess Ahmadi, Felicia Saruba
  */
 
 public class Log {
 
+    /**
+     * build a file for logs and save the logs in the file.
+     * @param logName
+     * @return
+     */
     public static Logger logFile(String logName) {
         Logger logger = Logger.getLogger(logName);
         FileHandler fh;
