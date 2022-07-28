@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.*;
 
 /**
- * @author: Li, Dai, Nik
+ * @author: Li, Dai, Nik, Djafari
  * when Client receive a protocol message from Server,handle and keep the information here,update to Gui
  */
 public class ClientReceive extends Thread{
