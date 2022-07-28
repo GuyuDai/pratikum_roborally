@@ -3,6 +3,9 @@ import server.BoardTypes.Board;
 import server.BoardElement.BoardElem;
 import server.Player.Robot;
 
+/**
+ * @author dai
+ */
 public class Position {
   private int x;  //colum
   private int y;  //row
@@ -68,7 +71,6 @@ public class Position {
   }
 
   /**
-   * @author dai
    * get the next position the robot is going to go to
    * not move the robot yet when calling this method
    * @return
@@ -90,7 +92,6 @@ public class Position {
     return null;
   }
   /**
-   * @author dai
    * to compare whether two position are the same
    * @param p
    * @return

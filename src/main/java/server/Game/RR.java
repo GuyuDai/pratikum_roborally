@@ -15,6 +15,11 @@ import server.*;
 import java.util.*;
 import java.util.concurrent.*;
 
+/**
+ * @author dai
+ * is a part of the server
+ * is a kind of thread
+ */
 public class RR extends Thread implements GameLogic {
   private Boolean isGoingOn;
   public Controller controller;
@@ -34,7 +39,10 @@ public class RR extends Thread implements GameLogic {
   private int checkPointMovementCount = 0;
 
 
-
+  /**
+   * when initialize the game, the position of antenna and reboot point are also recorded
+   * @param gameBoard
+   */
   public RR(Board gameBoard) {
     this.gameBoard = gameBoard;
     this.isGoingOn = false;
@@ -63,6 +71,9 @@ public class RR extends Thread implements GameLogic {
     }
   }
 
+  /**
+   * set the thread name, initialize the controller, send protocol message GameStarted, do game progress
+   */
   @Override
   public void run() {
     this.setName("GameThread");
@@ -71,6 +82,9 @@ public class RR extends Thread implements GameLogic {
     gameProgress();
   }
 
+  /**
+   * set the game state as initializing and then start the game(call the run() method)
+   */
   public synchronized void startGame() {
     this.currentState = GameState.GameInitializing;
     this.start();
@@ -124,6 +138,9 @@ public class RR extends Thread implements GameLogic {
     this.activeCards = activeCards;
   }
 
+  /**
+   * switch to next game state, and before switching, check if the game end or not
+   */
   public void nextGameState() {
     finishedPlayers = 0;
     switch (currentState) {
@@ -184,6 +201,9 @@ public class RR extends Thread implements GameLogic {
     return true;
   }
 
+  /**
+   * do different things in different game state
+   */
   public synchronized void gameProgress() {  //reminder synchronized
     if (currentState == GameState.GameInitializing) {
       doGameInitializing();
@@ -222,6 +242,9 @@ public class RR extends Thread implements GameLogic {
     }
   }
 
+  /**
+   * current player interact with the board element which he or she stands on
+   */
   public void interactWithTile() {
     BoardElem activeBoardElem1 = playerInCurrentTurn.getOwnRobot().getCurrentPosition().getTile();
     BoardElem activeBoardElem2 = playerInCurrentTurn.getOwnRobot().getCurrentPosition().getSecondTile();
@@ -233,6 +256,9 @@ public class RR extends Thread implements GameLogic {
     }
   }
 
+  /**
+   * set priority as the distance between each player and antenna
+   */
   public void setPriority() {
     System.out.println("enter setPriority");  //test
     for (Player player : activePlayers) {
@@ -242,6 +268,9 @@ public class RR extends Thread implements GameLogic {
     System.out.println("leave SP");  //test
   }
 
+  /**
+   * reorder the sequence of actions by player's priority
+   */
   public void reorderPlayer() {
     System.out.println("entry RP");  //test
     CopyOnWriteArrayList<Player> temp = new CopyOnWriteArrayList<Player>();
@@ -261,6 +290,9 @@ public class RR extends Thread implements GameLogic {
 
   }
 
+  /**
+   * behavior in initializing state
+   */
   public void doGameInitializing(){
     for(ServerThread serverThread : getActiveClients()){
       activePlayers.add(serverThread.getPlayer());
@@ -297,6 +329,9 @@ public class RR extends Thread implements GameLogic {
     nextGameState();
   }
 
+  /**
+   * behavior in building phase
+   */
   public void doBulidingPhase() {
     System.out.println("enter building phase");  //test
     this.activePhase = 0;
@@ -324,6 +359,9 @@ public class RR extends Thread implements GameLogic {
   }
 
 
+  /**
+   * behavior in upgrade phase
+   */
   public void doUpgradePhase() {
     this.activePhase = 1;
     sendMessageToAll(new ActivePhase(activePhase));
@@ -334,6 +372,9 @@ public class RR extends Thread implements GameLogic {
     nextGameState();
   }
 
+  /**
+   * behavior in programming phase
+   */
   public void DoProgrammingPhase () {
     this.activePhase = 2;
     sendMessageToAll(new ActivePhase(activePhase));
@@ -392,6 +433,10 @@ public class RR extends Thread implements GameLogic {
     }
     nextGameState();
   }
+
+  /**
+   * behavior in activation phase
+   */
   public void DoActivationPhase () {
     this.activePhase = 3;
     sendMessageToAll(new ActivePhase(activePhase));
@@ -449,6 +494,9 @@ public class RR extends Thread implements GameLogic {
 
   }
 
+  /**
+   * behavior when chech points move
+   */
   private void checkPointMove(){
     if(gameBoard.getName().equals("Twister")){
       int tempID;
@@ -551,6 +599,9 @@ public class RR extends Thread implements GameLogic {
     }
   }
 
+  /**
+   * set the current player as the next one
+   */
   public void notifyCurrentPlayer(){
     setPlayerInCurrentTurn(activePlayers.get(playerInListPosition));
     sendMessageToClient(new CurrentPlayer(playerInCurrentTurn.clientID),getServerThreadById(playerInCurrentTurn.clientID));
@@ -561,16 +612,30 @@ public class RR extends Thread implements GameLogic {
 
   }
 
+  /**
+   * send protocol message to a certain client
+   * @param msg
+   * @param client
+   */
   public void sendMessageToClient(Message msg, ServerThread client) {
     client.sendMessage(msg.toString());
   }
 
+  /**
+   * send protocol message to all the connected clients
+   * @param msg
+   */
   public void sendMessageToAll(Message msg){
     for(ServerThread client : this.activeClients){
       sendMessageToClient(msg, client);
     }
   }
 
+  /**
+   * send protocol message to all the client without a certain client
+   * @param msg
+   * @param without
+   */
   public void sendMessageWithout(Message msg, ServerThread without){
     for(ServerThread client : this.activeClients){
       if(client.getID() != without.getID()){
@@ -579,6 +644,10 @@ public class RR extends Thread implements GameLogic {
     }
   }
 
+  /**
+   * @param id wanted client's id
+   * @return this client's server thread
+   */
   public ServerThread getServerThreadById(int id){
     for(ServerThread target : getActiveClients()){
       if(target.getID() == id){
@@ -588,6 +657,9 @@ public class RR extends Thread implements GameLogic {
     return null;
   }
 
+  /**
+   * @return available damage piles
+   */
   public String[] getAvailablePiles(){
     ArrayList<String> tempAvailablePiles = new ArrayList<String>();
     if(!controller.isCardListEmpty(gameDeck.getSpamPile())){

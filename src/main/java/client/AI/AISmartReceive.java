@@ -947,6 +947,11 @@ public class AISmartReceive extends ClientReceive {
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
+  /**
+   * @author dai
+   * @param input String form reader.readLine()
+   * @return corresponding protocol message
+   */
       private Message wrapMessage (String input){
         if (input.contains("\"messageType\":\"ActivePhase\",\"messageBody\"")) {
           return new Gson().fromJson(input, ActivePhase.class);
@@ -1106,10 +1111,10 @@ public class AISmartReceive extends ClientReceive {
 
 
   /**
-   * this method is for the LMU Server, for our own game, please use the above wrapMessage()
-   *
-   * @param input Json String
-   * @return specific Message
+   * another wrap message method for the LMU Server, for our own game, please use the above wrapMessage()
+   * @author dai
+   * @param input
+   * @return
    */
   /*
   private Message wrapMessage(String input) {

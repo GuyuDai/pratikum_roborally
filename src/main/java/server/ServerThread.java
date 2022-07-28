@@ -104,6 +104,11 @@ public class ServerThread implements Runnable {
         }
     }
 
+    /**
+     * @author dai
+     * @param input String form reader.readLine()
+     * @return corresponding protocol message
+     */
     private Message wrapMessage(String input){
         if(input.contains("\"messageType\":\"ActivePhase\",\"messageBody\"")){
             return new Gson().fromJson(input, ActivePhase.class);
@@ -259,6 +264,10 @@ public class ServerThread implements Runnable {
         return new ErrorMessage("Error when parsing String to Message");
     }
 
+    /**
+     * get the protocol message from server and react accordingly
+     * @param message
+     */
     private synchronized void identifyMessage(Message message) {
         /*
         GsonBuilder gsonBuilder = new GsonBuilder();
@@ -578,6 +587,10 @@ public class ServerThread implements Runnable {
         }
     }
 
+    /**
+     * send message to server
+     * @param msg
+     */
     public void sendMessage(String msg){
         try {
             writeOutput.write(msg);
@@ -587,6 +600,11 @@ public class ServerThread implements Runnable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * send message to all the connected client including him- or herself
+     * @param msg
+     */
     public void sendToAll(String msg){
         try {
             for (ServerThread serverThread : connectedClients) {
@@ -599,6 +617,11 @@ public class ServerThread implements Runnable {
         }
     }
 
+    /**
+     * send private message to another client
+     * @param msg
+     * @param id
+     */
     public void sendPrivate(String msg,int id){
         try {
             for (ServerThread serverThread : connectedClients) {
@@ -614,6 +637,10 @@ public class ServerThread implements Runnable {
         }
     }
 
+    /**
+     * start the robo rally
+     * @param board game map
+     */
     private void startGame(Board board){
         if(currentGame == null){
             RR game = new RR(board);
@@ -638,7 +665,7 @@ public class ServerThread implements Runnable {
         }
     }
 
-    public Player firstPlayerReady(){
+    private Player firstPlayerReady(){
         int readyPlayer = 0;
         Player firstReadyPlayer = null;
         for(ServerThread target: connectedClients) {
@@ -652,7 +679,7 @@ public class ServerThread implements Runnable {
         }
         return null;
     }
-    public Player nextPlayerReady(){
+    private Player nextPlayerReady(){
         int readyPlayer = 0;
         Player firstReadyPlayer = null;
         for(ServerThread target: connectedClients) {
@@ -668,7 +695,7 @@ public class ServerThread implements Runnable {
         return null;
     }
 
-    public boolean allPlayerReady(){
+    private boolean allPlayerReady(){
       for(ServerThread target: connectedClients){
           if(!target.isReady()){
               return false;
@@ -677,6 +704,7 @@ public class ServerThread implements Runnable {
       return true;
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
     public BufferedReader getReadInput(){
         return readInput;
     }
@@ -743,6 +771,11 @@ public class ServerThread implements Runnable {
         this.registerPointer = registerPointer;
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * close all the thread resources
+     */
     public void elegantClose(){
 
         connectedClients.remove(this);

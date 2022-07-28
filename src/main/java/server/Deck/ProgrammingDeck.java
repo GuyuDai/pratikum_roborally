@@ -4,6 +4,10 @@ import server.CardTypes.*;
 import java.util.Collections;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * @author dai
+ * idea: programming deck consists of remainingCards and discardPile
+ */
 public class ProgrammingDeck {
   private CopyOnWriteArrayList<Card> remainingCards;
   private CopyOnWriteArrayList<Card> discardPile;

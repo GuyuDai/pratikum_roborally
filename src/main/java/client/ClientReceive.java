@@ -183,8 +183,9 @@ public class ClientReceive extends Thread{
 
      */
     /**
-     * @author: dai
-     * transfer protocol Json String to Class.
+     * @author dai
+     * @param input String form reader.readLine()
+     * @return corresponding protocol message
      */
 
     private Message wrapMessage(String input){

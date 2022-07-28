@@ -11,7 +11,7 @@ import server.Server;
 import server.ServerThread;
 
 /**
- * @author dai, nassrin
+ * @author dai
  * used to check the protential disconnection from client
  * usage: when a serverThread received an Alive message, do DisconnectionController.updateAlive(this)
  */
