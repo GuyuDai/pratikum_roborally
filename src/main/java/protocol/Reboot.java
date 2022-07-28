@@ -8,6 +8,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 /**
+ * @author Djafari,Dai
  * Reboot(): right after the register.
  * Robot start with orientation to top/north/up
  * The coordinates of the field where the robot reboots will be sent to all players via "Movement"-message.

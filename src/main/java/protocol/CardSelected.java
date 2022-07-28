@@ -8,6 +8,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 /**
+ * @author Djafari, Dai
  * The server sends the filled registers without any information about the cards to all players.
  * "Filled" is saying whether a card was put to/ removed from the register.
  */

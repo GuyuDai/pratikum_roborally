@@ -17,6 +17,9 @@ import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
 
+/**
+ * @author Djafari, Dai
+ */
 public class AIReceive extends ClientReceive {
 
   public static final String ANSI_GREEN = "\u001B[32m";

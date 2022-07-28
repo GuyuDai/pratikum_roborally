@@ -15,6 +15,9 @@ import protocol.ProtocolFormat.Message;
 import server.Control.DisconnectionController;
 import server.Player.Player;
 
+/**
+ * @author Dai, Djafari
+ */
 public class Server {
 
     public static final Logger logger = Log.logFile("ServerLog");

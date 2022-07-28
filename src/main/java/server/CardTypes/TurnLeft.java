@@ -4,15 +4,17 @@ import server.Control.Direction;
 import server.Player.Robot;
 import server.Control.Position;
 
+
+/**
+ * @author Dai, Li
+ * reset the orientation of a robot's position
+ */
 public class TurnLeft extends Card implements Move{
   public TurnLeft(){
     super("TurnLeft");
   }
 
-  /**
-   * @author dai,Li
-   * reset the orientation of a robot's position
-   */
+
   @Override
   public void action() {
     move(this.getOwner().getOwnRobot());

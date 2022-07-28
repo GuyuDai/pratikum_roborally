@@ -15,6 +15,10 @@ import server.Control.Direction;
 import server.Control.Position;
 import server.Game.RR;
 
+
+/**
+ * @author Dai
+ */
 public class Robot implements RobotAction {
 
   private static final Logger logger = Logger.getLogger(Robot.class.getName());

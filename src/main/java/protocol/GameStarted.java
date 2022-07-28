@@ -11,6 +11,9 @@ import protocol.ProtocolFormat.MessageType;
 import java.util.List;
 import server.BoardTypes.Board;
 
+/**
+ * @author Djafari, Dai
+ */
 public class GameStarted implements Message {
   public String messageType;
   public String getMessageType() {

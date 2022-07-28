@@ -2,7 +2,9 @@ package protocol.ProtocolFormat;
 
 import server.CardTypes.Card;
 
-
+/**
+ * @author Nassrin
+ */
 public class ActiveCard {
     public int playerId;
     public String card;

@@ -9,6 +9,7 @@ import protocol.ProtocolFormat.MessageType;
 import server.CardTypes.*;
 
 /**
+ * @author Dai
  * Some cards have to be replaced by e.g. spam cards during the activation of the register.
  */
 

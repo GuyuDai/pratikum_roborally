@@ -4,6 +4,9 @@ import server.CardTypes.*;
 import java.util.Collections;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * @author Dai, Li
+ */
 public class ProgrammingDeck {
   private CopyOnWriteArrayList<Card> remainingCards;
   private CopyOnWriteArrayList<Card> discardPile;

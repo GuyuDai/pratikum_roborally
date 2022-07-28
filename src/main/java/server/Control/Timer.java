@@ -2,6 +2,9 @@ package server.Control;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author Djafari, Dai
+ */
 public class Timer {
 
   public static boolean timerStarted = false;

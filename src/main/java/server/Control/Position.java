@@ -3,6 +3,9 @@ import server.BoardTypes.Board;
 import server.BoardElement.BoardElem;
 import server.Player.Robot;
 
+/**
+ * @author Dai, Li
+ */
 public class Position {
   private int x;  //colum
   private int y;  //row

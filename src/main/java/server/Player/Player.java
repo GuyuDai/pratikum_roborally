@@ -12,6 +12,11 @@ import java.util.*;
 import java.util.concurrent.*;
 
 
+
+/**
+ * @author Dai, Li
+ */
+
 public class Player implements PlayerAction{
   public String name;
   public int clientID;

@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-
+/**
+ * @author Djafari, Dai
+ */
 public class ProtocolParser {
 
   private final String json;

@@ -6,7 +6,7 @@ import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.*;
 
 /**
- * @author Nik
+ * @author Nik, Dai
  */
 public class DiscardSome implements Message {
     public String messageType;

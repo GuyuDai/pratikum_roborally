@@ -4,7 +4,7 @@ import server.Player.Robot;
 import server.CardTypes.Move;
 
 /**
- * @author dai, Nargess Ahmadi
+ * @author Dai, Nargess Ahmadi
  * this class is used to represent that there is nothing in a certain position
  * but the robot cannot reach or go through or distroy it or...
  */

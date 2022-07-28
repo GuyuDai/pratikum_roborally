@@ -1,7 +1,7 @@
 package server.Game;
 
 /**
- * @author dai
+ * @author Dai
  * mark which state the game has reached
  */
 public enum GameState {

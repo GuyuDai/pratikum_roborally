@@ -8,6 +8,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 /**
+ * @author Djafari, Dai
  * The 30s timer starts after the one player who gets his register filled first.
  */
 

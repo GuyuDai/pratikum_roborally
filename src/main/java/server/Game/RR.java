@@ -15,6 +15,10 @@ import server.*;
 import java.util.*;
 import java.util.concurrent.*;
 
+/**
+ * @author Dai, Li
+ */
+
 public class RR extends Thread implements GameLogic {
   private Boolean isGoingOn;
   public Controller controller;

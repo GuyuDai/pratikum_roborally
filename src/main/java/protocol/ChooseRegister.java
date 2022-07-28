@@ -6,7 +6,7 @@ import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.*;
 
 /**
- * @author Nik
+ * @author Nik, Dai
  */
 public class ChooseRegister implements Message {
     public String messageType;

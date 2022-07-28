@@ -7,8 +7,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 /**
- * @author Dai
- *
+ * @author Dai, Djafari
  * The first 9 programming cards are drawn and given to a player.
  * This message is only sent to the player receiving the programming cards.
  */

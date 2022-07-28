@@ -41,7 +41,7 @@ import server.Game.RR;
 import server.Player.Player;
 
 /**
- * @author  dai, Li
+ * @author  Dai, Li, Djafari
  * handle message from Client,and send message to Client
  */
 public class ServerThread implements Runnable {
