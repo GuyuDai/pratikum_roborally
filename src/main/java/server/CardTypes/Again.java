@@ -5,8 +5,6 @@ public class Again extends Card {
 
   /**
    * @author Minghao Li
-   *
-   *
    * Repeat the programming in your previous register.
    * If your previous register was a damage card, draw a card from the top of your deck, and play that card this register.
    */

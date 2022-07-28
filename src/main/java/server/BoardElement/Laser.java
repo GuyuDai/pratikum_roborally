@@ -7,7 +7,7 @@ import server.Game.RR;
 
 /**
  * @author Minghao Li
- * If  robot is shotby a board laser, player must take damage in the form of one SPAM damage card
+ * If  robot is shot by a board laser, player must take damage in the form of one SPAM damage card
  * each laser on that space and place it in yourdiscard pile.
  */
 public class Laser extends BoardElem implements DamageCards {

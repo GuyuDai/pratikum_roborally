@@ -6,11 +6,10 @@ import server.Game.RR;
 import server.Player.Robot;
 
 /**
- * @author Nargess Ahmadi, Nassrin Djafari,Minghao Li
+ * @author Minghao Li
  * Conveyor belts move your robot in the direction of the arrows.
  * Double-arrowed conveyor belts move robots two spaces and activate before single-arrowed conveyor belts,
  * which move robots one space. Once a robot has moved off a belt, the belt no longer affects that robot.
- * See the examples below.
  */
 
 public class ConveyBelt extends BoardElem implements Move {
@@ -27,7 +26,12 @@ public class ConveyBelt extends BoardElem implements Move {
     move(currentGame.getPlayerInCurrentTurn().getOwnRobot());
   }
 
-
+  /**
+   * @author Minghao Li
+   * ConveyBelt move robot method,if next step is no longer on Belt,it will stop pushing Robot
+   * if nextstep is on a RotatingBelt,it will do RotatingBelt move method.
+   * robot will move 1 step,and use if-condition to check next step is on Belt or not.
+   */
   @Override
   public void move(Robot robot) {
     Direction arrowDirection=this.getDirection();
@@ -53,8 +57,6 @@ public class ConveyBelt extends BoardElem implements Move {
         robot.stay();
       }
     }
-    //check if robot moves out of ConveyBelt,it will move 1 steps anyway.
-    //but rotatingBelt is also a belt robot may not move in arrowDirection when it meets a rotatingBelt,it will change moveDirection;
 
   }
 

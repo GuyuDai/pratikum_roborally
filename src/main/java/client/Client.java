@@ -26,6 +26,10 @@ public class Client {
         return clientReceive;
     }
 
+    /**
+     * @author: Li
+     * initialize Client
+     */
     public void init() {
         try {
             //Build client with the local host

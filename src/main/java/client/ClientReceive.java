@@ -15,7 +15,10 @@ import java.net.*;
 import java.util.Map;
 import java.util.*;
 
-
+/**
+ * @author: Li
+ * when Client receive a protocol message from Server,handle and keep the information here,update to Gui
+ */
 public class ClientReceive extends Thread{
 
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -179,7 +182,10 @@ public class ClientReceive extends Thread{
     }
 
      */
-
+    /**
+     * @author: dai
+     * transfer protocol Json String to Class.
+     */
 
     private Message wrapMessage(String input){
         if(input.contains("\"messageType\":\"ActivePhase\",\"messageBody\"")){
@@ -332,6 +338,11 @@ public class ClientReceive extends Thread{
 
         return new ErrorMessage("Error when parsing String to Message");
     }
+
+    /**
+     * @author: Li
+     * Client handle protocol message from Server.
+     */
 
     private void identifyMessage(Message message) {
         String type = message.getMessageType();
@@ -568,6 +579,10 @@ public class ClientReceive extends Thread{
         }
     }
 
+    /**
+     * @author Minghao Li
+     * handle chat message,connect to Gui to show the chat messaage.
+     */
     public void receiveChat(String msg){
         String fromName = this.getNameById(getFromId());
         if(LobbyViewModel.getWindowName().equals("Lobby")) {
@@ -625,7 +640,11 @@ public class ClientReceive extends Thread{
             e.printStackTrace();
         }
     }
-
+    /**
+     * @author: Li
+     * @param takenX takenY playerID
+     * when Client receive a startingPoint x,y from other players,keep them in a Hashmap and a list.
+     */
     public void startingPositionAdd(int takenX, int takenY, int playerId){
         if(board.equals("DeathTrap")){
             if(takenX==1 && takenY==11){
@@ -822,6 +841,10 @@ public class ClientReceive extends Thread{
     ?? protected List<Integer> robotNumbers = new ArrayList<>();
     ?? protected List<Integer> startNumbers = new ArrayList<>();
     ?? protected List<Boolean> readyList=new ArrayList<>();
+     */
+    /**
+     * @author dai,Li
+     * when a Client disconnect,remove his information which is kept in other ClientReceive
      */
     public void removeDisconnectedClient(int targetID){
         if(IdStartPoint.containsKey(targetID)){
