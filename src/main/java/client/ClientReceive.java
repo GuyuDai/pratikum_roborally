@@ -167,7 +167,6 @@ public class ClientReceive extends Thread{
         try {
             while (!socket.isClosed()) {
                 String serverMessage = readInput.readLine();
-                System.out.println(serverMessage + "-----------original message");  //test
                 Message message = wrapMessage(serverMessage);
                 //System.out.println("--------------------------------------------------------------");  //test
                 Client.getLogger().info( ANSI_GREEN + message + "wrapped message");  //test

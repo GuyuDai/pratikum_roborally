@@ -92,7 +92,6 @@ public class ServerThread implements Runnable {
                 //System.out.println(clientMessage + "----------original message");  //test
                 Message message = wrapMessage(clientMessage);
                 //System.out.println("-----------------------------------------------------");  //test
-                Server.getLogger().info(ANSI_GREEN + message.toString() + "wrapped message");  //test
                 identifyMessage(message);
             }
             elegantClose();
