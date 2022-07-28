@@ -3,6 +3,9 @@ package server.CardTypes;
 import server.Game.RR;
 import server.Player.Player;
 
+/**
+ * @author Dai
+ */
 public abstract class Card {
   public String name;
   public RR currentGame;

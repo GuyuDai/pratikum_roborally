@@ -8,7 +8,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 /**
- * @author Dai
+ * @author Dai, Djafari
  * All clients get a message after the timer ends.
  * The message also informs about players who might have been too slow.
  */

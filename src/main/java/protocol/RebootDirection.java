@@ -8,6 +8,10 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 
+
+/**
+ * @author Djafari, Dai
+ */
 public class RebootDirection implements Message {
     public String messageType;
     public String getMessageType() {

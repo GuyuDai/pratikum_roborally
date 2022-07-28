@@ -7,6 +7,10 @@ import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
+
+/**
+ * @author Djafari, Dai
+ */
 public class PlayerStatus implements Message {
     public String messageType;
     public String getMessageType() {

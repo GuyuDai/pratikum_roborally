@@ -8,6 +8,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 /**
+ * @author Dai,Djafari
  * most general message type, just send a String to client
  */
 public class ClientMessage implements Message {

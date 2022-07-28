@@ -16,9 +16,11 @@ import java.util.Map;
 import java.util.*;
 
 /**
- * @author: Li
- * when Client receive a protocol message from Server,handle and keep the information here,update to Gui
+ * When a client receive a protocol message from Server, it handles and keep the information here and update the GUI
+ *
+ * @author: Li MingHao, Yixue Dai, Felicia Saruba, Nargess Ahmadi, Nassrin Djafari, Niklas Nißl
  */
+
 public class ClientReceive extends Thread{
 
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -106,6 +108,10 @@ public class ClientReceive extends Thread{
         this.checkPointYPosition = checkPointYPosition;
     }
 
+    /**
+     * sets the positions of the checkpoints
+     * @author Dai, Nik
+     */
     public void setCheckPointsPosition(){
         switch (this.board){
             case "DizzyHighway":
@@ -344,7 +350,7 @@ public class ClientReceive extends Thread{
     }
 
     /**
-     * @author: Li
+     * @author: Li, Nik, Dai
      * Client handle protocol message from Server.
      */
 

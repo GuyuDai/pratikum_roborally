@@ -8,6 +8,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 /**
+ * @author Dai
  * For Animation of BlueConveyorBelt, GreenConveyorBelt, PushPanel, Gear, CheckPoint,
  * PlayerShooting, WallShooting,EnergySpace. Not necessary.
  */

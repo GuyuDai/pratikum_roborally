@@ -8,6 +8,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 /**
+ * @author Djafari, Dai
  * The direction of a turning is described as "clockwise" and "counterclockwise".
  */
 

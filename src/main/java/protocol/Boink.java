@@ -5,6 +5,9 @@ import com.google.gson.GsonBuilder;
 import protocol.Alive.AliveBody;
 import protocol.ProtocolFormat.*;
 
+/**
+ * @author Dai
+ */
 public class Boink implements Message{
     public String messageType;
     public String getMessageType() {

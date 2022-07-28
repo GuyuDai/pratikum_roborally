@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import client.Client;
 import client.ExitWindow;
+import client.gameWindow.GameModel;
 import client.loginWindow.LoginViewModel;
 import com.google.gson.Gson;
 import javafx.animation.PauseTransition;
@@ -27,9 +28,10 @@ import protocol.SetStatus;
 
 
 /**
- * @author Nargess Ahmadi, Felicia Saruba, Minghao Li
+ * Binds the data coming from the {@link LobbyModel} with its respective GUI-elements and manages the presentation logic
+ * for the lobby window
  *
- * window for the Lobby
+ * @author Nargess Ahmadi, Felicia Saruba, Li MingHao
  */
 
 public class LobbyViewModel {
@@ -72,7 +74,7 @@ public class LobbyViewModel {
     private ImageView yourRobot;
 
     /**
-     * other players mat
+     * Other players mat
      */
     @FXML
     private ImageView yourRobotText;
@@ -82,7 +84,7 @@ public class LobbyViewModel {
     ImageView box1, box2;
 
     /**
-     * initialize elements for loading the Lobby window
+     * Initialize elements for loading the Lobby window
      */
     public void initialize() {
         list.itemsProperty().set(model.getListContentProperty());
@@ -91,7 +93,7 @@ public class LobbyViewModel {
     }
 
     /**
-     * node elements for Lobby window
+     * Node elements for Lobby window
      */
     public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendBtn) {
         this.container = container;
@@ -140,7 +142,7 @@ public class LobbyViewModel {
     }
 
     /**
-     * open game window
+     * This method is used to open the game window
      */
     public void openGameWindow() {
         try {

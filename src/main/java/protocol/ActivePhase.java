@@ -6,6 +6,9 @@ import protocol.ProtocolFormat.MessageBody;
 import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
+/**
+ * @author Dai, Djafari
+ */
 public class ActivePhase implements Message {
     public String messageType;
     public String getMessageType() {
@@ -14,11 +17,9 @@ public class ActivePhase implements Message {
     public ActivePhaseBody messageBody;
     public class ActivePhaseBody extends MessageBody {
         protected int phase;
-
         public int getPhase() {
             return phase;
         }
-
         public void setPhase(int phase) {
             this.phase = phase;
         }

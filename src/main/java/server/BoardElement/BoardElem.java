@@ -5,6 +5,9 @@ import server.Control.Direction;
 import server.Control.Position;
 import server.Game.RR;
 
+/**
+ * @author Minghao Li
+ */
 public abstract class BoardElem {
   public String name;
   public Position position;

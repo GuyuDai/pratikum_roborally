@@ -27,10 +27,12 @@ import java.util.*;
 
 
 /**
+ * Binds the data coming from the {@link GameModel} with its respective GUI-elements and manages the presentation logic
+ * for the game window
  * @author Nargess Ahmadi, Felicia Saruba, Li MingHao
- *
- * window for the Game
  */
+
+
 public class GameViewModel {
 
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -327,7 +329,7 @@ public class GameViewModel {
 
 
     /**
-     * initialize elements for loading the Game window
+     *  This method initialize board elements for loading the game window.
      */
     public void initialize(Client client) {
         this.client = client;
@@ -338,7 +340,7 @@ public class GameViewModel {
 
 
     /**
-     * add node elements for game window
+     * This method add node elements for game window.
      */
     public void setNodeElements(VBox container, ListView<String> list, TextField input, Button sendBtn) {
         this.gameContainer = gameContainer;
@@ -366,7 +368,7 @@ public class GameViewModel {
     }
 
     /**
-     * sends message in the chatroom by clicking on the send button
+     * This method is used to send messages in the chatroom by clicking on the send button.
      */
     public void sendButtonAction(ActionEvent actionEvent) throws IOException {
         String message = input.getText();
@@ -378,7 +380,7 @@ public class GameViewModel {
 
 
     /**
-     * checks if it is a direct message or a message for all
+     * This method checks if it is a direct message or a message for all.
      */
     public void checkInput(String message){
         String chatToSend = "";
@@ -420,7 +422,7 @@ public class GameViewModel {
 
 
     /**
-     * send messages using keyboard "Enter" key
+     * This method is used to send messages by using the keyboard "Enter" key event.
      */
     @FXML
     public void keyboardAction(KeyEvent keyEvent) throws IOException {
@@ -430,7 +432,7 @@ public class GameViewModel {
     }
 
     /**
-     * open ChatWindow by clicking the Open Chat Button
+     * This method opens the chat window by clicking the OPEN CHAT Button
      */
     public void chatBtnAction(ActionEvent actionEvent) {
         if (container.isVisible()) {
@@ -445,7 +447,7 @@ public class GameViewModel {
     }
 
     /**
-     * exit game and return to Lobby
+     * This method is used to exit game and close the thread.
      */
     public void exitGame(ActionEvent actionEvent) {
         Stage stage = (Stage) exitBtn.getScene().getWindow();
@@ -467,7 +469,7 @@ public class GameViewModel {
     }
 
     /**
-     * sets your own robot icon
+     * This method displays your choosen robot icon on the gameboard
      */
     public void setYourBotIcon(){
         yourBotText.setVisible(true);
@@ -502,7 +504,7 @@ public class GameViewModel {
 
 
     /**
-     * Set other player´s icon and name on board.
+     * This method displays other players robot icon, name and checkpoints on gameboard.
      */
     public void setOthersBotIcon() {
         if (playerBot1.getImage() != (null)){
@@ -594,7 +596,7 @@ public class GameViewModel {
 
 
     /**
-     * print 9 random cards from a deck of 20
+     *  This method is printing nine random cards from a deck of 20.
      */
     public void printCards() {
         playProgrammingPhaseBegins();
@@ -693,7 +695,7 @@ public class GameViewModel {
 
 
     /**
-     * when 5th register is chosen, the timer will start and afterwardsa the play cards button will appear
+     * When the 5th register is chosen, the timer will start and afterwards the play cards button will appear.
      */
     private void handle5thRegister() {
         Text.setText("Players have 30 seconds left to finish their register");
@@ -705,9 +707,9 @@ public class GameViewModel {
         textAppear2.play();
     }
 
-
     /**
-     * pick your register of 5 cards from your hands of 9 cards: if hand 1 is chosen
+     * Pick your register of 5 cards from your hands of 9 cards: if hand 1 is chosen
+     * If the first choosen Card is Again, an error message will be displayed for the user.
      */
     @FXML
     void hand1ButtonAction(ActionEvent event) {
@@ -749,7 +751,8 @@ public class GameViewModel {
     }
 
     /**
-     * pick your register of 5 cards from your hands of 9 cards: if hand 2 is chosen
+     * Pick your register of 5 cards from your hands of 9 cards: if hand 2 is chosen
+     * If the first choosen Card is Again, an error message will be displayed for the user.
      */
     @FXML
     void hand2ButtonAction(ActionEvent event) {
@@ -791,7 +794,8 @@ public class GameViewModel {
     }
 
     /**
-     * pick your register of 5 cards from your hands of 9 cards: if hand 3 is chosen
+     * Pick your register of 5 cards from your hands of 9 cards: if hand 3 is chosen
+     * If the first choosen Card is Again, an error message will be displayed for the user.
      */
     @FXML
     void hand3ButtonAction(ActionEvent event) {
@@ -833,7 +837,8 @@ public class GameViewModel {
     }
 
     /**
-     * pick your register of 5 cards from your hands of 9 cards: if hand 4 is chosen
+     * Pick your register of 5 cards from your hands of 9 cards: if hand 4 is chosen
+     * If the first choosen Card is Again, an error message will be displayed for the user.
      */
     @FXML
     void hand4ButtonAction(ActionEvent event) {
@@ -875,7 +880,8 @@ public class GameViewModel {
     }
 
     /**
-     * pick your register of 5 cards from your hands of 9 cards: if hand 5 is chosen
+     * Pick your register of 5 cards from your hands of 9 cards: if hand 5 is chosen
+     * If the first choosen Card is Again, an error message will be displayed for the user.
      */
     @FXML
     void hand5ButtonAction(ActionEvent event) {
@@ -916,7 +922,8 @@ public class GameViewModel {
     }
 
     /**
-     * pick your register of 5 cards from your hands of 9 cards: if hand 6 is chosen
+     * Pick your register of 5 cards from your hands of 9 cards: if hand 6 is chosen
+     * If the first choosen Card is Again, an error message will be displayed for the user.
      */
     @FXML
     void hand6ButtonAction(ActionEvent event) {
@@ -957,7 +964,8 @@ public class GameViewModel {
     }
 
     /**
-     * pick your register of 5 cards from your hands of 9 cards: if hand 7 is chosen
+     * Pick your register of 5 cards from your hands of 9 cards: if hand 7 is chosen
+     * If the first choosen Card is Again, an error message will be displayed for the user.
      */
     @FXML
     void hand7ButtonAction(ActionEvent event) {
@@ -998,7 +1006,8 @@ public class GameViewModel {
     }
 
     /**
-     * pick your register of 5 cards from your hands of 9 cards: if hand 8 is chosen
+     * Pick your register of 5 cards from your hands of 9 cards: if hand 8 is chosen.
+     * If the first choosen Card is Again, an error message will be displayed for the user.
      */
     @FXML
     void hand8ButtonAction(ActionEvent event) {
@@ -1039,7 +1048,8 @@ public class GameViewModel {
     }
 
     /**
-     * pick your register of 5 cards from your hands of 9 cards: if hand 9 is chosen
+     * Pick your register of 5 cards from your hands of 9 cards: if hand 9 is chosen
+     * If the first choosen Card is Again, an error message will be displayed for the user.
      */
     @FXML
     void hand9ButtonAction(ActionEvent event) {
@@ -1082,7 +1092,9 @@ public class GameViewModel {
 
 
     /**
-     * pick register cards from hands automatically
+     * This method is called when the timer of 30s is up.
+     * The registers of the players who have not filled their register with 5 cards in time, will be filled
+     * automatically from the remaining hand cards.
      */
     public void autoFillRegister() {
         for (int i = 1; i < 10; i++) {
@@ -1155,7 +1167,8 @@ public class GameViewModel {
     }
 
     /**
-     * print map button -> map gets printed and starting point selection appears
+     * This methos is called by pressing the PRINT MAP  button
+     * The choosen map is printed and the starting point selection appears.
      */
     public void printMapButtonAction(ActionEvent actionEvent) {
         String map = Client.getClientReceive().getBoard();
@@ -1179,7 +1192,8 @@ public class GameViewModel {
     }
 
     /**
-     * start game button -> show button get Cards
+     * This method is called when the START GAME button is pressed
+     * the GET CARDS button will be displayed for the user.
      */
     public void startGameButtonAction(ActionEvent actionEvent) {
         if (Client.getClientReceive().getIdList().size() > Client.getClientReceive().getStartNumbers().size()) {
@@ -1202,7 +1216,8 @@ public class GameViewModel {
 
 
     /**
-     * selected map gets printed on the GUI as well as the player characters
+     * The matching images are added to each board element.
+     * Selected map gets printed on the GUI as well as the player characters
      */
     public void printMapGUI(String setMapSelection) {
         Board board=null;
@@ -2040,7 +2055,7 @@ public class GameViewModel {
     }
 
     /**
-     * move Checkpoints on Conveyorbelt in Twister Map
+     * This method is used to move the checkpoints on Conveyorbelt in Twister Map
      */
     public void moveCheckpointTwister(int moveNumber){
 
@@ -2108,6 +2123,7 @@ public class GameViewModel {
 
 
     /**
+     * This method is used to display your choosen robot on the starting point.
      * @return imageView of your own robot
      */
     public ImageView checkYourbotImageView(){
@@ -2142,7 +2158,7 @@ public class GameViewModel {
 
 
     /**
-     * when clicking on starting point button 1, user will see where the robot would be on the map
+     * When clicking on starting point button 1, user will see where the robot would be on the map
      */
     public void startingPoint1Action(ActionEvent actionEvent) {
         String selectedMap = Client.getClientReceive().getBoard();
@@ -2161,7 +2177,7 @@ public class GameViewModel {
     }
 
     /**
-     * when clicking on starting point button 2, user will see where the robot would be on the map
+     * When clicking on starting point button 2, user will see where the robot would be on the map
      */
     public void startingPoint2Action(ActionEvent actionEvent) {
         String selectedMap = Client.getClientReceive().getBoard();
@@ -2180,7 +2196,7 @@ public class GameViewModel {
     }
 
     /**
-     * when clicking on starting point button 3, user will see where the robot would be on the map
+     * When clicking on starting point button 3, user will see where the robot would be on the map
      */
     public void startingPoint3Action(ActionEvent actionEvent) {
         String selectedMap = Client.getClientReceive().getBoard();
@@ -2199,7 +2215,7 @@ public class GameViewModel {
     }
 
     /**
-     * when clicking on starting point button 4, user will see where the robot would be on the map
+     * When clicking on starting point button 4, user will see where the robot would be on the map
      */
     public void startingPoint4Action(ActionEvent actionEvent) {
         String selectedMap = Client.getClientReceive().getBoard();
@@ -2218,7 +2234,7 @@ public class GameViewModel {
     }
 
     /**
-     * when clicking on starting point button 5, user will see where the robot would be on the map
+     * When clicking on starting point button 5, user will see where the robot would be on the map
      */
     public void startingPoint5Action(ActionEvent actionEvent) {
         String selectedMap = Client.getClientReceive().getBoard();
@@ -2237,7 +2253,7 @@ public class GameViewModel {
     }
 
     /**
-     * when clicking on starting point button 6, user will see where the robot would be on the map
+     * When clicking on starting point button 6, user will see where the robot would be on the map
      */
     public void startingPoint6Action(ActionEvent actionEvent) {
         String selectedMap = Client.getClientReceive().getBoard();
@@ -2319,7 +2335,7 @@ public class GameViewModel {
 
 
     /**
-     * show robot movement on map
+     * This method is used to show the robot movement on the map.
      */
     public void moveRobot() {
         robotBoard.getChildren().clear();
@@ -2397,7 +2413,7 @@ public class GameViewModel {
 
 
     /**
-     * set your robot on its starting point on the GUI
+     * This method sets your robot on its starting point on the GUI
      */
     public void setRobotOnBoard(int startingPointNumber){
         int yourId=Client.getClientReceive().getClientID();
@@ -2480,7 +2496,7 @@ public class GameViewModel {
 
 
     /**
-     * set other robots on their starting point on the GUI
+     * Set other robots on their starting point on the GUI
      */
     public void setOtherRobotOnBoard(int otherRobotNumber,int startingPointNumber){
                 Image otherRobotImage = null;
@@ -2658,7 +2674,7 @@ public class GameViewModel {
     }
 
     /**
-     * show 9 hand cards to choose from
+     * Show 9 hand cards to choose from
      */
     public void getCardsButtonAction(ActionEvent actionEvent) {
         getCardsButton.setVisible(false);

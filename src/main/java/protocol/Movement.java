@@ -8,6 +8,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 /**
+ * @author Dai
  * The Movements of a client will be broadcasted to all players
  * Only movements between fields are performed. There are no changes of the Orientation.
  */

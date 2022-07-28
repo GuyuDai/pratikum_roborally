@@ -1,6 +1,8 @@
 package protocol.ProtocolFormat;
 
-
+/**
+ * @author Djafari, Dai
+ */
 public class MessageType {
     public static final String clientMessage = "ClientMessage";
     public static final String helloServer = "HelloServer";

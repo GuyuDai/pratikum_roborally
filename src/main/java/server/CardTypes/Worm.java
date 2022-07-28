@@ -1,5 +1,8 @@
 package server.CardTypes;
 
+/**
+ * @author Dai, Li, Djafari, Ahmadi
+ */
 public class Worm extends Card implements DamageCards {
   public Worm(){
     super("Worm");

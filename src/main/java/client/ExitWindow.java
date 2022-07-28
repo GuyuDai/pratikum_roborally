@@ -9,9 +9,22 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import protocol.SetStatus;
 
-public class ExitWindow {
 
+/**
+ * This class manages the presentation logic for the Exit confirmation window.
+ *
+ * @author Felicia Saruba, Nargess Ahmadi
+ */
+
+public class ExitWindow {
     static boolean answer;
+
+    /**
+     * This method is called when a player wants to exit the game.
+     * @param title
+     * @param message
+     * @return
+     */
     public static boolean display(String title, String message){
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);

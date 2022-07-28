@@ -8,6 +8,7 @@ import protocol.ProtocolFormat.Message;
 import protocol.ProtocolFormat.MessageType;
 
 /**
+ * @author Djafari, Dai
  * PickDamage()
  * The SpamCards are count. If all SpamCards are taken the server asks the client to pick a damageCard.
  * After selecting the damageCard the server will announce the damage.
