@@ -816,5 +816,10 @@ public class ServerThread implements Runnable {
                 sendMessage(new ErrorMessage("wanted check point not exist").toString());
             }
         }
+        if(msg.equals("/let me win") && currentGame != null){
+            sendToAll(new GameFinished(this.clientID).toString());
+            currentGame.setCurrentState(GameState.GameEnding);
+        }
+
     }
 }
