@@ -33,6 +33,7 @@ public class Client {
 
     /**
      * initialize a new client
+     * @author Li
      */
     public void init() {
         try {

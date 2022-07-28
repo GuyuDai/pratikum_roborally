@@ -70,6 +70,7 @@ public class AIReceive extends ClientReceive {
 
   /**
    * @param message
+   * @author Yixue Dai, Li, Nik
    */
   private void identifyMessage(Message message) {
     String type = message.getMessageType();

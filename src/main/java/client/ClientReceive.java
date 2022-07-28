@@ -109,8 +109,8 @@ public class ClientReceive extends Thread{
     }
 
     /**
-     * author: Dai, Nik
      * sets the positions of the checkpoints
+     * @author Dai, Nik
      */
     public void setCheckPointsPosition(){
         switch (this.board){

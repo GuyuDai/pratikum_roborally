@@ -41,8 +41,8 @@ import server.Game.RR;
 import server.Player.Player;
 
 /**
- * @author  Dai, Li, Djafari
  * handle message from Client,and send message to Client
+ * @author  Yixue Dai, Li MingHao, Nassrin Djafari
  */
 public class ServerThread implements Runnable {
 
