@@ -1,10 +1,11 @@
 package protocol;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import protocol.Alive.AliveBody;
+import com.google.gson.*;
 import protocol.ProtocolFormat.*;
 
+/**
+ * author: Nik
+ */
 public class CheckPointMoved implements Message {
     public String messageType;
     public String getMessageType() {
