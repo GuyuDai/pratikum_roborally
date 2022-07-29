@@ -4,6 +4,9 @@ import server.BoardElement.*;
 import server.Control.Direction;
 
 
+/**
+ * @author Minghao Li, Felicia Saruba, Nargess Ahmadi, Niklas Nißl
+ */
 public class Twister extends Board{
 
     public Twister() {

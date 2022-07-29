@@ -18,7 +18,7 @@ import java.util.*;
 /**
  * When a client receive a protocol message from Server, it handles and keep the information here and update the GUI
  *
- * @author: Li MingHao, Yixue Dai
+ * @author: Li MingHao, Yixue Dai, Niklas Nissl
  */
 
 public class ClientReceive extends Thread{
@@ -110,7 +110,7 @@ public class ClientReceive extends Thread{
 
     /**
      * sets the positions of the checkpoints
-     * @author Dai, Nik
+     * @author  Nik, Dai
      */
     public void setCheckPointsPosition(){
         switch (this.board){
@@ -349,7 +349,7 @@ public class ClientReceive extends Thread{
     }
 
     /**
-     * @author: Li
+     * @author: Li, Nik
      * Client handle protocol message from Server.
      */
 
@@ -651,7 +651,7 @@ public class ClientReceive extends Thread{
         }
     }
     /**
-     * @author: Li
+     * @author: Li, Nik
      * @param takenX takenY playerID
      * when Client receive a startingPoint x,y from other players,keep them in a Hashmap and a list.
      */

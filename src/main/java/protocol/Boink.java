@@ -1,12 +1,10 @@
 package protocol;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import protocol.Alive.AliveBody;
+import com.google.gson.*;
 import protocol.ProtocolFormat.*;
 
 /**
- * @author Dai
+ * @author Dai, Nik
  */
 public class Boink implements Message{
     public String messageType;

@@ -1,12 +1,11 @@
 package protocol;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import protocol.Alive.AliveBody;
+import com.google.gson.*;
 import protocol.ProtocolFormat.*;
 
 /**
- * @author Dai, Djafari, Nissl
+ * @author Niklas Nissl, Dai, Djafari
+ * The server sends the new position of the according checkpoint that has moved
  */
 public class CheckPointMoved implements Message {
     public String messageType;

@@ -1,14 +1,11 @@
 package protocol;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import protocol.Alive.AliveBody;
-import protocol.ProtocolFormat.Message;
-import protocol.ProtocolFormat.MessageBody;
-import protocol.ProtocolFormat.MessageType;
+import com.google.gson.*;
+import protocol.ProtocolFormat.*;
 
 /**
- * @author Dai
+ * @author Dai, Nik
+ * To take off 3 cards, the client sends this kind of message
  */
 public class ReturnCards implements Message {
   public String messageType;

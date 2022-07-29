@@ -9,8 +9,6 @@ import protocol.PlayerAdded.*;
 import protocol.ProtocolFormat.*;
 import protocol.ReceivedChat.*;
 import protocol.Welcome.*;
-import server.BoardTypes.*;
-import server.Control.*;
 
 import java.io.*;
 import java.net.*;
@@ -66,7 +64,7 @@ public class AIReceive extends ClientReceive {
   }
 
   /**
-   * @author: Dai, Li, Nik
+   * @author: Dai, Nik, Li
    * @param message
    * get the protocol message from server and react accordingly
    */

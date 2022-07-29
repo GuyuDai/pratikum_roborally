@@ -1,12 +1,11 @@
 package protocol;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import protocol.Alive.AliveBody;
+import com.google.gson.*;
 import protocol.ProtocolFormat.*;
 
 /**
  * @author Nik, Dai
+ * Shows the cards the player wants to lay on his deck
  */
 public class DiscardSome implements Message {
     public String messageType;

@@ -1,12 +1,11 @@
 package protocol;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import protocol.Alive.AliveBody;
+import com.google.gson.*;
 import protocol.ProtocolFormat.*;
 
 /**
  * @author Nik
+ * to choose a register for the current round, the server acknowledges
  */
 public class RegisterChosen implements Message {
     public String messageType;

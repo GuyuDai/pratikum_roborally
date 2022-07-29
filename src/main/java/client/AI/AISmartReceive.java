@@ -50,6 +50,7 @@ public class AISmartReceive extends ClientReceive {
   }
 
   /**
+   * @author Nik
    * @param socket
    * Initializes avaialbe starting points and available figures to choose from
    */
@@ -73,6 +74,9 @@ public class AISmartReceive extends ClientReceive {
 
   }
 
+  /**
+   * @author Nik
+   */
   public void run() {
     IdName.put("Server", -1);
     try {
@@ -90,6 +94,7 @@ public class AISmartReceive extends ClientReceive {
   }
 
   /**
+   * @author Nik
    * @param message
    * identifies incoming messages from the serving accordingly to the protocol
    * different messagetype leads to different actions of the client ai
@@ -404,6 +409,7 @@ public class AISmartReceive extends ClientReceive {
   }
 
   /**
+   * @author Nik
    * @param turndirection saves the facing direction of the robot accordingly
    */
   private void aiSaveFacingDirection(String turndirection) {
@@ -427,6 +433,7 @@ public class AISmartReceive extends ClientReceive {
   }
 
   /**
+   * @author Nik
    * Uses available Starting Points accordingly to the different Maps
    * This method is necessary for the AI Client to be able to choose a free Startingpoint
    */
@@ -484,6 +491,7 @@ public class AISmartReceive extends ClientReceive {
 
 
   /**
+   * @author Nik
    * Sets the cards in the Programmingphase of the AIClient, in order that the Checkpoints will be reached in the right order
    */
   private void aiSmartProgramming() {
@@ -787,6 +795,7 @@ public class AISmartReceive extends ClientReceive {
   }
 
   /**
+   * @author Nik
    * @throws NoSuchMethodException
    * Checks if there is a pit nearby and changes the facing direction of the robot
    * accordingly if such cards are available
@@ -912,6 +921,10 @@ public class AISmartReceive extends ClientReceive {
   private List<String> myNineCardsOnPile = new ArrayList<>();
   private String[] registerCards = new String[5];
 
+  /**
+   * author Nik
+   * that was for the stupid ai programming
+   */
   public void programmingPhaseAI() {
     // draw from pile 9 cards automatically
 
@@ -953,7 +966,7 @@ public class AISmartReceive extends ClientReceive {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
   /**
-   * @author dai
+   * @author dai, nik
    * @param input String form reader.readLine()
    * @return corresponding protocol message
    */
@@ -1115,12 +1128,6 @@ public class AISmartReceive extends ClientReceive {
 
 
 
-  /**
-   * another wrap message method for the LMU Server, for our own game, please use the above wrapMessage()
-   * @author dai
-   * @param input
-   * @return
-   */
   /*
   private Message wrapMessage(String input) {
     if (input.contains("\"messageType\":\"ActivePhase\"")) {
