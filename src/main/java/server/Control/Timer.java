@@ -3,7 +3,7 @@ package server.Control;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author dai
+ * @author djafari, dai
  * usage: Timer.countDown(time)
  */
 public class Timer {

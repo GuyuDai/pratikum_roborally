@@ -5,7 +5,7 @@ import com.google.gson.*;
 import java.lang.reflect.Type;
 
 /**
- * @author dai
+ * @author dai, djafari
  * identify which protocol a String is and seserialize
  * usage:  GsonBuilder gsonBuilder = new GsonBuilder();
  *         gsonBuilder.registerTypeAdapter(Message.class, new MessageAdapter());

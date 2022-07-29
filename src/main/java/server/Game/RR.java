@@ -16,7 +16,7 @@ import java.util.*;
 import java.util.concurrent.*;
 
 /**
- * @author dai
+ * @author dai, djafari
  * is a part of the server
  * is a kind of thread
  */

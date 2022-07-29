@@ -39,7 +39,7 @@ import server.Player.Player;
 
 /**
  * handle message from Client,and send message to Client
- * @author  Yixue Dai, Li MingHao
+ * @author  Yixue Dai, Li MingHao, Nassrin Djafari
  */
 public class ServerThread implements Runnable {
 
@@ -101,7 +101,7 @@ public class ServerThread implements Runnable {
     }
 
     /**
-     * @author dai
+     * @author dai, djafari
      * @param input String form reader.readLine()
      * @return corresponding protocol message
      */

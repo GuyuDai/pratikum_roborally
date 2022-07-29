@@ -16,7 +16,7 @@ import server.Control.DisconnectionController;
 import server.Player.Player;
 
 /**
- * @author dai
+ * @author Djafari, Dai
  */
 public class Server {
 
