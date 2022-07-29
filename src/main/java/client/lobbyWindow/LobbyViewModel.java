@@ -440,7 +440,6 @@ public class LobbyViewModel {
      * if the first player deselects being ready, the player who was ready as 2nd fastest will be able to choose the map
      */
     public void checkForReady() {
-        System.out.println(Client.getClientReceive().getReadyList().size());
         if(Client.getClientReceive().getReadyList().size() == 1 && readyButton.isSelected()){
             selectMap.setText("SELECT MAP");
         } else {
@@ -460,7 +459,7 @@ public class LobbyViewModel {
             String exitMessage = new ConnectionUpdate(yourId, false, "").toString();
             Client.getClientReceive().sendMessage(exitMessage);
             //System.out.println(yourId + " has left."); //test
-            System.out.println(Client.getClientReceive().getIdList());
+            //System.out.println(Client.getClientReceive().getIdList());
             Client.getLogger().info(Client.getClientReceive().getNameById(yourId) + "has left the Game");
             String notReadyMessage = new SetStatus(false).toString();
             Client.getClientReceive().sendMessage(notReadyMessage);
