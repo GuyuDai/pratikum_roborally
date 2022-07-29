@@ -1,0 +1,17 @@
+client
+client.AI
+client.gameWindow
+client.imageWindow
+client.lobbyWindow
+client.loginWindow
+client.popupWindows
+protocol
+protocol.ProtocolFormat
+server
+server.BoardElement
+server.BoardTypes
+server.CardTypes
+server.Control
+server.Deck
+server.Game
+server.Player
