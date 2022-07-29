@@ -1,0 +1,138 @@
+.backgroundColor {
+    -fx-background-color: linear-gradient(to right, #000000, #434343);
+}
+
+.rotate90 {
+    -fx-rotate: 90;
+}
+
+.rotate180{
+    -fx-rotate: 180;
+}
+
+.rotate270{
+    -fx-rotate: 270;
+}
+
+.radius {
+    -fx-background-radius: 15;
+}
+
+.positionCenter {
+    -fx-alignment: CENTER;
+}
+
+.fontColor {
+}
+
+.buttonColor {
+    -fx-background-color: linear-gradient(to right, #ada996, #f2f2f2,  #dbdbdb, #eaeaea);
+    -fx-opacity: .7;
+    -fx-font-weight: bold;
+    -fx-font-size: 10;
+
+}
+
+.buttonColor1 {
+    -fx-background-color: linear-gradient(to left, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
+    -fx-opacity: .7;
+    -fx-font-weight: bold;
+}
+
+.worm {
+    -fx-background-radius: 10;
+    -fx-min-height: 100px;
+    -fx-min-width: 75px;
+    -fx-background-image: url("/damagingCards/worm.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center 8px;
+}
+
+.spam {
+    -fx-min-height: 100px;
+    -fx-min-width: 75px;
+    -fx-background-image: url("/damagingCards/spam.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center 8px;
+    -fx-background-radius: 10;
+}
+
+.trojan {
+    -fx-min-height: 100px;
+    -fx-min-width: 75px;
+    -fx-background-image: url("/damagingCards/trojan.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center 8px;
+    -fx-background-radius: 10;
+}
+
+.virus {
+    -fx-min-height: 100px;
+    -fx-min-width: 75px;
+    -fx-background-image: url("/damagingCards/virus.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center 8px;
+    -fx-background-radius: 10;
+}
+
+.setCheckPointImage {
+    -fx-background-image: url("/checkpoint.png");
+}
+
+.label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16;
+    -fx-text-alignment: center;
+}
+
+.buttonHand{
+    -fx-background-color: transparent;
+}
+
+.startPoint{
+    -fx-background-color: linear-gradient(to bottom, #ddefbb, #ffeeee, #ddefbb);
+}
+.buttonColor2{
+    -fx-background-color: #ddefbb;
+}
+
+.buttonSquash {
+    -fx-background-color: radial-gradient(radius 200%, #ffffff 0%, #f7f7f7 35%, #e9210f 100% );
+    -fx-border-width: 2;
+}
+
+.buttonSpin {
+    -fx-background-color: radial-gradient(radius 200%, #ffffff 0%, #f7f7f7 35%, #1f4de5 100% );
+    -fx-border-width: 2;
+}
+
+.buttonHulk {
+    -fx-background-color: radial-gradient(radius 200%, #ffffff 0%, #f7f7f7 35%, #279625 100% );
+    -fx-border-width: 2;
+}
+
+.buttonTwitch {
+    -fx-background-color: radial-gradient(radius 200%, #ffffff 0%, #f7f7f7 35%, #f18a42 100% );
+    -fx-border-width: 2;
+}
+
+.buttonHammer {
+    -fx-background-color: radial-gradient(radius 200%, #ffffff 0%, #f7f7f7 35%, #f18dd2 100% );
+    -fx-border-width: 2;
+}
+
+.buttonTwonkey {
+    -fx-background-color: radial-gradient(radius 200%, #ffffff 0%, #f7f7f7 35%, #4f1de8 100% );
+    -fx-border-width: 2;
+}
+
+.gameboard {
+    -fx-border-width: 3;
+    -fx-border-color:  #e9210f;
+}
+
